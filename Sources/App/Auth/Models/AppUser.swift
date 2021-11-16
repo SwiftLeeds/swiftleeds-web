@@ -36,6 +36,9 @@ final class AppUser: Model, ModelAuthenticatable, Content {
     @Field(key: "user_role")
     var role: UserRole
     
+    @OptionalChild(for: \.$user)
+    var token: UserToken?
+    
     // Creates a new, empty user.
     init() { }
 
@@ -60,20 +63,22 @@ final class AppUser: Model, ModelAuthenticatable, Content {
         )
     }
     
-    class Migrations: Migration {
-        func prepare(on database: Database) -> EventLoopFuture<Void> {
-            return database.schema(AppUser.schema)
+    class Migrations: AsyncMigration {
+        
+        func prepare(on database: Database) async throws {
+            try await database.schema(AppUser.schema)
                 .id()
                 .field("name", .string, .required)
                 .field("password_hash", .string, .required)
                 .field("email", .string, .required)
                 .field("user_role", .string, .sql(.default("user")))
+                .field("token_id", .uuid, .required, .references("user_tokens", "id"))
                 .unique(on: "email")
                 .create()
         }
-        
-        func revert(on database: Database) -> EventLoopFuture<Void> {
-            return database.schema(AppUser.schema).delete()
+
+        func revert(on database: Database) async throws {
+            try await database.schema(AppUser.schema).delete()
         }
     }
 
@@ -88,35 +93,5 @@ final class AppUser: Model, ModelAuthenticatable, Content {
             validations.add("email", as: String.self, is: .email)
             validations.add("password", as: String.self, is: .count(8...))
         }
-    }
-}
-
-class AdminAuthenticatable: BearerAuthenticator {
-    
-    enum RoleFailure: Error {
-        case notAuthenticated
-        case notAdmin
-    }
-    
-    func authenticate(bearer: BearerAuthorization, for request: Request) -> EventLoopFuture<Void> {
-        UserToken.query(on: request.db)
-            .filter(\.$value == bearer.token)
-            .first()
-            .flatMap { token in
-                guard let token = token else {
-                    throw Abort(.unauthorized)
-                }
-                guard token.isValid else {
-                    return token.delete(on: request.db)
-                }
-                
-                return token.$user.get(on: request.db).flatMapThrowing { user in
-                    guard user.role == .admin else {
-                        throw Abort(.unauthorized)
-                    }
-                    request.auth.login(token)
-                    request.auth.login(user)
-                }
-            }
     }
 }

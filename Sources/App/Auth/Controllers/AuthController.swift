@@ -15,12 +15,9 @@ struct AuthController: RouteCollection {
         
         let passwordProtected = routes.grouped(AppUser.authenticator())
         passwordProtected.post("login", use: login)
-        
-        let adminProtected = routes.grouped(AdminAuthenticatable())
-        adminProtected.get("admin", use: admin)
     }
     
-    private func create(request: Request) throws -> EventLoopFuture<UserToken> {
+    private func create(request: Request) async throws -> UserToken {
         try AppUser.Create.validate(content: request)
         let newUser = try request.content.decode(AppUser.Create.self)
         guard newUser.password == newUser.confirmPassword else {
@@ -31,27 +28,38 @@ struct AuthController: RouteCollection {
                                email: newUser.email,
                                passwordHash: Bcrypt.hash(newUser.password),
                                role: AppUser.UserRole.user) // by default you're a user
-        
-        
-        // we first save the user
-        return user.save(on: request.db).flatMapThrowing { _ in
-            // we generate a token set and save it
-            let token = try user.generateToken()
-            _ = token.save(on: request.db)
-            // the client is returns that token set to access other api's
-            return token
-        }
-    }
-    
-    private func login(request: Request) throws -> EventLoopFuture<UserToken> {
-        let user = try request.auth.require(AppUser.self)
         let token = try user.generateToken()
-        return token.save(on: request.db).flatMapThrowing { _ in
+        try await user.save(on: request.db)
+        try await token.save(on: request.db)
+        return token
+    }
+    
+    private func login(request: Request) async throws -> UserToken {
+        let user = try request.auth.require(AppUser.self)
+        do {
+            let token = try user.generateToken()
+            try await token.save(on: request.db)
             return token
+        } catch {
+            guard let old = try await user.$token.get(on: request.db) else {
+                throw error
+            }
+            
+            guard old.isValid else {
+                try await old.delete(on: request.db)
+                return try await login(request: request)
+            }
+            
+            return old
         }
     }
     
-    private func admin(request: Request) throws -> String {
-        return "Hello Admin!"
+    private func logout(request: Request) async throws {
+        let user = try request.auth.require(AppUser.self)
+        guard let token = try await user.$token.get(on: request.db) else {
+            throw Abort(.unauthorized)
+        }
+        
+        try await token.delete(on: request.db)
     }
 }
