@@ -72,7 +72,7 @@ final class AppUser: Model, ModelAuthenticatable, Content {
                 .field("password_hash", .string, .required)
                 .field("email", .string, .required)
                 .field("user_role", .string, .sql(.default("user")))
-                .field("token_id", .uuid, .required, .references("user_tokens", "id"))
+                .field("token", .uuid, .required, .references("app_users", "id"))
                 .unique(on: "email")
                 .create()
         }
