@@ -17,8 +17,8 @@ Follow these steps to get your development environment setup to run SwiftLeeds l
 
 ### Prerequisites
 SwiftLeedsWeb runs off Vapor (of course!), which requires a couple of pre-requisites: 
-* (Homebrew)[https://brew.sh]
-* (Vapor)[https://docs.vapor.codes/4.0/install/macos/]
+* [Homebrew](https://brew.sh)
+* [Vapor](https://docs.vapor.codes/4.0/install/macos/)
 
 Once you have those two dependencies installed, you're ready to get started. For now, we'll ignore running in a production like environment. Instead, we'll focus on local only build. See the advanced setup below to get started with Docker. 
 
