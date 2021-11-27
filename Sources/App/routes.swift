@@ -1,7 +1,7 @@
 import Vapor
 
 func routes(_ app: Application) throws {
-    app.get { req in
-        return "SwiftLeeds is in maintenance 🚀"
+    app.get { req -> EventLoopFuture<View> in
+        return req.view.render("home")
     }
 }

@@ -29,6 +29,24 @@
         }
       },
       {
+        "package": "leaf",
+        "repositoryURL": "https://github.com/vapor/leaf.git",
+        "state": {
+          "branch": null,
+          "revision": "c0359c49d616135a0735a0a5d4fb0f59c8f6618f",
+          "version": "4.1.3"
+        }
+      },
+      {
+        "package": "leaf-kit",
+        "repositoryURL": "https://github.com/vapor/leaf-kit.git",
+        "state": {
+          "branch": null,
+          "revision": "983fcbe89e7153c4d5870bdc76bf57a56817225f",
+          "version": "1.4.0"
+        }
+      },
+      {
         "package": "multipart-kit",
         "repositoryURL": "https://github.com/vapor/multipart-kit.git",
         "state": {

@@ -24,6 +24,12 @@ Once you have those two dependencies installed, you're ready to get started. For
 
 To start, open the `Package.swift` file. It'll take a few moments for the dependencies to download, especially on first open. Once done, hit the play button. That's it! You're ready to rock and roll. You should now see http://127.0.0.1:8080 up and running. 
 
+## Leaf
+
+SwiftLeeds is using Leaf to build the frontend part of the website. These `Views` live within the Resources/Views folder of the project structure.
+
+It's worth noting that to run this in development you will need to set your custom directory in the active scheme on Xcode. You can read about it [here](https://docs.vapor.codes/4.0/xcode/#custom-working-directory).
+
 ## Contributing 🏗
 
 We welcome all contributions to this repository. Please raise a PR so our Lead Maintainer can help get this pushed through, alternatively please raise an Issue or Discussion topic.
