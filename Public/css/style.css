@@ -1,0 +1,145 @@
+/* Fonts */
+@font-face { font-family: Poppins-Thin; src: url('/font/Poppins-Thin.ttf'); }
+@font-face { font-family: Poppins-Regular; src: url('/font/Poppins-Regular.ttf'); }
+@font-face { font-family: Poppins-Medium; src: url('/font/Poppins-Medium.ttf'); }
+@font-face { font-family: Poppins-Bold; src: url('/font/Poppins-Bold.ttf'); }
+
+
+/* Site Styles */
+body {
+  background-image: url('/img/header-bg.png');
+  background-repeat: no-repeat;
+  background-position: right top;
+  font-family: Poppins-Regular;
+}
+
+strong {
+  font-family: Poppins-Bold;
+}
+
+h1 {
+  font-size: 3em;
+  line-height: 1.2em;
+  margin-top: 0.5em;
+  padding: 1em 0;
+  text-transform: uppercase;
+  width:  700px;
+}
+
+h2 {
+  font-size: 2em;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+a {
+  color: #ED2207;
+}
+
+.nav-arrow {
+  float: right;
+  text-decoration: none;
+}
+
+
+/* Header */
+.seperator {
+  width: 0;
+  height: 40px;
+  border: 0.5px solid #000000;
+  margin:  0 2em;
+  display: block;
+  float: left;
+}
+
+.event-date {
+  float: left;
+  line-height:  120%;
+  text-transform: uppercase;
+}
+
+
+/* Footer */
+footer a {
+  color: #000;
+  text-decoration: none;
+}
+
+
+/* Top Navigation */
+ul.top-nav {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-top:  1px #000 solid;
+  box-shadow: 0px 4px 21px rgba(255, 126, 7, 0.5);
+  float: right;
+  font-size:  16px;
+  margin:  0;
+  padding: 0.5em 1em;
+}
+
+ul.top-nav li {
+  float: left;
+  font-family: Poppins-Medium;
+  list-style-type: none;
+  padding: 0 1em;
+  text-transform: uppercase;
+}
+
+ul.top-nav li a {
+  color: #000;
+  text-decoration: none;
+}
+
+
+/* Home page */
+.row h2 {
+  padding-left: 0;
+}
+
+ul.tickets {
+  padding-left: 0;
+}
+
+ul.tickets li {
+  background: #000;
+  color: #fff;
+  float: left;
+  font-weight: bold;
+  list-style-type: none;
+  padding: 1em 1em;
+  position: relative;
+  text-transform: uppercase;
+}
+
+ul.tickets li.inPerson {
+  background: #ED2207;
+}
+
+ul.tickets li.remote {
+  background: #BC1802;
+}
+
+ul.tickets li a {
+  color: #fff;
+}
+
+.get-in-touch {
+  float: right;
+  line-height: 1.2em;
+  text-align: right;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.tag {
+  background: #000;
+  border-radius: 4px;
+  color: #fff;
+  padding: 4px;
+  text-transform: uppercase;
+  font-size: 0.7em;
+}

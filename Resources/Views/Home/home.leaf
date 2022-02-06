@@ -1,0 +1,47 @@
+#extend("base"):
+  #export("title", "Home")
+
+  #export("content"):
+    #extend("Shared/_header")
+
+    <h1>
+      A unique <strong>Swift</strong><br/>
+      <strong>Conference</strong><br/>
+      in the heart<br/>
+      of leeds.
+    </h1>
+
+    <div class="row">
+      <ul class="tickets col-8">
+        <li>Get Your Ticket</li>
+        <li class="inPerson"><a href="#">In-Person</a></li>
+        <li class="remote"><a href="#">Remote</a></li>
+      </ul>
+
+      <div class="col-4 p-0">
+        <a href="#bottom" class="nav-arrow">
+          <img src="/img/nav-arrow-down.png" alt="Navigate to bottom"/>
+        </a>
+      </div>
+    </div>
+
+    <br style="clear: both;"/>
+    <br/>
+
+    <div class="container">
+      #extend("Home/_about-us")
+      <br/>
+      #extend("Home/_speakers")
+      <br/>
+      #extend("Home/_previous-conferences")
+      <br/>
+      #extend("Home/_order-tickets")
+      <br/>
+      #extend("Home/_sponsors")
+      <br/>
+      #extend("Home/_schedule")
+    </div>
+
+    #extend("Shared/_footer")
+  #endexport
+#endextend
