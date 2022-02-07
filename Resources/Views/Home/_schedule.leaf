@@ -1,0 +1,45 @@
+<div class="border" style="margin: 0 -12px;">
+  <div class="row m-5">
+    <h2 class="col-2">
+      Conference<br/>
+      Schedule
+    </h2>
+
+    <div class="col">
+      <a class="get-in-touch" href="#">
+        Want to be here?<br/>
+        Get in touch
+      </a>
+    </div>
+  </div>
+
+  <div class="row mx-5 my-2 py-3" style="border-bottom: 1px solid #ccc;">
+    <div class="col-2 px-0">
+      <strong>9:20AM - 9:40AM PT</strong>
+    </div>
+    <div class="col" style="text-align: right;">
+      Intro – SwiftLeeds
+    </div>
+    <div class="col-2" style="text-align: right;">
+      <span class="tag m-3">Beginner</span>
+      <img src="/img/show-more.png" alt="Show more"/>
+    </div>
+  </div>
+
+  <div class="row mx-5 my-2 py-3" style="border-bottom: 1px solid #ccc;">
+    <div class="col-2 px-0">
+      <strong>9:40AM - 10:20AM PT</strong>
+    </div>
+    <div class="col" style="text-align: right;">
+      Server-side Swift State of the Union: Life after async/await
+    </div>
+    <div class="col-2" style="text-align: right;">
+      <span class="tag m-3">Intermediate</span>
+      <img src="/img/show-more.png" alt="Show more"/>
+    </div>
+  </div>
+
+  <div class="col mb-5"/>
+</div>
+
+

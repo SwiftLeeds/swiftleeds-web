@@ -1,0 +1,37 @@
+<br/>
+<footer>
+  <div class="row">
+    <ul class="col-4">
+      <li><a href="#">FAQ</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Statute</a></li>
+    </ul>
+
+    <div class="col-4">
+      <h5>
+        Partners & sponsers
+      </h5>
+
+      <p>
+        If you want to establish cooperation with us, become a partner or have another important issue, please contact us using the email below.
+      </p>
+    </div>
+
+    <div class="col-4 p-0">
+      <a href="#top" class="nav-arrow">
+        <img src="/img/nav-arrow-up.png" alt="Navigate to top"/>
+
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <p class="col-4">
+      Copyright &copy; 2021 SwiftLeeds
+    </p>
+
+    <p class="col-4">
+      <a href="mailto:contact@swiftleeds.co.uk">contact@swiftleeds.co.uk</a>
+    </p>
+  </div>
+</footer>
