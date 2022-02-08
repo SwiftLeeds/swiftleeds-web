@@ -1,13 +1,26 @@
-<header>
-  <img src="/img/logo.png" alt="SwiftLeeds logo" style="float: left;"/>
-  <span class="seperator"></span>
-
-  <div class="event-date">
-    <strong>Oct 18 2022</strong>
-    <br/>
-    City Center, Leeds, UK
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+        <img src="/img/logo.png" alt="SwiftLeeds logo" class="logo"/>
+    </a>
+    <span class="seperator"></span>
+    <div class="event-date">
+        <strong>Oct 18 2022</strong>
+        <br/>
+        City Center, Leeds, UK
+    </div>
+    
+    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="justify-content-end collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav top-nav nav">
+        <a class="nav-link text-dark" href="#">Speakers</a>
+        <a class="nav-link text-dark" href="#">Tickets</a>
+        <a class="nav-link text-dark" href="#">Partners & Sponsors</a>
+        <a class="nav-link text-dark disabled">Schedule</a>
+      </div>
+    </div>
   </div>
-
-  #extend("Shared/_navigation")
-  <br/>
-</header>
+</nav>

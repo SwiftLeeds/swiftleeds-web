@@ -7,10 +7,16 @@
 
 /* Site Styles */
 body {
-  background-image: url('/img/header-bg.png');
-  background-repeat: no-repeat;
-  background-position: right top;
   font-family: Poppins-Regular;
+}
+
+.child-img {
+  height: 80%;
+  /* Center vertically and horizontally */
+  position: absolute;
+  top: 10em;
+  left: 45%;
+  margin: -25px 0 0 -25px; /* Apply negative top and left margins to truly center the element */
 }
 
 strong {
@@ -45,6 +51,11 @@ a {
   text-decoration: none;
 }
 
+.logo {
+    width: 10em;
+    float: left;
+}
+
 
 /* Header */
 .seperator {
@@ -71,7 +82,7 @@ footer a {
 
 
 /* Top Navigation */
-ul.top-nav {
+.top-nav {
   background-color: rgba(255, 255, 255, 0.6);
   border-top:  1px #000 solid;
   box-shadow: 0px 4px 21px rgba(255, 126, 7, 0.5);
