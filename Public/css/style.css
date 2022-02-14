@@ -94,6 +94,12 @@ ul.top-nav li a {
   text-decoration: none;
 }
 
+/* Coming Soon Page */
+.container img {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+}
 
 /* Home page */
 .row h2 {
