@@ -74,7 +74,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/joewilliams/Documents/swiftleeds-web"
+      customWorkingDirectory = "/Users/Joe.Williams/Documents/Work/swiftleeds-web"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"

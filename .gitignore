@@ -6,3 +6,4 @@ DerivedData/
 Tests/LinuxMain.swift
 .vscode
 .swiftpm/xcode/xcuserdata/
+.swiftpm/

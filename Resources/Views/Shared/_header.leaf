@@ -4,7 +4,7 @@
         <img src="/img/logo.png" alt="SwiftLeeds logo" class="logo"/>
     </a>
     <span class="separator"></span>
-    <div class="event-date col-sm-6 col-md-8">
+    <div class="event-date col-2">
         <strong>Oct 18 2022</strong>
         <br/>
         City Center, Leeds, UK
