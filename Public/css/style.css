@@ -11,12 +11,12 @@ body {
 }
 
 .child-img {
-  height: 80%;
-  /* Center vertically and horizontally */
+  height: 50%;
   position: absolute;
   top: 10em;
   left: 45%;
-  margin: -25px 0 0 -25px; /* Apply negative top and left margins to truly center the element */
+  margin: -25px 0 0 -25px;
+  z-index: -1;
 }
 
 strong {
