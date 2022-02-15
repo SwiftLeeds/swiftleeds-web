@@ -3,8 +3,8 @@
     <a class="navbar-brand" href="#">
         <img src="/img/logo.png" alt="SwiftLeeds logo" class="logo"/>
     </a>
-    <span class="seperator"></span>
-    <div class="event-date">
+    <span class="separator"></span>
+    <div class="event-date col-sm-6 col-md-8">
         <strong>Oct 18 2022</strong>
         <br/>
         City Center, Leeds, UK
@@ -14,7 +14,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     
-    <div class="justify-content-end collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="col-6 col-md-4 justify-content-end collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav top-nav nav">
         <a class="nav-link text-dark" href="#">Speakers</a>
         <a class="nav-link text-dark" href="#">Tickets</a>

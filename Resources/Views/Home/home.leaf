@@ -3,23 +3,22 @@
 
   #export("content"):
     #extend("Shared/_header")
-
-    <div class="container">
-        <div class="row">
-            <div class="col-6">
-                <h1>
+    
+    <!-- Header-->
+    <header class="my-3">
+        <div class="container-sm">
+            <div>
+                <h1 class="display-4 fw-bolder">
                     A unique <strong>Swift</strong><br/>
                     <strong>Conference</strong><br/>
                     in the heart<br/>
                     of leeds.
                 </h1>
             </div>
-            <div class="col-6 flex-grow">
-                <img src="/img/header-bg.png" class="child-img"/>
-            </div>
         </div>
-    </div>
+    </header>
 
+    <!-- Sections-->
     <div class="row">
       <ul class="tickets col-10">
         <li>Get Your Ticket</li>
@@ -27,7 +26,7 @@
         <li class="remote"><a href="#">Remote</a></li>
       </ul>
 
-      <div class="col-2 p-0">
+      <div class="col-2">
         <a href="#bottom" class="nav-arrow">
           <img src="/img/nav-arrow-down.png" alt="Navigate to bottom"/>
         </a>
