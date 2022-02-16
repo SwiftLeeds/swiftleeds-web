@@ -30,13 +30,13 @@
     <div class="row">
       <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
         <img
-        src="/img/people.png"
+        src="/img/people.jpg"
         class="w-100 shadow-1-strong rounded mb-4"
         alt="People networking"
         />
         
         <img
-        src="/img/jordi.png"
+        src="/img/jordi.jpg"
         class="w-100 shadow-1-strong rounded mb-4"
         alt="Jordi talking about indie developers"
         />
@@ -44,13 +44,13 @@
       
       <div class="col-lg-4 mb-4 mb-lg-0">
         <img
-        src="/img/danijela.png"
+        src="/img/danijela.jpg"
         class="w-100 shadow-1-strong rounded mb-4"
         alt="Danijela talking about being a developer"
         />
         
         <img
-        src="/img/josh.png"
+        src="/img/josh.jpg"
         class="w-100 shadow-1-strong rounded mb-4"
         alt="Josh introducing fastlane and App Store API"
         />
@@ -58,13 +58,13 @@
       
       <div class="col-lg-4 mb-4 mb-lg-0">
         <img
-        src="/img/adam.png"
+        src="/img/adam.jpg"
         class="w-100 shadow-1-strong rounded mb-4"
         alt="Adam introducing the next speaker"
         />
         
         <img
-        src="/img/sign-in.png"
+        src="/img/sign-in.jpg"
         class="w-100 shadow-1-strong rounded mb-4"
         alt="Beth checking people in"
         />
