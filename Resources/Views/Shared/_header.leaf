@@ -16,10 +16,9 @@
     
     <div class="col-6 col-md-4 justify-content-end collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav top-nav nav">
-        <a class="nav-link text-dark" href="#">Speakers</a>
-        <a class="nav-link text-dark" href="#">Tickets</a>
-        <a class="nav-link text-dark" href="#">Partners & Sponsors</a>
-        <a class="nav-link text-dark disabled">Schedule</a>
+        <a class="nav-link text-dark" href="/#about">About</a>
+        <a class="nav-link text-dark" href="/#previous">Previous Conference</a>
+        <a class="nav-link text-dark" href="/#sponsors">Sponsors</a>
       </div>
     </div>
   </div>

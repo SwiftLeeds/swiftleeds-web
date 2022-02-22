@@ -1,9 +1,11 @@
 <div class="row">
     <div class="col-sm-5 col-md-3 col-lg-2">
+    <a id="about">
         <h2>
         What are<br/>
         we about
         </h2>
+        </a>
     </div>
 
     <div class="col-sm-7 col-md-9 col-lg-10">

@@ -25,14 +25,7 @@
       <ul class="tickets col-10">
         <li>Get Your Ticket</li>
         <li class="inPerson"><a href="#">In-Person</a></li>
-        <li class="remote"><a href="#">Remote</a></li>
       </ul>
-
-      <div class="col-2">
-        <a href="#bottom" class="nav-arrow">
-          <img src="/img/nav-arrow-down.png" alt="Navigate to bottom"/>
-        </a>
-      </div>
     </div>
 
     <br style="clear: both;"/>
@@ -41,15 +34,9 @@
     <div class="container">
       #extend("Home/_about-us")
       <br/>
-      #extend("Home/_speakers")
-      <br/>
       #extend("Home/_previous-conferences")
       <br/>
-      #extend("Home/_order-tickets")
-      <br/>
       #extend("Home/_sponsors")
-      <br/>
-      #extend("Home/_schedule")
     </div>
 
     #extend("Shared/_footer")
