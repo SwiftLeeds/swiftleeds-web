@@ -106,7 +106,6 @@ ul.top-nav li a {
 .container img {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 40px;
 }
 
 /* Home page */
@@ -115,7 +114,7 @@ ul.top-nav li a {
 }
 
 ul.tickets {
-  padding-left: 0;
+  padding-left: 40;
 }
 
 ul.tickets li {
