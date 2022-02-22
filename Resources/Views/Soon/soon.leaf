@@ -26,12 +26,16 @@
             <div class="col-12" align="center">
               <p class="h2 text-center">Call for Speakers <strong>Now Open</strong></p>
               <p class="text-center">Do you want to present at the next Swift Leeds Conference? Click the button below to submit a presentation.</p>
-              <button type="button" class="btn btn-outline-success">
-                <a href="https://sessionize.com/swiftleeds/">Click Here</a>
-              </button>
+              <a href="https://sessionize.com/swiftleeds/" target="_blank" class="btn btn-outline-success" role="button">Click Here</a>
             </div>
         </div>
         </br>
+        <div class="row">
+            <div class="col-12">
+              <p class="h2 text-center"><strong>Coming 2022</strong></p>
+              </br>
+            </div>
+        </div>
         <!-- Gallery -->
         <div class="row">
           <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
@@ -77,14 +81,6 @@
           </div>
         </div>
         <!-- Gallery -->
-        <div class="row">
-            <div class="col-12">
-              <p class="h2 text-center"><strong>Coming 2022</strong></p>
-              </br>
-            </div>
-        </div>
     </div>
-
-    #extend("Shared/_footer")
   #endexport
 #endextend
