@@ -1,9 +1,56 @@
 <div class="row">
-  <h2 class="col-2">
-    Previous<br/>
-    Conference
-  </h2>
+    <div class="col-sm-5 col-md-3 col-lg-2">
+        <h2>
+        Previous<br/>
+        Conference
+        </h2>
+    </div>
 
-  <p class="col">
-  </p>
+    <div class="col-sm-7 col-md-9 col-lg-10">
+        <!-- Gallery -->
+        <div class="row">
+            <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                <img
+                src="/img/people.png"
+                class="w-100 shadow-1-strong rounded mb-4"
+                alt="People networking"
+                />
+
+                <img
+                src="/img/jordi.png"
+                class="w-100 shadow-1-strong rounded mb-4"
+                alt="Jordi talking about indie developers"
+                />
+            </div>
+
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <img
+            src="/img/danijela.png"
+            class="w-100 shadow-1-strong rounded mb-4"
+            alt="Danijela talking about being a developer"
+            />
+
+            <img
+            src="/img/josh.png"
+            class="w-100 shadow-1-strong rounded mb-4"
+            alt="Josh introducing fastlane and App Store API"
+            />
+          </div>
+
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <img
+            src="/img/adam.png"
+            class="w-100 shadow-1-strong rounded mb-4"
+            alt="Adam introducing the next speaker"
+            />
+
+            <img
+            src="/img/sign-in.png"
+            class="w-100 shadow-1-strong rounded mb-4"
+            alt="Beth checking people in"
+            />
+          </div>
+        </div>
+        <!-- Gallery -->
+    </div>
 </div>
