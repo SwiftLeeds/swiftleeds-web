@@ -11,11 +11,11 @@ body {
 }
 
 .child-img {
-  height: 50%;
+  height: 90%;
   position: absolute;
-  top: 10em;
-  left: 45%;
-  margin: -25px 0 0 -25px;
+  top: 4em;
+  left: 50%;
+  margin: -25px 0 0 -95px;
   z-index: -1;
 }
 
@@ -86,7 +86,15 @@ footer a {
   box-shadow: 0px 4px 21px rgba(255, 126, 7, 0.5);
   float: right;
   font-size:  16px;
-  padding: 0.5em 1em;
+  padding: 0.5em 2em;
+}
+
+.navbar-expand-lg {
+    padding-right: 30px;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 20px;
 }
 
 ul.top-nav li {
@@ -100,6 +108,11 @@ ul.top-nav li {
 ul.top-nav li a {
   color: #000;
   text-decoration: none;
+  vertical-align: baseline;
+}
+
+.top-nav img {
+    margin-top: 10px;
 }
 
 /* Coming Soon Page */
