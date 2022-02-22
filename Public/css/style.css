@@ -19,6 +19,31 @@ body {
   z-index: -1;
 }
 
+.previous-conference-image {
+    object-fit: cover;
+    width: 190px;
+    height: 265px;
+}
+
+.previous-conference-image-half {
+    object-fit: cover;
+    width: 50% !important;
+}
+
+.bordered {
+    border: 1px solid #000000;
+}
+
+
+
+.conference-image-top-offset {
+    margin-top: 50px !important;
+}
+
+.conference-image-bottom-offset {
+    margin-top: -20px !important;
+}
+
 strong {
   font-family: Poppins-Bold;
 }
@@ -34,6 +59,10 @@ h2 {
   font-size: 2em;
   line-height: 100%;
   text-transform: uppercase;
+}
+
+p.bold {
+    font-weight: bold;
 }
 
 ul li {
@@ -53,7 +82,6 @@ a {
     width: 10em;
     float: left;
 }
-
 
 /* Header */
 .separator {
