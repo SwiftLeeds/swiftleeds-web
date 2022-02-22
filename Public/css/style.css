@@ -20,28 +20,34 @@ body {
 }
 
 .previous-conference-image {
-    object-fit: cover;
-    width: 190px;
-    height: 265px;
+  object-fit: cover;
+  width: 190px;
+  height: 265px;
+}
+
+.previous-conference-icon {
+  margin-left: -40% !important;
+  height: 50%;
+  width: 75%;
 }
 
 .previous-conference-image-half {
-    object-fit: cover;
-    width: 50% !important;
+  object-fit: cover;
+  width: 50% !important;
 }
 
 .bordered {
-    border: 1px solid #000000;
+  border: 1px solid #000000;
 }
 
 
 
 .conference-image-top-offset {
-    margin-top: 50px !important;
+  margin-top: 50px !important;
 }
 
 .conference-image-bottom-offset {
-    margin-top: -20px !important;
+  margin-top: -20px !important;
 }
 
 strong {
@@ -79,8 +85,8 @@ a {
 }
 
 .logo {
-    width: 10em;
-    float: left;
+  width: 10em;
+  float: left;
 }
 
 /* Header */
@@ -132,8 +138,8 @@ ul.top-nav li a {
 
 /* Coming Soon Page */
 .container img {
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Home page */
