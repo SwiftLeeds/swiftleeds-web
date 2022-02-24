@@ -19,6 +19,8 @@ body {
   z-index: -1;
 }
 
+/* Previous Conference Section */
+
 .previous-conference-image {
   object-fit: cover;
   width: 190px;
@@ -26,26 +28,45 @@ body {
 }
 
 .previous-conference-icon {
-  margin-left: -40% !important;
+  margin-left: -40%;
   height: 50%;
   width: 75%;
 }
 
 .previous-conference-image-half {
   object-fit: cover;
-  width: 50% !important;
+  width: 50%;
+}
+
+.conference-image-top-offset {
+  margin-top: 50px;
+}
+
+.conference-image-bottom-offset {
+  margin-top: -20px;
 }
 
 .bordered {
   border: 1px solid #000000;
 }
 
-.conference-image-top-offset {
-  margin-top: 50px !important;
-}
+@media only screen and (max-width: 989px) {
+    .previous-conference-image,
+    .pc-image-md {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        margin: 0 0 0 0 !important;
+    }
 
-.conference-image-bottom-offset {
-  margin-top: -20px !important;
+    .previous-conference-icon,
+    .pc-icon-md {
+        display: none;
+    }
+
+    .ci-md {
+        margin: 0 0 0 0 !important;
+    }
 }
 
 strong {
@@ -103,13 +124,11 @@ a {
   text-transform: uppercase;
 }
 
-
 /* Footer */
 footer a {
   color: #000;
   text-decoration: none;
 }
-
 
 /* Top Navigation */
 .top-nav {
