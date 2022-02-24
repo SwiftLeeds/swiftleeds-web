@@ -1,58 +1,26 @@
-<div class="row">
-    <div class="col-sm-5 col-md-3 col-lg-2">
-    <a id="previous">
-        <h2>
-        Previous<br/>
-        Conference
+<div class="row align-items-start">
+    <div class="col-lg-3 col-sm-6">
+        <h2 id="previous">
+            Previous<br>
+            Conference
         </h2>
-        </a>
+        <br>
+        <p class="bold">October 05 - 06, 2021</p>
+        <br>
+        <img src="/img/previous.svg" class="previous-conference-icon">
     </div>
-
-    <div class="col-sm-7 col-md-9 col-lg-10">
-        <!-- Gallery -->
-        <div class="row">
-            <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                <img
-                src="/img/people.png"
-                class="w-100 shadow-1-strong rounded mb-4"
-                alt="People networking"
-                />
-
-                <img
-                src="/img/jordi.png"
-                class="w-100 shadow-1-strong rounded mb-4"
-                alt="Jordi talking about indie developers"
-                />
-            </div>
-
-          <div class="col-lg-4 mb-4 mb-lg-0">
-            <img
-            src="/img/danijela.png"
-            class="w-100 shadow-1-strong rounded mb-4"
-            alt="Danijela talking about being a developer"
-            />
-
-            <img
-            src="/img/josh.png"
-            class="w-100 shadow-1-strong rounded mb-4"
-            alt="Josh introducing fastlane and App Store API"
-            />
-          </div>
-
-          <div class="col-lg-4 mb-4 mb-lg-0">
-            <img
-            src="/img/adam.png"
-            class="w-100 shadow-1-strong rounded mb-4"
-            alt="Adam introducing the next speaker"
-            />
-
-            <img
-            src="/img/sign-in.png"
-            class="w-100 shadow-1-strong rounded mb-4"
-            alt="Beth checking people in"
-            />
-          </div>
-        </div>
-        <!-- Gallery -->
+    <div class="col-lg-2 col-sm-12 p-0">
+        <img src="/img/jordi.jpg" class="previous-conference-image pc-image-md shadow-1-strong conference-image-top-offset bordered" alt="People networking">
+    </div>
+    <div class="col-lg-2 col-sm-12 p-0">
+        <img src="/img/danijela.jpg" class="previous-conference-image pc-image-md shadow-1-strong conference-image-bottom-offset bordered" alt="People networking">
+        <img src="/img/sign-in.jpg" class="previous-conference-image-half pc-image-md shadow-1-strong conference-image-top-offset bordered" alt="People networking">
+    </div>
+    <div class="col-lg-2 col-sm-12 p-0">
+        <img src="/img/people.jpg" class="previous-conference-image-half pc-image-md shadow-1-strong conference-image-bottom-offset bordered" alt="People networking">
+        <img src="/img/swag.png" class="previous-conference-image pc-image-md shadow-1-strong conference-image-top-offset bordered" alt="People networking">
+    </div>
+    <div class="col-lg-2 col-sm-12 p-0">
+        <img src="/img/adam.jpg" class="previous-conference-image pc-image-md shadow-1-strong bordered" alt="People networking">
     </div>
 </div>
