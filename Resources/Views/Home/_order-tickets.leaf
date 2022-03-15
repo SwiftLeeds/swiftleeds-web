@@ -1,20 +1,16 @@
 <div class="row">
-  <div class="col-sm-5 col-md-3 col-lg-2">
-    <a id="tickets">
-      <h2>
-        GET YOUR<br/>
-        TICKETS
-      </h2>
-      <br/>
-      <p>
+  <div id="tickets" class="col-6">
+    <h2>
+      GET YOUR<br/>
+      TICKETS
+    </h2>
+    <br/>
+    <p>
       Your full access ticket to SwiftLeeds
-      </p>
-    </a>
+    </p>
   </div>
   
-  <div class="col-sm-7 col-md-9 col-lg-10 ticket">
-  <div class="ticket-container">
+  <div class="col-6">
     <tito-widget event="ultimateconf/2013" releases="3elajg6qcxu"></tito-widget>
-    </div>
   </div>
 </div>

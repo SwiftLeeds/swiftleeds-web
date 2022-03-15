@@ -39,13 +39,8 @@ body {
     z-index: -1;
 }
 
-.ticket-container {
-    height: 380px;
-    width: 380px;
-}
-
-.ticket {
-    padding-left: 380px;
+.tito-iframe {
+    width: auto !important;
 }
 
 /* What We Are About Section */

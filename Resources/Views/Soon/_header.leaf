@@ -9,18 +9,11 @@
         <br/>
         City Center, Leeds, UK
     </div>
-    
+
     <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    
-    <div class="col-6 col-md-4 justify-content-end collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav top-nav nav">
-        <a class="nav-link text-dark" href="#about">About</a>
-        <a class="nav-link text-dark" href="#previous">Previous Conference</a>
-        <a class="nav-link text-dark" href="#sponsors">Sponsors</a>
-        <li><a href="https://twitter.com/swift_leeds"><img src="/img/twitter.png" alt="twitter" width=20 height=20/></a></li>
-      </div>
-    </div>
+
+    <div class="col-6 col-md-4 justify-content-end collapse navbar-collapse" id="navbarNavAltMarkup"/>
   </div>
 </nav>

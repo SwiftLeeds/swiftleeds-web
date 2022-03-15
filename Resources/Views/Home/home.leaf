@@ -24,7 +24,7 @@
     <div class="row">
       <ul class="tickets col-10">
         <li>Get Your Ticket</li>
-        <li class="inPerson"><a href="#">In-Person</a></li>
+        <li class="inPerson"><a href="#tickets">In-Person</a></li>
       </ul>
     </div>
 
