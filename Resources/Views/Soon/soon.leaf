@@ -8,7 +8,7 @@
     <header class="my-3">
         <div class="container-sm">
             <div>
-                <h1 class="display-4 fw-bolder">
+                <h1 class="display-4">
                     A unique <strong>Swift</strong><br/>
                     <strong>Conference</strong><br/>
                     in the heart<br/>
