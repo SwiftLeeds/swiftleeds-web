@@ -1,26 +1,30 @@
 <div class="row align-items-start">
-    <div class="col-lg-3 col-sm-6">
-        <h2 id="previous">
-            Previous<br>
-            Conference
-        </h2>
-        <br>
-        <p class="bold">October 05 - 06, 2021</p>
-        <br>
-        <img src="/img/previous.svg" class="previous-conference-icon">
-    </div>
-    <div class="col-lg-2 col-sm-12 p-0">
-        <img src="/img/jordi.jpg" class="previous-conference-image pc-image-md shadow-1-strong conference-image-top-offset bordered" alt="People networking">
-    </div>
-    <div class="col-lg-2 col-sm-12 p-0">
-        <img src="/img/danijela.jpg" class="previous-conference-image pc-image-md shadow-1-strong conference-image-bottom-offset bordered" alt="People networking">
-        <img src="/img/sign-in.jpg" class="previous-conference-image-half pc-image-md shadow-1-strong conference-image-top-offset bordered" alt="People networking">
-    </div>
-    <div class="col-lg-2 col-sm-12 p-0">
-        <img src="/img/people.jpg" class="previous-conference-image-half pc-image-md shadow-1-strong conference-image-bottom-offset bordered" alt="People networking">
-        <img src="/img/swag.png" class="previous-conference-image pc-image-md shadow-1-strong conference-image-top-offset bordered" alt="People networking">
-    </div>
-    <div class="col-lg-2 col-sm-12 p-0">
-        <img src="/img/adam.jpg" class="previous-conference-image pc-image-md shadow-1-strong bordered" alt="People networking">
-    </div>
+  <div class="col-lg-3 col-sm-6">
+    <h2 id="previous">
+      Previous<br>
+      Conference
+    </h2>
+    <br>
+    <p class="bold">October 05 - 06, 2021</p>
+    <br>
+    <img src="/img/previous.svg" class="previous-conference-icon">
+  </div>
+
+  <div class="col-lg-2 col-sm-12 p-0">
+    <img src="/img/jordi.jpg" class="previous-conference-image pc-image-md shadow-1-strong conference-image-top-offset bordered" alt="People networking">
+  </div>
+
+  <div class="col-lg-2 col-sm-12 p-0">
+    <img src="/img/danijela.jpg" class="previous-conference-image pc-image-md shadow-1-strong conference-image-bottom-offset bordered" alt="People networking">
+    <img src="/img/sign-in.jpg" class="previous-conference-image-half pc-image-md shadow-1-strong conference-image-top-offset bordered" alt="People networking">
+  </div>
+
+  <div class="col-lg-2 col-sm-12 p-0">
+    <img src="/img/people.jpg" class="previous-conference-image-half pc-image-md shadow-1-strong conference-image-bottom-offset bordered" alt="People networking">
+    <img src="/img/swag.png" class="previous-conference-image pc-image-md shadow-1-strong conference-image-top-offset bordered" alt="People networking">
+  </div>
+
+  <div class="col-lg-2 col-sm-12 p-0">
+    <img src="/img/adam.jpg" class="previous-conference-image pc-image-md shadow-1-strong bordered" alt="People networking">
+  </div>
 </div>

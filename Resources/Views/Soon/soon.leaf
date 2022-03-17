@@ -2,7 +2,7 @@
   #export("title", "SwiftLeeds - The Unique iOS Conference in the UK")
 
   #export("content"):
-    #extend("Shared/_header")
+    #extend("Soon/_header")
 
     <!-- Header-->
     <header class="my-3">

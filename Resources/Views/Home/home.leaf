@@ -24,15 +24,19 @@
     <div class="row">
       <ul class="tickets col-10">
         <li>Get Your Ticket</li>
-        <li class="inPerson"><a href="#">In-Person</a></li>
+        <li class="inPerson"><a href="#tickets">In-Person</a></li>
       </ul>
     </div>
 
     <br style="clear: both;"/>
     <br/>
+    
+    <img src="/img/ticket-background.svg" class="order-tickets"/>
 
     <div class="container">
       #extend("Home/_about-us")
+      <br/>
+      #extend("Home/_order-tickets")
       <br/>
       #extend("Home/_previous-conferences")
       <br/>

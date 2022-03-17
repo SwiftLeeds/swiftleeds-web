@@ -1,16 +1,22 @@
 <div class="row">
-    <div class="col-sm-5 col-md-3 col-lg-2">
-    <a id="about">
+    <div id="about" class="col-sm-5 col-md-3 col-lg-2">
         <h2>
-        What are<br/>
-        we about
+            What are<br/>
+            we about
         </h2>
-        </a>
+        <img src="/img/about-icon.svg" class="what-about-icon">
     </div>
 
     <div class="col-sm-7 col-md-9 col-lg-10">
         <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <a href="https://twitter.com/Adam9Rush">Adam Rush</a> founded SwiftLeeds in 2019, born from over ten years of experience attending conferences. The inspiration was bringing a modern, inclusive conference in the North of the UK to be more accessible for all.
+        <br />
+        <br />
+        SwiftLeeds is now run with over ten community volunteers building the website, iOS applications and making sure we cover all the bases on the day. SwiftLeeds is entirely non-profit, and the funds make sure we can deliver the best experience possible.
+        <br />
+        <br />
+        In-person conferences are the best way to meet like-minded people who enjoy building apps with Swift. You can also learn from the best people in the industry and chat about all things Swift.
+        <br />
         </p>
     </div>
 </div>

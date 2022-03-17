@@ -13,6 +13,38 @@ body {
   z-index: -1;
 }
 
+.row {
+    padding-top: 40px;
+}
+
+.col-lg-10 {
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
+/* Order Tickets */
+
+.order-tickets {
+    height: 74%;
+    position: absolute;
+    top: 4em;
+    left: 58%;
+    margin: 840px 0 0 -340px;
+    z-index: -1;
+}
+
+.tito-iframe {
+    width: auto !important;
+}
+
+/* What We Are About Section */
+
+.what-about-icon {
+  margin-left: -20%;
+  height: 80%;
+  width: 85%;
+}
+
 /* Previous Conference Section */
 
 .previous-conference-image {
@@ -53,6 +85,8 @@ body {
         margin: 0 0 0 0 !important;
     }
 
+    .order-tickets,
+    .what-about-icon,
     .previous-conference-icon,
     .pc-icon-md {
         display: none;
