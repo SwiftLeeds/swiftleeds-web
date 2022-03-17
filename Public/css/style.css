@@ -1,13 +1,7 @@
-/* Fonts */
-@font-face { font-family: Poppins-Thin; src: url('/font/Poppins-Thin.ttf'); }
-@font-face { font-family: Poppins-Regular; src: url('/font/Poppins-Regular.ttf'); }
-@font-face { font-family: Poppins-Medium; src: url('/font/Poppins-Medium.ttf'); }
-@font-face { font-family: Poppins-Bold; src: url('/font/Poppins-Bold.ttf'); }
-
-
 /* Site Styles */
 body {
-  font-family: Poppins-Regular;
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; !important;
+  font-weight: 400;
 }
 
 .child-img {
@@ -70,7 +64,7 @@ body {
 }
 
 strong {
-  font-family: Poppins-Bold;
+  font-weight: bold;
 }
 
 h1 {
@@ -78,6 +72,7 @@ h1 {
   margin-top: 0.5em;
   padding: 0.5em 0;
   text-transform: uppercase;
+  font-weight: 200 !important;
 }
 
 h2 {
@@ -161,7 +156,7 @@ footer a {
 
 ul.top-nav li {
   float: left;
-  font-family: Poppins-Medium;
+  font-weight: 500;
   list-style-type: none;
   padding: 0 1em;
   text-transform: uppercase;
