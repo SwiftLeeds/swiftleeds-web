@@ -1,5 +1,5 @@
 #extend("base"):
-  #export("title", "Home")
+  #export("title", "SwiftLeeds")
 
   #export("content"):
     #extend("Shared/_header")

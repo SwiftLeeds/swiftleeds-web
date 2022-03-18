@@ -6,9 +6,15 @@
     </h2>
   </div>
 
-  <div class="col-sm-7 col-md-9 col-lg-10">
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-  </div>
+    <div class="table-responsive">
+      <table class="table sponsors-table">
+        <tbody>
+          <tr>
+            <th scope="row" class="text-start">Platinum Sponsors</th>
+            <td><a href="https://codemagic.io" target="_blank"><img src="img/codemagic.png" class="sponsor-img"></a></td>
+            <td><a href="https://getstream.io/chat/sdk/swiftui/?utm_source=SwiftLeeds&utm_medium=Whole_Event_L&utm_content=Developer&utm_campaign=SwiftLeeds_Oct2022" target="_blank"><img src="img/stream.png" class="sponsor-img"></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 </div>
