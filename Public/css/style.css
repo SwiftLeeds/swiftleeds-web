@@ -22,9 +22,13 @@ body {
     padding-left: 40px;
 }
 
+th, td {
+  text-align: left;
+}
+
 /* Sponsors */
 
-.table {
+.sponsors-table {
     border-collapse: unset;
     vertical-align: middle;
     text-align
@@ -33,10 +37,6 @@ body {
 .sponsor-img {
     max-width: 100%;
     height: auto;
-}
-
-th, td {
-  text-align: left;
 }
 
 /* Order Tickets */

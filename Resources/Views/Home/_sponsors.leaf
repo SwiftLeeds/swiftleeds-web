@@ -7,17 +7,12 @@
   </div>
 
     <div class="table-responsive">
-      <table class="table text-center">
+      <table class="table sponsors-table">
         <tbody>
           <tr>
             <th scope="row" class="text-start">Platinum Sponsors</th>
-            <td><a href="https://codemagic.io"><img src="img/codemagic.png" class="sponsor-img"></a></td>
-            <td><a href="https://getstream.io/chat/sdk/swiftui/?utm_source=SwiftLeeds&utm_medium=Whole_Event_L&utm_content=Developer&utm_campaign=SwiftLeeds_Oct2022"><img src="img/stream.png" class="sponsor-img"></a></td>
-          </tr>
-        </tbody>
-
-        <tbody>
-          <tr>
+            <td><a href="https://codemagic.io" target="_blank"><img src="img/codemagic.png" class="sponsor-img"></a></td>
+            <td><a href="https://getstream.io/chat/sdk/swiftui/?utm_source=SwiftLeeds&utm_medium=Whole_Event_L&utm_content=Developer&utm_campaign=SwiftLeeds_Oct2022" target="_blank"><img src="img/stream.png" class="sponsor-img"></a></td>
           </tr>
         </tbody>
       </table>
