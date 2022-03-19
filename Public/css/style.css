@@ -9,7 +9,6 @@
 }
 
 html {
-  background-color: var(--background-color);
   width: 100vw;
   overflow-x: hidden;
 }
