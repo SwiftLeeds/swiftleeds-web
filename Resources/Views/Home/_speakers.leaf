@@ -1,16 +1,37 @@
 <div class="row">
-  <div class="col-sm-5 col-md-3 col-lg-2">
-    <a id="speakers">
-      <h2>
-        Meet the<br/>
-        speakers
-      </h2>
-    </a>
-  </div>
-  
-  <div class="col-sm-7 col-md-9 col-lg-10">
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
+  <div class="speaker-grid-container">
+    <div>
+      <div class="speaker-grid-header">
+          <a id="speakers">
+            <h2>
+              Meet the<br/>
+              speakers
+            </h2>
+          </a>
+          <div class="call-for-speakers">
+            <img src="/img/arrowicon.svg"/>
+            <a href="https://sessionize.com/swiftleeds/">Want to be here? get in touch.</a>
+          </div>
+      </div>
+    </div>
+    <div class="speaker-grid col-12">
+        #for(speaker in speakers):
+            <div class="speaker-grid-element">
+                <div class="speaker-grid-element-image-container">
+                    <img class="speaker-grid-element-image" src="#(speaker.imageLink)"/>
+                </div>
+                <div class="speaker-grid-element-info">
+                    <a href="#(speaker.socialLink)">
+                        <div class="speaker-grid-social">
+                            <img src="/img/twitter-vector.svg"/>
+                        </div>
+                    </a>
+                    <p class="speaker-grid-name">#(speaker.name)</p>
+                    <p class="speaker-grid-title">#(speaker.title)</p>
+                </div>
+            </div>
+        #endfor
+     </div>
+    </div>
   </div>
 </div>

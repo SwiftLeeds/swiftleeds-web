@@ -36,6 +36,8 @@
     <div class="container">
       #extend("Home/_about-us")
       <br/>
+      #extend("Home/_speakers")
+      <br/>
       #extend("Home/_order-tickets")
       <br/>
       #extend("Home/_previous-conferences")

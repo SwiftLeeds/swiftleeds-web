@@ -1,7 +1,9 @@
 /* Site Styles */
 body {
-  font-family: Poppins, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; !important;
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif !important;
   font-weight: 400;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .child-img {
@@ -31,7 +33,7 @@ th, td {
 .sponsors-table {
     border-collapse: unset;
     vertical-align: middle;
-    text-align
+    text-align: center;
 }
 
 .sponsor-img {
@@ -130,6 +132,7 @@ h2 {
   font-size: 2em;
   line-height: 100%;
   text-transform: uppercase;
+  font-weight: 200 !important;
 }
 
 p.bold {
@@ -224,7 +227,7 @@ ul.top-nav li a {
 }
 
 /* Coming Soon Page */
-.container img {
+.container > img {
   margin-left: auto;
   margin-right: auto;
 }
@@ -276,4 +279,168 @@ ul.tickets li a {
   padding: 4px;
   text-transform: uppercase;
   font-size: 0.7em;
+}
+
+/* Speaker Grid */
+.speaker-grid-container {
+  width: 100%;
+  border: 1px solid black;
+  padding: 80px 0px 80px 0px;
+}
+
+.speaker-grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: max-content;
+  grid-gap: 20px;
+  grid-row-gap: 20px;
+  padding-top: 80px;
+}
+
+.speaker-grid-background {
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  background-color: powderblue;
+  margin-top: -2px; /* Account for the border */
+  height: 100%;
+}
+
+/* Speaker grid header */
+.speaker-grid-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 120px;
+  padding-right: 120px;
+}
+
+.call-for-speakers {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+}
+
+.call-for-speakers > img {
+  display: inline-block;
+  align-self: flex-end;
+  text-align: right;
+}
+
+.call-for-speakers > a {
+  align-self: center;
+  font-weight: 600;
+  color: #ED2207; /* Explicit to disable ugly blue hover */
+}
+
+/* Speaker Grid elements */
+.speaker-grid-element { 
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  height: 100%;
+}
+
+.speaker-grid-element-image-container {
+    width: 100%;
+    height: 300px;
+}
+
+.speaker-grid-element-image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.speaker-grid-element-info { 
+  display: inline-block;
+  padding-left: 20px;
+  width: 100%;
+}
+
+.speaker-grid-element-info > a { 
+  text-decoration: none;
+}
+
+.speaker-grid-social {
+  float: right;
+  width: 36px;
+  height: 36px;
+  background-color: black;
+  text-align: center;
+}
+
+.speaker-grid-social > img {
+  display: inline-block;
+  margin: 0 auto;
+  padding: 8px;
+  height: 100%;
+  width: 100%;
+}
+
+.speaker-grid-element-info > p {
+    margin: 0;
+}
+
+.speaker-grid-name {
+    padding-top: 20px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.speaker-grid-title {
+    font-weight: 300;
+    font-size: 14px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .speaker-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .speaker-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .speaker-grid-header {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+/* Responsive Grid */
+@media only screen and (max-width: 768px) {
+  .speaker-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .speaker-grid-element-image-container {
+    height: 300px;
+  }
+  .speaker-grid-header {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .speaker-grid-element-image-container {
+    height: 55vw;
+  }
+
+  .speaker-grid-header {
+    padding-left: 20px;
+    padding-right: 20px;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: left;
+  }
+
+  .call-for-speakers {
+    align-self: flex-start;
+  }
+  .call-for-speakers > img {
+    display: none;
+  }
 }
