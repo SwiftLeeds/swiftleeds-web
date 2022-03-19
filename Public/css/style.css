@@ -332,6 +332,7 @@ ul.tickets li a {
   align-self: center;
   font-weight: 600;
   color: #ED2207; /* Explicit to disable ugly blue hover */
+  font-size: 20px;
 }
 
 /* Speaker Grid elements */
@@ -361,6 +362,7 @@ ul.tickets li a {
 
 .speaker-grid-element-info > a { 
   text-decoration: none;
+  font-size: 20px;;
 }
 
 .speaker-grid-social {
@@ -398,15 +400,15 @@ ul.tickets li a {
   .speaker-grid {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
+  .speaker-grid-header {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 }
 
 @media only screen and (max-width: 992px) {
   .speaker-grid {
     grid-template-columns: 1fr 1fr 1fr;
-  }
-  .speaker-grid-header {
-    padding-left: 40px;
-    padding-right: 40px;
   }
 }
 
