@@ -17,6 +17,6 @@ import Vapor
 ///     return req.view.render("Home/home", HomeContext(speakers: speakers, cfpActive: Date() < cfpExpirationDate))
 /// 
 struct HomeContext: Content {
-    var speakers: [Speaker] = Speaker.speakers
+    var speakers: [Speaker] = []
     var cfpActive: Bool = false
 }
