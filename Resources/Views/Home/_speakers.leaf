@@ -14,7 +14,8 @@
           </div>
       </div>
     </div>
-    <div class="speaker-grid col-12">
+    <div class="speaker-grid">
+        <div class="speaker-grid-container-background"></div>
         #for(speaker in speakers):
             <div class="speaker-grid-element">
                 <div class="speaker-grid-element-image-container">

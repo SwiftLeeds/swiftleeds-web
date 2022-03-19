@@ -305,6 +305,7 @@ ul.tickets li a {
 }
 
 .speaker-grid {
+  position: relative;
   display: grid;
   width: 100%;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -314,12 +315,16 @@ ul.tickets li a {
   padding-top: 80px;
 }
 
-.speaker-grid-background {
-  z-index: -1;
+.speaker-grid-container-background {
   position: absolute;
-  width: 100%;
-  margin-top: -2px; /* Account for the border */
+  content: "";
+  margin-left: calc(((100%/5)*-1)/2); /* About 20% extra width */
+  width: 120%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px var(--border-color) solid;
+  pointer-events: none; /* Make sure we don't get in the way */
+  margin-top: calc(80px + 1px) /* Border width / 2 */
 }
 
 /* Speaker grid header */
@@ -412,6 +417,9 @@ ul.tickets li a {
 }
 
 @media only screen and (max-width: 1200px) {
+  .speaker-grid-container-background {
+    display: none;
+  }
   .speaker-grid {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
