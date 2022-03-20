@@ -18,6 +18,7 @@
           #endif
       </div>
     </div>
+    #if(count(speakers) > 0):
     <div class="speaker-grid">
         <div class="speaker-grid-container-background"></div>
         #for(speaker in speakers):
@@ -38,5 +39,6 @@
         #endfor
      </div>
     </div>
+    #endif
   </div>
 </div>
