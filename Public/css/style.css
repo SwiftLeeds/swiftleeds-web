@@ -300,7 +300,7 @@ ul.tickets li a {
 .speaker-grid-container {
   width: 100%;
   border: 1px solid var(--border-color);
-  padding: 80px 0px 80px 0px;
+  padding: 80px 0;
 }
 
 .speaker-grid {
