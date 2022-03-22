@@ -19,7 +19,7 @@
         <a class="nav-link text-dark" href="#about">About</a>
         <a class="nav-link text-dark" href="#previous">Previous Conference</a>
         <a class="nav-link text-dark" href="#sponsors">Sponsors</a>
-        <li><a href="https://twitter.com/swift_leeds"><img src="/img/twitter.png" alt="twitter" width=20 height=20/></a></li>
+        <li><a href="https://twitter.com/swift_leeds" target="_blank"><img src="/img/twitter.png" alt="twitter" width=20 height=20/></a></li>
       </div>
     </div>
   </div>

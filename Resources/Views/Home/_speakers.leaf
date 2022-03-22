@@ -11,7 +11,7 @@
           #if(cfpEnabled):
           <div class="call-for-speakers">
             <img src="/img/arrowicon.svg"/>
-            <a href="https://sessionize.com/swiftleeds/">Want to be here? get in touch.</a>
+            <a href="https://sessionize.com/swiftleeds/" target="_blank">Want to be here? get in touch.</a>
           </div>
           #else:
             <p></p>
