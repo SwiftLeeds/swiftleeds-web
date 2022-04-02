@@ -30,7 +30,8 @@
         <a class="nav-link text-dark" href="#tickets">Tickets</a>
         <a class="nav-link text-dark" href="#previous">Previous Conference</a>
         <a class="nav-link text-dark" href="#sponsors">Sponsors</a>
-        <li><a href="https://twitter.com/swift_leeds" target="_blank"><img src="/img/twitter.png" alt="twitter" width=20 height=20/></a></li>
+        <a class="nav-link text-dark" href="https://twitter.com/swift_leeds" target="_blank"><img src="/img/twitter.png" alt="twitter"/></a>
+        <a class="nav-link text-dark" href="https://join.slack.com/t/swiftleedsworkspace/shared_invite/zt-wkmr6pif-ZDCdDeHM60jcBUy0BxHdCQ" target="_blank"><img src="/img/slack.png" alt="slack"/></a>
       </div>
     </div>
   </div>
