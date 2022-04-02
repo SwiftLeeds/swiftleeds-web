@@ -35,6 +35,19 @@ body {
     padding-top: 40px;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+/* This will make sure anchor links don't get covered by the nav bar */
+
+:target:before {
+    content: "";
+    display: block;
+    height: 100px;
+    margin: -100px 0 0;
+}
+
 .col-lg-10 {
     padding-right: 40px;
     padding-left: 40px;
