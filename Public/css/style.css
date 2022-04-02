@@ -19,6 +19,7 @@ body {
   font-weight: 400;
   background-color: var(--background-color);
   color: var(--text-color);
+  padding-top: 5rem;
 }
 
 .child-img {
@@ -168,7 +169,12 @@ a {
 }
 
 .logo {
-  width: 10em;
+  max-width: 10em;
+  float: left;
+}
+
+.logo-vertical {
+  max-width: 3em;
   float: left;
 }
 
@@ -177,9 +183,13 @@ a {
   width: 0;
   height: 40px;
   border: 0.5px solid var(--border-color);
-  margin:  0 1em;
+  margin:  0 0.5em;
   display: block;
   float: left;
+}
+
+@media only screen and (min-width: 576px) {
+    margin: 0 1em;
 }
 
 .btn-outline-success:hover {
@@ -197,6 +207,12 @@ a {
   float: left;
   line-height:  120%;
   text-transform: uppercase;
+  text-align: left;
+  height: 100%;
+}
+
+.event-date > p {
+    margin: 0
 }
 
 /* Footer */
@@ -207,16 +223,27 @@ footer a {
 
 /* Top Navigation */
 .top-nav {
-  background-color: var(--semi-opaque-background);
-  border-top:  1px var(--border-color) solid;
-  box-shadow: 0px 4px 21px rgba(255, 126, 7, 0.5);
-  float: right;
+  float: left;
   font-size:  16px;
-  padding: 0.5em 2em;
 }
 
-.navbar-expand-lg {
-    padding-right: 30px;
+.navbar {
+    background: var(--background-color);
+}
+
+@media only screen and (max-width: 576px) {
+    .navbar-collapse {
+        padding: 1em;
+    }
+}
+@media only screen and (min-width: 576px) {
+    .navbar {
+        padding: 20px;
+    }
+
+    .navbar-expand-lg {
+        padding-right: 30px;
+    }
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {

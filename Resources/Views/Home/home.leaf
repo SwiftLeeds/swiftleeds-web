@@ -3,9 +3,9 @@
 
   #export("content"):
     #extend("Shared/_header")
-    
+
     <!-- Header-->
-    <header class="my-3">
+    <header class="my-3 ">
         <div class="container-sm">
             <div>
                 <h1 class="display-4">
