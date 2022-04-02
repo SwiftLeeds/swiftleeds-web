@@ -1,6 +1,6 @@
 <div class="row">
-  <div id="tickets" class="col-sm-12 col-md-6">
-    <h2>
+  <div class="col-sm-12 col-md-6">
+    <h2 id="tickets">
       GET YOUR<br/>
       TICKETS
     </h2>
