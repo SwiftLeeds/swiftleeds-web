@@ -139,6 +139,17 @@ th, td {
     .pc-icon-md {
         display: none;
     }
+    
+    .container-sm {
+        margin: 0 0 0 0 !important;
+    }
+    
+    .child-img {
+        max-height: 70%;
+        max-width: 70%;
+        overflow: hidden;
+        padding-top: 40px;
+    }
 
     .ci-md {
         margin: 0 0 0 0 !important;
