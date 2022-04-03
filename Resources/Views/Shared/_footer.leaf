@@ -1,11 +1,14 @@
 <br/>
-<footer>
+<footer class="container-md mt-3">
   <div class="row">
     <ul class="col-4">
       
     </ul>
 
-    <div class="col-4">
+    <!-- On small phones, force a newline here -->
+    <div class="w-100 d-sm-block d-md-none"></div>
+
+    <div class="col-sm-8 col-md-4">
       <h5>
         Partners & Sponsors
       </h5>
@@ -15,13 +18,15 @@
       </p>
     </div>
 
-    <div class="col-4 p-0">
+    <div class="col-sm-2 col-md-4 p-sm-20 p-md-0">
       <a href="#top" class="nav-arrow">
         <img src="/img/nav-arrow-up.png" alt="Navigate to top"/>
-
       </a>
     </div>
   </div>
+
+    <!-- On small phones, force a newline here -->
+    <div class="w-100 d-sm-block d-md-none"></div>
 
   <div class="row">
     <p class="col-4">

@@ -1,6 +1,6 @@
 <div class="row">
-    <div id="about" class="col-sm-5 col-md-3 col-lg-2">
-        <h2>
+    <div class="col-sm-5 col-md-3 col-lg-2">
+        <h2 id="about">
             What are<br/>
             we about
         </h2>
@@ -9,7 +9,7 @@
 
     <div class="col-sm-7 col-md-9 col-lg-10">
         <p>
-        <a href="https://twitter.com/Adam9Rush">Adam Rush</a> founded SwiftLeeds in 2019, born from over ten years of experience attending conferences. The inspiration was bringing a modern, inclusive conference in the North of the UK to be more accessible for all.
+        <a href="https://twitter.com/Adam9Rush" target="_blank">Adam Rush</a> founded SwiftLeeds in 2019, born from over ten years of experience attending conferences. The inspiration was bringing a modern, inclusive conference in the North of the UK to be more accessible for all.
         <br />
         <br />
         SwiftLeeds is now run with over ten community volunteers building the website, iOS applications and making sure we cover all the bases on the day. SwiftLeeds is entirely non-profit, and the funds make sure we can deliver the best experience possible.

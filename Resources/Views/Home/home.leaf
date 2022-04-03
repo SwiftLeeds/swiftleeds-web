@@ -1,9 +1,8 @@
 #extend("base"):
 #export("title", "SwiftLeeds")
 
-#export("content"):
-#extend("Shared/_header")
-
+  #export("content"):
+    #extend("Shared/_header")
 <!-- Header-->
 <header class="my-3">
   <div class="container-sm">
@@ -27,8 +26,6 @@
     <li class="inPerson"><a href="#tickets">In-Person</a></li>
   </ul>
 </div>
-
-<br style="clear: both;"/>
 
 <div class="container">
   <div class="row bg-light p-3">
