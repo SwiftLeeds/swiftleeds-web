@@ -2,9 +2,7 @@
 <footer class="container-md mt-3">
   <div class="row">
     <ul class="col-4">
-      <li><a href="#">FAQ</a></li>
-      <li><a href="#">Privacy Policy</a></li>
-      <li><a href="#">Statute</a></li>
+      
     </ul>
 
     <!-- On small phones, force a newline here -->

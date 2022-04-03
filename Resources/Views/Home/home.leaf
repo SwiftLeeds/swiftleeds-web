@@ -1,50 +1,56 @@
 #extend("base"):
-  #export("title", "SwiftLeeds")
+#export("title", "SwiftLeeds")
 
   #export("content"):
     #extend("Shared/_header")
-    
-    <!-- Header-->
-    <header class="my-3">
-        <div class="container-sm">
-            <div>
-                <h1 class="display-4">
-                    A unique <strong>Swift</strong><br/>
-                    <strong>Conference</strong><br/>
-                    in the heart<br/>
-                    of leeds.
-                </h1>
-
-                <img src="/img/header-bg.png" class="child-img"/>
-            </div>
-        </div>
-    </header>
-
-    <!-- Sections-->
-    <div class="row">
-      <ul class="tickets col-10">
-        <li>Get Your Ticket</li>
-        <li class="inPerson"><a href="#tickets">In-Person</a></li>
-      </ul>
+<!-- Header-->
+<header class="my-3">
+  <div class="container-sm">
+    <div>
+      <h1 class="display-4">
+        A unique <strong>Swift</strong><br/>
+        <strong>Conference</strong><br/>
+        in the heart<br/>
+        of leeds.
+      </h1>
+      
+      <img src="/img/header-bg.png" class="child-img"/>
     </div>
+  </div>
+</header>
 
-    <br style="clear: both;"/>
+<!-- Sections-->
+<div class="row">
+  <ul class="tickets col-10">
+    <li>Get Your Ticket</li>
+    <li class="inPerson"><a href="#tickets">In-Person</a></li>
+  </ul>
+</div>
+
+<div class="container">
+  <div class="row bg-light p-3">
+    <div class="col-12" align="center">
+      <p class="h2 text-center">Call for Speakers <strong>Now Open</strong></p>
+      <p class="text-center">Do you want to present at the next Swift Leeds Conference? Click the button below to submit a presentation.</p>
+      <a href="https://sessionize.com/swiftleeds/" target="_blank" class="btn btn-outline-success" role="button">Click Here</a>
+    </div>
+  </div>
+  
+  <br style="clear: both;"/>
+  <br/>
+  
+  <img src="/img/ticket-background.svg" class="order-tickets"/>
+  
+  <div class="container">
+    #extend("Home/_about-us")
     <br/>
-    
-    <img src="/img/ticket-background.svg" class="order-tickets"/>
-
-    <div class="container">
-      #extend("Home/_about-us")
-      <br/>
-      #extend("Home/_order-tickets")
-      <br/>
-      #extend("Home/_speakers")
-      <br/>
-      #extend("Home/_previous-conferences")
-      <br/>
-      #extend("Home/_sponsors")
-    </div>
-
-    #extend("Shared/_footer")
+    #extend("Home/_order-tickets")
+    <br/>
+    #extend("Home/_previous-conferences")
+    <br/>
+    #extend("Home/_sponsors")
+  </div>
+  
+  #extend("Shared/_footer")
   #endexport
-#endextend
+  #endextend
