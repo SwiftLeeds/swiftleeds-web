@@ -11,9 +11,18 @@ import Fluent
 
 struct AuthController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
-        routes.post("create", use: create)
+        routes.get("logout", use: logout)
+        let grouped = routes.grouped("api", "v1", "auth")
+        grouped.post("create", use: create)
         
-        let passwordProtected = routes.grouped(AppUser.authenticator())
+        let passwordProtected = grouped.grouped(
+            [
+                AppUser.authenticator(),
+                AppUser.credentialsAuthenticator(),
+                AppUser.sessionAuthenticator()
+            ]
+        )
+        
         passwordProtected.post("login", use: login)
     }
     
@@ -34,12 +43,15 @@ struct AuthController: RouteCollection {
         return token
     }
     
-    private func login(request: Request) async throws -> UserToken {
-        let user = try request.auth.require(AppUser.self)
+    private func login(request: Request) async throws -> Response {
+        guard let user = request.auth.get(AppUser.self) else {
+            throw Abort(.notFound)
+        }
+                
         do {
             let token = try user.generateToken()
             try await token.save(on: request.db)
-            return token
+            return request.redirect(to: "/", type: .normal)
         } catch {
             guard let old = try await user.$token.get(on: request.db) else {
                 throw error
@@ -50,16 +62,21 @@ struct AuthController: RouteCollection {
                 return try await login(request: request)
             }
             
-            return old
+            return request.redirect(to: "/", type: .normal)
         }
     }
     
-    private func logout(request: Request) async throws {
-        let user = try request.auth.require(AppUser.self)
+    private func logout(request: Request) async throws -> Response {
+        guard let user = request.auth.get(AppUser.self) else {
+            return request.redirect(to: "/")
+        }
+        
         guard let token = try await user.$token.get(on: request.db) else {
-            throw Abort(.unauthorized)
+            return request.redirect(to: "/")
         }
         
         try await token.delete(on: request.db)
+        request.auth.logout(AppUser.self)
+        return request.redirect(to: "/")
     }
 }

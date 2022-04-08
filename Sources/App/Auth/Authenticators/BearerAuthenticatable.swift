@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  BearerAuthenticatable.swift
 //  
 //
 //  Created by Joe Williams on 16/11/2021.
@@ -9,7 +9,8 @@ import Foundation
 import Vapor
 import Fluent
 
-class AdminAuthenticatable: AsyncBearerAuthenticator {
+/// Authenticator used to authenticate a user by their auth token.
+class BearerAuthenticatable: Authenticator, AsyncBearerAuthenticator {
     
     enum RoleFailure: Error {
         case notAuthenticated
@@ -27,10 +28,6 @@ class AdminAuthenticatable: AsyncBearerAuthenticator {
         }
         
         let user = try await token.$user.get(on: request.db)
-        guard user.role == .admin else {
-            throw Abort(.unauthorized)
-        }
-        
         request.auth.login(token)
         request.auth.login(user)
     }

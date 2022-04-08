@@ -21,7 +21,7 @@ final class UserToken: Model, Content, ModelTokenAuthenticatable {
         return self.timestamp > Date()
     }
 
-    @ID(key: .id)
+    @ID(custom: "id", generatedBy: .database)
     var id: UUID?
 
     @Field(key: "value")
@@ -35,7 +35,7 @@ final class UserToken: Model, Content, ModelTokenAuthenticatable {
 
     init() { }
 
-    init(id: UUID? = nil, value: String, timestamp: Date, userID: User.IDValue) {
+    init(id: UUID? = .init(), value: String, timestamp: Date, userID: User.IDValue) {
         self.id = id
         self.value = value
         self.timestamp = timestamp

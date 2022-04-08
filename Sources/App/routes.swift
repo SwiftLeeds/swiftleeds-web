@@ -1,12 +1,24 @@
 import Vapor
 
 func routes(_ app: Application) throws {
-    app.get { req -> EventLoopFuture<View> in
+    
+    let route = app.routes.grouped(AppUser.sessionAuthenticator())
+    
+    route.get { req -> EventLoopFuture<View> in
         let cfpExpirationDate = Date(timeIntervalSince1970: 1651356000) // 30th April 22
-        return req.view.render("Home/home", HomeContext(cfpEnabled: cfpExpirationDate > Date()))
+        guard let user = req.auth.get(AppUser.self) else {
+            return req.view.render("Home/home")
+        }
+        return req.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), user: user))
     }
-    let routes = app.grouped("api", "v1")
-    try routes
-        .grouped("auth")
-        .register(collection: AuthController())
+    
+    app.routes.get("login") { request in
+        request.view.render("Authentication/login")
+    }
+    
+    app.routes.get("register") { request in
+        request.view.render("Authentication/register")
+    }
+    
+    try app.routes.register(collection: AuthController())
 }

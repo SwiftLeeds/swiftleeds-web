@@ -9,10 +9,13 @@ import Foundation
 import Vapor
 import Fluent
 
-final class AppUser: Model, ModelAuthenticatable, Content {
-    
+final class AppUser: Authenticatable, ModelAuthenticatable, Content, ModelSessionAuthenticatable, ModelCredentialsAuthenticatable {
     enum UserRole: String, Codable {
-        case user, editor, admin
+        case user, speaker, admin
+    }
+    
+    var sessionID: UUID {
+        return id ?? .init()
     }
     
     static let usernameKey = \AppUser.$email
@@ -20,7 +23,7 @@ final class AppUser: Model, ModelAuthenticatable, Content {
     static let schema = "app_users"
     
     // Unique identifier for this user.
-    @ID(key: .id)
+    @ID(custom: "id", generatedBy: .database)
     var id: UUID?
 
     // The user's name.
@@ -43,7 +46,7 @@ final class AppUser: Model, ModelAuthenticatable, Content {
     init() { }
 
     // Creates a new user with all properties set.
-    init(id: UUID? = nil, name: String, email: String, passwordHash: String, role: UserRole) {
+    init(id: UUID? = .init(), name: String, email: String, passwordHash: String, role: UserRole) {
         self.id = id
         self.name = name
         self.email = email
@@ -63,6 +66,24 @@ final class AppUser: Model, ModelAuthenticatable, Content {
         )
     }
     
+    public static func credentialsAuthenticator(
+        database: DatabaseID? = nil
+    ) -> Authenticator {
+        return CustomCredentialsAuthenticator()
+    }
+    
+    public static func sessionAuthenticator(
+        _ databaseID: DatabaseID? = nil
+    ) -> Authenticator {
+        return SessionAuthenticator()
+    }
+    
+    public static func authenticator(
+        database: DatabaseID? = nil
+    ) -> Authenticator {
+        return BearerAuthenticatable()
+    }
+    
     class Migrations: AsyncMigration {
         
         func prepare(on database: Database) async throws {
@@ -72,7 +93,6 @@ final class AppUser: Model, ModelAuthenticatable, Content {
                 .field("password_hash", .string, .required)
                 .field("email", .string, .required)
                 .field("user_role", .string, .sql(.default("user")))
-                .field("token", .uuid, .required, .references("app_users", "id"))
                 .unique(on: "email")
                 .create()
         }
