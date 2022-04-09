@@ -24,10 +24,10 @@
         #for(speaker in speakers):
             <div class="speaker-grid-element">
                 <div class="speaker-grid-element-image-container">
-                    <img class="speaker-grid-element-image" src="#(speaker.imageLink)"/>
+                    <img class="speaker-grid-element-image" src="/img/#(speaker.profileImage)"/>
                 </div>
                 <div class="speaker-grid-element-info">
-                    <a href="#(speaker.socialLink)">
+                    <a href="https://twitter.com/#(speaker.twitter)">
                         <div class="speaker-grid-social">
                             <img src="/img/twitter-vector.svg"/>
                         </div>

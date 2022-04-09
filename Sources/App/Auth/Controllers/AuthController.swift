@@ -17,9 +17,9 @@ struct AuthController: RouteCollection {
         
         let passwordProtected = grouped.grouped(
             [
-                AppUser.authenticator(),
-                AppUser.credentialsAuthenticator(),
-                AppUser.sessionAuthenticator()
+                User.authenticator(),
+                User.credentialsAuthenticator(),
+                User.sessionAuthenticator()
             ]
         )
         
@@ -27,16 +27,16 @@ struct AuthController: RouteCollection {
     }
     
     private func create(request: Request) async throws -> UserToken {
-        try AppUser.Create.validate(content: request)
-        let newUser = try request.content.decode(AppUser.Create.self)
+        try User.Create.validate(content: request)
+        let newUser = try request.content.decode(User.Create.self)
         guard newUser.password == newUser.confirmPassword else {
             throw Abort(.badRequest, reason: "Passwords do not match")
         }
         
-        let user = try AppUser(name: newUser.name,
-                               email: newUser.email,
-                               passwordHash: Bcrypt.hash(newUser.password),
-                               role: AppUser.UserRole.user) // by default you're a user
+        let user = try User(name: newUser.name,
+                            email: newUser.email.lowercased(),
+                            passwordHash: Bcrypt.hash(newUser.password),
+                            role: User.Role.user) // by default you're a user
         let token = try user.generateToken()
         try await user.save(on: request.db)
         try await token.save(on: request.db)
@@ -44,14 +44,14 @@ struct AuthController: RouteCollection {
     }
     
     private func login(request: Request) async throws -> Response {
-        guard let user = request.auth.get(AppUser.self) else {
+        guard let user = request.auth.get(User.self) else {
             throw Abort(.notFound)
         }
                 
         do {
             let token = try user.generateToken()
             try await token.save(on: request.db)
-            return request.redirect(to: "/", type: .normal)
+            return request.redirect(to: "/")
         } catch {
             guard let old = try await user.$token.get(on: request.db) else {
                 throw error
@@ -61,13 +61,12 @@ struct AuthController: RouteCollection {
                 try await old.delete(on: request.db)
                 return try await login(request: request)
             }
-            
-            return request.redirect(to: "/", type: .normal)
+            return request.redirect(to: "/")
         }
     }
     
     private func logout(request: Request) async throws -> Response {
-        guard let user = request.auth.get(AppUser.self) else {
+        guard let user = request.auth.get(User.self) else {
             return request.redirect(to: "/")
         }
         
@@ -76,7 +75,7 @@ struct AuthController: RouteCollection {
         }
         
         try await token.delete(on: request.db)
-        request.auth.logout(AppUser.self)
+        request.auth.logout(User.self)
         return request.redirect(to: "/")
     }
 }

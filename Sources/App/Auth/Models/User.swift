@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  User.swift
 //  
 //
 //  Created by Joe Williams on 14/11/2021.
@@ -9,8 +9,8 @@ import Foundation
 import Vapor
 import Fluent
 
-final class AppUser: Authenticatable, ModelAuthenticatable, Content, ModelSessionAuthenticatable, ModelCredentialsAuthenticatable {
-    enum UserRole: String, Codable {
+final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAuthenticatable, ModelCredentialsAuthenticatable, Codable {
+    enum Role: String, Codable {
         case user, speaker, admin
     }
     
@@ -18,9 +18,9 @@ final class AppUser: Authenticatable, ModelAuthenticatable, Content, ModelSessio
         return id ?? .init()
     }
     
-    static let usernameKey = \AppUser.$email
-    static let passwordHashKey = \AppUser.$passwordHash
-    static let schema = "app_users"
+    static let usernameKey = \User.$email
+    static let passwordHashKey = \User.$passwordHash
+    static let schema = "users"
     
     // Unique identifier for this user.
     @ID(custom: "id", generatedBy: .database)
@@ -37,7 +37,7 @@ final class AppUser: Authenticatable, ModelAuthenticatable, Content, ModelSessio
     var passwordHash: String
     
     @Field(key: "user_role")
-    var role: UserRole
+    var role: User.Role
     
     @OptionalChild(for: \.$user)
     var token: UserToken?
@@ -46,7 +46,7 @@ final class AppUser: Authenticatable, ModelAuthenticatable, Content, ModelSessio
     init() { }
 
     // Creates a new user with all properties set.
-    init(id: UUID? = .init(), name: String, email: String, passwordHash: String, role: UserRole) {
+    init(id: UUID? = .init(), name: String, email: String, passwordHash: String, role: User.Role) {
         self.id = id
         self.name = name
         self.email = email
@@ -87,7 +87,7 @@ final class AppUser: Authenticatable, ModelAuthenticatable, Content, ModelSessio
     class Migrations: AsyncMigration {
         
         func prepare(on database: Database) async throws {
-            try await database.schema(AppUser.schema)
+            try await database.schema(User.schema)
                 .id()
                 .field("name", .string, .required)
                 .field("password_hash", .string, .required)
@@ -98,7 +98,7 @@ final class AppUser: Authenticatable, ModelAuthenticatable, Content, ModelSessio
         }
 
         func revert(on database: Database) async throws {
-            try await database.schema(AppUser.schema).delete()
+            try await database.schema(User.schema).delete()
         }
     }
 

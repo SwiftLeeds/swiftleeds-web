@@ -9,8 +9,8 @@ import Foundation
 import Vapor
 import Fluent
 
-final class UserToken: Model, Content, ModelTokenAuthenticatable {
-    typealias User = AppUser
+final class UserToken: Model, Content, ModelTokenAuthenticatable, Codable {
+    typealias User = App.User
     
     static let valueKey = \UserToken.$value
     static let userKey = \UserToken.$user
@@ -50,7 +50,7 @@ final class UserToken: Model, Content, ModelTokenAuthenticatable {
                 .id()
                 .field("value", .string, .required)
                 .field("timestamp", .datetime, .required)
-                .field("user_id", .uuid, .required, .references("app_users", "id"))
+                .field("user_id", .uuid, .required, .references("users", "id"))
                 .unique(on: "value")
                 .unique(on: "user_id")
                 .create()
