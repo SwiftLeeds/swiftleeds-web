@@ -8,4 +8,3 @@ Tests/LinuxMain.swift
 .swiftpm/xcode/xcuserdata/
 .swiftpm/
 .env.*
-UPDATE public.app_users SET user_role='admin' WHERE id='370e5f6a-73eb-40df-b64b-29ef4f03f349' 

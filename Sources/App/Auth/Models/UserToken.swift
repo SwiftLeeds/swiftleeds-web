@@ -43,7 +43,9 @@ final class UserToken: Model, Content, ModelTokenAuthenticatable, Codable {
     }
     
     struct Migrations: AsyncMigration {
-        var name: String { "CreateUserToken" }
+        var name: String {
+            "CreateUserToken"
+        }
         
         func prepare(on database: Database) async throws {
             return try await database.schema("user_tokens")
