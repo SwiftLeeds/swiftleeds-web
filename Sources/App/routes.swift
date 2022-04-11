@@ -5,4 +5,8 @@ func routes(_ app: Application) throws {
         let cfpExpirationDate = Date(timeIntervalSince1970: 1651356000) // 30th April 22
         return req.view.render("Home/home", HomeContext(cfpEnabled: cfpExpirationDate > Date()))
     }
+    
+    app.get("conduct") { req -> EventLoopFuture<View> in
+        return req.view.render("Secondary/conduct", ["name": "Leaf"])
+    }
 }

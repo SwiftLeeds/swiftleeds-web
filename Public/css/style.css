@@ -218,13 +218,14 @@ a {
 
 .btn-outline-success:hover {
   color: #fff;
-  background-color: rgba(255, 126, 7, 1);
-  border-color: rgba(255, 126, 7, 1);
+  background-color: rgba(224, 4, 14, 1);
+  border-color: rgba(224, 4, 14, 1);
 }
 
 .btn-outline-success {
-  color: rgba(255, 126, 7, 1);
-  border-color: rgba(255, 126, 7, 1);
+  color: rgba(224, 4, 14, 1);
+  border-radius: 0px;
+  border-color: rgba(224, 4, 14, 1);
 }
 
 .event-date {
