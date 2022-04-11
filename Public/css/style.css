@@ -4,7 +4,7 @@
   --accent-color-darkened: #BC1802;
   --border-color: #000000;
   --background-color: #FFFFFF;
-  --semi-opaque-background: rgba(255, 255, 255, 0.6);
+  --semi-opaque-background: rgba(255, 255, 255, 0.8);
   --text-color: #000000;
 }
 
@@ -25,7 +25,7 @@ body {
 .child-img {
   height: 90%;
   position: absolute;
-  top: 4em;
+  top: 6em;
   left: 50%;
   margin: -25px 0 0 -95px;
   z-index: -1;
@@ -252,14 +252,19 @@ footer a {
 }
 
 .navbar {
-    background: var(--background-color);
+    background: var(--semi-opaque-background);
 }
 
 @media only screen and (max-width: 576px) {
     .navbar-collapse {
         padding: 1em;
     }
+
+    .navbar {
+        background: var(--background-color);
+    }
 }
+
 @media only screen and (min-width: 576px) {
     .navbar {
         padding: 20px;
