@@ -26,11 +26,19 @@ struct AuthController: RouteCollection {
         passwordProtected.post("login", use: login)
     }
     
-    private func create(request: Request) async throws -> UserToken {
-        try User.Create.validate(content: request)
+    private func create(request: Request) async throws -> Response {
+        
+        // Create User Validations
+        do {
+            try User.Create.validate(content: request)
+        } catch {
+            return request.redirect(to: "/register?message=\(error)")
+        }
+        
+        // Decode New User
         let newUser = try request.content.decode(User.Create.self)
         guard newUser.password == newUser.confirmPassword else {
-            throw Abort(.badRequest, reason: "Passwords do not match")
+            return request.redirect(to: "/register?message=Passwords do not match")
         }
         
         let user = try User(name: newUser.name,
@@ -40,7 +48,7 @@ struct AuthController: RouteCollection {
         let token = try user.generateToken()
         try await user.save(on: request.db)
         try await token.save(on: request.db)
-        return token
+        return request.redirect(to: "/create-presentation")
     }
     
     private func login(request: Request) async throws -> Response {

@@ -19,8 +19,12 @@ func routes(_ app: Application) throws {
         request.view.render("Authentication/login")
     }
     
-    app.routes.get("register") { request in
-        request.view.render("Authentication/register")
+    app.routes.get("register") { request -> View in
+        if let message = request.query[String.self, at: "message"] {
+            return try await request.view.render("Authentication/register", RegisterContext(message: message))
+        } else {
+            return try await request.view.render("Authentication/register")
+        }
     }
         
     app.routes.get("create-presentation") { request -> View in
