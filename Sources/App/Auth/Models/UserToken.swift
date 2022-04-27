@@ -21,7 +21,7 @@ final class UserToken: Model, Content, ModelTokenAuthenticatable, Codable {
         return self.timestamp > Date()
     }
 
-    @ID(custom: "id", generatedBy: .database)
+    @ID()
     var id: UUID?
 
     @Field(key: "value")
@@ -43,10 +43,6 @@ final class UserToken: Model, Content, ModelTokenAuthenticatable, Codable {
     }
     
     struct Migrations: AsyncMigration {
-        var name: String {
-            "CreateUserToken"
-        }
-        
         func prepare(on database: Database) async throws {
             return try await database.schema("user_tokens")
                 .id()

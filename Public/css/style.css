@@ -22,11 +22,6 @@ body {
   padding-top: 5rem;
 }
 
-.centered {
-  display: flex;
-  justify-content: center;
-}
-
 .child-img {
   height: 90%;
   position: absolute;

@@ -11,11 +11,13 @@ import Fluent
 
 final class Presentation: Codable, Model, Content {
     
+    typealias IDValue = UUID
+    
     static var schema: String {
         return "presentations"
     }
     
-    @ID(custom: "id", generatedBy: .database)
+    @ID(key: .id)
     var id: UUID?
     
     @Field(key: "title")
@@ -30,28 +32,27 @@ final class Presentation: Codable, Model, Content {
     @Parent(key: "speaker_id")
     var speaker: Speaker
     
+    @Parent(key: "event_id")
+    public var event: Event
+    
     init() { }
     
-    init(id: UUID? = .init(), title: String, synopsis: String, image: String?, speakerID: Speaker.IDValue) {
+    init(id: IDValue?, title: String, synopsis: String, image: String?, eventID: Event.IDValue) {
         self.id = id
         self.title = title
         self.synopsis = synopsis
         self.image = image
-        self.$speaker.id = speakerID
+        self.$event.id = eventID
     }
     
-    struct Migrations: AsyncMigration {
-        var name: String {
-            "CreatePresentationMigration"
-        }
-        
+    class Migrations: AsyncMigration {
         func prepare(on database: Database) async throws {
             return try await database.schema(Presentation.schema)
                 .id()
                 .field("title", .string, .required)
                 .field("synopsis", .string, .required)
                 .field("speaker_id", .uuid, .references("speakers", "id"))
-                .unique(on: "speaker_id")
+                .field("event_id", .uuid, .references("events", "id"))
                 .create()
         }
         

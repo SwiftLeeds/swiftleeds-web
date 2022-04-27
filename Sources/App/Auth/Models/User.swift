@@ -23,7 +23,7 @@ final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAu
     static let schema = "users"
     
     // Unique identifier for this user.
-    @ID(custom: "id", generatedBy: .database)
+    @ID()
     var id: UUID?
 
     // The user's name.
@@ -85,7 +85,6 @@ final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAu
     }
     
     class Migrations: AsyncMigration {
-        
         func prepare(on database: Database) async throws {
             try await database.schema(User.schema)
                 .id()

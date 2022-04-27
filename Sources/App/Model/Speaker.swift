@@ -8,6 +8,7 @@
 import Foundation
 import Vapor
 import Fluent
+import FluentPostgresDriver
 
 final class Speaker: Codable, Model, Content {
 
@@ -17,7 +18,7 @@ final class Speaker: Codable, Model, Content {
         return "speakers"
     }
     
-    @ID()
+    @ID(key: .id)
     var id: UUID?
 
     @Field(key: "name")
@@ -32,38 +33,22 @@ final class Speaker: Codable, Model, Content {
     @Field(key: "twitter")
     var twitter: String?
     
-    @OptionalChild(for: \.$speaker)
-    var presentation: Presentation?
+    @Field(key: "organisation")
+    var organisation: String
     
-    init() {
-        
-    }
+    @Children(for: \.$speaker)
+    var presentations: [Presentation]
     
-    init(id: UUID? = .init(),
-         name: String,
-         biography: String,
-         profileImage: String = "avatar.png",
-         twitter: String?
-    ) {
-        
-        self.name = name
-        self.biography = biography
-        self.profileImage = profileImage
-        self.twitter = twitter
-    }
+    init() { }
     
-    struct Migrations: AsyncMigration {
-        
-        var name: String {
-            "CreateSpeakerMigration"
-        }
-        
+    class Migrations: AsyncMigration {
         func prepare(on database: Database) async throws {
             try await database.schema(Speaker.schema)
-                .field("id", .uuid, .identifier(auto: true))
+                .id()
                 .field("name", .string, .required)
                 .field("biography", .string, .required)
                 .field("twitter", .string)
+                .field("organisation", .string, .required)
                 .field("profile_image", .string, .sql(.default("avatar.png")))
                 .unique(on: "name")
                 .create()

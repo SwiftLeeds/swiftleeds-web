@@ -17,6 +17,7 @@ public func configure(_ app: Application) throws {
     app.views.use(.leaf)
     
     // register routes
+    app.migrations.add(App.Event.Migrations())
     app.migrations.add(App.User.Migrations())
     app.migrations.add(UserToken.Migrations())
     app.migrations.add(Speaker.Migrations())

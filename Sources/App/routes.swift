@@ -22,6 +22,11 @@ func routes(_ app: Application) throws {
     app.routes.get("register") { request in
         request.view.render("Authentication/register")
     }
+    
+    app.routes.get("admin") { request -> View in
+        let query = try request.query.decode(PageQuery.self)
+        return try await request.view.render("Admin/home", ["page": query.page])
+    }
         
     app.routes.get("create-presentation") { request -> View in
         guard let user = request.auth.get(User.self) else {
@@ -33,10 +38,14 @@ func routes(_ app: Application) throws {
         }
         
         let speakers = try await Speaker.query(on: request.db).all()
-        let context = HomeContext(speakers: speakers, cfpEnabled: true)
+        let context = HomeContext(speakers: speakers, cfpEnabled: cfpExpirationDate > Date())
         return try await request.view.render("Authentication/create_presentation", context)
     }
     
     try app.routes.register(collection: AuthController())
     try app.routes.register(collection: SpeakerController())
+}
+
+struct PageQuery: Content {
+    var page: String
 }
