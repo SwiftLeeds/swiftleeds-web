@@ -4,6 +4,11 @@
             #extend("Shared/_header")
             <div class="row">
                 <h1>Create your <strong>SwiftLeeds</strong> account </h1>
+                #if(message):
+                <div class="alert alert-danger" role="alert">
+                    #(message)
+                </div>
+                #endif
                 <form class="col-6" method="POST" action="/api/v1/auth/create">
                   <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
