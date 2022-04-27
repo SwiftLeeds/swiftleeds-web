@@ -53,6 +53,7 @@ final class Presentation: Codable, Model, Content {
                 .field("synopsis", .string, .required)
                 .field("speaker_id", .uuid, .references("speakers", "id"))
                 .field("event_id", .uuid, .references("events", "id"))
+                .field("image", .string)
                 .create()
         }
         

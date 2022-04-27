@@ -17,9 +17,9 @@
                     <span class="input-group-text" id="twitter">@</span>
                     <input type="text" name="twitter" class="form-control" placeholder="Twitter" aria-label="Username" aria-describedby="basic-addon1">
                   </div>
-                  <div class="input-group mb-3">
+                  <div class="mb-3">
                     <label for="organisation" class="form-label">Organisation</label>
-                    <input class="form-control" id="organisation" aria-describedby="organisation" name="organisation">
+                    <input class="form-control" id="organisation" name="organisation">
                   </div>
                   <div class="mb-3">
                     <label for="formFile" class="form-label">Profile picture</label>

@@ -26,16 +26,17 @@ struct SpeakerController: RouteCollection {
         let image = try request.content.decode(ImageUpload.self)
         
         let app = request.application
-        let path = app.directory.publicDirectory + "img/\(image.profileImage.filename)"
+        let filename = "\(image.profileImage.filename)-\(UUID.generateRandom().uuidString)"
+        let path = app.directory.publicDirectory + "img/\(filename)"
         let handle = try app.fileio.openFile(path: path,
                                              mode: .write,
                                              flags: .allowFileCreation(posixMode: 0x744),
                                              eventLoop: request.eventLoop).wait()
         try app.fileio.write(fileHandle: handle, buffer: image.profileImage.data, eventLoop: request.eventLoop).wait()
         try handle.close()
-        speaker.profileImage = image.profileImage.filename
+        speaker.profileImage = filename
         try await speaker.save(on: request.db)
-        return request.redirect(to: "/create-presentation")
+        return request.redirect(to: "/admin?page=speakers")
     }
     
     private func onCreate(request: Request) async throws -> View {

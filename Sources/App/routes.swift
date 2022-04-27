@@ -29,7 +29,9 @@ func routes(_ app: Application) throws {
     
     app.routes.get("admin") { request -> View in
         let query = try request.query.decode(PageQuery.self)
-        return try await request.view.render("Admin/home", ["page": query.page])
+        let speakers = try await Speaker.query(on: request.db).all()
+        let presentations = try await Presentation.query(on: request.db).all()
+        return try await request.view.render("Admin/home", AdminContext(speakers: speakers, presentations: presentations, page: query.page))
     }
         
     app.routes.get("create-presentation") { request -> View in
@@ -51,5 +53,11 @@ func routes(_ app: Application) throws {
 }
 
 struct PageQuery: Content {
+    var page: String
+}
+
+struct AdminContext: Content {
+    var speakers: [Speaker] = []
+    var presentations: [Presentation] = []
     var page: String
 }

@@ -13,10 +13,6 @@
                     #endfor
                     </datalist>
                     <br>
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" id="twitter">@</span>
-                      <input type="text" name="twitter" class="form-control" placeholder="Twitter" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
                     <div class="mb-3">
                       <label for="title" class="form-label">Presentation title</label>
                       <input class="form-control" name="title" id="title">
