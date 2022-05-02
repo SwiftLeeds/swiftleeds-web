@@ -26,15 +26,6 @@
     <li class="inPerson"><a href="#tickets">In-Person</a></li>
   </ul>
 </div>
-
-<div class="container">
-  <div class="row bg-light p-3">
-    <div class="col-12" align="center">
-      <p class="h2 text-center">Call for Speakers <strong>Now Open</strong></p>
-      <p class="text-center">Do you want to present at the next Swift Leeds Conference? Click the button below to submit a presentation.</p>
-      <a href="https://sessionize.com/swiftleeds/" target="_blank" class="btn btn-outline-success" role="button">Click Here</a>
-    </div>
-  </div>
   
   <br style="clear: both;"/>
   <br/>
