@@ -9,13 +9,11 @@ import Foundation
 import Fluent
 import Vapor
 
-final class Event: Model, Content, Codable {
+final class Event: Model, Content {
     
     typealias IDValue = UUID
     
-    static var schema: String {
-        return "events"
-    }
+    static let schema: String = "events"
     
     @ID(key: .id)
     var id: UUID?

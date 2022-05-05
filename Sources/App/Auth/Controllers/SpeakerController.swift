@@ -28,12 +28,7 @@ struct SpeakerController: RouteCollection {
         let app = request.application
         let filename = "\(image.profileImage.filename)-\(UUID.generateRandom().uuidString)"
         let path = app.directory.publicDirectory + "img/\(filename)"
-        let handle = try app.fileio.openFile(path: path,
-                                             mode: .write,
-                                             flags: .allowFileCreation(posixMode: 0x744),
-                                             eventLoop: request.eventLoop).wait()
-        try app.fileio.write(fileHandle: handle, buffer: image.profileImage.data, eventLoop: request.eventLoop).wait()
-        try handle.close()
+        try await request.fileio.writeFile(image.profileImage.data, at: path)
         speaker.profileImage = filename
         try await speaker.save(on: request.db)
         return request.redirect(to: "/admin?page=speakers")
