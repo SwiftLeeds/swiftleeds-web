@@ -28,6 +28,9 @@ func routes(_ app: Application) throws {
     }
     
     app.routes.get("admin") { request -> View in
+        guard request.isAdmin else {
+            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
+        }
         let query = try request.query.decode(PageQuery.self)
         let speakers = try await Speaker.query(on: request.db).all()
         let presentations = try await Presentation.query(on: request.db).all()
@@ -35,11 +38,7 @@ func routes(_ app: Application) throws {
     }
         
     app.routes.get("create-presentation") { request -> View in
-        guard let user = request.auth.get(User.self) else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
-        }
-        
-        guard user.role == .admin else {
+        guard request.isAdmin else {
             return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
         }
         
@@ -60,4 +59,14 @@ struct AdminContext: Content {
     var speakers: [Speaker] = []
     var presentations: [Presentation] = []
     var page: String
+}
+
+extension Request {
+    var isAdmin: Bool {
+        guard let user = auth.get(User.self) else {
+            return false
+        }
+        
+        return user.role == .admin
+    }
 }

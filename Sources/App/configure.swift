@@ -23,10 +23,14 @@ public func configure(_ app: Application) throws {
     app.migrations.add(Speaker.Migrations())
     app.migrations.add(Presentation.Migrations())
     app.migrations.add(SessionRecord.migration)
-    try app.databases.use(.postgres(url: Application.db), as: .psql)
+    do {
+        try app.databases.use(.postgres(url: Application.db), as: .psql)
+    } catch {
+        app.logger.error("Failed to connect to DB with error \(error)")
+    }
     try routes(app)
 }
 
 extension Application {
-    static let db = Environment.get("DB_URL")!
+    static let db = Environment.get("DATABASE_URL")!
 }
