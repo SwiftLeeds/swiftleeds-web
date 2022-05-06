@@ -1,0 +1,36 @@
+#extend("base"):
+    #export("title", "SwiftLeeds")
+    #export("content"):
+        #extend("Shared/_header")
+        <div class="row">
+            <h1>Create a <strong>speaker</strong></h1>
+            <form method="POST" action="/api/v1/speaker/create" enctype="multipart/form-data">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input class="form-control" id="name" aria-describedby="name" name="name">
+              </div>
+              <div class="mb-3">
+                <label for="biography" class="form-label">Biography</label>
+                <textarea class="form-control" name="biography" id="biography" rows="3"></textarea>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="twitter">@</span>
+                <input type="text" name="twitter" class="form-control" placeholder="Twitter" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              <div class="mb-3">
+                <label for="organisation" class="form-label">Organisation</label>
+                <input class="form-control" id="organisation" name="organisation">
+              </div>
+              <div class="mb-3">
+                <label for="formFile" class="form-label">Profile picture</label>
+                <input class="form-control" type="file" id="image" name="profileImage"">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <div class="col-6">
+              <img src="/img/header-bg.png" class="child-img">
+            </div>
+        </div>
+        #extend("Shared/_footer")
+    #endexport
+#endextend

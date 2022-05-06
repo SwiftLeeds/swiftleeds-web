@@ -1,0 +1,29 @@
+#extend("base"):
+    #export("title", "SwiftLeeds")
+        #export("content"):
+            #extend("Shared/_header")
+            <div class="row">
+                <h1><strong>Admin</strong> area</h1>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    #extend("Admin/Shared/_sidebar")
+                </div>
+                <div class="col-9">
+                    #if(page == "speakers"):
+                        #extend("Admin/speakers")
+                    #elseif(page == "presentations"):
+                        #extend("Admin/presentations")
+                    #elseif(page == "events"):
+                        #extend("Admin/events")
+                    #endif
+                </div>
+            </div>
+            #extend("Shared/_footer")
+            <script type="text/javascript">
+                var nav = document.getElementById("nav");
+                var links = nav.getElementsByClassName("nav-link");
+                Object.values(links).filter(link => link.href.includes("#(page)"))[0].className += " active";
+            </script>
+    #endexport
+#endextend

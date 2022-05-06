@@ -1,0 +1,32 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+    <a href="/admin" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <img src="/img/logo.png" />
+    </a>
+    <hr>
+    <ul id="nav" class="nav nav-pills flex-column mb-auto">
+      <li>
+        <a href="/admin?page=speakers" class="nav-link link-dark">
+          Speakers
+        </a>
+      </li>
+      <li>
+        <a href="/admin?page=presentations" class="nav-link link-dark">
+          Presentations / Sessions
+        </a>
+      </li>
+      <li>
+        <a href="/admin?page=events" class="nav-link link-dark">
+          Events
+        </a>
+      </li>
+    </ul>
+    <hr>
+    <div class="dropdown">
+      <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+        <strong>Joe</strong>
+      </a>
+      <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+        <li><a class="dropdown-item" href="#">Sign out</a></li>
+      </ul>
+    </div>
+</div>

@@ -29,13 +29,16 @@
   
   <br style="clear: both;"/>
   <br/>
-  
   <img src="/img/ticket-background.svg" class="order-tickets"/>
   
   <div class="container">
     #extend("Home/_about-us")
     <br/>
     #extend("Home/_order-tickets")
+    #if(count(speakers) > 0):
+        <br/>
+        #extend("Home/_speakers")
+    #endif
     <br/>
     #extend("Home/_previous-conferences")
     <br/>
