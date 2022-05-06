@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top">
   <div class="container">
-    <a class="navbar-brand d-none d-md-block" href="#">
+    <a class="navbar-brand d-none d-md-block" href="/">
         <img src="/img/logo_horizontal.svg" alt="SwiftLeeds logo" class="logo"/>
     </a>
     <a class="navbar-brand d-md-none" href="#">

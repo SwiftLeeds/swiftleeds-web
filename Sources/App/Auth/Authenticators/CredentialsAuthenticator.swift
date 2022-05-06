@@ -19,7 +19,11 @@ class CustomCredentialsAuthenticator: Authenticator, AsyncCredentialsAuthenticat
     typealias Credentials = Input
     
     func authenticate(credentials: Credentials, for request: Request) async throws {
-        guard let user = try? await AppUser.query(on: request.db).filter(\.$email == credentials.email).first() else {
+        guard let user = try? await User.query(on: request.db).filter(\.$email == credentials.email.lowercased()).first() else {
+            throw Abort(.unauthorized)
+        }
+        
+        guard try user.verify(password: credentials.password) else {
             throw Abort(.unauthorized)
         }
         

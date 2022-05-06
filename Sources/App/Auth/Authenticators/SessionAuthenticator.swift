@@ -11,10 +11,10 @@ import Fluent
 
 /// Session Authenticator used for checking the auth status of front-end web clients. This authenticator uses the sessions cookie.
 class SessionAuthenticator: Authenticator, AsyncSessionAuthenticator {
-    typealias User = AppUser
+    typealias User = App.User
     
     func authenticate(sessionID: User.SessionID, for request: Request) async throws {
-        guard let user = try await AppUser.query(on: request.db).filter(\.$id == sessionID).first() else {
+        guard let user = try await User.query(on: request.db).filter(\.$id == sessionID).first() else {
             throw Abort(.unauthorized)
         }
         

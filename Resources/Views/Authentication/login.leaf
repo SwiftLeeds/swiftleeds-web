@@ -3,7 +3,7 @@
         #export("content"):
             #extend("Shared/_header")
             <div class="row">
-                <h1>Create your <strong>SwiftLeeds</strong> account </h1>
+                <h1>Login to your <strong>SwiftLeeds</strong> account </h1>
                 <form class="col-6" method="POST" action="/api/v1/auth/login">
                   <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
