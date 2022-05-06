@@ -1,16 +1,16 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top">
   <div class="container">
-    <a class="navbar-brand d-none d-md-block" href="/">
+    <a class="navbar-brand d-none d-md-block" href="../">
         <img src="/img/logo_horizontal.svg" alt="SwiftLeeds logo" class="logo"/>
     </a>
-    <a class="navbar-brand d-md-none" href="#">
+    <a class="navbar-brand d-md-none" href="../">
         <img src="/img/logo_vertical.svg" alt="SwiftLeeds logo" class="logo-vertical"/>
     </a>
 
     <span class="separator"></span>
 
     <div class="event-date">
-        <strong>Oct 17 2022</strong>
+        <strong>Oct 20 2022</strong>
         <br/>
         <p class="d-none d-md-inline-block">
         City Center, Leeds, UK
@@ -26,11 +26,12 @@
     
     <div class="justify-content-end collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav top-nav nav">
-        <a class="nav-link text-dark" href="#about">About</a>
-        <a class="nav-link text-dark" href="#tickets">Tickets</a>
-        <a class="nav-link text-dark" href="#previous">Previous Conference</a>
-        <a class="nav-link text-dark" href="#sponsors">Sponsors</a>
+        <a class="nav-link text-dark" href="../#about">About</a>
+        <a class="nav-link text-dark" href="../#tickets">Tickets</a>
+        <a class="nav-link text-dark" href="../#previous">Previous Conference</a>
+        <a class="nav-link text-dark" href="../#sponsors">Sponsors</a>
         <a class="nav-link text-dark" href="https://twitter.com/swift_leeds" target="_blank"><img src="/img/twitter.png" alt="twitter"/></a>
+        <a class="nav-link text-dark" href="https://www.youtube.com/channel/UCCq1K0eWKZFBCpqaC3n8V1g" target="_blank"><img src="/img/youtube.png" alt="youtube"/></a>
         <a class="nav-link text-dark" href="https://join.slack.com/t/swiftleedsworkspace/shared_invite/zt-wkmr6pif-ZDCdDeHM60jcBUy0BxHdCQ" target="_blank"><img src="/img/slack.png" alt="slack"/></a>
       </div>
     </div>

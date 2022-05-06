@@ -47,6 +47,10 @@ func routes(_ app: Application) throws {
         return try await request.view.render("Authentication/create_presentation", context)
     }
     
+    app.get("conduct") { req -> EventLoopFuture<View> in
+        return req.view.render("Secondary/conduct", ["name": "Leaf"])
+    }
+    
     try app.routes.register(collection: AuthController())
     try app.routes.register(collection: SpeakerController())
 }
