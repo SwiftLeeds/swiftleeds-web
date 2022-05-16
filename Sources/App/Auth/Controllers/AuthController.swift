@@ -55,12 +55,14 @@ struct AuthController: RouteCollection {
         guard let user = request.auth.get(User.self) else {
             throw Abort(.notFound)
         }
+        
+        let adminPath = "/admin?page=speakers"
                 
         do {
             let token = try user.generateToken()
             try await token.save(on: request.db)
             if user.role == .admin {
-                return request.redirect(to: "/admin?page=speakers")
+                return request.redirect(to: adminPath)
             }
             return request.redirect(to: "/")
         } catch {
@@ -73,7 +75,7 @@ struct AuthController: RouteCollection {
                 return try await login(request: request)
             }
             if user.role == .admin {
-                return request.redirect(to: "/admin?page=speakers")
+                return request.redirect(to: adminPath)
             }
             return request.redirect(to: "/")
         }
