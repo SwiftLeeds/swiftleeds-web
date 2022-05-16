@@ -59,6 +59,9 @@ struct AuthController: RouteCollection {
         do {
             let token = try user.generateToken()
             try await token.save(on: request.db)
+            if user.role == .admin {
+                return request.redirect(to: "/admin?page=speakers")
+            }
             return request.redirect(to: "/")
         } catch {
             guard let old = try await user.$token.get(on: request.db) else {
@@ -68,6 +71,9 @@ struct AuthController: RouteCollection {
             guard old.isValid else {
                 try await old.delete(on: request.db)
                 return try await login(request: request)
+            }
+            if user.role == .admin {
+                return request.redirect(to: "/admin?page=speakers")
             }
             return request.redirect(to: "/")
         }
