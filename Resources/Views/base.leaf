@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="css/style.css"/>
     
     <script src='https://js.tito.io/v2' async></script>
+    
+    <script defer data-domain="swiftleeds.co.uk" src="https://plausible.io/js/plausible.js"></script>
 
     #import("styles")
   </head>
