@@ -33,7 +33,7 @@
                         </div>
                     </a>
                     <p class="speaker-grid-name">#(speaker.name)</p>
-                    <p class="speaker-grid-title">#(speaker.title)</p>
+                    <p class="speaker-grid-title">#(speaker.organisation)</p>
                 </div>
             </div>
         #endfor
