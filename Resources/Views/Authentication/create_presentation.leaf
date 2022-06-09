@@ -3,15 +3,21 @@
     #export("content"):
         #extend("Shared/_header")
         <div class="row">
-            <form method="POST" action="/api/v1/presentation/create">
+            <form method="POST" action="/api/v1/presentation/create" enctype="multipart/form-data">
                 <h1>Create presentation</h1>
-                <label for="speakers" class="form-label">Speaker</label>
-                <input class="form-control" list="available-speakers" id="speakers" placeholder="Type to search...">
-                <datalist id="available-speakers">
+                <label for="speaker" class="form-label">Speaker</label>
+                <select name="speaker" class="form-control">
                 #for(speaker in speakers):
-                  <option value="#(speaker.name)">
+                  <option id="speaker" name="speaker" value=#(speaker.id)>#(speaker.name)</option>
                 #endfor
-                </datalist>
+                </select>
+                <br>
+                <label for="event" class="form-label">Event</label>
+                <select name="event" class="form-control">
+                #for(event in events):
+                  <option id="event" name="event" value=#(event.id)>#(event.name) @ #dateFormat(event.date)</option>
+                #endfor
+                </select>
                 <br>
                 <div class="mb-3">
                   <label for="title" class="form-label">Presentation title</label>
@@ -25,6 +31,7 @@
                   <label for="formFile" class="form-label">Presentation image</label>
                   <input class="form-control" type="file" id="image">
                 </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             <div class="col-6">
               <img src="/img/header-bg.png" class="child-img">
@@ -33,3 +40,4 @@
         #extend("Shared/_footer")
     #endexport
 #endextend
+

@@ -21,6 +21,8 @@
     <script src='https://js.tito.io/v2' async></script>
     
     <script defer data-domain="swiftleeds.co.uk" src="https://plausible.io/js/plausible.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.0/dist/index.umd.min.js" type="text/javascript" async=""></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
     #import("styles")
   </head>

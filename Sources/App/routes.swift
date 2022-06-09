@@ -2,13 +2,14 @@ import Vapor
 
 let cfpExpirationDate = Date(timeIntervalSince1970: 1651356000) // 30th April 22
 
+
 func routes(_ app: Application) throws {
     
     let route = app.routes.grouped(User.sessionAuthenticator())
  
     route.get { req -> View in
         do {
-            let speakers = try await Speaker.query(on: req.db).all()
+            let speakers = try await Speaker.query(on: req.db).with(\.$presentations).all()
             return try await req.view.render("Home/home", HomeContext(speakers: speakers, cfpEnabled: cfpExpirationDate > Date()))
         } catch {
             return try await req.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
@@ -31,21 +32,12 @@ func routes(_ app: Application) throws {
         guard let user = request.user, user.role == .admin else {
             return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
         }
-        let query = try request.query.decode(PageQuery.self)
-        let speakers = try await Speaker.query(on: request.db).all()
-        let presentations = try await Presentation.query(on: request.db).all()
+        let query = try? request.query.decode(PageQuery.self)
+        let speakers = try await Speaker.query(on: request.db).with(\.$presentations).all()
+        let presentations = try await Presentation.query(on: request.db).with(\.$speaker).all()
+        let events = try await Event.query(on: request.db).all()
         
-        return try await request.view.render("Admin/home", AdminContext(speakers: speakers, presentations: presentations, page: query.page, user: user))
-    }
-        
-    app.routes.get("create-presentation") { request -> View in
-        guard request.user?.role == .admin else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
-        }
-        
-        let speakers = try await Speaker.query(on: request.db).all()
-        let context = HomeContext(speakers: speakers, cfpEnabled: cfpExpirationDate > Date())
-        return try await request.view.render("Authentication/create_presentation", context)
+        return try await request.view.render("Admin/home", AdminContext(speakers: speakers, presentations: presentations, events: events, page: (query ?? PageQuery(page: "speakers")).page, user: user))
     }
     
     app.get("conduct") { req -> EventLoopFuture<View> in
@@ -54,6 +46,8 @@ func routes(_ app: Application) throws {
     
     try app.routes.register(collection: AuthController())
     try app.routes.register(collection: SpeakerController())
+    try app.routes.register(collection: PresentationController())
+    try app.routes.register(collection: EventsController())
 }
 
 struct PageQuery: Content {
@@ -63,6 +57,7 @@ struct PageQuery: Content {
 struct AdminContext: Content {
     var speakers: [Speaker] = []
     var presentations: [Presentation] = []
+    var events: [Event] = []
     var page: String
     var user: User
 }

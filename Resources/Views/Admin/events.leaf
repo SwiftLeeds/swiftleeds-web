@@ -1,2 +1,16 @@
 <h1>Events</h1>
-
+<ul class="list-group">
+    #for(event in events):
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            #(event.name) - #(event.location)
+            <span class="badge badge-primary badge-pill">
+                <a href="#">🗑</a>
+                &nbsp
+                <a href="#">✏️</a>
+            </span>
+        </li>
+    #endfor
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="/create-event">Add new event</a>
+    </li>
+</ul>

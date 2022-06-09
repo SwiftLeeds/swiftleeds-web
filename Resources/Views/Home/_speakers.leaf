@@ -26,7 +26,7 @@
                 <div class="speaker-grid-element-image-container">
                     <img class="speaker-grid-element-image" src="https://swiftleeds-speakers.s3.eu-west-2.amazonaws.com/#(speaker.profileImage)"/>
                 </div>
-                <div class="speaker-grid-element-info">
+                <div class="speaker-grid-element-info" >
                     <a href="https://twitter.com/#(speaker.twitter)">
                         <div class="speaker-grid-social">
                             <img src="/img/twitter-vector.svg"/>
@@ -34,6 +34,28 @@
                     </a>
                     <p class="speaker-grid-name">#(speaker.name)</p>
                     <p class="speaker-grid-title">#(speaker.organisation)</p>
+                    #if(count(speaker.presentations) > 0):
+                        <p class="speaker-grid-name">Presentations</p>
+                        #for(presentation in speaker.presentations):
+                            <p class="speaker-grid-title">#(presentation.title)</p>
+                        #endfor
+                    #endif
+                </div>
+                
+                <div id="synopsisModal" class="modal" tabindex="-1" role="dialog">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 id="modal-title" class="modal-title"></h5>
+                      </div>
+                      <div class="modal-body">
+                        <p id="modal-body"></p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="synopsisModal">Close</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
             </div>
         #endfor
@@ -42,3 +64,5 @@
     #endif
   </div>
 </div>
+
+

@@ -12,6 +12,7 @@ public func configure(_ app: Application) throws {
     app.routes.defaultMaxBodySize = "10mb"
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
     app.sessions.use(.fluent(.psql))
+    app.leaf.tags["dateFormat"] = NowTag()
 
     // Use Leaf
     app.views.use(.leaf)
@@ -28,8 +29,8 @@ public func configure(_ app: Application) throws {
         guard var postgresConfig = PostgresConfiguration(url: Application.db) else {
             throw DatabaseError()
         }
-        postgresConfig.tlsConfiguration = .makeClientConfiguration()
-        postgresConfig.tlsConfiguration?.certificateVerification = .none
+//        postgresConfig.tlsConfiguration = .makeClientConfiguration()
+//        postgresConfig.tlsConfiguration?.certificateVerification = .none
         app.databases.use(.postgres(configuration: postgresConfig), as: .psql)
     } catch {
         app.logger.error("Failed to connect to DB with error \(error)")
