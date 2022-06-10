@@ -11,8 +11,8 @@
         <tbody>
           <tr>
             <th scope="row" class="text-start">Platinum Sponsors</th>
-            <td><a href="https://codemagic.io" target="_blank"><img src="img/codemagic.png" class="sponsor-img"></a></td>
-            <td><a href="https://getstream.io/chat/sdk/swiftui/?utm_source=SwiftLeeds&utm_medium=Whole_Event_L&utm_content=Developer&utm_campaign=SwiftLeeds_Oct2022" target="_blank"><img src="img/stream.png" class="sponsor-img"></a></td>
+            <td><a href="https://codemagic.io" target="_blank"><img src="img/codemagic.png" class="platinumsponsor-img"></a></td>
+            <td><a href="https://getstream.io/chat/sdk/swiftui/?utm_source=SwiftLeeds&utm_medium=Whole_Event_L&utm_content=Developer&utm_campaign=SwiftLeeds_Oct2022" target="_blank"><img src="img/stream.png" class="platinumsponsor-img"></a></td>
             <td></td>
           </tr>
             <tr>
@@ -20,6 +20,7 @@
             <td><a href="https://www.mkodo.com/s/careers" target="_blank"><img src="img/mkodo.png" class="sponsor-img"></a></td>
             <td><a href="https://www.and.digital/join/open-roles" target="_blank"><img src="img/and-digital.png" class="sponsor-img"></a></td>
             <td><a href="https://www.xdesign.com/" target="_blank"><img src="img/xdesign.png" class="sponsor-img"></a></td>
+            <td><a href="https://www.bitrise.io/" target="_blank"><img src="img/bitrise.png" class="sponsor-img"></a></td>
           </tr>
         </tbody>
       </table>
