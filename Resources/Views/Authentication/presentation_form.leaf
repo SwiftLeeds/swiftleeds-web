@@ -4,9 +4,9 @@
         #extend("Shared/_header")
         <div class="row">
             #if(presentation):
-              <form method="POST" action="/api/v1/presentation/#(presentation.id)" enctype="multipart/form-data">
+              <form method="POST" action="/api/v1/presentations/#(presentation.id)" enctype="multipart/form-data">
             #else:
-              <form method="POST" action="/api/v1/presentation" enctype="multipart/form-data">
+              <form method="POST" action="/api/v1/presentations" enctype="multipart/form-data">
             #endif
                 <h1>
                 #if(presentation):

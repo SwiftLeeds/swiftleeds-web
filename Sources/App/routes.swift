@@ -42,7 +42,7 @@ func routes(_ app: Application) throws {
     
     let apiRoutes = app.grouped("api", "v1")
     
-    try apiRoutes.grouped("presentation").register(collection: PresentationAPIController())
+    try apiRoutes.grouped("presentations").register(collection: PresentationAPIController())
     
     // MARK: - Admin Routes
     
@@ -60,7 +60,7 @@ func routes(_ app: Application) throws {
         return try await request.view.render("Admin/home", AdminContext(speakers: speakers, presentations: presentations, events: events, page: (query ?? PageQuery(page: "speakers")).page, user: user))
     }
     
-    try adminRoutes.grouped("presentation").register(collection: PresentationViewController())
+    try adminRoutes.grouped("presentations").register(collection: PresentationViewController())
 }
 
 struct PageQuery: Content {
