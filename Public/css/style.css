@@ -553,9 +553,24 @@ ul.tickets li a {
     object-fit: contain;
 }
 
+.sponsor-grid-divider {
+    width: 100%;
+    height: 1px;
+    border: 1px solid var(--border-color);
+    margin: 1em;
+}
+
 @media only screen and (min-width: 768px) {
     .sponsor-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(16vw, 1fr));
+    }
+}
+
+
+@media only screen and (max-width: 576px) {
+    .sponsor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     }
 }
