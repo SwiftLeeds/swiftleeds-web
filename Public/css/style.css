@@ -565,11 +565,16 @@ ul.tickets li a {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
     }
+    .platinum {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
 }
 
 @media only screen and (max-width: 576px) {
     .sponsor-grid {
-      display: grid;
       grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+    .platinum {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
 }

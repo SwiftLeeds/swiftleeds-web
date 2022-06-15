@@ -7,7 +7,7 @@
   </div>
 
     <p class="sponsor-grid-subhead">Platinum sponsors</p>
-    <div class="sponsor-grid">
+    <div class="sponsor-grid platinum">
         <div class="sponsor">
             <a href="https://codemagic.io" target="_blank"><img src="img/codemagic.svg" class="sponsor-img"></a>
         </div>
