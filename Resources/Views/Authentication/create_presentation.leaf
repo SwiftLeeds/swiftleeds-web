@@ -5,23 +5,35 @@
         <div class="row">
             <form method="POST" action="/api/v1/presentation/create" enctype="multipart/form-data">
                 <h1>Create presentation</h1>
-                <label for="speaker" class="form-label">Speaker</label>
-                <select name="speaker" class="form-control">
+                <label for="speakerID" class="form-label">Speaker</label>
+                <select name="speakerID" class="form-control">
                 #for(speaker in speakers):
-                  <option id="speaker" name="speaker" value=#(speaker.id)>#(speaker.name)</option>
+                  <option id="speakerID" name="speakerID" value=#(speaker.id)>#(speaker.name)</option>
                 #endfor
                 </select>
                 <br>
                 <label for="event" class="form-label">Event</label>
-                <select name="event" class="form-control">
+                <select name="eventID" class="form-control">
                 #for(event in events):
-                  <option id="event" name="event" value=#(event.id)>#(event.name) @ #dateFormat(event.date)</option>
+                  <option id="eventID" name="eventID" value=#(event.id)>#(event.name) @ #dateFormat(event.date)</option>
                 #endfor
                 </select>
                 <br>
                 <div class="mb-3">
                   <label for="title" class="form-label">Presentation title</label>
                   <input class="form-control" name="title" id="title">
+                </div>
+                <label for="startTime" class="form-label">Start Time</label>
+                <div class="input-group clockpicker">
+                    <input name="startTime" type="text" class="form-control" value="09:30">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+                <br>
+                <div class="mb-3">
+                    <label for="duration" class="form-label">Duration (minutes)</label>
+                    <input name="duration" type="number" class="form-control" value="30"/>
                 </div>
                 <div class="mb-3">
                   <label for="synopsis" class="form-label">Presentation synopsis</label>
@@ -37,6 +49,11 @@
               <img src="/img/header-bg.png" class="child-img">
             </div>
         </div>
+        <script>
+            function setEventDate(date) {
+                window.EventDate = date;
+            }
+        </script>
         #extend("Shared/_footer")
     #endexport
 #endextend

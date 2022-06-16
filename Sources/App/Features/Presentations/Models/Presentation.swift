@@ -9,8 +9,8 @@ import Foundation
 import Vapor
 import Fluent
 
-final class Presentation: Codable, Model, Content {
-    
+final class Presentation: Model, Content {
+        
     typealias IDValue = UUID
     
     static var schema: String {
@@ -35,14 +35,25 @@ final class Presentation: Codable, Model, Content {
     @Parent(key: "event_id")
     public var event: Event
     
+    @Field(key: "start_date")
+    var startDate: String
+    
+    @Field(key: "duration")
+    var duration: Double
+    
+    @Field(key: "is_tba")
+    var isTBA: Bool
+    
     init() { }
     
-    init(id: IDValue?, title: String, synopsis: String, image: String?, eventID: Event.IDValue) {
+    init(id: IDValue?, title: String, synopsis: String, image: String?, startDate: String, duration: Double, isTBA: Bool) {
         self.id = id
         self.title = title
         self.synopsis = synopsis
         self.image = image
-        self.$event.id = eventID
+        self.startDate = startDate
+        self.duration = duration
+        self.isTBA = isTBA
     }
     
     class Migrations: AsyncMigration {
@@ -50,14 +61,16 @@ final class Presentation: Codable, Model, Content {
             return try await database.schema(Presentation.schema)
                 .id()
                 .field("title", .string, .required)
-                .field("synopsis", .string, .required)
+                .field("synopsis", .string)
                 .field("speaker_id", .uuid, .references("speakers", "id"))
                 .field("event_id", .uuid, .references("events", "id"))
                 .field("image", .string)
+                .field("start_date", .string)
+                .field("duration", .double)
+                .field("is_tba", .bool)
                 .create()
         }
-        
-        
+
         func revert(on database: Database) async throws {
             return try await database.schema("presentations").delete()
         }

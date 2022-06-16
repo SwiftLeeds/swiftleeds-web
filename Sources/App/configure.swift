@@ -17,13 +17,13 @@ public func configure(_ app: Application) throws {
     // Use Leaf
     app.views.use(.leaf)
     
-    // register routes
-    app.migrations.add(App.Event.Migrations())
     app.migrations.add(App.User.Migrations())
     app.migrations.add(UserToken.Migrations())
+    app.migrations.add(App.Event.Migrations())
     app.migrations.add(Speaker.Migrations())
     app.migrations.add(Presentation.Migrations())
     app.migrations.add(SessionRecord.migration)
+
     do {
         struct DatabaseError: Error { }
         guard var postgresConfig = PostgresConfiguration(url: Application.db) else {

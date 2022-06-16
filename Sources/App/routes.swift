@@ -10,9 +10,10 @@ func routes(_ app: Application) throws {
     route.get { req -> View in
         do {
             let speakers = try await Speaker.query(on: req.db).with(\.$presentations).all()
-            return try await req.view.render("Home/home", HomeContext(speakers: speakers, cfpEnabled: cfpExpirationDate > Date()))
+            let presentations = try? await Presentation.query(on: req.db).all()
+            return try await req.view.render("Home/home", HomeContext(speakers: speakers, cfpEnabled: cfpExpirationDate > Date(), presentations: presentations ?? []))
         } catch {
-            return try await req.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
+            return try await req.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), presentations: []))
         }
     }
     
@@ -30,7 +31,7 @@ func routes(_ app: Application) throws {
     
     app.routes.get("admin") { request -> View in
         guard let user = request.user, user.role == .admin else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
+            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), presentations: []))
         }
         let query = try? request.query.decode(PageQuery.self)
         let speakers = try await Speaker.query(on: request.db).with(\.$presentations).all()

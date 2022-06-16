@@ -13,10 +13,12 @@ import S3
 struct PresentationController: RouteCollection {
     
     struct FormInput: Content {
-        let speaker: String
-        let event: String
+        let speakerID: String
+        let eventID: String
         let title: String
         let synopsis: String
+        let startTime: String
+        let duration: Double
     }
     
     func boot(routes: RoutesBuilder) throws {
@@ -27,7 +29,7 @@ struct PresentationController: RouteCollection {
     
     private func onCreate(request: Request) async throws -> View {
         guard request.user?.role == .admin else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
+            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), presentations: []))
         }
         
         let speakers = try await Speaker.query(on: request.db).all()
@@ -38,15 +40,11 @@ struct PresentationController: RouteCollection {
     
     private func onPost(request: Request) async throws -> Response {
         let input = try request.content.decode(FormInput.self)
-        guard let speaker = try await Speaker.find(UUID(uuidString: input.speaker), on: request.db) else {
+        guard let speaker = try await Speaker.find(UUID(uuidString: input.speakerID), on: request.db) else {
             return request.redirect(to: "/admin")
         }
         
-        guard let event = try await Event.find(.init(uuidString: input.event), on: request.db) else {
-            return request.redirect(to: "/admin")
-        }
-        
-        guard let eventID = event.id else {
+        guard let event = try await Event.find(.init(uuidString: input.eventID), on: request.db) else {
             return request.redirect(to: "/admin")
         }
         
@@ -54,9 +52,11 @@ struct PresentationController: RouteCollection {
                                         title: input.title,
                                         synopsis: input.synopsis,
                                         image: nil,
-                                        eventID: eventID
+                                        startDate: input.startTime,
+                                        duration: input.duration,
+                                        isTBA: false
         )
-        
+
         presentation.$speaker.id = try speaker.requireID()
         presentation.$event.id = try event.requireID()
         try await presentation.create(on: request.db)

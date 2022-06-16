@@ -39,6 +39,10 @@
         <br/>
         #extend("Home/_speakers")
     #endif
+    #if(count(presentations) > 0):
+    <br/>
+    #extend("Home/_schedule")
+    #endif
     <br/>
     #extend("Home/_previous-conferences")
     <br/>
