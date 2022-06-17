@@ -39,7 +39,10 @@
         <br/>
         #extend("Home/_speakers")
     #endif
-    <br/>
+    <br />
+    #extend("Home/_location")
+    <br />
+    <br />
     #extend("Home/_previous-conferences")
     <br/>
     #extend("Home/_sponsors")

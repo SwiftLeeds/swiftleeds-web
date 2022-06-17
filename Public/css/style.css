@@ -583,14 +583,23 @@ ul.tickets li a {
 @media only screen and (min-width: 768px) {
     .sponsor-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(16vw, 1fr));
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    .platinum {
+      grid-template-columns: 1fr 1fr 1fr;
     }
 }
 
-
 @media only screen and (max-width: 576px) {
     .sponsor-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+    .sponsor-img {
+        aspect-ratio: auto;
+        padding-bottom: 16px;
+    }
+    .platinum {
+        grid-template-columns: 1fr;
     }
 }
