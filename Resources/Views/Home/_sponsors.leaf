@@ -27,5 +27,8 @@
         <div class="sponsor">
             <a href="https://www.xdesign.com/" target="_blank"><img src="img/xdesign.png" class="sponsor-img"></a>
         </div>
+        <div class="sponsor">
+          <a href="https://www.bitrise.io/" target="_blank"><img src="img/bitrise.svg" class="sponsor-img"></a>
+        </div>
     </div>
 </div>
