@@ -4,10 +4,12 @@ import Fluent
 struct PresentationAPIController: RouteCollection {
     
     private struct FormInput: Content {
-        let speaker: String
-        let event: String
+        let speakerID: String
+        let eventID: String
         let title: String
         let synopsis: String
+        let startTime: String
+        let duration: Double
     }
     
     func boot(routes: RoutesBuilder) throws {
@@ -18,15 +20,11 @@ struct PresentationAPIController: RouteCollection {
     private func onPost(request: Request) async throws -> Response {
         let input = try request.content.decode(FormInput.self)
         
-        guard let speaker = try await Speaker.find(UUID(uuidString: input.speaker), on: request.db) else {
+        guard let speaker = try await Speaker.find(UUID(uuidString: input.speakerID), on: request.db) else {
             return request.redirect(to: "/admin")
         }
         
-        guard let event = try await Event.find(.init(uuidString: input.event), on: request.db) else {
-            return request.redirect(to: "/admin")
-        }
-        
-        guard let eventID = event.id else {
+        guard let event = try await Event.find(.init(uuidString: input.eventID), on: request.db) else {
             return request.redirect(to: "/admin")
         }
         
@@ -35,7 +33,9 @@ struct PresentationAPIController: RouteCollection {
             title: input.title,
             synopsis: input.synopsis,
             image: nil,
-            eventID: eventID 
+            startDate: input.startTime,
+            duration: input.duration,
+            isTBA: false
         )
         
         presentation.$speaker.id = try speaker.requireID()
@@ -49,11 +49,11 @@ struct PresentationAPIController: RouteCollection {
     private func onEdit(request: Request) async throws -> Response {
         let input = try request.content.decode(FormInput.self)
         
-        guard let speaker = try await Speaker.find(.init(uuidString: input.speaker), on: request.db) else {
+        guard let speaker = try await Speaker.find(.init(uuidString: input.speakerID), on: request.db) else {
             return request.redirect(to: "/admin")
         }
         
-        guard let event = try await Event.find(.init(uuidString: input.event), on: request.db) else {
+        guard let event = try await Event.find(.init(uuidString: input.eventID), on: request.db) else {
             return request.redirect(to: "/admin")
         }
         
@@ -64,6 +64,9 @@ struct PresentationAPIController: RouteCollection {
         presentation.title = input.title
         presentation.synopsis = input.synopsis
         presentation.image = nil
+        presentation.startDate = input.startTime
+        presentation.duration = input.duration
+        presentation.isTBA = false
         
         presentation.$speaker.id = try speaker.requireID()
         presentation.$event.id = try event.requireID()

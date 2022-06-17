@@ -48,7 +48,7 @@ struct AuthController: RouteCollection {
         let token = try user.generateToken()
         try await user.save(on: request.db)
         try await token.save(on: request.db)
-        return request.redirect(to: "/create-presentation")
+        return request.redirect(to: "/")
     }
     
     private func login(request: Request) async throws -> Response {

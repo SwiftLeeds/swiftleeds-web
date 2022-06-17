@@ -34,11 +34,11 @@ struct SpeakerController: RouteCollection {
                                                    contentLength: Int64(data.count),
                                                    key: filename
         )
-        let s3 = S3(accessKeyId: Environment.get("S3_KEY")!,
-                    secretAccessKey: Environment.get("S3_SECRET")!,
-                    region: .euwest2
-        )
-        let response = s3.putObject(putObjectRequest)
+//        let s3 = S3(accessKeyId: Environment.get("S3_KEY")!,
+//                    secretAccessKey: Environment.get("S3_SECRET")!,
+//                    region: .euwest2
+//        )
+//        let response = s3.putObject(putObjectRequest)
         speaker.profileImage = filename
         
         try await speaker.save(on: request.db)
@@ -47,7 +47,7 @@ struct SpeakerController: RouteCollection {
     
     private func onCreate(request: Request) async throws -> View {
         guard let user = request.auth.get(User.self), user.role == .admin else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
+            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), presentations: []))
         }
 
         return try await request.view.render("Authentication/create_speaker")

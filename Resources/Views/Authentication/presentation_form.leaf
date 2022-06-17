@@ -15,19 +15,19 @@
                     Create Presentation
                 #endif
                 </h1>
-                <label for="speaker" class="form-label">Speaker</label>
-                <select name="speaker" class="form-control">
+                <label for="speakerID" class="form-label">Speaker</label>
+                <select name="speakerID" class="form-control">
                 #for(speaker in speakers):
-                  <option #if(speaker.id == presentation.speaker.id): selected #endif id="speaker" name="speaker" value=#(speaker.id)>
+                  <option #if(speaker.id == presentation.speaker.id): selected #endif id="speakerID" name="speakerID" value=#(speaker.id)>
                     #(speaker.name)
                   </option>
                 #endfor
                 </select>
                 <br>
                 <label for="event" class="form-label">Event</label>
-                <select name="event" class="form-control">
+                <select name="eventID" class="form-control">
                 #for(event in events):
-                  <option #if(event.id == presentation.event.id): selected #endif id="event" name="event" value=#(event.id)>
+                  <option #if(event.id == presentation.event.id): selected #endif id="eventID" name="eventID" value=#(event.id)>
                     #(event.name) @ #dateFormat(event.date)
                   </option>
                 #endfor
@@ -36,6 +36,18 @@
                 <div class="mb-3">
                   <label for="title" class="form-label">Presentation title</label>
                   <input value="#(presentation.title)" class="form-control" name="title" id="title">
+                </div>
+                <label for="startTime" class="form-label">Start Time</label>
+                <div class="input-group clockpicker">
+                    <input name="startTime" type="text" class="form-control" #if(presentation.startDate): value="#(presentation.startDate)" #else: value="09:30" #endif>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+                <br>
+                <div class="mb-3">
+                    <label for="duration" class="form-label">Duration (minutes)</label>
+                    <input value="#(presentation.duration)" name="duration" type="number" class="form-control" value="30"/>
                 </div>
                 <div class="mb-3">
                   <label for="synopsis" class="form-label">Presentation synopsis</label>
@@ -51,6 +63,11 @@
               <img src="/img/header-bg.png" class="child-img">
             </div>
         </div>
+        <script>
+            function setEventDate(date) {
+                window.EventDate = date;
+            }
+        </script>
         #extend("Shared/_footer")
     #endexport
 #endextend
