@@ -26,12 +26,14 @@
                 <div class="speaker-grid-element-image-container">
                     <img class="speaker-grid-element-image" src="https://swiftleeds-speakers.s3.eu-west-2.amazonaws.com/#(speaker.profileImage)"/>
                 </div>
-                <div class="speaker-grid-element-info" >
+                <div class="speaker-grid-element-info">
+                    #if(speaker.twitter):
                     <a href="https://twitter.com/#(speaker.twitter)">
                         <div class="speaker-grid-social">
                             <img src="/img/twitter-vector.svg"/>
                         </div>
                     </a>
+                    #endif
                     <p class="speaker-grid-name">#(speaker.name)</p>
                     <p class="speaker-grid-title">#(speaker.organisation)</p>
                     #if(count(speaker.presentations) > 0):
