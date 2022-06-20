@@ -43,7 +43,7 @@ final class Speaker: Codable, Model, Content {
     
     class Migrations: AsyncMigration {
         var name: String {
-            "speakerv2"
+            "speakerv2.1"
         }
 
         func prepare(on database: Database) async throws {

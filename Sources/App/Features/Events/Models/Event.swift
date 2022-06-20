@@ -34,7 +34,7 @@ final class Event: Model, Content {
     
     class Migrations: AsyncMigration {
         var name: String {
-            "eventv2"
+            "eventv2.1"
         }
 
         func prepare(on database: Database) async throws {

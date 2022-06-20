@@ -59,7 +59,7 @@ final class Presentation: Model, Content {
     class Migrations: AsyncMigration {
         
         var name: String {
-            "presentationsv2"
+            "presentationsv2.1"
         }
         
         func prepare(on database: Database) async throws {

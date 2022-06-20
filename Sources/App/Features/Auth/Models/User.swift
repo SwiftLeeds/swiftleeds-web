@@ -86,7 +86,7 @@ final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAu
     
     class Migrations: AsyncMigration {
         var name: String {
-            "userv2"
+            "userv2.1"
         }
         func prepare(on database: Database) async throws {
 

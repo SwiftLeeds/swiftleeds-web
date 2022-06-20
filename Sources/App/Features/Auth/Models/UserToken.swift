@@ -43,15 +43,12 @@ final class UserToken: Model, Content, ModelTokenAuthenticatable, Codable {
     }
     
     struct Migrations: AsyncMigration {
+        var name: String {
+            "usertokenv2"
+        }
+
         func prepare(on database: Database) async throws {
-            return try await database.schema("user_tokens")
-                .id()
-                .field("value", .string, .required)
-                .field("timestamp", .datetime, .required)
-                .field("user_id", .uuid, .required, .references("users", "id"))
-                .unique(on: "value")
-                .unique(on: "user_id")
-                .create()
+
         }
 
         func revert(on database: Database) async throws {
