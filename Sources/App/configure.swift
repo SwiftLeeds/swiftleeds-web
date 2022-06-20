@@ -24,8 +24,6 @@ public func configure(_ app: Application) throws {
     app.migrations.add(Presentation.Migrations())
     app.migrations.add(SessionRecord.migration)
     
-    try? app.autoMigrate()
-
     do {
         struct DatabaseError: Error { }
         guard var postgresConfig = PostgresConfiguration(url: Application.db) else {
@@ -34,6 +32,7 @@ public func configure(_ app: Application) throws {
         postgresConfig.tlsConfiguration = .makeClientConfiguration()
         postgresConfig.tlsConfiguration?.certificateVerification = .none
         app.databases.use(.postgres(configuration: postgresConfig), as: .psql)
+        try app.autoMigrate()
     } catch {
         app.logger.error("Failed to connect to DB with error \(error)")
     }
