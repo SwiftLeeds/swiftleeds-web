@@ -23,6 +23,8 @@ public func configure(_ app: Application) throws {
     app.migrations.add(Speaker.Migrations())
     app.migrations.add(Presentation.Migrations())
     app.migrations.add(SessionRecord.migration)
+    
+    try? app.autoMigrate()
 
     do {
         struct DatabaseError: Error { }
