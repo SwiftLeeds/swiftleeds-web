@@ -33,13 +33,12 @@ final class Event: Model, Content {
     init() { }
     
     class Migrations: AsyncMigration {
+        var name: String {
+            "eventv2"
+        }
+
         func prepare(on database: Database) async throws {
-            try await database.schema(Event.schema)
-                .id()
-                .field("name", .string, .required)
-                .field("event_date", .date, .required)
-                .field("location", .string, .required)
-                .create()
+
         }
         
         func revert(on database: Database) async throws {

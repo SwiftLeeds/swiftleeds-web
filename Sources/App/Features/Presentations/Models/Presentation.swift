@@ -57,18 +57,18 @@ final class Presentation: Model, Content {
     }
     
     class Migrations: AsyncMigration {
+        
+        var name: String {
+            "presentationsv2"
+        }
+        
         func prepare(on database: Database) async throws {
-            return try await database.schema(Presentation.schema)
-                .id()
-                .field("title", .string, .required)
-                .field("synopsis", .string)
-                .field("speaker_id", .uuid, .references("speakers", "id"))
-                .field("event_id", .uuid, .references("events", "id"))
-                .field("image", .string)
+            let schema = try await database.schema(Presentation.schema)
                 .field("start_date", .string)
                 .field("duration", .double)
                 .field("is_tba", .bool)
-                .create()
+            
+            try await schema.update()
         }
 
         func revert(on database: Database) async throws {

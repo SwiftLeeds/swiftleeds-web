@@ -12,8 +12,10 @@ func routes(_ app: Application) throws {
     route.get { req -> View in
         do {
             let speakers = try await Speaker.query(on: req.db).with(\.$presentations).all()
-            let presentations = try? await Presentation.query(on: req.db).all()
-            return try await req.view.render("Home/home", HomeContext(speakers: speakers, cfpEnabled: cfpExpirationDate > Date(), presentations: presentations ?? []))
+            if let presentations = try? await Presentation.query(on: req.db).all() {
+                return try await req.view.render("Home/home", HomeContext(speakers: speakers, cfpEnabled: cfpExpirationDate > Date(), presentations: presentations))
+            }
+            return try await req.view.render("Home/home", HomeContext(speakers: speakers, cfpEnabled: cfpExpirationDate > Date(), presentations: []))
         } catch {
             return try await req.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), presentations: []))
         }

@@ -85,15 +85,11 @@ final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAu
     }
     
     class Migrations: AsyncMigration {
+        var name: String {
+            "userv2"
+        }
         func prepare(on database: Database) async throws {
-            try await database.schema(User.schema)
-                .id()
-                .field("name", .string, .required)
-                .field("password_hash", .string, .required)
-                .field("email", .string, .required)
-                .field("user_role", .string, .sql(.default("user")))
-                .unique(on: "email")
-                .create()
+
         }
 
         func revert(on database: Database) async throws {
