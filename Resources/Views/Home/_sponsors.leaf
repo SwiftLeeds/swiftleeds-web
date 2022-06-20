@@ -19,7 +19,7 @@
     <p class="sponsor-grid-subhead">Gold sponsors</p>
     <div class="sponsor-grid">
         <div class="sponsor">
-            <a href="https://www.mkodo.com/s/careers" target="_blank"><img src="img/mkodo.png" class="sponsor-img"></a>
+            <a href="https://www.mkodo.com/s/careers" target="_blank"><img src="img/mkodo.svg" class="sponsor-img"></a>
         </div>
         <div class="sponsor">
             <a href="https://www.and.digital/join/open-roles" target="_blank"><img src="img/and-digital.png" class="sponsor-img"></a>
