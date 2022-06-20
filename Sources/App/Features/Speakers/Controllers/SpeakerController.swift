@@ -34,11 +34,11 @@ struct SpeakerController: RouteCollection {
                                                    contentLength: Int64(data.count),
                                                    key: filename
         )
-//        let s3 = S3(accessKeyId: Environment.get("S3_KEY")!,
-//                    secretAccessKey: Environment.get("S3_SECRET")!,
-//                    region: .euwest2
-//        )
-//        let response = s3.putObject(putObjectRequest)
+        let s3 = S3(accessKeyId: Environment.get("S3_KEY")!,
+                    secretAccessKey: Environment.get("S3_SECRET")!,
+                    region: .euwest2
+        )
+        let response = s3.putObject(putObjectRequest)
         speaker.profileImage = filename
         
         try await speaker.save(on: request.db)

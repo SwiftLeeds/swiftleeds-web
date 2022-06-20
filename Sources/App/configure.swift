@@ -31,8 +31,8 @@ public func configure(_ app: Application) throws {
         guard var postgresConfig = PostgresConfiguration(url: Application.db) else {
             throw DatabaseError()
         }
-//        postgresConfig.tlsConfiguration = .makeClientConfiguration()
-//        postgresConfig.tlsConfiguration?.certificateVerification = .none
+        postgresConfig.tlsConfiguration = .makeClientConfiguration()
+        postgresConfig.tlsConfiguration?.certificateVerification = .none
         app.databases.use(.postgres(configuration: postgresConfig), as: .psql)
     } catch {
         app.logger.error("Failed to connect to DB with error \(error)")
