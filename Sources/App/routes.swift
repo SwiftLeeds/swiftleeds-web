@@ -5,6 +5,8 @@ let cfpExpirationDate = Date(timeIntervalSince1970: 1651356000) // 30th April 22
 
 func routes(_ app: Application) throws {
     
+    // MARK: - Web Routes
+    
     let route = app.routes.grouped(User.sessionAuthenticator())
  
     route.get { req -> View in
@@ -29,7 +31,25 @@ func routes(_ app: Application) throws {
         }
     }
     
-    app.routes.get("admin") { request -> View in
+    app.get("conduct") { req -> EventLoopFuture<View> in
+        return req.view.render("Secondary/conduct", ["name": "Leaf"])
+    }
+
+    try app.routes.register(collection: AuthController()) // TODO: Split this out into web/api/admin
+    try app.routes.register(collection: SpeakerController()) // TODO: Split this out into web/api/admin
+    try app.routes.register(collection: EventsController()) // TODO: Split this out into web/api/admin
+    
+    // MARK: - API Routes
+    
+    let apiRoutes = app.grouped("api", "v1")
+    
+    try apiRoutes.grouped("presentations").register(collection: PresentationAPIController())
+    
+    // MARK: - Admin Routes
+    
+    let adminRoutes = app.grouped("admin")
+    
+    adminRoutes.get("") { request -> View in
         guard let user = request.user, user.role == .admin else {
             return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), presentations: []))
         }
@@ -41,14 +61,7 @@ func routes(_ app: Application) throws {
         return try await request.view.render("Admin/home", AdminContext(speakers: speakers, presentations: presentations, events: events, page: (query ?? PageQuery(page: "speakers")).page, user: user))
     }
     
-    app.get("conduct") { req -> EventLoopFuture<View> in
-        return req.view.render("Secondary/conduct", ["name": "Leaf"])
-    }
-    
-    try app.routes.register(collection: AuthController())
-    try app.routes.register(collection: SpeakerController())
-    try app.routes.register(collection: PresentationController())
-    try app.routes.register(collection: EventsController())
+    try adminRoutes.grouped("presentations").register(collection: PresentationViewController())
 }
 
 struct PageQuery: Content {

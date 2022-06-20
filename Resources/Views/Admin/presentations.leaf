@@ -6,11 +6,11 @@
             <span class="badge badge-primary badge-pill">
                 <a href="#">🗑</a>
                 &nbsp
-                <a href="#">✏️</a>
+                <a href="/admin/presentations/#(presentation.id)">✏️</a>
             </span>
         </li>
     #endfor
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <a href="/create-presentation">Add new presentation</a>
+        <a href="/admin/presentations">Add new presentation</a>
     </li>
 </ul>

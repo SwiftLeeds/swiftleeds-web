@@ -3,29 +3,43 @@
     #export("content"):
         #extend("Shared/_header")
         <div class="row">
-            <form method="POST" action="/api/v1/presentation/create" enctype="multipart/form-data">
-                <h1>Create presentation</h1>
+            #if(presentation):
+              <form method="POST" action="/api/v1/presentations/#(presentation.id)" enctype="multipart/form-data">
+            #else:
+              <form method="POST" action="/api/v1/presentations" enctype="multipart/form-data">
+            #endif
+                <h1>
+                #if(presentation):
+                    Edit Presentation
+                #else:
+                    Create Presentation
+                #endif
+                </h1>
                 <label for="speakerID" class="form-label">Speaker</label>
                 <select name="speakerID" class="form-control">
                 #for(speaker in speakers):
-                  <option id="speakerID" name="speakerID" value=#(speaker.id)>#(speaker.name)</option>
+                  <option #if(speaker.id == presentation.speaker.id): selected #endif id="speakerID" name="speakerID" value=#(speaker.id)>
+                    #(speaker.name)
+                  </option>
                 #endfor
                 </select>
                 <br>
                 <label for="event" class="form-label">Event</label>
                 <select name="eventID" class="form-control">
                 #for(event in events):
-                  <option id="eventID" name="eventID" value=#(event.id)>#(event.name) @ #dateFormat(event.date)</option>
+                  <option #if(event.id == presentation.event.id): selected #endif id="eventID" name="eventID" value=#(event.id)>
+                    #(event.name) @ #dateFormat(event.date)
+                  </option>
                 #endfor
                 </select>
                 <br>
                 <div class="mb-3">
                   <label for="title" class="form-label">Presentation title</label>
-                  <input class="form-control" name="title" id="title">
+                  <input value="#(presentation.title)" class="form-control" name="title" id="title">
                 </div>
                 <label for="startTime" class="form-label">Start Time</label>
                 <div class="input-group clockpicker">
-                    <input name="startTime" type="text" class="form-control" value="09:30">
+                    <input name="startTime" type="text" class="form-control" #if(presentation.startDate): value="#(presentation.startDate)" #else: value="09:30" #endif>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-time"></span>
                     </span>
@@ -33,11 +47,11 @@
                 <br>
                 <div class="mb-3">
                     <label for="duration" class="form-label">Duration (minutes)</label>
-                    <input name="duration" type="number" class="form-control" value="30"/>
+                    <input value="#(presentation.duration)" name="duration" type="number" class="form-control" value="30"/>
                 </div>
                 <div class="mb-3">
                   <label for="synopsis" class="form-label">Presentation synopsis</label>
-                  <textarea class="form-control" name="synopsis" id="synopsis" rows="3"></textarea>
+                  <textarea class="form-control" name="synopsis" id="synopsis" rows="3">#(presentation.synopsis)</textarea>
                 </div>
                 <div class="mb-3">
                   <label for="formFile" class="form-label">Presentation image</label>
