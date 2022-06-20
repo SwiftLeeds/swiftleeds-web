@@ -2,16 +2,20 @@ import Vapor
 
 let cfpExpirationDate = Date(timeIntervalSince1970: 1651356000) // 30th April 22
 
+
 func routes(_ app: Application) throws {
+    
+    // MARK: - Web Routes
     
     let route = app.routes.grouped(User.sessionAuthenticator())
  
     route.get { req -> View in
         do {
-            let speakers = try await Speaker.query(on: req.db).all()
-            return try await req.view.render("Home/home", HomeContext(speakers: speakers, cfpEnabled: cfpExpirationDate > Date()))
+            let speakers = try await Speaker.query(on: req.db).with(\.$presentations).all()
+            let presentations = try? await Presentation.query(on: req.db).all()
+            return try await req.view.render("Home/home", HomeContext(speakers: speakers, cfpEnabled: cfpExpirationDate > Date(), presentations: presentations ?? []))
         } catch {
-            return try await req.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
+            return try await req.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), presentations: []))
         }
     }
     
@@ -27,33 +31,37 @@ func routes(_ app: Application) throws {
         }
     }
     
-    app.routes.get("admin") { request -> View in
-        guard let user = request.user, user.role == .admin else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
-        }
-        let query = try request.query.decode(PageQuery.self)
-        let speakers = try await Speaker.query(on: request.db).all()
-        let presentations = try await Presentation.query(on: request.db).all()
-        
-        return try await request.view.render("Admin/home", AdminContext(speakers: speakers, presentations: presentations, page: query.page, user: user))
-    }
-        
-    app.routes.get("create-presentation") { request -> View in
-        guard request.user?.role == .admin else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
-        }
-        
-        let speakers = try await Speaker.query(on: request.db).all()
-        let context = HomeContext(speakers: speakers, cfpEnabled: cfpExpirationDate > Date())
-        return try await request.view.render("Authentication/create_presentation", context)
-    }
-    
     app.get("conduct") { req -> EventLoopFuture<View> in
         return req.view.render("Secondary/conduct", ["name": "Leaf"])
     }
+
+    try app.routes.register(collection: AuthController()) // TODO: Split this out into web/api/admin
+    try app.routes.register(collection: SpeakerController()) // TODO: Split this out into web/api/admin
+    try app.routes.register(collection: EventsController()) // TODO: Split this out into web/api/admin
     
-    try app.routes.register(collection: AuthController())
-    try app.routes.register(collection: SpeakerController())
+    // MARK: - API Routes
+    
+    let apiRoutes = app.grouped("api", "v1")
+    
+    try apiRoutes.grouped("presentations").register(collection: PresentationAPIController())
+    
+    // MARK: - Admin Routes
+    
+    let adminRoutes = app.grouped("admin")
+    
+    adminRoutes.get("") { request -> View in
+        guard let user = request.user, user.role == .admin else {
+            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), presentations: []))
+        }
+        let query = try? request.query.decode(PageQuery.self)
+        let speakers = try await Speaker.query(on: request.db).with(\.$presentations).all()
+        let presentations = try await Presentation.query(on: request.db).with(\.$speaker).all()
+        let events = try await Event.query(on: request.db).all()
+        
+        return try await request.view.render("Admin/home", AdminContext(speakers: speakers, presentations: presentations, events: events, page: (query ?? PageQuery(page: "speakers")).page, user: user))
+    }
+    
+    try adminRoutes.grouped("presentations").register(collection: PresentationViewController())
 }
 
 struct PageQuery: Content {
@@ -63,6 +71,7 @@ struct PageQuery: Content {
 struct AdminContext: Content {
     var speakers: [Speaker] = []
     var presentations: [Presentation] = []
+    var events: [Event] = []
     var page: String
     var user: User
 }

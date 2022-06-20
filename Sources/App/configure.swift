@@ -12,17 +12,20 @@ public func configure(_ app: Application) throws {
     app.routes.defaultMaxBodySize = "10mb"
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
     app.sessions.use(.fluent(.psql))
+    app.leaf.tags["dateFormat"] = NowTag()
 
     // Use Leaf
     app.views.use(.leaf)
     
-    // register routes
-    app.migrations.add(App.Event.Migrations())
     app.migrations.add(App.User.Migrations())
     app.migrations.add(UserToken.Migrations())
+    app.migrations.add(App.Event.Migrations())
     app.migrations.add(Speaker.Migrations())
     app.migrations.add(Presentation.Migrations())
     app.migrations.add(SessionRecord.migration)
+    
+    try? app.autoMigrate()
+
     do {
         struct DatabaseError: Error { }
         guard var postgresConfig = PostgresConfiguration(url: Application.db) else {

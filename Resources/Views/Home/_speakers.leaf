@@ -36,6 +36,28 @@
                     #endif
                     <p class="speaker-grid-name">#(speaker.name)</p>
                     <p class="speaker-grid-title">#(speaker.organisation)</p>
+                    #if(count(speaker.presentations) > 0):
+                        <p class="speaker-grid-name">Presentations</p>
+                        #for(presentation in speaker.presentations):
+                            <p class="speaker-grid-title">#(presentation.title)</p>
+                        #endfor
+                    #endif
+                </div>
+                
+                <div id="synopsisModal" class="modal" tabindex="-1" role="dialog">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 id="modal-title" class="modal-title"></h5>
+                      </div>
+                      <div class="modal-body">
+                        <p id="modal-body"></p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="synopsisModal">Close</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
             </div>
         #endfor
@@ -44,3 +66,5 @@
     #endif
   </div>
 </div>
+
+

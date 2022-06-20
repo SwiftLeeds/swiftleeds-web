@@ -12,33 +12,22 @@
       </a>
     </div>
   </div>
-
+  #for(presentation in presentations):
   <div class="row mx-5 my-2 py-3" style="border-bottom: 1px solid #ccc;">
     <div class="col-2 px-0">
-      <strong>9:20AM - 9:40AM PT</strong>
+      <strong>#(presentation.startDate)</strong>
     </div>
-    <div class="col" style="text-align: right;">
-      Intro – SwiftLeeds
+    <div class="col">
+      <strong>#(presentation.title)</strong>
+      <br>
+      #(presentation.synopsis)
     </div>
     <div class="col-2" style="text-align: right;">
-      <span class="tag m-3">Beginner</span>
+      <span class="tag m-3">#(presentation.duration) minutes</span>
       <img src="/img/show-more.png" alt="Show more"/>
     </div>
   </div>
-
-  <div class="row mx-5 my-2 py-3" style="border-bottom: 1px solid #ccc;">
-    <div class="col-2 px-0">
-      <strong>9:40AM - 10:20AM PT</strong>
-    </div>
-    <div class="col" style="text-align: right;">
-      Server-side Swift State of the Union: Life after async/await
-    </div>
-    <div class="col-2" style="text-align: right;">
-      <span class="tag m-3">Intermediate</span>
-      <img src="/img/show-more.png" alt="Show more"/>
-    </div>
-  </div>
-
+  #endfor
   <div class="col mb-5"/>
 </div>
 
