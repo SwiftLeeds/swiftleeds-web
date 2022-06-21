@@ -12,6 +12,7 @@
       </a>
     </div>
   </div>
+  
   #for(presentation in presentations):
   <div class="row mx-5 my-2 py-3" style="border-bottom: 1px solid #ccc;">
     <div class="col-2 px-0">
@@ -19,8 +20,11 @@
     </div>
     <div class="col">
       <strong>#(presentation.title)</strong>
-      <br>
+      <br />
+      <br />
       #(presentation.synopsis)
+      <br />
+      <br />
     </div>
     <div class="col-2" style="text-align: right;">
       <span class="tag m-3">#(presentation.duration) minutes</span>
@@ -29,6 +33,7 @@
   </div>
   #endfor
   <div class="col mb-5"/>
+</div>
 </div>
 
 
