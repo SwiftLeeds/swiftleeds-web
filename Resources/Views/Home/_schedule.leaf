@@ -1,6 +1,6 @@
 <div class="border" style="margin: 0 -12px;">
   <div class="row m-5">
-    <h2 class="col-2">
+    <h2 class="col-2" id="schedule">
       Conference<br/>
       Schedule
     </h2>
