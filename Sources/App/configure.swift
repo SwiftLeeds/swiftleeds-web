@@ -3,6 +3,7 @@ import Leaf
 import Fluent
 import FluentPostgresDriver
 import Foundation
+import LeafMarkdown
 
 // configures your application
 public func configure(_ app: Application) throws {
@@ -13,6 +14,7 @@ public func configure(_ app: Application) throws {
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
     app.sessions.use(.fluent(.psql))
     app.leaf.tags["dateFormat"] = NowTag()
+    app.leaf.tags["markdown"] = Markdown()
 
     // Use Leaf
     app.views.use(.leaf)

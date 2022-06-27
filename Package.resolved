@@ -29,6 +29,15 @@
         }
       },
       {
+        "package": "cmark",
+        "repositoryURL": "https://github.com/brokenhandsio/cmark-gfm.git",
+        "state": {
+          "branch": null,
+          "revision": "e97450a77a40f12b4f88f95891621c3b5d8669de",
+          "version": "2.1.0"
+        }
+      },
+      {
         "package": "console-kit",
         "repositoryURL": "https://github.com/vapor/console-kit.git",
         "state": {
@@ -89,6 +98,24 @@
           "branch": null,
           "revision": "983fcbe89e7153c4d5870bdc76bf57a56817225f",
           "version": "1.4.0"
+        }
+      },
+      {
+        "package": "LeafMarkdown",
+        "repositoryURL": "https://github.com/vapor-community/leaf-markdown.git",
+        "state": {
+          "branch": null,
+          "revision": "ecec9a93102139609aa5a84c51990fc305fbc1d6",
+          "version": "3.0.1"
+        }
+      },
+      {
+        "package": "SwiftMarkdown",
+        "repositoryURL": "https://github.com/vapor-community/markdown.git",
+        "state": {
+          "branch": null,
+          "revision": "f0cdf125947c06685ebaef633fd00ae5247a1cfc",
+          "version": "0.7.1"
         }
       },
       {
