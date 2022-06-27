@@ -51,7 +51,8 @@
                 </div>
                 <div class="mb-3">
                   <label for="synopsis" class="form-label">Presentation synopsis</label>
-                  <textarea class="form-control" name="synopsis" id="synopsis" rows="3">#(presentation.synopsis)</textarea>
+                  <textarea class="form-control" name="synopsis" id="synopsis" rows="10">#(presentation.synopsis)</textarea>
+                  <p>* Supports Markdown</p>
                 </div>
                 <div class="mb-3">
                   <label for="formFile" class="form-label">Presentation image</label>
