@@ -11,10 +11,10 @@ import Vapor
 
 final class Event: Model, Content {
     
+    static let schema = Schema.event
+
     typealias IDValue = UUID
-    
-    static let schema: String = "events"
-    
+
     @ID(key: .id)
     var id: UUID?
     
@@ -31,18 +31,4 @@ final class Event: Model, Content {
     var presentations: [Presentation]
     
     init() { }
-    
-    class Migrations: AsyncMigration {
-        var name: String {
-            "eventv2.1"
-        }
-
-        func prepare(on database: Database) async throws {
-
-        }
-        
-        func revert(on database: Database) async throws {
-            try await database.schema(Event.schema).delete()
-        }
-    }
 }

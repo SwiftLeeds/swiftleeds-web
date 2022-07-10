@@ -10,13 +10,14 @@ import Vapor
 import Fluent
 
 final class UserToken: Model, Content, ModelTokenAuthenticatable, Codable {
+    
+    static let schema = Schema.userToken
+    
     typealias User = App.User
     
     static let valueKey = \UserToken.$value
     static let userKey = \UserToken.$user
-    
-    static let schema = "user_tokens"
-    
+
     var isValid: Bool {
         return self.timestamp > Date()
     }
@@ -40,19 +41,5 @@ final class UserToken: Model, Content, ModelTokenAuthenticatable, Codable {
         self.value = value
         self.timestamp = timestamp
         self.$user.id = userID
-    }
-    
-    struct Migrations: AsyncMigration {
-        var name: String {
-            "usertokenv2"
-        }
-
-        func prepare(on database: Database) async throws {
-
-        }
-
-        func revert(on database: Database) async throws {
-            return try await database.schema("user_tokens").delete()
-        }
     }
 }

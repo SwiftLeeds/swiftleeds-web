@@ -10,6 +10,9 @@ import Vapor
 import Fluent
 
 final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAuthenticatable, ModelCredentialsAuthenticatable, Codable {
+    
+    static let schema = Schema.user
+    
     enum Role: String, Codable {
         case user, speaker, admin
     }
@@ -20,7 +23,6 @@ final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAu
     
     static let usernameKey = \User.$email
     static let passwordHashKey = \User.$passwordHash
-    static let schema = "users"
     
     // Unique identifier for this user.
     @ID()
@@ -82,19 +84,6 @@ final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAu
         database: DatabaseID? = nil
     ) -> Authenticator {
         return BearerAuthenticatable()
-    }
-    
-    class Migrations: AsyncMigration {
-        var name: String {
-            "userv2.1"
-        }
-        func prepare(on database: Database) async throws {
-
-        }
-
-        func revert(on database: Database) async throws {
-            try await database.schema(User.schema).delete()
-        }
     }
 
     struct Create: Content, Validatable {

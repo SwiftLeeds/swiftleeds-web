@@ -11,12 +11,10 @@ import Fluent
 import FluentPostgresDriver
 
 final class Speaker: Codable, Model, Content {
+    
+    static let schema = Schema.speaker
 
     typealias IDValue = UUID
-    
-    static var schema: String {
-        return "speakers"
-    }
     
     @ID(key: .id)
     var id: UUID?
@@ -40,18 +38,4 @@ final class Speaker: Codable, Model, Content {
     var presentations: [Presentation]
     
     init() { }
-    
-    class Migrations: AsyncMigration {
-        var name: String {
-            "speakerv2.1"
-        }
-
-        func prepare(on database: Database) async throws {
-            
-        }
-        
-        func revert(on database: Database) async throws {
-            try await database.schema(Speaker.schema).delete()
-        }
-    }
 }
