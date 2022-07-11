@@ -16,8 +16,7 @@ public func configure(_ app: Application) throws {
     // Use Leaf
     app.views.use(.leaf)
 
-    try migrations(app)
-    try routes(app)
+    try Migrations.migrate(app)
 }
 
 extension Application {
