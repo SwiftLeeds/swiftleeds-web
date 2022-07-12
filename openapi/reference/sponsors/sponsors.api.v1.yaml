@@ -1,0 +1,17 @@
+list:
+  get:
+    summary: List all Sponsors
+    operationId: listSponsors
+    responses:
+      '200':
+        description: An array of Sponsors
+        content:
+          application/json:
+            schema:
+              $ref: ./models/sponsor-package-levels.v1.yaml
+      default:
+        description: Unexpected error
+        content:
+          application/json:
+            schema:
+              $ref: ../common/models/error.v1.yaml

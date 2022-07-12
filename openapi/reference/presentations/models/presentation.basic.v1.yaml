@@ -1,0 +1,12 @@
+title: Presentation (Basic)
+x-stoplight:
+  id: ql9cylyx36re3
+description: A basic representation of a single Presentation.
+type: object
+xml:
+  name: Presentation Basic
+properties:
+  title:
+    type: string
+    example: What's new in Core Data
+x-internal: false

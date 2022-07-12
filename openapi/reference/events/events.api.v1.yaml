@@ -1,0 +1,42 @@
+list:
+  get:
+    summary: List all Events
+    operationId: listEvents
+    responses:
+      '200':
+        description: An array of Events
+        content:
+          application/json:
+            schema:
+              $ref: ./models/event.v1.yaml
+      default:
+        description: Unexpected error
+        content:
+          application/json:
+            schema:
+              $ref: ../common/models/error.v1.yaml
+detail:
+  parameters:
+    - schema:
+        type: uuid
+      name: eventId
+      in: path
+      required: true
+      description: ID of an existing event.
+  get:
+    summary: Get Event Info by Event ID
+    responses:
+      '200':
+        description: Event Found
+        content:
+          application/json:
+            schema:
+              $ref: ./models/event.v1.yaml
+      '404':
+        description: Event Not Found
+        content:
+          application/json:
+            schema:
+              $ref: ../common/models/error.v1.yaml
+    operationId: get-events-eventId
+    description: Retrieve the information of the event with the matching event ID.

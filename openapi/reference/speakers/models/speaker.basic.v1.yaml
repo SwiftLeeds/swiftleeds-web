@@ -1,0 +1,21 @@
+title: Speaker (Basic)
+description: A basic representation of a single Speaker.
+type: object
+xml:
+  name: Speaker Basic
+properties:
+  name:
+    type: string
+    example: Tim Cook
+  profile_image:
+    type: string
+    format: url
+  twitter:
+    type: string
+    example: '@tim_cook'
+  organisation:
+    type: string
+    example: Apple
+x-stoplight:
+  id: bjf5gnzeztn4v
+x-internal: false

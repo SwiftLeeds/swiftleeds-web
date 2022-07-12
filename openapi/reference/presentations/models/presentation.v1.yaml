@@ -1,0 +1,36 @@
+title: Presentation
+description: A single Presentation.
+type: object
+x-tags:
+  - Presentations
+xml:
+  name: Presentation
+properties:
+  id:
+    type: string
+    format: uuid
+  title:
+    type: string
+    example: "What's new in Core Data"
+  synopsis:
+    type: string
+    example: "Nothing :("
+  image:
+    type: string
+    format: uri
+  start_date:
+    type: string
+    format: date
+    example: "09:30"
+  duration:
+    type: string
+    example: "60"
+  is_tba:
+    type: boolean
+  speaker:
+    type: object
+    $ref: '../../speakers/models/speaker.basic.v1.yaml'
+x-stoplight:
+  id: cc9vksh5j0rk9
+x-internal: false
+    

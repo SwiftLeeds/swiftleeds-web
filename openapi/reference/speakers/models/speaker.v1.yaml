@@ -1,0 +1,30 @@
+title: Speaker
+x-stoplight:
+  id: y2g3ixgbtmrkv
+description: A single Speaker.
+type: object
+x-tags:
+  - Speakers
+xml:
+  name: Speaker
+properties:
+  id:
+    type: string
+    format: uuid
+  name:
+    type: string
+    example: Tim Cook
+  profile_image:
+    type: string
+    format: uri
+  twitter:
+    type: string
+    example: '@tim_cook'
+  organisation:
+    type: string
+    example: Apple
+  presentations:
+    type: array
+    items:
+      $ref: ../../presentations/models/presentation.basic.v1.yaml
+x-internal: false
