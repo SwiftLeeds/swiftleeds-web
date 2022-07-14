@@ -20,6 +20,10 @@ enum Schema {
     }
 
     static var slot: String {
-        return "session_slots"
+        return "slots"
+    }
+
+    static var activity: String {
+        return "activity"
     }
 }

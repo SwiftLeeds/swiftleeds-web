@@ -25,7 +25,12 @@ class Migrations {
         
         app.migrations.add(PresentationMigrationV1())
 
+        // Activity Migrations
+
+        app.migrations.add(ActivityMigrationV1())
+
         // Slots
+
         app.migrations.add(SlotMigrationV1())
 
         // Session Record Migrations

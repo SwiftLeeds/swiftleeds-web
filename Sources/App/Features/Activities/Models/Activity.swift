@@ -1,0 +1,52 @@
+import Foundation
+import Fluent
+import Vapor
+
+final class Activity: Model, Content {
+
+    static let schema = Schema.activity
+
+    typealias IDValue = UUID
+
+    @ID(key: .id)
+    var id: UUID?
+
+    @Field(key: "title")
+    var title: String?
+
+    @Field(key: "subtitle")
+    var subtitle: String?
+
+    @Field(key: "description")
+    var description: String?
+
+    @Field(key: "url")
+    var metadataURL: String?
+
+    @Field(key: "image")
+    var image: String?
+
+    @Parent(key: "event_id")
+    var event: Event
+
+    @Parent(key: "slot_id")
+    public var slot: Slot
+
+    init() { }
+
+    init(
+        id: IDValue?,
+        title: String? = nil,
+        subtitle: String? = nil,
+        description: String? = nil,
+        metadataURL: String? = nil,
+        image: String? = nil
+    ) {
+        self.id = id
+        self.title = title
+        self.subtitle = subtitle
+        self.description = description
+        self.metadataURL = metadataURL
+        self.image = image
+    }
+}
