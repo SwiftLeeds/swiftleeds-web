@@ -15,6 +15,11 @@
         </a>
       </li>
     <li>
+        <a href="/admin?page=activities" class="nav-link link-dark">
+          Activities
+        </a>
+      </li>
+      <li>
         <a href="/admin?page=slots" class="nav-link link-dark">
           Slots
         </a>

@@ -5,8 +5,7 @@
             #(slot.id) at #(slot.startDate) -
             #if(slot.presentation):
                 #(slot.presentation.title)
-            #endif
-            #if(slot.activity):
+            #elseif(slot.activity):
                 #(slot.activity.title)
             #endif
             <span class="badge badge-primary badge-pill">

@@ -67,7 +67,19 @@ func routes(_ app: Application) throws {
         let presentations = try await Presentation.query(on: request.db).with(\.$speaker).all()
         let events = try await Event.query(on: request.db).all()
         let slots = try await Slot.query(on: request.db).with(\.$presentation).with(\.$activity).all()
-        return try await request.view.render("Admin/home", AdminContext(speakers: speakers, presentations: presentations, events: events, slots: slots, page: (query ?? PageQuery(page: "speakers")).page, user: user))
+        let activities = try await Activity.query(on: request.db).all()
+        return try await request.view.render(
+            "Admin/home",
+            AdminContext(
+                speakers: speakers,
+                presentations: presentations,
+                events: events,
+                slots: slots,
+                activities: activities,
+                page: (query ?? PageQuery(page: "speakers")).page,
+                user: user
+            )
+        )
     }
     
     try adminRoutes.grouped("presentations").register(collection: PresentationViewController())
@@ -83,6 +95,7 @@ struct AdminContext: Content {
     var presentations: [Presentation] = []
     var events: [Event] = []
     var slots: [Slot] = []
+    var activities: [Activity] = []
     var page: String
     var user: User
 }
