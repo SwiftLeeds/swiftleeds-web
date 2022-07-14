@@ -41,6 +41,11 @@ class SlotMigrationV1: AsyncMigration {
                 .field("speaker_id", .uuid, .references("speakers", "id"))
                 .field("event_id", .uuid, .references("events", "id"))
                 .update()
+
+        try await database.schema(Schema.activity)
+            .deleteField("slot_id")
+            .update()
+        
         // remove table
         try await database.schema(Schema.slot).delete()
     }
