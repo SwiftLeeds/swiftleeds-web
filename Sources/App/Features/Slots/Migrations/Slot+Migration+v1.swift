@@ -8,17 +8,17 @@ class SlotMigrationV1: AsyncMigration {
              .field("start_date", .string, .required)
              .field("duration", .double)
              .field("event_id", .uuid, .required, .references(Schema.event, "id"))
-             .field("presentation_id", .uuid, .references(Schema.presentation, "id"))
-             .field("activity_id", .uuid, .references(Schema.activity, "id"))
              .create()
 
         // Insert the slot relation into child entities
         try await database.schema(Schema.presentation)
-            .field("slot_id", .uuid, .references(Schema.slot, "id"))
+            .field("slot_id", .uuid, .references(Schema.slot, "id", onDelete: .setNull, onUpdate: .cascade))
+            .unique(on: "slot_id")
             .update()
 
         try await database.schema(Schema.activity)
-            .field("slot_id", .uuid, .references(Schema.slot, "id"))
+            .field("slot_id", .uuid, .references(Schema.slot, "id", onDelete: .setNull, onUpdate: .cascade))
+            .unique(on: "slot_id")
             .update()
 
         // Due to the lack of slots when initially created, presentations need to be "upgraded"
@@ -38,14 +38,14 @@ class SlotMigrationV1: AsyncMigration {
         try await database
                 .schema(Schema.presentation)
                 .deleteField("slot_id")
-                .field("speaker_id", .uuid, .references("speakers", "id"))
-                .field("event_id", .uuid, .references("events", "id"))
+                .field("start_date", .string)
+                .field("duration", .double)
                 .update()
 
         try await database.schema(Schema.activity)
             .deleteField("slot_id")
             .update()
-        
+
         // remove table
         try await database.schema(Schema.slot).delete()
     }

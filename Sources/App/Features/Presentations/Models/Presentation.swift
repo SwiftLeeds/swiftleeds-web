@@ -35,8 +35,8 @@ final class Presentation: Model, Content {
     @Parent(key: "event_id")
     public var event: Event
 
-    @Parent(key: "slot_id")
-    public var slot: Slot
+    @OptionalParent(key: "slot_id")
+    public var slot: Slot?
     
     @Field(key: "is_tba")
     var isTBA: Bool

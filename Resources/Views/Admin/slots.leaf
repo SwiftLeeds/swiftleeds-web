@@ -1,0 +1,22 @@
+<h1>Slots</h1>
+<ul class="list-group">
+    #for(slot in slots):
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            #(slot.id) at #(slot.startDate) -
+            #if(slot.presentation):
+                #(slot.presentation.title)
+            #endif
+            #if(slot.activity):
+                #(slot.activity.title)
+            #endif
+            <span class="badge badge-primary badge-pill">
+                <a href="/admin/slots/delete/#(slot.id)">🗑</a>
+                &nbsp
+                <a href="/admin/slots/#(slot.id)">✏️</a>
+            </span>
+        </li>
+    #endfor
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="/admin/slots">Add new slot</a>
+    </li>
+</ul>

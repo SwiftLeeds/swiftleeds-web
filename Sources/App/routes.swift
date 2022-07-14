@@ -12,12 +12,18 @@ func routes(_ app: Application) throws {
     route.get { req -> View in
         do {
             let speakers = try await Speaker.query(on: req.db).with(\.$presentations).all()
-            if let presentations = try? await Presentation.query(on: req.db).sort(\.$startDate).with(\.$speaker).all() {
-                return try await req.view.render("Home/home", HomeContext(speakers: speakers, cfpEnabled: cfpExpirationDate > Date(), presentations: presentations))
+            if let slots = try? await Slot.query(on: req.db)
+                .with(\.$activity)
+                .with(\.$presentation, { presentation in
+                    presentation.with(\.$speaker)
+                })
+                .sort(\.$startDate)
+                .all() {
+                return try await req.view.render("Home/home", HomeContext(speakers: speakers, cfpEnabled: cfpExpirationDate > Date(), slots: slots))
             }
-            return try await req.view.render("Home/home", HomeContext(speakers: speakers, cfpEnabled: cfpExpirationDate > Date(), presentations: []))
+            return try await req.view.render("Home/home", HomeContext(speakers: speakers, cfpEnabled: cfpExpirationDate > Date(), slots: []))
         } catch {
-            return try await req.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), presentations: []))
+            return try await req.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), slots: []))
         }
     }
     
@@ -46,24 +52,26 @@ func routes(_ app: Application) throws {
     let apiRoutes = app.grouped("api", "v1")
     
     try apiRoutes.grouped("presentations").register(collection: PresentationAPIController())
-    
+    try apiRoutes.grouped("slots").register(collection: SlotAPIController())
+
     // MARK: - Admin Routes
     
     let adminRoutes = app.grouped("admin")
     
     adminRoutes.get("") { request -> View in
         guard let user = request.user, user.role == .admin else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), presentations: []))
+            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), slots: []))
         }
         let query = try? request.query.decode(PageQuery.self)
         let speakers = try await Speaker.query(on: request.db).with(\.$presentations).all()
         let presentations = try await Presentation.query(on: request.db).with(\.$speaker).all()
         let events = try await Event.query(on: request.db).all()
-        
-        return try await request.view.render("Admin/home", AdminContext(speakers: speakers, presentations: presentations, events: events, page: (query ?? PageQuery(page: "speakers")).page, user: user))
+        let slots = try await Slot.query(on: request.db).with(\.$presentation).with(\.$activity).all()
+        return try await request.view.render("Admin/home", AdminContext(speakers: speakers, presentations: presentations, events: events, slots: slots, page: (query ?? PageQuery(page: "speakers")).page, user: user))
     }
     
     try adminRoutes.grouped("presentations").register(collection: PresentationViewController())
+    try adminRoutes.grouped("slots").register(collection: SlotViewController())
 }
 
 struct PageQuery: Content {
@@ -74,6 +82,7 @@ struct AdminContext: Content {
     var speakers: [Speaker] = []
     var presentations: [Presentation] = []
     var events: [Event] = []
+    var slots: [Slot] = []
     var page: String
     var user: User
 }

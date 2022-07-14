@@ -8,20 +8,20 @@
   
   <div class="accordion accordion-flush" id="accordionFlushExample">
     
-    #for(presentation in presentations):
+    #for(slot in slots):
     <div class="accordion-item">
     
-      <h2 class="accordion-header" id="flush-heading-#(presentation.id)">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-#(presentation.id)" aria-expanded="false" aria-controls="flush-collapse-#(presentation.id)">
+      <h2 class="accordion-header" id="flush-heading-#(slot.id)">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-#(slot.id)" aria-expanded="false" aria-controls="flush-collapse-#(slot.id)">
           <div class="container">
             <div class="row">
             
               <div class="col-md-4">
-                <strong>#(presentation.startDate)</strong>
+                <strong>#(slot.startDate)</strong>
               </div>
               
               <div class="col-md-4 col-lg">
-                <p class="presentation-title">#(presentation.title)</p>
+                <p class="presentation-title">#(slot.presentation.title)</p>
               </div>
               
             </div>
@@ -29,7 +29,7 @@
         </button>
       </h2>
       
-      <div id="flush-collapse-#(presentation.id)" class="accordion-collapse collapse" aria-labelledby="flush-heading-#(presentation.id)" data-bs-parent="#accordionFlushExample">
+      <div id="flush-collapse-#(slot.id)" class="accordion-collapse collapse" aria-labelledby="flush-heading-#(slotpresentation.id)" data-bs-parent="#accordionFlushExample">
         <br />
         <br />
         <div class="accordion-body">
@@ -37,18 +37,17 @@
           <div class="row mx-5 my-2 py-3">
           
             <div class="col-md-4">
-              <img class="speaker-grid-element-image" src="https://swiftleeds-speakers.s3.eu-west-2.amazonaws.com/#(presentation.speaker.profileImage)"/>
+              <img class="speaker-grid-element-image" src="https://swiftleeds-speakers.s3.eu-west-2.amazonaws.com/#(slot.presentation.speaker.profileImage)"/>
             </div>
             
             <br />
             <br />
             <div class="col-md-4 col-lg">
-              #markdown((presentation.synopsis))
+              #markdown((slot.presentation.synopsis))
               <br />
               <br />
-              <strong>#(presentation.speaker.name)</strong> / #(presentation.speaker.organisation)
+              <strong>#(slot.presentation.speaker.name)</strong> / #(slot.presentation.speaker.organisation)
             </div>
-            
             </div>
           </div>
           </div>

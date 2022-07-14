@@ -2,7 +2,7 @@ import Foundation
 import Fluent
 import Vapor
 
-final class Activity: Model, Content {
+final class Activity: Codable, Model, Content {
 
     static let schema = Schema.activity
 
@@ -12,7 +12,7 @@ final class Activity: Model, Content {
     var id: UUID?
 
     @Field(key: "title")
-    var title: String?
+    var title: String
 
     @Field(key: "subtitle")
     var subtitle: String?
@@ -29,14 +29,14 @@ final class Activity: Model, Content {
     @Parent(key: "event_id")
     var event: Event
 
-    @Parent(key: "slot_id")
-    public var slot: Slot
+    @OptionalParent(key: "slot_id")
+    public var slot: Slot?
 
     init() { }
 
     init(
         id: IDValue?,
-        title: String? = nil,
+        title: String,
         subtitle: String? = nil,
         description: String? = nil,
         metadataURL: String? = nil,

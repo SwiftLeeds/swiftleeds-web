@@ -39,7 +39,7 @@
         <br/>
         #extend("Home/_speakers")
     #endif
-    #if(count(presentations) > 0):
+    #if(count(slots) > 0):
         <br/>
         #extend("Home/_schedule")
     #endif

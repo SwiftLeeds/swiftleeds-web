@@ -14,6 +14,11 @@
           Presentations / Sessions
         </a>
       </li>
+    <li>
+        <a href="/admin?page=slots" class="nav-link link-dark">
+          Slots
+        </a>
+      </li>
       <li>
         <a href="/admin?page=events" class="nav-link link-dark">
           Events

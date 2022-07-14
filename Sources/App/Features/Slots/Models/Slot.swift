@@ -2,7 +2,7 @@ import Foundation
 import Fluent
 import Vapor
 
-final class Slot: Model, Content {
+final class Slot: Codable, Model, Content {
 
     static let schema = Schema.slot
 
@@ -20,11 +20,11 @@ final class Slot: Model, Content {
     @Parent(key: "event_id")
     var event: Event
 
-    @Children(for: \.$slot)
-    var presentation: [Presentation]
+    @OptionalChild(for: \.$slot)
+    var presentation: Presentation?
 
-    @Children(for: \.$slot)
-    var activity: [Activity]
+    @OptionalChild(for: \.$slot)
+    var activity: Activity?
 
     init() { }
 

@@ -39,7 +39,7 @@ struct PresentationAPIController: RouteCollection {
         
         try await presentation.create(on: request.db)
         
-        return request.redirect(to: "/admin")
+        return request.redirect(to: "/admin?page=presentations")
     }
     
     private func onEdit(request: Request) async throws -> Response {
@@ -67,6 +67,6 @@ struct PresentationAPIController: RouteCollection {
         
         try await presentation.update(on: request.db)
         
-        return request.redirect(to: "/admin")
+        return request.redirect(to: "/admin?page=presentations")
     }
 }
