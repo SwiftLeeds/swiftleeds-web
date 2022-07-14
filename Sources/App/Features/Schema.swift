@@ -18,4 +18,8 @@ enum Schema {
     static var speaker: String {
         return "speakers"
     }
+
+    static var slot: String {
+        return "session_slots"
+    }
 }
