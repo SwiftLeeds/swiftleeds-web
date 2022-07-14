@@ -21,15 +21,18 @@
               </div>
               
               <div class="col-md-4 col-lg">
-                <p class="presentation-title">#(slot.presentation.title)</p>
+                #if(slot.presentation):
+                    <p class="presentation-title">#(slot.presentation.title)</p>
+                #elseif(slot.activity):
+                    <p class="presentation-title">#(slot.activity.title)</p>
+                #endif
               </div>
-              
             </div>
           </div>
         </button>
       </h2>
       
-      <div id="flush-collapse-#(slot.id)" class="accordion-collapse collapse" aria-labelledby="flush-heading-#(slotpresentation.id)" data-bs-parent="#accordionFlushExample">
+      <div id="flush-collapse-#(slot.id)" class="accordion-collapse collapse" aria-labelledby="flush-heading-#(slot.id)" data-bs-parent="#accordionFlushExample">
         <br />
         <br />
         <div class="accordion-body">
@@ -37,16 +40,26 @@
           <div class="row mx-5 my-2 py-3">
           
             <div class="col-md-4">
-              <img class="speaker-grid-element-image" src="https://swiftleeds-speakers.s3.eu-west-2.amazonaws.com/#(slot.presentation.speaker.profileImage)"/>
+                #if(slot.presentation):
+                    <img class="speaker-grid-element-image" src="https://swiftleeds-speakers.s3.eu-west-2.amazonaws.com/#(slot.presentation.speaker.profileImage)"/>
+                #elseif(slot.activity):
+                    <img class="speaker-grid-element-image" src="https://swiftleeds-speakers.s3.eu-west-2.amazonaws.com/#(slot.activity.image)"/>
+                #endif
             </div>
             
             <br />
             <br />
             <div class="col-md-4 col-lg">
-              #markdown((slot.presentation.synopsis))
+                #if(slot.presentation):
+                    #markdown((slot.presentation.synopsis))
+                #elseif(slot.activity):
+                    #markdown((slot.activity.synopsis))
+                #endif
               <br />
               <br />
-              <strong>#(slot.presentation.speaker.name)</strong> / #(slot.presentation.speaker.organisation)
+                #if(slot.presentation):
+                    <strong>#(slot.presentation.speaker.name)</strong> / #(slot.presentation.speaker.organisation)
+                #endif
             </div>
             </div>
           </div>
