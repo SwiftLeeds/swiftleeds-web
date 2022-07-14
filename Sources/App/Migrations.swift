@@ -41,10 +41,13 @@ class Migrations {
             
             app.databases.use(.postgres(configuration: postgresConfig), as: .psql)
             
-            app.autoMigrate()
-            try routes(app)
         } catch {
             app.logger.error("Failed to connect to DB with error \(error)")
+        }
+        do {
+            try app.autoMigrate().wait()
+        } catch {
+            app.logger.error("Failed to migrate DB with error \(error)")
         }
     }
 }
