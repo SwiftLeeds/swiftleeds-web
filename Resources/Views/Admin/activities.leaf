@@ -2,15 +2,15 @@
 <ul class="list-group">
     #for(activity in activities):
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            #(activity.title) at #(activity.startDate)
+            #(activity.title) / #(activity.subtitle)
             <span class="badge badge-primary badge-pill">
-                <a href="/admin/activites/delete/#(activity.id)">🗑</a>
+                <a href="/admin/activities/delete/#(activity.id)">🗑</a>
                 &nbsp
-                <a href="/admin/activites/#(activity.id)">✏️</a>
+                <a href="/admin/activities/#(activity.id)">✏️</a>
             </span>
         </li>
     #endfor
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <a href="/activities/slots">Add new activity</a>
+        <a href="/admin/activities">Add new activity</a>
     </li>
 </ul>

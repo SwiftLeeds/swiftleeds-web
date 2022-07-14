@@ -36,6 +36,7 @@
                 <br class="activity">
                 <label for="activityID" class="form-label activity">Activity</label>
                 <select name="activityID" class="form-control activity">
+                <option disabled selected value> -- select an option -- </option>
                 #for(activity in activities):
                   <option #if(activities.id == slot.activity.id): selected #endif id="activityID" name="activityID" value=#(activity.id)>
                     #(activity.title) - #(activity.subtitle)
@@ -63,10 +64,6 @@
                 <div class="mb-3">
                     <label for="duration" class="form-label">Duration (minutes)</label>
                     <input value="#(slot.duration)" name="duration" type="number" class="form-control" value="30"/>
-                </div>
-                <div class="mb-3">
-                  <label for="formFile" class="form-label">Image</label>
-                  <input class="form-control" type="file" id="image">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

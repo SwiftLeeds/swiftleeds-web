@@ -53,6 +53,7 @@ func routes(_ app: Application) throws {
     
     try apiRoutes.grouped("presentations").register(collection: PresentationAPIController())
     try apiRoutes.grouped("slots").register(collection: SlotAPIController())
+    try apiRoutes.grouped("activities").register(collection: ActivityAPIController())
 
     // MARK: - Admin Routes
     
@@ -84,6 +85,7 @@ func routes(_ app: Application) throws {
     
     try adminRoutes.grouped("presentations").register(collection: PresentationViewController())
     try adminRoutes.grouped("slots").register(collection: SlotViewController())
+    try adminRoutes.grouped("activities").register(collection: ActivityViewController())
 }
 
 struct PageQuery: Content {
