@@ -37,25 +37,17 @@ final class Presentation: Model, Content {
 
     @Parent(key: "slot_id")
     public var slot: Slot
-
-    @Field(key: "start_date")
-    var startDate: String
-    
-    @Field(key: "duration")
-    var duration: Double
     
     @Field(key: "is_tba")
     var isTBA: Bool
     
     init() { }
     
-    init(id: IDValue?, title: String, synopsis: String, image: String?, startDate: String, duration: Double, isTBA: Bool) {
+    init(id: IDValue?, title: String, synopsis: String, image: String?, isTBA: Bool) {
         self.id = id
         self.title = title
         self.synopsis = synopsis
         self.image = image
-        self.startDate = startDate
-        self.duration = duration
         self.isTBA = isTBA
     }
 }

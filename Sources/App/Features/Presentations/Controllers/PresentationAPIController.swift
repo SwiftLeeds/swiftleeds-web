@@ -8,8 +8,6 @@ struct PresentationAPIController: RouteCollection {
         let eventID: String
         let title: String
         let synopsis: String
-        let startTime: String
-        let duration: Double
     }
     
     func boot(routes: RoutesBuilder) throws {
@@ -33,8 +31,6 @@ struct PresentationAPIController: RouteCollection {
             title: input.title,
             synopsis: input.synopsis,
             image: nil,
-            startDate: input.startTime,
-            duration: input.duration,
             isTBA: false
         )
         
@@ -64,8 +60,6 @@ struct PresentationAPIController: RouteCollection {
         presentation.title = input.title
         presentation.synopsis = input.synopsis
         presentation.image = nil
-        presentation.startDate = input.startTime
-        presentation.duration = input.duration
         presentation.isTBA = false
         
         presentation.$speaker.id = try speaker.requireID()
