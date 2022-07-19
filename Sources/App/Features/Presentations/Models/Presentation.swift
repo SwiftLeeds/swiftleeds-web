@@ -55,24 +55,4 @@ final class Presentation: Model, Content {
         self.duration = duration
         self.isTBA = isTBA
     }
-    
-    class Migrations: AsyncMigration {
-        
-        var name: String {
-            "presentationsv2.1"
-        }
-        
-        func prepare(on database: Database) async throws {
-            let schema = try await database.schema(Presentation.schema)
-                .field("start_date", .string)
-                .field("duration", .double)
-                .field("is_tba", .bool)
-            
-            try await schema.update()
-        }
-
-        func revert(on database: Database) async throws {
-            return try await database.schema("presentations").delete()
-        }
-    }
 }
