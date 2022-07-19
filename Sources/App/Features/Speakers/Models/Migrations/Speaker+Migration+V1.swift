@@ -10,7 +10,6 @@ class SpeakerMigrationV1: AsyncMigration {
              .field("twitter", .string)
              .field("organisation", .string, .required)
              .field("profile_image", .string, .sql(.default("avatar.png")))
-             .unique(on: "name")
              .create()
     }
 
