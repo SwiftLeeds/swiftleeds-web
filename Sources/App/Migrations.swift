@@ -29,7 +29,7 @@ class Migrations {
 
         app.migrations.add(ActivityMigrationV1())
 
-        // Slots
+        // Slots Migrations
 
         app.migrations.add(SlotMigrationV1())
 
@@ -48,10 +48,10 @@ class Migrations {
             postgresConfig.tlsConfiguration?.certificateVerification = .none
             
             app.databases.use(.postgres(configuration: postgresConfig), as: .psql)
-            
         } catch {
             app.logger.error("Failed to connect to DB with error \(error)")
         }
+        
         do {
             try app.autoMigrate().wait()
         } catch {
