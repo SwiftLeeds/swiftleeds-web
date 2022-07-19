@@ -18,4 +18,12 @@ enum Schema {
     static var speaker: String {
         return "speakers"
     }
+
+    static var slot: String {
+        return "slots"
+    }
+
+    static var activity: String {
+        return "activity"
+    }
 }

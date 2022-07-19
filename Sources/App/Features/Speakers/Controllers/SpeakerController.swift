@@ -47,9 +47,8 @@ struct SpeakerController: RouteCollection {
     
     private func onCreate(request: Request) async throws -> View {
         guard let user = request.auth.get(User.self), user.role == .admin else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), presentations: []))
+            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
         }
-
         return try await request.view.render("Authentication/create_speaker")
     }
 }

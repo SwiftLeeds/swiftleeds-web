@@ -25,6 +25,14 @@ class Migrations {
         
         app.migrations.add(PresentationMigrationV1())
 
+        // Activity Migrations
+
+        app.migrations.add(ActivityMigrationV1())
+
+        // Slots Migrations
+
+        app.migrations.add(SlotMigrationV1())
+
         // Session Record Migrations
         
         app.migrations.add(SessionRecord.migration)
@@ -40,10 +48,14 @@ class Migrations {
             postgresConfig.tlsConfiguration?.certificateVerification = .none
             
             app.databases.use(.postgres(configuration: postgresConfig), as: .psql)
-            
-            app.autoMigrate()
         } catch {
             app.logger.error("Failed to connect to DB with error \(error)")
+        }
+        
+        do {
+            try app.autoMigrate().wait()
+        } catch {
+            app.logger.error("Failed to migrate DB with error \(error)")
         }
     }
 }

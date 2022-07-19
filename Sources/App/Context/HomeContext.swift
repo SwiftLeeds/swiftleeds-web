@@ -19,5 +19,5 @@ import Vapor
 struct HomeContext: Content {
     var speakers: [Speaker] = []
     var cfpEnabled: Bool = false
-    var presentations: [Presentation]
+    var slots: [Slot] = []
 }

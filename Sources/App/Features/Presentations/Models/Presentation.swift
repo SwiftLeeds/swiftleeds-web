@@ -34,25 +34,20 @@ final class Presentation: Model, Content {
     
     @Parent(key: "event_id")
     public var event: Event
-    
-    @Field(key: "start_date")
-    var startDate: String
-    
-    @Field(key: "duration")
-    var duration: Double
+
+    @OptionalParent(key: "slot_id")
+    public var slot: Slot?
     
     @Field(key: "is_tba")
     var isTBA: Bool
     
     init() { }
     
-    init(id: IDValue?, title: String, synopsis: String, image: String?, startDate: String, duration: Double, isTBA: Bool) {
+    init(id: IDValue?, title: String, synopsis: String, image: String?, isTBA: Bool) {
         self.id = id
         self.title = title
         self.synopsis = synopsis
         self.image = image
-        self.startDate = startDate
-        self.duration = duration
         self.isTBA = isTBA
     }
 }

@@ -14,8 +14,12 @@
                         #extend("Admin/speakers")
                     #elseif(page == "presentations"):
                         #extend("Admin/presentations")
+                    #elseif(page == "activities"):
+                        #extend("Admin/activities")
                     #elseif(page == "events"):
                         #extend("Admin/events")
+                    #elseif(page == "slots"):
+                        #extend("Admin/slots")
                     #endif
                 </div>
             </div>
