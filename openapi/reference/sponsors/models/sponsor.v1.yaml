@@ -1,0 +1,24 @@
+title: Sponsor
+description: A single Sponsor.
+type: object
+x-tags:
+  - Sponsors
+xml:
+  name: Sponsor
+properties:
+  id:
+    type: string
+    format: uuid
+  name:
+    type: string
+    example: "Codemagic"
+  image:
+    type: string
+    format: uri
+  url:
+    type: string
+    format: url
+    example: "https://codemagic.io"
+x-stoplight:
+  id: e7k8uleizxz36
+x-internal: false

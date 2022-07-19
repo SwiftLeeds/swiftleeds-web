@@ -1,0 +1,17 @@
+list:
+  get:
+    summary: List all Presentations
+    operationId: listPresentations
+    responses:
+      '200':
+        description: An array of Presentations
+        content:
+          application/json:
+            schema:
+              $ref: ./models/presentation.v1.yaml
+      default:
+        description: Unexpected error
+        content:
+          application/json:
+            schema:
+              $ref: ../common/models/error.v1.yaml

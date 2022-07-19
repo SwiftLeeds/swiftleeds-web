@@ -1,0 +1,21 @@
+title: Sponsor Package Levels
+description: A collection of Sponsors against their package levels.
+type: object
+x-tags:
+  - Sponsor Packages
+xml:
+  name: Packages
+properties:
+  type:
+    type: string
+    enum:
+      - Platinum
+      - Gold
+      - Silver
+  sponsors:
+    type: array
+    items:
+      $ref: ./sponsor.v1.yaml
+x-stoplight:
+  id: j0wytfl9rq4zi
+x-internal: false
