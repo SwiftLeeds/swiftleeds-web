@@ -12,18 +12,33 @@ func routes(_ app: Application) throws {
     route.get { req -> View in
         do {
             let speakers = try await Speaker.query(on: req.db).with(\.$presentations).all()
-            if let slots = try? await Slot.query(on: req.db)
+            
+            // There might be a better way to handle this, but Leaf templates don't
+            // support dictionaries holding arrays,
+            // e.g [.gold: [sponsor, sponsor], .platinum: [sponsor, sponsor]]
+            let sponsorQuery = try await Sponsor.query(on: req.db).all()
+            let platinumSponsors = sponsorQuery.filter { $0.sponsorLevel == .platinum }
+            let silverSponsors = sponsorQuery.filter { $0.sponsorLevel == .silver }
+            let goldSponsors = sponsorQuery.filter { $0.sponsorLevel == .gold }
+            
+            let slots = try await Slot.query(on: req.db)
                 .with(\.$activity)
                 .with(\.$presentation, { presentation in
                     presentation.with(\.$speaker)
                 })
                 .sort(\.$startDate)
-                .all() {
-                return try await req.view.render("Home/home", HomeContext(speakers: speakers, cfpEnabled: cfpExpirationDate > Date(), slots: slots))
-            }
-            return try await req.view.render("Home/home", HomeContext(speakers: speakers, cfpEnabled: cfpExpirationDate > Date(), slots: []))
+                .all()
+    
+            return try await req.view.render("Home/home", HomeContext(
+                speakers: speakers,
+                cfpEnabled: cfpExpirationDate > Date(),
+                slots: slots,
+                platinumSponsors: platinumSponsors,
+                silverSponsors: silverSponsors,
+                goldSponsors: goldSponsors
+            ))
         } catch {
-            return try await req.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), slots: []))
+            return try await req.view.render("Home/home", HomeContext(cfpEnabled: cfpExpirationDate > Date()))
         }
     }
     
@@ -54,6 +69,7 @@ func routes(_ app: Application) throws {
     try apiRoutes.grouped("presentations").register(collection: PresentationAPIController())
     try apiRoutes.grouped("slots").register(collection: SlotAPIController())
     try apiRoutes.grouped("activities").register(collection: ActivityAPIController())
+    try apiRoutes.grouped("sponsors").register(collection: SponsorAPIController())
 
     // MARK: - Admin Routes
     
@@ -63,12 +79,15 @@ func routes(_ app: Application) throws {
         guard let user = request.user, user.role == .admin else {
             return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), slots: []))
         }
+        
         let query = try? request.query.decode(PageQuery.self)
         let speakers = try await Speaker.query(on: request.db).with(\.$presentations).all()
         let presentations = try await Presentation.query(on: request.db).with(\.$speaker).all()
         let events = try await Event.query(on: request.db).all()
         let slots = try await Slot.query(on: request.db).with(\.$presentation).with(\.$activity).all()
         let activities = try await Activity.query(on: request.db).all()
+        let sponsors = try await Sponsor.query(on: request.db).all()
+        
         return try await request.view.render(
             "Admin/home",
             AdminContext(
@@ -77,6 +96,7 @@ func routes(_ app: Application) throws {
                 events: events,
                 slots: slots,
                 activities: activities,
+                sponsors: sponsors,
                 page: (query ?? PageQuery(page: "speakers")).page,
                 user: user
             )
@@ -86,6 +106,7 @@ func routes(_ app: Application) throws {
     try adminRoutes.grouped("presentations").register(collection: PresentationViewController())
     try adminRoutes.grouped("slots").register(collection: SlotViewController())
     try adminRoutes.grouped("activities").register(collection: ActivityViewController())
+    try adminRoutes.grouped("sponsors").register(collection: SponsorViewController())
 }
 
 struct PageQuery: Content {
@@ -98,6 +119,7 @@ struct AdminContext: Content {
     var events: [Event] = []
     var slots: [Slot] = []
     var activities: [Activity] = []
+    var sponsors: [Sponsor] = []
     var page: String
     var user: User
 }

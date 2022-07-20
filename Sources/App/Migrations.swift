@@ -32,6 +32,10 @@ class Migrations {
         // Slots Migrations
 
         app.migrations.add(SlotMigrationV1())
+        
+        // Sponsors Migrations
+        
+        app.migrations.add(SponsorMigrationV1())
 
         // Session Record Migrations
         

@@ -5,30 +5,44 @@
       sponsors
     </h2>
   </div>
-
+    #if(count(platinumSponsors) > 0):
     <p class="sponsor-grid-subhead">Platinum sponsors</p>
     <div class="sponsor-grid platinum">
+        #for(sponsor in platinumSponsors):
         <div class="sponsor">
-            <a href="https://codemagic.io" target="_blank"><img src="img/codemagic.svg" class="sponsor-img"></a>
+            <a href="#(sponsor.url)" target="_blank"><img src="https://swift-leeds.s3.eu-west-2.amazonaws.com/#(sponsor.image)" class="sponsor-img"></a>
         </div>
-        <div class="sponsor">
-            <a href="https://getstream.io/chat/sdk/swiftui/?utm_source=SwiftLeeds&utm_medium=Whole_Event_L&utm_content=Developer&utm_campaign=SwiftLeeds_Oct2022" target="_blank"><img src="img/stream.svg" class="sponsor-img"></a>
-        </div>
+        #endfor
     </div>
+    #endif
+    
+    #if(count(platinumSponsors) > 0 && count(goldSponsors) > 0):
     <div class="sponsor-grid-divider"></div>
+    #endif
+    
+    #if(count(goldSponsors) > 0):
     <p class="sponsor-grid-subhead">Gold sponsors</p>
     <div class="sponsor-grid">
+        #for(sponsor in goldSponsors):
         <div class="sponsor">
-            <a href="https://www.mkodo.com/s/careers" target="_blank"><img src="img/mkodo.svg" class="sponsor-img"></a>
+            <a href="#(sponsor.url)" target="_blank"><img src="https://swift-leeds.s3.eu-west-2.amazonaws.com/#(sponsor.image)" class="sponsor-img"></a>
         </div>
-        <div class="sponsor">
-            <a href="https://www.and.digital/join/open-roles" target="_blank"><img src="img/and.svg" class="sponsor-img"></a>
-        </div>
-        <div class="sponsor">
-            <a href="https://www.xdesign.com/" target="_blank"><img src="img/xdesign.png" class="sponsor-img"></a>
-        </div>
-        <div class="sponsor">
-          <a href="https://www.bitrise.io/" target="_blank"><img src="img/bitrise.svg" class="sponsor-img"></a>
-        </div>
+        #endfor
     </div>
+    #endif
+    
+    #if(count(goldSponsors) > 0 && count(silverSponsors) > 0):
+    <div class="sponsor-grid-divider"></div>
+    #endif
+    
+    #if(count(silverSponsors) > 0):
+    <p class="sponsor-grid-subhead">Silver sponsors</p>
+    <div class="sponsor-grid">
+        #for(sponsor in silverSponsors):
+        <div class="sponsor">
+            <a href="#(sponsor.url)" target="_blank"><img src="https://swift-leeds.s3.eu-west-2.amazonaws.com/#(sponsor.image)" class="sponsor-img"></a>
+        </div>
+        #endfor
+    </div>
+    #endif
 </div>

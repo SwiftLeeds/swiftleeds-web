@@ -1,0 +1,16 @@
+<h1>Sponsors</h1>
+<ul class="list-group">
+    #for(sponsor in sponsors):
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            #(sponsor.name) - #capitalized(sponsor.sponsorLevel)
+            <span class="badge badge-primary badge-pill">
+                <a href="#">🗑</a>
+                &nbsp
+                <a href="/admin/sponsors/#(sponsor.id)">✏️</a>
+            </span>
+        </li>
+    #endfor
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="/admin/sponsors">Add new sponsor</a>
+    </li>
+</ul>
