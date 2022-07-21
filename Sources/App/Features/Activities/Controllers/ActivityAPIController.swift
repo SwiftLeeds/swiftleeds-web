@@ -9,6 +9,9 @@ struct ActivityAPIController: RouteCollection {
         let subtitle: String?
         let description: String?
         let metadataURL: String?
+    }
+
+    struct ImageUpload: Content {
         var activityImage: File
     }
 
@@ -19,14 +22,15 @@ struct ActivityAPIController: RouteCollection {
 
     private func onPost(request: Request) async throws -> Response {
         let input = try request.content.decode(FormInput.self)
+        let image = try request.content.decode(ImageUpload.self)
 
         guard let event = try await Event.find(.init(uuidString: input.eventID), on: request.db) else {
             return request.redirect(to: "/admin")
         }
 
         // Image upload
-        let data =  Data(input.activityImage.data.readableBytesView)
-        let filename = "\(input.activityImage.filename)-\(UUID.generateRandom().uuidString)"
+        let data =  Data(image.activityImage.data.readableBytesView)
+        let filename = "\(image.activityImage.filename)-\(UUID.generateRandom().uuidString)"
 
         let putObjectRequest = S3.PutObjectRequest(acl: .publicRead,
                                                    body: data,
@@ -38,7 +42,7 @@ struct ActivityAPIController: RouteCollection {
                     secretAccessKey: Environment.get("S3_SECRET")!,
                     region: .euwest2
         )
-        let response = s3.putObject(putObjectRequest)
+        let response = try s3.putObject(putObjectRequest).wait()
 
         // Model
 
@@ -60,6 +64,7 @@ struct ActivityAPIController: RouteCollection {
 
     private func onEdit(request: Request) async throws -> Response {
         let input = try request.content.decode(FormInput.self)
+        let image = try request.content.decode(ImageUpload.self)
 
         guard let event = try await Event.find(.init(uuidString: input.eventID), on: request.db) else {
             return request.redirect(to: "/admin?page=activities")
@@ -70,8 +75,8 @@ struct ActivityAPIController: RouteCollection {
         }
 
         // Image upload
-        let data =  Data(input.activityImage.data.readableBytesView)
-        let filename = "\(input.activityImage.filename)-\(UUID.generateRandom().uuidString)"
+        let data =  Data(image.activityImage.data.readableBytesView)
+        let filename = "\(image.activityImage.filename)-\(UUID.generateRandom().uuidString)"
 
         let putObjectRequest = S3.PutObjectRequest(acl: .publicRead,
                                                    body: data,
@@ -83,7 +88,7 @@ struct ActivityAPIController: RouteCollection {
                     secretAccessKey: Environment.get("S3_SECRET")!,
                     region: .euwest2
         )
-        let response = s3.putObject(putObjectRequest)
+        let response = try s3.putObject(putObjectRequest).wait()
 
         // Model
 
