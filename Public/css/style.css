@@ -583,6 +583,12 @@ ul.tickets li a {
     object-fit: contain;
 }
 
+.sponsor-thumbnail-img {
+    height: 200px;
+    aspect-ratio: 1.8;
+    object-fit: contain;
+}
+
 .sponsor-grid-divider {
     width: 100%;
     height: 1px;
