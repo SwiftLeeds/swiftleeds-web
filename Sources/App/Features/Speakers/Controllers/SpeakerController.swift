@@ -38,7 +38,7 @@ struct SpeakerController: RouteCollection {
                     secretAccessKey: Environment.get("S3_SECRET")!,
                     region: .euwest2
         )
-        let response = s3.putObject(putObjectRequest)
+        let response = try s3.putObject(putObjectRequest).wait()
         speaker.profileImage = filename
         
         try await speaker.save(on: request.db)

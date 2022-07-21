@@ -42,7 +42,7 @@ struct ActivityAPIController: RouteCollection {
                     secretAccessKey: Environment.get("S3_SECRET")!,
                     region: .euwest2
         )
-        let response = s3.putObject(putObjectRequest)
+        let response = try s3.putObject(putObjectRequest).wait()
 
         // Model
 
@@ -88,7 +88,7 @@ struct ActivityAPIController: RouteCollection {
                     secretAccessKey: Environment.get("S3_SECRET")!,
                     region: .euwest2
         )
-        let response = s3.putObject(putObjectRequest)
+        let response = try s3.putObject(putObjectRequest).wait()
 
         // Model
 
