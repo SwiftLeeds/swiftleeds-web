@@ -1,6 +1,19 @@
 <h1>Sponsors</h1>
+
 <ul class="list-group">
-    #for(sponsor in sponsors):
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="/admin/sponsors">Add new sponsor</a>
+    </li>
+</ul>
+
+</br>
+
+<ul class="list-group">
+    <li class="list-group-item list-group-item-secondary disabled d-flex justify-content-between align-items-center">
+        Platinum Sponsors
+    </li>
+    #if(count(platinumSponsors) > 0):
+        #for(sponsor in platinumSponsors):
         <li class="list-group-item d-flex justify-content-between align-items-center">
             #(sponsor.name) - #capitalized(sponsor.sponsorLevel)
             <span class="badge badge-primary badge-pill">
@@ -9,8 +22,58 @@
                 <a href="/admin/sponsors/#(sponsor.id)">✏️</a>
             </span>
         </li>
-    #endfor
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-        <a href="/admin/sponsors">Add new sponsor</a>
+        #endfor
+    #else:
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            No platinum sponsors set
+        </li>
+    #endif
+</ul>
+
+</br>
+
+<ul class="list-group">
+    <li class="list-group-item list-group-item-secondary disabled d-flex justify-content-between align-items-center">
+        Gold Sponsors
     </li>
+    #if(count(goldSponsors) > 0):
+        #for(sponsor in goldSponsors):
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            #(sponsor.name) - #capitalized(sponsor.sponsorLevel)
+            <span class="badge badge-primary badge-pill">
+                <a href="#">🗑</a>
+                &nbsp
+                <a href="/admin/sponsors/#(sponsor.id)">✏️</a>
+            </span>
+        </li>
+        #endfor
+    #else:
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            No gold sponsors set
+        </li>
+    #endif
+</ul>
+
+</br>
+
+<ul class="list-group">
+    <li class="list-group-item list-group-item-secondary disabled d-flex justify-content-between align-items-center">
+        Silver Sponsors
+    </li>
+    #if(count(silverSponsors) > 0):
+        #for(sponsor in silverSponsors):
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            #(sponsor.name) - #capitalized(sponsor.sponsorLevel)
+            <span class="badge badge-primary badge-pill">
+                <a href="#">🗑</a>
+                &nbsp
+                <a href="/admin/sponsors/#(sponsor.id)">✏️</a>
+            </span>
+        </li>
+        #endfor
+    #else:
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            No silver sponsors set
+        </li>
+    #endif
 </ul>

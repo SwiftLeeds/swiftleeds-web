@@ -26,7 +26,7 @@ struct SpeakerController: RouteCollection {
         let speaker = try request.content.decode(Speaker.self)
         let image = try request.content.decode(ImageUpload.self)
         
-        let filename = "\(image.profileImage.filename)-\(UUID.generateRandom().uuidString)"
+        let fileName = "\(image.profileImage.filename)-\(UUID.generateRandom().uuidString)"
 
         do {
             try await ImageService.uploadFile(
@@ -37,7 +37,7 @@ struct SpeakerController: RouteCollection {
             return request.redirect(to: "/admin")
         }
         
-        speaker.profileImage = filename
+        speaker.profileImage = fileName
         
         try await speaker.save(on: request.db)
         

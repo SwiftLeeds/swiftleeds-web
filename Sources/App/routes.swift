@@ -86,7 +86,14 @@ func routes(_ app: Application) throws {
         let events = try await Event.query(on: request.db).all()
         let slots = try await Slot.query(on: request.db).with(\.$presentation).with(\.$activity).all()
         let activities = try await Activity.query(on: request.db).all()
-        let sponsors = try await Sponsor.query(on: request.db).all()
+        
+        // There might be a better way to handle this, but Leaf templates don't
+        // support dictionaries holding arrays,
+        // e.g [.gold: [sponsor, sponsor], .platinum: [sponsor, sponsor]]
+        let sponsorQuery = try await Sponsor.query(on: request.db).all()
+        let platinumSponsors = sponsorQuery.filter { $0.sponsorLevel == .platinum }
+        let silverSponsors = sponsorQuery.filter { $0.sponsorLevel == .silver }
+        let goldSponsors = sponsorQuery.filter { $0.sponsorLevel == .gold }
         
         return try await request.view.render(
             "Admin/home",
@@ -96,7 +103,9 @@ func routes(_ app: Application) throws {
                 events: events,
                 slots: slots,
                 activities: activities,
-                sponsors: sponsors,
+                platinumSponsors: platinumSponsors,
+                silverSponsors: silverSponsors,
+                goldSponsors: goldSponsors,
                 page: (query ?? PageQuery(page: "speakers")).page,
                 user: user
             )
@@ -119,7 +128,9 @@ struct AdminContext: Content {
     var events: [Event] = []
     var slots: [Slot] = []
     var activities: [Activity] = []
-    var sponsors: [Sponsor] = []
+    var platinumSponsors: [Sponsor] = []
+    var silverSponsors: [Sponsor] = []
+    var goldSponsors: [Sponsor] = []
     var page: String
     var user: User
 }
