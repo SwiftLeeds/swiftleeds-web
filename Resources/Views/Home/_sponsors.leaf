@@ -10,7 +10,7 @@
     <div class="sponsor-grid platinum">
         #for(sponsor in platinumSponsors):
         <div class="sponsor">
-            <a href="#(sponsor.url)" target="_blank"><img src="https://swift-leeds.s3.eu-west-2.amazonaws.com/#(sponsor.image)" class="sponsor-img"></a>
+            <a href="#(sponsor.url)" target="_blank"><img src="https://swiftleeds-speakers.s3.eu-west-2.amazonaws.com/#(sponsor.image)" class="sponsor-img"></a>
         </div>
         #endfor
     </div>
@@ -25,7 +25,7 @@
     <div class="sponsor-grid">
         #for(sponsor in goldSponsors):
         <div class="sponsor">
-            <a href="#(sponsor.url)" target="_blank"><img src="https://swift-leeds.s3.eu-west-2.amazonaws.com/#(sponsor.image)" class="sponsor-img"></a>
+            <a href="#(sponsor.url)" target="_blank"><img src="https://swiftleeds-speakers.s3.eu-west-2.amazonaws.com/#(sponsor.image)" class="sponsor-img"></a>
         </div>
         #endfor
     </div>
@@ -40,7 +40,7 @@
     <div class="sponsor-grid">
         #for(sponsor in silverSponsors):
         <div class="sponsor">
-            <a href="#(sponsor.url)" target="_blank"><img src="https://swift-leeds.s3.eu-west-2.amazonaws.com/#(sponsor.image)" class="sponsor-img"></a>
+            <a href="#(sponsor.url)" target="_blank"><img src="https://swiftleeds-speakers.s3.eu-west-2.amazonaws.com/#(sponsor.image)" class="sponsor-img"></a>
         </div>
         #endfor
     </div>

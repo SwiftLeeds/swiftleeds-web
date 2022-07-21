@@ -24,7 +24,7 @@
         #for(speaker in speakers):
             <div class="speaker-grid-element">
                 <div class="speaker-grid-element-image-container">
-                    <img class="speaker-grid-element-image" src="https://swift-leeds.s3.eu-west-2.amazonaws.com/#(speaker.profileImage)"/>
+                    <img class="speaker-grid-element-image" src="https://swiftleeds-speakers.s3.eu-west-2.amazonaws.com/#(speaker.profileImage)"/>
                 </div>
                 <div class="speaker-grid-element-info">
                     #if(speaker.twitter):
