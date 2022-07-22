@@ -97,6 +97,7 @@ struct ActivityAPIController: RouteCollection {
         activity.subtitle = input.subtitle
         activity.description = input.description
         activity.metadataURL = input.metadataURL
+        activity.image = filename
 
         activity.$event.id = try event.requireID()
 
