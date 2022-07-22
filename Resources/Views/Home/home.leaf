@@ -47,8 +47,10 @@
     #extend("Home/_location")
     <br />
     #extend("Home/_previous-conferences")
-    <br/>
-    #extend("Home/_sponsors")
+    #if(count(platinumSponsors) > 0 || count(goldSponsors) > 0 || count(silverSponsors) > 0):
+        <br/>
+        #extend("Home/_sponsors")
+    #endif
   </div>
   
   #extend("Shared/_footer")

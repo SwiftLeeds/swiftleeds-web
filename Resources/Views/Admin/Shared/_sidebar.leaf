@@ -29,6 +29,11 @@
           Events
         </a>
       </li>
+    <li>
+        <a href="/admin?page=sponsors" class="nav-link link-dark">
+          Sponsors
+        </a>
+      </li>
     </ul>
     <hr>
     <div class="dropdown">

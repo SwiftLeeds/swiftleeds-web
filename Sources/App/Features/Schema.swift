@@ -26,4 +26,8 @@ enum Schema {
     static var activity: String {
         return "activity"
     }
+    
+    static var sponsor: String {
+        return "sponsors"
+    }
 }

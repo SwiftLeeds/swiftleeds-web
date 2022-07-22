@@ -20,6 +20,8 @@
                         #extend("Admin/events")
                     #elseif(page == "slots"):
                         #extend("Admin/slots")
+                    #elseif(page == "sponsors"):
+                        #extend("Admin/sponsors")
                     #endif
                 </div>
             </div>
