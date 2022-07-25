@@ -12,6 +12,15 @@ enum SpeakerTransformer: Transformer {
         guard let entity = entity else {
             return nil
         }
+
+        let presentations: [PresentationResponse]
+
+        if let presentationEntities = entity.$presentations.value {
+            presentations = presentationEntities.compactMap(PresentationTransformer.transform(_:))
+        } else {
+            presentations = []
+        }
+
         return .init(
             id: entity.id,
             name: entity.name,
@@ -19,7 +28,7 @@ enum SpeakerTransformer: Transformer {
             profileImage: entity.profileImage,
             twitter: entity.twitter,
             organisation: entity.organisation,
-            presentations: entity.presentations.compactMap(PresentationTransformer.transform)
+            presentations: presentations
         )
     }
 }

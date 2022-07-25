@@ -12,12 +12,28 @@ enum SlotTransformer: Transformer {
         guard let slot = entity else {
             return nil
         }
+
+        let presentation: PresentationResponse?
+        let activity: ActivityResponse?
+
+        if let presentationEntity = slot.$presentation.value {
+            presentation = PresentationTransformer.transform(presentationEntity)
+        } else {
+            presentation = nil
+        }
+
+        if let activityEntity = slot.$activity.value {
+            activity = ActivityTransformer.transform(activityEntity)
+        } else {
+            activity = nil
+        }
+
         return .init(
             id: slot.id,
             startTime: slotDateFormatter.date(from: slot.startDate),
             duration: slot.duration,
-            presentation: PresentationTransformer.transform(slot.presentation),
-            activity: ActivityTransformer.transform(slot.activity)
+            presentation: presentation,
+            activity: activity
         )
     }
 }

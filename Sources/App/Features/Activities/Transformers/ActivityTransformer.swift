@@ -16,7 +16,7 @@ enum ActivityTransformer: Transformer {
             id: entity.id,
             title: entity.title,
             subtitle: entity.subtitle,
-            description: entity.description,
+            description: entity.$description.wrappedValue ?? "", // Avoid name conflict with description
             metadataURL: entity.metadataURL,
             image: entity.image
         )

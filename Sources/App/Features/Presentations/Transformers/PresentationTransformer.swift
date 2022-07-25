@@ -12,12 +12,21 @@ enum PresentationTransformer: Transformer {
         guard let entity = entity else {
             return nil
         }
+
+        let speaker: SpeakerResponse?
+
+        if let speakerEntity = entity.$speaker.value {
+            speaker = SpeakerTransformer.transform(speakerEntity)
+        } else {
+            speaker = nil
+        }
+
         return PresentationResponse(
             id: entity.id,
             title: entity.title,
             synopsis: entity.synopsis,
             image: entity.image,
-            speaker: SpeakerTransformer.transform(entity.speaker)
+            speaker: speaker
         )
     }
 }
