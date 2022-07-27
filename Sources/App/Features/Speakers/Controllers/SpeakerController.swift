@@ -26,22 +26,21 @@ struct SpeakerController: RouteCollection {
         let speaker = try request.content.decode(Speaker.self)
         let image = try request.content.decode(ImageUpload.self)
         
-        let data =  Data(image.profileImage.data.readableBytesView)
-        let filename = "\(image.profileImage.filename)-\(UUID.generateRandom().uuidString)"
-        let putObjectRequest = S3.PutObjectRequest(acl: .publicRead,
-                                                   body: data,
-                                                   bucket: "swiftleeds-speakers",
-                                                   contentLength: Int64(data.count),
-                                                   key: filename
-        )
-        let s3 = S3(accessKeyId: Environment.get("S3_KEY")!,
-                    secretAccessKey: Environment.get("S3_SECRET")!,
-                    region: .euwest2
-        )
-        let response = try s3.putObject(putObjectRequest).wait()
-        speaker.profileImage = filename
+        let fileName = "\(image.profileImage.filename)-\(UUID.generateRandom().uuidString)"
+
+        do {
+            try await ImageService.uploadFile(
+                data: Data(image.profileImage.data.readableBytesView),
+                filename: fileName
+            )
+        } catch {
+            return request.redirect(to: "/admin")
+        }
+        
+        speaker.profileImage = fileName
         
         try await speaker.save(on: request.db)
+        
         return request.redirect(to: "/admin?page=speakers")
     }
     

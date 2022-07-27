@@ -34,7 +34,7 @@ struct ActivityAPIController: RouteCollection {
 
         let putObjectRequest = S3.PutObjectRequest(acl: .publicRead,
                                                    body: data,
-                                                   bucket: "swiftleeds-speakers",
+                                                   bucket: Environment.get("S3_BUCKET_NAME")!,
                                                    contentLength: Int64(data.count),
                                                    key: filename
         )
@@ -80,7 +80,7 @@ struct ActivityAPIController: RouteCollection {
 
         let putObjectRequest = S3.PutObjectRequest(acl: .publicRead,
                                                    body: data,
-                                                   bucket: "swiftleeds-speakers",
+                                                   bucket: Environment.get("S3_BUCKET_NAME")!,
                                                    contentLength: Int64(data.count),
                                                    key: filename
         )

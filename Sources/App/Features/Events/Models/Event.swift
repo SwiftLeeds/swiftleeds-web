@@ -29,6 +29,9 @@ final class Event: Model, Content {
     
     @Children(for: \.$event)
     var presentations: [Presentation]
+
+    @Children(for: \.$event)
+    var slots: [Slot]
     
     init() { }
 }
