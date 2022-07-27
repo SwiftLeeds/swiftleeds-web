@@ -70,6 +70,7 @@ func routes(_ app: Application) throws {
     try apiRoutes.grouped("slots").register(collection: SlotAPIController())
     try apiRoutes.grouped("activities").register(collection: ActivityAPIController())
     try apiRoutes.grouped("sponsors").register(collection: SponsorAPIController())
+    try apiRoutes.grouped("schedule").register(collection: ScheduleAPIController())
 
     // MARK: - Admin Routes
     
