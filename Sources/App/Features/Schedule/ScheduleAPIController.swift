@@ -29,10 +29,11 @@ struct ScheduleAPIController: RouteCollection {
             })
             .first()
 
-        var data = (eventWithSlots?.slots.compactMap(SlotTransformer.transform) ?? [])
-        data.sort(using: KeyPathComparator(\.startTime, order: .forward))
+        let data = (eventWithSlots?.slots.compactMap(SlotTransformer.transform) ?? [])
         return try await GenericResponse(
-            data: data
+            data: data.sorted(by: {
+                $0.startTime ?? Date() < $1.startTime ?? Date()
+            })
         ).encodeResponse(for: request)
     }
 }
