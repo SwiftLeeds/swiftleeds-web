@@ -23,7 +23,7 @@
         The venue is situated near the major <a href="https://wymetro.com/buses/bus-stations/leeds-city-bus-station/">bus station</a>, so a bus is also an option but this is for local travel around Leeds or surrounding areas only. The venue The Playhouse is situated on the eastern side of the city, and is walking distance to all that Leeds has to offer.
         <br />
         <br />
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#recommendedHotels">
+        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#recommendedHotels">
         Recommended Hotels
         </button>
         </p>
