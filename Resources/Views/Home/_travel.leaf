@@ -1,0 +1,120 @@
+<div class="row">
+    <div class="col-sm-5 col-md-3 col-lg-2">
+        <h2 id="about">
+            Travel<br/>
+            to Leeds
+        </h2>
+    </div>
+
+    <div class="col-sm-7 col-md-9 col-lg-10">
+        <p>
+        Leeds is one of the biggest cities in the UK, it contributes a major part of the UK economy with a huge technology presence. Leeds, has some of the biggest technology companies across the UK and is hugely accessible. Leeds is situated in the North Eastarn part of the UK.
+        <br />
+        <br />
+        Leeds has an <a href="https://www.leedsbradfordairport.co.uk/">International Airport</a> which is approx 15 minutes from the city centre by car.
+        <br />
+        <br />
+        If you're travelling from outside the UK, you're likely going to fly in to <a href="https://www.manchesterairport.co.uk/">Manchester</a> or Leeds, if you're flying to Leeds your best onward travel is via local taxi which can take you directly to the city, and will cost you approximately £20. If you're travelling into Manchester, you can either take the Train which will have direct trains to Leeds City and will take approx 1hr.
+        <br />
+        <br />
+        If you're travelling inside the UK, you can take the train to our huge <a href="https://www.networkrail.co.uk/communities/passengers/our-stations/leeds-station/">railway station</a> and the venue is approx 15 minute walk from the station, alternatively you could hop in a taxi which will take 5 minutes.
+        <br />
+        <br />
+        The venue is situated near the major <a href="https://wymetro.com/buses/bus-stations/leeds-city-bus-station/">bus station</a>, so a bus is also an option but this is for local travel around Leeds or surrounding areas only. The venue The Playhouse is situated on the eastern side of the city, and is walking distance to all that Leeds has to offer.
+        <br />
+        <br />
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#recommendedHotels">
+        Recommended Hotels
+        </button>
+        </p>
+    </div>
+</div>
+
+<!-- Recommended Hotels Modal -->
+<div class="modal fade" id="recommendedHotels" tabindex="-1" aria-labelledby="recommendedHotelsLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="recommendedHotelsLabel">Recommended Hotels</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        We have tracked down the best hotels located around the venue, there are of course many options when staying inside Leeds, but if you want to get closer to the venue, you can use one of the listed hotels below. We have also added some notes to each one, they're all with varying star rating and costs.
+        <br />
+        <br />
+        <div class="alert alert-secondary" role="alert">
+            Please note; we are not associated or directly involved with any recommended hotel and we ask you also do your own research before booking.
+        </div>
+        <br />
+        <br />
+        
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Hotel Name</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Average Price</th>
+      <th scope="col">Website</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="../img/hotels/holiday-inn.jpeg" class="img-thumbnail" width="180" height="180"></td>
+      <td>Holiday Inn Express</td>
+      <td>3*</td>
+      <td>£70</td>
+      <td><a href="https://www.booking.com/hotel/gb/express-by-holiday-inn-leeds-armouries.en-gb.html" target="_blank">Visit Website</a></td>
+    </tr>
+    <tr>
+      <td><img src="../img/hotels/radissonblu.jpeg" class="img-thumbnail" width="180" height="180"></td>
+      <td>Radisson Blu Hotel</td>
+      <td>4*</td>
+      <td>£100</td>
+      <td><a href="https://www.booking.com/hotel/gb/radissonleeds.en-gb.html" target="_blank">Visit Website</a></td>
+    </tr>
+    <tr>
+      <td><img src="../img/hotels/queenshotel.jpeg" class="img-thumbnail" width="180" height="180"></td>
+      <td>The Queens Hotel</td>
+      <td>4*</td>
+      <td>£100</td>
+      <td><a href="https://www.booking.com/hotel/gb/the-queens.en-gb.html" target="_blank">Visit Website</a></td>
+    </tr>
+    <tr>
+      <td><img src="../img/hotels/dakota.jpeg" class="img-thumbnail" width="180" height="180"></td>
+      <td>Dakota Leeds</td>
+      <td>5*</td>
+      <td>£140</td>
+      <td><a href="https://www.booking.com/hotel/gb/dakota-leeds.en-gb.html" target="_blank">Visit Website</a></td>
+    </tr>
+    <tr>
+      <td><img src="../img/hotels/vicarlane.jpeg" class="img-thumbnail" width="180" height="180"></td>
+      <td>Travelodge Vicar Lane</td>
+      <td>2*</td>
+      <td>£40</td>
+      <td><a href="https://www.travelodge.co.uk/hotels/323/Leeds-Central-Vicar-Lane-hotel" target="_blank">Visit Website</a></td>
+    </tr>
+    <tr>
+      <td><img src="../img/hotels/ibishotel.jpeg" class="img-thumbnail" width="180" height="180"></td>
+      <td>Ibis Crown Point</td>
+      <td>2*</td>
+      <td>£40</td>
+      <td><a href="https://www.booking.com/hotel/gb/etap-leeds.en-gb.html" target="_blank">Visit Website</a></td>
+    </tr>
+    <tr>
+      <td><img src="../img/hotels/hampton.jpeg" class="img-thumbnail" width="180" height="180"></td>
+      <td>Hampton by Hilton Leeds</td>
+      <td>3*</td>
+      <td>£70</td>
+      <td><a href="https://www.booking.com/hotel/gb/etap-leeds.en-gb.html" target="_blank">Visit Website</a></td>
+    </tr>
+  </tbody>
+</table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
