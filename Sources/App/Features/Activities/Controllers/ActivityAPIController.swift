@@ -42,6 +42,7 @@ struct ActivityAPIController: RouteCollection {
                     secretAccessKey: Environment.get("S3_SECRET")!,
                     region: .euwest2
         )
+
         let response = try s3.putObject(putObjectRequest).wait()
 
         // Model
@@ -75,29 +76,28 @@ struct ActivityAPIController: RouteCollection {
         }
 
         // Image upload
-        let data =  Data(image.activityImage.data.readableBytesView)
-        let filename = "\(image.activityImage.filename)-\(UUID.generateRandom().uuidString)"
+        var fileName = activity.image
 
-        let putObjectRequest = S3.PutObjectRequest(acl: .publicRead,
-                                                   body: data,
-                                                   bucket: Environment.get("S3_BUCKET_NAME")!,
-                                                   contentLength: Int64(data.count),
-                                                   key: filename
-        )
-        let s3 = S3(accessKeyId: Environment.get("S3_KEY")!,
-                    secretAccessKey: Environment.get("S3_SECRET")!,
-                    region: .euwest2
-        )
-        let response = try s3.putObject(putObjectRequest).wait()
+        if !image.activityImage.filename.isEmpty {
+            let tempFileName = "\(UUID.generateRandom().uuidString)-\(image.activityImage.filename)"
+
+            do {
+                try await ImageService.uploadFile(
+                    data: Data(image.activityImage.data.readableBytesView),
+                    filename: tempFileName
+                )
+                fileName = tempFileName
+            } catch {
+                return request.redirect(to: "/admin")
+            }
+        }
 
         // Model
-
-
         activity.title = input.title
         activity.subtitle = input.subtitle
         activity.description = input.description
         activity.metadataURL = input.metadataURL
-        activity.image = filename
+        activity.image = fileName
 
         activity.$event.id = try event.requireID()
 
