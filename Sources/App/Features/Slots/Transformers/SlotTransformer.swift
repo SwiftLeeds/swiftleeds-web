@@ -30,18 +30,10 @@ enum SlotTransformer: Transformer {
 
         return .init(
             id: slot.id,
-            startTime: slotDateFormatter.date(from: slot.startDate),
+            startTime: slot.startDate,
             duration: slot.duration,
             presentation: presentation,
             activity: activity
         )
-    }
-}
-
-private extension SlotTransformer {
-    private static var slotDateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        return formatter
     }
 }

@@ -30,10 +30,13 @@ struct ScheduleAPIController: RouteCollection {
             .first()
 
         let data = (eventWithSlots?.slots.compactMap(SlotTransformer.transform) ?? [])
-        return try await GenericResponse(
+
+        let response = GenericResponse(
             data: data.sorted(by: {
-                $0.startTime ?? Date() < $1.startTime ?? Date()
+                $0.startTime ?? "" < $1.startTime ?? ""
             })
-        ).encodeResponse(for: request)
+        )
+        
+        return try await response.encodeResponse(for: request)
     }
 }
