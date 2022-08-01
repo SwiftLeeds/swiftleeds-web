@@ -29,21 +29,19 @@ struct ActivityAPIController: RouteCollection {
         }
 
         // Image upload
-        let data =  Data(image.activityImage.data.readableBytesView)
-        let filename = "\(image.activityImage.filename)-\(UUID.generateRandom().uuidString)"
+        var fileName = "\(UUID.generateRandom().uuidString)-\(image.activityImage.filename)"
 
-        let putObjectRequest = S3.PutObjectRequest(acl: .publicRead,
-                                                   body: data,
-                                                   bucket: Environment.get("S3_BUCKET_NAME")!,
-                                                   contentLength: Int64(data.count),
-                                                   key: filename
-        )
-        let s3 = S3(accessKeyId: Environment.get("S3_KEY")!,
-                    secretAccessKey: Environment.get("S3_SECRET")!,
-                    region: .euwest2
-        )
+        if !image.activityImage.filename.isEmpty {
 
-        let response = try s3.putObject(putObjectRequest).wait()
+            do {
+                try await ImageService.uploadFile(
+                    data: Data(image.activityImage.data.readableBytesView),
+                    filename: fileName
+                )
+            } catch {
+                return request.redirect(to: "/admin?page=activities")
+            }
+        }
 
         // Model
 
@@ -53,7 +51,7 @@ struct ActivityAPIController: RouteCollection {
             subtitle: input.subtitle,
             description: input.description,
             metadataURL: input.metadataURL,
-            image: filename
+            image: fileName
         )
 
         activity.$event.id = try event.requireID()
@@ -88,7 +86,7 @@ struct ActivityAPIController: RouteCollection {
                 )
                 fileName = tempFileName
             } catch {
-                return request.redirect(to: "/admin")
+                return request.redirect(to: "/admin?page=activities")
             }
         }
 

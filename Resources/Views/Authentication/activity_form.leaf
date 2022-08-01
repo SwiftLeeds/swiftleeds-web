@@ -47,6 +47,11 @@
                   <div class="mb-3">
                     <label for="formFile" class="form-label">Activity picture</label>
                     <input class="form-control" type="file" id="image" name="activityImage">
+                  #if(activity.image):
+                  </br>
+                  <p class="form-label">Existing activity image</p>
+                  <img src="https://swiftleeds-speakers.s3.eu-west-2.amazonaws.com/#(activity.image)" class="img-thumbnail sponsor-thumbnail-img">
+                  #endif
                   </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
