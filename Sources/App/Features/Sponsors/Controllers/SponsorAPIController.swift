@@ -36,16 +36,16 @@ struct SponsorAPIController: RouteCollection {
         }
         
         let fileName = "\(UUID.generateRandom().uuidString)-\(image.sponsorImage.filename)"
-//
-//        do {
-//            try await ImageService.uploadFile(
-//                data: Data(image.sponsorImage.data.readableBytesView),
-//                filename: fileName
-//            )
-//        } catch {
-//            return request.redirect(to: "/admin")
-//        }
-//
+
+        do {
+            try await ImageService.uploadFile(
+                data: Data(image.sponsorImage.data.readableBytesView),
+                filename: fileName
+            )
+        } catch {
+            return request.redirect(to: "/admin")
+        }
+
         guard let sponsorLevel = Sponsor.SponsorLevel(rawValue: input.sponsorLevel) else {
             return request.redirect(to: "/admin")
         }
