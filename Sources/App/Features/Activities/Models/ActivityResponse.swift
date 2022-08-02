@@ -9,7 +9,7 @@ import Foundation
 import Vapor
 
 struct ActivityResponse: Content {
-    let id: UUID?
+    let id: UUID
     let title: String
     let subtitle: String?
     let description: String?

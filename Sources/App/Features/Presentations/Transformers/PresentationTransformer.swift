@@ -9,9 +9,7 @@ import Foundation
 
 enum PresentationTransformer: Transformer {
     static func transform(_ entity: Presentation?) -> PresentationResponse? {
-        guard let entity = entity else {
-            return nil
-        }
+        guard let entity = entity, let id = entity.id else { return nil }
 
         let speaker: SpeakerResponse?
 
@@ -22,7 +20,7 @@ enum PresentationTransformer: Transformer {
         }
 
         return PresentationResponse(
-            id: entity.id,
+            id: id,
             title: entity.title,
             synopsis: entity.synopsis,
             image: entity.image,
