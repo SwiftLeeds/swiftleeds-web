@@ -19,6 +19,7 @@ struct SponsorAPIController: RouteCollection {
     }
     
     func boot(routes: RoutesBuilder) throws {
+        routes.get("", use: onGet)
         routes.post("", use: onPost)
         routes.post(":id", use: onEdit)
     }
@@ -35,7 +36,7 @@ struct SponsorAPIController: RouteCollection {
         }
         
         let fileName = "\(UUID.generateRandom().uuidString)-\(image.sponsorImage.filename)"
-        
+
         do {
             try await ImageService.uploadFile(
                 data: Data(image.sponsorImage.data.readableBytesView),
@@ -44,7 +45,7 @@ struct SponsorAPIController: RouteCollection {
         } catch {
             return request.redirect(to: "/admin")
         }
-        
+
         guard let sponsorLevel = Sponsor.SponsorLevel(rawValue: input.sponsorLevel) else {
             return request.redirect(to: "/admin")
         }
@@ -112,5 +113,12 @@ struct SponsorAPIController: RouteCollection {
         try await sponsor.update(on: request.db)
         
         return request.redirect(to: "/admin?page=sponsors")
+    }
+
+    private func onGet(request: Request) async throws -> Response {
+        let allSponsors = try await Sponsor.query(on: request.db).all()
+        return try await GenericResponse(
+            data: allSponsors.compactMap(SponsorTransformer.transform(_:))
+        ).encodeResponse(for: request)
     }
 }
