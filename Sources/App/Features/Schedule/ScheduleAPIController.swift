@@ -29,14 +29,25 @@ struct ScheduleAPIController: RouteCollection {
             })
             .first()
 
-        let data = (eventWithSlots?.slots.compactMap(SlotTransformer.transform) ?? [])
+        guard let event = eventWithSlots else {
+            throw ScheduleAPIError.notFound
+        }
+
+        guard let schedule = ScheduleTransformer.transform(event: event, slots: event.slots) else {
+            throw ScheduleAPIError.transformFailure
+        }
 
         let response = GenericResponse(
-            data: data.sorted(by: {
-                $0.startTime ?? "" < $1.startTime ?? ""
-            })
+            data: schedule
         )
         
         return try await response.encodeResponse(for: request)
+    }
+}
+
+private extension ScheduleAPIController {
+    enum ScheduleAPIError: Error {
+        case notFound
+        case transformFailure
     }
 }
