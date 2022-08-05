@@ -29,7 +29,7 @@ struct ActivityAPIController: RouteCollection {
         }
 
         // Image upload
-        var fileName = "\(UUID.generateRandom().uuidString)-\(image.activityImage.filename)"
+        let fileName = "\(UUID.generateRandom().uuidString)-\(image.activityImage.filename)"
 
         if !image.activityImage.filename.isEmpty {
 
