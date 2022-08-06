@@ -17,8 +17,8 @@ final class Location: Codable, Model, Content {
     @Field(key: "lat")
     var lat: Double
 
-    @Field(key: "long")
-    var long: Double
+    @Field(key: "lon")
+    var lon: Double
 
     @Field(key: "url")
     var url: String

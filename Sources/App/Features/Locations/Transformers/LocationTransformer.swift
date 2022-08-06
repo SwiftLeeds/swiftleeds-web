@@ -10,7 +10,7 @@ enum LocationTransformer: Transformer {
             id: id,
             name: entity.name,
             lat: entity.lat,
-            long: entity.long,
+            lon: entity.lon,
             url: entity.url
         )
     }

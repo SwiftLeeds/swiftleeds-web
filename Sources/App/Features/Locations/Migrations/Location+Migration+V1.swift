@@ -9,7 +9,7 @@ class LocationMigrationV1: AsyncMigration {
              .field("name", .string, .required)
              .field("url", .string, .required)
              .field("lat", .double, .required)
-             .field("long", .double, .required)
+             .field("lon", .double, .required)
              .field("category_id", .uuid, .references(
                 Schema.locationCategory, "id", onDelete: .setNull, onUpdate: .cascade
              ))
