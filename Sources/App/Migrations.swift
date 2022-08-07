@@ -40,6 +40,10 @@ class Migrations {
         // Session Record Migrations
         
         app.migrations.add(SessionRecord.migration)
+
+        // Location migrations
+        app.migrations.add(LocationCategoryMigrationV1())
+        app.migrations.add(LocationMigrationV1())
         
         do {
             struct DatabaseError: Error {}
