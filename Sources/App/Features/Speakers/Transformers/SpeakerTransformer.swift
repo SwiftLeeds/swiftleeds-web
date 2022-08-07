@@ -25,7 +25,7 @@ enum SpeakerTransformer: Transformer {
             id: entity.id,
             name: entity.name,
             biography: entity.biography,
-            profileImage: entity.profileImage,
+            profileImage: ImageTransformer.transform(imageURL: entity.profileImage),
             twitter: entity.twitter,
             organisation: entity.organisation,
             presentations: presentations
