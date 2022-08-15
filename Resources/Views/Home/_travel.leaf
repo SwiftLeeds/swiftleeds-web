@@ -26,6 +26,13 @@
         <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#recommendedHotels">
         Recommended Hotels
         </button>
+        <br />
+        <br />
+        <button type="button" class="btn btn-danger">
+        <a href="/pdf/Leeds_Playhouse.pdf" download rel="noopener noreferrer" target="_blank" style="text-decoration:none; color:white;">
+            Download Venue Pack
+        </a>
+        </button>
         </p>
     </div>
 </div>
