@@ -443,12 +443,6 @@ ul.tickets li a {
     background-color: rgba(255, 126, 7, 0.4);
 }
 
-.dual-speaker-image-container > img {
-    width: 48%;
-    height: 100%;
-    display: inline-block;
-}
-
 .speaker-grid-element-info { 
   display: inline-block;
   padding-left: 20px;
