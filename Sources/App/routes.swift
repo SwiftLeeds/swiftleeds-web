@@ -24,11 +24,19 @@ func routes(_ app: Application) throws {
             let slots = try await Slot.query(on: req.db)
                 .with(\.$activity)
                 .with(\.$presentation, { presentation in
-                    presentation.with(\.$speaker)
+                    presentation
+                        .with(\.$speaker)
+                        .with(\.$secondSpeaker)
                 })
                 .sort(\.$startDate)
                 .all()
-    
+
+
+            slots.forEach { slot in
+                print(slot.presentation?.speaker)
+                print(slot.presentation?.secondSpeaker)
+            }
+
             return try await req.view.render("Home/home", HomeContext(
                 speakers: speakers,
                 cfpEnabled: cfpExpirationDate > Date(),
@@ -73,6 +81,10 @@ func routes(_ app: Application) throws {
     try apiRoutes.grouped("schedule").register(collection: ScheduleAPIController())
     try apiRoutes.grouped("local").register(collection: LocalAPIController())
 
+    let apiTwoRoutes = app.grouped("api", "v2")
+
+    try apiTwoRoutes.grouped("schedule").register(collection: ScheduleAPIControllerV2())
+
     // MARK: - Admin Routes
     
     let adminRoutes = app.grouped("admin")
@@ -84,7 +96,10 @@ func routes(_ app: Application) throws {
         
         let query = try? request.query.decode(PageQuery.self)
         let speakers = try await Speaker.query(on: request.db).with(\.$presentations).all()
-        let presentations = try await Presentation.query(on: request.db).with(\.$speaker).all()
+        let presentations = try await Presentation.query(on: request.db)
+            .with(\.$speaker)
+            .with(\.$secondSpeaker)
+            .all()
         let events = try await Event.query(on: request.db).all()
         let slots = try await Slot.query(on: request.db).with(\.$presentation).with(\.$activity).all()
         let activities = try await Activity.query(on: request.db).all()
@@ -96,7 +111,7 @@ func routes(_ app: Application) throws {
         let platinumSponsors = sponsorQuery.filter { $0.sponsorLevel == .platinum }
         let silverSponsors = sponsorQuery.filter { $0.sponsorLevel == .silver }
         let goldSponsors = sponsorQuery.filter { $0.sponsorLevel == .gold }
-        
+
         return try await request.view.render(
             "Admin/home",
             AdminContext(

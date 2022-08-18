@@ -41,7 +41,14 @@
           
             <div class="col-md-4">
                 #if(slot.presentation):
+                    #if(slot.presentation.secondSpeaker):
+                    <div class="dual-speaker-image-container">
                     <img class="speaker-grid-element-image" src="https://swiftleeds-speakers.s3.eu-west-2.amazonaws.com/#(slot.presentation.speaker.profileImage)"/>
+                    <img class="speaker-grid-element-image" src="https://swiftleeds-speakers.s3.eu-west-2.amazonaws.com/#(slot.presentation.secondSpeaker.profileImage)"/>
+                    </div>
+                    #else:
+                    <img class="speaker-grid-element-image" src="https://swiftleeds-speakers.s3.eu-west-2.amazonaws.com/#(slot.presentation.speaker.profileImage)"/>
+                    #endif
                 #elseif(slot.activity):
                     <img class="speaker-grid-element-image" src="https://swiftleeds-speakers.s3.eu-west-2.amazonaws.com/#(slot.activity.image)"/>
                 #endif
@@ -59,6 +66,10 @@
               <br />
                 #if(slot.presentation):
                     <strong>#(slot.presentation.speaker.name)</strong> / #(slot.presentation.speaker.organisation)
+                    <br />
+                    #if(slot.presentation.secondSpeaker):
+                    <strong>#(slot.presentation.secondSpeaker.name)</strong> / #(slot.presentation.secondSpeaker.organisation)
+                    #endif
                 #endif
             </div>
             </div>

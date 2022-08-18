@@ -2,7 +2,11 @@
 <ul class="list-group">
     #for(presentation in presentations):
         <li class="list-group-item d-flex justify-content-between align-items-center">
+            #if(presentation.secondSpeaker):
+            "#(presentation.title)" by #(presentation.speaker.name), #(presentation.secondSpeaker.name)
+            #else:
             "#(presentation.title)" by #(presentation.speaker.name)
+            #endif
             <span class="badge badge-primary badge-pill">
                 <a href="#">🗑</a>
                 &nbsp

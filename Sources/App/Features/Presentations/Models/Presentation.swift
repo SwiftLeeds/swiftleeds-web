@@ -31,6 +31,9 @@ final class Presentation: Model, Content {
     
     @Parent(key: "speaker_id")
     var speaker: Speaker
+
+    @OptionalParent(key: "speaker_two_id")
+    var secondSpeaker: Speaker?
     
     @Parent(key: "event_id")
     public var event: Event

@@ -23,10 +23,3 @@ struct LocalAPIController: RouteCollection {
         return try await response.encodeResponse(for: request)
     }
 }
-
-private extension ScheduleAPIController {
-    enum ScheduleAPIError: Error {
-        case notFound
-        case transformFailure
-    }
-}
