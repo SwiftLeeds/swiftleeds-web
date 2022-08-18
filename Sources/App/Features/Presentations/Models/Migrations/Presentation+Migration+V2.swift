@@ -9,7 +9,7 @@ class PresentationMigrationV2: AsyncMigration {
     }
 
     func revert(on database: Database) async throws {
-        try await database.schema(Schema.activity)
+        try await database.schema(Schema.presentation)
             .deleteField("speaker_two_id")
             .update()
     }
