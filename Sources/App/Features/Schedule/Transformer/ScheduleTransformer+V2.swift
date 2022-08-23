@@ -1,6 +1,6 @@
 //
-//  ScheduleTransformer.swift
-//  
+//  ScheduleTransformer+V2.swift
+//
 //
 //  Created by Alex Logan on 02/08/2022.
 //
@@ -8,12 +8,12 @@
 import Foundation
 
 // A unique transformer as it doesn't actually represent an entity
-enum ScheduleTransformer {
-    static func transform(event: Event, slots: [Slot]) -> ScheduleResponse? {
+enum ScheduleTransformerV2 {
+    static func transform(event: Event, slots: [Slot]) -> ScheduleResponseV2? {
         guard let eventResponse = EventTransformer.transform(event) else { return nil }
-        return ScheduleResponse(
+        return ScheduleResponseV2(
             event: eventResponse,
-            slots: slots.compactMap(SlotTransformer.transform(_:)).sorted(by: {
+            slots: slots.compactMap(SlotTransformerV2.transform(_:)).sorted(by: {
                 $0.startTime < $1.startTime
             })
         )

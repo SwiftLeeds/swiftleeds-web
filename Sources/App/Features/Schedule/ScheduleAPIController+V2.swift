@@ -1,15 +1,14 @@
 //
-//  ScheduleAPIController.swift
-//  
+//  ScheduleAPIController+V2.swift
 //
-//  Created by Alex Logan on 25/07/2022.
+//
+//  Created by Alex Logan on 18/08/2022.
 //
 
 import Vapor
 import Fluent
 
-
-struct ScheduleAPIController: RouteCollection {
+struct ScheduleAPIControllerV2: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         routes.get("", use: onGet)
     }
@@ -23,30 +22,23 @@ struct ScheduleAPIController: RouteCollection {
                 slots
                     .with(\.$activity)
                     .with(\.$presentation, { presentation in
-                        presentation.with(\.$speaker)
+                        presentation.with(\.$speaker).with(\.$secondSpeaker)
                     })
             })
             .first()
 
         guard let event = eventWithSlots else {
-            throw ScheduleAPIError.notFound
+            throw ScheduleAPIController.ScheduleAPIError.notFound
         }
 
-        guard let schedule = ScheduleTransformer.transform(event: event, slots: event.slots) else {
-            throw ScheduleAPIError.transformFailure
+        guard let schedule = ScheduleTransformerV2.transform(event: event, slots: event.slots) else {
+            throw ScheduleAPIController.ScheduleAPIError.transformFailure
         }
 
         let response = GenericResponse(
             data: schedule
         )
-        
-        return try await response.encodeResponse(for: request)
-    }
-}
 
-extension ScheduleAPIController {
-    enum ScheduleAPIError: Error {
-        case notFound
-        case transformFailure
+        return try await response.encodeResponse(for: request)
     }
 }

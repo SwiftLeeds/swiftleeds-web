@@ -14,6 +14,7 @@ struct PresentationViewController: RouteCollection {
         let presentation: Presentation?
         let speakers: [Speaker]
         let events: [Event]
+        let hasSecondSpeaker: Bool
     }
     
     func boot(routes: RoutesBuilder) throws {
@@ -28,7 +29,7 @@ struct PresentationViewController: RouteCollection {
         
         let speakers = try await Speaker.query(on: request.db).all()
         let events = try await Event.query(on: request.db).all()
-        let context = PresentationContext(presentation: nil, speakers: speakers, events: events)
+        let context = PresentationContext(presentation: nil, speakers: speakers, events: events, hasSecondSpeaker: false)
         
         return try await request.view.render("Authentication/presentation_form", context)
     }
@@ -41,10 +42,10 @@ struct PresentationViewController: RouteCollection {
         guard let presentation = try await Presentation.find(request.parameters.get("id"), on: request.db) else {
             throw Abort(.notFound)
         }
-        
+
         let speakers = try await Speaker.query(on: request.db).all()
         let events = try await Event.query(on: request.db).all()
-        let context = PresentationContext(presentation: presentation, speakers: speakers, events: events)
+        let context = PresentationContext(presentation: presentation, speakers: speakers, events: events, hasSecondSpeaker: presentation.$secondSpeaker.id != nil)
         
         return try await request.view.render("Authentication/presentation_form", context)
     }

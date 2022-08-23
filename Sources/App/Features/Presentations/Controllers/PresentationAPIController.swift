@@ -5,9 +5,11 @@ struct PresentationAPIController: RouteCollection {
     
     private struct FormInput: Content {
         let speakerID: String
+        let secondSpeakerID: String?
         let eventID: String
         let title: String
         let synopsis: String
+        let enableSecondSpeaker: Bool?
     }
     
     func boot(routes: RoutesBuilder) throws {
@@ -21,10 +23,11 @@ struct PresentationAPIController: RouteCollection {
         guard let speaker = try await Speaker.find(UUID(uuidString: input.speakerID), on: request.db) else {
             return request.redirect(to: "/admin")
         }
-        
+
         guard let event = try await Event.find(.init(uuidString: input.eventID), on: request.db) else {
             return request.redirect(to: "/admin")
         }
+
         
         let presentation = Presentation(
             id: .generateRandom(),
@@ -36,6 +39,15 @@ struct PresentationAPIController: RouteCollection {
         
         presentation.$speaker.id = try speaker.requireID()
         presentation.$event.id = try event.requireID()
+
+        if let secondSpeakerID = input.secondSpeakerID, (input.enableSecondSpeaker ?? false) {
+            guard let secondSpeaker = try await Speaker.find(UUID(uuidString: secondSpeakerID), on: request.db) else {
+                return request.redirect(to: "/admin")
+            }
+            presentation.$secondSpeaker.id = try secondSpeaker.requireID()
+        } else {
+            presentation.$secondSpeaker.id = nil
+        }
         
         try await presentation.create(on: request.db)
         
@@ -64,6 +76,15 @@ struct PresentationAPIController: RouteCollection {
         
         presentation.$speaker.id = try speaker.requireID()
         presentation.$event.id = try event.requireID()
+
+        if let secondSpeakerID = input.secondSpeakerID, (input.enableSecondSpeaker ?? false) {
+            guard let secondSpeaker = try await Speaker.find(UUID(uuidString: secondSpeakerID), on: request.db) else {
+                return request.redirect(to: "/admin")
+            }
+            presentation.$secondSpeaker.id = try secondSpeaker.requireID()
+        } else {
+            presentation.$secondSpeaker.id = nil
+        }
         
         try await presentation.update(on: request.db)
         

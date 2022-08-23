@@ -44,6 +44,10 @@ class Migrations {
         // Location migrations
         app.migrations.add(LocationCategoryMigrationV1())
         app.migrations.add(LocationMigrationV1())
+
+        // Dual Speaker Migrations
+
+        app.migrations.add(PresentationMigrationV2())
         
         do {
             struct DatabaseError: Error {}
