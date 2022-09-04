@@ -14,6 +14,7 @@ let package = Package(
         .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
         .package(name: "AWSSDKSwift", url: "https://github.com/swift-aws/aws-sdk-swift.git", from: "4.7.0"),
         .package(name: "LeafMarkdown", url: "https://github.com/vapor-community/leaf-markdown.git", .upToNextMajor(from: "3.0.0")),
+        .package(url: "https://github.com/vapor/apns.git", from: "1.0.0"),
     ],
     targets: [
         .target(
@@ -24,7 +25,8 @@ let package = Package(
                 .product(name: "Fluent", package: "fluent"),
                 .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
                 .product(name: "S3", package: "AWSSDKSwift"),
-                .product(name: "LeafMarkdown", package: "LeafMarkdown")
+                .product(name: "LeafMarkdown", package: "LeafMarkdown"),
+                .product(name: "APNS", package: "apns")
             ],
             swiftSettings: [
                 // Enable better optimizations when building in Release configuration. Despite the use of

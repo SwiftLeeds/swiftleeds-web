@@ -69,5 +69,8 @@ class Migrations {
         } catch {
             app.logger.error("Failed to migrate DB with error \(error)")
         }
+
+        // MARK: - Push
+        app.migrations.add(PushMigration())
     }
 }

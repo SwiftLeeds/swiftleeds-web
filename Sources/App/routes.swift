@@ -69,6 +69,8 @@ func routes(_ app: Application) throws {
     try app.routes.register(collection: AuthController()) // TODO: Split this out into web/api/admin
     try app.routes.register(collection: SpeakerController()) // TODO: Split this out into web/api/admin
     try app.routes.register(collection: EventsController()) // TODO: Split this out into web/api/admin
+
+    try app.routes.register(collection: PushController())
     
     // MARK: - API Routes
     
