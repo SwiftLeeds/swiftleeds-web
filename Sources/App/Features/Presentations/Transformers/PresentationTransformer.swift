@@ -24,7 +24,8 @@ enum PresentationTransformer: Transformer {
             title: entity.title,
             synopsis: entity.synopsis,
             image: entity.image,
-            speaker: speaker
+            speaker: speaker,
+            slidoURL: entity.slidoURL
         )
     }
 }

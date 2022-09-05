@@ -46,8 +46,10 @@ class Migrations {
         app.migrations.add(LocationMigrationV1())
 
         // Dual Speaker Migrations
-
         app.migrations.add(PresentationMigrationV2())
+
+        // Addition of optional Slido URL
+        app.migrations.add(PresentationMigrationV3())
         
         do {
             struct DatabaseError: Error {}
