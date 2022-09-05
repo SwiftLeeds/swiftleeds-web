@@ -60,6 +60,10 @@
                   <label for="formFile" class="form-label">Presentation image</label>
                   <input class="form-control" type="file" id="image">
                 </div>
+                <div class="mb-3">
+                  <label for="slidoURL" class="form-label">Slido URL</label>
+                  <input value="#(presentation.slidoURL)" class="form-control" name="slidoURL" id="slidoURL">
+                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             <div class="col-6">

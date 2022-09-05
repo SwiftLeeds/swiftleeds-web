@@ -38,7 +38,7 @@
                 <select name="activityID" class="form-control activity">
                 <option disabled selected value> -- select an option -- </option>
                 #for(activity in activities):
-                  <option #if(activities.id == slot.activity.id): selected #endif id="activityID" name="activityID" value=#(activity.id)>
+                  <option #if(activity.id == slot.activity.id): selected #endif id="activityID" name="activityID" value=#(activity.id)>
                     #(activity.title) - #(activity.subtitle)
                   </option>
                 #endfor

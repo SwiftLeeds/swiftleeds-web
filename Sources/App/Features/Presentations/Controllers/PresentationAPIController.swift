@@ -10,10 +10,11 @@ struct PresentationAPIController: RouteCollection {
         let title: String
         let synopsis: String
         let enableSecondSpeaker: Bool?
+        let slidoURL: String?
     }
     
     func boot(routes: RoutesBuilder) throws {
-        routes.post("", use: onPost)
+        routes.post(use: onPost)
         routes.post(":id", use: onEdit)
     }
 
@@ -34,7 +35,8 @@ struct PresentationAPIController: RouteCollection {
             title: input.title,
             synopsis: input.synopsis,
             image: nil,
-            isTBA: false
+            isTBA: false,
+            slidoURL: input.slidoURL
         )
         
         presentation.$speaker.id = try speaker.requireID()
@@ -73,6 +75,7 @@ struct PresentationAPIController: RouteCollection {
         presentation.synopsis = input.synopsis
         presentation.image = nil
         presentation.isTBA = false
+        presentation.slidoURL = input.slidoURL
         
         presentation.$speaker.id = try speaker.requireID()
         presentation.$event.id = try event.requireID()

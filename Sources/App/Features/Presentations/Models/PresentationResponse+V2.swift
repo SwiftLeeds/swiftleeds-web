@@ -14,4 +14,5 @@ struct PresentationResponseV2: Content {
     let synopsis: String
     let image: String?
     var speakers: [SpeakerResponse] = []
+    let slidoURL: String?
 }
