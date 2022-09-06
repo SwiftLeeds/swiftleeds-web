@@ -25,12 +25,12 @@
                 </select>
                 <br/>
                 <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="enableSecondSpeaker" data-toggle="toggle">
+                <input type="checkbox" class="form-check-input" id="enableSecondSpeaker" data-toggle="toggle" checked="checked">
                 <label class="form-check-label" for="enableSecondSpeaker">Second Speaker</label>
                 </div>
                 <br>
                 <label for="secondSpeakerID" class="form-label secondSpeaker">Speaker Two</label>
-                <select name="secondSpeakerID" class="form-control secondSpeaker">
+                <select id="secondSpeakerSelect" name="secondSpeakerID" class="form-control secondSpeaker">
                 #for(speaker in speakers):
                   <option #if(speaker.id == presentation.secondSpeaker.id): selected #endif id="secondSpeakerID" name="secondSpeakerID" value=#(speaker.id)>
                     #(speaker.name)
@@ -75,10 +75,12 @@
                 window.EventDate = date;
             }
             function updateForSecondSpeaker(enabled) {
-                console.log(enabled)
                 if (enabled) {
                     $(".secondSpeaker").show();
                 } else {
+                    $("#secondSpeakerSelect").find('option').each(function( index ) {
+                        $(this).attr("selected", false);
+                    });
                     $(".secondSpeaker").hide();
                 }
             }

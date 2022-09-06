@@ -9,7 +9,6 @@ struct PresentationAPIController: RouteCollection {
         let eventID: String
         let title: String
         let synopsis: String
-        let enableSecondSpeaker: Bool?
         let slidoURL: String?
     }
     
@@ -42,7 +41,7 @@ struct PresentationAPIController: RouteCollection {
         presentation.$speaker.id = try speaker.requireID()
         presentation.$event.id = try event.requireID()
 
-        if let secondSpeakerID = input.secondSpeakerID, (input.enableSecondSpeaker ?? false) {
+        if let secondSpeakerID = input.secondSpeakerID {
             guard let secondSpeaker = try await Speaker.find(UUID(uuidString: secondSpeakerID), on: request.db) else {
                 return request.redirect(to: "/admin")
             }
@@ -80,7 +79,7 @@ struct PresentationAPIController: RouteCollection {
         presentation.$speaker.id = try speaker.requireID()
         presentation.$event.id = try event.requireID()
 
-        if let secondSpeakerID = input.secondSpeakerID, (input.enableSecondSpeaker ?? false) {
+        if let secondSpeakerID = input.secondSpeakerID {
             guard let secondSpeaker = try await Speaker.find(UUID(uuidString: secondSpeakerID), on: request.db) else {
                 return request.redirect(to: "/admin")
             }
