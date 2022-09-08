@@ -7,6 +7,10 @@ enum Schema {
         return "user_tokens"
     }
     
+    static var token: String {
+        return "tokens"
+    }
+    
     static var event: String {
         return "events"
     }
