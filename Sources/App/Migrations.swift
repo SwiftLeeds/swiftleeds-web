@@ -47,6 +47,9 @@ class Migrations {
 
         // Dual Speaker Migrations
         app.migrations.add(PresentationMigrationV2())
+        
+        // Add Push migrations
+        app.migrations.add(PushMigration())
 
         // Addition of optional Slido URL
         app.migrations.add(PresentationMigrationV3())
@@ -71,8 +74,5 @@ class Migrations {
         } catch {
             app.logger.error("Failed to migrate DB with error \(error)")
         }
-
-        // MARK: - Push
-        app.migrations.add(PushMigration())
     }
 }
