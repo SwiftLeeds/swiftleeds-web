@@ -38,4 +38,8 @@ enum Schema {
     static var locationCategory: String {
         return "locationCategories"
     }
+
+    static var tokens: String {
+        return "tokens"
+    }
 }

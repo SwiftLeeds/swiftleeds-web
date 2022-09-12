@@ -50,6 +50,10 @@ class Migrations {
 
         // Addition of optional Slido URL
         app.migrations.add(PresentationMigrationV3())
+
+        // MARK: - Push
+        app.migrations.add(PushMigration())
+        app.migrations.add(PushMigrationV2())
         
         do {
             struct DatabaseError: Error {}
@@ -71,8 +75,5 @@ class Migrations {
         } catch {
             app.logger.error("Failed to migrate DB with error \(error)")
         }
-
-        // MARK: - Push
-        app.migrations.add(PushMigration())
     }
 }
