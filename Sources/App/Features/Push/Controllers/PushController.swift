@@ -11,7 +11,17 @@ struct PushController: RouteCollection {
 
     private func create(req: Request) async throws -> Token {
         let token = try req.content.decode(Token.self)
-        try await token.save(on: req.db)
+
+        // Either store or update the token value
+        if let storedToken = try await Token.query(on: req.db)
+            .filter(\.$token == token.token)
+            .first() {
+            storedToken.debug = token.debug
+            try await storedToken.save(on: req.db)
+        } else {
+            try await token.save(on: req.db)
+        }
+
         return token
     }
 
@@ -25,7 +35,6 @@ struct PushController: RouteCollection {
         guard
             let token = try await Token.query(on: req.db)
                 .filter(\.$token == tokenID)
-                .filter(\.$debug == true)
                 .first()
         else { return .notFound }
 

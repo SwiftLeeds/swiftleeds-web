@@ -13,6 +13,9 @@ final class Token: Model, Content {
     @Field(key: "debug")
     var debug: Bool
 
+    @Timestamp(key: "updated_at", on: .update, format: .iso8601)
+    var updatedAt: Date?
+
     init() {}
 
     init(id: UUID? = nil, token: String, debug: Bool) {
