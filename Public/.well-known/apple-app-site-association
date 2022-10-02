@@ -1,0 +1,16 @@
+{
+    "appclips": {
+        "apps": [
+            "K33K6V7FBA.uk.co.swiftleeds.SwiftLeeds.Clip"
+        ]
+    },
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "K33K6V7FBA.uk.co.swiftleeds.SwiftLeeds",
+                "paths": [ "*", "/" ]
+            }
+        ]
+    }
+}

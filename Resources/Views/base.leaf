@@ -3,8 +3,10 @@
   <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="author" content="Swift Leeds"/>
+    <meta name="author" content="SwiftLeeds"/>
+    <meta name="apple-itunes-app" content="app-id=1595490143"/>
     <meta property="og:image" content="/img/logo.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">

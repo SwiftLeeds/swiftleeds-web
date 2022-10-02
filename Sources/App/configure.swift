@@ -3,20 +3,22 @@ import Leaf
 import LeafMarkdown
 import APNS
 
-// configures your application
 public func configure(_ app: Application) throws {
+    // Middleware
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
     app.middleware.use(app.sessions.middleware)
     app.middleware.use(User.sessionAuthenticator())
-    app.routes.defaultMaxBodySize = "10mb"
-    app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
+
+    // Leaf
     app.leaf.tags["dateFormat"] = NowTag()
     app.leaf.tags["markdown"] = Markdown()
-
-    // Use Leaf
     app.views.use(.leaf)
 
+    // Migrations
     try Migrations.migrate(app)
+
+    // Routes
+    app.routes.defaultMaxBodySize = "10mb"
     try routes(app)
 
     // APNS
