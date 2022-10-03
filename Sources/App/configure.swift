@@ -5,6 +5,7 @@ import APNS
 
 public func configure(_ app: Application) throws {
     // Middleware
+    app.middleware.use(AppleAppSiteAssociationMiddleware())
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
     app.middleware.use(app.sessions.middleware)
     app.middleware.use(User.sessionAuthenticator())
