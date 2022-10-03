@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="author" content="SwiftLeeds"/>
-    <meta name="apple-itunes-app" content="app-id=1595490143"/>
+    <meta name="apple-itunes-app" content="app-id=1595490143, app-clip-bundle-id=uk.co.swiftleeds.SwiftLeeds.Clip, app-clip-display=card"/>
     <meta property="og:image" content="/img/logo.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
