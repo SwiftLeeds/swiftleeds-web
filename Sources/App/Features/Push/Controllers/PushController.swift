@@ -7,6 +7,7 @@ struct PushController: RouteCollection {
         let push = routes.grouped("push")
         push.post(use: create)
         push.post("testNotification", use: testNotification)
+        push.post("sendNotification", use: sendNotification)
     }
 
     private func create(req: Request) async throws -> Token {
@@ -40,6 +41,27 @@ struct PushController: RouteCollection {
 
         let alert = APNSwiftAlert(title: "SwiftLeeds Rocks!", body: "Push is working 🚀")
         _ = req.apns.send(alert, to: token.token)
+
+        return .noContent
+    }
+
+    private func sendNotification(req: Request) async throws -> HTTPStatus {
+        struct SendNotificationRequest: Decodable {
+            let message: String
+            let securityCode: String
+        }
+
+        let notificationRequest = try req.content.decode(SendNotificationRequest.self)
+        let secretSecurityCode = Environment.get("PUSH_SECURITY_CODE")
+
+        guard notificationRequest.securityCode == secretSecurityCode else { throw Abort(.forbidden) }
+
+        let tokens = try await Token.query(on: req.db).all()
+        let alert = APNSwiftAlert(title: "SwiftLeeds", body: notificationRequest.message)
+
+        tokens.forEach { token in
+            _ = req.apns.send(alert, to: token.token)
+        }
 
         return .noContent
     }
