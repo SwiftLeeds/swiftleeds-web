@@ -35,7 +35,7 @@
                   #if(sponsor.image):
                   </br>
                   <p class="form-label">Existing sponsor image</p>
-                  <img src="https://swiftleeds-speakers.s3.eu-west-2.amazonaws.com/#(sponsor.image)" class="img-thumbnail sponsor-thumbnail-img">
+                  <img src="#awsImage(sponsor.image)" class="img-thumbnail sponsor-thumbnail-img">
                   #endif
                 </div>
                 <div class="mb-3">
