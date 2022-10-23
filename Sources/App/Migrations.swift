@@ -10,35 +10,27 @@ class Migrations {
         app.migrations.add(UserMigrationV1())
         
         // User Token Migrations
-        
         app.migrations.add(UserTokenMigrationV1())
         
         // Event Migrations
-        
         app.migrations.add(EventMigrationV1())
         
         // Speaker Migrations
-        
         app.migrations.add(SpeakerMigrationV1())
 
         // Presentation Migrations
-        
         app.migrations.add(PresentationMigrationV1())
 
         // Activity Migrations
-
         app.migrations.add(ActivityMigrationV1())
 
         // Slots Migrations
-
         app.migrations.add(SlotMigrationV1())
         
         // Sponsors Migrations
-        
         app.migrations.add(SponsorMigrationV1())
 
         // Session Record Migrations
-        
         app.migrations.add(SessionRecord.migration)
 
         // Location migrations
@@ -51,7 +43,7 @@ class Migrations {
         // Addition of optional Slido URL
         app.migrations.add(PresentationMigrationV3())
 
-        // MARK: - Push
+        // Push notification tokens
         app.migrations.add(PushMigration())
         app.migrations.add(PushMigrationV2())
         
