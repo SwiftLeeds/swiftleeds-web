@@ -90,3 +90,9 @@ In order for Xcode to know where the Leaf files are stored, you must set your wo
 That should be everything! If you've followed these steps, you should now be able to run the 'swift-leeds' scheme in Xcode. This will output a message reading "Server starting on http://127.0.0.1:8080".
 
 If the application fails to load then we recommend following these steps again to make sure you haven't missed something. Otherwise, feel free to raise a GitHub Issue or contact us on the Slack (links above) and we'll help you to get started.
+
+### (Optional) Seed Database
+
+In order to quickly get started, we've produced some "seed data" which inserts mock information into the database. Assuming you've used the database details documented above, it's as easy as running `make seed` from your Terminal window.
+
+You can then navigate to http://127.0.0.1:8080/login and use the email "test@test.com" and password "12345678" to enter the admin area. The admin area is available at http://127.0.0.1:8080/login (once logged in) and will give you the ability to insert your own sessions, speakers and more.

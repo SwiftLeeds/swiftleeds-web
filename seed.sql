@@ -1,0 +1,2 @@
+INSERT INTO "users" ("id", "name", "password_hash", "email", "user_role") 
+VALUES ('7fd44e3e-44e9-4f5d-b440-74e99710a060', 'Test', '$2b$12$vjV9QYnEa/CtXovhSH9GnecpN5ddJWfRr6j747puqzFDeqUbBVNzC', 'test@test.com', 'admin');
