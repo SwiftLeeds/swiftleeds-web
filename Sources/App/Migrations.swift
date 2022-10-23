@@ -48,13 +48,10 @@ class Migrations {
         app.migrations.add(PushMigrationV2())
         
         do {
-            struct DatabaseError: Error {}
-            
             guard var postgresConfig = PostgresConfiguration(url: Application.db) else {
-                throw DatabaseError()
+                throw Abort(.internalServerError, reason: "Invalid PostgreSQL connection URL provided")
             }
             
-            postgresConfig.tlsConfiguration = .makeClientConfiguration()
             postgresConfig.tlsConfiguration?.certificateVerification = .none
             
             app.databases.use(.postgres(configuration: postgresConfig), as: .psql)
