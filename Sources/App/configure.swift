@@ -24,8 +24,9 @@ public func configure(_ app: Application) throws {
 
     // APNS
     if
-        let ecodedKey = Environment.get("P8_CERTIFICATE"),
-        let data = Data(base64Encoded: ecodedKey),
+        let encodedKey = Environment.get("P8_CERTIFICATE"),
+        encodedKey.isEmpty == false,
+        let data = Data(base64Encoded: encodedKey),
         let p8Key = String(data: data, encoding: .utf8)
     {
         let apnsEnvironment: APNSwiftConfiguration.Environment = app.environment == .production ? .production : .sandbox
