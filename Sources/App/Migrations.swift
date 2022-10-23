@@ -48,7 +48,11 @@ class Migrations {
         app.migrations.add(PushMigrationV2())
         
         do {
-            guard var postgresConfig = PostgresConfiguration(url: Application.db) else {
+            guard let url = Environment.get("DATABASE_URL") else {
+                throw Abort(.internalServerError, reason: "Missing 'DATABASE_URL' environment variable")
+            }
+
+            guard var postgresConfig = PostgresConfiguration(url: url) else {
                 throw Abort(.internalServerError, reason: "Invalid PostgreSQL connection URL provided")
             }
             

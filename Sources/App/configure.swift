@@ -34,7 +34,3 @@ public func configure(_ app: Application) throws {
         app.apns.configuration = .init(authenticationMethod: auth, topic: "uk.co.swiftleeds.SwiftLeeds", environment: apnsEnvironment)
     }
 }
-
-extension Application {
-    static let db = Environment.get("DATABASE_URL")!
-}
