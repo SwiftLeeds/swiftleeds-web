@@ -67,7 +67,7 @@ You are welcome to provide your own database name, username and password - modif
 
 Once those commands have been executed, your database is now setup! 🚀
 
-### 3. Environment Variables
+### 3. Environment Variables
 
 Vapor, along with many server frameworks, uses 'dot env' files to store environment variables for our application to use at runtime. You'll see that we have a file called `.env.development` - these are variables which our local environment is able to use.
 
