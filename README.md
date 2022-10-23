@@ -66,6 +66,12 @@ vapor run migrate
 
 You'll likely need to press Y when prompted. 
 
+### Leaf
+
+SwiftLeeds is using Leaf to build the frontend part of the website. These `Views` live within the Resources/Views folder of the project structure.
+
+It's worth noting that to run this in development you will need to set your custom directory in the active scheme on Xcode. You can read about it [here](https://docs.vapor.codes/4.0/xcode/#custom-working-directory).
+
 ### 🚀 Ready to develop
 
 That's it! You're ready to rock and roll. You should now see the following in your Xcode terminal
@@ -75,12 +81,6 @@ That's it! You're ready to rock and roll. You should now see the following in yo
 ```
 
 If you have any issues, please reach out with an issue or via the Slack channel. 
-
-## Leaf
-
-SwiftLeeds is using Leaf to build the frontend part of the website. These `Views` live within the Resources/Views folder of the project structure.
-
-It's worth noting that to run this in development you will need to set your custom directory in the active scheme on Xcode. You can read about it [here](https://docs.vapor.codes/4.0/xcode/#custom-working-directory).
 
 ## Contributing 🏗
 
