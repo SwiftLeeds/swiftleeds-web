@@ -1,4 +1,9 @@
-<p align="center"><img width=70% src="https://github.com/SwiftLeeds/swiftleeds-web/blob/main/media/swift-leeds-horizontal.png"></p>
+<p align="center">
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="./media/swift-leeds-horizontal-dark.png">
+        <img alt="The Swift Leeds logo showing two swift birds to the left of the text 'Swift Leeds'" src="./media/swift-leeds-horizontal.png">
+    </picture>
+</p>
 
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
