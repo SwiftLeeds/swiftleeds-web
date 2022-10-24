@@ -1,9 +1,12 @@
+TRUNCATE TABLE "users" CASCADE;
 INSERT INTO "users" ("id", "name", "password_hash", "email", "user_role") VALUES 
 ('7fd44e3e-44e9-4f5d-b440-74e99710a060', 'Test', '$2b$12$vjV9QYnEa/CtXovhSH9GnecpN5ddJWfRr6j747puqzFDeqUbBVNzC', 'test@test.com', 'admin');
 
+TRUNCATE TABLE "events" CASCADE;
 INSERT INTO "events" ("id", "name", "event_date", "location") VALUES
 ('005a548b-9ebe-4742-8de5-8a37acaabab8', 'SwiftLeeds 2022', '2022-10-20', 'The Playhouse, Leeds');
 
+TRUNCATE TABLE "sponsors" CASCADE;
 INSERT INTO "sponsors" ("id", "name", "image", "url", "sponsor_level", "event_id") VALUES
 ('14b78287-6fed-4f1a-af56-b15abfff619b', 'RevenueCat', '1B6DDD64-3DCE-46BD-9EFB-75444654ADBE-revenuecat-logo-red.png', 'https://www.revenuecat.com/', 'gold', '005a548b-9ebe-4742-8de5-8a37acaabab8'),
 ('3e77790c-9af5-4974-bf3c-9e6de79fb714', 'Bitrise', '806F78F2-734A-439A-838E-0B814894BFBD-bitrise.png', 'https://www.bitrise.io/', 'gold', '005a548b-9ebe-4742-8de5-8a37acaabab8'),
@@ -13,6 +16,7 @@ INSERT INTO "sponsors" ("id", "name", "image", "url", "sponsor_level", "event_id
 ('c4948a85-96a1-47c2-9628-108e05cabec4', 'mkodo', '632CCBD3-1E2B-47A6-98D3-F3BAF6EDB641-mkodo.png', 'https://www.mkodo.com/s/careers', 'gold', '005a548b-9ebe-4742-8de5-8a37acaabab8'),
 ('c648a09f-2bed-475f-8100-9bc9d2b14c9c', 'Codemagic', '0216EFFD-EFEA-4325-880C-CB74B1B16264-codemagic.png', 'https://codemagic.io/', 'platinum', '005a548b-9ebe-4742-8de5-8a37acaabab8');
 
+TRUNCATE TABLE "speakers" CASCADE;
 INSERT INTO "speakers" ("id", "name", "biography", "twitter", "organisation", "profile_image") VALUES
 ('019064d6-1f2f-4e3b-9243-831309a12030', 'Ibrahima Ciss', 'UI Designer converted to iOS Software Engineer. Love exploring iOS APIs and sharing my discoveries. Love everything about software design, testing, app architecture, and accessibility.', 'bionik6', 'iOS Consultant', '3bcb-0o0o0-YSidXenfoC6NqUT72UYZxk.jpeg-E57870EC-AF67-40B5-9129-F50F8B3CC937'),
 ('0373fc98-50d9-428c-a87d-bb012d5f9d29', 'Florian Schweizer', 'My name is Florian Schweizer, but I am probably better known as “Flo writes Code”, which is the name of my Twitter and Youtube accounts - places where I share what I have learned, how my indie development efforts are going and other things related to Apple platform development. \n\nFunnily enough, I have never been to a conference (of any type, really) myself, but both Jordi Bruin and Peter Friese have mentioned me in their talks over the past year. While submitting this proposal I am still working on my master’s thesis in Informatics: Games Engineering, which is about the social impact on children and adolescents of an AR iOS game that I have developed over the last year.', 'FloWritesCode', 'Flowritesco.de', 'a2a4-0o0o0-awzqF1dNUjg3839Hfhn696.jpeg-D0E76C3D-6F98-4669-9E71-B978AB8BBFD1'),
@@ -25,7 +29,8 @@ INSERT INTO "speakers" ("id", "name", "biography", "twitter", "organisation", "p
 ('f6957656-03d0-42c0-8b90-b424d3e13bac', 'Aviel Gross', 'I am working as an iOS engineer since 2013. In 2017 I started working at Facebook (Meta) and in March 2021 I moved to work at Adobe. I now lead the Behance iOS app at Adobe.', 'avielgr', 'Bēhance, Adobe', '0737-0o0o0-MJ9uuKpZGvd26aiShLes28.jpeg-0778BC3B-0A6B-43C8-85DB-A6F54BB97105'),
 ('ff672e21-c27d-44da-84aa-e9a368eae29e', 'Donny Wals', 'I am a passionate, iOS developer that loves learning and sharing knowledge. I started doing iOS roughly when Swift was announced and immediately fell in love with it. I wrote three books on iOS development for a publisher and self-published books on Combine and Core Data.', 'donnywals', 'DonnyWals.com', 'jOaeQ1Og_400x400.jpeg-AEAB9C2A-9572-4E6A-A63E-C3534EE5C321');
 
-INSERT INTO "public"."slots" ("id", "start_date", "duration", "event_id") VALUES
+TRUNCATE TABLE "slots" CASCADE;
+INSERT INTO "slots" ("id", "start_date", "duration", "event_id") VALUES
 ('032782bd-0985-40f1-8f27-1c21b8253884', '15:20', 30, '005a548b-9ebe-4742-8de5-8a37acaabab8'),
 ('12fe25cd-a131-4415-b1b4-672ba5dc2a9c', '14:00', 40, '005a548b-9ebe-4742-8de5-8a37acaabab8'),
 ('19fd48d9-06eb-4a84-80e0-7645365b7aa5', '09:20', 20, '005a548b-9ebe-4742-8de5-8a37acaabab8'),
@@ -41,6 +46,7 @@ INSERT INTO "public"."slots" ("id", "start_date", "duration", "event_id") VALUES
 ('ce03ade2-ffb7-4b55-ac25-0395e869b1d0', '11:00', 30, '005a548b-9ebe-4742-8de5-8a37acaabab8'),
 ('ffdf8fe1-fee3-45f0-b0a3-b414d766bd25', '08:30', 30, '005a548b-9ebe-4742-8de5-8a37acaabab8');
 
+TRUNCATE TABLE "activity" CASCADE;
 INSERT INTO "activity" ("id", "title", "subtitle", "description", "url", "image", "event_id", "slot_id") VALUES
 ('1a128d61-930e-4d1b-935d-8153c99810cc', 'Refreshment Break ☕️', 'You might like to drink ☕️ or 🫖', 'It''s time to take a well-deserved break; there will be coffee, tea, water and more. You can take time to network, meet new people or relax and absorb all that information you have listened to.', '', 'IMG_1257%202.JPG-C5948967-9B86-4993-9EA1-E89624F1AA7A', '005a548b-9ebe-4742-8de5-8a37acaabab8', '032782bd-0985-40f1-8f27-1c21b8253884'),
 ('7603ab5a-e816-4fbc-a838-d104eca9fcbb', 'Introduction to SwiftLeeds', 'A welcome introduction from your SwiftLeeds host, Adam Rush!', 'Adam Rush will be hosting this year''s SwiftLeeds and will be welcoming you all in true SwiftLeeds fashion. Adam will try to be funny at times and really inject lots of motivation, ready for some fantastic talks ahead.', '', 'adam.jpg-A5B77EEF-07F8-4EB9-A160-795CB42D814E', '005a548b-9ebe-4742-8de5-8a37acaabab8', '19fd48d9-06eb-4a84-80e0-7645365b7aa5'),
@@ -48,6 +54,7 @@ INSERT INTO "activity" ("id", "title", "subtitle", "description", "url", "image"
 ('bca02346-6fe5-49bc-bdfa-4b66fb6adda9', 'Registration', 'Time to check in 🎟', 'The doors at The Playhouse will open prompt at 8:30 AM and it''s time to register and collect your things. Please bring along your QR code ticket for prompt entry and nothing else is required. The SwiftLeeds team will greet you along with a fresh breakfast to start the day.', '', '3893D677-2CA2-4BD5-AE1D-F9F69CE85139-LP_BuildingProgress_Aug2019-7-David-Lindsay-Photographer-scaled.jpeg', '005a548b-9ebe-4742-8de5-8a37acaabab8', 'ffdf8fe1-fee3-45f0-b0a3-b414d766bd25'),
 ('f4fb0c62-b3c8-4c46-bdc4-7fdadc71861d', 'Lunch 🍕', 'It''s time for some well deserved food', 'We have partnered with the venue to provide us with handmade food. The venue has an incredible chef who will produce food to cater to everyone. They have access to a stone-baked pizza oven to provide fresh pizza slices and handmade buffet food with a vast selection. Don''t forget your handmade brownie or Bakewell slice 😋', '', 'IMG_6298.jpg-93D1F0E2-6F47-4149-944B-FB824EFB2549', '005a548b-9ebe-4742-8de5-8a37acaabab8', 'cc8af7bb-9403-4ae1-9735-1bb702c7d403');
 
+TRUNCATE TABLE "presentations" CASCADE;
 INSERT INTO "presentations" ("id", "title", "synopsis", "speaker_id", "event_id", "image", "is_tba", "slot_id", "speaker_two_id", "slido_url") VALUES
 ('262c1083-ba7d-49b5-b1dc-60cd917396c8', 'Building (and testing) custom property wrappers for SwiftUI', 'In this talk, you will learn everything you need to know about using DynamicProperty to build custom property wrappers that integrate with SwiftUI’s view lifecycle and environment beautifully. And more importantly, you will learn how you can write unit tests for your custom property wrappers as well.', 'ff672e21-c27d-44da-84aa-e9a368eae29e', '005a548b-9ebe-4742-8de5-8a37acaabab8', NULL, 'f', '3229d814-7d86-4ad3-9eda-2f08029b8369', NULL, 'https://app.sli.do/event/kUqN77GxRVR9Tu1QYbwTe8'),
 ('45cfd91e-2945-4c5e-9c20-58f298f76298', 'SwiftUI Performance for Demanding Apps', 'SwiftUI is powerful and flexible, but sometimes confusing. Things like modifiers order, inline views, `body` complexity, and POD views, can all seriously affect our performance. In this talk, we will learn the best ways to use SwiftUI for resource-heavy and dynamic UIs, while maintaining the golden 60fps.\n\nIn 2022, we (Adobe Bēhance) rebuilt our navigation infra, and our main Feed, in SwiftUI. We also insisted the app must run great on the worst phone we support - iPhone 6S Plus. Getting there was a journey.\n\nWe will start by comparing SwiftUI to UIKit: We know there’s no more `View Controller`, and views are mere “function of their state”, but what does it mean?\nNext, we will dive into specific scenarios and see how this new way of thinking is critical for achieving great performance. We will learn things like:\n\n- Avoiding redundant view diffing\n- Controlling view update lifecycle\n- How to “hide” complex states to improve performance\n- Avoiding SwiftUI’s pitfalls, like nested publishers and iOS 14 vs 15 behaviour\n- And more…\n', 'f6957656-03d0-42c0-8b90-b424d3e13bac', '005a548b-9ebe-4742-8de5-8a37acaabab8', NULL, 'f', 'a3a16d1c-4ef4-460d-a3b8-076d2053568d', NULL, 'https://app.sli.do/event/15gNhA8ht2f26apL82JSTK'),
@@ -59,6 +66,7 @@ INSERT INTO "presentations" ("id", "title", "synopsis", "speaker_id", "event_id"
 ('c0ffddcf-c148-4d1b-8cc5-4efa3e705327', 'Testing Asynchronous Code in Swift 5.5', 'Swift''s modern concurrency APIs allow for greater flexibility and future-proofing in unit testing. \r\n\r\nIn this session, I will demonstrate how we updated our unit testing strategy as we adopted `async`/`await` in our Combine-based applications at Urban Outfitters.\r\n\r\nAdditionally, I will demonstrate how to use `AsyncStream` to mock networking calls, how to update Combine tests with `AsyncSequence`, and how to optimize tests by implementing Task functions and phasing out `waitForExpectations`.', '06d1ecb6-f714-4d3a-8ceb-7f5817930218', '005a548b-9ebe-4742-8de5-8a37acaabab8', NULL, 'f', '5acc3d3e-62e7-4168-8659-d09e76529036', NULL, 'https://app.sli.do/event/i4ovARujc5DK72vKnmzKJM'),
 ('f298d006-52d7-4cf9-8d9e-147e58e20753', 'Modularization Techniques: from Monolithic to Multi Packages App', 'Designing for modularity can be pretty challenging, especially if we didn''t start earlier in the process. This can lead to longer build time, tightly coupled code, and hard to maintain, extend and test your app. \n\nIn this talk, I''ll show you how to design your app in a loosely-coupled way and then break your monolithic app into independent modules via Swift Package Manager, each doing precisely just one thing.', '019064d6-1f2f-4e3b-9243-831309a12030', '005a548b-9ebe-4742-8de5-8a37acaabab8', NULL, 'f', '96b03d1f-14b8-445b-9c21-7b0dfe662313', NULL, 'https://app.sli.do/event/7RKA8rn98qhGhLwHTte944');
 
+TRUNCATE TABLE "locationCategories" CASCADE;
 INSERT INTO "locationCategories" ("id", "name", "symbol_name") VALUES
 ('D5B5B6C9-D1BF-4B33-B77D-29C5C1DDB560', 'SwiftLeeds', 'building.2.fill'),
 ('0E46F4B7-0844-4C5B-8457-16A8C966BF58', 'Places to Work', 'laptopcomputer'),
@@ -67,15 +75,31 @@ INSERT INTO "locationCategories" ("id", "name", "symbol_name") VALUES
 ('3327F9D0-B38B-4743-8EE0-F3188ABA60D7', 'Drinking Spots', 'wineglass.fill'),
 ('DD19C880-1723-4AF2-8005-B4CEFFCBD6E2', 'Coffee', 'cup.and.saucer.fill');
 
+TRUNCATE TABLE "locations" CASCADE;
 INSERT INTO "locations" ("id", "name", "url", "lat", "lon", "category_id") VALUES
+('8b423641-3d9b-45c5-b785-0187eaa401a1', 'Wizu Workspace', 'http://www.wizuworkspace.com/the-leeming-building', 53.799173655248964, -1.5401714417101833, '0e46f4b7-0844-4c5b-8457-16a8c966bf58'),
+('b24a7c31-ed7f-4b53-9d21-dbd15c3f4d7f', 'Victoria Leeds', 'http://www.victorialeeds.co.uk/', 53.79818232029677, -1.5405197760056504, '3087653e-e10e-41c8-b321-d16a68fa9a88'),
+('85843a21-d18f-4261-a52b-c59d7098316f', 'Trinity Leeds', 'http://www.trinityleeds.com/', 53.79679603071404, -1.5440971686466118, '3087653e-e10e-41c8-b321-d16a68fa9a88'),
+('ac471e53-c120-4fe2-8965-1d6585d20e78', 'Trinity Kitchen', 'https://trinityleeds.com/shops/trinity-kitchen', 53.797378, -1.545209, '3078d29d-cd3c-4be6-ba3a-ae3ed0901335'),
 ('4064f003-4044-4f12-b48d-12c938cdb290', 'The Lost & Found', 'http://www.the-lostandfound.co.uk/restaurant/leeds-greek-street', 53.79843036094402, -1.5471689293777409, '3327f9d0-b38b-4743-8ee0-f3188aba60d7'),
 ('6317bb63-2742-4d74-8713-ad9e7ed9f654', 'The Alchemist', 'https://thealchemist.uk.com/menus/', 53.798701696550935, -1.5479613581811973, '3327f9d0-b38b-4743-8ee0-f3188aba60d7'),
+('8c02af4a-0466-4a5a-9ccb-2caf7f08bcbf', 'Tattu', 'http://tattu.co.uk/leeds/', 53.79824212814524, -1.54885001971015, '3078d29d-cd3c-4be6-ba3a-ae3ed0901335'),
+('e81d3f01-e326-473d-a757-1703b0a41797', 'Stuzzi', 'http://www.stuzzi.co.uk/', 53.80046608786117, -1.539799428835741, '3078d29d-cd3c-4be6-ba3a-ae3ed0901335'),
+('aae02cae-15c2-43da-9282-4ca89f6aadd1', 'Royal Armouries', 'https://royalarmouries.org/visit-us/leeds', 53.791989038708735, -1.531337542186456, '3087653e-e10e-41c8-b321-d16a68fa9a88'),
 ('85c117e9-dfbd-4249-9639-83e9b1a343e4', 'Playhouse Theatre', 'https://leedsplayhouse.org.uk', 53.798228, -1.535243, 'd5b5b6c9-d1bf-4b33-b77d-29c5c1ddb560'),
+('4b093b5e-24d5-4a18-826b-d9b5db30aaa2', 'Pizza Fella', 'https://www.pizzafella.com/menu', 53.799904427924844, -1.5386023102900523, '3078d29d-cd3c-4be6-ba3a-ae3ed0901335'),
+('f506ec86-c363-447e-8775-86627d76be86', 'Park House by Spacemade', 'https://www.spacemade.co/locations/london/park-house/', 53.798857519062445, -1.5527801945845137, '0e46f4b7-0844-4c5b-8457-16a8c966bf58'),
 ('a165fdef-0b48-475f-b66f-445563d90bca', 'North Star', 'https://www.northstarroast.com/cafe/', 53.79391081831077, -1.5314760279758834, 'dd19c880-1723-4af2-8005-b4ceffcbd6e2'),
 ('c584d44e-c7e7-4649-8fc4-bcb775a20427', 'Manahatta', 'https://www.manahatta.co.uk/bars/greek-street', 53.79835740292875, -1.5486636084718148, '3327f9d0-b38b-4743-8ee0-f3188aba60d7'),
+('53acdb93-5415-48dd-b34d-54288098d363', 'Leeds Art Gallery', 'https://museumsandgalleries.leeds.gov.uk/leeds-art-gallery/', 53.800223537676416, -1.5478176533022505, '3087653e-e10e-41c8-b321-d16a68fa9a88'),
 ('72ba7e4d-8892-4d75-9bbe-db20c7aa0797', 'Laynes Espresso', 'http://www.laynesespresso.co.uk/', 53.79532138579969, -1.5450768520447067, 'dd19c880-1723-4af2-8005-b4ceffcbd6e2'),
 ('c15b4231-6b85-4c4b-88f3-8161f71c37bd', 'Kapow', 'https://www.kapowcoffee.co.uk/', 53.798800736285486, -1.5427554652058615, 'dd19c880-1723-4af2-8005-b4ceffcbd6e2'),
+('d9c13011-7147-4d51-a6d3-c087eb5b1e1f', 'House of Fu', 'http://www.hellohouseoffu.com/', 53.7990542317147, -1.5409765306859269, '3078d29d-cd3c-4be6-ba3a-ae3ed0901335'),
+('e1a700db-8872-4e12-8b88-4a1322d4fc73', 'Duke Studios', 'http://www.duke-studios.com/', 53.7913022408058, -1.538100284323885, '0e46f4b7-0844-4c5b-8457-16a8c966bf58'),
 ('ff2be354-bf17-4883-9eaa-b8afc0d13e05', 'Brew Society', 'https://www.brewsociety.co.uk/', 53.79584058588689, -1.550339186509128, '3327f9d0-b38b-4743-8ee0-f3188aba60d7'),
 ('7b8a4bbd-b8ce-4171-8289-651ad9d1b00a', 'Brew Dog', 'https://www.brewdog.com/uk/bars/uk/brewdog-north-street-leeds', 53.80187943492715, -1.5379835403514934, '3327f9d0-b38b-4743-8ee0-f3188aba60d7'),
+('1e2122c3-3d8a-4aec-831a-54d113feaace', 'Belgrave', 'http://www.belgravemusichall.com/', 53.80099082308206, -1.5407517502542225, '3078d29d-cd3c-4be6-ba3a-ae3ed0901335'),
+('823b754c-d551-4234-baf1-9ae444fdc5f5', 'Avenue HQ', 'https://www.avenue-hq.com/', 53.79885392247382, -1.548977202363078, '0e46f4b7-0844-4c5b-8457-16a8c966bf58'),
 ('4967f863-4941-4e47-8034-c81c6557cc9e', 'Assembly Underground', 'http://www.assemblyunderground.com/', 53.80082340535508, -1.5485263386179835, '3327f9d0-b38b-4743-8ee0-f3188aba60d7'),
+('e97d70f7-2124-4aca-868c-54c8ddec7e81', 'Apple', 'https://www.apple.com/uk/retail/trinityleeds/?cid=aos-gb-seo-maps', 53.79685991942918, -1.543359837957889, '3087653e-e10e-41c8-b321-d16a68fa9a88'),
 ('09a8ddac-7dca-4f99-80ba-66750571cbf9', '200 Degrees', 'http://www.200degs.com/leeds-bond-street', 53.79760107211073, -1.5459528678505592, 'dd19c880-1723-4af2-8005-b4ceffcbd6e2');
