@@ -12,9 +12,10 @@
 
 SwiftLeeds is a truly unique conference built by the community for the community. Started in 2021, we're now working towards our third year. SwiftLeeds is hosted in the heart of [Leeds](https://www.google.com/maps/place/Leeds/@53.8059821,-1.6057715,12z/data=!3m1!4b1!4m5!3m4!1s0x48793e4ada64bd99:0x51adbafd0213dca9!8m2!3d53.8007554!4d-1.5490774), a beautiful city in the northern English county of Yorkshire.
 
-The website, which is of course built in Swift using [Vapor](https://vapor.codes/), is split into two key components:
+The website, which is of course built in Swift using [Vapor](https://vapor.codes/), is split into three key components:
 1. The frontend which provides the community with information about the event, as well as the capability to buy tickets.
 2. The API which powers our [open-source iOS application](https://github.com/SwiftLeeds/swiftleeds-ios).
+3. The admin page which enables priviledged users to update the event details.
 
 ## Contributing 🏗
 
@@ -32,7 +33,7 @@ For now, we'll focus on your local environment which is slightly different to ho
 
 SwiftLeeds relies on a few tools before we can get started! 
 
-* [Xcode](https://developer.apple.com/xcode/) (we recommend using Xcode 14)
+* [Xcode](https://developer.apple.com/xcode/) (Xcode 14 using Swift 5.7)
 * [Postgres](https://postgresapp.com) - our chosen database, used to persist data.
 * Optional: [Vapor](https://docs.vapor.codes/4.0/install/macos/)
 
