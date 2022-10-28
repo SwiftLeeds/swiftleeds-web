@@ -26,9 +26,6 @@ final class Presentation: Model, Content {
     @Field(key: "synopsis")
     var synopsis: String
     
-    @Field(key: "image")
-    var image: String?
-    
     @Parent(key: "speaker_id")
     var speaker: Speaker
 
@@ -49,11 +46,10 @@ final class Presentation: Model, Content {
     
     init() { }
     
-    init(id: IDValue?, title: String, synopsis: String, image: String?, isTBA: Bool, slidoURL: String?) {
+    init(id: IDValue?, title: String, synopsis: String, isTBA: Bool, slidoURL: String?) {
         self.id = id
         self.title = title
         self.synopsis = synopsis
-        self.image = image
         self.isTBA = isTBA
         self.slidoURL = slidoURL
     }

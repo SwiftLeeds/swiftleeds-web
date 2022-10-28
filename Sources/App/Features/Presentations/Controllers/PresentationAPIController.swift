@@ -33,7 +33,6 @@ struct PresentationAPIController: RouteCollection {
             id: .generateRandom(),
             title: input.title,
             synopsis: input.synopsis,
-            image: nil,
             isTBA: false,
             slidoURL: input.slidoURL
         )
@@ -72,7 +71,6 @@ struct PresentationAPIController: RouteCollection {
         
         presentation.title = input.title
         presentation.synopsis = input.synopsis
-        presentation.image = nil
         presentation.isTBA = false
         presentation.slidoURL = input.slidoURL
         
