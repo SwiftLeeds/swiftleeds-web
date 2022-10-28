@@ -19,8 +19,8 @@ import Vapor
 struct HomeContext: Content {
     var speakers: [Speaker] = []
     var cfpEnabled: Bool = false
+    var ticketsEnabled: Bool = false
     var slots: [Slot] = []
-    
     var platinumSponsors: [Sponsor] = []
     var silverSponsors: [Sponsor] = []
     var goldSponsors: [Sponsor] = []
