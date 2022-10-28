@@ -24,16 +24,13 @@ public func configure(_ app: Application) throws {
 
     // APNS
     if
-        let ecodedKey = Environment.get("P8_CERTIFICATE"),
-        let data = Data(base64Encoded: ecodedKey),
+        let encodedKey = Environment.get("P8_CERTIFICATE"),
+        encodedKey.isEmpty == false,
+        let data = Data(base64Encoded: encodedKey),
         let p8Key = String(data: data, encoding: .utf8)
     {
         let apnsEnvironment: APNSwiftConfiguration.Environment = app.environment == .production ? .production : .sandbox
         let auth: APNSwiftConfiguration.AuthenticationMethod = try .jwt(key: .private(pem: p8Key), keyIdentifier: "K4D2BJ235Y", teamIdentifier: "K33K6V7FBA")
         app.apns.configuration = .init(authenticationMethod: auth, topic: "uk.co.swiftleeds.SwiftLeeds", environment: apnsEnvironment)
     }
-}
-
-extension Application {
-    static let db = Environment.get("DATABASE_URL")!
 }
