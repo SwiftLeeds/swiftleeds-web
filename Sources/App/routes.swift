@@ -28,12 +28,7 @@ func routes(_ app: Application) throws {
                 }
                 .sort(\.$startDate)
                 .all()
-
-            slots.forEach { slot in
-                print(slot.presentation?.speaker as Any)
-                print(slot.presentation?.secondSpeaker as Any)
-            }
-
+            
             return try await req.view.render("Home/home", HomeContext(
                 speakers: speakers,
                 cfpEnabled: cfpExpirationDate > Date(),
