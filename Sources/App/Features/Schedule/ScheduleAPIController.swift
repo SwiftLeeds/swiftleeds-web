@@ -1,13 +1,5 @@
-//
-//  ScheduleAPIController.swift
-//  
-//
-//  Created by Alex Logan on 25/07/2022.
-//
-
-import Vapor
 import Fluent
-
+import Vapor
 
 struct ScheduleAPIController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
@@ -19,13 +11,13 @@ struct ScheduleAPIController: RouteCollection {
         // In future this will need to be smarter
         let eventWithSlots = try await Event.query(on: request.db)
             .sort(\.$date, .ascending)
-            .with(\.$slots, { slots in
+            .with(\.$slots) { slots in
                 slots
                     .with(\.$activity)
-                    .with(\.$presentation, { presentation in
+                    .with(\.$presentation) { presentation in
                         presentation.with(\.$speaker)
-                    })
-            })
+                    }
+            }
             .first()
 
         guard let event = eventWithSlots else {

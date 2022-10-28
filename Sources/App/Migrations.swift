@@ -1,6 +1,6 @@
-import Vapor
 import Fluent
 import FluentPostgresDriver
+import Vapor
 
 class Migrations {
     static func migrate(_ app: Application) throws {

@@ -1,16 +1,8 @@
-//
-//  Presentation.swift
-//  
-//
-//  Created by Alex Logan on 19/03/2022.
-//
-
+import Fluent
 import Foundation
 import Vapor
-import Fluent
 
 final class Presentation: Model, Content {
-        
     typealias IDValue = UUID
     
     static var schema: String {
@@ -44,7 +36,7 @@ final class Presentation: Model, Content {
     @Field(key: "slido_url")
     var slidoURL: String?
     
-    init() { }
+    init() {}
     
     init(id: IDValue?, title: String, synopsis: String, isTBA: Bool, slidoURL: String?) {
         self.id = id

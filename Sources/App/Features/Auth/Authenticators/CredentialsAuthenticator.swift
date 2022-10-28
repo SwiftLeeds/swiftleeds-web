@@ -1,13 +1,6 @@
-//
-//  CustomCredentialsAuthenticator.swift
-//  
-//
-//  Created by Joe Williams on 09/04/2022.
-//
-
+import Fluent
 import Foundation
 import Vapor
-import Fluent
 
 /// Credentials Authenticator used for authenticating front-end web clients.
 class CustomCredentialsAuthenticator: Authenticator, AsyncCredentialsAuthenticator {

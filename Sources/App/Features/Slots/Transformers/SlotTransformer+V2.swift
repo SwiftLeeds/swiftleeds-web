@@ -1,15 +1,10 @@
-//
-//  SlotTransformer+V2.swift
-//
-//
-//  Created by Alex Logan on 25/07/2022.
-//
-
 import Foundation
 
 enum SlotTransformerV2: Transformer {
     static func transform(_ entity: Slot?) -> SlotResponseV2? {
-        guard let entity = entity, let id = entity.id else { return nil }
+        guard let entity = entity, let id = entity.id else {
+            return nil
+        }
 
         let presentation: PresentationResponseV2?
         let activity: ActivityResponse?

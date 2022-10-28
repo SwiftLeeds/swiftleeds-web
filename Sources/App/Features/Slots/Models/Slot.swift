@@ -1,9 +1,8 @@
-import Foundation
 import Fluent
+import Foundation
 import Vapor
 
 final class Slot: Codable, Model, Content {
-
     static let schema = Schema.slot
 
     typealias IDValue = UUID
@@ -26,7 +25,7 @@ final class Slot: Codable, Model, Content {
     @OptionalChild(for: \.$slot)
     var activity: Activity?
 
-    init() { }
+    init() {}
 
     init(
         id: IDValue?,

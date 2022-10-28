@@ -1,6 +1,6 @@
+import APNS
 import Fluent
 import Vapor
-import APNS
 
 struct PushController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
@@ -16,7 +16,8 @@ struct PushController: RouteCollection {
         // Either store or update the token value
         if let storedToken = try await Token.query(on: req.db)
             .filter(\.$token == token.token)
-            .first() {
+            .first()
+        {
             storedToken.debug = token.debug
             try await storedToken.save(on: req.db)
         } else {
@@ -35,9 +36,11 @@ struct PushController: RouteCollection {
 
         guard
             let token = try await Token.query(on: req.db)
-                .filter(\.$token == tokenID)
-                .first()
-        else { return .notFound }
+            .filter(\.$token == tokenID)
+            .first()
+        else {
+            return .notFound
+        }
 
         let alert = APNSwiftAlert(title: "SwiftLeeds Rocks!", body: "Push is working 🚀")
         _ = req.apns.send(alert, to: token.token)
@@ -54,7 +57,9 @@ struct PushController: RouteCollection {
         let notificationRequest = try req.content.decode(SendNotificationRequest.self)
         let secretSecurityCode = Environment.get("PUSH_SECURITY_CODE")
 
-        guard notificationRequest.securityCode == secretSecurityCode else { throw Abort(.forbidden) }
+        guard notificationRequest.securityCode == secretSecurityCode else {
+            throw Abort(.forbidden)
+        }
 
         let tokens = try await Token.query(on: req.db).all()
         let alert = APNSwiftAlert(title: "SwiftLeeds", body: notificationRequest.message)

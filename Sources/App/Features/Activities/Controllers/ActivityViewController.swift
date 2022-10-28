@@ -1,8 +1,7 @@
-import Vapor
 import Fluent
+import Vapor
 
 struct ActivityViewController: RouteCollection {
-
     private struct ActivityContext: Content {
         let activity: Activity?
         let events: [Event]

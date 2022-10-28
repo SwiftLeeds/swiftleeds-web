@@ -1,13 +1,6 @@
-//
-//  AuthController.swift
-//  
-//
-//  Created by Joe Williams on 14/11/2021.
-//
-
+import Fluent
 import Foundation
 import Vapor
-import Fluent
 
 struct AuthController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
@@ -19,7 +12,7 @@ struct AuthController: RouteCollection {
             [
                 User.authenticator(),
                 User.credentialsAuthenticator(),
-                User.sessionAuthenticator()
+                User.sessionAuthenticator(),
             ]
         )
         
@@ -27,7 +20,6 @@ struct AuthController: RouteCollection {
     }
     
     private func create(request: Request) async throws -> Response {
-        
         // Create User Validations
         do {
             try User.Create.validate(content: request)

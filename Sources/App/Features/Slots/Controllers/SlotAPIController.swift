@@ -1,5 +1,5 @@
-import Vapor
 import Fluent
+import Vapor
 
 struct SlotAPIController: RouteCollection {
     private struct FormInput: Content {
@@ -100,7 +100,7 @@ struct SlotAPIController: RouteCollection {
         if let activity = activity, activity.id != slot.activity?.id {
             activity.$slot.id = try slot.requireID()
             try await activity.update(on: request.db)
-        } else if let presentation = presentation, presentation.id != slot.presentation?.id  {
+        } else if let presentation = presentation, presentation.id != slot.presentation?.id {
             presentation.$slot.id = try slot.requireID()
             try await presentation.update(on: request.db)
         }

@@ -1,15 +1,7 @@
-//
-//  PresentationController.swift
-//  
-//
-//  Created by Joe Williams on 07/06/2022.
-//
-
-import Vapor
 import Fluent
+import Vapor
 
 struct PresentationViewController: RouteCollection {
-
     private struct PresentationContext: Content {
         let presentation: Presentation?
         let speakers: [Speaker]

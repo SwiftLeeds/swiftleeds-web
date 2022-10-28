@@ -1,7 +1,6 @@
 import Fluent
 
 struct UserTokenMigrationV1: AsyncMigration {
-    
     func prepare(on database: Database) async throws {
         try await database.schema(Schema.userToken)
             .id()

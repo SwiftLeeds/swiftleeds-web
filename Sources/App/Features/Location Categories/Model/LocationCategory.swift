@@ -1,9 +1,8 @@
-import Foundation
 import Fluent
+import Foundation
 import Vapor
 
 final class LocationCategory: Codable, Model, Content {
-
     static let schema = Schema.locationCategory
 
     typealias IDValue = UUID
@@ -20,5 +19,5 @@ final class LocationCategory: Codable, Model, Content {
     @Children(for: \.$category)
     var locations: [Location]
 
-    init() { }
+    init() {}
 }

@@ -1,7 +1,7 @@
-import Vapor
+import APNS
 import Leaf
 import LeafMarkdown
-import APNS
+import Vapor
 
 public func configure(_ app: Application) throws {
     // Middleware

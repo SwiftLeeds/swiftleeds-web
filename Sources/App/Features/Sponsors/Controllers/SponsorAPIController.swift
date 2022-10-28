@@ -1,8 +1,7 @@
-import Vapor
 import Fluent
+import Vapor
 
 struct SponsorAPIController: RouteCollection {
-    
     private struct ImageCreateInput: Content {
         let sponsorImage: File
     }

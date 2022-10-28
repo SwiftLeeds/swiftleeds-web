@@ -1,10 +1,10 @@
-import Vapor
 import Fluent
+import Vapor
 
 struct SlotViewController: RouteCollection {
-
     enum SlotTypes: String, CaseIterable {
-        case presentation, activity
+        case presentation
+        case activity
     }
 
     private struct PresentationContext: Content {

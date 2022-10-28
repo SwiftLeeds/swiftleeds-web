@@ -1,0 +1,19 @@
+--patternlet inline
+--swiftversion 5.6
+--trimwhitespace nonblank-lines
+--ifdef no-indent
+
+--disable spaceInsideBrackets
+--disable yodaConditions
+--disable numberFormatting
+--disable redundantReturn
+
+--enable isEmpty
+--enable sortedSwitchCases
+--enable wrapEnumCases
+--enable wrapSwitchCases
+--enable wrapConditionalBodies
+--enable blankLinesBetweenImports
+--enable blockComments
+
+--header ""

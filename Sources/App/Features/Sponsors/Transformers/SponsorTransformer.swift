@@ -1,10 +1,3 @@
-//
-//  SponsorTransformer.swift
-//  
-//
-//  Created by Alex Logan on 01/08/2022.
-//
-
 import Foundation
 import Vapor
 

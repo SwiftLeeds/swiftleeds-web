@@ -1,8 +1,7 @@
-import Vapor
 import Fluent
+import Vapor
 
 struct SponsorViewController: RouteCollection {
-    
     private let sponsorLevels: [Sponsor.SponsorLevel] = [.silver, .gold, .platinum]
 
     private struct SponsorContext: Content {

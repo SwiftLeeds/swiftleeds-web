@@ -2,9 +2,7 @@ import Vapor
 
 let cfpExpirationDate = Date(timeIntervalSince1970: 1651356000) // 30th April 22
 
-
 func routes(_ app: Application) throws {
-    
     // MARK: - Web Routes
     
     let route = app.routes.grouped(User.sessionAuthenticator())
@@ -23,11 +21,11 @@ func routes(_ app: Application) throws {
             
             let slots = try await Slot.query(on: req.db)
                 .with(\.$activity)
-                .with(\.$presentation, { presentation in
+                .with(\.$presentation) { presentation in
                     presentation
                         .with(\.$speaker)
                         .with(\.$secondSpeaker)
-                })
+                }
                 .sort(\.$startDate)
                 .all()
 
@@ -150,7 +148,7 @@ struct AdminContext: Content {
     var user: User
 }
 
-extension Request {    
+extension Request {
     var user: User? {
         if let user = auth.get(User.self) {
             return user

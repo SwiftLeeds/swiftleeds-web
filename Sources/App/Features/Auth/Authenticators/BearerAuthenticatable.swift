@@ -1,17 +1,9 @@
-//
-//  BearerAuthenticatable.swift
-//  
-//
-//  Created by Joe Williams on 16/11/2021.
-//
-
+import Fluent
 import Foundation
 import Vapor
-import Fluent
 
 /// Authenticator used to authenticate a user by their auth token.
 class BearerAuthenticatable: Authenticator, AsyncBearerAuthenticator {
-    
     enum RoleFailure: Error {
         case notAuthenticated
         case notAdmin

@@ -1,5 +1,5 @@
-import Vapor
 import S3
+import Vapor
 
 final class ImageService {
     @discardableResult

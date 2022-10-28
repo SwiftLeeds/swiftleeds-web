@@ -1,16 +1,8 @@
-//
-//  Event.swift
-//  
-//
-//  Created by Joe Williams on 10/04/2022.
-//
-
-import Foundation
 import Fluent
+import Foundation
 import Vapor
 
 final class Event: Model, Content {
-    
     static let schema = Schema.event
 
     typealias IDValue = UUID
@@ -33,5 +25,5 @@ final class Event: Model, Content {
     @Children(for: \.$event)
     var slots: [Slot]
     
-    init() { }
+    init() {}
 }

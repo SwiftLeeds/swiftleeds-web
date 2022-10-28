@@ -1,13 +1,6 @@
-//
-//  SessionAuthenticator.swift
-//  
-//
-//  Created by Joe Williams on 09/04/2022.
-//
-
+import Fluent
 import Foundation
 import Vapor
-import Fluent
 
 /// Session Authenticator used for checking the auth status of front-end web clients. This authenticator uses the sessions cookie.
 class SessionAuthenticator: Authenticator, AsyncSessionAuthenticator {

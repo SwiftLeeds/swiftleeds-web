@@ -1,20 +1,14 @@
-//
-//  User.swift
-//  
-//
-//  Created by Joe Williams on 14/11/2021.
-//
-
+import Fluent
 import Foundation
 import Vapor
-import Fluent
 
 final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAuthenticatable, ModelCredentialsAuthenticatable, Codable {
-    
     static let schema = Schema.user
     
     enum Role: String, Codable {
-        case user, speaker, admin
+        case user
+        case speaker
+        case admin
     }
     
     var sessionID: UUID {
@@ -45,7 +39,7 @@ final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAu
     var token: UserToken?
     
     // Creates a new, empty user.
-    init() { }
+    init() {}
 
     // Creates a new user with all properties set.
     init(id: UUID? = .init(), name: String, email: String, passwordHash: String, role: User.Role) {
@@ -57,31 +51,31 @@ final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAu
     }
     
     func verify(password: String) throws -> Bool {
-        try Bcrypt.verify(password, created: self.passwordHash)
+        try Bcrypt.verify(password, created: passwordHash)
     }
     
     func generateToken() throws -> UserToken {
         try .init(
             value: [UInt8].random(count: 16).base64,
             timestamp: Date().addingTimeInterval(604800), // token is valid for 1 week
-            userID: self.requireID()
+            userID: requireID()
         )
     }
     
     public static func credentialsAuthenticator(
-        database: DatabaseID? = nil
+        database _: DatabaseID? = nil
     ) -> Authenticator {
         return CustomCredentialsAuthenticator()
     }
     
     public static func sessionAuthenticator(
-        _ databaseID: DatabaseID? = nil
+        _: DatabaseID? = nil
     ) -> Authenticator {
         return SessionAuthenticator()
     }
     
     public static func authenticator(
-        database: DatabaseID? = nil
+        database _: DatabaseID? = nil
     ) -> Authenticator {
         return BearerAuthenticatable()
     }

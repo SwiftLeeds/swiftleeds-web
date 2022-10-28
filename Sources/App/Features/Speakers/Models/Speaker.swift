@@ -1,17 +1,9 @@
-//
-//  Speaker.swift
-//  
-//
-//  Created by Joe Williams on 09/04/2022.
-//
-
-import Foundation
-import Vapor
 import Fluent
 import FluentPostgresDriver
+import Foundation
+import Vapor
 
 final class Speaker: Codable, Model, Content {
-    
     static let schema = Schema.speaker
 
     typealias IDValue = UUID
@@ -37,5 +29,5 @@ final class Speaker: Codable, Model, Content {
     @Children(for: \.$speaker)
     var presentations: [Presentation]
     
-    init() { }
+    init() {}
 }

@@ -1,9 +1,8 @@
-import Foundation
 import Fluent
+import Foundation
 import Vapor
 
 final class Location: Codable, Model, Content {
-
     static let schema = Schema.location
 
     typealias IDValue = UUID

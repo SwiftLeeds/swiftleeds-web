@@ -1,9 +1,8 @@
+import Fluent
 import Foundation
 import Vapor
-import Fluent
 
 final class Sponsor: Model, Content {
-    
     enum SponsorLevel: String, Codable {
         case silver
         case gold
