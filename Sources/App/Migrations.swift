@@ -72,7 +72,9 @@ class Migrations {
         }
         
         do {
-            try app.autoMigrate().wait()
+            if app.environment != .testing {
+                try app.autoMigrate().wait()
+            }
         } catch {
             app.logger.error("Failed to migrate DB with error \(error)")
         }
