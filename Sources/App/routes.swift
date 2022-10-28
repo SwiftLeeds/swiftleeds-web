@@ -83,13 +83,10 @@ func routes(_ app: Application) throws {
 
     // MARK: - Admin Routes
     
-    let adminRoutes = app.grouped("admin")
+    let adminRoutes = app.grouped("admin").grouped(AdminMiddleware())
     
     adminRoutes.get { request -> View in
-        guard let user = request.user, user.role == .admin else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), slots: []))
-        }
-        
+        let user = try request.auth.require(User.self)
         let query = try? request.query.decode(PageQuery.self)
         let speakers = try await Speaker.query(on: request.db).with(\.$presentations).all()
         let presentations = try await Presentation.query(on: request.db)
@@ -150,9 +147,6 @@ struct AdminContext: Content {
 
 extension Request {
     var user: User? {
-        if let user = auth.get(User.self) {
-            return user
-        }
-        return nil
+        return auth.get(User.self)
     }
 }

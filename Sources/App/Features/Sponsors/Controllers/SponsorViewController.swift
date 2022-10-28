@@ -16,10 +16,6 @@ struct SponsorViewController: RouteCollection {
     }
         
     private func onCreate(request: Request) async throws -> View {
-        guard request.user?.role == .admin else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
-        }
-        
         let events = try await Event.query(on: request.db).all()
         let context = SponsorContext(sponsor: nil, sponsorLevels: sponsorLevels, events: events)
         
@@ -27,10 +23,6 @@ struct SponsorViewController: RouteCollection {
     }
     
     private func onEdit(request: Request) async throws -> View {
-        guard request.user?.role == .admin else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
-        }
-
         guard let sponsor = try await Sponsor.find(request.parameters.get("id"), on: request.db) else {
             throw Abort(.notFound)
         }
