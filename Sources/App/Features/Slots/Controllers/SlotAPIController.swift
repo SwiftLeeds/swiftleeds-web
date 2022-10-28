@@ -16,7 +16,7 @@ struct SlotAPIController: RouteCollection {
     }
 
     func boot(routes: RoutesBuilder) throws {
-        routes.post("", use: onPost)
+        routes.post(use: onPost)
         routes.post(":id", use: onEdit)
     }
 

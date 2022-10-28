@@ -85,7 +85,7 @@ func routes(_ app: Application) throws {
     
     let adminRoutes = app.grouped("admin")
     
-    adminRoutes.get("") { request -> View in
+    adminRoutes.get { request -> View in
         guard let user = request.user, user.role == .admin else {
             return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), slots: []))
         }

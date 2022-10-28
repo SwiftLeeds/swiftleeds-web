@@ -18,8 +18,8 @@ struct SponsorAPIController: RouteCollection {
     }
     
     func boot(routes: RoutesBuilder) throws {
-        routes.get("", use: onGet)
-        routes.post("", use: onPost)
+        routes.get(use: onGet)
+        routes.post(use: onPost)
         routes.post(":id", use: onEdit)
     }
     

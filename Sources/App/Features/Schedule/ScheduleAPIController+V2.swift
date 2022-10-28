@@ -3,7 +3,7 @@ import Vapor
 
 struct ScheduleAPIControllerV2: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
-        routes.get("", use: onGet)
+        routes.get(use: onGet)
     }
 
     private func onGet(request: Request) async throws -> Response {

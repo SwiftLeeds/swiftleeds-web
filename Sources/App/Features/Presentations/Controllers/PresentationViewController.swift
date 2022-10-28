@@ -10,7 +10,7 @@ struct PresentationViewController: RouteCollection {
     }
     
     func boot(routes: RoutesBuilder) throws {
-        routes.get("", use: onCreate)
+        routes.get(use: onCreate)
         routes.get(":id", use: onEdit)
     }
         
