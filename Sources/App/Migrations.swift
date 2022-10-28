@@ -56,6 +56,11 @@ class Migrations {
                 throw Abort(.internalServerError, reason: "Invalid PostgreSQL connection URL provided")
             }
             
+            if app.environment.isRelease {
+                // Based on recommended approach from https://devcenter.heroku.com/articles/connecting-heroku-postgres
+                postgresConfig.tlsConfiguration = .makeClientConfiguration()
+            }
+            
             postgresConfig.tlsConfiguration?.certificateVerification = .none
             
             app.databases.use(.postgres(configuration: postgresConfig), as: .psql)
