@@ -55,8 +55,8 @@ func routes(_ app: Application) throws {
         }
     }
     
-    app.get("conduct") { req -> EventLoopFuture<View> in
-        return req.view.render("Secondary/conduct", ["name": "Leaf"])
+    app.get("conduct") { req -> View in
+        return try await req.view.render("Secondary/conduct")
     }
 
     try app.routes.register(collection: AuthController()) // TODO: Split this out into web/api/admin
