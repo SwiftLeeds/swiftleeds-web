@@ -1,7 +1,6 @@
 import Fluent
 
 class SponsorMigrationV1: AsyncMigration {
-
     func prepare(on database: Database) async throws {
         _ = try await database.enum("sponsor_level")
             .case("silver")
@@ -12,13 +11,13 @@ class SponsorMigrationV1: AsyncMigration {
         let sponsorLevel = try await database.enum("sponsor_level").read()
         
         try await database.schema(Schema.sponsor)
-             .id()
-             .field("name", .string, .required)
-             .field("image", .string, .required)
-             .field("url", .string)
-             .field("sponsor_level", sponsorLevel, .required)
-             .field("event_id", .uuid, .references("events", "id"))
-             .create()
+            .id()
+            .field("name", .string, .required)
+            .field("image", .string, .required)
+            .field("url", .string)
+            .field("sponsor_level", sponsorLevel, .required)
+            .field("event_id", .uuid, .references("events", "id"))
+            .create()
     }
 
     func revert(on database: Database) async throws {

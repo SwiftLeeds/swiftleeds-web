@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "swift-leeds",
     platforms: [
-        .macOS(.v12)
+        .macOS(.v12),
     ],
     dependencies: [
         // 💧 A server-side Swift web framework.
@@ -26,19 +26,19 @@ let package = Package(
                 .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
                 .product(name: "S3", package: "AWSSDKSwift"),
                 .product(name: "LeafMarkdown", package: "LeafMarkdown"),
-                .product(name: "APNS", package: "apns")
+                .product(name: "APNS", package: "apns"),
             ],
             swiftSettings: [
                 // Enable better optimizations when building in Release configuration. Despite the use of
                 // the `.unsafeFlags` construct required by SwiftPM, this flag is recommended for Release
                 // builds. See <https://github.com/swift-server/guides/blob/main/docs/building.md#building-for-production> for details.
-                .unsafeFlags(["-cross-module-optimization"], .when(configuration: .release))
+                .unsafeFlags(["-cross-module-optimization"], .when(configuration: .release)),
             ]
         ),
         .executableTarget(name: "Run", dependencies: [.target(name: "App")]),
         .testTarget(name: "AppTests", dependencies: [
             .target(name: "App"),
             .product(name: "XCTVapor", package: "vapor"),
-        ])
+        ]),
     ]
 )

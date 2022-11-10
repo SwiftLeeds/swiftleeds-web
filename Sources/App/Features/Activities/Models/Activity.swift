@@ -1,9 +1,8 @@
-import Foundation
 import Fluent
+import Foundation
 import Vapor
 
 final class Activity: Codable, Model, Content {
-
     static let schema = Schema.activity
 
     typealias IDValue = UUID
@@ -32,7 +31,7 @@ final class Activity: Codable, Model, Content {
     @OptionalParent(key: "slot_id")
     public var slot: Slot?
 
-    init() { }
+    init() {}
 
     init(
         id: IDValue?,

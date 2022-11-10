@@ -1,15 +1,15 @@
 import Fluent
 
-class PresentationMigrationV2: AsyncMigration {
+class PresentationMigrationV4: AsyncMigration {
     func prepare(on database: Database) async throws {
         try await database.schema(Schema.presentation)
-            .field("speaker_two_id", .uuid, .references(Schema.speaker, "id", onDelete: .setNull, onUpdate: .cascade))
+            .deleteField("image")
             .update()
     }
 
     func revert(on database: Database) async throws {
         try await database.schema(Schema.presentation)
-            .deleteField("speaker_two_id")
+            .field("image", .string)
             .update()
     }
 }

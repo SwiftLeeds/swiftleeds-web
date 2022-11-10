@@ -1,8 +1,7 @@
-import Vapor
 import Fluent
+import Vapor
 
 struct PresentationAPIController: RouteCollection {
-    
     private struct FormInput: Content {
         let speakerID: String
         let secondSpeakerID: String?
@@ -28,12 +27,10 @@ struct PresentationAPIController: RouteCollection {
             return request.redirect(to: "/admin")
         }
 
-        
         let presentation = Presentation(
             id: .generateRandom(),
             title: input.title,
             synopsis: input.synopsis,
-            image: nil,
             isTBA: false,
             slidoURL: input.slidoURL
         )
@@ -72,7 +69,6 @@ struct PresentationAPIController: RouteCollection {
         
         presentation.title = input.title
         presentation.synopsis = input.synopsis
-        presentation.image = nil
         presentation.isTBA = false
         presentation.slidoURL = input.slidoURL
         

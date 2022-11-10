@@ -1,10 +1,3 @@
-//
-//  SlotResponse+V2.swift
-//  
-//
-//  Created by Alex Logan on 18/08/2022.
-//
-
 import Foundation
 import Vapor
 

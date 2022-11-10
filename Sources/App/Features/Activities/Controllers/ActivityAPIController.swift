@@ -1,6 +1,6 @@
-import Vapor
 import Fluent
 import S3
+import Vapor
 
 struct ActivityAPIController: RouteCollection {
     private struct FormInput: Content {
@@ -16,7 +16,7 @@ struct ActivityAPIController: RouteCollection {
     }
 
     func boot(routes: RoutesBuilder) throws {
-        routes.post("", use: onPost)
+        routes.post(use: onPost)
         routes.post(":id", use: onEdit)
     }
 
@@ -32,7 +32,6 @@ struct ActivityAPIController: RouteCollection {
         let fileName = "\(UUID.generateRandom().uuidString)-\(image.activityImage.filename)"
 
         if !image.activityImage.filename.isEmpty {
-
             do {
                 try await ImageService.uploadFile(
                     data: Data(image.activityImage.data.readableBytesView),

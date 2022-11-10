@@ -1,14 +1,13 @@
 import Fluent
 
 class SlotMigrationV1: AsyncMigration {
-
     func prepare(on database: Database) async throws {
         try await database.schema(Schema.slot)
-             .id()
-             .field("start_date", .string, .required)
-             .field("duration", .double)
-             .field("event_id", .uuid, .required, .references(Schema.event, "id"))
-             .create()
+            .id()
+            .field("start_date", .string, .required)
+            .field("duration", .double)
+            .field("event_id", .uuid, .required, .references(Schema.event, "id"))
+            .create()
 
         // Insert the slot relation into child entities
         try await database.schema(Schema.presentation)
@@ -27,20 +26,20 @@ class SlotMigrationV1: AsyncMigration {
 
         // Remove the legacy fields as they're no longer required
         try await database
-                .schema(Schema.presentation)
-                .deleteField("start_date")
-                .deleteField("duration")
-                .update()
+            .schema(Schema.presentation)
+            .deleteField("start_date")
+            .deleteField("duration")
+            .update()
     }
 
     func revert(on database: Database) async throws {
         // remove foreign keys & restore deleted fields
         try await database
-                .schema(Schema.presentation)
-                .deleteField("slot_id")
-                .field("start_date", .string)
-                .field("duration", .double)
-                .update()
+            .schema(Schema.presentation)
+            .deleteField("slot_id")
+            .field("start_date", .string)
+            .field("duration", .double)
+            .update()
 
         try await database.schema(Schema.activity)
             .deleteField("slot_id")

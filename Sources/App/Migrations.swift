@@ -1,6 +1,6 @@
-import Vapor
 import Fluent
 import FluentPostgresDriver
+import Vapor
 
 class Migrations {
     static func migrate(_ app: Application) throws {
@@ -47,6 +47,9 @@ class Migrations {
         app.migrations.add(PushMigration())
         app.migrations.add(PushMigrationV2())
         
+        // Presentation: remove unused image field
+        app.migrations.add(PresentationMigrationV4())
+        
         do {
             guard let url = Environment.get("DATABASE_URL") else {
                 throw Abort(.internalServerError, reason: "Missing 'DATABASE_URL' environment variable")
@@ -69,7 +72,9 @@ class Migrations {
         }
         
         do {
-            try app.autoMigrate().wait()
+            if app.environment != .testing {
+                try app.autoMigrate().wait()
+            }
         } catch {
             app.logger.error("Failed to migrate DB with error \(error)")
         }

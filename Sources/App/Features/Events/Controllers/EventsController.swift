@@ -1,15 +1,8 @@
-//
-//  EventsController.swift
-//
-//
-//  Created by Joe Williams on 07/06/2022.
-//
-
-import Foundation
 import Fluent
-import Vapor
+import Foundation
 import Leaf
 import LeafKit
+import Vapor
 
 struct EventsController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
@@ -29,7 +22,7 @@ struct EventsController: RouteCollection {
     }
     
     private func onPost(request: Request) async throws -> Response {
-        let customDecoder = URLEncodedFormDecoder(configuration: URLEncodedFormDecoder.Configuration.init(boolFlags: true, arraySeparators: [","], dateDecodingStrategy: .secondsSince1970))
+        let customDecoder = URLEncodedFormDecoder(configuration: URLEncodedFormDecoder.Configuration(boolFlags: true, arraySeparators: [","], dateDecodingStrategy: .secondsSince1970))
         let event = try request.content.decode(Event.self, using: customDecoder)
         try await event.save(on: request.db)
         return request.redirect(to: "/admin")
@@ -49,7 +42,6 @@ struct NowTag: LeafTag {
         guard let string = ctx.parameters[0].double else {
             throw NowTagError()
         }
-        
         
         let referenceDate = Date(timeIntervalSince1970: string)
 

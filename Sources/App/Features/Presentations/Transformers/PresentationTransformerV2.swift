@@ -1,15 +1,10 @@
-//
-//  PresentationTransformerV2.swift
-//  
-//
-//  Created by Alex Logan on 18/08/2022.
-//
-
 import Foundation
 
 enum PresentationTransformerV2: Transformer {
     static func transform(_ entity: Presentation?) -> PresentationResponseV2? {
-        guard let entity = entity, let id = entity.id else { return nil }
+        guard let entity = entity, let id = entity.id else {
+            return nil
+        }
 
         let speaker: SpeakerResponse?
         let secondSpeaker: SpeakerResponse?
@@ -30,7 +25,6 @@ enum PresentationTransformerV2: Transformer {
             id: id,
             title: entity.title,
             synopsis: entity.synopsis,
-            image: entity.image,
             speakers: [speaker, secondSpeaker].compactMap { $0 },
             slidoURL: entity.slidoURL
         )

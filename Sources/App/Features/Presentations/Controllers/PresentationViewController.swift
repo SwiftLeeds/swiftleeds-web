@@ -1,15 +1,7 @@
-//
-//  PresentationController.swift
-//  
-//
-//  Created by Joe Williams on 07/06/2022.
-//
-
-import Vapor
 import Fluent
+import Vapor
 
 struct PresentationViewController: RouteCollection {
-
     private struct PresentationContext: Content {
         let presentation: Presentation?
         let speakers: [Speaker]
@@ -18,15 +10,11 @@ struct PresentationViewController: RouteCollection {
     }
     
     func boot(routes: RoutesBuilder) throws {
-        routes.get("", use: onCreate)
+        routes.get(use: onCreate)
         routes.get(":id", use: onEdit)
     }
         
     private func onCreate(request: Request) async throws -> View {
-        guard request.user?.role == .admin else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
-        }
-        
         let speakers = try await Speaker.query(on: request.db).all()
         let events = try await Event.query(on: request.db).all()
         let context = PresentationContext(presentation: nil, speakers: speakers, events: events, hasSecondSpeaker: false)
@@ -35,10 +23,6 @@ struct PresentationViewController: RouteCollection {
     }
     
     private func onEdit(request: Request) async throws -> View {
-        guard request.user?.role == .admin else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
-        }
-
         guard let presentation = try await Presentation.find(request.parameters.get("id"), on: request.db) else {
             throw Abort(.notFound)
         }

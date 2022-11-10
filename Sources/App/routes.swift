@@ -2,9 +2,7 @@ import Vapor
 
 let cfpExpirationDate = Date(timeIntervalSince1970: 1651356000) // 30th April 22
 
-
 func routes(_ app: Application) throws {
-    
     // MARK: - Web Routes
     
     let route = app.routes.grouped(User.sessionAuthenticator())
@@ -23,19 +21,14 @@ func routes(_ app: Application) throws {
             
             let slots = try await Slot.query(on: req.db)
                 .with(\.$activity)
-                .with(\.$presentation, { presentation in
+                .with(\.$presentation) { presentation in
                     presentation
                         .with(\.$speaker)
                         .with(\.$secondSpeaker)
-                })
+                }
                 .sort(\.$startDate)
                 .all()
-
-            slots.forEach { slot in
-                print(slot.presentation?.speaker as Any)
-                print(slot.presentation?.secondSpeaker as Any)
-            }
-
+            
             return try await req.view.render("Home/home", HomeContext(
                 speakers: speakers,
                 cfpEnabled: cfpExpirationDate > Date(),
@@ -62,8 +55,8 @@ func routes(_ app: Application) throws {
         }
     }
     
-    app.get("conduct") { req -> EventLoopFuture<View> in
-        return req.view.render("Secondary/conduct", ["name": "Leaf"])
+    app.get("conduct") { req -> View in
+        return try await req.view.render("Secondary/conduct")
     }
 
     try app.routes.register(collection: AuthController()) // TODO: Split this out into web/api/admin
@@ -85,13 +78,10 @@ func routes(_ app: Application) throws {
 
     // MARK: - Admin Routes
     
-    let adminRoutes = app.grouped("admin")
+    let adminRoutes = app.grouped("admin").grouped(AdminMiddleware())
     
-    adminRoutes.get("") { request -> View in
-        guard let user = request.user, user.role == .admin else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date(), slots: []))
-        }
-        
+    adminRoutes.get { request -> View in
+        let user = try request.auth.require(User.self)
         let query = try? request.query.decode(PageQuery.self)
         let speakers = try await Speaker.query(on: request.db).with(\.$presentations).all()
         let presentations = try await Presentation.query(on: request.db)
@@ -150,11 +140,8 @@ struct AdminContext: Content {
     var user: User
 }
 
-extension Request {    
+extension Request {
     var user: User? {
-        if let user = auth.get(User.self) {
-            return user
-        }
-        return nil
+        return auth.get(User.self)
     }
 }

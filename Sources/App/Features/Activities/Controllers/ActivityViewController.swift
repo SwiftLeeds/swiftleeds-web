@@ -1,32 +1,24 @@
-import Vapor
 import Fluent
+import Vapor
 
 struct ActivityViewController: RouteCollection {
-
     private struct ActivityContext: Content {
         let activity: Activity?
         let events: [Event]
     }
 
     func boot(routes: RoutesBuilder) throws {
-        routes.get("", use: onCreate)
+        routes.get(use: onCreate)
         routes.get(":id", use: onEdit)
         routes.get("delete", ":id", use: onDelete)
     }
 
     private func onCreate(request: Request) async throws -> View {
-        guard request.user?.role == .admin else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
-        }
         let context = try await buildContext(from: request.db, activity: nil)
         return try await request.view.render("Authentication/activity_form", context)
     }
 
     private func onEdit(request: Request) async throws -> View {
-        guard request.user?.role == .admin else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
-        }
-
         guard let requestID = request.parameters.get("id") else {
             throw Abort(.notFound)
         }
@@ -42,10 +34,6 @@ struct ActivityViewController: RouteCollection {
     }
 
     private func onDelete(request: Request) async throws -> Response {
-        guard request.user?.role == .admin else {
-            return request.redirect(to: "/home")
-        }
-
         guard let requestID = request.parameters.get("id") else {
             throw Abort(.notFound)
         }

@@ -1,16 +1,8 @@
-//
-//  File.swift
-//  
-//
-//  Created by Joe Williams on 14/11/2021.
-//
-
+import Fluent
 import Foundation
 import Vapor
-import Fluent
 
 final class UserToken: Model, Content, ModelTokenAuthenticatable, Codable {
-    
     static let schema = Schema.userToken
     
     typealias User = App.User
@@ -19,7 +11,7 @@ final class UserToken: Model, Content, ModelTokenAuthenticatable, Codable {
     static let userKey = \UserToken.$user
 
     var isValid: Bool {
-        return self.timestamp > Date()
+        return timestamp > Date()
     }
 
     @ID()
@@ -34,12 +26,12 @@ final class UserToken: Model, Content, ModelTokenAuthenticatable, Codable {
     @Parent(key: "user_id")
     var user: User
 
-    init() { }
+    init() {}
 
     init(id: UUID? = .init(), value: String, timestamp: Date, userID: User.IDValue) {
         self.id = id
         self.value = value
         self.timestamp = timestamp
-        self.$user.id = userID
+        $user.id = userID
     }
 }

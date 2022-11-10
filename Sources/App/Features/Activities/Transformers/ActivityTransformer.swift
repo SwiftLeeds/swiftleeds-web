@@ -1,15 +1,10 @@
-//
-//  ActivityTransformer.swift
-//  
-//
-//  Created by Alex Logan on 25/07/2022.
-//
-
 import Foundation
 
 enum ActivityTransformer: Transformer {
     static func transform(_ entity: Activity?) -> ActivityResponse? {
-        guard let entity = entity, let id = entity.id else { return nil }
+        guard let entity = entity, let id = entity.id else {
+            return nil
+        }
 
         var entityImage: String? = entity.image
 

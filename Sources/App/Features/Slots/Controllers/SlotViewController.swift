@@ -1,10 +1,10 @@
-import Vapor
 import Fluent
+import Vapor
 
 struct SlotViewController: RouteCollection {
-
     enum SlotTypes: String, CaseIterable {
-        case presentation, activity
+        case presentation
+        case activity
     }
 
     private struct PresentationContext: Content {
@@ -17,24 +17,17 @@ struct SlotViewController: RouteCollection {
     }
 
     func boot(routes: RoutesBuilder) throws {
-        routes.get("", use: onCreate)
+        routes.get(use: onCreate)
         routes.get(":id", use: onEdit)
         routes.get("delete", ":id", use: onDelete)
     }
 
     private func onCreate(request: Request) async throws -> View {
-        guard request.user?.role == .admin else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
-        }
         let context = try await buildContext(from: request.db, slot: nil)
         return try await request.view.render("Authentication/slot_form", context)
     }
 
     private func onEdit(request: Request) async throws -> View {
-        guard request.user?.role == .admin else {
-            return try await request.view.render("Home/home", HomeContext(speakers: [], cfpEnabled: cfpExpirationDate > Date()))
-        }
-
         guard let requestID = request.parameters.get("id") else {
             throw Abort(.notFound)
         }
@@ -51,10 +44,6 @@ struct SlotViewController: RouteCollection {
     }
 
     private func onDelete(request: Request) async throws -> Response {
-        guard request.user?.role == .admin else {
-            return request.redirect(to: "/home")
-        }
-
         guard let requestID = request.parameters.get("id") else {
             throw Abort(.notFound)
         }

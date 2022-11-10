@@ -1,17 +1,9 @@
-//
-//  File.swift
-//  
-//
-//  Created by Joe Williams on 09/04/2022.
-//
-
-import Foundation
 import Fluent
-import Vapor
+import Foundation
 import S3
+import Vapor
 
 struct SpeakerController: RouteCollection {
-    
     struct ImageUpload: Content {
         var profileImage: File
     }
