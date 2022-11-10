@@ -20,12 +20,14 @@
 </header>
 
 <!-- Sections-->
+#if(ticketsEnabled):
 <div class="row">
   <ul class="tickets col-10">
     <li>Get Your Ticket</li>
     <li class="inPerson"><a href="#tickets">In-Person</a></li>
   </ul>
 </div>
+#endif
   
   <br style="clear: both;"/>
   <br/>
@@ -34,7 +36,9 @@
   <div class="container">
     #extend("Home/_about-us")
     <br/>
-    #extend("Home/_order-tickets")
+    #if(ticketsEnabled):
+        #extend("Home/_order-tickets")
+    #endif
     #if(count(speakers) > 0):
         <br/>
         #extend("Home/_speakers")

@@ -39,6 +39,7 @@ func routes(_ app: Application) throws {
             return try await req.view.render("Home/home", HomeContext(
                 speakers: speakers,
                 cfpEnabled: cfpExpirationDate > Date(),
+                ticketsEnabled: false,
                 slots: slots,
                 platinumSponsors: platinumSponsors,
                 silverSponsors: silverSponsors,

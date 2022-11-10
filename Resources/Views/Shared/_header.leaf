@@ -10,7 +10,7 @@
     <span class="separator"></span>
 
     <div class="event-date">
-        <strong>Oct 20 2022</strong>
+        <strong>Returning in Late 2023</strong>
         <br/>
         <p class="d-none d-md-inline-block">
         Leeds Playhouse, Leeds, UK
@@ -26,7 +26,7 @@
     
     <div class="justify-content-end collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav top-nav nav">
-        <a class="nav-link text-dark" href="../#tickets">Tickets</a>
+        <!-- <a class="nav-link text-dark" href="../#tickets">Tickets</a> -->
         <a class="nav-link text-dark" href="../#speakers">Speakers</a>
         <a class="nav-link text-dark" href="../#schedule">Schedule</a>
         <a class="nav-link text-dark" href="../#venue">Venue</a>
