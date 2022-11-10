@@ -13,6 +13,7 @@ public func configure(_ app: Application) throws {
     // Leaf
     app.leaf.tags["dateFormat"] = NowTag()
     app.leaf.tags["markdown"] = Markdown()
+    app.leaf.tags["awsImage"] = AwsImageTag()
     app.views.use(.leaf)
 
     // Migrations
