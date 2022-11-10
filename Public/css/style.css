@@ -620,3 +620,9 @@ ul.tickets li a {
         grid-template-columns: 1fr;
     }
 }
+
+/* Markdown */
+
+.markdown li {
+  list-style-type: inherit;
+}
