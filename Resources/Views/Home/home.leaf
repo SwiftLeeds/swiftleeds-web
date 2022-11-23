@@ -42,13 +42,13 @@
         #extend("Home/_order-tickets")
     #endif
     #if(count(speakers) > 0):
-        #if(conferenceEnded):
+        #if(!conferenceEnded):
             <br/>
             #extend("Home/_speakers")
         #endif
     #endif
     #if(count(slots) > 0):
-        #if(conferenceEnded):
+        #if(!conferenceEnded):
             <br/>
             #extend("Home/_schedule")
         #endif
