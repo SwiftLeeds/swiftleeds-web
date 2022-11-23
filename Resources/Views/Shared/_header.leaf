@@ -27,13 +27,15 @@
     <div class="justify-content-end collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav top-nav nav">
         <!-- <a class="nav-link text-dark" href="../#tickets">Tickets</a> -->
-        <a class="nav-link text-dark" href="../#speakers">Speakers</a>
-        <a class="nav-link text-dark" href="../#schedule">Schedule</a>
+        <!-- <a class="nav-link text-dark" href="../#speakers">Speakers</a> -->
+        <!-- <a class="nav-link text-dark" href="../#schedule">Schedule</a> -->
+        <a class="nav-link text-dark" href="../#previous">Previous</a>
         <a class="nav-link text-dark" href="../#venue">Venue</a>
         <a class="nav-link text-dark" href="../#sponsors">Sponsors</a>
         <a class="nav-link text-dark" href="https://twitter.com/swift_leeds" target="_blank"><img src="/img/twitter.png" alt="twitter"/></a>
         <a class="nav-link text-dark" href="https://www.youtube.com/channel/UCCq1K0eWKZFBCpqaC3n8V1g" target="_blank"><img src="/img/youtube.png" alt="youtube"/></a>
         <a class="nav-link text-dark" href="https://join.slack.com/t/swiftleedsworkspace/shared_invite/zt-wkmr6pif-ZDCdDeHM60jcBUy0BxHdCQ" target="_blank"><img src="/img/slack.png" alt="slack"/></a>
+        <a class="nav-link text-dark" href="https://www.flickr.com/photos/196979204@N02/albums/72177720303878744" target="_blank"><img src="/img/flickr.png" alt="flickr"/></a>
       </div>
     </div>
   </div>
