@@ -36,16 +36,22 @@
   <div class="container">
     #extend("Home/_about-us")
     <br/>
+    #extend("Home/_highlights")
+    <br/>
     #if(ticketsEnabled):
         #extend("Home/_order-tickets")
     #endif
     #if(count(speakers) > 0):
-        <br/>
-        #extend("Home/_speakers")
+        #if(conferenceEnded):
+            <br/>
+            #extend("Home/_speakers")
+        #endif
     #endif
     #if(count(slots) > 0):
-        <br/>
-        #extend("Home/_schedule")
+        #if(conferenceEnded):
+            <br/>
+            #extend("Home/_schedule")
+        #endif
     #endif
     <br/>
     #extend("Home/_location")
