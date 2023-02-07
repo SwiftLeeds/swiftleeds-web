@@ -13,6 +13,19 @@ struct SponsorViewController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         routes.get(use: onCreate)
         routes.get(":id", use: onEdit)
+        routes.get("delete", ":id", use: onDelete)
+    }
+    
+    private func onDelete(request: Request) async throws -> Response {
+        guard let sponsor = try await Sponsor.find(request.parameters.get("id"), on: request.db) else {
+            throw Abort(.notFound)
+        }
+        
+        let events = try await Event.query(on: request.db).all()
+        
+        try await sponsor.delete(on: request.db)
+        
+        return request.redirect(to: "/admin?page=sponsors")
     }
         
     private func onCreate(request: Request) async throws -> View {
