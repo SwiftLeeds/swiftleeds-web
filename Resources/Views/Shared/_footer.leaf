@@ -30,7 +30,7 @@
 
   <div class="row">
     <p class="col-4">
-      Copyright &copy; 2022 SwiftLeeds
+      #copyright(2021, "SwiftLeeds")
     </p>
 
     <p class="col-4">
