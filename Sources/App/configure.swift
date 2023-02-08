@@ -11,6 +11,7 @@ public func configure(_ app: Application) throws {
     app.middleware.use(User.sessionAuthenticator())
 
     // Leaf
+    app.leaf.tags["copyright"] = CopyrightTag()
     app.leaf.tags["dateFormat"] = NowTag()
     app.leaf.tags["markdown"] = Markdown()
     app.leaf.tags["awsImage"] = AwsImageTag()
