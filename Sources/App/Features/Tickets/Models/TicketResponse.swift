@@ -6,5 +6,5 @@ struct TicketResponse: Content {
     let lastName: String
     let company: String?
     let avatarUrl: URL?
-    let responses: [String: String]?
+    let responses: [String: String]
 }

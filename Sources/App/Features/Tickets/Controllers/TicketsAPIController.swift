@@ -18,7 +18,7 @@ struct TicketsAPIController: RouteCollection {
             throw Abort(.badRequest, reason: "Ticket identifier was not provided as 'stub' URL parameter")
         }
         
-        let url = "https://api.tito.io/v3/swiftleeds/\(event)/tickets/\(stub)?view=short"
+        let url = "https://api.tito.io/v3/swiftleeds/\(event)/tickets/\(stub)"
         
         let response = try await request.client.get(URI(string: url), headers: [
             "Authorization": "Token token=\(auth)",
