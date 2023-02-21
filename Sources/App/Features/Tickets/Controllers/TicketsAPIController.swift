@@ -14,10 +14,11 @@ struct TicketsAPIController: RouteCollection {
             throw Abort(.badRequest, reason: "Event parameter was not provided to GET request")
         }
         
-        guard let stub: String = try request.query.get(at: "stub") else { // example: ti_xxxxxxxxxxxxxxxxxxx
+        guard let stubInput: String = try request.query.get(at: "stub") else { // example: ti_xxxxxxxxxxxxxxxxxxx
             throw Abort(.badRequest, reason: "Ticket identifier was not provided as 'stub' URL parameter")
         }
         
+        let stub = stubInput.replacingOccurrences(of: "[^A-Za-z0-9_]", with: "", options: .regularExpression)
         let url = "https://api.tito.io/v3/swiftleeds/\(event)/tickets/\(stub)"
         
         let response = try await request.client.get(URI(string: url), headers: [
