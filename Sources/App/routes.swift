@@ -19,6 +19,8 @@ func routes(_ app: Application) throws {
             let silverSponsors = sponsorQuery.filter { $0.sponsorLevel == .silver }
             let goldSponsors = sponsorQuery.filter { $0.sponsorLevel == .gold }
             
+            let pastSponsorQuery = try await PastSponsor.query(on: req.db).all()
+            
             let slots = try await Slot.query(on: req.db)
                 .with(\.$activity)
                 .with(\.$presentation) { presentation in
@@ -37,7 +39,8 @@ func routes(_ app: Application) throws {
                 slots: slots,
                 platinumSponsors: platinumSponsors,
                 silverSponsors: silverSponsors,
-                goldSponsors: goldSponsors
+                goldSponsors: goldSponsors,
+                pastSponsors: pastSponsorQuery
             ))
         } catch {
             return try await req.view.render("Home/home", HomeContext(cfpEnabled: cfpExpirationDate > Date()))
@@ -76,6 +79,7 @@ func routes(_ app: Application) throws {
     try apiRoutes.grouped("sponsors").register(collection: SponsorAPIController())
     try apiRoutes.grouped("schedule").register(collection: ScheduleAPIControllerV2())
     try apiRoutes.grouped("local").register(collection: LocalAPIController())
+    try apiRoutes.grouped("past-sponsors").register(collection: PastSponsorAPIController())
 
     // MARK: - Admin Routes
     
@@ -100,6 +104,8 @@ func routes(_ app: Application) throws {
         let platinumSponsors = sponsorQuery.filter { $0.sponsorLevel == .platinum }
         let silverSponsors = sponsorQuery.filter { $0.sponsorLevel == .silver }
         let goldSponsors = sponsorQuery.filter { $0.sponsorLevel == .gold }
+        
+        let pastSponsors = try await PastSponsor.query(on: request.db).all()
 
         return try await request.view.render(
             "Admin/home",
@@ -112,6 +118,7 @@ func routes(_ app: Application) throws {
                 platinumSponsors: platinumSponsors,
                 silverSponsors: silverSponsors,
                 goldSponsors: goldSponsors,
+                pastSponsors: pastSponsors,
                 page: (query ?? PageQuery(page: "speakers")).page,
                 user: user
             )
@@ -122,6 +129,7 @@ func routes(_ app: Application) throws {
     try adminRoutes.grouped("slots").register(collection: SlotViewController())
     try adminRoutes.grouped("activities").register(collection: ActivityViewController())
     try adminRoutes.grouped("sponsors").register(collection: SponsorViewController())
+    try adminRoutes.grouped("past-sponsors").register(collection: PastSponsorViewController())
 }
 
 struct PageQuery: Content {
@@ -137,6 +145,7 @@ struct AdminContext: Content {
     var platinumSponsors: [Sponsor] = []
     var silverSponsors: [Sponsor] = []
     var goldSponsors: [Sponsor] = []
+    var pastSponsors: [PastSponsor] = []
     var page: String
     var user: User
 }

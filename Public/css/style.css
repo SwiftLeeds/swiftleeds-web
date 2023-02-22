@@ -550,6 +550,70 @@ ul.tickets li a {
     vertical-align: text-top;
 }
 
+/* Past Sponsors Grid */
+.past-sponsor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 4rem;
+  margin: 0 auto;
+  max-width: 100%;
+  padding-top: 32px 0px 32px 0px;
+}
+
+.past-sponsor-grid-subhead {
+  padding-top: 16px;
+  font-weight: 600;
+}
+
+.past-sponsor {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.past-sponsor > a {
+    text-align: center;
+    display: block;
+    height:100%;
+}
+
+.past-sponsor-img {
+    aspect-ratio: 1.8;
+    width: 100%;
+    object-fit: contain;
+}
+
+.past-sponsor-thumbnail-img {
+    height: 200px;
+    aspect-ratio: 1.8;
+    object-fit: contain;
+}
+
+.past-sponsor-grid-divider {
+    width: 100%;
+    height: 1px;
+    border: 1px solid var(--border-color);
+    margin: 1em;
+}
+
+@media only screen and (min-width: 768px) {
+    .past-sponsor-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .past-sponsor-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+    .past-sponsor-img {
+        aspect-ratio: auto;
+        padding-bottom: 16px;
+    }
+}
+
 
 /* Sponsors Grid */
 .sponsor-grid {
@@ -625,4 +689,10 @@ ul.tickets li a {
 
 .markdown li {
   list-style-type: inherit;
+}
+
+/* Admin CSS */
+
+.accordion-body {
+    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important
 }

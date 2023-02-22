@@ -54,15 +54,18 @@
         #endif
     #endif
     <br/>
+    #if(count(platinumSponsors) > 0 || count(goldSponsors) > 0 || count(silverSponsors) > 0):
+    <br/>
+        #extend("Home/_sponsors")
+    #endif
+    <br />
     #extend("Home/_location")
     <br />
     #extend("Home/_travel")
     <br />
     #extend("Home/_previous-conferences")
-    #if(count(platinumSponsors) > 0 || count(goldSponsors) > 0 || count(silverSponsors) > 0):
-        <br/>
-        #extend("Home/_sponsors")
-    #endif
+    <br />
+    #extend("Home/_past-sponsors")
   </div>
   
   #extend("Shared/_footer")

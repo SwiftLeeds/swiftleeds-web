@@ -1,0 +1,31 @@
+<h1>Past Sponsors</h1>
+
+<ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="/admin/past-sponsors">Add new past sponsor</a>
+    </li>
+</ul>
+
+</br>
+
+<ul class="list-group">
+    <li class="list-group-item list-group-item-secondary disabled d-flex justify-content-between align-items-center">
+        All Sponsors
+    </li>
+    #if(count(pastSponsors) > 0):
+        #for(sponsor in pastSponsors):
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            #(sponsor.name)
+            <span class="badge badge-primary badge-pill">
+                <a href="/admin/past-sponsors/delete/#(sponsor.id)">🗑</a>
+                &nbsp
+                <a href="/admin/past-sponsors/#(sponsor.id)">✏️</a>
+            </span>
+        </li>
+        #endfor
+    #else:
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            No past sponsors
+        </li>
+    #endif
+</ul>

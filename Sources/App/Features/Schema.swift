@@ -30,6 +30,10 @@ enum Schema {
     static var sponsor: String {
         return "sponsors"
     }
+    
+    static var pastSponsors: String {
+        return "past_sponsors"
+    }
 
     static var location: String {
         return "locations"

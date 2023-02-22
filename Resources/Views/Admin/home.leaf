@@ -22,6 +22,8 @@
                         #extend("Admin/slots")
                     #elseif(page == "sponsors"):
                         #extend("Admin/sponsors")
+                    #elseif(page == "past-sponsors"):
+                        #extend("Admin/past-sponsors")
                     #endif
                 </div>
             </div>

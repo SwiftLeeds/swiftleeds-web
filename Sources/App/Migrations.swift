@@ -50,6 +50,8 @@ class Migrations {
         // Presentation: remove unused image field
         app.migrations.add(PresentationMigrationV4())
         
+        app.migrations.add(PastSponsorMigration())
+        
         do {
             guard let url = Environment.get("DATABASE_URL") else {
                 throw Abort(.internalServerError, reason: "Missing 'DATABASE_URL' environment variable")

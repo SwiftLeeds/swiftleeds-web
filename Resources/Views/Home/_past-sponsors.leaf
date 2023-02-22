@@ -1,0 +1,16 @@
+<div class="row align-items-start">
+  <div class="col-lg-3 col-sm-6">
+    <h2 id="previous">
+      Past<br>
+      Sponsors
+    </h2>
+    <br />
+  </div>
+
+<div class="past-sponsor-grid">
+        #for(sponsor in pastSponsors):
+            <a href="#(sponsor.url)" target="_blank"><img src="#awsImage(sponsor.image)" class="img-thumbnail" alt=""></a>
+        #endfor
+    </div>
+
+</div>
