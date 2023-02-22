@@ -76,6 +76,7 @@ func routes(_ app: Application) throws {
     try apiRoutes.grouped("sponsors").register(collection: SponsorAPIController())
     try apiRoutes.grouped("schedule").register(collection: ScheduleAPIControllerV2())
     try apiRoutes.grouped("local").register(collection: LocalAPIController())
+    try apiRoutes.grouped("tickets").register(collection: TicketsAPIController())
 
     // MARK: - Admin Routes
     
