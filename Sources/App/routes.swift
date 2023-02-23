@@ -1,6 +1,6 @@
 import Vapor
 
-let cfpExpirationDate = Date(timeIntervalSince1970: 1651356000) // 30th April 22
+let cfpExpirationDate = Date(timeIntervalSince1970: 1682855940) // 30th April 23
 
 func routes(_ app: Application) throws {
     // MARK: - Web Routes
