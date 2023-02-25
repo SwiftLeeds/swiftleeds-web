@@ -37,14 +37,61 @@
         <h1>#(group.title)</h1>
 
         #for(slot in group.slots):
-          <li class="list-group-item #if(slot.isOwner):active#elseif(slot.owner):disabled#endif">
-            #date(slot.date, "HH:mm")
+          <!-- Button trigger modal -->
+          <button type="button" class="list-group-item list-group-item-action flex-column align-items-start #if(slot.isOwner):active#elseif(slot.owner):disabled#endif" data-bs-toggle="modal" data-bs-target="#slot-#(slot.id)">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">#date(slot.date, "HH:mm")</h5>
+            </div>
 
-            #if(slot.owner):
-            &dash; #(slot.owner)
+            #if(slot.isOwner):
+            <small>This slot is your session!</small>
+            #elseif(slot.owner):
+            <small>This slot is taken by #(slot.owner).</small>
+            #else:
+            <small>This slot is available.</small>
             #endif
-            
-          </li>
+          </button>
+
+          #if(slot.isOwner):
+          <!-- Modal -->
+          <div class="modal fade" id="slot-#(slot.id)" tabindex="-1" aria-labelledby="slot-#(slot.id)-title" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="slot-#(slot.id)-title">Cancel Drop-in Session</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  This will cancel your 15 minute session with #(session.owner) at #date(slot.date, "HH:mm") on #date(slot.date, "dd/MM/yyyy").
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Modal (Keep Session)</button>
+                  <button type="button" class="btn btn-danger">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          #else:
+          <!-- Modal -->
+          <div class="modal fade" id="slot-#(slot.id)" tabindex="-1" aria-labelledby="slot-#(slot.id)-title" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="slot-#(slot.id)-title">Book Drop-in Session</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  This will reserve a 15 minute session with #(session.owner) at #date(slot.date, "HH:mm") on #date(slot.date, "dd/MM/yyyy").
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Modal</button>
+                  <button type="button" class="btn btn-primary">Book</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          #endif
+
         #endfor
       #endfor
     </ul>
