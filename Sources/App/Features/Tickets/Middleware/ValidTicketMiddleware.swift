@@ -8,6 +8,25 @@ struct ValidTicketMiddleware: AsyncMiddleware {
     }
     
     func respond(to request: Request, chainingTo next: AsyncResponder) async throws -> Response {
+        #if DEBUG
+        // append ?skipTicket=true to route in debug builds in order to bypass tito
+        if request.application.environment.isRelease == false {
+            let value: String? = try? request.query.get(at: "skipTicket")
+            
+            if value == "true" {
+                request.storage.set(TicketStorage.self, to: .init(
+                    first_name: "James",
+                    last_name: "Sherlock",
+                    company: nil,
+                    avatar_url: nil,
+                    responses: [:]
+                ))
+                
+                return try await next.respond(to: request)
+            }
+        }
+        #endif
+        
         let returnUrl = request.url.path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             .map { "?returnUrl=" + $0 } ?? ""
         
