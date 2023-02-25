@@ -20,7 +20,7 @@
     <div class="card mb-3">
       <div class="row no-gutters pt-0">
         <div class="col-md-4">
-          <img src="#(session.ownerImageUrl)" class="card-img" alt="#(session.owner) avatar image">
+          <img src="#awsImage(session.ownerImageUrl)" class="card-img" alt="#(session.owner) avatar image">
         </div>
         <div class="col-md-8">
           <div class="card-body">

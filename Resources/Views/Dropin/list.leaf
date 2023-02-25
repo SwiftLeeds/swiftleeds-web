@@ -23,7 +23,7 @@
     #for(session in sessions):
       <div class="col">
       <div class="card h-100">
-        <img src="#(session.ownerImageUrl)" class="card-img-top" alt="#(session.owner) avatar image">
+        <img src="#awsImage(session.ownerImageUrl)" class="card-img-top" alt="#(session.owner) avatar image">
         <div class="card-body">
           <h5 class="card-title">#(session.title)</h5>
           <p class="card-text">By <a href="#(session.ownerLink)" target="_blank">#(session.owner)</a></p>
