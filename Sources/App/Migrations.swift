@@ -53,6 +53,7 @@ class Migrations {
         // Drop-in Sessions
         app.migrations.add(AddDropInSessionMigration())
         app.migrations.add(AddDropInSessionSlotsMigration())
+        app.migrations.add(EventMigrationV2())
         
         do {
             guard let url = Environment.get("DATABASE_URL") else {

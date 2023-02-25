@@ -3,15 +3,16 @@ import Vapor
 
 struct DropInRouteController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
-        // TODO: (James) load current event from DB
-        let dbEventId = UUID(uuidString: "a6b202de-6135-4e71-bdb0-290ecff798a8")!
-        
         routes.grouped(ValidTicketMiddleware()).group("drop-in") { builder in
             // list available sessions
             builder.get { req async throws -> View in
+                guard let currentEvent = try await Event.query(on: req.db).filter(\.$isCurrent == true).first() else {
+                    throw Abort(.badRequest, reason: "unable to identify current event")
+                }
+                
                 let sessions = try await DropInSession.query(on: req.db)
                     .with(\.$event)
-                    .filter(\.$event.$id == dbEventId)
+                    .filter(\.$event.$id == currentEvent.requireID())
                     .sort(.id)
                     .all()
                 
@@ -80,7 +81,6 @@ struct DropInSessionViewModel: Codable {
     init(model: DropInSession, availability: String) {
         self.id = model.id?.uuidString ?? ""
         self.title = model.title
-        print(model.description)
         self.description = model.description
         self.owner = model.owner
         self.ownerImageUrl = model.ownerImageUrl
