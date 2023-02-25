@@ -17,6 +17,21 @@
       </div>
     </header>
 
+<div class="card mb-3">
+  <div class="row no-gutters pt-0">
+    <div class="col-md-4">
+      <img src="#(session.ownerImageUrl)" class="card-img" alt="#(session.owner) avatar image">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">#(session.title)</h5>
+        <p class="card-text">By <a href="#(session.ownerLink)" target="_blank">#(session.owner)</a></p>
+        <p class="card-text">#markdown(session.description)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
     <ul class="list-group">
       #for(group in slots):
         <h1>#(group.title)</h1>
