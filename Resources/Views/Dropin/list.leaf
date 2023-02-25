@@ -1,0 +1,41 @@
+#extend("base"):
+  #export("title", "SwiftLeeds")
+
+  #export("content"):
+    #extend("Shared/_header")
+
+    <header class="my-3">
+      <div class="container-sm">
+        <div>
+          <h1 class="display-4">
+            Book your <strong>free</strong><br/>
+            drop-in session
+          </h1>
+          
+          <img src="/img/header-bg.png" class="child-img"/>
+        </div>
+      </div>
+    </header>
+
+    <div class="row row-cols-1 row-cols-md-4 row-cols-sm-2 g-4">
+    #for(session in sessions):
+      <div class="col">
+      <div class="card h-100">
+        <img src="#(session.ownerImageUrl)" class="card-img-top" alt="#(session.owner) avatar image">
+        <div class="card-body">
+          <h5 class="card-title">#(session.title)</h5>
+          <p class="card-text">By <a href="#(session.ownerLink)" target="_blank">#(session.owner)</a></p>
+          <p class="card-text">#markdown(session.description)</p>
+        </div>
+        <div class="card-footer text-center">
+          <a href="/drop-in/#(session.id)" class="btn btn-primary btn-block">View Slots</a>
+          <small class="text-muted d-block mt-2">#(session.availability)</small>
+        </div>
+      </div>
+      </div>
+    #endfor
+    </div>
+  
+    #extend("Shared/_footer")
+  #endexport
+  #endextend
