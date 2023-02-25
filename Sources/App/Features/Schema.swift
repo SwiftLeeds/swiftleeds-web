@@ -42,4 +42,12 @@ enum Schema {
     static var tokens: String {
         return "tokens"
     }
+    
+    static var dropInSessions: String {
+        return "dropin_sessions"
+    }
+    
+    static var dropInSessionSlots: String {
+        return "dropin_session_slots"
+    }
 }

@@ -1,31 +1,55 @@
+import Fluent
 import Vapor
 
 struct DropInRouteController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
+        // TODO: (James) load current event from DB
+        let dbEventId = UUID(uuidString: "a6b202de-6135-4e71-bdb0-290ecff798a8")!
+        
         routes.grouped(ValidTicketMiddleware()).group("drop-in") { builder in
             // list available sessions
             builder.get { req async throws -> View in
-                guard let ticket = req.storage.get(TicketStorage.self) else {
-                    throw Abort(.unauthorized, reason: "Ticket not present in session storage")
+                let sessions = try await DropInSession.query(on: req.db)
+                    .with(\.$event)
+                    .filter(\.$event.$id == dbEventId)
+                    .sort(.id)
+                    .all()
+                
+                let viewModels = sessions.map {
+                    DropInSessionViewModel(model: $0, availability: "TODO")
                 }
                 
                 return try await req.leaf.render(
                     "Dropin/list",
-                    DropInSessionListContext(sessions: DropInSession.sessions)
+                    DropInSessionListContext(sessions: viewModels)
                 )
             }
             
             // list available slots for given session
             builder.get(":session") { req async throws -> Response in
+                guard let ticket = req.storage.get(TicketStorage.self) else {
+                    throw Abort(.unauthorized, reason: "Ticket not present in session storage")
+                }
+                
                 let sessionKey: String = try req.parameters.require("session")
                 
-                guard let session = DropInSession.sessions.first(where: { $0.id == sessionKey }) else {
+                guard let sessionKeyUUID = UUID(uuidString: sessionKey) else {
                     return try await req.redirect(to: "/drop-in").encodeResponse(for: req)
                 }
                 
+                let sessionOpt = try await DropInSession.query(on: req.db)
+                    .filter(\.$id == sessionKeyUUID)
+                    .first()
+                
+                guard let session = sessionOpt else {
+                    return try await req.redirect(to: "/drop-in").encodeResponse(for: req)
+                }
+                
+                let viewModel = DropInSessionViewModel(model: session, availability: "")
+                
                 return try await req.leaf.render(
                     "Dropin/slots",
-                    DropInSessionSlotsContext(session: session)
+                    DropInSessionSlotsContext(session: viewModel)
                 ).encodeResponse(for: req)
             }
             
@@ -44,82 +68,31 @@ struct DropInRouteController: RouteCollection {
     }
 }
 
-struct DropInSession: Codable {
+struct DropInSessionViewModel: Codable {
     let id: String
     let title: String
     let description: String
     let owner: String
-    let ownerImageUrl: String
-    let ownerLink: String
+    let ownerImageUrl: String?
+    let ownerLink: String?
     let availability: String
+    
+    init(model: DropInSession, availability: String) {
+        self.id = model.id?.uuidString ?? ""
+        self.title = model.title
+        print(model.description)
+        self.description = model.description
+        self.owner = model.owner
+        self.ownerImageUrl = model.ownerImageUrl
+        self.ownerLink = model.ownerLink
+        self.availability = availability
+    }
 }
 
 struct DropInSessionListContext: Content {
-    let sessions: [DropInSession]
+    let sessions: [DropInSessionViewModel]
 }
 
 struct DropInSessionSlotsContext: Content {
-    let session: DropInSession
-}
-
-extension DropInSession {
-    static var sessions: [DropInSession] = [
-        .init(
-            id: "1",
-            title: "App Design Review",
-            description: """
-            We are excited to have Hidde van der Ploeg available to provide a design review of your iOS application.
-
-            You will be allocated a timeslot throughout the day of the conference, and you can sit down, ask questions and get the opinion of a design expert.
-            """,
-            owner: "Hidde van der Ploeg",
-            ownerImageUrl: "https://pbs.twimg.com/profile_images/1597353545904316417/Zpow22F5_400x400.jpg",
-            ownerLink: "https://twitter.com/hiddevdploeg",
-            availability: "No slots available"
-        ),
-        
-        .init(
-            id: "2",
-            title: "App Store Optimization Review",
-            description: """
-            We are excited to have Ariel from AppFigures available to provide a full App Store Optimization review of your app.
-
-            You will be allocated a timeslot throughout the day of the conference, and you can sit down, ask questions and get the opinion of an ASO expert.
-            """,
-            owner: "Ariel from Appfigures",
-            ownerImageUrl: "https://pbs.twimg.com/profile_images/1609004676774592513/y4oh0Nb__400x400.jpg",
-            ownerLink: "https://twitter.com/arielmichaeli",
-            availability: "16 slots available"
-        ),
-    
-        .init(
-            id: "3",
-            title: "Indie Developer App Review",
-            description: """
-            Do you have an Indie App you would like to get **FREE** advice about?
-
-            Jordi Bruin will be onsite, ready to answer your questions about your app and help you with anything that you might be struggling with, code or otherwise.
-
-            Jordi Bruin is a world-class Indie app developer and was recently nominated for an Apple Design Award. Slots will be limited and on a first-come, first-serve basis. By opting for this in your ticket, you'll be provided with a set day and time for meeting Jordi Bruin in a 1-1 meeting.
-
-            **Please note;** you must only opt for this if your app is built by you independently and isn't a company application.
-            """,
-            owner: "Jordi Bruin",
-            ownerImageUrl: "https://pbs.twimg.com/profile_images/1302138759677345792/Tp9T2p2C_400x400.jpg",
-            ownerLink: "https://twitter.com/jordibruin",
-            availability: "1 slot available"
-        ),
-    
-        .init(
-            id: "4",
-            title: "App Accessibility Review",
-            description: """
-            todo
-            """,
-            owner: "Daniel Devesa Derksen-Staats",
-            ownerImageUrl: "https://pbs.twimg.com/profile_images/472077462596096001/O87Gvgjg_400x400.jpeg",
-            ownerLink: "https://twitter.com/dadederk",
-            availability: "31 slots available"
-        )
-    ]
+    let session: DropInSessionViewModel
 }

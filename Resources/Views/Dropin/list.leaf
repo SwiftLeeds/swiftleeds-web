@@ -17,6 +17,8 @@
       </div>
     </header>
 
+    <p>Drop-in sessions are new to SwiftLeeds 2023. Every attendee is entitled to a single 15-minute session with one of our fantastic hosts.</p>
+
     <div class="row row-cols-1 row-cols-md-4 row-cols-sm-2 g-4">
     #for(session in sessions):
       <div class="col">
