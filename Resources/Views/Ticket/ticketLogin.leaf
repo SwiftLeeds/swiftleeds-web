@@ -1,0 +1,43 @@
+#extend("base"):
+  #export("title", "SwiftLeeds")
+
+  #export("content"):
+    #extend("Shared/_header")
+
+    <header class="my-3">
+      <div class="container-sm">
+        <div>
+          <h1 class="display-4">
+            Login with <br/>
+            <strong>your ticket</strong>
+          </h1>
+          
+          <img src="/img/header-bg.png" class="child-img"/>
+        </div>
+      </div>
+    </header>
+
+    <div class="row">
+      <form class="col-6" method="POST" action="/ticketLogin/validate">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" aria-describedby="email" name="email">
+          <div id="emailHelp" class="form-text">The email address of the ticket holder.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="ticket" class="form-label">Ticket Reference</label>
+          <input type="text" class="form-control" id="ticket" name="ticket">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <div class="col-6">
+        <img src="/img/header-bg.png" class="child-img">
+      </div>
+    </div>
+  
+    #extend("Shared/_footer")
+  #endexport
+  #endextend
