@@ -17,20 +17,24 @@
       </div>
     </header>
 
-<div class="card mb-3">
-  <div class="row no-gutters pt-0">
-    <div class="col-md-4">
-      <img src="#(session.ownerImageUrl)" class="card-img" alt="#(session.owner) avatar image">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">#(session.title)</h5>
-        <p class="card-text">By <a href="#(session.ownerLink)" target="_blank">#(session.owner)</a></p>
-        <p class="card-text">#markdown(session.description)</p>
+    <div class="card mb-3">
+      <div class="row no-gutters pt-0">
+        <div class="col-md-4">
+          <img src="#(session.ownerImageUrl)" class="card-img" alt="#(session.owner) avatar image">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">#(session.title)</h5>
+            <p class="card-text">By <a href="#(session.ownerLink)" target="_blank">#(session.owner)</a></p>
+            <p class="card-text">#markdown(session.description)</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+
+    #if(prompt):
+    <div class="alert alert-secondary" role="alert">#(prompt)</div>
+    #endif
 
     <ul class="list-group">
       #for(group in slots):
@@ -66,7 +70,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Modal (Keep Session)</button>
-                  <button type="button" class="btn btn-danger">Cancel</button>
+                  <a href="/drop-in/#(session.id)/cancel/#(slot.id)" class="btn btn-danger">Cancel</a>
                 </div>
               </div>
             </div>
@@ -85,7 +89,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Modal</button>
-                  <button type="button" class="btn btn-primary">Book</button>
+                  <a href="/drop-in/#(session.id)/book/#(slot.id)" class="btn btn-primary">Book</a>
                 </div>
               </div>
             </div>

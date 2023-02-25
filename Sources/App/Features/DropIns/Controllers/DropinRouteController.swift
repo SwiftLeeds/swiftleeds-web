@@ -75,21 +75,99 @@ struct DropInRouteController: RouteCollection {
                     "Dropin/slots",
                     DropInSessionSlotsContext(
                         session: DropInSessionViewModel(model: session),
-                        slots: slotModelsGrouped
+                        slots: slotModelsGrouped,
+                        prompt: req.query["prompt"]
                     )
                 ).encodeResponse(for: req)
             }
             
             // return slot back to pool
-            builder.delete(":session") { req in
-                // let session = try req.parameters.require("session")
-                return "deleted"
+            builder.get(":session", "cancel", ":slot") { req async throws in
+                guard let ticket = req.storage.get(TicketStorage.self) else {
+                    throw Abort(.unauthorized, reason: "Ticket not present in session storage")
+                }
+                
+                let sessionID = try req.parameters.require("session")
+                let slotID = try req.parameters.require("slot")
+                
+                guard let slotUUID = UUID(uuidString: slotID) else {
+                    // slot ID not valid
+                    return req.redirect(to: "/drop-in/\(sessionID)")
+                }
+                
+                guard let slot = try await DropInSessionSlot.query(on: req.db).filter(\.$id == slotUUID).first() else {
+                    // slot not found
+                    return req.redirect(to: "/drop-in/\(sessionID)")
+                }
+                
+                guard slot.ticket == ticket.slug else {
+                    // it's not their ticket!
+                    let message = "This is not your ticket to cancel."
+                        .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                    
+                    return req.redirect(to: "/drop-in/\(sessionID)?prompt=\(message ?? "")")
+                }
+                
+                // clear our ticket
+                slot.ticket = nil
+                slot.ticketOwner = nil
+                try await slot.save(on: req.db)
+                
+                let message = "Session cancelled, you may book another slot now."
+                    .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                
+                return req.redirect(to: "/drop-in/\(sessionID)?prompt=\(message ?? "")")
             }
             
             // claim slot from pool
-            builder.put(":session") { req in
-                // let session = try req.parameters.require("session")
-                return "inserted"
+            builder.get(":session", "book", ":slot") { req in
+                guard let ticket = req.storage.get(TicketStorage.self) else {
+                    throw Abort(.unauthorized, reason: "Ticket not present in session storage")
+                }
+                
+                let sessionID = try req.parameters.require("session")
+                let slotID = try req.parameters.require("slot")
+                
+                guard let slotUUID = UUID(uuidString: slotID) else {
+                    // slot ID not valid
+                    return req.redirect(to: "/drop-in/\(sessionID)")
+                }
+                
+                guard let slot = try await DropInSessionSlot.query(on: req.db).filter(\.$id == slotUUID).first() else {
+                    // slot not found
+                    return req.redirect(to: "/drop-in/\(sessionID)")
+                }
+                
+                guard slot.ticket == nil else {
+                    // ticket is already taken!
+                    let message = "This session has already been taken."
+                        .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                    
+                    return req.redirect(to: "/drop-in/\(sessionID)?prompt=\(message ?? "")")
+                }
+                
+                let existingSlot = try await DropInSessionSlot
+                    .query(on: req.db)
+                    .filter(\.$ticket == ticket.slug)
+                    .first()
+                
+                if existingSlot != nil {
+                    // they already have a slot booked
+                    let message = "You already have a session booked, please cancel it first before booking another."
+                        .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                    
+                    return req.redirect(to: "/drop-in/\(sessionID)?prompt=\(message ?? "")")
+                }
+                
+                // update ticket owner
+                slot.ticket = ticket.slug
+                slot.ticketOwner = ticket.first_name + " " + ticket.last_name
+                try await slot.save(on: req.db)
+                
+                let message = "Session booked, see you in Leeds!"
+                    .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                
+                return req.redirect(to: "/drop-in/\(sessionID)?prompt=\(message ?? "")")
             }
         }
     }
@@ -153,4 +231,5 @@ struct DropInSessionSlotsContext: Content {
     
     let session: DropInSessionViewModel
     let slots: [SlotGroup]
+    let prompt: String?
 }
