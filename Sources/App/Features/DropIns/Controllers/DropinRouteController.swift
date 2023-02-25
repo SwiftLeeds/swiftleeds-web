@@ -41,17 +41,42 @@ struct DropInRouteController: RouteCollection {
                 
                 let sessionOpt = try await DropInSession.query(on: req.db)
                     .filter(\.$id == sessionKeyUUID)
+                    .with(\.$slots)
                     .first()
                 
                 guard let session = sessionOpt else {
                     return try await req.redirect(to: "/drop-in").encodeResponse(for: req)
                 }
                 
-                let viewModel = DropInSessionViewModel(model: session)
+                let slotModels: [DropInSessionSlotsContext.Slot] = session.slots.compactMap {
+                    guard let id = $0.id?.uuidString else {
+                        return nil
+                    }
+                    
+                    return DropInSessionSlotsContext.Slot(
+                        id: id,
+                        date: $0.date,
+                        owner: $0.ticketOwner,
+                        isOwner: $0.ticket == ticket.slug
+                    )
+                }.sorted(by: { $0.date < $1.date }) // sort times so they're in order on the day
+                
+                // group by the day of the week (Wednesday, Thursday, etc)
+                let slotModelsGrouped = Dictionary(grouping: slotModels) { slot in slot.date.dayNumberOfWeek() ?? -1 }
+                    // order (Wednesday before Thursday)
+                    .sorted(by: { $0.key < $1.key })
+                    // enumerate them to turn into conference day number
+                    .enumerated()
+                    .map { (offset, result) in
+                        DropInSessionSlotsContext.SlotGroup(title: "Day \(offset + 1)", slots: result.value)
+                    }
                 
                 return try await req.leaf.render(
                     "Dropin/slots",
-                    DropInSessionSlotsContext(session: viewModel)
+                    DropInSessionSlotsContext(
+                        session: DropInSessionViewModel(model: session),
+                        slots: slotModelsGrouped
+                    )
                 ).encodeResponse(for: req)
             }
             
@@ -67,6 +92,12 @@ struct DropInRouteController: RouteCollection {
                 return "inserted"
             }
         }
+    }
+}
+
+extension Date {
+    func dayNumberOfWeek() -> Int? {
+        return Calendar.current.dateComponents([.weekday], from: self).weekday
     }
 }
 
@@ -108,5 +139,18 @@ struct DropInSessionListContext: Content {
 }
 
 struct DropInSessionSlotsContext: Content {
+    struct Slot: Codable {
+        let id: String
+        let date: Date
+        let owner: String?
+        let isOwner: Bool
+    }
+    
+    struct SlotGroup: Codable {
+        let title: String
+        let slots: [Slot]
+    }
+    
     let session: DropInSessionViewModel
+    let slots: [SlotGroup]
 }

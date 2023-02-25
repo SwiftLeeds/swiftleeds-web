@@ -17,6 +17,7 @@ struct ValidTicketMiddleware: AsyncMiddleware {
                 request.storage.set(TicketStorage.self, to: .init(
                     first_name: "James",
                     last_name: "Sherlock",
+                    slug: "ti_test_p05Ch95xJS5AStInfa8whFA",
                     company: nil,
                     avatar_url: nil,
                     responses: [:]

@@ -16,6 +16,24 @@
         </div>
       </div>
     </header>
+
+    <ul class="list-group">
+      #for(group in slots):
+        <h1>#(group.title)</h1>
+
+        #for(slot in group.slots):
+          <li class="list-group-item #if(slot.isOwner):active#elseif(slot.owner):disabled#endif">
+            #date(slot.date, "HH:mm")
+
+            #if(slot.owner):
+            &dash; #(slot.owner)
+            #endif
+            
+          </li>
+        #endfor
+      #endfor
+    </ul>
+    
     
     #extend("Shared/_footer")
   #endexport
