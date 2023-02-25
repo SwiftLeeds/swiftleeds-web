@@ -29,6 +29,7 @@ struct TitoService {
         let stub = stub.replacingOccurrences(of: "[^A-Za-z0-9_]", with: "", options: .regularExpression)
         let url = "\(baseUrl)/\(event)/tickets/\(stub)"
         
+        // TODO: (James) apply in-memory caching to reduce latency and avoid tito rate limits
         let response = try await req.client.get(URI(string: url), headers: getHeaders())
         
         switch response.status.code {
