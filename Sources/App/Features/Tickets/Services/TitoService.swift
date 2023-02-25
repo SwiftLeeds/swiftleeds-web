@@ -1,24 +1,21 @@
 import Vapor
 
 struct TitoService {
-    
+    let baseUrl = "https://api.tito.io/v3/swiftleeds"
     let event: String
     
     func ticket(payload: TicketLoginPayload, req: Request) async throws -> TitoTicketsResponse.Ticket? {
-        let auth = try getToken()
-        let url = "https://api.tito.io/v3/swiftleeds/\(event)/tickets?search[states][]=complete"
+        let url = "\(baseUrl)/\(event)/tickets?search[states][]=complete"
         
-        let response = try await req.client.get(URI(string: url), headers: [
-            "Authorization": "Token token=\(auth)",
-            "Accept": "application/json"
-        ])
+        let response = try await req.client.get(URI(string: url), headers: getHeaders())
         
         // TODO: (James) if ticket is not on page one, go to page two, and three... etc
         let tickets = try response.content.decode(TitoTicketsResponse.self).tickets
         
         let ticketOpt = tickets.first(where: {
-            $0.reference == payload.ticket &&
-            $0.email == payload.email
+            // case insensitive comparisons
+            $0.reference.lowercased() == payload.ticket.lowercased() &&
+            $0.email.lowercased() == payload.email.lowercased()
         })
         
         guard let ticket = ticketOpt else {
@@ -29,14 +26,10 @@ struct TitoService {
     }
     
     func ticket(stub: String, req: Request) async throws -> TitoTicket? {
-        let auth = try getToken()
         let stub = stub.replacingOccurrences(of: "[^A-Za-z0-9_]", with: "", options: .regularExpression)
-        let url = "https://api.tito.io/v3/swiftleeds/\(event)/tickets/\(stub)"
+        let url = "\(baseUrl)/\(event)/tickets/\(stub)"
         
-        let response = try await req.client.get(URI(string: url), headers: [
-            "Authorization": "Token token=\(auth)",
-            "Accept": "application/json"
-        ])
+        let response = try await req.client.get(URI(string: url), headers: getHeaders())
         
         switch response.status.code {
         case 200: // ok
@@ -56,6 +49,15 @@ struct TitoService {
         }
         
         return auth
+    }
+    
+    private func getHeaders() throws -> HTTPHeaders {
+        let auth = try getToken()
+        
+        return [
+            "Authorization": "Token token=\(auth)",
+            "Accept": "application/json"
+        ]
     }
     
 }
