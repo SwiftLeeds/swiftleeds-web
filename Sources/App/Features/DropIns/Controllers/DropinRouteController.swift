@@ -13,11 +13,12 @@ struct DropInRouteController: RouteCollection {
                 let sessions = try await DropInSession.query(on: req.db)
                     .with(\.$event)
                     .filter(\.$event.$id == currentEvent.requireID())
+                    .with(\.$slots)
                     .sort(.id)
                     .all()
                 
                 let viewModels = sessions.map {
-                    DropInSessionViewModel(model: $0, availability: "TODO")
+                    DropInSessionViewModel(model: $0)
                 }
                 
                 return try await req.leaf.render(
@@ -46,7 +47,7 @@ struct DropInRouteController: RouteCollection {
                     return try await req.redirect(to: "/drop-in").encodeResponse(for: req)
                 }
                 
-                let viewModel = DropInSessionViewModel(model: session, availability: "")
+                let viewModel = DropInSessionViewModel(model: session)
                 
                 return try await req.leaf.render(
                     "Dropin/slots",
@@ -78,14 +79,27 @@ struct DropInSessionViewModel: Codable {
     let ownerLink: String?
     let availability: String
     
-    init(model: DropInSession, availability: String) {
+    init(model: DropInSession) {
         self.id = model.id?.uuidString ?? ""
         self.title = model.title
         self.description = model.description
         self.owner = model.owner
         self.ownerImageUrl = model.ownerImageUrl
         self.ownerLink = model.ownerLink
-        self.availability = availability
+        self.availability = Self.generateAvailabilityString(
+            slotCount: model.slots.filter { $0.ticket == nil }.count
+        )
+    }
+    
+    static func generateAvailabilityString(slotCount: Int) -> String {
+        switch slotCount {
+        case 0:
+            return "No slots available"
+        case 1:
+            return "1 slot available"
+        default:
+            return "\(slotCount) slots available"
+        }
     }
 }
 

@@ -28,7 +28,10 @@ final class DropInSession: Model, Content {
     var ownerLink: String?
     
     @Parent(key: "event_id")
-    public var event: Event
+    var event: Event
+    
+    @Children(for: \.$session)
+    var slots: [DropInSessionSlot]
     
     init() {}
 }
