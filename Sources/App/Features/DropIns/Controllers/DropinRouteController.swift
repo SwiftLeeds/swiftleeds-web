@@ -10,15 +10,23 @@ struct DropInRouteController: RouteCollection {
                 }
                 
                 return try await req.leaf.render(
-                    "Dropin/List",
+                    "Dropin/list",
                     DropInSessionListContext(sessions: DropInSession.sessions)
                 )
             }
             
             // list available slots for given session
-            builder.get(":session") { req in
-                // let session = try req.parameters.require("session")
-                return "session"
+            builder.get(":session") { req async throws -> Response in
+                let sessionKey: String = try req.parameters.require("session")
+                
+                guard let session = DropInSession.sessions.first(where: { $0.id == sessionKey }) else {
+                    return try await req.redirect(to: "/drop-in").encodeResponse(for: req)
+                }
+                
+                return try await req.leaf.render(
+                    "Dropin/slots",
+                    DropInSessionSlotsContext(session: session)
+                ).encodeResponse(for: req)
             }
             
             // return slot back to pool
@@ -48,6 +56,10 @@ struct DropInSession: Codable {
 
 struct DropInSessionListContext: Content {
     let sessions: [DropInSession]
+}
+
+struct DropInSessionSlotsContext: Content {
+    let session: DropInSession
 }
 
 extension DropInSession {

@@ -1,0 +1,22 @@
+#extend("base"):
+  #export("title", "SwiftLeeds")
+
+  #export("content"):
+    #extend("Shared/_header")
+
+    <header class="my-3">
+      <div class="container-sm">
+        <div>
+          <h1 class="display-4">
+            Book your <strong>free</strong><br/>
+            drop-in session
+          </h1>
+          
+          <img src="/img/header-bg.png" class="child-img"/>
+        </div>
+      </div>
+    </header>
+    
+    #extend("Shared/_footer")
+  #endexport
+  #endextend
