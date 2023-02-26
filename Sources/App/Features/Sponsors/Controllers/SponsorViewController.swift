@@ -21,7 +21,7 @@ struct SponsorViewController: RouteCollection {
             throw Abort(.notFound)
         }
         
-        let events = try await Event.query(on: request.db).all()
+        // let events = try await Event.query(on: request.db).all()
         
         try await sponsor.delete(on: request.db)
         
