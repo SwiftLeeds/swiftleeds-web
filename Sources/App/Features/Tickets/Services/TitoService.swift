@@ -5,14 +5,18 @@ struct TitoService {
     let event: String
     
     func ticket(payload: TicketLoginPayload, req: Request) async throws -> TitoTicketsResponse.Ticket? {
-        let url = "\(baseUrl)/\(event)/tickets?search[states][]=complete"
+        // 1000 page size should guarantee all tickets are returned in one request (and is the maximum)
+        // completed state search makes invalid, incomplete, or unpaid tickets are not returned
+        let url = "\(baseUrl)/\(event)/tickets?search[states][]=complete&page[size]=1000"
         
         let response = try await req.client.get(URI(string: url), headers: getHeaders())
+        let ticketResponse = try response.content.decode(TitoTicketsResponse.self)
         
-        // TODO: (James) if ticket is not on page one, go to page two, and three... etc
-        let tickets = try response.content.decode(TitoTicketsResponse.self).tickets
+        if ticketResponse.meta.next_page != nil {
+            req.logger.warning("There is an extra page of ticket results, login will not see new tickets...")
+        }
         
-        let ticketOpt = tickets.first(where: {
+        let ticketOpt = ticketResponse.tickets.first(where: {
             // case insensitive comparisons
             $0.reference.lowercased() == payload.ticket.lowercased() &&
             $0.email.lowercased() == payload.email.lowercased()
@@ -27,14 +31,21 @@ struct TitoService {
     
     func ticket(stub: String, req: Request) async throws -> TitoTicket? {
         let stub = stub.replacingOccurrences(of: "[^A-Za-z0-9_]", with: "", options: .regularExpression)
+        
+        if let cache = try? await req.cache.get("tito-\(stub)", as: TitoTicket.self) {
+            // if a given ticket stub has been validated within the last hour then we can cache this in-memory
+            return cache
+        }
+        
         let url = "\(baseUrl)/\(event)/tickets/\(stub)"
         
-        // TODO: (James) apply in-memory caching to reduce latency and avoid tito rate limits
         let response = try await req.client.get(URI(string: url), headers: getHeaders())
         
         switch response.status.code {
         case 200: // ok
-            return try response.content.decode(TitoResponse.self).ticket
+            let ticket = try response.content.decode(TitoResponse.self).ticket
+            try await req.cache.set("tito-\(stub)", to: ticket, expiresIn: .hours(1))
+            return ticket
             
         case 404: // not found
             return nil
@@ -73,6 +84,7 @@ struct TitoTicketsResponse: Decodable {
     struct Meta: Decodable {
         let next_page: String?
         let total_pages: Int
+        let per_page: Int
     }
     
     let tickets: [Ticket]

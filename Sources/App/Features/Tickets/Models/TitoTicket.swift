@@ -1,6 +1,6 @@
 import Foundation
 
-struct TitoTicket: Decodable {
+struct TitoTicket: Codable {
     let first_name: String
     let last_name: String
     let slug: String
