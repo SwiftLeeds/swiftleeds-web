@@ -66,6 +66,9 @@ func routes(_ app: Application) throws {
 
     try app.routes.register(collection: PushController())
     
+    try app.routes.register(collection: DropInRouteController())
+    try app.routes.register(collection: TicketLoginController())
+    
     // MARK: - API Routes
     
     let apiRoutes = app.grouped("api", "v1")

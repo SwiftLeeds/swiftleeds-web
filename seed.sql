@@ -3,8 +3,9 @@ INSERT INTO "users" ("id", "name", "password_hash", "email", "user_role") VALUES
 ('7fd44e3e-44e9-4f5d-b440-74e99710a060', 'Test', '$2b$12$vjV9QYnEa/CtXovhSH9GnecpN5ddJWfRr6j747puqzFDeqUbBVNzC', 'test@test.com', 'admin');
 
 TRUNCATE TABLE "events" CASCADE;
-INSERT INTO "events" ("id", "name", "event_date", "location") VALUES
-('005a548b-9ebe-4742-8de5-8a37acaabab8', 'SwiftLeeds 2022', '2022-10-20', 'The Playhouse, Leeds');
+INSERT INTO "events" ("id", "name", "event_date", "location", "is_current") VALUES
+('005a548b-9ebe-4742-8de5-8a37acaabab8', 'SwiftLeeds 2022', '2022-10-20', 'The Playhouse, Leeds', 'f'),
+('a6b202de-6135-4e71-bdb0-290ecff798a8', 'SwiftLeeds 2023', '2023-10-18', 'The Playhouse, Leeds', 't');
 
 TRUNCATE TABLE "sponsors" CASCADE;
 INSERT INTO "sponsors" ("id", "name", "image", "url", "sponsor_level", "event_id") VALUES
@@ -152,3 +153,29 @@ INSERT INTO "locations" ("id", "name", "url", "lat", "lon", "category_id") VALUE
 ('4967f863-4941-4e47-8034-c81c6557cc9e', 'Assembly Underground', 'http://www.assemblyunderground.com/', 53.80082340535508, -1.5485263386179835, '3327f9d0-b38b-4743-8ee0-f3188aba60d7'),
 ('e97d70f7-2124-4aca-868c-54c8ddec7e81', 'Apple', 'https://www.apple.com/uk/retail/trinityleeds/?cid=aos-gb-seo-maps', 53.79685991942918, -1.543359837957889, '3087653e-e10e-41c8-b321-d16a68fa9a88'),
 ('09a8ddac-7dca-4f99-80ba-66750571cbf9', '200 Degrees', 'http://www.200degs.com/leeds-bond-street', 53.79760107211073, -1.5459528678505592, 'dd19c880-1723-4af2-8005-b4ceffcbd6e2');
+
+TRUNCATE TABLE "dropin_sessions" CASCADE;
+INSERT INTO "dropin_sessions" ("id", "title", "description", "owner", "owner_image_url", "owner_link", "event_id") VALUES
+('175fd73b-28a7-4f94-a4c0-e62478140f2f', 'App Accessibility Review', 'todo', 'Daniel Devesa Derksen-Staats', 'O87Gvgjg_400x400.jpeg', 'https://twitter.com/dadederk', 'a6b202de-6135-4e71-bdb0-290ecff798a8'),
+('7077ef86-9212-46a6-97e4-bda99822a0a9', 'App Store Optimization Review', 'We are excited to have Ariel from AppFigures available to provide a full App Store Optimization review of your app.
+
+You will be allocated a timeslot throughout the day of the conference, and you can sit down, ask questions and get the opinion of an ASO expert.', 'Ariel from Appfigures', 'y4oh0Nb__400x400.jpeg', 'https://twitter.com/arielmichaeli', 'a6b202de-6135-4e71-bdb0-290ecff798a8'),
+('813dee8f-89cb-4480-8e04-f28ad36554d6', 'App Design Review', 'We are excited to have Hidde van der Ploeg available to provide a design review of your iOS application.
+
+You will be allocated a timeslot throughout the day of the conference, and you can sit down, ask questions and get the opinion of a design expert.', 'Hidde van der Ploeg', 'Zpow22F5_400x400.jpeg', 'https://twitter.com/hiddevdploeg', 'a6b202de-6135-4e71-bdb0-290ecff798a8'),
+('b544d903-795c-42aa-97d7-e2af44a505c4', 'Indie Developer App Review', 'Do you have an Indie App you would like to get **FREE** advice about?
+
+Jordi Bruin will be onsite, ready to answer your questions about your app and help you with anything that you might be struggling with, code or otherwise.
+
+Jordi Bruin is a world-class Indie app developer and was recently nominated for an Apple Design Award. Slots will be limited and on a first-come, first-serve basis. By opting for this in your ticket, you''ll be provided with a set day and time for meeting Jordi Bruin in a 1-1 meeting.
+
+**Please note;** you must only opt for this if your app is built by you independently and isn''t a company application.', 'Jordi Bruin', 'Tp9T2p2C_400x400.jpeg', 'https://twitter.com/jordibruin', 'a6b202de-6135-4e71-bdb0-290ecff798a8');
+
+TRUNCATE TABLE "dropin_session_slots" CASCADE;
+INSERT INTO "dropin_session_slots" ("id", "session_id", "date", "ticket", "ticket_owner") VALUES
+('6400c626-1b90-4a03-81cc-76d5bb494d87', '175fd73b-28a7-4f94-a4c0-e62478140f2f', '2023-10-18 14:00:00+01', NULL, NULL),
+('8740803d-a4f0-4d6b-b15c-4c7c29e7f75d', '175fd73b-28a7-4f94-a4c0-e62478140f2f', '2023-10-19 13:00:00+01', NULL, NULL),
+('bf5d89aa-8ae9-4c06-b79f-56a36c8d3eb9', '175fd73b-28a7-4f94-a4c0-e62478140f2f', '2023-10-18 17:15:00+01', NULL, NULL),
+('c1bb2aed-cef1-452d-8503-db13596cbc37', '175fd73b-28a7-4f94-a4c0-e62478140f2f', '2023-10-18 16:45:00+01', 'reserved', 'Adam Rush'),
+('dc146ae5-607b-4e07-8c3d-7db0a10c20d6', '175fd73b-28a7-4f94-a4c0-e62478140f2f', '2023-10-18 16:30:00+01', 'ti_test_p05Ch95xJS5AStInfa8whFA', 'James Sherlock'),
+('f9bc67a4-10e9-4dac-8ede-561f0d9826d3', '175fd73b-28a7-4f94-a4c0-e62478140f2f', '2023-10-18 17:00:00+01', NULL, NULL);

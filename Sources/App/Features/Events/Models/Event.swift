@@ -19,6 +19,9 @@ final class Event: Model, Content {
     @Field(key: "location")
     var location: String
     
+    @Field(key: "is_current")
+    var isCurrent: Bool
+    
     @Children(for: \.$event)
     var presentations: [Presentation]
 
