@@ -20,7 +20,8 @@ struct ValidTicketMiddleware: AsyncMiddleware {
                     slug: "ti_test_p05Ch95xJS5AStInfa8whFA",
                     company: nil,
                     avatar_url: nil,
-                    responses: [:]
+                    responses: [:],
+                    release: .init(metadata: .init(canBookDropInSession: true))
                 ))
                 
                 return try await next.respond(to: request)

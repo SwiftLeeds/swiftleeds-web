@@ -10,6 +10,10 @@ struct DropInRouteController: RouteCollection {
                     throw Abort(.badRequest, reason: "unable to identify current event")
                 }
                 
+                guard let ticket = req.storage.get(TicketStorage.self) else {
+                    throw Abort(.unauthorized, reason: "Ticket not present in session storage")
+                }
+                
                 let sessions = try await DropInSession.query(on: req.db)
                     .with(\.$event)
                     .filter(\.$event.$id == currentEvent.requireID())
@@ -23,7 +27,10 @@ struct DropInRouteController: RouteCollection {
                 
                 return try await req.leaf.render(
                     "Dropin/list",
-                    DropInSessionListContext(sessions: viewModels)
+                    DropInSessionListContext(
+                        sessions: viewModels,
+                        hasValidTicket: ticket.release?.metadata?.canBookDropInSession == true
+                    )
                 )
             }
             
@@ -128,6 +135,14 @@ struct DropInRouteController: RouteCollection {
                 let sessionID = try req.parameters.require("session")
                 let slotID = try req.parameters.require("slot")
                 
+                guard ticket.release?.metadata?.canBookDropInSession == true else {
+                    // invalid ticket (likely a live stream pass) so can't book
+                    let message = "Your ticket does not entitle you to a drop-in session."
+                        .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                    
+                    return req.redirect(to: "/drop-in/\(sessionID)?prompt=\(message ?? "")")
+                }
+                
                 guard let slotUUID = UUID(uuidString: slotID) else {
                     // slot ID not valid
                     return req.redirect(to: "/drop-in/\(sessionID)")
@@ -214,6 +229,7 @@ struct DropInSessionViewModel: Codable {
 
 struct DropInSessionListContext: Content {
     let sessions: [DropInSessionViewModel]
+    let hasValidTicket: Bool
 }
 
 struct DropInSessionSlotsContext: Content {

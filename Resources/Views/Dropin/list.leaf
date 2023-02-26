@@ -30,8 +30,12 @@
           <p class="card-text">#markdown(session.description)</p>
         </div>
         <div class="card-footer text-center">
+          #if(hasValidTicket):
           <a href="/drop-in/#(session.id)" class="btn btn-primary btn-block">View Slots</a>
           <small class="text-muted d-block mt-2">#(session.availability)</small>
+          #else:
+          <small class="text-muted d-block mt-2">Your ticket does not come with a drop-in session.</small>
+          #endif
         </div>
       </div>
       </div>
