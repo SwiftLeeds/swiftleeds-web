@@ -10,7 +10,7 @@ struct TicketLoginController: RouteCollection {
             )
         }
         
-        routes.post("ticketLogin", "validate") { req async throws in
+        routes.post("ticketLogin", "validate") { req async throws -> Response in
             // Get user input
             let input = try req.content.decode(TicketLoginPayload.self)
             

@@ -89,7 +89,7 @@ struct DropInRouteController: RouteCollection {
             }
             
             // return slot back to pool
-            builder.get(":session", "cancel", ":slot") { req async throws in
+            builder.get(":session", "cancel", ":slot") { req async throws -> Response in
                 guard let ticket = req.storage.get(TicketStorage.self) else {
                     throw Abort(.unauthorized, reason: "Ticket not present in session storage")
                 }
@@ -127,7 +127,7 @@ struct DropInRouteController: RouteCollection {
             }
             
             // claim slot from pool
-            builder.get(":session", "book", ":slot") { req in
+            builder.get(":session", "book", ":slot") { req async throws -> Response in
                 guard let ticket = req.storage.get(TicketStorage.self) else {
                     throw Abort(.unauthorized, reason: "Ticket not present in session storage")
                 }
