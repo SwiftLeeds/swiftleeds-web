@@ -9,7 +9,11 @@
         "details": [
             {
                 "appID": "K33K6V7FBA.uk.co.swiftleeds.SwiftLeeds",
-                "paths": [ "*", "/" ]
+                "paths": [
+                    "NOT /drop-in/*",
+                    "*",
+                    "/"
+                ]
             }
         ]
     }

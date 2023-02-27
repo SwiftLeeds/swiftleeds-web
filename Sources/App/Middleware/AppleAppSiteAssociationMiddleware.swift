@@ -6,8 +6,12 @@ struct AppleAppSiteAssociationMiddleware: AsyncMiddleware {
             return try await next.respond(to: request)
         }
 
-        let response = try await next.respond(to: request)
-        response.headers.add(name: "content-type", value: "application/json")
-        return response
+        if Environment.get("ENABLE_AASA") == "true" {
+            let response = try await next.respond(to: request)
+            response.headers.add(name: "content-type", value: "application/json")
+            return response
+        } else {
+            return Response(status: .notFound)
+        }
     }
 }
