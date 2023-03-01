@@ -36,17 +36,12 @@
   <div class="container">
     #extend("Home/_about-us")
     <br/>
-    #extend("Home/_highlights")
+    #extend("Home/_speakers")
     <br/>
     #if(ticketsEnabled):
         #extend("Home/_order-tickets")
     #endif
-    #if(count(speakers) > 0):
-        #if(!conferenceEnded):
-            <br/>
-            #extend("Home/_speakers")
-        #endif
-    #endif
+    <br />
     #if(count(slots) > 0):
         #if(!conferenceEnded):
             <br/>
@@ -59,8 +54,10 @@
     #extend("Home/_travel")
     <br />
     #extend("Home/_previous-conferences")
+    <br />
+    #extend("Home/_highlights")
+    <br />
     #if(count(platinumSponsors) > 0 || count(goldSponsors) > 0 || count(silverSponsors) > 0):
-        <br/>
         #extend("Home/_sponsors")
     #endif
   </div>
