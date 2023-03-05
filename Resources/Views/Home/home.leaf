@@ -35,12 +35,15 @@
   
   <div class="container">
     #extend("Home/_about-us")
-    <br/>
-    #extend("Home/_speakers")
-    <br/>
+    <br />
     #if(ticketsEnabled):
         #extend("Home/_order-tickets")
     #endif
+    <br />
+    #extend("Home/_drop-in-sessions")
+    <br />
+    <br />
+    #extend("Home/_speakers")
     <br />
     #if(count(slots) > 0):
         #if(!conferenceEnded):

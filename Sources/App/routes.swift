@@ -28,16 +28,19 @@ func routes(_ app: Application) throws {
                 }
                 .sort(\.$startDate)
                 .all()
-            
+
+            let dropInSessions = try await DropInSession.query(on: req.db).all()
+
             return try await req.view.render("Home/home", HomeContext(
                 speakers: speakers,
                 cfpEnabled: cfpExpirationDate > Date(),
-                ticketsEnabled: false,
+                ticketsEnabled: true,
                 conferenceEnded: true,
                 slots: slots,
                 platinumSponsors: platinumSponsors,
                 silverSponsors: silverSponsors,
-                goldSponsors: goldSponsors
+                goldSponsors: goldSponsors,
+                dropInSessions: dropInSessions
             ))
         } catch {
             return try await req.view.render("Home/home", HomeContext(cfpEnabled: cfpExpirationDate > Date()))
