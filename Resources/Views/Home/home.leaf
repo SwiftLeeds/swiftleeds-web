@@ -43,10 +43,8 @@
     #endif
     <br />
     #if(count(slots) > 0):
-        #if(!conferenceEnded):
-            <br/>
-            #extend("Home/_schedule")
-        #endif
+        <br/>
+        #extend("Home/_schedule")
     #endif
     <br/>
     #extend("Home/_location")

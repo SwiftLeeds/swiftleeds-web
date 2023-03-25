@@ -30,3 +30,13 @@ final class Event: Model, Content {
     
     init() {}
 }
+
+extension Event {
+    static func getCurrent(on db: Database) async throws -> Event {
+        guard let event = try await Event.query(on: db).filter(\.$isCurrent == true).first() else {
+            throw Abort(.notFound, reason: "could not locate current event")
+        }
+        
+        return event
+    }
+}

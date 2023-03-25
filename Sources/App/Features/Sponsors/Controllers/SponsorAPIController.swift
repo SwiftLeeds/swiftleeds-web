@@ -115,7 +115,11 @@ struct SponsorAPIController: RouteCollection {
     }
 
     private func onGet(request: Request) async throws -> Response {
-        let allSponsors = try await Sponsor.query(on: request.db).all()
+        let allSponsors = try await Sponsor.query(on: request.db)
+            .with(\.$event)
+            .all()
+            .filter { $0.event.isCurrent }
+        
         return try await GenericResponse(
             data: allSponsors.compactMap(SponsorTransformer.transform(_:))
         ).encodeResponse(for: request)
