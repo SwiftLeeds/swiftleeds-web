@@ -26,10 +26,13 @@
     
     <div class="justify-content-end collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav top-nav nav">
-        <!-- <a class="nav-link text-dark" href="../#tickets">Tickets</a> -->
+        <a class="nav-link text-dark" href="../#tickets">Tickets</a>
+        #if(count(dropInSessions) > 0):
+        <a class="nav-link text-dark" href="../#dropin">Drop In</a>
+        #endif
         <!-- <a class="nav-link text-dark" href="../#speakers">Speakers</a> -->
         <!-- <a class="nav-link text-dark" href="../#schedule">Schedule</a> -->
-        <a class="nav-link text-dark" href="../#previous">Previous</a>
+        <!-- <a class="nav-link text-dark" href="../#previous">Previous</a> -->
         <a class="nav-link text-dark" href="../#venue">Venue</a>
         <a class="nav-link text-dark" href="../#sponsors">Sponsors</a>
         <a class="nav-link text-dark" href="https://twitter.com/swift_leeds" target="_blank"><img src="/img/twitter.png" alt="twitter"/></a>

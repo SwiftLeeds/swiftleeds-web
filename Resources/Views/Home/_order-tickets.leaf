@@ -16,6 +16,6 @@
   <div class="w-100 d-sm-block d-md-none"></div>
 
   <div class="col-sm-12 col-md-6">
-    <tito-widget event="swiftleeds/swiftleeds"></tito-widget>
+    <tito-widget event="swiftleeds/swiftleeds-23"></tito-widget>
   </div>
 </div>

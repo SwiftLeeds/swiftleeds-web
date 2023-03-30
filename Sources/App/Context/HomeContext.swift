@@ -17,4 +17,5 @@ struct HomeContext: Content {
     var platinumSponsors: [Sponsor] = []
     var silverSponsors: [Sponsor] = []
     var goldSponsors: [Sponsor] = []
+    var dropInSessions: [DropInSession] = []
 }

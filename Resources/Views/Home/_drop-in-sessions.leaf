@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-sm-5 col-md-3 col-lg-2">
+        <h2 id="dropin">
+            <strong>FREE</strong><br />
+            drop-in session
+        </h2>
+    </div>
+
+    <div class="col-sm-7 col-md-9 col-lg-10">
+    <p>We are excited to reveal a new and exclusive add-on to SwiftLeeds. With every ticket purchased, you’ll be eligible to book a <strong>free</strong> drop-in session with one of our on-site experts. Sessions are available on a first come first served basis, so we recommend to get your ticket and book your free session now!</p>
+    <br />
+    <a href="/drop-in" class="btn btn-primary btn-lg" role="button">Book Now</a><br />
+    <small>(Requires a valid ticket purchase)</small>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-4 row-cols-sm-2 g-4">
+    #for(session in dropInSessions):
+      <div class="col">
+      <div class="card h-100">
+        <img src="#awsImage(session.ownerImageUrl)" class="card-img-top" alt="#(session.owner) avatar image">
+        <div class="card-body">
+          <h5 class="card-title">#(session.title)</h5>
+          <p class="card-text">With <a href="#(session.ownerLink)" target="_blank">#(session.owner)</a></p>
+        </div>
+      </div>
+      </div>
+    #endfor
+    </div>
+</div>

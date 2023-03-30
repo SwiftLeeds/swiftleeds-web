@@ -1,6 +1,7 @@
 import Vapor
 
 let cfpExpirationDate = Date(timeIntervalSince1970: 1682855940) // 30th April 23
+let isDropInSessionsEnabled = false
 
 func routes(_ app: Application) throws {
     // MARK: - Web Routes
@@ -33,6 +34,11 @@ func routes(_ app: Application) throws {
             let silverSponsors = sponsorQuery.filter { $0.sponsorLevel == .silver }
             let goldSponsors = sponsorQuery.filter { $0.sponsorLevel == .gold }
             
+            let dropInSessions = try await DropInSession.query(on: req.db)
+                .with(\.$event)
+                .all()
+                .filter { $0.event.isCurrent }
+            
             let slots = try await Slot.query(on: req.db)
                 .with(\.$activity)
                 .with(\.$presentation) { presentation in
@@ -52,7 +58,8 @@ func routes(_ app: Application) throws {
                 slots: slots,
                 platinumSponsors: platinumSponsors,
                 silverSponsors: silverSponsors,
-                goldSponsors: goldSponsors
+                goldSponsors: goldSponsors,
+                dropInSessions: isDropInSessionsEnabled ? dropInSessions : []
             ))
         } catch {
             return try await req.view.render("Home/home", HomeContext(cfpEnabled: cfpExpirationDate > Date()))
