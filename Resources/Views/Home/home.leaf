@@ -40,8 +40,10 @@
         #extend("Home/_order-tickets")
     #endif
     <br />
+    #if(isDropInEnabled):
     #extend("Home/_drop-in-sessions")
     <br />
+    #endif
     <br />
     #extend("Home/_speakers")
     <br />
