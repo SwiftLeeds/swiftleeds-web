@@ -7,24 +7,18 @@ struct ScheduleAPIControllerV2: RouteCollection {
     }
 
     private func onGet(request: Request) async throws -> Response {
-        // Get the current event
-        // In future this will need to be smarter
-        let eventWithSlots = try await Event.query(on: request.db)
-            .sort(\.$date, .ascending)
-            .with(\.$slots) { slots in
-                slots
-                    .with(\.$activity)
-                    .with(\.$presentation) { presentation in
-                        presentation.with(\.$speaker).with(\.$secondSpeaker)
-                    }
+        let event = try await Event.getCurrent(on: request.db)
+        
+        let slots = try await Slot.query(on: request.db)
+            .with(\.$event)
+            .with(\.$activity)
+            .with(\.$presentation) { presentation in
+                presentation.with(\.$speaker).with(\.$secondSpeaker)
             }
-            .first()
+            .all()
+            .filter { $0.event.id == event.id }
 
-        guard let event = eventWithSlots else {
-            throw ScheduleAPIController.ScheduleAPIError.notFound
-        }
-
-        guard let schedule = ScheduleTransformerV2.transform(event: event, slots: event.slots) else {
+        guard let schedule = ScheduleTransformerV2.transform(event: event, slots: slots) else {
             throw ScheduleAPIController.ScheduleAPIError.transformFailure
         }
 

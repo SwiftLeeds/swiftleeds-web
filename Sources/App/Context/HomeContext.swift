@@ -13,7 +13,6 @@ struct HomeContext: Content {
     var speakers: [Speaker] = []
     var cfpEnabled: Bool = false
     var ticketsEnabled: Bool = false
-    var isDropInEnabled: Bool = false
     var conferenceEnded: Bool = true
     var slots: [Slot] = []
     var platinumSponsors: [Sponsor] = []

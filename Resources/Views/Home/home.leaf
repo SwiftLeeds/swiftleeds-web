@@ -40,7 +40,7 @@
         #extend("Home/_order-tickets")
     #endif
     <br />
-    #if(isDropInEnabled):
+    #if(count(dropInSessions) > 0):
     #extend("Home/_drop-in-sessions")
     <br />
     #endif
@@ -48,10 +48,8 @@
     #extend("Home/_speakers")
     <br />
     #if(count(slots) > 0):
-        #if(!conferenceEnded):
-            <br/>
-            #extend("Home/_schedule")
-        #endif
+        <br/>
+        #extend("Home/_schedule")
     #endif
     <br/>
     #extend("Home/_location")

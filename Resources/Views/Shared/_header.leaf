@@ -27,7 +27,7 @@
     <div class="justify-content-end collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav top-nav nav">
         <a class="nav-link text-dark" href="../#tickets">Tickets</a>
-        #if(isDropInEnabled):
+        #if(count(dropInSessions) > 0):
         <a class="nav-link text-dark" href="../#dropin">Drop In</a>
         #endif
         <!-- <a class="nav-link text-dark" href="../#speakers">Speakers</a> -->
