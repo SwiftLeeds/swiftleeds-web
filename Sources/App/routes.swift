@@ -1,6 +1,7 @@
 import Vapor
 
 let cfpExpirationDate = Date(timeIntervalSince1970: 1682855940) // 30th April 23
+let isDropInSessionsEnabled = false
 
 func routes(_ app: Application) throws {
     // MARK: - Web Routes
@@ -58,7 +59,7 @@ func routes(_ app: Application) throws {
                 platinumSponsors: platinumSponsors,
                 silverSponsors: silverSponsors,
                 goldSponsors: goldSponsors,
-                dropInSessions: dropInSessions
+                dropInSessions: isDropInSessionsEnabled ? dropInSessions : []
             ))
         } catch {
             return try await req.view.render("Home/home", HomeContext(cfpEnabled: cfpExpirationDate > Date()))
