@@ -55,6 +55,9 @@ class Migrations {
         app.migrations.add(AddDropInSessionSlotsMigration())
         app.migrations.add(EventMigrationV2())
         
+        // Full dates in Slots
+        app.migrations.add(SlotMigrationV2())
+        
         do {
             guard let url = Environment.get("DATABASE_URL") else {
                 throw Abort(.internalServerError, reason: "Missing 'DATABASE_URL' environment variable")

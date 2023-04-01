@@ -12,6 +12,9 @@ final class Slot: Codable, Model, Content {
 
     @Field(key: "start_date")
     var startDate: String
+    
+    @Field(key: "date")
+    var date: Date?
 
     @Field(key: "duration")
     var duration: Double
