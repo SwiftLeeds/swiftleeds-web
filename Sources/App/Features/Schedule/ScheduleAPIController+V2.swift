@@ -7,7 +7,13 @@ struct ScheduleAPIControllerV2: RouteCollection {
     }
 
     private func onGet(request: Request) async throws -> Response {
-        let event = try await Event.getCurrent(on: request.db)
+        guard let event = try await Event
+            .query(on: request.db)
+            .all()
+            .first(where: { $0.shouldBeReturned(by: request) })
+        else {
+            throw ScheduleAPIController.ScheduleAPIError.notFound
+        }
         
         let slots = try await Slot.query(on: request.db)
             .with(\.$event)

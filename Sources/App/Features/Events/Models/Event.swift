@@ -39,4 +39,16 @@ extension Event {
         
         return event
     }
+    
+    func shouldBeReturned(by request: Request) -> Bool {
+        // if the request has a query parameter of 'event' (the event ID)
+        // then only return 'true' if the ID provided matches this event
+        if let targetEvent: String = try? request.query.get(String.self, at: "event") {
+            // case insensitive comparison
+            return targetEvent.lowercased() == id?.uuidString.lowercased()
+        }
+        
+        // otherwise return 'true' only if the event is current (i.e. is this years event)
+        return isCurrent
+    }
 }
