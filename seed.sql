@@ -62,8 +62,11 @@ INSERT INTO "activity" ("id", "title", "subtitle", "description", "url", "image"
 ('f4fb0c62-b3c8-4c46-bdc4-7fdadc71861d', 'Lunch 🍕', 'It''s time for some well deserved food', 'We have partnered with the venue to provide us with handmade food. The venue has an incredible chef who will produce food to cater to everyone. They have access to a stone-baked pizza oven to provide fresh pizza slices and handmade buffet food with a vast selection. Don''t forget your handmade brownie or Bakewell slice 😋', '', 'IMG_6298.jpg-93D1F0E2-6F47-4149-944B-FB824EFB2549', '005a548b-9ebe-4742-8de5-8a37acaabab8', 'cc8af7bb-9403-4ae1-9735-1bb702c7d403');
 
 TRUNCATE TABLE "presentations" CASCADE;
-INSERT INTO "presentations" ("id", "title", "synopsis", "speaker_id", "event_id", "image", "is_tba", "slot_id", "speaker_two_id", "slido_url") VALUES
-('262c1083-ba7d-49b5-b1dc-60cd917396c8', 'Building (and testing) custom property wrappers for SwiftUI', 'In this talk, you will learn everything you need to know about using DynamicProperty to build custom property wrappers that integrate with SwiftUI’s view lifecycle and environment beautifully. And more importantly, you will learn how you can write unit tests for your custom property wrappers as well.', 'ff672e21-c27d-44da-84aa-e9a368eae29e', '005a548b-9ebe-4742-8de5-8a37acaabab8', NULL, 'f', '3229d814-7d86-4ad3-9eda-2f08029b8369', NULL, 'https://app.sli.do/event/kUqN77GxRVR9Tu1QYbwTe8'),
+INSERT INTO "presentations" ("id", "title", "synopsis", "speaker_id", "event_id", "is_tba", "slot_id", "speaker_two_id", "slido_url") VALUES
+('262c1083-ba7d-49b5-b1dc-60cd917396c8', 'Building (and testing) custom property wrappers for SwiftUI', 'In this talk, you will learn everything you need to know about using DynamicProperty to build custom property wrappers that integrate with SwiftUI’s view lifecycle and environment beautifully. And more importantly, you will learn how you can write unit tests for your custom property wrappers as well.
+
+* Watch recording on [YouTube](https://youtube.com)
+* Read slides [here](https:/example.com)', 'ff672e21-c27d-44da-84aa-e9a368eae29e', '005a548b-9ebe-4742-8de5-8a37acaabab8', 'f', '3229d814-7d86-4ad3-9eda-2f08029b8369', NULL, 'https://app.sli.do/event/kUqN77GxRVR9Tu1QYbwTe8'),
 ('45cfd91e-2945-4c5e-9c20-58f298f76298', 'SwiftUI Performance for Demanding Apps', 'SwiftUI is powerful and flexible, but sometimes confusing. Things like modifiers order, inline views, `body` complexity, and POD views, can all seriously affect our performance. In this talk, we will learn the best ways to use SwiftUI for resource-heavy and dynamic UIs, while maintaining the golden 60fps.
 
 In 2022, we (Adobe Bēhance) rebuilt our navigation infra, and our main Feed, in SwiftUI. We also insisted the app must run great on the worst phone we support - iPhone 6S Plus. Getting there was a journey.
@@ -75,15 +78,15 @@ Next, we will dive into specific scenarios and see how this new way of thinking 
 - Controlling view update lifecycle
 - How to “hide” complex states to improve performance
 - Avoiding SwiftUI’s pitfalls, like nested publishers and iOS 14 vs 15 behaviour
-- And more…', 'f6957656-03d0-42c0-8b90-b424d3e13bac', '005a548b-9ebe-4742-8de5-8a37acaabab8', NULL, 'f', 'a3a16d1c-4ef4-460d-a3b8-076d2053568d', NULL, 'https://app.sli.do/event/15gNhA8ht2f26apL82JSTK'),
+- And more…', 'f6957656-03d0-42c0-8b90-b424d3e13bac', '005a548b-9ebe-4742-8de5-8a37acaabab8', 'f', 'a3a16d1c-4ef4-460d-a3b8-076d2053568d', NULL, 'https://app.sli.do/event/15gNhA8ht2f26apL82JSTK'),
 ('5d3114e8-573c-47bf-a33b-9aabac649f7c', 'SwiftUI, async / await, AsyncAlgorithms: How does it fit?', 'What''s the easiest way to deal with asynchronous code? A couple of years ago, the answer would have been Combine.
 
 But in 2021, async / await was integrated into Swift, making dealing with simple asynchronous use cases much more straightforward and intuitive.
 
 Then in 2022, the Swift team released their new AsyncAlgorithms module, which clearly seems like a fully-fledged alternative to Combine!
 
-So in this talk, I want to discuss the current state of asynchronous code management as of October 2022 and provide examples of how we can build apps using SwiftUI, async / await and AsyncAlgorithms.', 'bbbf970a-d96c-47bf-9da2-f347945b0344', '005a548b-9ebe-4742-8de5-8a37acaabab8', NULL, 'f', '12fe25cd-a131-4415-b1b4-672ba5dc2a9c', NULL, 'https://app.sli.do/event/sxRC7CV4i5LqNCu93n2wUq'),
-('6bc2fdd9-c6c4-4a65-bd8e-234cb1638893', 'Test Plan Sharding with Pipelines', 'Atanas, will be providing a very brief overview of using Test Plan Sharding with Pipelines', 'da59e75c-27a0-40bf-8b48-469d5204fa1d', '005a548b-9ebe-4742-8de5-8a37acaabab8', NULL, 'f', '9afd1020-8020-49f8-8843-9dae6d3b7586', NULL, ''),
+So in this talk, I want to discuss the current state of asynchronous code management as of October 2022 and provide examples of how we can build apps using SwiftUI, async / await and AsyncAlgorithms.', 'bbbf970a-d96c-47bf-9da2-f347945b0344', '005a548b-9ebe-4742-8de5-8a37acaabab8', 'f', '12fe25cd-a131-4415-b1b4-672ba5dc2a9c', NULL, 'https://app.sli.do/event/sxRC7CV4i5LqNCu93n2wUq'),
+('6bc2fdd9-c6c4-4a65-bd8e-234cb1638893', 'Test Plan Sharding with Pipelines', 'Atanas, will be providing a very brief overview of using Test Plan Sharding with Pipelines', 'da59e75c-27a0-40bf-8b48-469d5204fa1d', '005a548b-9ebe-4742-8de5-8a37acaabab8', 'f', '9afd1020-8020-49f8-8843-9dae6d3b7586', NULL, ''),
 ('927daf47-c081-4e12-ac40-e78f3f41250f', 'UI automation with XCUItest', 'n this duo talk with Poornima and Sanaa, we''ll be exploring how to create the most efficient UI automation using Apple''s UI automation frameworks. We''ll be covering:
 
 - What is UI automation testing
@@ -96,25 +99,26 @@ So in this talk, I want to discuss the current state of asynchronous code manage
 - Test Results: Reporting
 - Debugging - breakpoints, prints, etc
 - CI
-- Pros and cons', 'e170bcc8-dc6a-442f-949b-6bb29e9aa752', '005a548b-9ebe-4742-8de5-8a37acaabab8', NULL, 'f', '79e03740-8aa5-438a-8648-ee4f8b899f8f', '4d75f00d-314e-4398-ae06-8c1e3ab5d04b', 'https://app.sli.do/event/rLYYtqtBZ22z6vDL1BJPfx'),
+- Pros and cons', 'e170bcc8-dc6a-442f-949b-6bb29e9aa752', '005a548b-9ebe-4742-8de5-8a37acaabab8', 'f', '79e03740-8aa5-438a-8648-ee4f8b899f8f', '4d75f00d-314e-4398-ae06-8c1e3ab5d04b', 'https://app.sli.do/event/rLYYtqtBZ22z6vDL1BJPfx'),
 ('9549cc8d-62de-4cdf-83be-ced63a5fd027', 'Spark your creativity: the power of iPad Playgrounds', 'Perfectionism is the enemy of creativity. Or at least, it has been for me.
 
 Spending years working in big teams with millions of users, I had forgotten how to play and experiment with iOS development. When iPad playgrounds were released, I took the opportunity to play around. Thanks to the software''s simplicity, I could re-ignite my creativity and - for the first time in years - not abandon my side projects.
 
-In this session, I want to help people get past their blocks and embrace a more playful development style.', 'a5a35b31-d5a5-4246-884e-f90958d1cc7d', '005a548b-9ebe-4742-8de5-8a37acaabab8', NULL, 'f', '71f6d14b-e41f-4beb-866b-5ed71da52cc8', NULL, 'https://app.sli.do/event/pEq6uGm2irgHncoUGAM5s8'),
-('a330bcad-219d-4e37-98fa-9602042c0131', 'CI/CD (Continuous Improvement, Continuous Discovery)', 'The Apple ecosystem is known to outsiders for its simplicity and ease of use. 
+In this session, I want to help people get past their blocks and embrace a more playful development style.', 'a5a35b31-d5a5-4246-884e-f90958d1cc7d', '005a548b-9ebe-4742-8de5-8a37acaabab8', 'f', '71f6d14b-e41f-4beb-866b-5ed71da52cc8', NULL, 'https://app.sli.do/event/pEq6uGm2irgHncoUGAM5s8'),
+('a330bcad-219d-4e37-98fa-9602042c0131', 'CI/CD (Continuous Improvement, Continuous Discovery)', 'The Apple ecosystem is known to outsiders for its simplicity and ease of use.
 
 From a developers'' point of view,, that is a different story - with WWDC introducing incredible amounts of new features and APIs each year, new devices are coming out, and new hardware features are added to existing devices. People developing in this ecosystem for a while will know that learning and learning about new features, frameworks, and tools are just as crucial as writing actual code.
 
-Over the past years, I have tried out many different approaches, and in this talk, I share those approaches, highlight what worked for me and give concrete examples to motivate listeners to expand their knowledge and try new ways to learn. The talk also covers how you can reflect on your own code and how sharing can make you a better developer, whether you’re an indie or working in a company.', '0373fc98-50d9-428c-a87d-bb012d5f9d29', '005a548b-9ebe-4742-8de5-8a37acaabab8', NULL, 'f', '4e2cb73a-30ae-4e8f-b1c4-fcf92135e69a', NULL, 'https://app.sli.do/event/cDj274MLgxzR3j1hGvoN8P'),
+Over the past years, I have tried out many different approaches, and in this talk, I share those approaches, highlight what worked for me and give concrete examples to motivate listeners to expand their knowledge and try new ways to learn. The talk also covers how you can reflect on your own code and how sharing can make you a better developer, whether you’re an indie or working in a company.', '0373fc98-50d9-428c-a87d-bb012d5f9d29', '005a548b-9ebe-4742-8de5-8a37acaabab8', 'f', '4e2cb73a-30ae-4e8f-b1c4-fcf92135e69a', NULL, 'https://app.sli.do/event/cDj274MLgxzR3j1hGvoN8P'),
 ('c0ffddcf-c148-4d1b-8cc5-4efa3e705327', 'Testing Asynchronous Code in Swift 5.5', 'Swift''s modern concurrency APIs allow for greater flexibility and future-proofing in unit testing.
 
 In this session, I will demonstrate how we updated our unit testing strategy as we adopted `async`/`await` in our Combine-based applications at Urban Outfitters.
 
-Additionally, I will demonstrate how to use `AsyncStream` to mock networking calls, how to update Combine tests with `AsyncSequence`, and how to optimize tests by implementing Task functions and phasing out `waitForExpectations`.', '06d1ecb6-f714-4d3a-8ceb-7f5817930218', '005a548b-9ebe-4742-8de5-8a37acaabab8', NULL, 'f', '5acc3d3e-62e7-4168-8659-d09e76529036', NULL, 'https://app.sli.do/event/i4ovARujc5DK72vKnmzKJM'),
+Additionally, I will demonstrate how to use `AsyncStream` to mock networking calls, how to update Combine tests with `AsyncSequence`, and how to optimize tests by implementing Task functions and phasing out `waitForExpectations`.', '06d1ecb6-f714-4d3a-8ceb-7f5817930218', '005a548b-9ebe-4742-8de5-8a37acaabab8', 'f', '5acc3d3e-62e7-4168-8659-d09e76529036', NULL, 'https://app.sli.do/event/i4ovARujc5DK72vKnmzKJM'),
 ('f298d006-52d7-4cf9-8d9e-147e58e20753', 'Modularization Techniques: from Monolithic to Multi Packages App', 'Designing for modularity can be pretty challenging, especially if we didn''t start earlier in the process. This can lead to longer build time, tightly coupled code, and hard to maintain, extend and test your app.
 
-In this talk, I''ll show you how to design your app in a loosely-coupled way and then break your monolithic app into independent modules via Swift Package Manager, each doing precisely just one thing.', '019064d6-1f2f-4e3b-9243-831309a12030', '005a548b-9ebe-4742-8de5-8a37acaabab8', NULL, 'f', '96b03d1f-14b8-445b-9c21-7b0dfe662313', NULL, 'https://app.sli.do/event/7RKA8rn98qhGhLwHTte944');
+In this talk, I''ll show you how to design your app in a loosely-coupled way and then break your monolithic app into independent modules via Swift Package Manager, each doing precisely just one thing.', '019064d6-1f2f-4e3b-9243-831309a12030', '005a548b-9ebe-4742-8de5-8a37acaabab8', 'f', '96b03d1f-14b8-445b-9c21-7b0dfe662313', NULL, 'https://app.sli.do/event/7RKA8rn98qhGhLwHTte944');
+
 
 TRUNCATE TABLE "locationCategories" CASCADE;
 INSERT INTO "locationCategories" ("id", "name", "symbol_name") VALUES
