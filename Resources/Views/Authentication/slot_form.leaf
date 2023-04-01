@@ -53,9 +53,9 @@
                 #endfor
                 </select>
                 <br>
-                <label for="startTime" class="form-label">Start Time</label>
-                <div class="input-group clockpicker">
-                    <input name="startTime" type="text" class="form-control" #if(slot.startDate): value="#(slot.startDate)" #else: value="09:41" #endif>
+                <label for="date" class="form-label">Start Time</label>
+                <div class="input-group">
+                    <input name="date" type="datetime-local" class="form-control" #if(slot.date): value="#(slot.date)" #elseif(slot.startDate): value="2022-10-20T#(slot.startDate)" #endif>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-time"></span>
                     </span>

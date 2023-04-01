@@ -33,10 +33,12 @@ final class Slot: Codable, Model, Content {
     init(
         id: IDValue?,
         startDate: String,
+        date: Date,
         duration: Double
     ) {
         self.id = id
         self.startDate = startDate
+        self.date = date
         self.duration = duration
     }
 }
