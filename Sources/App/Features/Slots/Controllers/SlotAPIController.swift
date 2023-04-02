@@ -6,7 +6,7 @@ struct SlotAPIController: RouteCollection {
         let presentationID: String?
         let activityID: String?
         let eventID: String
-        let startTime: String
+        let date: String
         let duration: Double
         let type: String
     }
@@ -40,10 +40,18 @@ struct SlotAPIController: RouteCollection {
         guard activity != nil || presentation != nil else {
             throw FormError.didNotProvideActivityOrPresentation
         }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = .init(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm" // date: 2022-10-20T14:00
+        
+        let inputDate = dateFormatter.date(from: input.date) ?? Date()
+        dateFormatter.dateFormat = "HH:mm"
 
         let slot = Slot(
             id: .generateRandom(),
-            startDate: input.startTime,
+            startDate: dateFormatter.string(from: inputDate),
+            date: inputDate,
             duration: input.duration
         )
 
@@ -91,7 +99,15 @@ struct SlotAPIController: RouteCollection {
             throw FormError.didNotProvideActivityOrPresentation
         }
 
-        slot.startDate = input.startTime
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = .init(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm" // date: 2022-10-20T14:00
+        
+        let inputDate = dateFormatter.date(from: input.date) ?? Date()
+        dateFormatter.dateFormat = "HH:mm"
+        
+        slot.startDate = dateFormatter.string(from: inputDate)
+        slot.date = inputDate
         slot.duration = input.duration
         slot.$event.id = try event.requireID()
 

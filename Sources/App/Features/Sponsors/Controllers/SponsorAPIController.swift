@@ -118,7 +118,7 @@ struct SponsorAPIController: RouteCollection {
         let allSponsors = try await Sponsor.query(on: request.db)
             .with(\.$event)
             .all()
-            .filter { $0.event.isCurrent }
+            .filter { $0.event.shouldBeReturned(by: request) }
         
         return try await GenericResponse(
             data: allSponsors.compactMap(SponsorTransformer.transform(_:))
