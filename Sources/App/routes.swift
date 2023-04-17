@@ -54,7 +54,7 @@ func routes(_ app: Application) throws {
             return try await req.view.render("Home/home", HomeContext(
                 speakers: speakers,
                 cfpEnabled: cfpExpirationDate > Date(),
-                ticketsEnabled: false,
+                ticketsEnabled: true,
                 slots: slots,
                 platinumSponsors: platinumSponsors,
                 silverSponsors: silverSponsors,
@@ -79,7 +79,7 @@ func routes(_ app: Application) throws {
     }
     
     app.get("conduct") { req -> View in
-        return try await req.view.render("Secondary/conduct")
+        return try await req.view.render("Secondary/conduct", HomeContext())
     }
 
     try app.routes.register(collection: AuthController()) // TODO: Split this out into web/api/admin
