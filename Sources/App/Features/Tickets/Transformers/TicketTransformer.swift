@@ -6,7 +6,7 @@ enum TicketTransformer {
         return .init(
             firstName: entity.first_name,
             lastName: entity.last_name,
-            company: entity.company,
+            company: entity.company_name,
             avatarUrl: entity.avatar_url,
             responses: entity.responses
         )

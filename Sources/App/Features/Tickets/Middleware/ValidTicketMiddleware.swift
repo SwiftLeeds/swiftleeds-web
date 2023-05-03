@@ -18,7 +18,7 @@ struct ValidTicketMiddleware: AsyncMiddleware {
                     first_name: "James",
                     last_name: "Sherlock",
                     slug: "ti_test_p05Ch95xJS5AStInfa8whFA",
-                    company: nil,
+                    company_name: nil,
                     avatar_url: nil,
                     responses: [:],
                     release: .init(metadata: .init(canBookDropInSession: true))

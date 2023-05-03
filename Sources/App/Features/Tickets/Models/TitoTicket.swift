@@ -12,7 +12,7 @@ struct TitoTicket: Codable {
     let first_name: String
     let last_name: String
     let slug: String
-    let company: String?
+    let company_name: String?
     let avatar_url: URL?
     let responses: [String: String]
     let release: Release?
