@@ -37,7 +37,7 @@ struct TitoService {
             return cache
         }
         
-        let url = "\(baseUrl)/\(event)/tickets/\(stub)"
+        let url = "\(baseUrl)/\(event)/tickets/\(stub)?expand=release,responses"
         
         let response = try await req.client.get(URI(string: url), headers: getHeaders())
         
