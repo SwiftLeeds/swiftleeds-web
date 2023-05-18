@@ -1,7 +1,7 @@
 import Vapor
 
 let cfpExpirationDate = Date(timeIntervalSince1970: 1682855940) // 30th April 23
-let isDropInSessionsEnabled = false
+let isDropInSessionsEnabled = true
 
 func routes(_ app: Application) throws {
     // MARK: - Web Routes
