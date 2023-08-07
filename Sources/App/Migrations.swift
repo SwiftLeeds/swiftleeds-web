@@ -64,6 +64,9 @@ class Migrations {
         // Add Last updated table and initial dates (for use with ETags)
         app.migrations.add(LastUpdatedMigrationV1())
 
+        // Add default entries into Last Update table
+        app.migrations.add(LastUpdatedMigrationV2())
+
         do {
             guard let url = Environment.get("DATABASE_URL") else {
                 throw Abort(.internalServerError, reason: "Missing 'DATABASE_URL' environment variable")
