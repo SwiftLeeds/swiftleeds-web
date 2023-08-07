@@ -4,6 +4,7 @@ import Vapor
 struct SponsorResponse: Content {
     let id: UUID?
     let name: String
+    let subtitle: String?
     let image: String?
     let url: String?
     let sponsorLevel: SponsorLevelResponse?

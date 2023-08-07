@@ -20,7 +20,10 @@ final class Sponsor: Model, Content {
     
     @Field(key: "name")
     var name: String
-    
+
+    @Field(key: "subtitle")
+    var subtitle: String?
+
     @Field(key: "image")
     var image: String
     
@@ -35,9 +38,10 @@ final class Sponsor: Model, Content {
     
     init() {}
     
-    init(id: IDValue?, name: String, image: String, url: String, sponsorLevel: SponsorLevel) {
+    init(id: IDValue?, name: String, subtitle: String?, image: String, url: String, sponsorLevel: SponsorLevel) {
         self.id = id
         self.name = name
+        self.subtitle = subtitle
         self.image = image
         self.url = url
         self.sponsorLevel = sponsorLevel

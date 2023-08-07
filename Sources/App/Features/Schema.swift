@@ -50,4 +50,8 @@ enum Schema {
     static var dropInSessionSlots: String {
         return "dropin_session_slots"
     }
+
+    static var lastUpdated: String {
+        return "last_updated"
+    }
 }
