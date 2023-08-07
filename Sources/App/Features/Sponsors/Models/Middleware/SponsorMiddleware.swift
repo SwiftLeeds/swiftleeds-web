@@ -23,7 +23,7 @@ struct SponsorMiddleware: AsyncModelMiddleware {
         else { throw SponsorMiddlewareError.couldNotUpdateTimestamp }
 
         let updatedDate = Date()
-        print("Sponsor \(name) was updated - \(updatedDate)")
+        db.logger.info("Sponsor \(name) was updated - \(updatedDate)")
 
         lastUpdated.sponsors = updatedDate
         try await lastUpdated.save(on: db)

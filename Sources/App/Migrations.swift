@@ -29,7 +29,6 @@ class Migrations {
         
         // Sponsors Migrations
         app.migrations.add(SponsorMigrationV1())
-        app.migrations.add(SponsorMigrationV2())
 
         // Session Record Migrations
         app.migrations.add(SessionRecord.migration)
@@ -59,7 +58,10 @@ class Migrations {
         // Full dates in Slots
         app.migrations.add(SlotMigrationV2())
 
-        // Last updated dates (for use with ETags)
+        // Add subtitle field to Sponsors table
+        app.migrations.add(SponsorMigrationV2())
+
+        // Add Last updated table and initial dates (for use with ETags)
         app.migrations.add(LastUpdatedMigrationV1())
 
         do {
