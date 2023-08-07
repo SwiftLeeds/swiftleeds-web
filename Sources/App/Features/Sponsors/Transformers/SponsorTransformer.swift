@@ -14,6 +14,7 @@ enum SponsorTransformer: Transformer {
         return .init(
             id: entity.id,
             name: entity.name,
+            subtitle: entity.subtitle,
             image: "https://\(bucketName).s3.eu-west-2.amazonaws.com/\(entity.image)",
             url: entity.url,
             sponsorLevel: .init(rawValue: entity.sponsorLevel.rawValue)

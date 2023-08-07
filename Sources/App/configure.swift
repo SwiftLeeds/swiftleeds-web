@@ -20,6 +20,9 @@ public func configure(_ app: Application) throws {
     // Migrations
     try Migrations.migrate(app)
 
+    // Model middleware
+    app.databases.middleware.use(SponsorMiddleware(), on: .psql)
+
     // Routes
     app.routes.defaultMaxBodySize = "10mb"
     try routes(app)

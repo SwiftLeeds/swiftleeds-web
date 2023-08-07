@@ -57,7 +57,13 @@ class Migrations {
         
         // Full dates in Slots
         app.migrations.add(SlotMigrationV2())
-        
+
+        // Add subtitle field to Sponsors table
+        app.migrations.add(SponsorMigrationV2())
+
+        // Add Last updated table and initial dates (for use with ETags)
+        app.migrations.add(LastUpdatedMigrationV1())
+
         do {
             guard let url = Environment.get("DATABASE_URL") else {
                 throw Abort(.internalServerError, reason: "Missing 'DATABASE_URL' environment variable")

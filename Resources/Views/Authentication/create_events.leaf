@@ -4,7 +4,7 @@
         #extend("Shared/_header")
         <div class="row">
             <form method="POST" action="/api/v1/events/create" enctype="application/x-www-form-urlencoded">
-                <h1>Create presentation</h1>
+                <h1>Create event</h1>
                 <br>
                 <div class="mb-3">
                   <label for="title" class="form-label">Event Name</label>
