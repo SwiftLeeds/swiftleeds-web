@@ -83,41 +83,54 @@ func routes(_ app: Application) throws {
     }
 
     try app.routes.register(collection: AuthController()) // TODO: Split this out into web/api/admin
-    try app.routes.register(collection: SpeakerController()) // TODO: Split this out into web/api/admin
-    try app.routes.register(collection: EventsController()) // TODO: Split this out into web/api/admin
-
     try app.routes.register(collection: PushController())
-    
     try app.routes.register(collection: DropInRouteController())
     try app.routes.register(collection: TicketLoginController())
     
     // MARK: - API Routes
     
     let apiRoutes = app.grouped("api", "v1")
-    
-    try apiRoutes.grouped("presentations").register(collection: PresentationAPIController())
-    try apiRoutes.grouped("slots").register(collection: SlotAPIController())
-    try apiRoutes.grouped("activities").register(collection: ActivityAPIController())
     try apiRoutes.grouped("sponsors").register(collection: SponsorAPIController())
     try apiRoutes.grouped("schedule").register(collection: ScheduleAPIControllerV2())
     try apiRoutes.grouped("local").register(collection: LocalAPIController())
     try apiRoutes.grouped("tickets").register(collection: TicketsAPIController())
 
     // MARK: - Admin Routes
-    
     let adminRoutes = app.grouped("admin").grouped(AdminMiddleware())
-    
+    try adminRoutes.grouped("sponsors").register(collection: SponsorRouteController())
+    try adminRoutes.grouped("speakers").register(collection: SpeakerRouteController())
+    try adminRoutes.grouped("slots").register(collection: SlotRouteController())
+    try adminRoutes.grouped("events").register(collection: EventRouteController())
+    try adminRoutes.grouped("presentations").register(collection: PresentationRouteController())
+    try adminRoutes.grouped("activities").register(collection: ActivityRouteController())
+
     adminRoutes.get { request -> View in
         let user = try request.auth.require(User.self)
         let query = try? request.query.decode(PageQuery.self)
-        let speakers = try await Speaker.query(on: request.db).with(\.$presentations).all()
+        let speakers = try await Speaker.query(on: request.db).sort(\.$name).with(\.$presentations).all()
         let presentations = try await Presentation.query(on: request.db)
+            .sort(\.$title)
             .with(\.$speaker)
             .with(\.$secondSpeaker)
             .all()
-        let events = try await Event.query(on: request.db).all()
-        let slots = try await Slot.query(on: request.db).with(\.$presentation).with(\.$activity).all()
-        let activities = try await Activity.query(on: request.db).all()
+        let events = try await Event.query(on: request.db).sort(\.$date).all()
+        let slots = try await Slot
+            .query(on: request.db)
+            .sort(\.$date)
+            .sort(\.$startDate)
+            .with(\.$presentation)
+            .with(\.$activity)
+            .all()
+        let activities = try await Activity.query(on: request.db).sort(\.$title).all()
+
+        guard let selectedEvent = try await Event
+            .query(on: request.db)
+            .all()
+            .first(where: { $0.shouldBeReturned(by: request) })
+        else {
+            // better error or selection here
+            throw ScheduleAPIController.ScheduleAPIError.notFound
+        }
         
         // There might be a better way to handle this, but Leaf templates don't
         // support dictionaries holding arrays,
@@ -130,6 +143,7 @@ func routes(_ app: Application) throws {
         return try await request.view.render(
             "Admin/home",
             AdminContext(
+                selectedEvent: selectedEvent,
                 speakers: speakers,
                 presentations: presentations,
                 events: events,
@@ -143,11 +157,6 @@ func routes(_ app: Application) throws {
             )
         )
     }
-    
-    try adminRoutes.grouped("presentations").register(collection: PresentationViewController())
-    try adminRoutes.grouped("slots").register(collection: SlotViewController())
-    try adminRoutes.grouped("activities").register(collection: ActivityViewController())
-    try adminRoutes.grouped("sponsors").register(collection: SponsorViewController())
 }
 
 struct PageQuery: Content {
@@ -155,6 +164,7 @@ struct PageQuery: Content {
 }
 
 struct AdminContext: Content {
+    var selectedEvent: Event
     var speakers: [Speaker] = []
     var presentations: [Presentation] = []
     var events: [Event] = []

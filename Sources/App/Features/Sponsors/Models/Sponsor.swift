@@ -3,17 +3,9 @@ import Foundation
 import Vapor
 
 final class Sponsor: Model, Content {
-    enum SponsorLevel: String, Codable {
-        case silver
-        case gold
-        case platinum
-    }
-        
+    static var schema = Schema.sponsor
+
     typealias IDValue = UUID
-    
-    static var schema: String {
-        return "sponsors"
-    }
     
     @ID(key: .id)
     var id: UUID?
@@ -45,5 +37,12 @@ final class Sponsor: Model, Content {
         self.image = image
         self.url = url
         self.sponsorLevel = sponsorLevel
+    }
+
+    // MARK: - SponsorLevel
+    enum SponsorLevel: String, Codable {
+        case silver
+        case gold
+        case platinum
     }
 }

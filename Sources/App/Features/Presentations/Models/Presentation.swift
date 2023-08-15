@@ -3,11 +3,9 @@ import Foundation
 import Vapor
 
 final class Presentation: Model, Content {
+    static var schema = Schema.presentation
+
     typealias IDValue = UUID
-    
-    static var schema: String {
-        return "presentations"
-    }
     
     @ID(key: .id)
     var id: UUID?

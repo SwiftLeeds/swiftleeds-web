@@ -1,14 +1,15 @@
-<h1>Presentations</h1>
+<h2>Presentations</h2>
+<br/>
 <ul class="list-group">
     #for(presentation in presentations):
-        <li class="list-group-item d-flex justify-content-between align-items-center">
+        <li class="list-group-item d-flex justify-content-between align-items-center event-visible" data-event="#(presentation.event.id)">
             #if(presentation.secondSpeaker):
             "#(presentation.title)" by #(presentation.speaker.name), #(presentation.secondSpeaker.name)
             #else:
             "#(presentation.title)" by #(presentation.speaker.name)
             #endif
             <span class="badge badge-primary badge-pill">
-                <a href="#">🗑</a>
+                <a href="/admin/presentations/delete/#(presentation.id)">🗑</a>
                 &nbsp
                 <a href="/admin/presentations/#(presentation.id)">✏️</a>
             </span>

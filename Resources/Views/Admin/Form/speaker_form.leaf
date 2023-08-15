@@ -1,0 +1,71 @@
+#extend("base"):
+  #export("title", "SwiftLeeds")
+
+  #export("content"):
+    #extend("Shared/_header")
+
+    <div class="row">
+      <form method="POST" action="/admin/speakers#if(speaker):/#(speaker.id)#endif" enctype="multipart/form-data" class="needs-validation" novalidate>
+        <h2>
+          #if(speaker):
+            Edit Speaker
+          #else:
+            Create Speaker
+          #endif
+        </h2>
+
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input id="name" class="form-control" name="name" value="#(speaker.name)" required>
+          <div class="invalid-feedback">
+            Please enter a name
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="biography" class="form-label">Biography</label>
+          <input id="biography" class="form-control" name="biography" value="#(speaker.biography)" required>
+          <div class="invalid-feedback">
+            Please enter a biography
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="organisation" class="form-label">Organisation</label>
+          <input name="organisation" id="organisation" class="form-control" value="#(speaker.organisation)" required>
+          <div class="invalid-feedback">
+            Please enter an organisation
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <br/>
+          <span class="input-group-text">@</span>
+          <input type="text" name="twitter" id="twitter" class="form-control" placeholder="Twitter" value="#(speaker.twitter)" aria-label="Twitter username" aria-describedby="basic-addon1">
+        </div>
+
+        <div class="mb-3">
+          <label for="profileImage" class="form-label">Image</label>
+          <input id="profileImage" class="form-control" type="file" name="profileImage" required>
+          <div class="invalid-feedback">
+            Please upload an image
+          </div>
+
+          #if(speaker.profileImage):
+            </br>
+            <p class="form-label">Existing image</p>
+            <img src="#awsImage(speaker.profileImage)" class="img-thumbnail speaker-thumbnail-img", width=200>
+          #endif
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <div class="col-6">
+        <img src="/img/header-bg.png" class="child-img">
+      </div>
+    </div>
+
+    #extend("Shared/_footer")
+  #endexport
+#endextend

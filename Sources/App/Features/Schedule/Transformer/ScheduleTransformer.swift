@@ -9,7 +9,7 @@ enum ScheduleTransformer {
         return ScheduleResponse(
             event: eventResponse,
             slots: slots.compactMap(SlotTransformer.transform(_:)).sorted(by: {
-                $0.startTime < $1.startTime
+                $0.date < $1.date
             })
         )
     }

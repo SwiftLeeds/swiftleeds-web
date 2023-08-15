@@ -24,6 +24,7 @@ enum SlotTransformer: Transformer {
         return .init(
             id: id,
             startTime: entity.startDate,
+            date: entity.date ?? Date(),
             duration: entity.duration,
             presentation: presentation,
             activity: activity

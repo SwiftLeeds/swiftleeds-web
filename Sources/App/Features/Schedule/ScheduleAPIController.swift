@@ -10,7 +10,7 @@ struct ScheduleAPIController: RouteCollection {
         // Get the current event
         // In future this will need to be smarter
         let eventWithSlots = try await Event.query(on: request.db)
-            .sort(\.$date, .ascending)
+            .sort(\.$date)
             .with(\.$slots) { slots in
                 slots
                     .with(\.$activity)

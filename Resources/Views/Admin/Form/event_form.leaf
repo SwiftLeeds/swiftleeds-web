@@ -1,0 +1,73 @@
+#extend("base"):
+  #export("title", "SwiftLeeds")
+
+  #export("content"):
+    #extend("Shared/_header")
+
+    <div class="row">
+      <form method="POST" action="/admin/events#if(event):/#(event.id)#endif" class="needs-validation" novalidate>
+        <h2>
+          #if(event):
+            Edit Event
+          #else:
+            Create Event
+          #endif
+        </h2>
+
+        <div class="mb-3">
+          <label for="title" class="form-label">Name</label>
+          <input id="name" class="form-control" name="name" value="#(event.name)" required>
+          <div class="invalid-feedback">
+            Please enter a name
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="date" class="form-label">Date</label>
+          <div class="input-group">
+            <input name="date" type="date" id="date"" class="form-control" value="#if(event):#date(event.date, "yyyy-MM-dd")#endif" required>
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-time"></span>
+            </span>
+            <div class="invalid-feedback">
+              Please enter an event date
+            </div>
+          </div>
+        <div>
+
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input id="location" class="form-control" name="location" value="#(event.location)" required>
+          <div class="invalid-feedback">
+            Please enter a location
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="isCurrent" class="form-label">Current Event</label>
+          <input id="isCurrentCheckbox" type="checkbox" #if(event.isCurrent):checked disabled=true#endif onchange="updatedCurrent()">
+          <input id="isCurrent" type="hidden" name="isCurrent" value="#if(event.isCurrent):true#else:false#endif"
+        </div>
+        <br/>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <div class="col-6">
+        <img src="/img/header-bg.png" class="child-img">
+      </div>
+    </div>
+
+    #extend("Shared/_footer")
+  #endexport
+
+  #export("scripts"):
+    <script>
+      function updatedCurrent() {
+        var isCurrent = document.getElementById('isCurrentCheckbox').checked
+        var element = document.getElementById('isCurrent')
+        element.value = isCurrent ? true : false
+      }
+    </script>
+  #endexport
+#endextend
