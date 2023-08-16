@@ -29,6 +29,14 @@ final class Event: Model, Content {
     var slots: [Slot]
     
     init() {}
+
+    init(id: IDValue?, name: String, date: Date, location: String, isCurrent: Bool) {
+        self.id = id
+        self.name = name
+        self.date = date
+        self.location = location
+        self.isCurrent = isCurrent
+    }
 }
 
 extension Event {

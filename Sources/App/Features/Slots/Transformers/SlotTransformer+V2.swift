@@ -9,7 +9,7 @@ enum SlotTransformerV2: Transformer {
         let presentation: PresentationResponseV2?
         let activity: ActivityResponse?
 
-        if let presentationEntity = entity.$presentation.value, presentationEntity?.isTBA != true {
+        if let presentationEntity = entity.$presentation.value, presentationEntity?.isTBA == true {
             presentation = PresentationTransformerV2.transform(presentationEntity)
         } else {
             presentation = nil
@@ -19,6 +19,10 @@ enum SlotTransformerV2: Transformer {
             activity = ActivityTransformer.transform(activityEntity)
         } else {
             activity = nil
+        }
+
+        if activity == nil && presentation == nil {
+            return nil
         }
 
         return .init(

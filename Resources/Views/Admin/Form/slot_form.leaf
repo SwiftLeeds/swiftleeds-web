@@ -1,0 +1,115 @@
+#extend("base"):
+  #export("title", "SwiftLeeds")
+
+  #export("content"):
+    #extend("Shared/_header")
+
+    <div class="row">
+      <form method="POST" action="/admin/slots#if(slot):/#(slot.id)#endif"" class="needs-validation" novalidate>
+        <h2>
+          #if(slot):
+            Edit Slot
+          #else:
+            Create Slot
+          #endif
+        </h2>
+
+        <label for="event" class="form-label">Event</label>
+        <select name="eventID" class="form-control" required>
+          <option selected disabled value="">-- select an event --</option>
+          #for(event in events):
+            <option #if(event.id == slot.event.id): selected #endif id="eventID" name="eventID" value=#(event.id)>
+              #(event.name)
+            </option>
+          #endfor
+        </select>
+        <div class="invalid-feedback">
+          Please select an event
+        </div>
+        <br/>
+
+        <label for="type" class="form-label">Type</label>
+        <select id="type" name="type" class="form-control">
+          #for(type in types):
+            <option #if(initialType == type):selected#endif id="type" name="type" value=#(type)>
+              #(type)
+            </option>
+          #endfor
+        </select>
+
+        <br class="presentation">
+        <label for="presentationID" class="form-label presentation">Presentation</label>
+        <select name="presentationID" class="form-control presentation">
+          <option selected value>-- select a presentation --</option>
+          #for(presentation in presentations):
+            <option #if(presentation.id == slot.presentation.id): selected #endif id="presentationID" name="presentationID" value=#(presentation.id)>
+              #(presentation.title)
+            </option>
+          #endfor
+        </select>
+
+        <br class="activity">
+        <label for="activityID" class="form-label activity">Activity</label>
+        <select name="activityID" class="form-control activity">
+          <option selected value>-- select an activity --</option>
+          #for(activity in activities):
+            <option #if(activity.id == slot.activity.id): selected #endif id="activityID" name="activityID" value=#(activity.id)>
+              #(activity.title) - #(activity.subtitle)
+            </option>
+          #endfor
+        </select>
+        <br>
+
+        <label for="date" class="form-label">Start Time</label>
+        <div class="input-group">
+          <input name="date" type="datetime-local" class="form-control" #if(slot.date): value="#date(slot.date)" #elseif(slot.startDate): value="2022-10-09T#(slot.startDate)" #endif required>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-time"></span>
+          </span>
+        </div>
+        <div class="invalid-feedback">
+          Please enter a start date and time
+        </div>
+
+        <br>
+        <div class="mb-3">
+          <label for="duration" class="form-label">Duration (minutes)</label>
+          <input name="duration" type="number" class="form-control" value="#(slot.duration)" required>
+          <div class="invalid-feedback">
+            Please enter a duration
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <div class="col-6">
+        <img src="/img/header-bg.png" class="child-img">
+      </div>
+    </div>
+
+    #extend("Shared/_footer")
+  #endexport
+
+  #export("scripts"):
+    <script>
+      function updateForType(type) {
+        if (type == "activity") {
+          $(".presentation").hide();
+          $(".activity").show();
+        } else if (type == "presentation") {
+          $(".presentation").show();
+          $(".activity").hide();
+        }
+      }
+
+      $(document).ready(function(){
+        updateForType("#(initialType)")
+        $("#type").on("change", function(e){
+          var type = $(this).val();
+          updateForType(type)
+        });
+      });
+    </script>
+  #endexport
+#endextend

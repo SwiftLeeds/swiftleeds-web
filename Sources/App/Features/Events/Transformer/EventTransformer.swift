@@ -2,9 +2,8 @@ import Foundation
 
 enum EventTransformer: Transformer {
     static func transform(_ entity: Event?) -> EventResponse? {
-        guard let entity = entity, let id = entity.id else {
-            return nil
-        }
+        guard let entity = entity, let id = entity.id else { return nil }
+
         return .init(
             id: id,
             name: entity.name,
@@ -17,6 +16,7 @@ enum EventTransformer: Transformer {
 private extension EventTransformer {
     static var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
+        formatter.locale = .init(identifier: "en_US_POSIX")
         formatter.dateFormat = "dd-MM-yyyy"
         return formatter
     }

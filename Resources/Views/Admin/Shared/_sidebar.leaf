@@ -5,18 +5,18 @@
     <hr>
     <ul id="nav" class="nav nav-pills flex-column mb-auto">
       <li>
-        <a href="/admin?page=speakers" class="nav-link link-dark">
-          Speakers
+        <a href="/admin?page=activities" class="nav-link link-dark">
+          Activities
+        </a>
+      </li>
+      <li>
+        <a href="/admin?page=events" class="nav-link link-dark">
+          Events
         </a>
       </li>
       <li>
         <a href="/admin?page=presentations" class="nav-link link-dark">
           Presentations / Sessions
-        </a>
-      </li>
-    <li>
-        <a href="/admin?page=activities" class="nav-link link-dark">
-          Activities
         </a>
       </li>
       <li>
@@ -25,11 +25,11 @@
         </a>
       </li>
       <li>
-        <a href="/admin?page=events" class="nav-link link-dark">
-          Events
+        <a href="/admin?page=speakers" class="nav-link link-dark">
+          Speakers
         </a>
       </li>
-    <li>
+      <li>
         <a href="/admin?page=sponsors" class="nav-link link-dark">
           Sponsors
         </a>

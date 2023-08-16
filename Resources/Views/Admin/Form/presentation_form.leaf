@@ -1,0 +1,114 @@
+#extend("base"):
+  #export("title", "SwiftLeeds")
+
+  #export("content"):
+    #extend("Shared/_header")
+
+    <div class="row">
+      <form method="POST" action="/admin/presentations#if(presentation):/#(presentation.id)#endif" enctype="multipart/form-data" class="needs-validation" novalidate>
+        <h2>
+          #if(presentation):
+            Edit Presentation
+          #else:
+            Create Presentation
+          #endif
+        </h2>
+
+        <label for="event" class="form-label">Event</label>
+        <select name="eventID" class="form-control" required>
+          <option selected disabled value="">-- select an event --</option>
+          #for(event in events):
+            <option #if(event.id == presentation.event.id): selected #endif id="eventID" name="eventID" value=#(event.id)>
+              #(event.name)
+            </option>
+          #endfor
+        </select>
+        <div class="invalid-feedback">
+          Please select an event
+        </div>
+        <br>
+
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input value="#(presentation.title)" class="form-control" name="title" id="title" required>
+          <div class="invalid-feedback">
+            Please enter a title
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="synopsis" class="form-label">Synopsis</label>
+          <textarea class="form-control" name="synopsis" id="synopsis" rows="10" required>#(presentation.synopsis)</textarea>
+          <div class="invalid-feedback">
+            Please enter a synopsis
+          </div>
+          <p>* Supports Markdown</p>
+        </div>
+
+        <label for="speakerID" class="form-label">Speaker</label>
+        <select name="speakerID" id="speakerID" class="form-control" required>
+          <option selected disabled value="">-- select a speaker --</option>
+          #for(speaker in speakers):
+            <option #if(speaker.id == presentation.speaker.id): selected #endif value=#(speaker.id)>
+              #(speaker.name)
+            </option>
+          #endfor
+        </select>
+        <div class="invalid-feedback">
+          Please select a speaker
+        </div>
+        <br/>
+
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="enableSecondSpeaker" data-toggle="toggle" checked="checked">
+          <label class="form-check-label" for="enableSecondSpeaker">Additional Speaker</label>
+        </div>
+
+        <select id="secondSpeakerSelect" name="secondSpeakerID" class="form-control secondSpeaker">
+          <option selected disabled value="">-- select additional speaker --</option>
+          #for(speaker in speakers):
+            <option #if(speaker.id == presentation.secondSpeaker.id): selected #endif value=#(speaker.id)>
+              #(speaker.name)
+            </option>
+          #endfor
+        </select>
+        <br>
+
+        <div class="mb-3">
+          <label for="slidoURL" class="form-label">Slido URL</label>
+          <input name="slidoURL" id="slidoURL" class="form-control" value="#(presentation.slidoURL)">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <div class="col-6">
+        <img src="/img/header-bg.png" class="child-img">
+      </div>
+    </div>
+
+    #extend("Shared/_footer")
+  #endexport
+
+  #export("scripts"):
+    <script>
+      function updateForSecondSpeaker(enabled) {
+        if (enabled) {
+          $("#secondSpeakerSelect").show();
+        } else {
+          $("#secondSpeakerSelect").hide();
+          $("#secondSpeakerSelect option:eq(0)").prop('selected', true)
+        }
+      }
+
+      $(document).ready(function(){
+        updateForSecondSpeaker(#(hasSecondSpeaker))
+        $("#enableSecondSpeaker").prop("checked", #(hasSecondSpeaker))
+        $("#enableSecondSpeaker").on("change", function(e){
+          var enabled = $(this).prop("checked") == true
+          updateForSecondSpeaker(enabled)
+        });
+      });
+    </script>
+  #endexport
+#endextend

@@ -19,15 +19,24 @@ final class Speaker: Codable, Model, Content {
     
     @Field(key: "profile_image")
     var profileImage: String
-    
-    @Field(key: "twitter")
-    var twitter: String?
-    
+
     @Field(key: "organisation")
     var organisation: String
+
+    @Field(key: "twitter")
+    var twitter: String?
     
     @Children(for: \.$speaker)
     var presentations: [Presentation]
     
     init() {}
+
+    init(id: IDValue?, name: String, biography: String, profileImage: String, organisation: String, twitter: String?) {
+        self.id = id
+        self.name = name
+        self.biography = biography
+        self.profileImage = profileImage
+        self.organisation = organisation
+        self.twitter = twitter
+    }
 }

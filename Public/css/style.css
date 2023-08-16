@@ -1,3 +1,7 @@
+.hidden {
+    display: none !important;
+}
+
 /* Base Variables */
 :root {
   --accent-color: #ED2207;
