@@ -56,7 +56,7 @@ struct EventRouteController: RouteCollection {
 
         guard let date = Self.formDateFormatter().date(from: input.date) else { return request.redirect(to: "/admin?page=events")}
 
-        if let event {
+        if let event = event {
             event.name = input.name
             event.date = date
             event.location = input.location
