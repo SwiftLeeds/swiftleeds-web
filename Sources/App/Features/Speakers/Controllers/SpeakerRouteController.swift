@@ -65,7 +65,7 @@ struct SpeakerRouteController: RouteCollection {
             }
         }
 
-        if let speaker {
+        if let speaker = speaker {
             speaker.name = input.name
             speaker.biography = input.biography
             speaker.profileImage = imageFilename
