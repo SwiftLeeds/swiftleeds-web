@@ -86,7 +86,7 @@ struct SponsorRouteController: RouteCollection {
             return request.redirect(to: "/admin?page=sponsors")
         }
 
-        if let sponsor {
+        if let sponsor = sponsor {
             sponsor.name = input.name
             sponsor.subtitle = input.subtitle
             sponsor.image = imageFilename

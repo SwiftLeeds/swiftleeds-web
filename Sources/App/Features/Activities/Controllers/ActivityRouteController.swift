@@ -60,7 +60,7 @@ struct ActivityRouteController: RouteCollection {
             return request.redirect(to: "/admin?page=activities")
         }
 
-        if let activity {
+        if let activity = activity {
             var fileName = activity.image
 
             if !image.activityImage.filename.isEmpty {

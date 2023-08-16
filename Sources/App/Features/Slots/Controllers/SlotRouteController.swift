@@ -89,7 +89,7 @@ struct SlotRouteController: RouteCollection {
 
         let inputDate = Self.formDateTimeFormatter().date(from: input.date) ?? Date()
 
-        if let slot {
+        if let slot = slot {
             slot.startDate = Self.timeFormatter().string(from: inputDate)
             slot.date = inputDate
             slot.duration = input.duration
@@ -100,23 +100,25 @@ struct SlotRouteController: RouteCollection {
 
             // Remove old session reference if changed
             if let existingActivity = slot.activity, input.activityID != existingActivity.id?.uuidString {
-                existingActivity.$slot.id = nil
+                let emptySlotID: Slot.IDValue? = nil
+                existingActivity.$slot.id = emptySlotID
                 try await existingActivity.update(on: request.db)
                 hasSessionChanged = true
             }
 
             if let existingPresentation = slot.presentation, input.presentationID != existingPresentation.id?.uuidString {
-                existingPresentation.$slot.id = nil
+                let emptySlotID: Slot.IDValue? = nil
+                existingPresentation.$slot.id = emptySlotID
                 try await existingPresentation.update(on: request.db)
                 hasSessionChanged = true
             }
 
             // Add new session reference if required
             if hasSessionChanged {
-                if let activity {
+                if let activity = activity {
                     activity.$slot.id = try slot.requireID()
                     try await activity.update(on: request.db)
-                } else if let presentation {
+                } else if let presentation = presentation {
                     presentation.$slot.id = try slot.requireID()
                     try await presentation.update(on: request.db)
                 }
@@ -133,10 +135,10 @@ struct SlotRouteController: RouteCollection {
 
             try await newSlot.create(on: request.db)
 
-            if let activity {
+            if let activity = activity {
                 activity.$slot.id = try newSlot.requireID()
                 try await activity.update(on: request.db)
-            } else if let presentation {
+            } else if let presentation = presentation {
                 presentation.$slot.id = try newSlot.requireID()
                 try await presentation.update(on: request.db)
             }

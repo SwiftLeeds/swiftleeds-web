@@ -59,7 +59,7 @@ struct PresentationRouteController: RouteCollection {
             return request.redirect(to: "/admin?page=presentations")
         }
 
-        if let presentation {
+        if let presentation = presentation {
             presentation.title = input.title
             presentation.synopsis = input.synopsis
             presentation.isTBA = false
@@ -74,7 +74,8 @@ struct PresentationRouteController: RouteCollection {
                 }
                 presentation.$secondSpeaker.id = try secondSpeaker.requireID()
             } else {
-                presentation.$secondSpeaker.id = nil
+                let emptySpeakerID: Speaker.IDValue? = nil
+                presentation.$secondSpeaker.id = emptySpeakerID
             }
 
             try await presentation.update(on: request.db)
@@ -96,7 +97,8 @@ struct PresentationRouteController: RouteCollection {
                 }
                 presentation.$secondSpeaker.id = try secondSpeaker.requireID()
             } else {
-                presentation.$secondSpeaker.id = nil
+                let emptySpeakerID: Speaker.IDValue? = nil
+                presentation.$secondSpeaker.id = emptySpeakerID
             }
 
             try await presentation.create(on: request.db)
