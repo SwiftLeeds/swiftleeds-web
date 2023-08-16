@@ -15,7 +15,7 @@
         </h2>
 
         <label for="event" class="form-label">Event</label>
-        <select name="eventID" class="form-control" required>
+        <select name="eventID" id="event" class="form-control" required>
           <option selected disabled value="">-- select an event --</option>
           #for(event in events):
             <option #if(event.id == slot.event.id): selected #endif id="eventID" name="eventID" value=#(event.id)>
@@ -42,18 +42,18 @@
         <select name="presentationID" class="form-control presentation">
           <option selected value>-- select a presentation --</option>
           #for(presentation in presentations):
-            <option #if(presentation.id == slot.presentation.id): selected #endif id="presentationID" name="presentationID" value=#(presentation.id)>
+            <option #if(presentation.id == slot.presentation.id): selected #endif name="presentationID" value=#(presentation.id) id="presentationID" class="event-visible" data-event="#(presentation.event.id)">
               #(presentation.title)
             </option>
           #endfor
         </select>
 
         <br class="activity">
-        <label for="activityID" class="form-label activity">Activity</label>
-        <select name="activityID" class="form-control activity">
+        <label for="activity" class="form-label activity">Activity</label>
+        <select name="activity" id="activity" class="form-control activity">
           <option selected value>-- select an activity --</option>
           #for(activity in activities):
-            <option #if(activity.id == slot.activity.id): selected #endif id="activityID" name="activityID" value=#(activity.id)>
+            <option #if(activity.id == slot.activity.id): selected #endif name="activityID" value=#(activity.id) id="activityID" class="event-visible" data-event="#(activity.event.id)">
               #(activity.title) - #(activity.subtitle)
             </option>
           #endfor
@@ -105,10 +105,30 @@
 
       $(document).ready(function(){
         updateForType("#(initialType)")
+        selectedEventUpdated()
+
         $("#type").on("change", function(e){
           var type = $(this).val();
           updateForType(type)
         });
+
+        $("#event").on("change", function(e){
+          selectedEventUpdated()
+        });
+
+        function selectedEventUpdated() {
+          var selectedEvent = document.getElementById('event').value
+          var elements = document.getElementsByClassName('event-visible')
+
+          for (const element of elements) {
+            console.log(element.dataset.event + ' - ' + selectedEvent)
+            if (element.dataset.event == selectedEvent) {
+              element.disabled = false
+            } else {
+              element.disabled = true
+            }
+          }
+        }
       });
     </script>
   #endexport
