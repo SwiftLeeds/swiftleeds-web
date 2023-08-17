@@ -1,57 +1,18 @@
 enum Schema {
-    static var user: String {
-        return "users"
-    }
-    
-    static var userToken: String {
-        return "user_tokens"
-    }
-    
-    static var event: String {
-        return "events"
-    }
-    
-    static var presentation: String {
-        return "presentations"
-    }
-    
-    static var speaker: String {
-        return "speakers"
-    }
-
-    static var slot: String {
-        return "slots"
-    }
-
-    static var activity: String {
-        return "activity"
-    }
-    
-    static var sponsor: String {
-        return "sponsors"
-    }
-
-    static var location: String {
-        return "locations"
-    }
-
-    static var locationCategory: String {
-        return "locationCategories"
-    }
-
-    static var tokens: String {
-        return "tokens"
-    }
-    
-    static var dropInSessions: String {
-        return "dropin_sessions"
-    }
-    
-    static var dropInSessionSlots: String {
-        return "dropin_session_slots"
-    }
-
-    static var lastUpdated: String {
-        return "last_updated"
-    }
+    static let activity = "activity"
+    static let dropInSessions =  "dropin_sessions"
+    static let dropInSessionSlots = "dropin_session_slots"
+    static let event = "events"
+    static let job = "jobs"
+    static let lastUpdated = "last_updated"
+    static let location = "locations"
+    static let locationCategory = "locationCategories"
+    static let presentation = "presentations"
+    static let slot = "slots"
+    static let speaker = "speakers"
+    static let sponsor = "sponsors"
+    static let sponsorLevel = "sponsor_level"
+    static let tokens = "tokens"
+    static let user = "users"
+    static let userToken = "user_tokens"
 }

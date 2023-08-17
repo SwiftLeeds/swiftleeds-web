@@ -2,14 +2,6 @@ import Fluent
 import Vapor
 
 struct SponsorRouteController: RouteCollection {
-    private let sponsorLevels: [Sponsor.SponsorLevel] = [.silver, .gold, .platinum]
-
-    private struct SponsorContext: Content {
-        let sponsor: Sponsor?
-        let sponsorLevels: [Sponsor.SponsorLevel]
-        let events: [Event]
-    }
-    
     func boot(routes: RoutesBuilder) throws {
         routes.get(use: onShowCreate)
         routes.get(":id", use: onShowEdit)
@@ -35,9 +27,7 @@ struct SponsorRouteController: RouteCollection {
     }
 
     private func onDelete(request: Request) async throws -> Response {
-        guard let sponsor = try await Sponsor.find(request.parameters.get("id"), on: request.db) else {
-            throw Abort(.notFound)
-        }
+        guard let sponsor = try await Sponsor.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
 
         try await sponsor.delete(on: request.db)
         return request.redirect(to: "/admin?page=sponsors")
@@ -48,9 +38,7 @@ struct SponsorRouteController: RouteCollection {
     }
     
     private func onEdit(request: Request) async throws -> Response {
-        guard let sponsor = try await Sponsor.find(
-            request.parameters.get("id"), on: request.db
-        ) else {
+        guard let sponsor = try await Sponsor.find(request.parameters.get("id"), on: request.db) else {
             return request.redirect(to: "/admin?page=sponsors")
         }
         
@@ -112,6 +100,13 @@ struct SponsorRouteController: RouteCollection {
         return request.redirect(to: "/admin?page=sponsors")
     }
 
+    // MARK: - SponsorContext
+    private struct SponsorContext: Content {
+        let sponsor: Sponsor?
+        let sponsorLevels: [Sponsor.SponsorLevel]
+        let events: [Event]
+    }
+
     // MARK: - ImageInput
     private struct ImageInput: Content {
         let sponsorImage: File?
@@ -125,4 +120,7 @@ struct SponsorRouteController: RouteCollection {
         let sponsorLevel: String
         let eventID: String
     }
+
+    // MARK: - sponsorLevels
+    private let sponsorLevels: [Sponsor.SponsorLevel] = [.silver, .gold, .platinum]
 }

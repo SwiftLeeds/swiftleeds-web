@@ -8,6 +8,7 @@ struct SponsorResponse: Content {
     let image: String?
     let url: String?
     let sponsorLevel: SponsorLevelResponse?
+    let jobs: [JobResponse]
 }
 
 enum SponsorLevelResponse: String, Content, RawRepresentable {

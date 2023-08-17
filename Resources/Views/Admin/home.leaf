@@ -25,16 +25,18 @@
           <br/>
         #endif
 
-        #if(page == "speakers"):
-          #extend("Admin/speakers")
-        #elseif(page == "presentations"):
-          #extend("Admin/presentations")
-        #elseif(page == "activities"):
+        #if(page == "activities"):
           #extend("Admin/activities")
         #elseif(page == "events"):
           #extend("Admin/events")
+        #elseif(page == "jobs"):
+          #extend("Admin/jobs")
+        #elseif(page == "presentations"):
+          #extend("Admin/presentations")
         #elseif(page == "slots"):
           #extend("Admin/slots")
+        #elseif(page == "speakers"):
+          #extend("Admin/speakers")
         #elseif(page == "sponsors"):
           #extend("Admin/sponsors")
         #endif
@@ -42,7 +44,9 @@
     </div>
 
     #extend("Shared/_footer")
+  #endexport
 
+  #export("scripts"):
     <script type="text/javascript">
       var nav = document.getElementById("nav");
       var links = nav.getElementsByClassName("nav-link");

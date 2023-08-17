@@ -27,6 +27,9 @@ final class Sponsor: Model, Content {
     
     @Parent(key: "event_id")
     public var event: Event
+
+    @Children(for: \.$sponsor)
+    var jobs: [Job]
     
     init() {}
     
