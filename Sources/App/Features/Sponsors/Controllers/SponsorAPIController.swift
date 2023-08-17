@@ -6,14 +6,6 @@ struct SponsorAPIController: RouteCollection {
         routes.get(use: onGet)
     }
 
-    private static var readableDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss zzz"
-        return formatter
-    }()
-
     private func onGet(request: Request) async throws -> Response {
         let lastModified = try await LastUpdated
             .query(on: request.db)
@@ -33,11 +25,12 @@ struct SponsorAPIController: RouteCollection {
 
         let allSponsors = try await Sponsor.query(on: request.db)
             .with(\.$event)
+            .with(\.$jobs)
             .all()
             .filter { $0.event.shouldBeReturned(by: request) }
 
         let sponsorsResponse = try await GenericResponse(
-            data: allSponsors.compactMap(SponsorTransformer.transform(_:))
+            data: allSponsors.compactMap(SponsorTransformer.transform)
         ).encodeResponse(status: .ok, headers: headers, for: request)
 
         updateSponsorsHash(on: request, lastModified: lastModified, contentLength: sponsorsResponse.body.count, eTag: eTag)
@@ -60,6 +53,14 @@ struct SponsorAPIController: RouteCollection {
     private func updateSponsorsHash(on request: Request, lastModified: Date, contentLength: Int, eTag: String) {
         request.application.storage[SponsorsHashes.self] = SponsorsHashes.Hash(lastModified: lastModified, contentLength: contentLength, eTag: eTag)
     }
+
+    private static var readableDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss zzz"
+        return formatter
+    }()
 
     // MARK: - SponsorsHashes
     struct SponsorsHashes: StorageKey {

@@ -67,6 +67,9 @@ class Migrations {
         // Add default entries into Last Update table
         app.migrations.add(LastUpdatedMigrationV2())
 
+        // Add Job table
+        app.migrations.add(JobMigrationV1())
+
         do {
             guard let url = Environment.get("DATABASE_URL") else {
                 throw Abort(.internalServerError, reason: "Missing 'DATABASE_URL' environment variable")

@@ -103,6 +103,7 @@ func routes(_ app: Application) throws {
     try adminRoutes.grouped("events").register(collection: EventRouteController())
     try adminRoutes.grouped("presentations").register(collection: PresentationRouteController())
     try adminRoutes.grouped("activities").register(collection: ActivityRouteController())
+    try adminRoutes.grouped("jobs").register(collection: JobRouteController())
 
     adminRoutes.get { request -> View in
         let user = try request.auth.require(User.self)
@@ -114,6 +115,7 @@ func routes(_ app: Application) throws {
             .with(\.$secondSpeaker)
             .all()
         let events = try await Event.query(on: request.db).sort(\.$date).all()
+        let jobs = try await Job.query(on: request.db).sort(\.$title).all()
         let slots = try await Slot
             .query(on: request.db)
             .sort(\.$date)
@@ -135,23 +137,26 @@ func routes(_ app: Application) throws {
         // There might be a better way to handle this, but Leaf templates don't
         // support dictionaries holding arrays,
         // e.g [.gold: [sponsor, sponsor], .platinum: [sponsor, sponsor]]
-        let sponsorQuery = try await Sponsor.query(on: request.db).all()
-        let platinumSponsors = sponsorQuery.filter { $0.sponsorLevel == .platinum }
-        let silverSponsors = sponsorQuery.filter { $0.sponsorLevel == .silver }
-        let goldSponsors = sponsorQuery.filter { $0.sponsorLevel == .gold }
+
+        let sponsors = try await Sponsor.query(on: request.db).all()
+        let platinumSponsors = sponsors.filter { $0.sponsorLevel == .platinum }
+        let silverSponsors = sponsors.filter { $0.sponsorLevel == .silver }
+        let goldSponsors = sponsors.filter { $0.sponsorLevel == .gold }
 
         return try await request.view.render(
             "Admin/home",
             AdminContext(
-                selectedEvent: selectedEvent,
-                speakers: speakers,
-                presentations: presentations,
-                events: events,
-                slots: slots,
                 activities: activities,
+                events: events,
+                jobs: jobs,
+                presentations: presentations,
+                slots: slots,
+                speakers: speakers,
+                sponsors: sponsors,
                 platinumSponsors: platinumSponsors,
                 silverSponsors: silverSponsors,
                 goldSponsors: goldSponsors,
+                selectedEvent: selectedEvent,
                 page: (query ?? PageQuery(page: "speakers")).page,
                 user: user
             )
@@ -164,15 +169,17 @@ struct PageQuery: Content {
 }
 
 struct AdminContext: Content {
-    var selectedEvent: Event
-    var speakers: [Speaker] = []
-    var presentations: [Presentation] = []
-    var events: [Event] = []
-    var slots: [Slot] = []
     var activities: [Activity] = []
+    var events: [Event] = []
+    var jobs: [Job] = []
+    var presentations: [Presentation] = []
+    var slots: [Slot] = []
+    var speakers: [Speaker] = []
+    var sponsors: [Sponsor] = []
     var platinumSponsors: [Sponsor] = []
     var silverSponsors: [Sponsor] = []
     var goldSponsors: [Sponsor] = []
+    var selectedEvent: Event
     var page: String
     var user: User
 }
