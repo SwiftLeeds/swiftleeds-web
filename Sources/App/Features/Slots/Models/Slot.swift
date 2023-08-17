@@ -42,3 +42,26 @@ final class Slot: Codable, Model, Content {
         self.duration = duration
     }
 }
+
+extension Array where Element == Slot {
+    var schedule: [[Slot]] {
+        let dates = Set(compactMap { $0.date?.withoutTime }).sorted(by: (<))
+        var slots: [[Slot]] = []
+
+        for date in dates {
+            slots.append(filter { Calendar.current.compare(date, to: $0.date ?? Date(), toGranularity: .day) == .orderedSame })
+        }
+
+        return slots
+    }
+}
+
+extension Date {
+    var withoutTime: Date {
+        guard let date = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: self)) else {
+            fatalError("Failed to strip time from Date")
+        }
+
+        return date
+    }
+}
