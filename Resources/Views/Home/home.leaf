@@ -47,7 +47,7 @@
     <br />
     #extend("Home/_speakers")
     <br />
-    #if(count(slots) > 0):
+    #if(count(schedule) > 0):
         <br/>
         #extend("Home/_schedule")
     #endif

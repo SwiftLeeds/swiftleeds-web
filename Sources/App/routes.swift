@@ -55,11 +55,11 @@ func routes(_ app: Application) throws {
                 speakers: speakers,
                 cfpEnabled: cfpExpirationDate > Date(),
                 ticketsEnabled: true,
-                slots: slots,
                 platinumSponsors: platinumSponsors,
                 silverSponsors: silverSponsors,
                 goldSponsors: goldSponsors,
-                dropInSessions: isDropInSessionsEnabled ? dropInSessions : []
+                dropInSessions: isDropInSessionsEnabled ? dropInSessions : [],
+                schedule: slots.schedule
             ))
         } catch {
             return try await req.view.render("Home/home", HomeContext(cfpEnabled: cfpExpirationDate > Date()))
