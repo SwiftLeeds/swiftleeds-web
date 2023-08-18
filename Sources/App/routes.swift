@@ -55,7 +55,6 @@ func routes(_ app: Application) throws {
                 speakers: speakers,
                 cfpEnabled: cfpExpirationDate > Date(),
                 ticketsEnabled: true,
-                slots: slots,
                 platinumSponsors: platinumSponsors,
                 silverSponsors: silverSponsors,
                 goldSponsors: goldSponsors,
