@@ -39,21 +39,21 @@
 
         <br class="presentation">
         <label for="presentationID" class="form-label presentation">Presentation</label>
-        <select name="presentationID" class="form-control presentation">
+        <select name="presentationID" id="presentationID" class="form-control presentation">
           <option selected value>-- select a presentation --</option>
           #for(presentation in presentations):
-            <option #if(presentation.id == slot.presentation.id): selected #endif name="presentationID" value=#(presentation.id) id="presentationID" class="event-visible" data-event="#(presentation.event.id)">
+            <option #if(presentation.id == slot.presentation.id): selected #endif name="presentation" value=#(presentation.id) class="event-visible" data-event="#(presentation.event.id)">
               #(presentation.title)
             </option>
           #endfor
         </select>
 
         <br class="activity">
-        <label for="activity" class="form-label activity">Activity</label>
-        <select name="activity" id="activity" class="form-control activity">
+        <label for="activityID" class="form-label activity">Activity</label>
+        <select name="activityID" id="activityID" class="form-control activity">
           <option selected value>-- select an activity --</option>
           #for(activity in activities):
-            <option #if(activity.id == slot.activity.id): selected #endif name="activityID" value=#(activity.id) id="activityID" class="event-visible" data-event="#(activity.event.id)">
+            <option #if(activity.id == slot.activity.id): selected #endif name="activity" value=#(activity.id) class="event-visible" data-event="#(activity.event.id)">
               #(activity.title) - #(activity.subtitle)
             </option>
           #endfor
@@ -95,11 +95,13 @@
     <script>
       function updateForType(type) {
         if (type == "activity") {
-          $(".presentation").hide();
-          $(".activity").show();
+          $(".presentation").hide()
+          $("#presentationID").prop("selectedIndex", 0)
+          $(".activity").show()
         } else if (type == "presentation") {
-          $(".presentation").show();
-          $(".activity").hide();
+          $(".presentation").show()
+          $(".activity").hide()
+          $("#activityID").prop("selectedIndex", 0)
         }
       }
 
