@@ -33,14 +33,18 @@ final class Presentation: Model, Content {
 
     @Field(key: "slido_url")
     var slidoURL: String?
+
+    @Field(key: "video_url")
+    var videoURL: String?
     
     init() {}
     
-    init(id: IDValue?, title: String, synopsis: String, isTBA: Bool, slidoURL: String?) {
+    init(id: IDValue?, title: String, synopsis: String, isTBA: Bool, slidoURL: String?, videoURL: String?) {
         self.id = id
         self.title = title
         self.synopsis = synopsis
         self.isTBA = isTBA
         self.slidoURL = slidoURL
+        self.videoURL = videoURL
     }
 }

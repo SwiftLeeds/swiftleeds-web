@@ -26,7 +26,8 @@ enum PresentationTransformerV2: Transformer {
             title: entity.title,
             synopsis: entity.synopsis,
             speakers: [speaker, secondSpeaker].compactMap { $0 },
-            slidoURL: entity.slidoURL
+            slidoURL: entity.slidoURL,
+            videoURL: entity.videoURL
         )
     }
 }

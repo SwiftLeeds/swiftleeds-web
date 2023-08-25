@@ -79,6 +79,11 @@
           <input name="slidoURL" id="slidoURL" class="form-control" value="#(presentation.slidoURL)">
         </div>
 
+        <div class="mb-3">
+          <label for="videoURL" class="form-label">Video URL</label>
+          <input name="videoURL" id="videoURL" class="form-control" value="#(presentation.videoURL)">
+        </div>
+
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 

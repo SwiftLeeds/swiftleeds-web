@@ -7,4 +7,5 @@ struct PresentationResponseV2: Content {
     let synopsis: String
     var speakers: [SpeakerResponse] = []
     let slidoURL: String?
+    let videoURL: String?
 }
