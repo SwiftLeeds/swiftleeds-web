@@ -64,6 +64,7 @@ struct PresentationRouteController: RouteCollection {
             presentation.synopsis = input.synopsis
             presentation.isTBA = false
             presentation.slidoURL = input.slidoURL
+            presentation.videoURL = input.videoURL
 
             presentation.$speaker.id = try speaker.requireID()
             presentation.$event.id = try event.requireID()
@@ -85,7 +86,8 @@ struct PresentationRouteController: RouteCollection {
                 title: input.title,
                 synopsis: input.synopsis,
                 isTBA: false,
-                slidoURL: input.slidoURL
+                slidoURL: input.slidoURL,
+                videoURL: input.videoURL
             )
 
             presentation.$speaker.id = try speaker.requireID()
@@ -123,5 +125,6 @@ struct PresentationRouteController: RouteCollection {
         let title: String
         let synopsis: String
         let slidoURL: String?
+        let videoURL: String?
     }
 }

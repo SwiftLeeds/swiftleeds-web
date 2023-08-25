@@ -70,6 +70,9 @@ class Migrations {
         // Add Job table
         app.migrations.add(JobMigrationV1())
 
+        // Add Video URL to Presentations table
+        app.migrations.add(PresentationMigrationV5())
+
         do {
             guard let url = Environment.get("DATABASE_URL") else {
                 throw Abort(.internalServerError, reason: "Missing 'DATABASE_URL' environment variable")
