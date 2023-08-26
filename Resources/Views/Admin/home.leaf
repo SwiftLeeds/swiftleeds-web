@@ -13,7 +13,7 @@
         #extend("Admin/Shared/_sidebar")
       </div>
       <div class="col-9">
-        #if(page == "activities" || page == "presentations" || page == "slots" || page == "sponsors" ):
+        #if(page == "activities" || page == "dropins" || page == "presentations" || page == "slots" || page == "sponsors" ):
           <label for="selectedEvent" class="form-label">Selected event</label>
           <select id="selectedEvent" name="selectedEvent" class="form-control" onchange="selectedEventUpdated()">
             #for(event in events):
@@ -27,6 +27,8 @@
 
         #if(page == "activities"):
           #extend("Admin/activities")
+        #elseif(page == "dropins"):
+          #extend("Admin/dropins")
         #elseif(page == "events"):
           #extend("Admin/events")
         #elseif(page == "jobs"):

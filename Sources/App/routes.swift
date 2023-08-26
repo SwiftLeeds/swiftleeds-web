@@ -104,6 +104,7 @@ func routes(_ app: Application) throws {
     try adminRoutes.grouped("presentations").register(collection: PresentationRouteController())
     try adminRoutes.grouped("activities").register(collection: ActivityRouteController())
     try adminRoutes.grouped("jobs").register(collection: JobRouteController())
+    try adminRoutes.grouped("dropins").register(collection: DropInAdminController())
 
     adminRoutes.get { request -> View in
         let user = try request.auth.require(User.self)
@@ -142,6 +143,10 @@ func routes(_ app: Application) throws {
         let platinumSponsors = sponsors.filter { $0.sponsorLevel == .platinum }
         let silverSponsors = sponsors.filter { $0.sponsorLevel == .silver }
         let goldSponsors = sponsors.filter { $0.sponsorLevel == .gold }
+        
+        let dropInSessions = try await DropInSession.query(on: request.db)
+            .with(\.$event)
+            .all()
 
         return try await request.view.render(
             "Admin/home",
@@ -156,6 +161,7 @@ func routes(_ app: Application) throws {
                 platinumSponsors: platinumSponsors,
                 silverSponsors: silverSponsors,
                 goldSponsors: goldSponsors,
+                dropInSessions: dropInSessions,
                 selectedEvent: selectedEvent,
                 page: (query ?? PageQuery(page: "speakers")).page,
                 user: user
@@ -179,6 +185,7 @@ struct AdminContext: Content {
     var platinumSponsors: [Sponsor] = []
     var silverSponsors: [Sponsor] = []
     var goldSponsors: [Sponsor] = []
+    var dropInSessions: [DropInSession] = []
     var selectedEvent: Event
     var page: String
     var user: User
