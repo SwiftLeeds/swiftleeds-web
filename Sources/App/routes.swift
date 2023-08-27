@@ -84,7 +84,7 @@ func routes(_ app: Application) throws {
 
     try app.routes.register(collection: AuthController()) // TODO: Split this out into web/api/admin
     try app.routes.register(collection: PushController())
-    try app.routes.register(collection: DropInRouteController())
+    try app.routes.register(collection: DropInUserRouteController())
     try app.routes.register(collection: TicketLoginController())
     
     // MARK: - API Routes
@@ -104,7 +104,7 @@ func routes(_ app: Application) throws {
     try adminRoutes.grouped("presentations").register(collection: PresentationRouteController())
     try adminRoutes.grouped("activities").register(collection: ActivityRouteController())
     try adminRoutes.grouped("jobs").register(collection: JobRouteController())
-    try adminRoutes.grouped("dropins").register(collection: DropInAdminController())
+    try adminRoutes.grouped("dropins").register(collection: DropInRouteController())
 
     adminRoutes.get { request -> View in
         let user = try request.auth.require(User.self)

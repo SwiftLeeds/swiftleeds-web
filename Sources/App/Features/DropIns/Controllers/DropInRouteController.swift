@@ -1,7 +1,7 @@
 import Fluent
 import Vapor
 
-struct DropInAdminController: RouteCollection {
+struct DropInRouteController: RouteCollection {
     struct DropinContext: Content {
         let sessions: [DropInSession]
     }
