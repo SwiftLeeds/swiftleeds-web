@@ -1,0 +1,13 @@
+<h1>#(session.title)</h1>
+
+#(session.description)
+
+<h2>Slots</h2>
+
+#for(group in slots):
+<h3>#(group.title)</h3>
+
+#for(slot in group.slots):
+#date(slot.date, "HH:mm") - #(slot.owner)<br />
+#endfor
+#endfor

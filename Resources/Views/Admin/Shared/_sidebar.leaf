@@ -10,6 +10,11 @@
         </a>
       </li>
       <li>
+        <a href="/admin?page=dropins" class="nav-link link-dark">
+          Drop-ins
+        </a>
+      </li>
+      <li>
         <a href="/admin?page=events" class="nav-link link-dark">
           Events
         </a>

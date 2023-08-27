@@ -1,0 +1,14 @@
+<h2>Drop-in Sessions</h2>
+<br/>
+<ul class="list-group">
+    #for(dropInSession in dropInSessions):
+        <li class="list-group-item d-flex justify-content-between align-items-center event-visible" data-event="#(dropInSession.event.id)">
+            #(dropInSession.title)<br />
+            with #(dropInSession.owner)
+            
+            <span class="badge badge-primary badge-pill">
+                <a href="/admin/dropins/print/#(dropInSession.id)">🖨️</a>
+            </span>
+        </li>
+    #endfor
+</ul>

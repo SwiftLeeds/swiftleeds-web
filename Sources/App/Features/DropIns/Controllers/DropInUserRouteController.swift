@@ -1,7 +1,7 @@
 import Fluent
 import Vapor
 
-struct DropInRouteController: RouteCollection {
+struct DropInUserRouteController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         routes.grouped(ValidTicketMiddleware()).group("drop-in") { builder in
             // list available sessions
