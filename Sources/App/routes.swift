@@ -21,6 +21,7 @@ func routes(_ app: Application) throws {
                     // presentation has been announced
                     $0.presentations.contains(where: { $0.event.isCurrent && $0.isTBA == false })
                 }
+                .sorted(by: { $0.name < $1.name })
             
             // There might be a better way to handle this, but Leaf templates don't
             // support dictionaries holding arrays,
