@@ -7,14 +7,14 @@ struct ScheduleAPIControllerV2: RouteCollection {
     }
 
     private func onGet(request: Request) async throws -> Response {
-        guard let event = try await Event
+        let events = try await Event
             .query(on: request.db)
             .all()
-            .first(where: { $0.shouldBeReturned(by: request) })
-        else {
+
+        guard let event = events.first(where: { $0.shouldBeReturned(by: request) }) else {
             throw ScheduleAPIController.ScheduleAPIError.notFound
         }
-        
+
         let slots = try await Slot.query(on: request.db)
             .with(\.$event)
             .with(\.$activity)
@@ -24,7 +24,7 @@ struct ScheduleAPIControllerV2: RouteCollection {
             .all()
             .filter { $0.event.id == event.id }
 
-        guard let schedule = ScheduleTransformerV2.transform(event: event, slots: slots) else {
+        guard let schedule = ScheduleTransformerV2.transform(event: event, events: events, slots: slots) else {
             throw ScheduleAPIController.ScheduleAPIError.transformFailure
         }
 
