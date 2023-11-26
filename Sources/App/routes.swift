@@ -2,9 +2,6 @@ import Vapor
 
 func routes(_ app: Application) throws {
     // MARK: - Web Routes
-    
-    let route = app.routes.grouped(User.sessionAuthenticator())
- 
     try app.routes.register(collection: HomeRouteController())
     
     app.routes.get("login") { request in

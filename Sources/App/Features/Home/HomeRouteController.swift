@@ -2,8 +2,9 @@ import Vapor
 
 struct HomeRouteController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
-        routes.get(use: get)
-        routes.get("schedule", use: schedule)
+        let route = routes.grouped(User.sessionAuthenticator())
+        route.get(use: get)
+        route.get("schedule", use: schedule)
     }
     
     func get(req: Request) async throws -> View {

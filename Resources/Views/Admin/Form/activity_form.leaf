@@ -3,17 +3,20 @@
 
   #export("content"):
     #extend("Shared/_header")
-
-    <div class="row">
-      <form method="POST" action="/admin/activities#if(activity):/#(activity.id)#endif" enctype="multipart/form-data" class="needs-validation" novalidate>
-        <h2>
-          #if(activity):
+      <section class="bg-dark py-4">
+        <div class="container pb-2 py-lg-5">
+          <h1 class="text-center my-4 text-white">#if(activity):
             Edit Activity
           #else:
             Create Activity
-          #endif
-        </h2>
-
+          #endif</h1>
+        </div>
+      </section>
+      
+      <section class="container mb-5 pt-4 pb-2 py-mg-4">
+      
+    <div class="row">
+      <form method="POST" action="/admin/activities#if(activity):/#(activity.id)#endif" enctype="multipart/form-data" class="needs-validation" novalidate>
         <label for="event" class="form-label">Event</label>
         <select name="eventID" class="form-control" required>
           <option selected disabled value="">-- select an event --</option>
@@ -66,12 +69,9 @@
 
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
-
-      <div class="col-6">
-        <img src="/img/header-bg.png" class="child-img">
-      </div>
     </div>
+    
+    </section>
 
-    #extend("Shared/_footer")
   #endexport
 #endextend
