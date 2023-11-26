@@ -3,28 +3,35 @@
 
   #export("content"):
     #extend("Shared/_header")
-    <div class="row">
-      <h1>Login to your <strong>SwiftLeeds</strong> account </h1>
-      <form class="col-6" method="POST" action="/api/v1/auth/login">
-        <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="email" aria-describedby="email" name="email">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+
+      <section class="bg-dark py-4">
+        <div class="container pb-2 py-lg-5">
+          <h1 class="text-center my-4 text-white">Login with your SwiftLeeds account</h1>
         </div>
+      </section>
+        
+        <section class="container mb-5 pt-4 pb-2 py-mg-4">
+        <div class="row justify-content-center">
+          <div class="col-lg-9">
+          
+              <form class="col-6" method="POST" action="/api/v1/auth/login">
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="email" aria-describedby="email" name="email">
+                  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
 
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" name="password">
-        </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" name="password">
+                </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-
-      <div class="col-6">
-        <img src="/img/header-bg.png" class="child-img">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            
+          </div>
       </div>
-    </div>
-
-    #extend("Shared/_footer")
+      </section>
+  
   #endexport
 #endextend
