@@ -15,7 +15,7 @@
               <a href="#info" class="nav-link" data-scroll data-scroll-offset="70">About</a>
             </li>
             
-            #if(count(speakers) > 0):
+            #if(safeCount(speakers) > 0):
             <li class="nav-item">
               <a href="#speakers" class="nav-link" data-scroll data-scroll-offset="70">Speakers</a>
             </li>
