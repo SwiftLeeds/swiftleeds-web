@@ -1,7 +1,7 @@
   <header class="header navbar navbar-expand-lg navbar-dark position-absolute navbar-sticky">
     <div class="container px-3">
       <a href="/" class="navbar-brand">
-        <img src="img/logo_horizontal_dark.svg" width="120" alt="SwiftLeeds">
+        <img src="/img/logo_horizontal_dark.svg" width="120" alt="SwiftLeeds">
       </a>
       
       <div id="navbarNav" class="offcanvas offcanvas-end bg-dark">

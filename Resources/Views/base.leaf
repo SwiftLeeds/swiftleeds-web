@@ -7,11 +7,11 @@
     <meta name="apple-itunes-app" content="app-id=1595490143, app-clip-bundle-id=uk.co.swiftleeds.SwiftLeeds.Clip, app-clip-display=card"/>
     <meta property="og:image" content="/img/logo.png" />
 
-    <link rel="stylesheet" media="screen" href="vendor/boxicons/css/boxicons.min.css"/>
-    <link rel="stylesheet" media="screen" href="vendor/swiper/swiper-bundle.min.css"/>
-    <link rel="stylesheet" media="screen" href="vendor/lightgallery/css/lightgallery-bundle.min.css"/>
+    <link rel="stylesheet" media="screen" href="/vendor/boxicons/css/boxicons.min.css"/>
+    <link rel="stylesheet" media="screen" href="/vendor/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" media="screen" href="/vendor/lightgallery/css/lightgallery-bundle.min.css"/>
 
-    <link rel="stylesheet" media="screen" href="css/theme.css">
+    <link rel="stylesheet" media="screen" href="/css/theme.css">
     
     <title>#import("title") - The Unique iOS Swift Conference in the UK</title>
 
@@ -46,17 +46,17 @@
 
 
     <!-- Vendor Scripts -->
-    <script src="vendor/parallax-js/dist/parallax.min.js"></script>
-    <script src="vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-    <script src="vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="vendor/lightgallery/lightgallery.min.js"></script>
-    <script src="vendor/lightgallery/plugins/fullscreen/lg-fullscreen.min.js"></script>
-    <script src="vendor/lightgallery/plugins/zoom/lg-zoom.min.js"></script>
-    <script src="vendor/lightgallery/plugins/video/lg-video.min.js"></script>
+    <script src="/vendor/parallax-js/dist/parallax.min.js"></script>
+    <script src="/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="/vendor/lightgallery/lightgallery.min.js"></script>
+    <script src="/vendor/lightgallery/plugins/fullscreen/lg-fullscreen.min.js"></script>
+    <script src="/vendor/lightgallery/plugins/zoom/lg-zoom.min.js"></script>
+    <script src="/vendor/lightgallery/plugins/video/lg-video.min.js"></script>
 
     <!-- Main Theme Script -->
-    <script src="js/theme.min.js"></script>
+    <script src="/js/theme.min.js"></script>
     
     <script>
       (() => {
