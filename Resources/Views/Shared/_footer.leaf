@@ -1,40 +1,64 @@
-<br/>
-<footer class="container-md mt-3">
-  <div class="row">
-    <ul class="col-4">
-        <li><a href="/conduct">Code of Conduct</a></li>
-    </ul>
+<footer class="footer dark-mode bg-dark py-5">
+  <div class="container pt-2 pt-sm-4">
+    <div class="row">
+      <div class="col-md-6 col-lg-5 col-xl-4 pb-2 pb-sm-3 pb-md-0 mb-4 mb-md-0">
+        <p class="mb-4">If you want to establish cooperation with us, become a partner or have another important issue, please contact us using the email provided.</p>
 
-    <!-- On small phones, force a newline here -->
-    <div class="w-100 d-sm-block d-md-none"></div>
+        <div class="d-flex flex-column flex-sm-row">
+          #if(phase.showAddToCalendar):
+          <a href="#" class="btn btn-outline-light btn-lg mb-3">
+            <i class="bx bx-calendar-check fs-xl me-2 ms-n1"></i>
+            Add to calendar
+          </a>
+          #endif
+        </div>
+      </div>
+      <div class="col-md-6 col-xxl-5 offset-lg-1 offset-xl-2 offset-xxl-3">
+        <div class="row row-cols-1 row-cols-sm-2">
+          <div class="col pb-2 pb-sm-0 mb-4 mb-sm-0">
+            <h3 class="h5 pb-1 pb-sm-2 pb-lg-3">Contact us</h3>
+            <ul class="nav flex-column mb-3">
+              <li>
+                <a href="mailto:info@swiftleeds.co.uk" class="nav-link fs-lg fw-normal px-0 py-1">
+                  <i class="bx bx-envelope fs-4 me-2"></i>
+                  info@swiftleeds.co.uk
+                </a>
+              </li>
+            </ul>
+            <div class="d-flex pt-2 pt-sm-3 pt-md-4">
+              <a href="https://twitter.com/swift_leeds" class="btn btn-icon btn-sm btn-secondary btn-twitter rounded-circle me-3">
+                <i class="bx bxl-twitter"></i>
+              </a>
+              <a href="https://join.slack.com/t/swiftleedsworkspace/shared_invite/zt-wkmr6pif-ZDCdDeHM60jcBUy0BxHdCQ" class="btn btn-icon btn-sm btn-secondary btn-slack rounded-circle me-3">
+                <i class="bx bxl-slack"></i>
+              </a>
+              <a href="https://www.youtube.com/channel/UCCq1K0eWKZFBCpqaC3n8V1g" class="btn btn-icon btn-sm btn-secondary btn-youtube rounded-circle me-3">
+                <i class="bx bxl-youtube"></i>
+              </a>
+              <a href="https://www.flickr.com/photos/196979204@N02/albums/72177720303878744" class="btn btn-icon btn-sm btn-secondary btn-flickr rounded-circle me-3">
+                <i class="bx bxl-flickr"></i>
+              </a>
+            </div>
+          </div>
 
-    <div class="col-sm-8 col-md-4">
-      <h5>
-        Partners & Sponsors
-      </h5>
-
-      <p>
-        If you want to establish cooperation with us, become a partner or have another important issue, please contact us using the email below.
-      </p>
+          <div class="col ps-sm-4 ps-md-5">
+            <div class="collapse d-lg-block">
+              <ul class="nav flex-column pb-lg-1 mb-lg-3">
+                <li class="nav-item"><a href="/" class="nav-link d-inline-block px-0 pt-1 pb-2">Home</a></li>
+                <li class="nav-item"><a href="/conduct" class="nav-link d-inline-block px-0 pt-1 pb-2">Code of Conduct</a></li>
+                
+                #if(false):
+                <li class="nav-item"><a href="/accessibility" class="nav-link d-inline-block px-0 pt-1 pb-2">Accessibility & Inclusivity</a></li>
+                #endif
+              </ul>
+            </div>
+          </div>
+          
+        </div>
+      </div>
     </div>
-
-    <div class="col-sm-2 col-md-4 p-sm-20 p-md-0">
-      <a href="#top" class="nav-arrow">
-        <img src="/img/nav-arrow-up.png" alt="Navigate to top"/>
-      </a>
-    </div>
-  </div>
-
-    <!-- On small phones, force a newline here -->
-    <div class="w-100 d-sm-block d-md-none"></div>
-
-  <div class="row">
-    <p class="col-4">
+    <p class="nav d-block fs-sm pt-5 mb-0 text-light opacity-60">
       #copyright(2021, "SwiftLeeds")
-    </p>
-
-    <p class="col-4">
-      <a href="mailto:info@swiftleeds.co.uk">info@swiftleeds.co.uk</a>
     </p>
   </div>
 </footer>

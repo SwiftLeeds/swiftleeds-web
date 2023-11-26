@@ -1,70 +1,30 @@
 #extend("base"):
-#export("title", "SwiftLeeds")
-
-  #export("content"):
-    #extend("Shared/_header")
-<!-- Header-->
-<header class="my-3">
-  <div class="container-sm">
-    <div>
-      <h1 class="display-4">
-        A unique <strong>2 day</strong><br/>
-        <strong>Swift Conference</strong><br/>
-        in the heart<br/>
-        of leeds.
-      </h1>
-      
-      <img src="/img/header-bg.png" class="child-img"/>
-    </div>
-  </div>
-</header>
-
-<!-- Sections-->
-#if(ticketsEnabled):
-<div class="row">
-  <ul class="tickets col-10">
-    <li>Get Your Ticket</li>
-    <li class="inPerson"><a href="#tickets">In-Person</a></li>
-  </ul>
-</div>
-#endif
-  
-  <br style="clear: both;"/>
-  <br/>
-  <img src="/img/ticket-background.svg" class="order-tickets"/>
-  
-  <div class="container">
-    #extend("Home/_about-us")
-    <br />
-    #if(ticketsEnabled):
-        #extend("Home/_order-tickets")
-    #endif
-    <br />
-    #if(count(dropInSessions) > 0):
-    #extend("Home/_drop-in-sessions")
-    <br />
-    #endif
-    <br />
-    #extend("Home/_speakers")
-    <br />
-    #if(count(schedule) > 0):
-        <br/>
-        #extend("Home/_schedule")
-    #endif
-    <br/>
-    #extend("Home/_location")
-    <br />
-    #extend("Home/_travel")
-    <br />
-    #extend("Home/_previous-conferences")
-    <br />
-    #extend("Home/_highlights")
-    <br />
-    #if(count(platinumSponsors) > 0 || count(goldSponsors) > 0 || count(silverSponsors) > 0):
-        #extend("Home/_sponsors")
-    #endif
-  </div>
-  
-  #extend("Shared/_footer")
-  #endexport
-  #endextend
+    #export("title", "SwiftLeeds")
+    
+    #export("content"):
+        #extend("Shared/_header")
+        #extend("Shared/_tito")
+        #extend("Home/_hero")
+        #extend("Home/_info")
+        
+        #if(count(dropInSessions) > 0):
+            #extend("Home/_drop-in-sessions")
+        #endif
+        
+        #if(count(speakers) > 0):
+            #extend("Home/_speakers")
+        #endif
+        
+        #if(phase.cfpEnabled):
+            #extend("Home/_cfp")
+        #endif
+        
+        #extend("Home/_previous-conferences")
+        #extend("Home/_location")
+        #extend("Home/_team")
+                
+        #if(phase.ticketsEnabled):
+            #extend("Home/_ticket_cta")
+        #endif
+    #endexport
+#endextend

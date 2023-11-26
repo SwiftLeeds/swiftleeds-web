@@ -11,11 +11,13 @@ import Vapor
 ///
 struct HomeContext: Content {
     var speakers: [Speaker] = []
-    var cfpEnabled: Bool = false
-    var ticketsEnabled: Bool = false
     var platinumSponsors: [Sponsor] = []
     var silverSponsors: [Sponsor] = []
     var goldSponsors: [Sponsor] = []
     var dropInSessions: [DropInSession] = []
     var schedule: [[Slot]] = []
+    var phase: PhaseContext? = nil
+    var event: Event? = nil
+    var eventDate: String? = nil
+    var eventYear: String? = nil
 }

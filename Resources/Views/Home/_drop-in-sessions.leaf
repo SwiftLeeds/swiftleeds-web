@@ -1,29 +1,35 @@
-<div class="row">
-    <div class="col-sm-5 col-md-3 col-lg-2">
-        <h2 id="dropin">
-            <strong>FREE</strong><br />
-            drop-in session
-        </h2>
-    </div>
-
-    <div class="col-sm-7 col-md-9 col-lg-10">
-    <p>We are excited to reveal a new and exclusive add-on to SwiftLeeds. With every ticket purchased, you’ll be eligible to book a <strong>free</strong> drop-in session with one of our on-site experts. Sessions are available on a first come first served basis, so we recommend to get your ticket and book your free session now!</p>
-    <br />
-    <a href="/drop-in" class="btn btn-primary btn-lg" role="button">Book Now</a><br />
-    <small>(Requires a valid ticket purchase)</small>
-    </div>
-
-    <div class="row row-cols-1 row-cols-md-4 row-cols-sm-2 g-4">
-    #for(session in dropInSessions):
-      <div class="col">
-      <div class="card h-100">
-        <img src="#awsImage(session.ownerImageUrl)" class="card-img-top" alt="#(session.owner) avatar image">
-        <div class="card-body">
-          <h5 class="card-title">#(session.title)</h5>
-          <p class="card-text">With <a href="#(session.ownerLink)" target="_blank">#(session.owner)</a></p>
+<section class="bg-secondary py-5 my-lg-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 pb-2 pb-md-0 mb-4 mb-md-0">
+        <div class="pe-lg-5">
+          <img src="img/dropin.jpeg" class="rounded-3" alt="Drop-in Sessions" />
         </div>
       </div>
+      <div class="col-md-6">
+        <h2 class="h3 mb-sm-4">Drop-in Sessions</h2>
+        <p class="d-md-none d-xl-block pb-2 pb-md-3 mb-3">
+          Included for free with every ticket, drop-in sessions give you an
+          exclusive 1 on 1 feedback session with one of our industry experts.
+          Choose from one of four hosts covering a wide range of topics.
+        </p>
+        <div class="border rounded-3 mb-4 mb-lg-5">
+          <div class="row row-cols-1 row-cols-sm-2 g-0">
+            #for(session in dropInSessions):
+            <div class="col d-flex align-items-center #if(index == 0 || index == 1):border-bottom#endif #if(index == 0 || index == 2):border-end-sm#endif p-3">
+              <img src="#awsImage(session.ownerImageUrl)" width="48" alt="#(session.owner) avatar image" class="rounded-circle">
+              <div class="ps-2 ms-1">
+                <h3 class="h6 mb-0">#(session.title)</h3>
+                <p class="fs-xs mb-0"><a href="#(session.ownerLink)" target="_blank">#(session.owner)</a></p>
+              </div>
+            </div>
+            #endfor
+          </div>
+        </div>
+        <div class="d-flex flex-column flex-sm-row">
+          <a href="/drop-in" class="btn btn-primary mb-3 mb-sm-0 me-sm-3">Book Session</a>
+        </div>
       </div>
-    #endfor
     </div>
-</div>
+  </div>
+</section>

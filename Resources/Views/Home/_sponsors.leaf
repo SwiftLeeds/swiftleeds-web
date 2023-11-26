@@ -1,48 +1,31 @@
-<div class="row">
-  <div class="col-sm-5 col-md-3 col-lg-2">
-    <h2 id="sponsors">
-      The best<br/>
-      sponsors
-    </h2>
-  </div>
-    #if(count(platinumSponsors) > 0):
-    <p class="sponsor-grid-subhead">Platinum sponsors</p>
-    <div class="sponsor-grid platinum">
-        #for(sponsor in platinumSponsors):
-        <div class="sponsor">
-            <a href="#(sponsor.url)" target="_blank"><img src="#awsImage(sponsor.image)" class="sponsor-img"></a>
-        </div>
-        #endfor
-    </div>
-    #endif
-    
-    #if(count(platinumSponsors) > 0 && count(goldSponsors) > 0):
-    <div class="sponsor-grid-divider"></div>
-    #endif
-    
-    #if(count(goldSponsors) > 0):
-    <p class="sponsor-grid-subhead">Gold sponsors</p>
-    <div class="sponsor-grid">
-        #for(sponsor in goldSponsors):
-        <div class="sponsor">
-            <a href="#(sponsor.url)" target="_blank"><img src="#awsImage(sponsor.image)" class="sponsor-img"></a>
-        </div>
-        #endfor
-    </div>
-    #endif
-    
-    #if(count(goldSponsors) > 0 && count(silverSponsors) > 0):
-    <div class="sponsor-grid-divider"></div>
-    #endif
-    
-    #if(count(silverSponsors) > 0):
-    <p class="sponsor-grid-subhead">Silver sponsors</p>
-    <div class="sponsor-grid">
-        #for(sponsor in silverSponsors):
-        <div class="sponsor">
-            <a href="#(sponsor.url)" target="_blank"><img src="#awsImage(sponsor.image)" class="sponsor-img"></a>
-        </div>
-        #endfor
-    </div>
-    #endif
+#if(count(platinumSponsors) > 0 || count(goldSponsors) > 0 || count(silverSponsors) > 0):
+<h2>Our Sponsors</h2>
+
+<div class="btn-group pb-2 px-0">
+#for(sponsor in platinumSponsors):
+    <a href="#(sponsor.url)" target="_blank" class="card card-body card-hover px-2 mx-2">
+        <img src="#awsImage(sponsor.image)" class="d-block mx-auto my-2" style="max-height: 50px; width: auto;" alt="#(sponsor.name)">
+    </a>
+#endfor
 </div>
+
+<div class="btn-group pb-2 px-0">
+#for(sponsor in goldSponsors):
+    <a href="#(sponsor.url)" target="_blank" class="card card-body card-hover px-2 mx-2">
+        <img src="#awsImage(sponsor.image)" class="d-block mx-auto my-2" style="max-height: 40px; width: auto;" alt="#(sponsor.name)">
+    </a>
+#endfor
+</div>
+
+<div class="btn-group px-0">
+#for(sponsor in silverSponsors):
+    <a href="#(sponsor.url)" target="_blank" class="card card-body card-hover px-2 mx-2">
+        <img src="#awsImage(sponsor.image)" class="d-block mx-auto my-2" style="max-height: 30px; width: auto;" alt="#(sponsor.name)">
+    </a>
+#endfor
+</div>
+
+<p class="mt-3 mb-0">
+    Want to support the event? Email us at <a href="mailto:info@swiftleeds.co.uk">info@swiftleeds.co.uk</a> for our sponsorship pack.
+</p>
+#endif

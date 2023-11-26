@@ -1,0 +1,54 @@
+<section class="pb-5">
+  <div class="container pt-2">
+    <div class="d-md-flex align-items-center justify-content-between text-center text-md-start">
+        <h2 class="h1">
+          We are looking for <span class="text-primary">speakers</span>
+        </h2>
+        
+        <a href="https://sessionize.com/swiftleeds-ios-conference" target="_blank" class="btn btn-primary text-white mb-3">
+            Submit your talk
+            <i class="bx bx-right-arrow-alt lead ms-2 me-n1"></i>
+        </a>
+    </div>
+    
+    <div class="row pt-xl-2 pt-xxl-4 pb-3 pb-sm-4 mt-2">
+      <div class="col-md-8 col-xl-5">
+        <ul class="list-unstyled">
+          <li class="d-flex fs-xl pb-2 mb-1">
+            <i class="bx bx-check-circle text-primary d-flex pe-1 me-2" style="margin-top: 0.375rem"></i>
+            We can help with your hotel and travel costs
+          </li>
+          <li class="d-flex fs-xl pb-2 mb-1">
+            <i class="bx bx-check-circle text-primary d-flex pe-1 me-2" style="margin-top: 0.375rem"></i>
+            We welcome and support first time speakers
+          </li>
+          <li class="d-flex fs-xl pb-2 mb-1">
+            <i class="bx bx-check-circle text-primary d-flex pe-1 me-2" style="margin-top: 0.375rem"></i>
+            We accept speakers from anywhere in the world
+          </li>
+          <li class="d-flex fs-xl pb-2 mb-1">
+            <i class="bx bx-check-circle text-primary d-flex pe-1 me-2" style="margin-top: 0.375rem"></i>
+            We provide free speaker training for everyone
+          </li>
+          <li class="d-flex fs-xl pb-2 mb-1">
+            <i class="bx bx-check-circle text-primary d-flex pe-1 me-2" style="margin-top: 0.375rem"></i>
+            Talks can range from 15 to 45 minutes
+          </li>
+          <li class="d-flex fs-xl">
+            <i class="bx bx-check-circle text-primary d-flex pe-1 me-2" style="margin-top: 0.375rem"></i>
+            Topics from iOS, Swift, indie development and everything inbetween
+          </li>
+        </ul>
+      </div>
+      
+      <div class="col-md-4 col-xl-5 col-xxl-4 offset-xl-2 offset-xxl-3">
+        <img src="img/cfp.jpg" class="rounded-3" alt="Zamzam Pooya on Stage" />
+      </div>
+    </div>
+    
+    <p>
+    We know many potential speakers, especially those from under-represented groups or those who have never spoken at a conference before, may rule themselves out unnecessarily. We want to hear from everybody in the Swift community, we would urge you to submit a proposal. Our team at SwiftLeeds review all talks anonymously.
+    </p>
+    
+  </div>
+</section>

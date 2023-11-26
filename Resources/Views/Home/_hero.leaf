@@ -1,0 +1,65 @@
+  <!-- Hero -->
+  <!-- style="background-image: url(img/drop_bg.png);" -->
+  <section class="dark-mode bg-dark bg-size-cover bg-repeat-0 bg-position-center position-relative overflow-hidden py-5 mb-4">
+    <div class="container position-relative zindex-2 pt-5 pb-md-2 pb-lg-4 pb-xl-5">
+      <div class="row pt-3 pb-2 py-md-4">
+
+        <!-- Text -->
+        <div class="col-xl-5 col-md-6 pt-lg-5 text-center text-md-start mb-4 mb-md-0">
+          <h2 class="h3 text-primary">#if(eventDate):#(eventDate) #endif#(eventYear)</h2>
+          <h1 class="display-4 pb-2 pb-sm-3">A <span class="text-primary">Unique</span> 2 Day Swift Conference in the Heart of Leeds</h1>
+          
+          <div class="d-flex justify-content-center justify-content-lg-start text-start mb-5">
+            <i class="bx bx-map fs-4 text-primary me-2"></i>
+            <div class="fs-xl text-white">#(event.location)</div>
+          </div>
+
+          <div class="d-flex justify-content-center justify-content-md-start pb-2 pt-lg-2 pt-xl-0">
+            #if(phase.ticketsEnabled):
+            <button type="button" class="btn btn-lg btn-primary shadow-primary me-3 me-sm-4" onclick="openTito();">
+              Buy ticket
+            </button>
+            #endif
+            
+            #if(phase.showAddToCalendar):
+            <a href="#" class="btn btn-lg btn-outline-secondary">
+              <i class="bx bx-calendar-check fs-xl me-2 ms-n1"></i>
+              Add to calendar
+            </a>
+            #endif
+          </div>
+
+          <a href="#tickets" class="d-table text-light opacity-80 text-decoration-none w-auto py-4 pt-4 pt-lg-5 mt-xxl-5" data-scroll data-scroll-offset="0">
+            <span class="d-flex align-items-center">
+              Scroll for more
+              <i class="bx bx-down-arrow-circle fs-3 ms-2"></i>
+            </span>
+          </a>
+        </div>
+
+         <!-- Right hand side -->
+        <div class="col-xl-7 col-md-6 d-md-flex justify-content-end">
+          <div class="parallax mx-auto me-lg-0" style="max-width: 648px;">
+            <div class="parallax-layer" data-depth="0.1">
+              <img src="img/landing/online-courses/hero/layer01.png" alt="Layer">
+            </div>
+            <div class="parallax-layer" data-depth="0.13">
+              <img src="img/landing/online-courses/hero/layer02.png" alt="Layer">
+            </div>
+            <div class="parallax-layer zindex-5" data-depth="-0.12">
+              <img src="img/landing/online-courses/hero/layer03.png" alt="Layer">
+            </div>
+            <div class="parallax-layer zindex-3" data-depth="0.27">
+              <img src="img/landing/online-courses/hero/layer04.png" alt="Layer">
+            </div>
+            <div class="parallax-layer zindex-1" data-depth="-0.18">
+              <img src="img/landing/online-courses/hero/layer05.png" alt="Layer">
+            </div>
+            <div class="parallax-layer zindex-1" data-depth="0.1">
+              <img src="img/landing/online-courses/hero/layer06.png" alt="Layer">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

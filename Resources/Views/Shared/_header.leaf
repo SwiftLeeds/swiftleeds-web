@@ -1,47 +1,84 @@
-<nav class="navbar navbar-expand-lg navbar-light fixed-top">
-  <div class="container">
-    <a class="navbar-brand d-none d-md-block" href="../">
-        <img src="/img/logo_horizontal.svg" alt="SwiftLeeds logo" class="logo"/>
-    </a>
-    <a class="navbar-brand d-md-none" href="../">
-        <img src="/img/logo_vertical.svg" alt="SwiftLeeds logo" class="logo-vertical"/>
-    </a>
-
-    <span class="separator"></span>
-
-    <div class="event-date">
-        <strong>9th & 10th October 2023</strong>
-        <br/>
-        <p class="d-none d-md-inline-block">
-        Leeds Playhouse, Leeds, UK
-        </p>
-        <p class="d-md-none">
-        Leeds, UK
-        </p>
-    </div>
-    
-    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    <div class="justify-content-end collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav top-nav nav">
-        <a class="nav-link text-dark" href="../#tickets">Tickets</a>
-        #if(dropInSessions):
-        #if(count(dropInSessions) > 0):
-        <a class="nav-link text-dark" href="../#dropin">Drop In</a>
+  <header class="header navbar navbar-expand-lg navbar-dark position-absolute navbar-sticky">
+    <div class="container px-3">
+      <a href="/" class="navbar-brand">
+        <img src="img/logo_horizontal_dark.svg" width="120" alt="SwiftLeeds">
+      </a>
+      
+      <div id="navbarNav" class="offcanvas offcanvas-end bg-dark">
+        <div class="offcanvas-header border-bottom border-light">
+          <h5 class="offcanvas-title text-white">Menu</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a href="#info" class="nav-link" data-scroll data-scroll-offset="70">About</a>
+            </li>
+            
+            #if(count(speakers) > 0):
+            <li class="nav-item">
+              <a href="#speakers" class="nav-link" data-scroll data-scroll-offset="70">Speakers</a>
+            </li>
+            #else:
+            <li class="nav-item">
+              <a href="#highlights" class="nav-link" data-scroll data-scroll-offset="70">Highlights</a>
+            </li>
+            #endif
+            
+            #if(phase.showSchedule):
+            <li class="nav-item">
+              <a href="/schedule" class="nav-link" data-scroll data-scroll-offset="70">Schedule</a>
+            </li>
+            #endif
+            
+            <li class="nav-item">
+              <a href="#venue" class="nav-link" data-scroll data-scroll-offset="70">Venue</a>
+            </li>
+            
+            <li class="nav-item d-none d-sm-none d-md-none d-lg-block mx-auto"></li>
+            
+            <li class="nav-item">
+              <a href="https://twitter.com/swift_leeds" target="_blank" class="nav-link">
+                <i class="bx bxl-twitter"></i> <span class="d-block d-sm-block d-md-block d-lg-none" style="margin-left: 6px;">Twitter</span>
+              </a>
+            </li>
+            
+            <li class="nav-item">
+              <a href="https://www.youtube.com/channel/UCCq1K0eWKZFBCpqaC3n8V1g" target="_blank" class="nav-link">
+                  <i class="bx bxl-youtube"></i> <span class="d-block d-sm-block d-md-block d-lg-none" style="margin-left: 6px;">YouTube</span>
+              </a>
+            </li>
+            
+            <li class="nav-item">
+              <a href="https://join.slack.com/t/swiftleedsworkspace/shared_invite/zt-wkmr6pif-ZDCdDeHM60jcBUy0BxHdCQ" target="_blank" class="nav-link">
+                  <i class="bx bxl-slack"></i> <span class="d-block d-sm-block d-md-block d-lg-none" style="margin-left: 6px;">Join Slack</span>
+              </a>
+            </li>
+            
+            <li class="nav-item">
+              <a href="https://www.flickr.com/photos/196979204@N02/albums/72177720303878744" target="_blank" class="nav-link">
+                  <i class="bx bxl-flickr"></i> <span class="d-block d-sm-block d-md-block d-lg-none" style="margin-left: 6px;">Flickr</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        #if(false):
+        <div class="offcanvas-header border-top border-light">
+          <button type="button" class="btn btn-primary w-100" onclick="openTito();">
+            Buy ticket
+          </button>
+        </div>
         #endif
-        #endif
-        <!-- <a class="nav-link text-dark" href="../#speakers">Speakers</a> -->
-        <!-- <a class="nav-link text-dark" href="../#schedule">Schedule</a> -->
-        <!-- <a class="nav-link text-dark" href="../#previous">Previous</a> -->
-        <a class="nav-link text-dark" href="../#venue">Venue</a>
-        <a class="nav-link text-dark" href="../#sponsors">Sponsors</a>
-        <a class="nav-link text-dark" href="https://twitter.com/swift_leeds" target="_blank"><img src="/img/twitter.png" alt="twitter"/></a>
-        <a class="nav-link text-dark" href="https://www.youtube.com/channel/UCCq1K0eWKZFBCpqaC3n8V1g" target="_blank"><img src="/img/youtube.png" alt="youtube"/></a>
-        <a class="nav-link text-dark" href="https://join.slack.com/t/swiftleedsworkspace/shared_invite/zt-wkmr6pif-ZDCdDeHM60jcBUy0BxHdCQ" target="_blank"><img src="/img/slack.png" alt="slack"/></a>
-        <a class="nav-link text-dark" href="https://www.flickr.com/photos/196979204@N02/albums/72177720303878744" target="_blank"><img src="/img/flickr.png" alt="flickr"/></a>
       </div>
+
+      <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      #if(false):
+      <button type="button" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" onclick="openTito();">
+        Buy ticket
+      </button>
+      #endif
     </div>
-  </div>
-</nav>
+  </header>

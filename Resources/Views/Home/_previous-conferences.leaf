@@ -1,42 +1,188 @@
-<div class="row align-items-start">
-  <div class="col-lg-3 col-sm-6">
-    <h2 id="previous">
-      Previous<br>
-      Conference
-    </h2>
-    <br>
-    <p class="bold">October 20th, 2022</p>
-    <p><a href="https://www.flickr.com/photos/196979204@N02/albums/72177720303878744" target="_blank">View all</a></p>
-    <img src="/img/previous.svg" class="previous-conference-icon">
-  </div>
+<section id="highlights" class="bg-secondary py-5">
+<div class="container">
+    <div class="row align-items-center pt-2 pb-3">
 
-  <div class="col-lg-2 col-sm-12 p-0">
-  <a href="https://swiftleeds-website.s3.eu-west-2.amazonaws.com/0007.swift-leeds-22-jma-photography.jpg" data-toggle="lightbox">
-    <img src="https://swiftleeds-website.s3.eu-west-2.amazonaws.com/0007.swift-leeds-22-jma-photography.jpg" class="previous-conference-image pc-image-md shadow-1-strong conference-image-top-offset bordered" alt="Checking People In">
-  </a>
-  </div>
+      <!-- Text -->
+      <div class="col-md-6 col-xl-5 text-center text-md-start mb-5 mb-md-0">
+        <h2 class="h1 pb-2 pb-lg-3">SwiftLeeds in 2023</h2>
+        <p class="pb-2 mb-4 mb-lg-5">In 2023 SwiftLeeds increased to two days, introduced drop-in sessions and live streamed the entire event. Watch this short video to check out how it all unfolded.</p>
+        <hr>
+        <div class="d-flex justify-content-center justify-content-md-between pt-4 pt-lg-5">
+          <div class="mx-3 mx-md-0">
+            <div class="display-3 text-dark mb-1">300+</div>
+            <span>Attendees from over <strong>30</strong> different countries</span>
+            <p>🇬🇧 🇩🇪 🇫🇷 🇮🇳 🇺🇸 🇮🇹 🇸🇳 🇰🇷 🇨🇳 🇿🇦 🇵🇰</p>
+          </div>
+          <div class="mx-3 mx-md-0">
+            <div class="display-3 text-dark mb-1">22</div>
+            <span>Expert speakers and hosts</span>
+          </div>
+        </div>
+      </div>
 
-  <div class="col-lg-2 col-sm-12 p-0">
-    <a href="https://swiftleeds-website.s3.eu-west-2.amazonaws.com/0137.swift-leeds-22-jma-photography.jpg" data-toggle="lightbox">
-    <img src="https://swiftleeds-website.s3.eu-west-2.amazonaws.com/0137.swift-leeds-22-jma-photography.jpg" class="previous-conference-image pc-image-md shadow-1-strong conference-image-bottom-offset bordered" alt="Poornima & Sanaa Talking">
-    </a>
-    <a href="https://swiftleeds-website.s3.eu-west-2.amazonaws.com/0174.swift-leeds-22-jma-photography.jpg" data-toggle="lightbox">
-    <img src="https://swiftleeds-website.s3.eu-west-2.amazonaws.com/0174.swift-leeds-22-jma-photography.jpg" class="previous-conference-image-half pc-image-md shadow-1-strong conference-image-top-offset bordered" alt="Vincent Speaking to the Audience">
-    </a>
-  </div>
+      <!-- Parallax gfx -->
+      <div class="col-md-6 offset-xl-1">
+        <div class="position-relative overflow-hidden rounded-3">
+            <span class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-35"></span>
+            <img src="img/IMG_0169.jpg" alt="SwiftLeeds Stage">
+            <div class="position-absolute top-0 start-0 w-100 h-100 zindex-5 d-flex align-items-center justify-content-center">
+              <a href="https://www.youtube.com/watch?v=cI-g6H2EeWU" class="btn btn-video btn-icon bg-white btn-xl stretched-link" data-bs-toggle="video">
+                <i class="bx bx-play"></i>
+              </a>
+            </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
 
-  <div class="col-lg-2 col-sm-12 p-0">
-    <a href="https://swiftleeds-website.s3.eu-west-2.amazonaws.com/0183.swift-leeds-22-jma-photography.jpg" data-toggle="lightbox">
-    <img src="https://swiftleeds-website.s3.eu-west-2.amazonaws.com/0183.swift-leeds-22-jma-photography.jpg" class="previous-conference-image-half pc-image-md shadow-1-strong conference-image-bottom-offset bordered" alt="Anna Beltrami Speaking to the Audience">
-    </a>
-    <a href="https://swiftleeds-website.s3.eu-west-2.amazonaws.com/0223.swift-leeds-22-jma-photography.jpg" data-toggle="lightbox">
-    <img src="https://swiftleeds-website.s3.eu-west-2.amazonaws.com/0223.swift-leeds-22-jma-photography.jpg" class="previous-conference-image pc-image-md shadow-1-strong conference-image-top-offset bordered" alt="SwiftLeeds Audience Shot">
-    </a>
-  </div>
 
-  <div class="col-lg-2 col-sm-12 p-0">
-    <a href="https://swiftleeds-website.s3.eu-west-2.amazonaws.com/0224.swift-leeds-22-jma-photography.jpg" data-toggle="lightbox">
-    <img src="https://swiftleeds-website.s3.eu-west-2.amazonaws.com/0224.swift-leeds-22-jma-photography.jpg" class="previous-conference-image pc-image-md shadow-1-strong bordered" alt="Large Audience Shot">
-    </a>
-  </div>
-</div>
+#if(false):
+  <!-- Gallery (carousels) -->
+  <section class="bg-secondary mb-5 pt-md-3 pt-lg-4 pt-xl-5">
+    <div class="pb-2 pb-sm-3 pb-md-4">
+
+      <!-- LTR -->
+      <div class="swiper" data-swiper-options='{
+        "loop": true,
+        "grabCursor": false,
+        "centeredSlides": true,
+        "autoplay": {
+          "delay": 0,
+          "disableOnInteraction": false
+        },
+        "freeMode": true,
+        "speed": 38000,
+        "freeModeMomentum": false,
+        "breakpoints": {
+          "0": {
+            "slidesPerView": 2,
+            "spaceBetween": 8
+          },
+          "500": {
+            "slidesPerView": 4,
+            "spaceBetween": 16
+          },
+          "768": {
+            "slidesPerView": 5,
+            "spaceBetween": 24
+          }
+        }
+      }'>
+        <div class="swiper-wrapper">
+
+          <!-- Item -->
+          <div class="swiper-slide">
+            <img src="img/gallery/swift-leeds-2023-jma-photography-9.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
+          </div>
+
+          <!-- Item -->
+          <div class="swiper-slide">
+            <img src="img/gallery/swift-leeds-2023-jma-photography-16.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
+          </div>
+
+          <!-- Item -->
+          <div class="swiper-slide">
+            <img src="img/gallery/swift-leeds-2023-jma-photography-52.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
+          </div>
+          
+          <!-- Item -->
+          <div class="swiper-slide">
+            <img src="img/gallery/swift-leeds-2023-jma-photography-53.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
+          </div>
+          
+          <!-- Item -->
+          <div class="swiper-slide">
+            <img src="img/gallery/swift-leeds-2023-jma-photography-59.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
+          </div>
+
+          <!-- Item -->
+          <div class="swiper-slide">
+            <img src="img/gallery/swift-leeds-2023-jma-photography-65.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
+          </div>
+
+          <!-- Item -->
+          <div class="swiper-slide">
+            <img src="img/gallery/swift-leeds-2023-jma-photography-69.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
+          </div>
+          
+          <!-- Item -->
+          <div class="swiper-slide">
+            <img src="img/gallery/swift-leeds-2023-jma-photography-75.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
+          </div>
+        </div>
+      </div>
+
+      <!-- RTL -->
+      <div class="swiper mt-md-4 mt-sm-3 mt-2" dir="rtl" data-swiper-options='{
+        "loop": true,
+        "grabCursor": false,
+        "centeredSlides": true,
+        "autoplay": {
+          "delay": 0,
+          "disableOnInteraction": false
+        },
+        "freeMode": true,
+        "speed": 38000,
+        "freeModeMomentum": false,
+        "breakpoints": {
+          "0": {
+            "slidesPerView": 2,
+            "spaceBetween": 8
+          },
+          "500": {
+            "slidesPerView": 4,
+            "spaceBetween": 16
+          },
+          "768": {
+            "slidesPerView": 5,
+            "spaceBetween": 24
+          }
+        }
+      }'>
+        <div class="swiper-wrapper">
+
+          <!-- Item -->
+          <div class="swiper-slide">
+            <img src="img/gallery/swift-leeds-2023-jma-photography-9.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
+          </div>
+
+          <!-- Item -->
+          <div class="swiper-slide">
+            <img src="img/gallery/swift-leeds-2023-jma-photography-16.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
+          </div>
+
+          <!-- Item -->
+          <div class="swiper-slide">
+            <img src="img/gallery/swift-leeds-2023-jma-photography-52.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
+          </div>
+          
+          <!-- Item -->
+          <div class="swiper-slide">
+            <img src="img/gallery/swift-leeds-2023-jma-photography-53.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
+          </div>
+          
+          <!-- Item -->
+          <div class="swiper-slide">
+            <img src="img/gallery/swift-leeds-2023-jma-photography-59.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
+          </div>
+
+          <!-- Item -->
+          <div class="swiper-slide">
+            <img src="img/gallery/swift-leeds-2023-jma-photography-65.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
+          </div>
+
+          <!-- Item -->
+          <div class="swiper-slide">
+            <img src="img/gallery/swift-leeds-2023-jma-photography-69.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
+          </div>
+          
+          <!-- Item -->
+          <div class="swiper-slide">
+            <img src="img/gallery/swift-leeds-2023-jma-photography-75.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+#endif

@@ -1,93 +1,98 @@
-<div class="border" style="margin: 0 -12px;">
-  <div class="row m-5">
-    <h2 class="col-2" id="schedule">
-      Conference<br/>
-      Schedule
-    </h2>
-  </div>
-  
-  <div class="accordion accordion-flush" id="accordionFlushExample">
-    #for(day in schedule):
-      #if(count(schedule) > 1):
-        <div class="row m-5">
-          <h2>Day #(index + 1)</h2>
+
+  <!-- Schedule -->
+  <section id="schedule" class="container py-5">
+    <div class="row mt-xl-2 mb-xl-3 pb-3 py-md-4 py-lg-5">
+      <div class="col-12">
+        <h2 class="h1 text-center text-sm-start pb-2 pb-lg-0 mb-4 mb-lg-5">Schedule</h2>
+      </div>
+      <div class="col-lg-3 mb-4">
+
+        <!-- Nav tabs -->
+        <div class="nav flex-nowrap flex-lg-column nav-tabs" role="tablist" aria-orientation="vertical">
+          #for(day in schedule):
+          <a href="#day-#(index + 1)" class="nav-link d-block w-100 rounded-3 p-4 p-xl-5 #if(index == 0):me-2 me-sm-3 me-lg-0 mb-lg-3 active#endif" id="day-#(index + 1)-tab" data-bs-toggle="tab" role="tab" aria-controls="day-#(index + 1)" aria-selected="#if(index == 0):true#else:false#endif">
+            <div class="fs-xl">Day #(index + 1)</div>
+            <div class="fs-3 fw-bold">Oct #(index + 9), #(eventYear)</div>
+          </a>
+          #endfor
         </div>
-      #endif
+      </div>
+      <div class="col-lg-8 offset-lg-1">
 
-      #for(slot in day):
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="flush-heading-#(slot.id)">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-#(slot.id)" aria-expanded="false" aria-controls="flush-collapse-#(slot.id)">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-4">
-                    <strong>#(slot.startDate)</strong>
+        <!-- Tab panes -->
+        <div class="tab-content">
 
-                    #if(slot.date):
-                      <strong>- #sessionEnd(slot.date, slot.duration)</strong>
-                    #endif
-                  </div>
+          #for(day in schedule):
+          <div class="tab-pane fade #if(index == 0):show active#endif" id="day-#(index + 1)" role="tabpanel" aria-labelledby="day-#(index + 1)-tab">
+            #for(slot in day):
+            <div class="#if(isLast):#else:border-bottom#endif #if(isFirst):pb-4#endif #if(isLast):pt-4#endif #if(!isFirst && !isLast):py-4#endif">
+              <div class="row pb-1 pb-xl-3">
+                <div class="col-sm-4 mb-3 mb-sm-0">
+                  <div class="h5 mb-1">#(slot.startDate) – #sessionEnd(slot.date, slot.duration)</div>
+                  <!-- <p class="text-muted mb-0">Beginner</p> -->
 
-                  <div class="col-md-4 col-lg">
-                    #if(slot.presentation):
-                      <p class="presentation-title">#(slot.presentation.title)</p>
-                    #elseif(slot.activity):
-                      <p class="presentation-title">#(slot.activity.title)</p>
-                    #endif
-                  </div>
+                  #if(slot.presentation):
+                  #if(slot.duration == 15.0):
+                  <span class="badge bg-danger shadow-danger fs-sm">Lightning</span>
+                  #elseif(slot.duration == 30.0):
+                  <span class="badge bg-warning shadow-warning fs-sm">Short Talk</span>
+                  #else:
+                  <span class="badge bg-success shadow-success fs-sm">Talk</span>
+                  #endif
+                  #elseif(slot.activity):
+
+                  #endif
                 </div>
-              </div>
-            </button>
-          </h2>
-
-          <div id="flush-collapse-#(slot.id)" class="accordion-collapse collapse" aria-labelledby="flush-heading-#(slot.id)" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body">
-              <div class="container">
-                <div class="row mx-5 my-2 py-3">
-                  <div class="col-md-4">
+                <div class="col-sm-8">
+                  <h5 class="mb-0">
                     #if(slot.presentation):
-                      #if(slot.presentation.secondSpeaker):
-                        <div class="dual-speaker-image-container">
-                          <img class="speaker-grid-element-image" src="#awsImage(slot.presentation.speaker.profileImage)"/>
-                          <img class="speaker-grid-element-image" src="#awsImage(slot.presentation.secondSpeaker.profileImage)"/>
-                        </div>
-                      #else:
-                        <img class="speaker-grid-element-image" src="#awsImage(slot.presentation.speaker.profileImage)"/>
-                      #endif
+                      #(slot.presentation.title)
                     #elseif(slot.activity):
-                      <img class="speaker-grid-element-image" src="#awsImage(slot.activity.image)"/>
+                      #(slot.activity.title)
                     #endif
-                  </div>
+                  </h5>
 
-                  <br />
-                  <br />
-
-                  <div class="col-md-4 col-lg markdown">
+                  <p class="mb-4">
                     #if(slot.presentation):
                       #markdown(slot.presentation.synopsis)
                     #elseif(slot.activity):
                       #markdown(slot.activity.description)
                     #endif
+                  </p>
 
-                    <br />
-                    <br />
-
-                    #if(slot.presentation):
-                      <strong>#(slot.presentation.speaker.name)</strong> / #(slot.presentation.speaker.organisation)
-                      <br />
-                      <br />
+                  #if(slot.presentation):
+                    <div class="row row-cols-1 row-cols-md-2 g-3">
+                      <div class="col">
+                        <div class="d-flex align-items-center">
+                          <img src="#awsImage(slot.presentation.speaker.profileImage)" class="rounded-circle schedule-speaker" alt="#(slot.presentation.speaker.name)">
+                          <div class="ps-3">
+                            <h6 class="fw-semibold mb-1">#(slot.presentation.speaker.name)</h6>
+                            <p class="fs-sm text-muted mb-0">#(slot.presentation.speaker.organisation)</p>
+                          </div>
+                        </div>
+                      </div>
 
                       #if(slot.presentation.secondSpeaker):
-                        <strong>#(slot.presentation.secondSpeaker.name)</strong> / #(slot.presentation.secondSpeaker.organisation)
+                      <div class="col">
+                        <div class="d-flex align-items-center">
+                          <img src="#awsImage(slot.presentation.secondSpeaker.profileImage)" class="rounded-circle schedule-speaker" alt="#(slot.presentation.secondSpeaker.name)">
+                          <div class="ps-3">
+                            <h6 class="fw-semibold mb-1">#(slot.presentation.secondSpeaker.name)</h6>
+                            <p class="fs-sm text-muted mb-0">#(slot.presentation.secondSpeaker.organisation)</p>
+                          </div>
+                        </div>
+                      </div>
                       #endif
-                    #endif
-                  </div>
+                    </div>
+                  #endif
                 </div>
               </div>
             </div>
+            #endfor
           </div>
+          #endfor
+
         </div>
-      #endfor
-    #endfor
-  </div>
-</div>
+      </div>
+    </div>
+  </section>
