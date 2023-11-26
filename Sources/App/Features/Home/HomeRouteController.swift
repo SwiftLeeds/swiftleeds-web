@@ -10,9 +10,20 @@ import Vapor
 struct HomeRouteController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         routes.get(use: get)
+        routes.get("schedule", use: schedule)
     }
     
     func get(req: Request) async throws -> View {
+        let context = try await getContext(req: req)
+        return try await req.view.render("Home/home", context)
+    }
+    
+    func schedule(req: Request) async throws -> View {
+        let context = try await getContext(req: req)
+        return try await req.view.render("Schedule/index", context)
+    }
+    
+    func getContext(req: Request) async throws -> HomeContext {
         let event = try await Event.getCurrent(on: req.db)
         let speakers = try await getSpeakers(req: req)
         let dropInSessions = try await getDropInSessions(req: req)
@@ -25,7 +36,7 @@ struct HomeRouteController: RouteCollection {
         
         let phase = try getPhase(req: req)
         
-        return try await req.view.render("Home/home", HomeContext(
+        return HomeContext(
             speakers: phase.showSpeakers ? speakers : [],
             platinumSponsors: phase.showSponsors ? platinumSponsors : [],
             silverSponsors: phase.showSponsors ? silverSponsors : [],
@@ -36,7 +47,7 @@ struct HomeRouteController: RouteCollection {
             event: event,
             eventDate: event.date.timeIntervalSince1970 > 1420074000 ? "9-10 OCT" : nil, // hide event date if older than 2015 (handle unknowns)
             eventYear: event.name.components(separatedBy: " ").last
-        ))
+        )
     }
     
     private func getSpeakers(req: Request) async throws -> [Speaker] {
@@ -128,7 +139,7 @@ struct PhaseContext: Codable {
     init(phase: Phase) {
         ticketsEnabled = phase.showTickets
         titoStub = "swiftleeds-24"
-        currentTicketPrice = "£170" // need to load from tito
+        currentTicketPrice = "£170" // TODO: need to load from tito
         cfpEnabled = phase.showCFP
         showAddToCalendar = false  // not implemented: https://add-to-calendar-button.com/
         showSchedule = phase.showSchedule
