@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by James Sherlock on 05/11/2023.
-//
-
 import Vapor
 
 struct HomeRouteController: RouteCollection {
