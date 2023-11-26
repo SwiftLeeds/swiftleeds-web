@@ -44,5 +44,9 @@ struct TicketLoginPayload: Decodable {
 }
 
 struct TicketLoginContext: Codable {
+    // For _header
+    var speakers: [Speaker] = []
+    
+    // TicketLoginContext
     let prompt: String?
 }

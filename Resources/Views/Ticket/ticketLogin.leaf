@@ -4,44 +4,38 @@
   #export("content"):
     #extend("Shared/_header")
 
-    <header class="my-3">
-      <div class="container-sm">
-        <div>
-          <h1 class="display-4">
-            Login with <br/>
-            <strong>your ticket</strong>
-          </h1>
+      <section class="bg-dark py-4">
+        <div class="container pb-2 py-lg-5">
+          <h1 class="text-center my-4 text-white">Login with your ticket</h1>
+        </div>
+      </section>
+        
+        <section class="container mb-5 pt-4 pb-2 py-mg-4">
+        <div class="row justify-content-center">
+          <div class="col-lg-9">
           
-          <img src="/img/header-bg.png" class="child-img"/>
-        </div>
+                #if(prompt):
+                    <div class="alert alert-secondary" role="alert">#(prompt)</div>
+                #endif
+          
+                <form class="col-6" method="POST" action="/ticketLogin/validate">
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Email address</label>
+                      <input type="email" class="form-control" id="email" aria-describedby="email" name="email">
+                      <div id="emailHelp" class="form-text">The email address of the ticket holder.</div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="ticket" class="form-label">Ticket Reference</label>
+                      <input type="text" class="form-control" id="ticket" name="ticket">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            
+          </div>
       </div>
-    </header>
-
-    #if(prompt):
-    <div class="alert alert-secondary" role="alert">#(prompt)</div>
-    #endif
-
-    <div class="row">
-      <form class="col-6" method="POST" action="/ticketLogin/validate">
-        <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="email" aria-describedby="email" name="email">
-          <div id="emailHelp" class="form-text">The email address of the ticket holder.</div>
-        </div>
-
-        <div class="mb-3">
-          <label for="ticket" class="form-label">Ticket Reference</label>
-          <input type="text" class="form-control" id="ticket" name="ticket">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-
-      <div class="col-6">
-        <img src="/img/header-bg.png" class="child-img">
-      </div>
-    </div>
+      </section>
   
-    #extend("Shared/_footer")
   #endexport
   #endextend
