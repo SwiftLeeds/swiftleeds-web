@@ -16142,3 +16142,7 @@ img-comparison-slider:focus {
 .nav-item i.bx {
     font-size: 24px;
 }
+
+.hidden {
+    display: none !important;
+}
