@@ -103,9 +103,9 @@ struct HomeRouteController: RouteCollection {
         #else
         Phase(
             showSponsors: true,
-            showSpeakers: true,
-            showSchedule: true,
-            showDropIns: true,
+            showSpeakers: false,
+            showSchedule: false,
+            showDropIns: false,
             showTickets: false,
             showCFP: Date(timeIntervalSince1970: 1682855940) > Date() // 30th April 23
         )
