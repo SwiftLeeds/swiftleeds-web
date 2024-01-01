@@ -106,7 +106,7 @@ struct HomeRouteController: RouteCollection {
             showSpeakers: true,
             showSchedule: true,
             showDropIns: true,
-            showTickets: true,
+            showTickets: false,
             showCFP: Date(timeIntervalSince1970: 1682855940) > Date() // 30th April 23
         )
         #endif
