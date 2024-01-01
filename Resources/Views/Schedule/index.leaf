@@ -1,0 +1,15 @@
+#extend("base"):
+    #export("title", "Schedule")
+    
+    #export("content"):
+        #extend("Shared/_header")
+        #extend("Shared/_tito")
+        #extend("Home/_hero")
+        
+        #extend("Schedule/_schedule")
+                
+        #if(phase.ticketsEnabled):
+            #extend("Home/_ticket_cta")
+        #endif
+    #endexport
+#endextend

@@ -1,64 +1,70 @@
-<div>
-  <div class="speaker-grid-container">
-    <div>
-      <div class="speaker-grid-header">
-          <a id="speakers">
-            <h2>
-              Meet the<br/>
-              speakers
-            </h2>
-          </a>
-          #if(cfpEnabled):
-          <div class="call-for-speakers">
-            <img src="/img/arrowicon.svg"/>
-            <a href="https://sessionize.com/swiftleeds-ios-conference" target="_blank">Want to be here? Apply now.</a>
+<!-- Speakers -->
+<section id="speakers" class="container pt-5 my-2 my-md-4 my-lg-5">
+  <div class="d-md-flex align-items-center justify-content-between text-center text-md-start pt-md-1 pt-lg-3">
+    <h2 class="h1 mb-4 mb-md-0 me-md-3">
+      #count(speakers) Incredible Speakers
+    </h2>
+  </div>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 mt-2 mt-lg-4">
+    #for(speaker in speakers):
+    <div class="col">
+      <div class="card card-hover border-0 bg-transparent">
+        <div class="position-relative square-image">
+          <img
+            src="#awsImage(speaker.profileImage)"
+            class="rounded-3"
+            alt="#(speaker.name)"
+          />
+          <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center rounded-3">
+            <span class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"></span>
+            <div class="position-relative d-flex zindex-2">
+              #if(speaker.facebook):
+              <a href="#" class="btn btn-icon btn-secondary btn-facebook btn-sm bg-white me-2">
+                <i class="bx bxl-facebook"></i>
+              </a>
+              #endif
+              
+              #if(speaker.linkedin):
+              <a href="#" class="btn btn-icon btn-secondary btn-linkedin btn-sm bg-white me-2">
+                <i class="bx bxl-linkedin"></i>
+              </a>
+              #endif
+              
+              #if(speaker.twitter):
+              <a href="https://twitter.com/#(speaker.twitter)" class="btn btn-icon btn-secondary btn-twitter btn-sm bg-white">
+                <i class="bx bxl-twitter"></i>
+              </a>
+              #endif
+            </div>
           </div>
-          #else:
-            <p></p>
-          #endif
+        </div>
+        <div class="card-body text-center p-3">
+          <h3 class="fs-lg fw-semibold pt-1 mb-2">#(speaker.name)</h3>
+          <p class="fs-sm mb-0">#(speaker.organisation)</p>
+        </div>
       </div>
     </div>
-    #if(count(speakers) > 0):
-    <div class="speaker-grid">
-        <div class="speaker-grid-container-background"></div>
-        #for(speaker in speakers):
-            <div class="speaker-grid-element">
-                <div class="speaker-grid-element-image-container">
-                    <img class="speaker-grid-element-image" src="#awsImage(speaker.profileImage)"/>
-                </div>
-                <div class="speaker-grid-element-info">
-                    #if(speaker.twitter):
-                    <a href="https://twitter.com/#(speaker.twitter)">
-                        <div class="speaker-grid-social">
-                            <img src="/img/twitter-vector.svg"/>
-                        </div>
-                    </a>
-                    #endif
-                    <p class="speaker-grid-name">#(speaker.name)</p>
-                    <p class="speaker-grid-title">#(speaker.organisation)</p>
-                </div>
-                
-                <div id="synopsisModal" class="modal" tabindex="-1" role="dialog">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 id="modal-title" class="modal-title"></h5>
-                      </div>
-                      <div class="modal-body">
-                        <p id="modal-body"></p>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="synopsisModal">Close</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            </div>
-        #endfor
-     </div>
+    #endfor
+  </div>
+</section>
+
+#if(phase.showSchedule):
+<section class="container pb-5">
+<div class="bg-secondary rounded-3 py-5 px-3 px-sm-4 px-lg-5 px-xl-0">
+  <div class="row align-items-center py-lg-4">
+    <div class="col-xl-5 col-md-6 offset-xl-1 mb-4 mb-md-0">
+      <div class="d-flex align-items-center">
+        <div class="ps-3 ms-sm-3">
+          <h2 class="h4 mb-0">The schedule has been revealed</h2>
+        </div>
+      </div>
     </div>
-    #endif
+    <div class="col-xl-5 col-md-6">
+      <div class="ps-lg-5 ms-xl-2">
+        <a href="/schedule" class="btn btn-primary w-100">View Schedule</a>
+      </div>
+    </div>
   </div>
 </div>
-
-
+</section>
+#endif

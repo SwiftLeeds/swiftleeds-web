@@ -1,0 +1,17 @@
+  <section class="bg-secondary py-5 mt-lg-5">
+  <div class="container">
+    <div class="row pt-xl-3">
+      <div class="col-md-5 text-center text-md-start pb-5">
+        <h1 class="mb-4">By the Community</h1>
+        <p class="fs-lg pb-lg-3 mb-4">SwiftLeeds is ran entirely by the community, for the community, with a number of volunteers building out our various systems and ensuring you have the best time possible.</p>
+        
+        #if(false):
+        <a href="/team" class="btn btn-primary shadow-primary btn-lg">More About Us</a>
+        #endif
+      </div>
+      <div class="col-xl-6 col-md-7 offset-xl-1 pb-4 pb-sm-3 pb-lg-0 mb-4 mb-sm-5 mb-lg-0">
+        <img src="img/team.jpg" class="rounded-3 shadow-sm" alt="SwiftLeeds Team">
+      </div>
+    </div>
+  </div>
+  </section>

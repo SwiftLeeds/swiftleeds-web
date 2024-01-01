@@ -1,0 +1,61 @@
+  <!-- Buy ticket CTA -->
+  <section class="bg-gradient-primary py-5">
+    <div class="container py-2 py-md-4 py-lg-5">
+      <div class="row py-xl-3">
+        <div class="col-xl-4 col-lg-5 offset-xl-1 order-lg-2 mb-4">
+          <h2 class="h1 text-light text-center text-sm-start pb-4 mb-0 mb-lg-3">Join us for SwiftLeeds #(eventYear)!</h2>
+          <div class="d-flex align-items-center pb-4">
+            <div class="bg-white rounded-circle text-primary flex-shrink-0 p-3" style="width: 60px; height: 60px;">
+              <i class="bx bxs-graduation" style="font-size: 26px; padding-left: 3px;"></i>
+            </div>
+            <p class="fs-xl text-light ps-3 mb-0">In full-time education? Choose our cheaper student pricing.</p>
+          </div>
+          
+          <div class="d-flex align-items-center pb-4">
+            <div class="bg-white rounded-circle text-primary flex-shrink-0 p-3" style="width: 60px; height: 60px;">
+              <i class="bx bxs-video-recording" style="font-size: 26px; padding-left: 3px;"></i>
+            </div>
+            <p class="fs-xl text-light ps-3 mb-0">Buy our livestream pass to join us online and never miss a moment.</p>
+          </div>
+          
+          <div class="d-flex align-items-center">
+            <div class="bg-white rounded-circle text-primary flex-shrink-0 p-3" style="width: 60px; height: 60px;">
+              <i class="bx bxs-group" style="font-size: 26px; padding-left: 3px;"></i>
+            </div>
+            <p class="fs-xl text-light ps-3 mb-0">Coming with friends or colleagues? Get a discount when you book together.</p>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-7 order-lg-1">
+
+          <!-- Ticket card -->
+          <div class="ignore-dark-mode position-relative">
+            <div class="position-relative overflow-hidden rounded-3 zindex-5 py-5 px-4 p-sm-5">
+              <span class="position-absolute top-0 start-0 w-100 h-100 bg-repeat-0 bg-position-center-start zindex-2" style="background-image: url(img/landing/conference/price-card-left-bg.png);"></span>
+              <span class="position-absolute top-0 end-0 w-100 h-100 bg-repeat-0 bg-position-center-end zindex-2" style="background-image: url(img/landing/conference/price-card-right-bg.png);"></span>
+              <div class="px-md-4 position-relative zindex-5">
+                <div class="d-sm-flex align-items-start justify-content-between">
+                  <div class="text-center text-sm-start me-sm-4">
+                    <div class="lead text-primary fw-semibold text-uppercase mb-2">#(eventDate)</div>
+                    <h3 class="h1">#(event.name)</h3>
+                  </div>
+                  <div class="d-table bg-white rounded-3 p-4 flex-shrink-0 mx-auto mx-sm-0">
+                    <img src="img/ticket-qr.png" width="102" alt="QR Code">
+                  </div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row align-items-center pt-4 mt-2">
+                  <button type="button" class="btn btn-primary shadow-primary btn-lg mb-3 mb-sm-0 me-sm-3" onclick="openTito();">
+                    Buy ticket
+                  </button>
+                  <div class="d-flex align-items-center">
+                    <span class="fs-lg me-2">from only</span>
+                    <span class="h4 text-body mb-0">#(phase.currentTicketPrice)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <span class="position-absolute bg-dark opacity-35 bottom-0 mb-n2 d-dark-mode-none" style="left: 1.5rem; width: calc(100% - 3rem); height: 5rem; filter: blur(.75rem);"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

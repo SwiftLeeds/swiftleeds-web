@@ -1,55 +1,39 @@
 #extend("base"):
-#export("title", "SwiftLeeds")
+    #export("title", "SwiftLeeds")
 
-  #export("content"):
-    #extend("Shared/_header")
-<!-- Header-->
-<header class="my-3">
-  <div class="container-sm">
-    <div>
-      <h1 class="display-4">
-        A unique <strong>Swift</strong><br/>
-        <strong>Conference</strong><br/>
-        in the heart<br/>
-        of leeds.
-      </h1>
-      
-      <img src="/img/header-bg.png" class="child-img"/>
-    </div>
-  </div>
-</header>
+    #export("content"):
+        #extend("Shared/_header")
+        
+    <section class="bg-dark py-4">
+        <div class="container pb-2 py-lg-5">
+          <h1 class="text-center my-4 text-white">Code of Conduct</h1>
+        </div>
+      </section>
+        
+        <section class="container mb-5 pt-4 pb-2 py-mg-4">
+        <div class="row justify-content-center">
+          <div class="col-lg-9">
+            <p>SwiftLeeds is a conference built by the community for the community and we take pride in our conference being a safe place for everyone. We take this very seriously and we expect everyone attending our conference to abide by these rules.</p>
 
-<!-- Sections-->
-<div class="row">
-  <ul class="tickets col-10">
-    <li>Get Your Ticket</li>
-    <li class="inPerson"><a href="../#tickets">In-Person</a></li>
-  </ul>
-</div>
-  
-  <div class="container">
-    <h1> Code of Conduct </h1>
-    <p>SwiftLeeds is a conference built by the community for the community and we take pride in our conference being a safe place for everyone. We take this very seriously and we expect everyone attending our conference to abide by these rules.</p>
+            <p>All attendees, speakers, sponsors and volunteers at our conference are required to agree to the following code of conduct. Organisers will enforce this code throughout the event. We expect cooperation from all participants to help ensure a safe environment for everybody.</p>
 
-    <p>All attendees, speakers, sponsors and volunteers at our conference are required to agree to the following code of conduct. Organisers will enforce this code throughout the event. We expect cooperation from all participants to help ensure a safe environment for everybody.</p>
+            <p>Harassment includes offensive verbal comments related to gender, gender identity and expression, age, sexual orientation, disability, physical appearance, body size, race, ethnicity, religion, technology choices, sexual images in public spaces, deliberate intimidation, stalking, following, harassing photography or recording, sustained disruption of talks or other events, inappropriate physical contact, and unwelcome sexual attention.</p>
 
-    <p>Harassment includes offensive verbal comments related to gender, gender identity and expression, age, sexual orientation, disability, physical appearance, body size, race, ethnicity, religion, technology choices, sexual images in public spaces, deliberate intimidation, stalking, following, harassing photography or recording, sustained disruption of talks or other events, inappropriate physical contact, and unwelcome sexual attention.</p>
+            <p>Participants asked to stop any harassing behaviour are expected to comply immediately.</p>
 
-    <p>Participants asked to stop any harassing behaviour are expected to comply immediately.</p>
+            <p>Sponsors are also subject to the anti-harassment policy. In particular, sponsors should not use sexualised images, activities, or other material. Booth staff (including volunteers) should not use sexualised clothing/uniforms/costumes or otherwise create a sexualised environment.</p>
 
-    <p>Sponsors are also subject to the anti-harassment policy. In particular, sponsors should not use sexualised images, activities, or other material. Booth staff (including volunteers) should not use sexualised clothing/uniforms/costumes or otherwise create a sexualised environment.</p>
+            <p>If a participant engages in harassing behaviour, the conference organisers may take any action they deem appropriate, including warning the offender or expulsion from the conference with no refund.</p>
 
-    <p>If a participant engages in harassing behaviour, the conference organisers may take any action they deem appropriate, including warning the offender or expulsion from the conference with no refund.</p>
+            <p>If you are being harassed, notice that someone else is being harassed, or have any other concerns, please contact a member of conference staff immediately. Conference staff can be identified as they'll be wearing branded clothing and/or badges.</p>
 
-    <p>If you are being harassed, notice that someone else is being harassed, or have any other concerns, please contact a member of conference staff immediately. Conference staff can be identified as they'll be wearing branded clothing and/or badges.</p>
+            <p>Conference staff will be happy to help participants contact venue security or local police, provide escorts, or otherwise assist those experiencing harassment to feel safe for the duration of the conference. We value your attendance.</p>
 
-    <p>Conference staff will be happy to help participants contact venue security or local police, provide escorts, or otherwise assist those experiencing harassment to feel safe for the duration of the conference. We value your attendance.</p>
+            <p>We expect participants to follow these rules at conference and workshop venues and conference-related social events.</p>
 
-    <p>We expect participants to follow these rules at conference and workshop venues and conference-related social events.</p>
-    
-    <p>If you have any questions please contact us on: <a href="mailto:info@swiftleeds.co.uk">info@swiftleeds.co.uk</a></p>
-</div>
-  
-  #extend("Shared/_footer")
-  #endexport
-  #endextend
+            <p>If you have any questions please contact us on: <a href="mailto:info@swiftleeds.co.uk">info@swiftleeds.co.uk</a></p>
+          </div>
+      </div>
+      </section>
+    #endexport
+#endextend

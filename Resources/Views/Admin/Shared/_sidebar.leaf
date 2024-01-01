@@ -1,8 +1,4 @@
 <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
-    <a href="/admin" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-      <img src="/img/logo.png" />
-    </a>
-    <hr>
     <ul id="nav" class="nav nav-pills flex-column mb-auto">
       <li>
         <a href="/admin?page=activities" class="nav-link link-dark">
@@ -51,7 +47,7 @@
         <strong>Welcome, #(user.name)</strong>
       </a>
       <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
+        <li><a class="dropdown-item" href="/logout">Sign out</a></li>
       </ul>
     </div>
 </div>

@@ -4,15 +4,20 @@
   #export("content"):
     #extend("Shared/_header")
 
-    <div class="row">
-      <form method="POST" action="/admin/sponsors#if(sponsor):/#(sponsor.id)#endif" enctype="multipart/form-data" class="needs-validation" novalidate>
-        <h2>
-          #if(sponsor):
+      <section class="bg-dark py-4">
+        <div class="container pb-2 py-lg-5">
+          <h1 class="text-center my-4 text-white">#if(sponsor):
             Edit Sponsor
           #else:
             Create Sponsor
-          #endif
-        </h2>
+          #endif</h1>
+        </div>
+      </section>
+      
+      <section class="container mb-5 pt-4 pb-2 py-mg-4">
+      
+    <div class="row">
+      <form method="POST" action="/admin/sponsors#if(sponsor):/#(sponsor.id)#endif" enctype="multipart/form-data" class="needs-validation" novalidate>
 
         <label for="event" class="form-label">Event</label>
         <select name="eventID" class="form-control" required>
@@ -77,12 +82,8 @@
 
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
-
-      <div class="col-6">
-        <img src="/img/header-bg.png" class="child-img">
-      </div>
     </div>
 
-    #extend("Shared/_footer")
+    </section>
   #endexport
 #endextend

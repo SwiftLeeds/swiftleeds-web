@@ -1,0 +1,98 @@
+
+  <!-- Schedule -->
+  <section id="schedule" class="container py-5">
+    <div class="row mt-xl-2 mb-xl-3 pb-3 py-md-4 py-lg-5">
+      <div class="col-12">
+        <h2 class="h1 text-center text-sm-start pb-2 pb-lg-0 mb-4 mb-lg-5">Schedule</h2>
+      </div>
+      <div class="col-lg-3 mb-4">
+
+        <!-- Nav tabs -->
+        <div class="nav flex-nowrap flex-lg-column nav-tabs" role="tablist" aria-orientation="vertical">
+          #for(day in schedule):
+          <a href="#day-#(index + 1)" class="nav-link d-block w-100 rounded-3 p-4 p-xl-5 #if(index == 0):me-2 me-sm-3 me-lg-0 mb-lg-3 active#endif" id="day-#(index + 1)-tab" data-bs-toggle="tab" role="tab" aria-controls="day-#(index + 1)" aria-selected="#if(index == 0):true#else:false#endif">
+            <div class="fs-xl">Day #(index + 1)</div>
+            <div class="fs-3 fw-bold">Oct #(index + 9), #(eventYear)</div>
+          </a>
+          #endfor
+        </div>
+      </div>
+      <div class="col-lg-8 offset-lg-1">
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+
+          #for(day in schedule):
+          <div class="tab-pane fade #if(index == 0):show active#endif" id="day-#(index + 1)" role="tabpanel" aria-labelledby="day-#(index + 1)-tab">
+            #for(slot in day):
+            <div class="#if(isLast):#else:border-bottom#endif #if(isFirst):pb-4#endif #if(isLast):pt-4#endif #if(!isFirst && !isLast):py-4#endif">
+              <div class="row pb-1 pb-xl-3">
+                <div class="col-sm-4 mb-3 mb-sm-0">
+                  <div class="h5 mb-1">#(slot.startDate) – #sessionEnd(slot.date, slot.duration)</div>
+                  <!-- <p class="text-muted mb-0">Beginner</p> -->
+
+                  #if(slot.presentation):
+                  #if(slot.duration == 15.0):
+                  <span class="badge bg-danger shadow-danger fs-sm">Lightning</span>
+                  #elseif(slot.duration == 30.0):
+                  <span class="badge bg-warning shadow-warning fs-sm">Short Talk</span>
+                  #else:
+                  <span class="badge bg-success shadow-success fs-sm">Talk</span>
+                  #endif
+                  #elseif(slot.activity):
+
+                  #endif
+                </div>
+                <div class="col-sm-8">
+                  <h5 class="mb-0">
+                    #if(slot.presentation):
+                      #(slot.presentation.title)
+                    #elseif(slot.activity):
+                      #(slot.activity.title)
+                    #endif
+                  </h5>
+
+                  <p class="mb-4">
+                    #if(slot.presentation):
+                      #markdown(slot.presentation.synopsis)
+                    #elseif(slot.activity):
+                      #markdown(slot.activity.description)
+                    #endif
+                  </p>
+
+                  #if(slot.presentation):
+                    <div class="row row-cols-1 row-cols-md-2 g-3">
+                      <div class="col">
+                        <div class="d-flex align-items-center">
+                          <img src="#awsImage(slot.presentation.speaker.profileImage)" class="rounded-circle schedule-speaker" alt="#(slot.presentation.speaker.name)">
+                          <div class="ps-3">
+                            <h6 class="fw-semibold mb-1">#(slot.presentation.speaker.name)</h6>
+                            <p class="fs-sm text-muted mb-0">#(slot.presentation.speaker.organisation)</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      #if(slot.presentation.secondSpeaker):
+                      <div class="col">
+                        <div class="d-flex align-items-center">
+                          <img src="#awsImage(slot.presentation.secondSpeaker.profileImage)" class="rounded-circle schedule-speaker" alt="#(slot.presentation.secondSpeaker.name)">
+                          <div class="ps-3">
+                            <h6 class="fw-semibold mb-1">#(slot.presentation.secondSpeaker.name)</h6>
+                            <p class="fs-sm text-muted mb-0">#(slot.presentation.secondSpeaker.organisation)</p>
+                          </div>
+                        </div>
+                      </div>
+                      #endif
+                    </div>
+                  #endif
+                </div>
+              </div>
+            </div>
+            #endfor
+          </div>
+          #endfor
+
+        </div>
+      </div>
+    </div>
+  </section>

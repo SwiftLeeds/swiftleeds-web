@@ -16,6 +16,7 @@ public func configure(_ app: Application) throws {
     app.leaf.tags["sessionEnd"] = SessionEndTag()
     app.leaf.tags["markdown"] = Markdown()
     app.leaf.tags["awsImage"] = AwsImageTag()
+    app.leaf.tags["safeCount"] = SafeCountTag()
     app.views.use(.leaf)
 
     // Migrations
