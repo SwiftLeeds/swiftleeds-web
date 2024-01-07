@@ -20,12 +20,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
     
     <script src='https://js.tito.io/v2' async></script>
-    
-    <script>
-    function openTito() {
-        document.getElementById('tito-trigger').children[0].click()
-    }
-    </script>
   </head>
 
   <body>
@@ -43,7 +37,19 @@
       <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
       <i class="btn-scroll-top-icon bx bx-chevron-up"></i>
     </a>
-
+    
+    <!-- Tito modal -->
+    <div class="modal fade" id="modalTitoOrder" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Purchase Ticket</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <tito-widget event="swiftleeds/#(phase.titoStub)"></tito-widget>
+        </div>
+      </div>
+    </div>
 
     <!-- Vendor Scripts -->
     <script src="/vendor/parallax-js/dist/parallax.min.js"></script>

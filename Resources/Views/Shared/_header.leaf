@@ -64,7 +64,7 @@
         </div>
         #if(false):
         <div class="offcanvas-header border-top border-light">
-          <button type="button" class="btn btn-primary w-100" onclick="openTito();">
+          <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalTitoOrder">
             Buy ticket
           </button>
         </div>
@@ -76,7 +76,7 @@
       </button>
       
       #if(false):
-      <button type="button" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" onclick="openTito();">
+      <button type="button" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" data-bs-toggle="modal" data-bs-target="#modalTitoOrder">
         Buy ticket
       </button>
       #endif
