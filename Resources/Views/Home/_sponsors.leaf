@@ -1,5 +1,5 @@
 #if(count(platinumSponsors) > 0 || count(goldSponsors) > 0 || count(silverSponsors) > 0):
-<h2>Our Sponsors</h2>
+<h2 class="mt-5">Our Sponsors</h2>
 
 <div class="btn-group pb-2 px-0">
 #for(sponsor in platinumSponsors):

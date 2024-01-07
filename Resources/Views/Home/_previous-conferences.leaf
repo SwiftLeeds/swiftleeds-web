@@ -36,8 +36,6 @@
     </div>
   </section>
 
-
-#if(false):
   <!-- Gallery (carousels) -->
   <section class="bg-secondary mb-5 pt-md-3 pt-lg-4 pt-xl-5">
     <div class="pb-2 pb-sm-3 pb-md-4">
@@ -185,4 +183,3 @@
       </div>
     </div>
   </section>
-#endif
