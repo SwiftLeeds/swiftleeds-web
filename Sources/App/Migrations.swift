@@ -77,17 +77,17 @@ class Migrations {
             guard let url = Environment.get("DATABASE_URL") else {
                 throw Abort(.internalServerError, reason: "Missing 'DATABASE_URL' environment variable")
             }
-
-            guard var postgresConfig = PostgresConfiguration(url: url) else {
-                throw Abort(.internalServerError, reason: "Invalid PostgreSQL connection URL provided")
-            }
+            
+            var postgresConfig = try SQLPostgresConfiguration(url: url)
+            var configuration = TLSConfiguration.makeClientConfiguration()
+            configuration.certificateVerification = .none
             
             if app.environment.isRelease {
                 // Based on recommended approach from https://devcenter.heroku.com/articles/connecting-heroku-postgres
-                postgresConfig.tlsConfiguration = .makeClientConfiguration()
+                postgresConfig.coreConfiguration.tls = try .require(.init(configuration: configuration))
+            } else {
+                postgresConfig.coreConfiguration.tls = try .prefer(.init(configuration: configuration))
             }
-            
-            postgresConfig.tlsConfiguration?.certificateVerification = .none
             
             app.databases.use(.postgres(configuration: postgresConfig), as: .psql)
         } catch {
