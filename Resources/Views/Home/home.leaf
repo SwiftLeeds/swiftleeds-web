@@ -3,7 +3,6 @@
     
     #export("content"):
         #extend("Shared/_header")
-        #extend("Shared/_tito")
         #extend("Home/_hero")
         #extend("Home/_info")
         

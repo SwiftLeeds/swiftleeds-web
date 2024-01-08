@@ -12,9 +12,16 @@ struct HomeRouteController: RouteCollection {
         return try await req.view.render("Home/home", context)
     }
     
-    func schedule(req: Request) async throws -> View {
+    func schedule(req: Request) async throws -> Response {
         let context = try await getContext(req: req)
-        return try await req.view.render("Schedule/index", context)
+        
+        if context.phase?.showSchedule == false {
+            // We already hide the link and CTA for the schedule, but users can manually go to this page prematurely
+            // This makes sure they can't.
+            return req.redirect(to: "/")
+        }
+        
+        return try await req.view.render("Schedule/index", context).encodeResponse(for: req)
     }
     
     func getContext(req: Request) async throws -> HomeContext {

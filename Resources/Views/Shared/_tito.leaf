@@ -1,3 +1,0 @@
-<div style="display: none";>
-<tito-button id="tito-trigger" event="swiftleeds/#(phase.titoStub)"></tito-button>
-</div>

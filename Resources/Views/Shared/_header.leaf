@@ -12,16 +12,16 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a href="#info" class="nav-link" data-scroll data-scroll-offset="70">About</a>
+              <a href="/#info" class="nav-link" data-scroll data-scroll-offset="70">About</a>
             </li>
             
             #if(safeCount(speakers) > 0):
             <li class="nav-item">
-              <a href="#speakers" class="nav-link" data-scroll data-scroll-offset="70">Speakers</a>
+              <a href="/#speakers" class="nav-link" data-scroll data-scroll-offset="70">Speakers</a>
             </li>
             #else:
             <li class="nav-item">
-              <a href="#highlights" class="nav-link" data-scroll data-scroll-offset="70">Highlights</a>
+              <a href="/#highlights" class="nav-link" data-scroll data-scroll-offset="70">Highlights</a>
             </li>
             #endif
             
@@ -32,7 +32,7 @@
             #endif
             
             <li class="nav-item">
-              <a href="#venue" class="nav-link" data-scroll data-scroll-offset="70">Venue</a>
+              <a href="/#venue" class="nav-link" data-scroll data-scroll-offset="70">Venue</a>
             </li>
             
             <li class="nav-item d-none d-sm-none d-md-none d-lg-block mx-auto"></li>
@@ -64,7 +64,7 @@
         </div>
         #if(false):
         <div class="offcanvas-header border-top border-light">
-          <button type="button" class="btn btn-primary w-100" onclick="openTito();">
+          <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalTitoOrder">
             Buy ticket
           </button>
         </div>
@@ -76,7 +76,7 @@
       </button>
       
       #if(false):
-      <button type="button" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" onclick="openTito();">
+      <button type="button" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" data-bs-toggle="modal" data-bs-target="#modalTitoOrder">
         Buy ticket
       </button>
       #endif
