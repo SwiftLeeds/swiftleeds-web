@@ -1,4 +1,4 @@
-<footer class="footer dark-mode bg-dark py-5">
+<footer class="footer bg-dark py-5" data-bs-theme="dark">
   <div class="container pt-2 pt-sm-4">
     <div class="row">
       <div class="col-md-6 col-lg-5 col-xl-4 pb-2 pb-sm-3 pb-md-0 mb-4 mb-md-0">
@@ -10,6 +10,14 @@
             <i class="bx bx-calendar-check fs-xl me-2 ms-n1"></i>
             Add to calendar
           </a>
+          #endif
+          
+          #if(false):
+            <div class="form-check form-switch mode-switch" data-bs-toggle="mode">
+              <input type="checkbox" class="form-check-input" id="theme-mode">
+              <label class="form-check-label d-none d-sm-block" for="theme-mode">Light</label>
+              <label class="form-check-label d-none d-sm-block" for="theme-mode">Dark</label>
+            </div>
           #endif
         </div>
       </div>

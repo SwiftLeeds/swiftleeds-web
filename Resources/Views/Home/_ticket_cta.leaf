@@ -1,5 +1,5 @@
   <!-- Buy ticket CTA -->
-  <section class="bg-gradient-primary py-5">
+  <section class="bg-gradient-primary py-5" data-bs-theme="light">
     <div class="container py-2 py-md-4 py-lg-5">
       <div class="row py-xl-3">
         <div class="col-xl-4 col-lg-5 offset-xl-1 order-lg-2 mb-4">
@@ -47,7 +47,7 @@
                     Buy ticket
                   </button>
                   <div class="d-flex align-items-center">
-                    <span class="fs-lg me-2">from only</span>
+                    <span class="fs-lg me-2 text-body">from only</span>
                     <span class="h4 text-body mb-0">#(phase.currentTicketPrice)</span>
                   </div>
                 </div>
