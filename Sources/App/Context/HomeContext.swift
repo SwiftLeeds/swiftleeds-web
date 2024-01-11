@@ -34,3 +34,15 @@ struct CfpContext: Content {
     var eventDate: String? = nil
     var eventYear: String? = nil
 }
+
+struct TeamContext: Content {
+    struct TeamMember: Codable {
+        let name: String
+        let role: String?
+        let twitter: String?
+        let linkedin: String?
+        let imageURL: String?
+    }
+    
+    var teamMembers: [TeamMember] = []
+}

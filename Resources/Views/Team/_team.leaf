@@ -1,0 +1,71 @@
+      <section class="position-relative pt-5 mb-5" style="background-color: #151922;">
+        <span class="d-dark-mode-none d-block position-absolute start-0 bottom-0 w-100 bg-white" style="height: 9.875vw;"></span>
+        <span class="d-dark-mode-block d-none position-absolute start-0 bottom-0 w-100 bg-light" style="height: 9.875vw;"></span>
+        <div class="container position-relative zindex-2 pt-5" data-bs-theme="dark">
+
+          <div class="mt-4 mb-lg-5 mb-4 py-3">
+            <h1 class="display-4 mb-0">We are SwiftLeeds Volunteers</h1>
+          </div>
+
+          <!-- Gallery -->
+          <div class="row g-md-4 g-3">
+            <div class="col-md-4">
+              <img src="img/team/hero-1.jpg" alt="Registration" class="rounded-3">
+            </div>
+            <div class="col-md-4 col-6 d-md-block d-none">
+              <img src="img/team/hero-2.jpg" alt="Visual Production" class="rounded-3">
+            </div>
+            <div class="col-md-4 col-6 d-md-block d-none">
+              <img src="img/team/hero-3.jpg" alt="Merchandise" class="rounded-3">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="container mb-5 pt-md-1 pt-lg-4 pt-xl-5">
+        <div class="mt-4 py-2 pb-sm-3 pb-md-4 pb-lg-5 mx-auto text-center">
+          <h2 class="h1 mb-4">For the community, by the community.</h2>
+          <p class="mb-2">Each one of our volunteers come from a background of Swift development, and have come together to put on the best possible conference.</p>
+          <p>They're here to answer your questions, keep you safe, and make sure you have a fantastic time.</p>
+        </div>
+      </section>
+      
+      <section class="container mb-5 py-lg-3 py-xl-4 py-xxl-5">
+        <!-- Team grid -->
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 pb-lg-2 pb-xl-3">
+
+        #for(teamMember in teamMembers):
+          <!-- Item -->
+          <div class="col">
+            <div class="card card-hover border-0 bg-transparent">
+              <div class="position-relative">
+                <img src="#(teamMember.imageURL)" class="rounded-3" alt="#(teamMember.name)">
+                <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center rounded-3">
+                  <span class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"></span>
+                  <div class="position-relative d-flex zindex-2">
+                    #if(teamMember.linkedin):
+                    <a href="#(teamMember.linkedin)" class="btn btn-icon btn-secondary btn-linkedin btn-sm bg-white me-2" aria-label="LinkedIn">
+                      <i class="bx bxl-linkedin"></i>
+                    </a>
+                    #endif
+                    #if(teamMember.twitter):
+                    <a href="#(teamMember.twitter)" class="btn btn-icon btn-secondary btn-twitter btn-sm bg-white" aria-label="Twitter">
+                      <i class="bx bxl-twitter"></i>
+                    </a>
+                    #endif
+                  </div>
+                </div>
+              </div>
+              <div class="card-body text-center p-3">
+                <h3 class="fs-lg fw-semibold pt-1 mb-2">#(teamMember.name)</h3>
+                
+                #if(teamMember.role):
+                <p class="fs-sm mb-0">#(teamMember.role)</p>
+                #endif
+              </div>
+            </div>
+          </div>
+        #endfor
+        
+        </div>
+      </section>
