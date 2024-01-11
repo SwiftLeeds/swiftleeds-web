@@ -21,3 +21,16 @@ struct HomeContext: Content {
     var eventDate: String? = nil
     var eventYear: String? = nil
 }
+
+struct CfpContext: Content {
+    struct Question: Codable {
+        let question: String
+        let answer: [String]
+    }
+    
+    var faqs: [Question] = []
+    var phase: PhaseContext? = nil
+    var event: Event? = nil
+    var eventDate: String? = nil
+    var eventYear: String? = nil
+}

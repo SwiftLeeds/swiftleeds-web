@@ -5,8 +5,8 @@
           We are looking for <span class="text-primary">speakers</span>
         </h2>
         
-        <a href="https://sessionize.com/swiftleeds-ios-conference" target="_blank" class="btn btn-primary text-white mb-3">
-            Submit your talk
+        <a href="/cfp" target="_blank" class="btn btn-primary text-white mb-3">
+            Learn more
             <i class="bx bx-right-arrow-alt lead ms-2 me-n1"></i>
         </a>
     </div>
@@ -45,10 +45,6 @@
         <img src="img/cfp.jpg" class="rounded-3" alt="Zamzam Pooya on Stage" />
       </div>
     </div>
-    
-    <p>
-    We know many potential speakers, especially those from under-represented groups or those who have never spoken at a conference before, may rule themselves out unnecessarily. We want to hear from everybody in the Swift community, we would urge you to submit a proposal. Our team at SwiftLeeds review all talks anonymously.
-    </p>
     
   </div>
 </section>

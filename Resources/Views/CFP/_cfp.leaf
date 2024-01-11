@@ -1,0 +1,59 @@
+<!-- Hero imagery with start/end date of CFP window, including status badge (Open, Closed, Coming Soon) and CTA -->
+
+
+    <section class="bg-dark py-4">
+        <div class="container pb-2 py-lg-5">
+          <h1 class="text-center my-4 text-white">Call for Papers</h1>
+        </div>
+      </section>
+      
+<section class="container py-5 mb-lg-2">
+<p>Each year SwiftLeeds operates a Call for Papers (CfP) which provides you with the opportunity to propose your own talk to be heard at that year's event.</p>
+<p>We know many potential speakers, especially those from under-represented groups or those who have never spoken at a conference before, may rule themselves out unnecessarily. We want to hear from everybody in the Swift community, we would urge you to submit a proposal. Our team at SwiftLeeds review all talks anonymously (see more about this process below).</p>
+</section>
+
+
+  <section class="container py-5 mb-lg-2">
+    <div class="row py-2 py-md-4 py-lg-5">
+      <div class="col-xl-4 col-md-5 text-center text-md-start pt-md-2 pb-2 pb-md-0 mb-4 mb-md-0">
+        <h2 class="pb-3 mb-1 mb-lg-3">Any questions? <br class="d-none d-md-inline">Check out the FAQs</h2>
+        <p class="fs-lg pb-3 mb-2 mb-lg-3">Still have unanswered questions and need to get in touch?</p>
+        
+        <div class="row row-cols-1 row-cols-sm-2 g-3 g-sm-4">
+          <div class="col">
+            <div class="card card-hover">
+              <div class="card-body pb-3">
+                <i class="bx bxs-envelope d-block fs-2 text-primary mb-2 py-1"></i>
+                <p class="fs-sm mb-2">Still have questions?</p>
+                <a href="#" class="btn btn-link stretched-link px-0">
+                  Email us
+                  <i class="bx bx-right-arrow-alt fs-xl ms-2"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-md-7 offset-xl-1">
+        <div class="accordion" id="faq">
+            #for(faq in faqs):
+              <div class="accordion-item border-0 rounded-3 shadow-sm mb-3">
+                <h2 class="accordion-header" id="q#(index)-heading">
+                  <button class="accordion-button shadow-none rounded-3 #if(index != 0):collapsed#endif" type="button" data-bs-toggle="collapse" data-bs-target="#q#(index)" aria-expanded="#if(index == 0):true#else:false#endif" aria-controls="q#(index)">
+                    #(faq.question)
+                  </button>
+                </h2>
+                <div id="q#(index)" class="accordion-collapse collapse #if(index == 0):show#endif" aria-labelledby="q#(index)-heading" data-bs-parent="#faq">
+                  <div class="accordion-body fs-sm pt-0">
+                      #for(answer in faq.answer):
+                      <p #if(isLast):class="mb-0"#endif>#unsafeHTML(answer)</p>
+                      #endfor
+                  </div>
+                </div>
+              </div>
+            #endfor
+        </div>
+      </div>
+    </div>
+  </section>
