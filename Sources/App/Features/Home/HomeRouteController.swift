@@ -174,14 +174,14 @@ struct HomeRouteController: RouteCollection {
         let silverSponsors = sponsorQuery.filter { $0.sponsorLevel == .silver }
         let goldSponsors = sponsorQuery.filter { $0.sponsorLevel == .gold }
         
-        let phase = try getPhase(req: req)
+        let phase = try getPhase(req: req, event: event)
         
         return HomeContext(
             speakers: phase.showSpeakers ? speakers : [],
             platinumSponsors: platinumSponsors,
             silverSponsors: silverSponsors,
             goldSponsors: goldSponsors,
-            dropInSessions: phase.showDropIns ? dropInSessions : [],
+            dropInSessions: dropInSessions,
             schedule: phase.showSchedule ? slots.schedule : [],
             phase: PhaseContext(phase: phase, event: event),
             event: event,
@@ -233,23 +233,25 @@ struct HomeRouteController: RouteCollection {
             .filter { $0.event.name == event.name }
     }
     
-    private func getPhase(req: Request) throws -> Phase {
+    private func getPhase(req: Request, event: Event) throws -> Phase {
+        let isPreviousEvent = event.date <= Date()
+        
         #if DEBUG
         let phaseQueryItem: String? = try? req.query.get(at: "phase")
         let phaseItems = phaseQueryItem?.components(separatedBy: ",") ?? []
         
         return Phase(
-            showSpeakers: phaseItems.contains("speakers"),
-            showSchedule: phaseItems.contains("schedule"),
-            showDropIns: phaseItems.contains("dropin"),
+            showSpeakers: isPreviousEvent || phaseItems.contains("speakers"),
+            showSchedule: isPreviousEvent || phaseItems.contains("schedule"),
             showTickets: phaseItems.contains("tickets")
         )
         #else
+        // If the event is in the past then we can safely show schedule/speakers
+        // TODO: if event is in the future, then rely on a database toggle
         Phase(
-            showSpeakers: false,
-            showSchedule: false,
-            showDropIns: false,
-            showTickets: false
+            showSpeakers: isPreviousEvent,
+            showSchedule: isPreviousEvent,
+            showTickets: false // TODO: if event is current, and in the future, then check tito
         )
         #endif
     }
@@ -314,7 +316,6 @@ struct HomeRouteController: RouteCollection {
 struct Phase {
     let showSpeakers: Bool
     let showSchedule: Bool
-    let showDropIns: Bool
     let showTickets: Bool
 }
 
