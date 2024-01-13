@@ -144,7 +144,7 @@ struct HomeRouteController: RouteCollection {
     }
     
     private func getPhase(req: Request, event: Event) throws -> Phase {
-        let isPreviousEvent = event.date <= Date() && event.date > 1420074000 // TODO: date should be nullable
+        let isPreviousEvent = event.date <= Date() && event.date.timeIntervalSince1970 > 1420074000 // TODO: date should be nullable
         
         #if DEBUG
         let phaseQueryItem: String? = try? req.query.get(at: "phase")
@@ -158,7 +158,7 @@ struct HomeRouteController: RouteCollection {
         #else
         // If the event is in the past then we can safely show schedule/speakers
         // TODO: if event is in the future, then rely on a database toggle
-        Phase(
+        return Phase(
             showSpeakers: isPreviousEvent,
             showSchedule: isPreviousEvent,
             showTickets: false // TODO: if event is current, and in the future, then check tito
