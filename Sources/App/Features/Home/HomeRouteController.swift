@@ -240,8 +240,7 @@ struct HomeRouteController: RouteCollection {
             showSpeakers: phaseItems.contains("speakers"),
             showSchedule: phaseItems.contains("schedule"),
             showDropIns: phaseItems.contains("dropin"),
-            showTickets: phaseItems.contains("tickets"),
-            showCFP: phaseItems.contains("cfp")
+            showTickets: phaseItems.contains("tickets")
         )
         #else
         Phase(
@@ -249,8 +248,7 @@ struct HomeRouteController: RouteCollection {
             showSpeakers: false,
             showSchedule: false,
             showDropIns: false,
-            showTickets: false,
-            showCFP: Date(timeIntervalSince1970: 1682855940) > Date() // 30th April 23
+            showTickets: false
         )
         #endif
     }
@@ -262,13 +260,11 @@ struct Phase {
     let showSchedule: Bool
     let showDropIns: Bool
     let showTickets: Bool
-    let showCFP: Bool
 }
 
 struct PhaseContext: Codable {
     let ticketsEnabled: Bool
     let currentTicketPrice: String
-    let cfpEnabled: Bool
     let showAddToCalendar: Bool
     let showSchedule: Bool
     let titoStub: String
@@ -277,7 +273,6 @@ struct PhaseContext: Codable {
         ticketsEnabled = phase.showTickets
         titoStub = "swiftleeds-24"
         currentTicketPrice = "£170" // TODO: need to load from tito
-        cfpEnabled = phase.showCFP
         showAddToCalendar = false  // not implemented: https://add-to-calendar-button.com/
         showSchedule = phase.showSchedule
     }

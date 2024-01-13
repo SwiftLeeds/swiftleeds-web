@@ -12,9 +12,7 @@
         
         #if(count(speakers) > 0):
             #extend("Home/_speakers")
-        #endif
-        
-        #if(phase.cfpEnabled):
+        #else:
             #extend("Home/_cfp")
         #endif
         
