@@ -45,4 +45,7 @@ struct TeamContext: Content {
     }
     
     var teamMembers: [TeamMember] = []
+    var event: Event? = nil
+    var eventDate: String? = nil
+    var eventYear: String? = nil
 }

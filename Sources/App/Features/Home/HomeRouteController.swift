@@ -15,9 +15,19 @@ struct HomeRouteController: RouteCollection {
     }
     
     func team(req: Request) async throws -> View {
+        guard let event = try await getEvent(for: req) else {
+            throw Abort(.notFound, reason: "Unable to find event")
+        }
+        
         // We shuffle the team members array on each load request in order to remove any bias in the array.
         // All volunteers are shown equally.
-        let context = TeamContext(teamMembers: teamMembers.shuffled())
+        let context = TeamContext(
+            teamMembers: teamMembers.shuffled(),
+            event: event,
+            eventDate: buildConferenceDateString(for: event),
+            eventYear: event.name.components(separatedBy: " ").last
+        )
+        
         return try await req.view.render("Team/index", context)
     }
     
