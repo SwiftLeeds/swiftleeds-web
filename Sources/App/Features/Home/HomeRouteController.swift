@@ -7,6 +7,9 @@ struct HomeRouteController: RouteCollection {
         route.get("schedule", use: schedule)
         route.get("cfp", use: cfp)
         route.get("team", use: team)
+        
+        route.get("year", ":year", use: get)
+        route.get("year", ":year", "schedule", use: schedule)
     }
     
     func get(req: Request) async throws -> View {
@@ -141,7 +144,7 @@ struct HomeRouteController: RouteCollection {
     }
     
     private func getPhase(req: Request, event: Event) throws -> Phase {
-        let isPreviousEvent = event.date <= Date()
+        let isPreviousEvent = event.date <= Date() && event.date > 1420074000 // TODO: date should be nullable
         
         #if DEBUG
         let phaseQueryItem: String? = try? req.query.get(at: "phase")
@@ -166,9 +169,9 @@ struct HomeRouteController: RouteCollection {
     private func getEvent(for req: Request) async throws -> Event? {
         #if DEBUG
         // Currently year-selector is only available on debug builds while we finish adding support
-        if let yearQueryItem: String = try? req.query.get(at: "year") {
+        if let yearParameterItem = req.parameters.get("year") {
             return try await Event.query(on: req.db)
-                .filter("name", .equal, "SwiftLeeds \(yearQueryItem)")
+                .filter("name", .equal, "SwiftLeeds \(yearParameterItem)")
                 .first()
         }
         #endif
