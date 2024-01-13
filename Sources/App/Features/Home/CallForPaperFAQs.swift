@@ -29,16 +29,24 @@ let callForPaperFAQs: [CfpContext.Question] = [
     .init(
         question: "I'm dead, blind, or have other accessibility requirments. Can I apply?",
         answer: [
-            "Absolutely. Let us know by emailing <a href=\"mailto:info@swiftleeds.co.uk\">info@swiftleeds.co.uk</a> and we'll work with you to ensure your needs are met throughout the process and at the venue. Contacting us with your needs will have no impact to the review of your talk proposal."
+            "Absolutely. Let us know by emailing <a href=\"mailto:info@swiftleeds.co.uk\">info@swiftleeds.co.uk</a> and we'll work with you to ensure your needs are met throughout the process and at the venue. Contacting us with your needs will have no impact to the review of your talk."
         ]
     ),
     .init(
         question: "How do you choose which speakers to have?",
         answer: [
-            "In 2023 we had 149 talks submitted to our Call for Papers from over 100 speakers, and only 18 slots on the schedule. Choosing which talks to accept takes a lot of time, and is a huge challenge!",
-            "We utilise a tool called <a href=\"https://sessionize.com/\" target=\"_blank\">Sessionize</a> for evaluation of speakers. Our team of more than 10 volunteers each get randomly served three talks at a time and must rank them. At this stage we do not see who the speaker is, but only the title and description you provide.",
+            "In 2023 we had 149 talks submitted to our Call for Papers process from over 100 different speakers, and only 18 slots on the schedule. Choosing which talks to accept takes a lot of time, and is a huge challenge!",
+            "We utilise a tool called <a href=\"https://sessionize.com/\" target=\"_blank\">Sessionize</a> for evaluation of speakers. Our team of volunteers each get randomly served three anonymous talks at a time and must rank them. At this stage we do not see who the speaker is, but only the title and description you provide.",
             "This process is repeated 100s of times with many combinations of talks by each of our volunteers until a ranking is generated, at which point we find out who the speakers are.",
             "With this ranking we work from the top and remove any duplicate talks, and additional talks from the same speaker. We'll then reach out to the top speakers to confirm their attendance, simply working down the list until we have the right number to fill our spots.",
+        ]
+    ),
+    .init(
+        question: "I was unsuccessful previously, can I try again?",
+        answer: [
+            "Absolutely! We review all talks anonymously and whether you were unsuccessful previously does not have any impact on your proposal this time.",
+            "SwiftLeeds receives a lot of talk submissions and we're constantly balancing the types of talks to ensure the best experience for everybody.",
+            "You might find it beneficial to ask a friend to review your proposal. We only see the title and description when reviewing, so it's important to give us all the facts and demonstrate why your talk would be perfect this year."
         ]
     )
 ]

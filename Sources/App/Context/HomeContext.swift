@@ -28,6 +28,15 @@ struct CfpContext: Content {
         let answer: [String]
     }
     
+    struct Stage: Codable {
+        let now: Date
+        let openDate: Date
+        let closeDate: Date
+        let reviewCompleted: Bool
+        let cfpUrl: String
+    }
+    
+    let stage: Stage
     var faqs: [Question] = []
     var phase: PhaseContext? = nil
     var event: Event? = nil

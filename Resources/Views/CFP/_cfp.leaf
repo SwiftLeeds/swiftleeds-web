@@ -1,16 +1,106 @@
 <!-- Hero imagery with start/end date of CFP window, including status badge (Open, Closed, Coming Soon) and CTA -->
-
-
-    <section class="bg-dark py-4">
+      
+    <section class="bg-dark py-4 text-white">
         <div class="container pb-2 py-lg-5">
-          <h1 class="text-center my-4 text-white">Call for Papers</h1>
+            <div class="row">
+              <div class="col-lg-6">
+                <h1 class="display-2 mb-0 text-white my-4">Speak at <span class="text-primary">SwiftLeeds #(eventYear)</span></h1>
+              </div>
+              <div class="col-lg-6 col-xl-5 offset-xl-1 pt-3 pt-sm-4 pt-lg-3">
+                <p class="fs-xl pb-4 mb-1 mb-md-2 mb-xl-3">Each year SwiftLeeds operates a Call for Papers (CfP) which provides you with the opportunity to propose your own talk to be heard at that year's event.</p>
+              </div>
+            </div>
         </div>
       </section>
       
-<section class="container py-5 mb-lg-2">
-<p>Each year SwiftLeeds operates a Call for Papers (CfP) which provides you with the opportunity to propose your own talk to be heard at that year's event.</p>
-<p>We know many potential speakers, especially those from under-represented groups or those who have never spoken at a conference before, may rule themselves out unnecessarily. We want to hear from everybody in the Swift community, we would urge you to submit a proposal. Our team at SwiftLeeds review all talks anonymously (see more about this process below).</p>
-</section>
+<section class="container py-5 my-lg-2">
+    <div class="steps steps-horizontal-md">
+      <!-- Step -->
+      <div class="step">
+        <div class="step-number #if(stage.now > stage.closeDate):bg-success#elseif(stage.now > stage.openDate):bg-warning#endif">
+          <div class="step-number-inner">
+            <i class="bx bx-edit fs-1"></i>
+          </div>
+        </div>
+        <div class="step-body">
+          <h5 class="mb-2">Submit your Talk</h5>
+          <p class="fs-sm mb-0">Once the Call for Papers opens, you have around four weeks to submit your talk to us.</p>
+        </div>
+      </div>
+  
+      <!-- Step -->
+      <div class="step">
+        <div class="step-number #if(stage.reviewCompleted):bg-success#elseif(stage.now > stage.closeDate):bg-warning#endif">
+          <div class="step-number-inner">
+            <i class="bx bx-search-alt-2 fs-1"></i>
+          </div>
+        </div>
+        <div class="step-body">
+          <h5 class="mb-2">Anonymous Review</h5>
+          <p class="fs-sm mb-0">Our team will anonymously review every talk submitted, providing us with a shortlist.</p>
+        </div>
+      </div>
+
+      <!-- Step -->
+      <div class="step">
+        <div class="step-number #if(stage.reviewCompleted):bg-success#endif">
+          <div class="step-number-inner">
+            <i class="bx bx-envelope fs-1"></i>
+          </div>
+        </div>
+        <div class="step-body">
+          <h5 class="mb-2">Receive Confirmation</h5>
+          <p class="fs-sm mb-0">You'll receive an email letting you know if you were successful for this year.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+      
+    <section class="container my-3">
+        <div class="row gy-4 py-xl-3">
+          <div class="col-md-6">
+            <img src="/img/stage.jpg" alt="Image" class="rounded-3">
+          </div>
+          <div class="col-lg-5 col-md-6 offset-lg-1 d-flex">
+            <div class="align-self-center ps-lg-0 ps-md-4">
+              <h2 class="h1 mb-lg-4 mb-3">We want to hear from you!</h2>
+              <p class="fs-lg">We know many potential speakers, especially those from under-represented groups or those who have never spoken at a conference before, may rule themselves out unnecessarily. We want to hear from everybody in the Swift community, we would urge you to submit a proposal. Our team at SwiftLeeds review all talks anonymously.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+#if(stage.now < stage.openDate):
+  <section class="container mt-5">
+    <div class="position-relative bg-info rounded-3 overflow-hidden px-3 py-3">
+      <div class="position-relative zindex-5 text-center my-xl-3 py-1 py-md-4 py-lg-5">
+        <p class="lead text-light opacity-70 mb-3">Are you ready?</p>
+        <h2 class="h1 text-light pb-3 pb-lg-0 mb-lg-5">Call for Papers Open Soon</h2>
+        <a href="#" class="btn btn-secondary btn-lg disabled">Submit Now</a>
+      </div>
+    </div>
+  </section>
+#elseif(stage.now < stage.closeDate):
+  <section class="container mt-5">
+    <div class="position-relative bg-success rounded-3 overflow-hidden px-3 py-3">
+      <div class="position-relative zindex-5 text-center my-xl-3 py-1 py-md-4 py-lg-5">
+        <p class="lead text-light opacity-70 mb-3">Ready to get started?</p>
+        <h2 class="h1 text-light pb-3 pb-lg-0 mb-lg-5">Call for Papers Open</h2>
+        <a href="#(stage.cfpUrl)" target="_blank" class="btn btn-secondary btn-lg">Submit Now</a>
+      </div>
+    </div>
+  </section>
+#else:
+  <section class="container mt-5">
+    <div class="position-relative bg-primary rounded-3 overflow-hidden px-3 py-3">
+      <div class="position-relative zindex-5 text-center my-xl-3 py-1 py-md-4 py-lg-5">
+        <p class="lead text-light opacity-70 mb-3">We've closed submissions for now!</p>
+        <h2 class="h1 text-light pb-3 pb-lg-0 mb-lg-5">Call for Papers Closed</h2>
+      </div>
+    </div>
+  </section>
+#endif
+
 
 
   <section class="container py-5 mb-lg-2">
