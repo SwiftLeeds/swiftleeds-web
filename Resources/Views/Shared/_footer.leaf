@@ -6,10 +6,10 @@
 
         <div class="d-flex flex-column flex-sm-row">
           #if(phase.showAddToCalendar):
-          <a href="#" class="btn btn-outline-light btn-lg mb-3">
+          <button class="btn btn-outline-light btn-lg mb-3" data-trigger="add-to-calendar">
             <i class="bx bx-calendar-check fs-xl me-2 ms-n1"></i>
             Add to calendar
-          </a>
+          </button>
           #endif
           
           #if(false):

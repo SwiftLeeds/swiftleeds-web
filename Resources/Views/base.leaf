@@ -21,6 +21,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
     
     <script src='https://js.tito.io/v2' async></script>
+    <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
   </head>
 
   <body>
@@ -81,6 +82,23 @@
           }, false)
         })
       })()
+    </script>
+    
+    <script type="application/javascript">
+        const config = {
+            name: "SwiftLeeds #(eventYear)",
+            description: "Join us for this year's SwiftLeeds!",
+            startDate: "#date(event.date, "yyyy-MM-dd")",
+            startTime: "08:30",
+            location: "#(event.location)",
+            endTime: "17:30",
+            options: ["Google", "iCal", "Apple", "Outlook.com", "Yahoo", "MicrosoftTeams", "Microsoft365"],
+            timeZone: "Europe/London"
+        };
+
+        document.querySelectorAll("[data-trigger='add-to-calendar']").forEach(button => {
+            button.addEventListener('click', () => atcb_action(config, button));
+        });
     </script>
 
     #import("scripts")

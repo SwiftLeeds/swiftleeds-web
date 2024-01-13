@@ -22,10 +22,10 @@
             #endif
             
             #if(phase.showAddToCalendar):
-            <a href="#" class="btn btn-lg btn-outline-secondary">
+            <button class="btn btn-lg btn-outline-secondary" data-trigger="add-to-calendar">
               <i class="bx bx-calendar-check fs-xl me-2 ms-n1"></i>
               Add to calendar
-            </a>
+            </button>
             #endif
           </div>
 
