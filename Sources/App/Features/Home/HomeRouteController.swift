@@ -161,11 +161,14 @@ struct HomeRouteController: RouteCollection {
     }
     
     func getContext(req: Request) async throws -> HomeContext {
-        let event = try await Event.getCurrent(on: req.db)
-        let speakers = try await getSpeakers(req: req)
-        let dropInSessions = try await getDropInSessions(req: req)
-        let slots = try await getSlots(req: req)
-        let sponsorQuery = try await getSponsors(req: req)
+        guard let event = try await getEvent(for: req) else {
+            throw Abort(.notFound, reason: "Unable to find event")
+        }
+        
+        let speakers = try await getSpeakers(req: req, event: event)
+        let dropInSessions = try await getDropInSessions(req: req, event: event)
+        let slots = try await getSlots(req: req, event: event)
+        let sponsorQuery = try await getSponsors(req: req, event: event)
         
         let platinumSponsors = sponsorQuery.filter { $0.sponsorLevel == .platinum }
         let silverSponsors = sponsorQuery.filter { $0.sponsorLevel == .silver }
@@ -175,9 +178,9 @@ struct HomeRouteController: RouteCollection {
         
         return HomeContext(
             speakers: phase.showSpeakers ? speakers : [],
-            platinumSponsors: phase.showSponsors ? platinumSponsors : [],
-            silverSponsors: phase.showSponsors ? silverSponsors : [],
-            goldSponsors: phase.showSponsors ? goldSponsors : [],
+            platinumSponsors: platinumSponsors,
+            silverSponsors: silverSponsors,
+            goldSponsors: goldSponsors,
             dropInSessions: phase.showDropIns ? dropInSessions : [],
             schedule: phase.showSchedule ? slots.schedule : [],
             phase: PhaseContext(phase: phase),
@@ -187,7 +190,7 @@ struct HomeRouteController: RouteCollection {
         )
     }
     
-    private func getSpeakers(req: Request) async throws -> [Speaker] {
+    private func getSpeakers(req: Request, event: Event) async throws -> [Speaker] {
         try await Speaker
             .query(on: req.db)
             .with(\.$presentations) {
@@ -197,26 +200,26 @@ struct HomeRouteController: RouteCollection {
             .filter {
                 // filter speakers to only return those that have a presentation in the current event and where that
                 // presentation has been announced
-                $0.presentations.contains(where: { $0.event.isCurrent && $0.isTBA == false })
+                $0.presentations.contains(where: { $0.event.name == event.name && $0.isTBA == false })
             }
             .sorted(by: { $0.name < $1.name })
     }
     
-    private func getSponsors(req: Request) async throws -> [Sponsor] {
+    private func getSponsors(req: Request, event: Event) async throws -> [Sponsor] {
         try await Sponsor.query(on: req.db)
             .with(\.$event)
             .all()
-            .filter { $0.event.isCurrent }
+            .filter { $0.event.name == event.name }
     }
     
-    private func getDropInSessions(req: Request) async throws -> [DropInSession] {
+    private func getDropInSessions(req: Request, event: Event) async throws -> [DropInSession] {
         try await DropInSession.query(on: req.db)
             .with(\.$event)
             .all()
-            .filter { $0.event.isCurrent }
+            .filter { $0.event.name == event.name }
     }
     
-    private func getSlots(req: Request) async throws -> [Slot] {
+    private func getSlots(req: Request, event: Event) async throws -> [Slot] {
         try await Slot.query(on: req.db)
             .with(\.$activity)
             .with(\.$presentation) { presentation in
@@ -227,7 +230,7 @@ struct HomeRouteController: RouteCollection {
             .with(\.$event)
             .sort(\.$startDate)
             .all()
-            .filter { $0.event.isCurrent }
+            .filter { $0.event.name == event.name }
     }
     
     private func getPhase(req: Request) throws -> Phase {
@@ -236,7 +239,6 @@ struct HomeRouteController: RouteCollection {
         let phaseItems = phaseQueryItem?.components(separatedBy: ",") ?? []
         
         return Phase(
-            showSponsors: phaseItems.contains("sponsors"),
             showSpeakers: phaseItems.contains("speakers"),
             showSchedule: phaseItems.contains("schedule"),
             showDropIns: phaseItems.contains("dropin"),
@@ -244,13 +246,25 @@ struct HomeRouteController: RouteCollection {
         )
         #else
         Phase(
-            showSponsors: true,
             showSpeakers: false,
             showSchedule: false,
             showDropIns: false,
             showTickets: false
         )
         #endif
+    }
+    
+    private func getEvent(for req: Request) async throws -> Event? {
+        #if DEBUG
+        // Currently year-selector is only available on debug builds while we finish adding support
+        if let yearQueryItem: String = try? req.query.get(at: "year") {
+            return try await Event.query(on: req.db)
+                .filter("name", .equal, "SwiftLeeds \(yearQueryItem)")
+                .first()
+        }
+        #endif
+        
+        return try await Event.getCurrent(on: req.db)
     }
     
     private func getNumberOfDays(for event: Event) -> Int {
@@ -298,7 +312,6 @@ struct HomeRouteController: RouteCollection {
 }
 
 struct Phase {
-    let showSponsors: Bool
     let showSpeakers: Bool
     let showSchedule: Bool
     let showDropIns: Bool
