@@ -9,6 +9,8 @@
         </div>
         
         <a href="https://swiftleeds.co.uk/pdf/Leeds_Playhouse.pdf" target="_blank" class="btn btn-primary my-3">View Venue Pack</a>
+        <button class="btn btn-secondary my-3" data-bs-toggle="modal" data-bs-target="#modal-travel">Travel Information</button>
+        <button class="btn btn-secondary my-3" data-bs-toggle="modal" data-bs-target="#modal-hotels">Nearby Hotels</button>
       </div>
       <div class="col-xl-9 col-md-8">
         <img src="img/venue.jpg" class="rounded-3" width="952" alt="Leeds Playhouse">
@@ -26,3 +28,145 @@
       </div>
     </div>
   </section>
+
+<div class="modal fade" id="modal-travel" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Getting to SwiftLeeds</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Leeds is one of the biggest cities in the UK and is highly accessible. Leeds is situated in the North Eastern part of the UK.</p>
+        <p>Leeds has an <a href="https://www.leedsbradfordairport.co.uk/">International Airport</a> which is approx 15 minutes from the city centre by car.</p>
+        <p>If you're travelling from outside the UK, you're likely going to fly in to <a href="https://www.manchesterairport.co.uk/">Manchester</a> or Leeds, if you're flying to Leeds your best onward travel is via local taxi which can take you directly to the city, and will cost you approximately £20. If you're travelling into Manchester, you can either take the train which will have direct trains to Leeds City and will take approx 1hr.</p>
+        <p>If you're travelling inside the UK, you can take the train to our <a href="https://www.networkrail.co.uk/communities/passengers/our-stations/leeds-station/">railway station</a> and the venue is approx 15 minute walk from the station, alternatively you could hop in a taxi which will take 5 minutes.</p>
+        <p>The venue is situated near the major <a href="https://wymetro.com/buses/bus-stations/leeds-city-bus-station/">bus station</a>, so a bus is also an option but this is for local travel around Leeds or surrounding areas only. The venue The Playhouse is situated on the eastern side of the city, and is walking distance to all that Leeds has to offer.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-hotels" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Staying in Leeds</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>We have tracked down the best hotels located around the venue, there are of course many options when staying inside Leeds, but if you want to get closer to the venue, you can use one of the listed hotels below. We have also added some notes to each one, they're all with varying star rating and costs.</p>
+        
+        <div class="alert alert-secondary" role="alert">
+            Please note; we are not associated or directly involved with any hotel listed below, and do not get any referral bonus. Please conduct your own research before booking.
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Hotel Name</th>
+              <th scope="col">Rating</th>
+              <th scope="col">Average Price</th>
+              <th scope="col">Website</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><img src="/img/hotels/holiday-inn.jpeg" class="img-thumbnail" width="180" height="180"></td>
+              <td>Holiday Inn Express</td>
+              <td>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bx-star text-muted opacity-75"></i>
+                <i class="bx bx-star text-muted opacity-75"></i>
+              </td>
+              <td>£70</td>
+              <td><a href="https://www.booking.com/hotel/gb/express-by-holiday-inn-leeds-armouries.en-gb.html" target="_blank">Visit Website</a></td>
+            </tr>
+            <tr>
+              <td><img src="/img/hotels/radissonblu.jpeg" class="img-thumbnail" width="180" height="180"></td>
+              <td>Radisson Blu Hotel</td>
+              <td>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bx-star text-muted opacity-75"></i>
+              </td>
+              <td>£100</td>
+              <td><a href="https://www.booking.com/hotel/gb/radissonleeds.en-gb.html" target="_blank">Visit Website</a></td>
+            </tr>
+            <tr>
+              <td><img src="/img/hotels/queenshotel.jpeg" class="img-thumbnail" width="180" height="180"></td>
+              <td>The Queens Hotel</td>
+              <td>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bx-star text-muted opacity-75"></i>
+              </td>
+              <td>£100</td>
+              <td><a href="https://www.booking.com/hotel/gb/the-queens.en-gb.html" target="_blank">Visit Website</a></td>
+            </tr>
+            <tr>
+              <td><img src="/img/hotels/dakota.jpeg" class="img-thumbnail" width="180" height="180"></td>
+              <td>Dakota Leeds</td>
+              <td>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bxs-star text-warning"></i>
+              </td>
+              <td>£140</td>
+              <td><a href="https://www.booking.com/hotel/gb/dakota-leeds.en-gb.html" target="_blank">Visit Website</a></td>
+            </tr>
+            <tr>
+              <td><img src="/img/hotels/vicarlane.jpeg" class="img-thumbnail" width="180" height="180"></td>
+              <td>Travelodge Vicar Lane</td>
+              <td>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bx-star text-muted opacity-75"></i>
+                <i class="bx bx-star text-muted opacity-75"></i>
+                <i class="bx bx-star text-muted opacity-75"></i>
+              </td>
+              <td>£40</td>
+              <td><a href="https://www.travelodge.co.uk/hotels/323/Leeds-Central-Vicar-Lane-hotel" target="_blank">Visit Website</a></td>
+            </tr>
+            <tr>
+              <td><img src="/img/hotels/ibishotel.jpeg" class="img-thumbnail" width="180" height="180"></td>
+              <td>Ibis Crown Point</td>
+              <td>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bx-star text-muted opacity-75"></i>
+                <i class="bx bx-star text-muted opacity-75"></i>
+                <i class="bx bx-star text-muted opacity-75"></i>
+              </td>
+              <td>£40</td>
+              <td><a href="https://www.booking.com/hotel/gb/etap-leeds.en-gb.html" target="_blank">Visit Website</a></td>
+            </tr>
+            <tr>
+              <td><img src="/img/hotels/hampton.jpeg" class="img-thumbnail" width="180" height="180"></td>
+              <td>Hampton by Hilton Leeds</td>
+              <td>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bxs-star text-warning"></i>
+                <i class="bx bx-star text-muted opacity-75"></i>
+                <i class="bx bx-star text-muted opacity-75"></i>
+              </td>
+              <td>£70</td>
+              <td><a href="https://www.hilton.com/en/hotels/lbaukhx-hampton-leeds-city-centre/" target="_blank">Visit Website</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
