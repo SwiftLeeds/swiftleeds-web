@@ -27,7 +27,7 @@ let callForPaperFAQs: [CfpContext.Question] = [
         ]
     ),
     .init(
-        question: "I'm dead, blind, or have other accessibility requirments. Can I apply?",
+        question: "I'm deaf, blind, or have other accessibility requirments. Can I apply?",
         answer: [
             "Absolutely. Let us know by emailing <a href=\"mailto:info@swiftleeds.co.uk\">info@swiftleeds.co.uk</a> and we'll work with you to ensure your needs are met throughout the process and at the venue. Contacting us with your needs will have no impact to the review of your talk."
         ]
