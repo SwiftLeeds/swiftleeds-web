@@ -69,3 +69,50 @@
         
         </div>
       </section>
+
+      <section class="py-5 bg-secondary">
+        <div class="container my-xl-5 my-lg-4 pb-2 py-sm-3 py-md-4">
+          <div class="row my-2">
+            <div class="col-xl-4 col-lg-5">
+              <div class="mb-lg-0 mb-5 mx-lg-0 mx-auto text-lg-start text-center" style="max-width: 26rem;">
+                <h2 class="h1 mb-4 pb-3">
+                  Want to get involved?<br>
+                  Get in touch!
+                </h2>
+                <p>From the mobile app, website, tooling and more, we rely on our volunteers to help build out the systems which make SwiftLeeds possible.</p>
+              </div>
+            </div>
+            <div class="col-lg-7 offset-xl-1">
+              <div class="row row-cols-sm-2 row-cols-1 gy-4">
+
+                <div class="col">
+                    <div class="card card-hover">
+                      <div class="card-body pb-3">
+                        <i class="bx bxl-github d-block fs-2 mb-2 py-1"></i>
+                        <p class="fs-sm mb-2">Check out our open-source projects and consider contributing.</p>
+                        <a href="https://github.com/swiftleeds/" target="_blank" class="btn btn-link stretched-link px-0">
+                          View GitHub
+                          <i class="bx bx-right-arrow-alt fs-xl ms-2"></i>
+                        </a>
+                      </div>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="card card-hover">
+                      <div class="card-body pb-3">
+                        <i class="bx bxl-slack d-block fs-2 mb-2 py-1"></i>
+                        <p class="fs-sm mb-2">Not sure where to get started or want to learn more? Speak to our team on Slack.</p>
+                        <a href="https://join.slack.com/t/swiftleedsworkspace/shared_invite/zt-wkmr6pif-ZDCdDeHM60jcBUy0BxHdCQ" target="_blank" class="btn btn-link stretched-link px-0">
+                          Join Slack
+                          <i class="bx bx-right-arrow-alt fs-xl ms-2"></i>
+                        </a>
+                      </div>
+                    </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
