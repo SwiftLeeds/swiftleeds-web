@@ -45,13 +45,14 @@ struct HomeRouteController: RouteCollection {
     
     func cfp(req: Request) async throws -> View {
         let context = try await getContext(req: req)
+        let sessionize = try await SessionizeService().loadEvent(slug: "swiftleeds-ios-conference-in-leeds-c", req: req)
         
         let stage = CfpContext.Stage(
             now: Date(),
-            openDate: Date(timeIntervalSince1970: 1709251200),
-            closeDate: Date(timeIntervalSince1970: 1711756800), 
+            openDate: sessionize.cfpDates.startUtc,
+            closeDate: sessionize.cfpDates.endUtc,
             reviewCompleted: context.speakers.isEmpty == false,
-            cfpUrl: "#"
+            cfpUrl: sessionize.cfpLink
         )
         
         let cfpContext = CfpContext(
