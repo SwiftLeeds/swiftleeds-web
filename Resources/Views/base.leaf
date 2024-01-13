@@ -84,6 +84,7 @@
       })()
     </script>
     
+    #if(event):
     <script type="application/javascript">
         const config = {
             name: "SwiftLeeds #(eventYear)",
@@ -100,6 +101,7 @@
             button.addEventListener('click', () => atcb_action(config, button));
         });
     </script>
+    #endif
 
     #import("scripts")
   </body>

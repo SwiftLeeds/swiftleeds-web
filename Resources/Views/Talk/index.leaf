@@ -1,0 +1,14 @@
+#extend("base"):
+    #export("title", title + " by " + author)
+    
+    #export("content"):
+        #extend("Shared/_header")
+        
+        #extend("Talk/_hero")
+        #extend("Talk/_info")
+        #extend("Talk/_media")
+        #if(false):
+        #extend("Talk/_transcript")
+        #endif
+    #endexport
+#endextend

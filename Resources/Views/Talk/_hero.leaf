@@ -1,0 +1,34 @@
+<section class="bg-dark bg-size-cover bg-repeat-0 bg-position-center position-relative overflow-hidden py-5 mb-4" data-bs-theme="dark">
+    <div class="container position-relative zindex-2 pt-5 pb-md-2 pb-lg-4 pb-xl-5">
+      <div class="row pt-3 pb-2 py-md-4">
+
+        <!-- Text -->
+        <div class="col-xl-5 col-md-6 pt-lg-5 text-center text-md-start mb-4 mb-md-0">
+          <h2 class="h3 text-primary">#date(date, "d MMM yyyy")</h2>
+          <h1 class="display-4 pb-2 pb-sm-3">#(title)</h1>
+          
+          <div class="d-flex justify-content-center justify-content-lg-start text-start mb-2">
+            <i class="bx bx-face fs-4 text-primary me-2"></i>
+            <div class="fs-xl text-white">#(author)</div>
+          </div>
+          
+          <div class="d-flex justify-content-center justify-content-lg-start text-start mb-5">
+            <i class="bx bx-map fs-4 text-primary me-2"></i>
+            <div class="fs-xl text-white">#(location)</div>
+          </div>
+
+          <a href="#media" class="d-table text-light opacity-80 text-decoration-none w-auto py-4 pt-4 pt-lg-5 mt-xxl-5" data-scroll data-scroll-offset="0">
+            <span class="d-flex align-items-center">
+              Scroll for more
+              <i class="bx bx-down-arrow-circle fs-3 ms-2"></i>
+            </span>
+          </a>
+        </div>
+
+         <!-- Right hand side -->
+        <div class="col-xl-7 col-md-6 d-md-flex justify-content-end">
+          <img src="#(imageLink)" alt="#(author)" />
+        </div>
+      </div>
+    </div>
+</section>
