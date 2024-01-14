@@ -10,13 +10,13 @@
           <!-- Gallery -->
           <div class="row g-md-4 g-3">
             <div class="col-md-4">
-              <img src="img/team/hero-1.jpg" alt="Registration" class="rounded-3">
+              <img src="/img/team/hero-1.jpg" alt="Registration" class="rounded-3">
             </div>
             <div class="col-md-4 col-6 d-md-block d-none">
-              <img src="img/team/hero-2.jpg" alt="Visual Production" class="rounded-3">
+              <img src="/img/team/hero-2.jpg" alt="Visual Production" class="rounded-3">
             </div>
             <div class="col-md-4 col-6 d-md-block d-none">
-              <img src="img/team/hero-3.jpg" alt="Merchandise" class="rounded-3">
+              <img src="/img/team/hero-3.jpg" alt="Merchandise" class="rounded-3">
             </div>
           </div>
         </div>

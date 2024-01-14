@@ -13,15 +13,15 @@
         <button class="btn btn-secondary my-3" data-bs-toggle="modal" data-bs-target="#modal-hotels">Nearby Hotels</button>
       </div>
       <div class="col-xl-9 col-md-8">
-        <img src="img/venue.jpg" class="rounded-3" width="952" alt="Leeds Playhouse">
+        <img src="/img/venue.jpg" class="rounded-3" width="952" alt="Leeds Playhouse">
       </div>
     </div>
     <div class="row mb-lg-3 pb-1 pb-md-4 pb-lg-5 mt-4 mt-sm-n5">
       <div class="col-lg-4 col-md-5 offset-md-6 offset-lg-7 mt-md-n5">
         <div class="gallery mt-md-n4 mx-auto" style="max-width: 416px;">
           <a href="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9426.04383686377!2d-1.53507!3d53.7981911!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48795c16cbb4b68f%3A0xd6ea21dab9c96c81!2sLeeds%20Playhouse!5e0!3m2!1sen!2suk!4v1697976299793!5m2!1sen!2suk" data-iframe="true" class="gallery-item rounded-2" data-sub-html='<h6 class="fs-sm text-light">Playhouse Square, Leeds, United Kingdom</h6>'>
-            <img src="img/map-light.png" class="d-dark-mode-none" alt="Map of Leeds Playhouse">
-            <img src="img/map-dark.png" class="d-none d-dark-mode-block" alt="Map of Leeds Playhouse">
+            <img src="/img/map-light.png" class="d-dark-mode-none" alt="Map of Leeds Playhouse">
+            <img src="/img/map-dark.png" class="d-none d-dark-mode-block" alt="Map of Leeds Playhouse">
             <div class="gallery-item-caption fs-sm fw-medium">Playhouse Square, Leeds, United Kingdom</div>
           </a>
         </div>
