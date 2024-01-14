@@ -1,6 +1,6 @@
   <!-- Hero -->
   <!-- style="background-image: url(img/drop_bg.png);" -->
-  <section class="dark-mode bg-dark bg-size-cover bg-repeat-0 bg-position-center position-relative overflow-hidden py-5 mb-4">
+  <section class="bg-dark bg-size-cover bg-repeat-0 bg-position-center position-relative overflow-hidden py-5 mb-4" data-bs-theme="dark">
     <div class="container position-relative zindex-2 pt-5 pb-md-2 pb-lg-4 pb-xl-5">
       <div class="row pt-3 pb-2 py-md-4">
 
@@ -22,10 +22,10 @@
             #endif
             
             #if(phase.showAddToCalendar):
-            <a href="#" class="btn btn-lg btn-outline-secondary">
+            <button class="btn btn-lg btn-outline-secondary" data-trigger="add-to-calendar">
               <i class="bx bx-calendar-check fs-xl me-2 ms-n1"></i>
               Add to calendar
-            </a>
+            </button>
             #endif
           </div>
 

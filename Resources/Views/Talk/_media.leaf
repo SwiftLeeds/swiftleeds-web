@@ -1,0 +1,21 @@
+<section id="media" class="container py-5 my-lg-2">
+    <div class="row">
+        <div class="col-6" id="slides">
+            <iframe
+                src="https://speakerdeck.com/player/c59200e0b734457f9685964c3f3e7c58"
+                frameborder="0"
+                allowfullscreen="true"
+                style="border-radius: 6px; width: 100%; height: auto; aspect-ratio: 560 / 315;"
+            ></iframe>
+        </div>
+        <div class="col-6" id="video">
+            <iframe
+                src="https://www.youtube.com/embed/#(videoReference)"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                frameborder="0"
+                allowfullscreen="true"
+                style="border-radius: 6px; width: 100%; height: auto; aspect-ratio: 560 / 315;"
+            ></iframe>
+        </div>
+    </div>
+</section>

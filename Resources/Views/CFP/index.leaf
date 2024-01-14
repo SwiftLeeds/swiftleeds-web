@@ -1,0 +1,13 @@
+#extend("base"):
+    #export("title", "Call for Papers")
+    
+    #export("content"):
+        #extend("Shared/_header")
+        
+        #extend("CFP/_cfp")
+                
+        #if(phase.ticketsEnabled):
+            #extend("Home/_ticket_cta")
+        #endif
+    #endexport
+#endextend

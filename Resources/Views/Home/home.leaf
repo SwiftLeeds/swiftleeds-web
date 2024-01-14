@@ -6,15 +6,11 @@
         #extend("Home/_hero")
         #extend("Home/_info")
         
-        #if(count(dropInSessions) > 0):
-            #extend("Home/_drop-in-sessions")
-        #endif
+        #extend("Home/_drop-in-sessions")
         
         #if(count(speakers) > 0):
             #extend("Home/_speakers")
-        #endif
-        
-        #if(phase.cfpEnabled):
+        #else:
             #extend("Home/_cfp")
         #endif
         

@@ -1,0 +1,8 @@
+#extend("base"):
+    #export("title", "Team")
+    
+    #export("content"):
+        #extend("Shared/_header")
+        #extend("Team/_team")
+    #endexport
+#endextend

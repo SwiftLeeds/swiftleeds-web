@@ -4,6 +4,10 @@ func routes(_ app: Application) throws {
     // MARK: - Web Routes
     try app.routes.register(collection: HomeRouteController())
     
+    #if DEBUG
+    try app.routes.register(collection: TalkRouteController())
+    #endif
+    
     app.routes.get("login") { request in
         request.view.render("Authentication/login")
     }

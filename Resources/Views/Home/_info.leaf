@@ -42,7 +42,7 @@
                   <span class="h4 text-light mb-0">#(phase.currentTicketPrice)</span>
                 </div>
                 #else:
-                <button class="btn btn-light btn-lg mb-3 mb-sm-0 me-sm-3" disabled>Coming Soon</button>
+                <button class="btn btn-light btn-lg mb-3 mb-sm-0 me-sm-3 text-primary" disabled>Coming Soon</button>
                 #endif
               </div>
             </div>

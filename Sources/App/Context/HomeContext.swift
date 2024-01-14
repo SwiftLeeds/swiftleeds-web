@@ -21,3 +21,40 @@ struct HomeContext: Content {
     var eventDate: String? = nil
     var eventYear: String? = nil
 }
+
+struct CfpContext: Content {
+    struct Question: Codable {
+        let question: String
+        let answer: [String]
+    }
+    
+    struct Stage: Codable {
+        let now: Date
+        let openDate: Date
+        let closeDate: Date
+        let reviewCompleted: Bool
+        let cfpUrl: String
+    }
+    
+    let stage: Stage
+    var faqs: [Question] = []
+    var phase: PhaseContext? = nil
+    var event: Event? = nil
+    var eventDate: String? = nil
+    var eventYear: String? = nil
+}
+
+struct TeamContext: Content {
+    struct TeamMember: Codable {
+        let name: String
+        let role: String?
+        let twitter: String?
+        let linkedin: String?
+        let imageURL: String?
+    }
+    
+    var teamMembers: [TeamMember] = []
+    var event: Event? = nil
+    var eventDate: String? = nil
+    var eventYear: String? = nil
+}
