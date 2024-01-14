@@ -14,7 +14,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-9">
           
-              <p>Drop-in sessions are unique to SwiftLeeds, introduced in 2023. Every attendee is entitled to a single session with one of our fantastic hosts.</p>
+              <p>Drop-In Sessions are unique to SwiftLeeds, introduced in 2023. Every attendee is entitled to a single session with one of our fantastic hosts.</p>
 
             #for(session in sessions):
             <div class="card overflow-hidden my-4">

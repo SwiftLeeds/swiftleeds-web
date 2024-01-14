@@ -9,27 +9,29 @@ let callForPaperFAQs: [CfpContext.Question] = [
     .init(
         question: "I've not spoken before, can I apply?",
         answer: [
-            "Absolutely. We welcome all speakers, whether it's their first time or their hundreth time. We provide optional speaker training for all successful applicants, and will work with you to answer any questions or concerns. We're here to help."
+            "Absolutely. We welcome all speakers, whether it's their first time or their hundreth time. We provide optional speaker training for all successful applicants, and will work with you to answer any questions or concerns. We're here to help.",
+            "SwiftLeeds is known for allowing first-time speakers to be on stage and present a talk; many have then gone on to speak at many other conferences worldwide."
         ]
     ),
     .init(
         question: "Do I have to pay to talk at SwiftLeeds?",
         answer: [
-            "You do not need to pay to talk at SwiftLeeds, in fact successful speakers will receive a ticket for both days at SwiftLeeds free of charge. We also pay for two days of accommodation, as well as breakfast and lunch at the venue on both days.",
-            "We will also support travel costs (flights or trains) up to £1,200 GBP or around $1,500 USD, where employers are unable to support."
+            "You do not need to pay to talk at SwiftLeeds; successful speakers will receive a ticket for both days at SwiftLeeds free of charge. We also pay for two days of accommodation and breakfast and lunch at the venue on both days.",
+            "As a community conference and a not-for-profit organisation, we do everything we can to keep ticket prices low and deliver the best conference experience.",
+            "Therefore, we always ask speakers if they can contribute to their travel or ask their employers if they want to sponsor the trip. Still, otherwise, we can and will do everything we can to cover travel up to £1,200 for international travellers, up to £500 for EU-based travellers and £200 for UK-based travellers."
         ]
     ),
     .init(
         question: "Are talks recorded or streamed?",
         answer: [
-            "Yes! All talks at SwiftLeeds are recorded, and streamed live to remote attendees. Videos are uploaded to <a href=\"https://www.youtube.com/@swiftleeds\" target=\"_blank\">our YouTube channel</a> after the event.",
-            "We also photograph every talk too, which are made available on <a href=\"https://www.flickr.com/photos/196979204@N02/\" target=\"_blank\">our Flickr</a>."
+            "Yes! All talks at SwiftLeeds are recorded, and streamed live to remote attendees. Videos are uploaded to our <a href=\"https://www.youtube.com/@swiftleeds\" target=\"_blank\">YouTube channel</a> after the event.",
+            "We also photograph every talk too, which are made available on our <a href=\"https://www.flickr.com/photos/196979204@N02/\" target=\"_blank\">Flickr</a>."
         ]
     ),
     .init(
-        question: "I'm deaf, blind, or have other accessibility requirments. Can I apply?",
+        question: "I'm deaf, blind, or have other accessibility requirements. Can I apply?",
         answer: [
-            "Absolutely. Let us know by emailing <a href=\"mailto:info@swiftleeds.co.uk\">info@swiftleeds.co.uk</a> and we'll work with you to ensure your needs are met throughout the process and at the venue. Contacting us with your needs will have no impact to the review of your talk."
+            "Absolutely. Let us know by emailing <a href=\"mailto:info@swiftleeds.co.uk\">info@swiftleeds.co.uk</a>, and we'll work with you to ensure your needs are met throughout the process and at the venue. Contacting us with your needs will not impact the review of your talk."
         ]
     ),
     .init(
@@ -47,6 +49,22 @@ let callForPaperFAQs: [CfpContext.Question] = [
             "Absolutely! We review all talks anonymously and whether you were unsuccessful previously does not have any impact on your proposal this time.",
             "SwiftLeeds receives a lot of talk submissions and we're constantly balancing the types of talks to ensure the best experience for everybody.",
             "You might find it beneficial to ask a friend to review your proposal. We only see the title and description when reviewing, so it's important to give us all the facts and demonstrate why your talk would be perfect this year."
+        ]
+    ),
+    .init(
+        question: "I need a VISA to the UK, can you help me?",
+        answer: [
+            "Absolutely! We have had speakers from across the globe. In 2023, we had speakers from Senegal, the US and more. Therefore, we are used to dealing with VISA applications to visit the UK.",
+            "This is no problem. You'll be given an invitation letter to upload for the UK VISA application, and we have had substantial success rates with this.",
+            "We have also called the UK embassy to help proceed with VISA applications. However, sometimes we do get the odd rejection, but we'll support you through the process."
+        ]
+    ),
+    .init(
+        question: "I have submitted, when will I hear back?",
+        answer: [
+            "As you can imagine, reviewing over 150 proposals is incredibly time-consuming, and we make sure that everyone is given a fair evaluation so that this process can take time.",
+            "However, after CfP closes (at the end of April), it's our mission to start the evaluation, and we'll usually begin letting speakers know in May & June.",
+            "This is based on how long it takes us, so if you've not heard anything, let us know, and we'll update you on where we are in the process."
         ]
     )
 ]

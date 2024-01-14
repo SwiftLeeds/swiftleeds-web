@@ -7,7 +7,8 @@
                 <h1 class="display-2 mb-0 text-white my-4">Speak at <span class="text-primary">SwiftLeeds #(eventYear)</span></h1>
               </div>
               <div class="col-lg-6 col-xl-5 offset-xl-1 pt-3 pt-sm-4 pt-lg-3">
-                <p class="fs-xl pb-4 mb-1 mb-md-2 mb-xl-3">Each year SwiftLeeds operates a Call for Papers (CfP) which provides you with the opportunity to propose your own talk to be heard at that year's event.</p>
+                <p class="fs-xl pb-4 mb-1 mb-md-2 mb-xl-3">Each year, SwiftLeeds operates a Call for Papers (CfP), which allows you to submit your talk to present on the big stage.</p>
+                <p class="fs-xl pb-4 mb-1 mb-md-2 mb-xl-3">No matter your experience, colour, race, or gender, we invite everyone to apply.</p>
               </div>
             </div>
         </div>
@@ -64,7 +65,9 @@
           <div class="col-lg-5 col-md-6 offset-lg-1 d-flex">
             <div class="align-self-center ps-lg-0 ps-md-4">
               <h2 class="h1 mb-lg-4 mb-3">We want to hear from you!</h2>
-              <p class="fs-lg">We know many potential speakers, especially those from under-represented groups or those who have never spoken at a conference before, may rule themselves out unnecessarily. We want to hear from everybody in the Swift community, we would urge you to submit a proposal. Our team at SwiftLeeds review all talks anonymously.</p>
+              <p class="fs-lg">Many potential speakers, especially those from under-represented groups or those who have never spoken at a conference, may rule themselves out unnecessarily.</p>
+              <p class="fs-lg">We want to hear from everybody in the Swift community and urge you to submit a proposal. Our team at SwiftLeeds review all talks anonymously.</p>
+              <p class="fs-lg">All our speakers join us for the entire year. This means we offer full speaker training and any support you require throughout the process, from reviewing slides to helping with speaker nerves.</p>
             </div>
           </div>
         </div>
@@ -75,7 +78,7 @@
     <div class="position-relative bg-info rounded-3 overflow-hidden px-3 py-3">
       <div class="position-relative zindex-5 text-center my-xl-3 py-1 py-md-4 py-lg-5">
         <p class="lead text-light opacity-70 mb-3">Are you ready?</p>
-        <h2 class="h1 text-light pb-3 pb-lg-0 mb-lg-5">Call for Papers Open Soon</h2>
+        <h2 class="h1 text-light pb-3 pb-lg-0 mb-lg-5">Call for Papers Opens: #date(stage.openDate, "EEEE d MMMM")</h2>
         <a href="#" class="btn btn-secondary btn-lg disabled">Submit Now</a>
       </div>
     </div>
@@ -85,7 +88,7 @@
     <div class="position-relative bg-success rounded-3 overflow-hidden px-3 py-3">
       <div class="position-relative zindex-5 text-center my-xl-3 py-1 py-md-4 py-lg-5">
         <p class="lead text-light opacity-70 mb-3">Ready to get started?</p>
-        <h2 class="h1 text-light pb-3 pb-lg-0 mb-lg-5">Call for Papers Open</h2>
+        <h2 class="h1 text-light pb-3 pb-lg-0 mb-lg-5">Call for Papers Closes: #date(stage.closeDate, "EEEE d MMMM")</h2>
         <a href="#(stage.cfpUrl)" target="_blank" class="btn btn-secondary btn-lg">Submit Now</a>
       </div>
     </div>
@@ -115,7 +118,7 @@
               <div class="card-body pb-3">
                 <i class="bx bxs-envelope d-block fs-2 text-primary mb-2 py-1"></i>
                 <p class="fs-sm mb-2">Still have questions?</p>
-                <a href="#" class="btn btn-link stretched-link px-0">
+                <a href="mailto:info@swiftleeds.co.uk" class="btn btn-link stretched-link px-0">
                   Email us
                   <i class="bx bx-right-arrow-alt fs-xl ms-2"></i>
                 </a>

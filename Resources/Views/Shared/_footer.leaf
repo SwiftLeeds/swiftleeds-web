@@ -5,13 +5,6 @@
         <p class="mb-4">If you want to establish cooperation with us, become a partner or have another important issue, please contact us using the email provided.</p>
 
         <div class="d-flex flex-column flex-sm-row">
-          #if(phase.showAddToCalendar):
-          <button class="btn btn-outline-light btn-lg mb-3" data-trigger="add-to-calendar">
-            <i class="bx bx-calendar-check fs-xl me-2 ms-n1"></i>
-            Add to calendar
-          </button>
-          #endif
-          
           #if(false):
             <div class="form-check form-switch mode-switch" data-bs-toggle="mode">
               <input type="checkbox" class="form-check-input" id="theme-mode">
