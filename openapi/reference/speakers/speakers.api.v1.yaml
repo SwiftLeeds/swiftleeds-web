@@ -1,0 +1,17 @@
+list:
+  get:
+    summary: List all Speakers
+    operationId: listSpeakers
+    responses:
+      '200':
+        description: An array of Speakers
+        content:
+          application/json:
+            schema:
+              $ref: ./models/speaker.basic.v1.yaml
+      default:
+        description: Unexpected error
+        content:
+          application/json:
+            schema:
+              $ref: ../common/models/error.v1.yaml

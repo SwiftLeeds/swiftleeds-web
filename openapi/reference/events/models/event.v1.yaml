@@ -1,0 +1,24 @@
+title: Event
+description: A single event.
+type: object
+x-tags:
+  - Events
+xml:
+  name: Event
+properties:
+  id:
+    type: string
+    format: uuid
+  name:
+    type: string
+    example: "SwiftLeeds"
+  event_date:
+    type: string
+    format: date
+    example: "2022-10-20"
+  location:
+    type: string
+    example: "Leeds"
+x-stoplight:
+  id: yta2alxm8au2u
+x-internal: false

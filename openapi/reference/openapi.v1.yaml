@@ -1,0 +1,23 @@
+openapi: 3.1.0
+x-stoplight:
+  id: d8b5p6qh2ajj1
+info:
+  title: SwiftLeeds API
+  version: '1.0'
+  description: ''
+servers:
+  - url: 'https://swiftleeds.com/api'
+    description: Production server (uses live data)
+  - url: 'http://127.0.0.1:8080/v1'
+    description: Local server (uses test data)
+paths:
+  /events:
+    $ref: 'events/events.api.v1.yaml#/list'
+  /events/{eventId}:
+    $ref: 'events/events.api.v1.yaml#/detail'
+  /presentations:
+    $ref: 'presentations/presentations.api.v1.yaml#/list'
+  /speakers:
+    $ref: 'speakers/speakers.api.v1.yaml#/list'
+  /sponsors:
+    $ref: 'sponsors/sponsors.api.v1.yaml#/list'
