@@ -9,6 +9,9 @@ public func configure(_ app: Application) throws {
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
     app.middleware.use(app.sessions.middleware)
     app.middleware.use(User.sessionAuthenticator())
+    
+    // Compression
+    app.http.server.configuration.responseCompression = .enabled
 
     // Leaf
     app.leaf.tags["copyright"] = CopyrightTag()

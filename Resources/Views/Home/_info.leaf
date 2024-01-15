@@ -28,7 +28,7 @@
                 </div>
                 #if(phase.ticketsEnabled):
                 <div class="d-table bg-white rounded-3 p-4 flex-shrink-0 mx-auto mx-sm-0">
-                  <img src="img/ticket-qr.png" width="102" alt="QR Code">
+                  <img src="/img/ticket-qr.png" width="102" alt="QR Code">
                 </div>
                 #endif
               </div>
