@@ -3,7 +3,13 @@
     
     #export("content"):
         #extend("Shared/_header")
-        #extend("Home/_hero")
+        
+        #if(eventYear == 2024):
+            #extend("Home/year/hero-2024")
+        #else:
+            #extend("Home/_hero")
+        #endif
+        
         #extend("Home/_info")
         
         #extend("Home/_drop-in-sessions")

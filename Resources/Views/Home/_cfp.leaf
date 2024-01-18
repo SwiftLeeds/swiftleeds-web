@@ -1,7 +1,7 @@
 <section class="pb-5">
   <div class="container pt-2">
     <div class="d-md-flex align-items-center justify-content-between text-center text-md-start">
-        <h2 class="h1">
+        <h2 class="h1 themed-header">
           We are looking for <span class="text-primary">speakers</span>
         </h2>
         

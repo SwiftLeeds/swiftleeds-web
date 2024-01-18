@@ -13,6 +13,7 @@
 
     <script src="/js/theme-switcher.js"></script>
     <link rel="stylesheet" media="screen" href="/css/theme.css">
+    <link rel="stylesheet" media="screen" href="/css/year/#(eventYear).css">
     
     <title>#import("title") - The Unique iOS Swift Conference in the UK</title>
 

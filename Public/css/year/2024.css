@@ -1,0 +1,39 @@
+.themed-header::before {
+    content: url('/img/year/2024/header-left.png');
+    margin-left: -40px;
+    position: absolute;
+}
+
+.themed-header::after {
+    content: url('/img/year/2024/header-right.png');
+    margin-left: 16px;
+    position: absolute;
+}
+
+.themed-header {
+    margin-left: 40px;
+}
+
+/* Bottom Bands (above footer) */
+main::after {
+    content: " ";
+    position: absolute;
+    width: 100%;
+    margin-top: 40px;
+    box-shadow:
+        0px 0px 0px 10px rgba(237, 34, 7, 1),
+        0px -16px 0px 16px rgba(255, 117, 39, 1),
+        0px -36px 0px 16px rgba(255, 202, 66, 1);
+}
+
+/* Constant Dark Background */
+.navbar {
+    background-color: var(--sl-navbar-stuck-bg);
+}
+
+#hero {
+    background-color: #2B2D36;
+    border: 20px solid #151617;
+    border-radius: 40px;
+    max-width: 650px;
+}
