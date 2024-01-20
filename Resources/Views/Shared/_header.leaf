@@ -27,7 +27,11 @@
             
             #if(phase.showSchedule):
             <li class="nav-item">
+              #if(event.isCurrent):
               <a href="/schedule" class="nav-link" data-scroll data-scroll-offset="70">Schedule</a>
+              #else:
+              <a href="/year/#(eventYear)/schedule" class="nav-link" data-scroll data-scroll-offset="70">Schedule</a>
+              #endif
             </li>
             #endif
             

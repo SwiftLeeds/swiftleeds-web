@@ -43,8 +43,10 @@
                   <span class="fs-lg text-light me-2">from only</span>
                   <span class="h4 text-light mb-0">#(phase.currentTicketPrice)</span>
                 </div>
-                #else:
+                #elseif(event.isCurrent):
                 <button class="btn btn-light btn-lg mb-3 mb-sm-0 me-sm-3 text-primary" disabled>Coming Soon</button>
+                #else:
+                <button class="btn btn-light btn-lg mb-3 mb-sm-0 me-sm-3 text-primary" disabled>Sales Closed</button>
                 #endif
               </div>
             </div>

@@ -30,8 +30,8 @@
           <!-- Ticket card -->
           <div class="ignore-dark-mode position-relative">
             <div class="position-relative overflow-hidden rounded-3 zindex-5 py-5 px-4 p-sm-5">
-              <span class="position-absolute top-0 start-0 w-100 h-100 bg-repeat-0 bg-position-center-start zindex-2" style="background-image: url(img/landing/conference/price-card-left-bg.png);"></span>
-              <span class="position-absolute top-0 end-0 w-100 h-100 bg-repeat-0 bg-position-center-end zindex-2" style="background-image: url(img/landing/conference/price-card-right-bg.png);"></span>
+              <span class="position-absolute top-0 start-0 w-100 h-100 bg-repeat-0 bg-position-center-start zindex-2" style="background-image: url(/img/landing/conference/price-card-left-bg.png);"></span>
+              <span class="position-absolute top-0 end-0 w-100 h-100 bg-repeat-0 bg-position-center-end zindex-2" style="background-image: url(/img/landing/conference/price-card-right-bg.png);"></span>
               <div class="px-md-4 position-relative zindex-5">
                 <div class="d-sm-flex align-items-start justify-content-between">
                   <div class="text-center text-sm-start me-sm-4">

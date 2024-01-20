@@ -61,7 +61,11 @@
     </div>
     <div class="col-xl-5 col-md-6">
       <div class="ps-lg-5 ms-xl-2">
+        #if(event.isCurrent):
         <a href="/schedule" class="btn btn-primary w-100">View Schedule</a>
+        #else:
+        <a href="/year/#(eventYear)/schedule" class="btn btn-primary w-100">View Schedule</a>
+        #endif
       </div>
     </div>
   </div>

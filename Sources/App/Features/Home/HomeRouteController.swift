@@ -167,14 +167,11 @@ struct HomeRouteController: RouteCollection {
     }
     
     private func getEvent(for req: Request) async throws -> Event? {
-        #if DEBUG
-        // Currently year-selector is only available on debug builds while we finish adding support
         if let yearParameterItem = req.parameters.get("year") {
             return try await Event.query(on: req.db)
                 .filter("name", .equal, "SwiftLeeds \(yearParameterItem)")
                 .first()
         }
-        #endif
         
         return try await Event.getCurrent(on: req.db)
     }
