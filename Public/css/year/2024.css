@@ -11,7 +11,12 @@
 }
 
 .themed-header {
+    margin-left: 0px;
+}
+
+.themed-header#sponsors {
     margin-left: 40px;
+    margin-bottom: 2rem;
 }
 
 /* Torch (above cta) */
@@ -45,4 +50,15 @@
     border: 20px solid #151617;
     border-radius: 40px;
     max-width: 650px;
+}
+
+@media (min-width: 992px) {
+    .text-lg-start.text-center .themed-header {
+        margin-left: 40px;
+    }
+}
+@media (min-width: 768px) {
+    .text-md-start.text-center .themed-header {
+        margin-left: 40px;
+    }
 }
