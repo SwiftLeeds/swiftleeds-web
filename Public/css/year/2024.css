@@ -62,3 +62,31 @@
         margin-left: 40px;
     }
 }
+
+.countdown {
+    background: #151617;
+    border-radius: 20px 20px 0 0;
+}
+
+#hero-container #legs {
+    gap: 20rem;
+    height: 80px;
+}
+
+@media (min-width: 500px) {
+    #hero-container #legs {
+        height: 100px;
+    }
+}
+
+@media (min-width: 768px) {
+    #hero-container #legs {
+        height: 150px;
+    }
+}
+
+#hero-container #legs div {
+    background: #151617;
+    width: 20px;
+    height: 100%;
+}

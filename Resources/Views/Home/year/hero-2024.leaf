@@ -1,15 +1,69 @@
 <section
+    id="hero-container"
     class="bg-dark bg-size-cover bg-repeat-0 bg-position-top position-relative overflow-hidden
-            py-5 mb-4 px-4
-            d-flex align-items-center justify-content-center"
+            pt-5 mb-4 px-4
+            d-flex align-items-center justify-content-center flex-column"
     data-bs-theme="dark"
     style="background-image: url(/img/year/2024/hero.jpg);"
 >
 
+    <div class="d-flex countdown gap-3 text-center text-white px-4 pt-3" id="countdown-container">
+        <div>
+            <span class="display-5 d-block" id="countdown-day">300</span>
+            days
+        </div>
+        <span class="display-5 text-primary">:</span>
+        <div>
+            <span class="display-5 d-block" id="countdown-hour">24</span>
+            hours
+        </div>
+        <span class="display-5 text-primary">:</span>
+        <div>
+            <span class="display-5 d-block" id="countdown-min">24</span>
+            min
+        </div>
+        <span class="display-5 text-primary">:</span>
+        <div>
+            <span class="display-5 d-block" id="countdown-sec">24</span>
+            sec
+        </div>
+    </div>
     <div class="py-5 py-sm-3 py-md-4 py-lg-5" id="hero">
       <h1 class="px-3 display-4 text-center">
         A <span class="text-primary">Unique</span> 2 Day Swift Conference in the Heart of Leeds
       </h1>
     </div>
     
+    <div class="d-flex" id="legs">
+        <div></div>
+        <div></div>
+    </div>
 </section>
+
+<script>
+// The date is hard coded to 8:30 since event.date does not include start time
+var countDownDate = new Date("#date(event.date, "MMM d, yyyy") 8:30:00").getTime();
+
+function updateCountdown() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown-day").innerHTML = days;
+    document.getElementById("countdown-hour").innerHTML = hours;
+    document.getElementById("countdown-min").innerHTML = minutes;
+    document.getElementById("countdown-sec").innerHTML = seconds;
+    
+    if (distance < 0) {
+        clearInterval(x); // Don't continue triggering if in the past
+        document.getElementById("countdown-container").innerHTML = "<div class=\"lead\">Conference Started</div>";
+    }
+}
+
+var x = setInterval(updateCountdown, 1000); // Every Second
+updateCountdown(); // Initial Load
+</script>
