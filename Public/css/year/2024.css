@@ -14,8 +14,17 @@
     margin-left: 40px;
 }
 
-/* Bottom Bands (above footer) */
-main::after {
+/* Torch (above cta) */
+#hook-precta::before {
+    content: url('/img/year/2024/torch.png');
+/*    background: #f3f6ff;*/
+    display: block;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+/* Bottom Bands (above cta) */
+#hook-precta::after {
     content: " ";
     position: absolute;
     width: 100%;
@@ -26,7 +35,7 @@ main::after {
         0px -36px 0px 16px rgba(255, 202, 66, 1);
 }
 
-/* Constant Dark Background */
+/* Ensure navbar always has a background */
 .navbar {
     background-color: var(--sl-navbar-stuck-bg);
 }

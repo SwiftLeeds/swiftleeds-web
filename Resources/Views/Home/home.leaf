@@ -23,7 +23,9 @@
         #extend("Home/_previous-conferences")
         #extend("Home/_location")
         #extend("Home/_team")
-                
+        
+        <div id="hook-precta"></div>
+        
         #if(phase.ticketsEnabled):
             #extend("Home/_ticket_cta")
         #endif

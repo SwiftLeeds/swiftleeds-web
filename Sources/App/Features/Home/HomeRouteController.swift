@@ -153,7 +153,7 @@ struct HomeRouteController: RouteCollection {
         return Phase(
             showSpeakers: isPreviousEvent || phaseItems.contains("speakers"),
             showSchedule: isPreviousEvent || phaseItems.contains("schedule"),
-            showTickets: phaseItems.contains("tickets")
+            showTickets: true
         )
         #else
         // If the event is in the past then we can safely show schedule/speakers
@@ -161,7 +161,7 @@ struct HomeRouteController: RouteCollection {
         return Phase(
             showSpeakers: isPreviousEvent,
             showSchedule: isPreviousEvent,
-            showTickets: false // TODO: if event is current, and in the future, then check tito
+            showTickets: true // TODO: if event is current, and in the future, then check tito
         )
         #endif
     }
