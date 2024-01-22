@@ -4,7 +4,7 @@
             pt-5 mb-4 px-4
             d-flex align-items-center justify-content-center flex-column"
     data-bs-theme="dark"
-    style="background-image: url(/img/year/2024/hero.jpg);"
+    style="background-image: url(/img/year/2024/hero.svg);"
 >
 
     <div class="d-flex countdown gap-3 text-center text-white px-4 pt-3" id="countdown-container">
