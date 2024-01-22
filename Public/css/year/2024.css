@@ -15,7 +15,7 @@
 }
 
 .themed-header#sponsors {
-    margin-left: 40px;
+    padding-left: 60px;
     margin-bottom: 2rem;
 }
 
@@ -69,7 +69,7 @@
 }
 
 #hero-container #legs {
-    gap: 20rem;
+    gap: 10rem;
     height: 80px;
 }
 
@@ -82,6 +82,7 @@
 @media (min-width: 768px) {
     #hero-container #legs {
         height: 150px;
+        gap: 20rem;
     }
 }
 
@@ -89,4 +90,15 @@
     background: #151617;
     width: 20px;
     height: 100%;
+}
+
+#countdown-container span {
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+@media (min-width: 768px) {
+    #countdown-container span {
+        font-size: 3rem;
+    }
 }
