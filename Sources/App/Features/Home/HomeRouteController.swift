@@ -48,7 +48,7 @@ struct HomeRouteController: RouteCollection {
     
     func cfp(req: Request) async throws -> View {
         let context = try await getContext(req: req)
-        let sessionize = try await SessionizeService().loadEvent(slug: "swiftleeds-ios-conference-in-leeds-c", req: req)
+        let sessionize = try await SessionizeService().loadEvent(slug: "swiftleeds-ios-conference-in-leeds", req: req)
         
         let stage = CfpContext.Stage(
             now: Date(),
