@@ -13,6 +13,7 @@
 
     <script src="/js/theme-switcher.js"></script>
     <link rel="stylesheet" media="screen" href="/css/theme.css">
+    <link rel="stylesheet" media="screen" href="/css/year/#(eventYear).css">
     
     <title>#import("title") - The Unique iOS Swift Conference in the UK</title>
 
@@ -20,7 +21,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
     
-    <script src='https://js.tito.io/v2' async></script>
+    <script src='https://js.tito.io/v2/with/inline' async></script>
     <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
   </head>
 
@@ -49,6 +50,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <tito-widget event="swiftleeds/#(phase.titoStub)"></tito-widget>
+          <div class="modal-footer justify-content-start">
+            <span class="text-muted">
+                Something wrong this form? Open in a <a href="https://ti.to/swiftleeds/#(phase.titoStub)" target="_blank">new tab</a>.
+            </span>
+          </div>
         </div>
       </div>
     </div>

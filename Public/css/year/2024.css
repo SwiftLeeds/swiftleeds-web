@@ -1,0 +1,92 @@
+.themed-header::before {
+    content: url('/img/year/2024/header-left.svg');
+    margin-left: -40px;
+    position: absolute;
+}
+
+.themed-header::after {
+    content: url('/img/year/2024/header-right.svg');
+    margin-left: 16px;
+    position: absolute;
+}
+
+.themed-header {
+    margin-left: 0px;
+}
+
+.themed-header#sponsors {
+    margin-left: 40px;
+    margin-bottom: 2rem;
+}
+
+/* Torch (above cta) */
+#hook-precta::before {
+    content: url('/img/year/2024/torch.svg');
+/*    background: #f3f6ff;*/
+    display: block;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+/* Bottom Bands (above cta) */
+#hook-precta::after {
+    content: " ";
+    position: absolute;
+    width: 100%;
+    margin-top: 40px;
+    box-shadow:
+        0px 0px 0px 10px rgba(237, 34, 7, 1),
+        0px -16px 0px 16px rgba(255, 117, 39, 1),
+        0px -36px 0px 16px rgba(255, 202, 66, 1);
+}
+
+/* Ensure navbar always has a background */
+.navbar {
+    background-color: var(--sl-navbar-stuck-bg);
+}
+
+#hero {
+    background-color: #2B2D36;
+    border: 20px solid #151617;
+    border-radius: 40px;
+    max-width: 650px;
+}
+
+@media (min-width: 992px) {
+    .text-lg-start.text-center .themed-header {
+        margin-left: 40px;
+    }
+}
+@media (min-width: 768px) {
+    .text-md-start.text-center .themed-header {
+        margin-left: 40px;
+    }
+}
+
+.countdown {
+    background: #151617;
+    border-radius: 20px 20px 0 0;
+}
+
+#hero-container #legs {
+    gap: 20rem;
+    height: 80px;
+}
+
+@media (min-width: 500px) {
+    #hero-container #legs {
+        height: 100px;
+    }
+}
+
+@media (min-width: 768px) {
+    #hero-container #legs {
+        height: 150px;
+    }
+}
+
+#hero-container #legs div {
+    background: #151617;
+    width: 20px;
+    height: 100%;
+}

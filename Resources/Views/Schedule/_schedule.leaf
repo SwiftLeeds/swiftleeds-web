@@ -12,7 +12,7 @@
           #for(day in schedule):
           <a href="#day-#(index + 1)" class="nav-link d-block w-100 rounded-3 p-4 p-xl-5 #if(index == 0):me-2 me-sm-3 me-lg-0 mb-lg-3 active#endif" id="day-#(index + 1)-tab" data-bs-toggle="tab" role="tab" aria-controls="day-#(index + 1)" aria-selected="#if(index == 0):true#else:false#endif">
             <div class="fs-xl">Day #(index + 1)</div>
-            <div class="fs-3 fw-bold">Oct #(index + 9), #(eventYear)</div>
+            <div class="fs-3 fw-bold">Oct #(index + date(event.date, "d")), #(eventYear)</div>
           </a>
           #endfor
         </div>
@@ -72,7 +72,7 @@
                         </div>
                       </div>
 
-                      #if(slot.presentation.secondSpeaker):
+                      #if(slot.presentation.secondSpeaker && slot.presentation.secondSpeaker.name):
                       <div class="col">
                         <div class="d-flex align-items-center">
                           <img src="#awsImage(slot.presentation.secondSpeaker.profileImage)" class="rounded-circle schedule-speaker" alt="#(slot.presentation.secondSpeaker.name)">

@@ -153,7 +153,7 @@ struct HomeRouteController: RouteCollection {
         return Phase(
             showSpeakers: isPreviousEvent || phaseItems.contains("speakers"),
             showSchedule: isPreviousEvent || phaseItems.contains("schedule"),
-            showTickets: phaseItems.contains("tickets")
+            showTickets: !isPreviousEvent
         )
         #else
         // If the event is in the past then we can safely show schedule/speakers
@@ -161,20 +161,17 @@ struct HomeRouteController: RouteCollection {
         return Phase(
             showSpeakers: isPreviousEvent,
             showSchedule: isPreviousEvent,
-            showTickets: false // TODO: if event is current, and in the future, then check tito
+            showTickets: !isPreviousEvent // TODO: if event is current, and in the future, then check tito
         )
         #endif
     }
     
     private func getEvent(for req: Request) async throws -> Event? {
-        #if DEBUG
-        // Currently year-selector is only available on debug builds while we finish adding support
         if let yearParameterItem = req.parameters.get("year") {
             return try await Event.query(on: req.db)
                 .filter("name", .equal, "SwiftLeeds \(yearParameterItem)")
                 .first()
         }
-        #endif
         
         return try await Event.getCurrent(on: req.db)
     }

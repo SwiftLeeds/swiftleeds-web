@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row pt-xl-3">
       <div class="col-md-5 text-center text-md-start pb-5">
-        <h1 class="mb-4">By the Community</h1>
+        <h1 class="mb-4 themed-header">By the Community</h1>
         <p class="fs-lg pb-lg-3 mb-4">SwiftLeeds is ran entirely by the community, for the community, with a number of volunteers building out our various systems and ensuring you have the best time possible.</p>
         
         <a href="/team" class="btn btn-primary shadow-primary btn-lg">More About Us</a>

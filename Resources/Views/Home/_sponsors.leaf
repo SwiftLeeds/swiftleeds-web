@@ -1,5 +1,5 @@
 #if(count(platinumSponsors) > 0 || count(goldSponsors) > 0 || count(silverSponsors) > 0):
-<h2 class="mt-5">Our Sponsors</h2>
+<h2 class="mt-5 themed-header" id="sponsors">Our Sponsors</h2>
 
 <div class="btn-group pb-2 px-0">
 #for(sponsor in platinumSponsors):
@@ -26,6 +26,8 @@
 </div>
 #endif
 
+#if(event.isCurrent):
 <p class="mt-3 mb-0">
     Want to support the event? Email us at <a href="mailto:info@swiftleeds.co.uk">info@swiftleeds.co.uk</a> for our sponsorship pack.
 </p>
+#endif

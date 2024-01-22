@@ -11,6 +11,8 @@ struct SessionEndTag: LeafTag {
         else { return .string("") }
 
         formatter.dateFormat = "HH:mm"
+        formatter.timeZone = .init(identifier: "UTC")
+        formatter.locale = .init(identifier: "en_US_POSIX")
 
         let referenceDate = Date(timeIntervalSince1970: startDate)
         let endDate = referenceDate.addingTimeInterval(.init(Int(duration) * 60))

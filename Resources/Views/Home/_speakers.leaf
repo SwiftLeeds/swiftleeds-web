@@ -1,7 +1,7 @@
 <!-- Speakers -->
 <section id="speakers" class="container pt-5 my-2 my-md-4 my-lg-5">
   <div class="d-md-flex align-items-center justify-content-between text-center text-md-start pt-md-1 pt-lg-3">
-    <h2 class="h1 mb-4 mb-md-0 me-md-3">
+    <h2 class="h1 mb-4 mb-md-0 me-md-3 themed-header">
       #count(speakers) Incredible Speakers
     </h2>
   </div>
@@ -61,7 +61,11 @@
     </div>
     <div class="col-xl-5 col-md-6">
       <div class="ps-lg-5 ms-xl-2">
+        #if(event.isCurrent):
         <a href="/schedule" class="btn btn-primary w-100">View Schedule</a>
+        #else:
+        <a href="/year/#(eventYear)/schedule" class="btn btn-primary w-100">View Schedule</a>
+        #endif
       </div>
     </div>
   </div>

@@ -3,10 +3,18 @@
     
     #export("content"):
         #extend("Shared/_header")
-        #extend("Home/_hero")
+        
+        #if(eventYear == 2024):
+            #extend("Home/year/hero-2024")
+        #else:
+            #extend("Home/_hero")
+        #endif
+        
         #extend("Home/_info")
         
-        #extend("Home/_drop-in-sessions")
+        #if(eventYear >= 2023):
+            #extend("Home/_drop-in-sessions")
+        #endif
         
         #if(count(speakers) > 0):
             #extend("Home/_speakers")
@@ -14,10 +22,20 @@
             #extend("Home/_cfp")
         #endif
         
-        #extend("Home/_previous-conferences")
-        #extend("Home/_location")
+        #if(event.isCurrent):
+            #extend("Home/_previous-conferences")
+        #endif
+        
+        #if(event.location == "The Playhouse, Leeds"):
+            #extend("Home/_venue_playhouse")
+        #elseif(event.location == "The Carriageworks Theatre"):
+        
+        #endif
+        
         #extend("Home/_team")
-                
+        
+        <div id="hook-precta"></div>
+        
         #if(phase.ticketsEnabled):
             #extend("Home/_ticket_cta")
         #endif
