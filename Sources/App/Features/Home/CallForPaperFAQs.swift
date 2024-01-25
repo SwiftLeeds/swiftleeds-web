@@ -1,11 +1,5 @@
 let callForPaperFAQs: [CfpContext.Question] = [
     .init(
-        question: "Will I get a refund if my talk is accepted?",
-        answer: [
-            "Absolutely! We know that some people would like to attend SwiftLeeds regardless of whether their talk is accepted; therefore, we offer a FULL refund if your talk is accepted, no quibbles!"
-        ]
-    ),
-    .init(
         question: "What topics can I talk about?",
         answer: [
             "It's a long list, but any talks surrounding the Swift language, the ecosystem (such as tooling, Swift Package Manager, Server-side Swift, or other non-Apple platforms), or any Apple operating system are all fair game. We also allow talks on design, architecture, working in software, indie development, testing, and more.",
@@ -25,6 +19,12 @@ let callForPaperFAQs: [CfpContext.Question] = [
             "You do not need to pay to talk at SwiftLeeds; successful speakers will receive a ticket for both days at SwiftLeeds free of charge. We also pay for two days of accommodation and breakfast and lunch at the venue on both days.",
             "As a community conference and a not-for-profit organisation, we do everything we can to keep ticket prices low and deliver the best conference experience.",
             "Therefore, we always ask speakers if they can contribute to their travel or ask their employers if they want to sponsor the trip. Still, otherwise, we can and will do everything we can to cover travel up to £1,200 for international travellers, up to £500 for EU-based travellers and £200 for UK-based travellers."
+        ]
+    ),
+    .init(
+        question: "Will I get a refund if my talk is accepted?",
+        answer: [
+            "Absolutely! We know that some people would like to attend SwiftLeeds regardless of whether their talk is accepted; therefore, we offer a FULL refund if your talk is accepted, no quibbles!"
         ]
     ),
     .init(
