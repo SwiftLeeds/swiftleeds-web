@@ -22,6 +22,12 @@ let callForPaperFAQs: [CfpContext.Question] = [
         ]
     ),
     .init(
+        question: "Will I get a refund if my talk is accepted?",
+        answer: [
+            "Absolutely! We know that some people would like to attend SwiftLeeds regardless of whether their talk is accepted; therefore, we offer a FULL refund if your talk is accepted, no quibbles!"
+        ]
+    ),
+    .init(
         question: "Are talks recorded or streamed?",
         answer: [
             "Yes! All talks at SwiftLeeds are recorded, and streamed live to remote attendees. Videos are uploaded to our <a href=\"https://www.youtube.com/@swiftleeds\" target=\"_blank\">YouTube channel</a> after the event.",
