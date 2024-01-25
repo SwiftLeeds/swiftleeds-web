@@ -1,5 +1,11 @@
 let callForPaperFAQs: [CfpContext.Question] = [
     .init(
+        question: "Will I get a refund if my talk is accepted?",
+        answer: [
+            "Absolutely! We know that some people would like to attend SwiftLeeds regardless of whether their talk is accepted; therefore, we offer a FULL refund if your talk is accepted, no quibbles!"
+        ]
+    ),
+    .init(
         question: "What topics can I talk about?",
         answer: [
             "It's a long list, but any talks surrounding the Swift language, the ecosystem (such as tooling, Swift Package Manager, Server-side Swift, or other non-Apple platforms), or any Apple operating system are all fair game. We also allow talks on design, architecture, working in software, indie development, testing, and more.",
