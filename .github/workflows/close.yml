@@ -1,0 +1,17 @@
+name: Destroy SwiftLeeds
+
+on:
+  pull_request:
+    types: [ closed ]
+
+jobs:
+  destroy:
+    steps:
+      - name: Destroy Google Cloud Run Servce
+        run: echo "TODO"
+
+      - name: Destroy GitHub Deployment
+        uses: bobheadxi/deployments@v1
+        with:
+          step: deactivate-env
+          env: ${{ github.head_ref || github.ref_name }}

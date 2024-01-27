@@ -50,6 +50,13 @@ jobs:
         with:
           credentials_json: '${{ secrets.GAR_JSON_KEY }}'
 
+      - name: Create GitHub Deployment
+        uses: bobheadxi/deployments@v1
+        id: deployment
+        with:
+          step: start
+          env: ${{ github.head_ref || github.ref_name }}
+
       - name: Deploy to Cloud Run
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v2
@@ -75,5 +82,13 @@ jobs:
             FLICKR_KEY=FLICKR_KEY:latest
             FLICKR_SECRET=FLICKR_SECRET:latest
 
-      - name: Show Output
-        run: echo ${{ steps.deploy.outputs.url }}
+      - name: Update GitHub Deployment
+        uses: bobheadxi/deployments@v1
+        if: always()
+        with:
+          step: finish
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          env: ${{ steps.deployment.outputs.env }}
+          env_url: ${{ steps.deploy.outputs.url }}
+          auto_inactive: true
