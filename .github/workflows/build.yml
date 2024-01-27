@@ -1,0 +1,32 @@
+name: Build SwiftLeeds
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          load: true # temporary
+          push: false # temporary
+          tags: swiftleeds/swiftleeds-web:${{ github.head_ref || github.ref_name }}-latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
