@@ -14,9 +14,14 @@ let package = Package(
         .package(url: "https://github.com/swift-aws/aws-sdk-swift.git", from: "4.7.0"),
         .package(url: "https://github.com/vapor-community/leaf-markdown.git", .upToNextMajor(from: "3.0.0")),
         .package(url: "https://github.com/vapor/apns.git", from: "1.0.0"),
+        
+        // This package is used by AWSSDKSwiftCore on Linux only. We add it here (but don't utilise it) in order to
+        // add it to the Package.resolved file. This ensures that when Docker or Heroku resolves this project, it will not
+        // ignore the versions pinned (causing a disparity between production Linux releases and local macOS builds).
+        .package(url: "https://github.com/apple/swift-nio-ssl-support.git", from: "1.0.0"),
     ],
     targets: [
-        .target(
+        .executableTarget(
             name: "App",
             dependencies: [
                 .product(name: "Vapor", package: "vapor"),
@@ -26,18 +31,6 @@ let package = Package(
                 .product(name: "S3", package: "aws-sdk-swift"),
                 .product(name: "LeafMarkdown", package: "leaf-markdown"),
                 .product(name: "APNS", package: "apns"),
-            ],
-            swiftSettings: [
-                // Enable better optimizations when building in Release configuration. Despite the use of
-                // the `.unsafeFlags` construct required by SwiftPM, this flag is recommended for Release
-                // builds. See <https://github.com/swift-server/guides/blob/main/docs/building.md#building-for-production> for details.
-                .unsafeFlags(["-cross-module-optimization"], .when(configuration: .release)),
-            ]
-        ),
-        .executableTarget(
-            name: "Run",
-            dependencies: [
-                .target(name: "App")
             ]
         ),
         .testTarget(

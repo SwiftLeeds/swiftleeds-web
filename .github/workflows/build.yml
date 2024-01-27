@@ -1,0 +1,95 @@
+name: Build SwiftLeeds
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Google Artifact Registry
+        uses: docker/login-action@v3
+        with:
+          registry: europe-west2-docker.pkg.dev
+          username: _json_key
+          password: ${{ secrets.GAR_JSON_KEY }}
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          provenance: false
+          tags: europe-west2-docker.pkg.dev/swiftleeds-website/swiftleeds-web/web:${{ github.head_ref || github.ref_name }}-latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate with Google Cloud
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GAR_JSON_KEY }}'
+
+      - name: Create GitHub Deployment
+        uses: bobheadxi/deployments@v1
+        id: deployment
+        with:
+          step: start
+          env: ${{ github.head_ref || github.ref_name }}
+          ref: ${{ github.head_ref || github.ref_name }}
+
+      - name: Deploy to Cloud Run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: swiftleeds-web-${{ github.head_ref || github.ref_name }}
+          region: europe-west2
+          image: europe-west2-docker.pkg.dev/swiftleeds-website/swiftleeds-web/web:${{ github.head_ref || github.ref_name }}-latest
+          flags: '--allow-unauthenticated'
+          env_vars: |
+            BUCKET_NAME_PRESENTATIONS=swiftleeds-presentations
+            BUCKET_NAME_SPEAKERS=swiftleeds-speakers
+            S3_BUCKET_NAME=swiftleeds-speakers
+            ENABLE_AASA=true
+          secrets: |
+            CHECKIN_SECRET=APP_CHECKIN_SECRET:latest
+            CHECKIN_TAG=TITO_CHECKIN_TAG:latest
+            DATABASE_URL=HEROKU_DATABASE_URL:latest
+            P8_CERTIFICATE=APNS_CERTIFICATE:latest
+            S3_KEY=AWS_KEY:latest
+            S3_SECRET=AWS_SECRET:latest
+            SESSIONIZE_KEY=SESSIONIZE_KEY:latest
+            TITO_TOKEN=TITO_KEY:latest
+            FLICKR_KEY=FLICKR_KEY:latest
+            FLICKR_SECRET=FLICKR_SECRET:latest
+
+      - name: Update GitHub Deployment
+        uses: bobheadxi/deployments@v1
+        if: always()
+        with:
+          step: finish
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          env: ${{ steps.deployment.outputs.env }}
+          env_url: ${{ steps.deploy.outputs.url }}
+          auto_inactive: true
