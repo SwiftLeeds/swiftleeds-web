@@ -6,9 +6,19 @@ on:
 
 jobs:
   destroy:
+    runs-on: ubuntu-latest
+
     steps:
+      - name: Authenticate with Google Cloud
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GAR_JSON_KEY }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+
       - name: Destroy Google Cloud Run Servce
-        run: echo "TODO"
+        run: gcloud run services delete --quiet --region europe-west2 swiftleeds-web-${{ github.head_ref || github.ref_name }}
 
       - name: Destroy GitHub Deployment
         uses: bobheadxi/deployments@v1
