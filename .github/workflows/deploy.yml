@@ -28,6 +28,22 @@ jobs:
           region: europe-west2
           image: europe-west2-docker.pkg.dev/swiftleeds-website/swiftleeds-web/web:${{ github.head_ref || github.ref_name }}-latest
           flags: '--allow-unauthenticated'
+          env_vars: |
+            BUCKET_NAME_PRESENTATIONS=swiftleeds-presentations
+            BUCKET_NAME_SPEAKERS=swiftleeds-speakers
+            S3_BUCKET_NAME=swiftleeds-speakers
+            ENABLE_AASA=true
+          secrets: |
+            CHECKIN_SECRET=APP_CHECKIN_SECRET:latest
+            CHECKIN_TAG=TITO_CHECKIN_TAG:latest
+            DATABASE_URL=HEROKU_DATABASE_URL:latest
+            P8_CERTIFICATE=APNS_CERTIFICATE:latest
+            S3_KEY=AWS_KEY:latest
+            S3_SECRET=AWS_SECRET:latest
+            SESSIONIZE_KEY=SESSIONIZE_KEY:latest
+            TITO_TOKEN=TITO_KEY:latest
+            FLICKR_KEY=FLICKR_KEY:latest
+            FLICKR_SECRET=FLICKR_SECRET:latest
 
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
