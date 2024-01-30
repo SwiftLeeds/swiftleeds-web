@@ -74,7 +74,7 @@ jobs:
           secrets: |
             CHECKIN_SECRET=APP_CHECKIN_SECRET:latest
             CHECKIN_TAG=TITO_CHECKIN_TAG:latest
-            DATABASE_URL=HEROKU_DATABASE_URL:latest
+            DATABASE_URL=SUPABASE_DATABASE_URL:latest
             P8_CERTIFICATE=APNS_CERTIFICATE:latest
             S3_KEY=AWS_KEY:latest
             S3_SECRET=AWS_SECRET:latest
