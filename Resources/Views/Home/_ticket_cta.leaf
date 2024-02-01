@@ -43,9 +43,9 @@
                   </div>
                 </div>
                 <div class="d-flex flex-column flex-sm-row align-items-center pt-4 mt-2">
-                  <button type="button" class="btn btn-primary shadow-primary btn-lg mb-3 mb-sm-0 me-sm-3" data-bs-toggle="modal" data-bs-target="#modalTitoOrder">
+                  <a href="https://ti.to/swiftleeds/#(phase.titoStub)" target="_blank" class="btn btn-primary shadow-primary btn-lg mb-3 mb-sm-0 me-sm-3">
                     Buy ticket
-                  </button>
+                  </a>
                   <div class="d-flex align-items-center">
                     <span class="fs-lg me-2 text-body">from only</span>
                     <span class="h4 text-body mb-0">#(phase.currentTicketPrice)</span>
