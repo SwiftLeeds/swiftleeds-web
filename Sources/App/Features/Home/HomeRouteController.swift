@@ -236,7 +236,7 @@ struct PhaseContext: Codable {
     init(phase: Phase, event: Event) {
         ticketsEnabled = phase.showTickets
         titoStub = "swiftleeds-24" // TODO: load this from event in database
-        currentTicketPrice = "£170" // TODO: need to load from tito
+        currentTicketPrice = "£180" // TODO: need to load from tito
         showAddToCalendar = event.isCurrent && event.date.timeIntervalSince1970 > 1420074000 // TODO: make date optional in db and do nil check here
         showSchedule = phase.showSchedule
     }
