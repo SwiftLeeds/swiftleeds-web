@@ -11,6 +11,9 @@
     <link rel="stylesheet" media="screen" href="/vendor/swiper/swiper-bundle.min.css"/>
     <link rel="stylesheet" media="screen" href="/vendor/lightgallery/css/lightgallery-bundle.min.css"/>
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script src="/js/custom-tito.js"></script>
     <script src="/js/theme-switcher.js"></script>
     <link rel="stylesheet" media="screen" href="/css/theme.css">
     <link rel="stylesheet" media="screen" href="/css/year/#(eventYear).css">
@@ -21,7 +24,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
     
-    <script src='https://js.tito.io/v2/with/inline' async></script>
+    <script src='https://js.tito.io/v2/with/inline,development_mode' async></script>
     <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
   </head>
 
