@@ -16,9 +16,9 @@
 
           <div class="d-flex justify-content-center justify-content-md-start pb-2 pt-lg-2 pt-xl-0">
             #if(phase.ticketsEnabled):
-            <a href="https://ti.to/swiftleeds/#(phase.titoStub)" target="_blank" class="btn btn-lg btn-primary shadow-primary me-3 me-sm-4">
+            <button type="button" class="btn btn-lg btn-primary shadow-primary me-3 me-sm-4" data-bs-toggle="modal" data-bs-target="#modalTitoOrder">
               Buy ticket
-            </a>
+            </button>
             #endif
             
             #if(phase.showAddToCalendar):
