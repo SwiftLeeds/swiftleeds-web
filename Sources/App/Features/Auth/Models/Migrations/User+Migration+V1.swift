@@ -1,6 +1,6 @@
 import Fluent
 
-class UserMigrationV1: AsyncMigration {
+final class UserMigrationV1: AsyncMigration {
     func prepare(on database: Database) async throws {
         try await database.schema(Schema.user)
             .id()

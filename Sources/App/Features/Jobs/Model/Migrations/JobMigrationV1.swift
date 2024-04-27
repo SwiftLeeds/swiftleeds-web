@@ -1,6 +1,6 @@
 import Fluent
 
-class JobMigrationV1: AsyncMigration {
+final class JobMigrationV1: AsyncMigration {
     func prepare(on database: Database) async throws {
         try await database.schema(Schema.job)
             .id()

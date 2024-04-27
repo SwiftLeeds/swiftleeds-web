@@ -1,6 +1,6 @@
 import Fluent
 
-class PresentationMigrationV4: AsyncMigration {
+final class PresentationMigrationV4: AsyncMigration {
     func prepare(on database: Database) async throws {
         try await database.schema(Schema.presentation)
             .deleteField("image")

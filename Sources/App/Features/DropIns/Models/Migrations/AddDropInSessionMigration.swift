@@ -1,6 +1,6 @@
 import Fluent
 
-class AddDropInSessionMigration: AsyncMigration {
+final class AddDropInSessionMigration: AsyncMigration {
     func prepare(on database: Database) async throws {
         try await database.schema(Schema.dropInSessions)
             .id()
