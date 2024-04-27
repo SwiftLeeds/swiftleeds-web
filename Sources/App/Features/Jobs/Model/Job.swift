@@ -5,7 +5,7 @@ import Vapor
 final class Job: Model, Content {
     typealias IDValue = UUID
 
-    static var schema: String = "jobs"
+    static let schema: String = "jobs"
 
     @ID(key: .id)
     var id: UUID?

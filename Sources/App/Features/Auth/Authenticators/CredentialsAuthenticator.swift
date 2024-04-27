@@ -3,7 +3,7 @@ import Foundation
 import Vapor
 
 /// Credentials Authenticator used for authenticating front-end web clients.
-class CustomCredentialsAuthenticator: Authenticator, AsyncCredentialsAuthenticator {
+final class CustomCredentialsAuthenticator: Authenticator, AsyncCredentialsAuthenticator {
     struct Input: Content {
         let email: String
         let password: String

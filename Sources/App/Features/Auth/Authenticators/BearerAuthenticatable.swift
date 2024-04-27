@@ -3,7 +3,7 @@ import Foundation
 import Vapor
 
 /// Authenticator used to authenticate a user by their auth token.
-class BearerAuthenticatable: Authenticator, AsyncBearerAuthenticator {
+final class BearerAuthenticatable: Authenticator, AsyncBearerAuthenticator {
     enum RoleFailure: Error {
         case notAuthenticated
         case notAdmin

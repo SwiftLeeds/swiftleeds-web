@@ -10,7 +10,7 @@ struct PushController: RouteCollection {
         push.post("sendNotification", use: sendNotification)
     }
 
-    private func create(req: Request) async throws -> Token {
+    @Sendable private func create(req: Request) async throws -> Token {
         let token = try req.content.decode(Token.self)
 
         // Either store or update the token value
@@ -27,7 +27,7 @@ struct PushController: RouteCollection {
         return token
     }
 
-    private func testNotification(req: Request) async throws -> HTTPStatus {
+    @Sendable private func testNotification(req: Request) async throws -> HTTPStatus {
         struct TestNotificationRequest: Decodable {
             let tokenID: String
         }
@@ -48,7 +48,7 @@ struct PushController: RouteCollection {
         return .noContent
     }
 
-    private func sendNotification(req: Request) async throws -> HTTPStatus {
+    @Sendable private func sendNotification(req: Request) async throws -> HTTPStatus {
         struct SendNotificationRequest: Decodable {
             let message: String
             let securityCode: String

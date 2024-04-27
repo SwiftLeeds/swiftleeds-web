@@ -6,7 +6,7 @@ struct TalkRouteController: RouteCollection {
         route.get("talk", ":talk", use: talk)
     }
     
-    private func talk(req: Request) async throws -> View {
+    @Sendable private func talk(req: Request) async throws -> View {
         let context = TalkContext(
             title: "ICYMI: Enums Are...",
             description: """

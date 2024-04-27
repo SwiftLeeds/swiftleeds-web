@@ -10,11 +10,11 @@ struct SlotRouteController: RouteCollection {
         routes.post(":id", use: onEdit)
     }
 
-    private func onShowCreate(request: Request) async throws -> View {
+    @Sendable private func onShowCreate(request: Request) async throws -> View {
         try await showForm(request: request, slot: nil)
     }
 
-    private func onShowEdit(request: Request) async throws -> View {
+    @Sendable private func onShowEdit(request: Request) async throws -> View {
         guard let slot = try await Slot.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
 
         try await slot.$presentation.load(on: request.db)
@@ -41,7 +41,7 @@ struct SlotRouteController: RouteCollection {
         return PresentationContext(slot: slot, events: events, presentations: presentations, activities: activities, initialType: initialType)
     }
 
-    private func onDelete(request: Request) async throws -> Response {
+    @Sendable private func onDelete(request: Request) async throws -> Response {
         guard let requestID = request.parameters.get("id") else {
             throw Abort(.notFound)
         }
@@ -55,11 +55,11 @@ struct SlotRouteController: RouteCollection {
         return request.redirect(to: "/admin?page=slots")
     }
 
-    private func onCreate(request: Request) async throws -> Response {
+    @Sendable private func onCreate(request: Request) async throws -> Response {
         try await update(request: request, slot: nil)
     }
 
-    private func onEdit(request: Request) async throws -> Response {
+    @Sendable private func onEdit(request: Request) async throws -> Response {
         guard let slot = try await Slot.find(request.parameters.get("id"), on: request.db) else {
             return request.redirect(to: "/admin?page=slots")
         }

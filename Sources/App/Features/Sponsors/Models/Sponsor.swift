@@ -3,7 +3,7 @@ import Foundation
 import Vapor
 
 final class Sponsor: Model, Content {
-    static var schema = Schema.sponsor
+    static let schema = Schema.sponsor
 
     typealias IDValue = UUID
     

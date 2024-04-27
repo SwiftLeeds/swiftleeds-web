@@ -14,11 +14,11 @@ struct EventRouteController: RouteCollection {
         routes.post(":id", use: onEdit)
     }
     
-    private func onShowCreate(request: Request) async throws -> View {
+    @Sendable private func onShowCreate(request: Request) async throws -> View {
         try await showForm(request: request, event: nil)
     }
 
-    private func onShowEdit(request: Request) async throws -> View {
+    @Sendable private func onShowEdit(request: Request) async throws -> View {
         guard let event = try await Event.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
 
         return try await showForm(request: request, event: event)
@@ -29,7 +29,7 @@ struct EventRouteController: RouteCollection {
         return try await request.view.render("Admin/Form/event_form", context)
     }
 
-    private func onDelete(request: Request) async throws -> Response {
+    @Sendable private func onDelete(request: Request) async throws -> Response {
         guard let event = try await Event.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
 
         try await event.delete(on: request.db)
@@ -37,11 +37,11 @@ struct EventRouteController: RouteCollection {
         return request.redirect(to: "/admin?page=events")
     }
 
-    private func onCreate(request: Request) async throws -> Response {
+    @Sendable private func onCreate(request: Request) async throws -> Response {
         try await update(request: request, event: nil)
     }
 
-    private func onEdit(request: Request) async throws -> Response {
+    @Sendable private func onEdit(request: Request) async throws -> Response {
         guard let event = try await Event.find(request.parameters.get("id"), on: request.db) else {
             return request.redirect(to: "/admin?page=events")
         }

@@ -12,11 +12,11 @@ struct SpeakerRouteController: RouteCollection {
         routes.post(":id", use: onEdit)
     }
 
-    private func onShowCreate(request: Request) async throws -> View {
+    @Sendable private func onShowCreate(request: Request) async throws -> View {
         try await showForm(request: request, speaker: nil)
     }
 
-    private func onShowEdit(request: Request) async throws -> View {
+    @Sendable private func onShowEdit(request: Request) async throws -> View {
         guard let speaker = try await Speaker.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
         return try await showForm(request: request, speaker: speaker)
     }
@@ -26,7 +26,7 @@ struct SpeakerRouteController: RouteCollection {
         return try await request.view.render("Admin/Form/speaker_form", context)
     }
 
-    private func onDelete(request: Request) async throws -> Response {
+    @Sendable private func onDelete(request: Request) async throws -> Response {
         guard
             let requestID = request.parameters.get("id"),
             let speaker = try? await Speaker.find(.init(uuidString: requestID), on: request.db)
@@ -37,11 +37,11 @@ struct SpeakerRouteController: RouteCollection {
         return request.redirect(to: "/admin?page=speakers")
     }
     
-    private func onCreate(request: Request) async throws -> Response {
+    @Sendable private func onCreate(request: Request) async throws -> Response {
         return try await update(request: request, speaker: nil)
     }
 
-    private func onEdit(request: Request) async throws -> Response {
+    @Sendable private func onEdit(request: Request) async throws -> Response {
         guard let speaker = try await Speaker.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
         return try await update(request: request, speaker: speaker)
     }

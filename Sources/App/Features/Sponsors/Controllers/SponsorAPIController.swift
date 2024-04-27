@@ -6,7 +6,7 @@ struct SponsorAPIController: RouteCollection {
         routes.get(use: onGet)
     }
 
-    private func onGet(request: Request) async throws -> Response {
+    @Sendable private func onGet(request: Request) async throws -> Response {
         let lastModified = try await LastUpdated
             .query(on: request.db)
             .first()?.sponsors ?? Date.distantPast

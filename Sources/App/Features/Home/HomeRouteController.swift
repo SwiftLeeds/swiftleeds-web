@@ -12,12 +12,12 @@ struct HomeRouteController: RouteCollection {
         route.get("year", ":year", "schedule", use: schedule)
     }
     
-    func get(req: Request) async throws -> View {
+    @Sendable func get(req: Request) async throws -> View {
         let context = try await getContext(req: req)
         return try await req.view.render("Home/home", context)
     }
     
-    func team(req: Request) async throws -> View {
+    @Sendable func team(req: Request) async throws -> View {
         guard let event = try await getEvent(for: req) else {
             throw Abort(.notFound, reason: "Unable to find event")
         }
@@ -34,7 +34,7 @@ struct HomeRouteController: RouteCollection {
         return try await req.view.render("Team/index", context)
     }
     
-    func schedule(req: Request) async throws -> Response {
+    @Sendable func schedule(req: Request) async throws -> Response {
         let context = try await getContext(req: req)
         
         if context.phase?.showSchedule == false {
@@ -46,7 +46,7 @@ struct HomeRouteController: RouteCollection {
         return try await req.view.render("Schedule/index", context).encodeResponse(for: req)
     }
     
-    func cfp(req: Request) async throws -> View {
+    @Sendable func cfp(req: Request) async throws -> View {
         let context = try await getContext(req: req)
         let sessionize = try await SessionizeService().loadEvent(slug: "swiftleeds-ios-conference-in-leeds", req: req)
         

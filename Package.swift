@@ -31,14 +31,21 @@ let package = Package(
                 .product(name: "S3", package: "aws-sdk-swift"),
                 .product(name: "LeafMarkdown", package: "leaf-markdown"),
                 .product(name: "APNS", package: "apns"),
-            ]
+            ],
+            swiftSettings: swiftSettings
         ),
         .testTarget(
             name: "AppTests",
             dependencies: [
                 .target(name: "App"),
                 .product(name: "XCTVapor", package: "vapor"),
-            ]
+            ],
+            swiftSettings: swiftSettings
         ),
     ]
 )
+
+var swiftSettings: [SwiftSetting] { [
+    .enableUpcomingFeature("DisableOutwardActorInference"),
+    .enableExperimentalFeature("StrictConcurrency"),
+] }

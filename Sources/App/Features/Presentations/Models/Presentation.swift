@@ -3,7 +3,7 @@ import Foundation
 import Vapor
 
 final class Presentation: Model, Content {
-    static var schema = Schema.presentation
+    static let schema = Schema.presentation
 
     typealias IDValue = UUID
     
