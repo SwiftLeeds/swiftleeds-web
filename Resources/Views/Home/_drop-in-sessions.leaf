@@ -63,14 +63,14 @@
             <div class="border rounded-3 mb-3 mb-lg-4">
               <div class="row row-cols-1 g-0">
                 <div class="col d-flex align-items-center border-bottom p-3">
-                  <img src="https://pbs.twimg.com/profile_images/1246103040710582274/HUC49wCP_400x400.jpg" width="48" alt="Dave Verwer">
+                  <img src="https://pbs.twimg.com/profile_images/1246103040710582274/HUC49wCP_400x400.jpg" width="48" alt="Dave Verwer" class="rounded">
                   <div class="ps-2 ms-1">
                     <h3 class="h6 mb-0">Dave Verwer</h3>
                     <p class="fs-xs mb-0">Author of <a href="https://iosdevweekly.com/?utm_source=swiftleeds" target="_blank">iOS Dev Weekly</a>, and co-creator of the <a href="https://swiftpackageindex.com/?utm_source=swiftleeds" target="_blank">Swift Package Index</a>.</p>
                   </div>
                 </div>
                 <div class="col d-flex align-items-center border-bottom p-3">
-                  <img src="https://avatars.githubusercontent.com/u/1130717?v=4" width="48" alt="Icon">
+                  <img src="https://avatars.githubusercontent.com/u/1130717?v=4" width="48" alt="Gwynne Raskind" class="rounded">
                   <div class="ps-2 ms-1">
                     <h3 class="h6 mb-0">Gwynne Raskind</h3>
                     <p class="fs-xs mb-0">Half of <a href="https://vapor.codes/?utm_source=swiftleeds" target="_blank">Vapor</a> core-team, and key contributor of <a href="https://www.swift.org/sswg/?utm_source=swiftleeds" target="_blank">server-side Swift working group</a>.</p>
