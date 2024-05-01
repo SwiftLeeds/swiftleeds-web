@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="col-md-6">
-        <h2 class="h3 mb-sm-4">Drop-In Sessions</h2>
+        <h2 class="h3 mb-sm-4">#if(eventYear == 2023):<span class="badge bg-primary fs-sm align-middle me-2">NEW</span>#endif Drop-In Sessions</h2>
         <p class="d-md-none d-xl-block pb-2 pb-md-3 mb-3">
           Included for free with every ticket, drop-in sessions give you an
           exclusive 1 on 1 feedback session with one of our industry experts.
@@ -37,5 +37,55 @@
         #endif
       </div>
     </div>
-  </div>
+  
+  
+          #if(eventYear >= 2024):
+      <div class="row mt-5">
+          <div class="col-md-6 order-md-2 pb-2 pb-md-0 mb-4 mb-md-0">
+            <div class="pe-lg-5">
+              <img src="/img/theatre.jpg" class="rounded-3" alt="SwiftLeeds Theatre">
+            </div>
+          </div>
+          <div class="col-md-6 ordr-md-1">
+            <h2 class="h3 mb-sm-4">#if(eventYear == 2024):<span class="badge bg-primary fs-sm align-middle me-2">NEW</span>#endif SwiftLeeds Evening Talkshow</h2>
+            
+            <p>SwiftLeeds is super excited to host a new, and interactive evening talk show with <a href="#" target="_blank">Dave&nbsp;Verwer</a> and <a href="#" target="_blank">Gwynne&nbsp;Raskind</a>. This special event will be held at the <a href="#venue" data-scroll data-scroll-offset="70">Leeds&nbsp;Playhouse</a> on October 7th, the evening before the main conference, at 6pm until 8:30pm.</p>
+            
+            <p>We'll be discussing some hot topics within the Swift community, such as;</p>
+            
+            <ul class="pb-2 pb-md-3 mb-3">
+                <li class="primary-marker align-items-center mb-2">The future and evolution of Swift</li>
+                <li class="primary-marker align-items-center mb-2">Why the Swift Packages are the future</li>
+                <li class="primary-marker align-items-center mb-2">How Swift can be used across different platforms</li>
+                <li class="primary-marker align-items-center">and much more&hellip;</li>
+            </ul>
+            
+            <div class="border rounded-3 mb-3 mb-lg-4">
+              <div class="row row-cols-1 g-0">
+                <div class="col d-flex align-items-center border-bottom p-3">
+                  <img src="https://pbs.twimg.com/profile_images/1246103040710582274/HUC49wCP_400x400.jpg" width="48" alt="Dave Verwer">
+                  <div class="ps-2 ms-1">
+                    <h3 class="h6 mb-0">Dave Verwer</h3>
+                    <p class="fs-xs mb-0">Author of <a href="https://iosdevweekly.com/?utm_source=swiftleeds" target="_blank">iOS Dev Weekly</a>, and co-creator of the <a href="https://swiftpackageindex.com/?utm_source=swiftleeds" target="_blank">Swift Package Index</a>.</p>
+                  </div>
+                </div>
+                <div class="col d-flex align-items-center border-bottom p-3">
+                  <img src="https://avatars.githubusercontent.com/u/1130717?v=4" width="48" alt="Icon">
+                  <div class="ps-2 ms-1">
+                    <h3 class="h6 mb-0">Gwynne Raskind</h3>
+                    <p class="fs-xs mb-0">Half of <a href="https://vapor.codes/?utm_source=swiftleeds" target="_blank">Vapor</a> core-team, and key contributor of <a href="https://www.swift.org/sswg/?utm_source=swiftleeds" target="_blank">server-side Swift working group</a>.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column flex-sm-row mb-2">
+              <a href="https://ti.to/swiftleeds/swiftleeds-24/with/live-talkshow" target="_blank" class="btn btn-primary mb-3 mb-sm-0 me-sm-3">Buy now</a>
+            </div>
+            <span class="fs-sm">Tickets will be sold on a first-come first-serve basis, so we encourage you to secure your spot now.</span>
+          </div>
+        </div>
+      #endif
+  
+      
+      </div>
 </section>
