@@ -10,7 +10,7 @@ struct DropInRouteController: RouteCollection {
         routes.get("print", ":id", use: onPrint)
     }
 
-    private func onPrint(request: Request) async throws -> View {
+    @Sendable private func onPrint(request: Request) async throws -> View {
         guard let sessionKey: String = request.parameters.get("id") else {
             throw Abort(.notFound)
         }

@@ -2,7 +2,7 @@ import Fluent
 import Foundation
 import Vapor
 
-class LocationMigrationV1: AsyncMigration {
+final class LocationMigrationV1: AsyncMigration {
     func prepare(on database: Database) async throws {
         try await database.schema(Schema.location)
             .id()

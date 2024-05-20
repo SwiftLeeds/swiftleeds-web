@@ -10,11 +10,11 @@ struct ActivityRouteController: RouteCollection {
         routes.post(":id", use: onEdit)
     }
 
-    private func onShowCreate(request: Request) async throws -> View {
+    @Sendable private func onShowCreate(request: Request) async throws -> View {
         try await showForm(request: request, activity: nil)
     }
 
-    private func onShowEdit(request: Request) async throws -> View {
+    @Sendable private func onShowEdit(request: Request) async throws -> View {
         guard let activity = try await Activity.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
 
         try await activity.$event.load(on: request.db)
@@ -32,7 +32,7 @@ struct ActivityRouteController: RouteCollection {
         return ActivityContext(activity: activity, events: events)
     }
 
-    private func onDelete(request: Request) async throws -> Response {
+    @Sendable private func onDelete(request: Request) async throws -> Response {
         guard let activity = try await Activity.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
 
         try await activity.delete(on: request.db)
@@ -40,11 +40,11 @@ struct ActivityRouteController: RouteCollection {
         return request.redirect(to: "/admin?page=activities")
     }
 
-    private func onCreate(request: Request) async throws -> Response {
+    @Sendable private func onCreate(request: Request) async throws -> Response {
         try await update(request: request, activity: nil)
     }
 
-    private func onEdit(request: Request) async throws -> Response {
+    @Sendable private func onEdit(request: Request) async throws -> Response {
         guard let activity = try await Activity.find(request.parameters.get("id"), on: request.db) else {
             return request.redirect(to: "/admin?page=activities")
         }

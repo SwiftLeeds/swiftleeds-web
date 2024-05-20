@@ -6,7 +6,7 @@ struct ScheduleAPIController: RouteCollection {
         routes.get(use: onGet)
     }
 
-    private func onGet(request: Request) async throws -> Response {
+    @Sendable private func onGet(request: Request) async throws -> Response {
         // Get the current event
         // In future this will need to be smarter
         let eventWithSlots = try await Event.query(on: request.db)

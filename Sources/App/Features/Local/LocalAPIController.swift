@@ -6,7 +6,7 @@ struct LocalAPIController: RouteCollection {
         routes.get(use: onGet)
     }
 
-    private func onGet(request: Request) async throws -> Response {
+    @Sendable private func onGet(request: Request) async throws -> Response {
         let categories = try await LocationCategory.query(on: request.db)
             .with(\.$locations)
             .all()

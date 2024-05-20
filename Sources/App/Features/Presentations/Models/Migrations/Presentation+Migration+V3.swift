@@ -1,6 +1,6 @@
 import Fluent
 
-class PresentationMigrationV3: AsyncMigration {
+final class PresentationMigrationV3: AsyncMigration {
     func prepare(on database: Database) async throws {
         try await database.schema(Schema.presentation)
             .field("slido_url", .string)

@@ -6,7 +6,7 @@ struct ScheduleAPIControllerV2: RouteCollection {
         routes.get(use: onGet)
     }
 
-    private func onGet(request: Request) async throws -> Response {
+    @Sendable private func onGet(request: Request) async throws -> Response {
         let events = try await Event
             .query(on: request.db)
             .all()

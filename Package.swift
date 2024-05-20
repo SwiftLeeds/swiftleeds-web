@@ -12,7 +12,7 @@ let package = Package(
         .package(url: "https://github.com/vapor/leaf.git", from: "4.0.0"),
         .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
         .package(url: "https://github.com/swift-aws/aws-sdk-swift.git", from: "4.7.0"),
-        .package(url: "https://github.com/vapor-community/leaf-markdown.git", .upToNextMajor(from: "3.0.0")),
+        .package(url: "https://github.com/vapor-community/leaf-markdown.git", from: "3.0.0"),
         .package(url: "https://github.com/vapor/apns.git", from: "1.0.0"),
         
         // This package is used by AWSSDKSwiftCore on Linux only. We add it here (but don't utilise it) in order to
@@ -31,14 +31,21 @@ let package = Package(
                 .product(name: "S3", package: "aws-sdk-swift"),
                 .product(name: "LeafMarkdown", package: "leaf-markdown"),
                 .product(name: "APNS", package: "apns"),
-            ]
+            ],
+            swiftSettings: swiftSettings
         ),
         .testTarget(
             name: "AppTests",
             dependencies: [
                 .target(name: "App"),
                 .product(name: "XCTVapor", package: "vapor"),
-            ]
+            ],
+            swiftSettings: swiftSettings
         ),
     ]
 )
+
+var swiftSettings: [SwiftSetting] { [
+    .enableUpcomingFeature("DisableOutwardActorInference"),
+    .enableExperimentalFeature("StrictConcurrency"),
+] }

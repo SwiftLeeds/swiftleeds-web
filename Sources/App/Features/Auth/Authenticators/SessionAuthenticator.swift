@@ -3,7 +3,7 @@ import Foundation
 import Vapor
 
 /// Session Authenticator used for checking the auth status of front-end web clients. This authenticator uses the sessions cookie.
-class SessionAuthenticator: Authenticator, AsyncSessionAuthenticator {
+final class SessionAuthenticator: Authenticator, AsyncSessionAuthenticator {
     typealias User = App.User
     
     func authenticate(sessionID: User.SessionID, for request: Request) async throws {

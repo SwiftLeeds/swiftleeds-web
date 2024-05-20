@@ -19,7 +19,7 @@ struct AuthController: RouteCollection {
         passwordProtected.post("login", use: login)
     }
     
-    private func create(request: Request) async throws -> Response {
+    @Sendable private func create(request: Request) async throws -> Response {
         // Create User Validations
         do {
             try User.Create.validate(content: request)
@@ -43,7 +43,7 @@ struct AuthController: RouteCollection {
         return request.redirect(to: "/")
     }
     
-    private func login(request: Request) async throws -> Response {
+    @Sendable private func login(request: Request) async throws -> Response {
         guard let user = request.auth.get(User.self) else {
             throw Abort(.notFound)
         }
@@ -73,7 +73,7 @@ struct AuthController: RouteCollection {
         }
     }
     
-    private func logout(request: Request) async throws -> Response {
+    @Sendable private func logout(request: Request) async throws -> Response {
         guard let user = request.auth.get(User.self) else {
             return request.redirect(to: "/")
         }

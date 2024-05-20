@@ -2,7 +2,7 @@ import Fluent
 import Foundation
 import Vapor
 
-class LocationCategoryMigrationV1: AsyncMigration {
+final class LocationCategoryMigrationV1: AsyncMigration {
     func prepare(on database: Database) async throws {
         try await database.schema(Schema.locationCategory)
             .id()

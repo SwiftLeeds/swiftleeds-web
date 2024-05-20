@@ -1,6 +1,6 @@
 import Fluent
 
-class SpeakerMigrationV1: AsyncMigration {
+final class SpeakerMigrationV1: AsyncMigration {
     func prepare(on database: Database) async throws {
         try await database.schema(Speaker.schema)
             .id()

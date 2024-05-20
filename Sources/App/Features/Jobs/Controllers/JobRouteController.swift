@@ -16,11 +16,11 @@ struct JobRouteController: RouteCollection {
         routes.post(":id", use: onEdit)
     }
 
-    private func onShowCreate(request: Request) async throws -> View {
+    @Sendable private func onShowCreate(request: Request) async throws -> View {
         try await showForm(request: request, job: nil)
     }
 
-    private func onShowEdit(request: Request) async throws -> View {
+    @Sendable private func onShowEdit(request: Request) async throws -> View {
         guard let job = try await Job.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
         return try await showForm(request: request, job: job)
     }
@@ -32,18 +32,18 @@ struct JobRouteController: RouteCollection {
         return try await request.view.render("Admin/Form/job_form", context)
     }
 
-    private func onDelete(request: Request) async throws -> Response {
+    @Sendable private func onDelete(request: Request) async throws -> Response {
         guard let job = try await Job.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
 
         try await job.delete(on: request.db)
         return request.redirect(to: "/admin?page=jobs")
     }
 
-    private func onCreate(request: Request) async throws -> Response {
+    @Sendable private func onCreate(request: Request) async throws -> Response {
         return try await update(request: request, job: nil)
     }
 
-    private func onEdit(request: Request) async throws -> Response {
+    @Sendable private func onEdit(request: Request) async throws -> Response {
         guard let job = try await Job.find(request.parameters.get("id"), on: request.db) else {
             return request.redirect(to: "/admin?page=jobs")
         }

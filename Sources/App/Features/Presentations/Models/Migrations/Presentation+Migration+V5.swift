@@ -1,6 +1,6 @@
 import Fluent
 
-class PresentationMigrationV5: AsyncMigration {
+final class PresentationMigrationV5: AsyncMigration {
     func prepare(on database: Database) async throws {
         try await database.schema(Schema.presentation)
             .field("video_url", .string)

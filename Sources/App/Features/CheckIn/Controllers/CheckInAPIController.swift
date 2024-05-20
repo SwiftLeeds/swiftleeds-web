@@ -5,7 +5,7 @@ struct CheckInAPIController: RouteCollection {
         routes.get(":secret", use: onGet)
     }
     
-    func onGet(request: Request) throws -> CheckIn {
+    @Sendable func onGet(request: Request) throws -> CheckIn {
         // Verified that :secret (in the route /api/v1/checkin/:secret) is equal to `CHECKIN_SECRET`
         // If it is, then return `CHECKIN_TAG`
         guard

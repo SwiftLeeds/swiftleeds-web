@@ -17357,3 +17357,7 @@ img-comparison-slider:focus {
 .hidden {
     display: none !important;
 }
+
+.primary-marker::marker {
+    color: rgba(var(--sl-primary-rgb));
+}

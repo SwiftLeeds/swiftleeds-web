@@ -1,6 +1,6 @@
 import Fluent
 
-class SponsorMigrationV1: AsyncMigration {
+final class SponsorMigrationV1: AsyncMigration {
     func prepare(on database: Database) async throws {
         _ = try await database.enum("sponsor_level")
             .case("silver")

@@ -5,7 +5,7 @@ struct TicketsAPIController: RouteCollection {
         routes.get(":event", use: onGet)
     }
     
-    private func onGet(request: Request) async throws -> Response {
+    @Sendable private func onGet(request: Request) async throws -> Response {
         guard let event = request.parameters.get("event") else { // example: swiftleeds-23
             throw Abort(.badRequest, reason: "Event parameter was not provided to GET request")
         }
