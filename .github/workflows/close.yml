@@ -6,6 +6,7 @@ on:
 
 jobs:
   destroy:
+    if: github.repository_owner == 'SwiftLeeds'
     runs-on: ubuntu-latest
 
     steps:
