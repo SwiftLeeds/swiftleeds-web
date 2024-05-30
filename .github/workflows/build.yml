@@ -33,7 +33,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          push: true
+          push: ${{ github.event_name == 'push' }} # Only push to PRD if the event is an push event
           provenance: false
           tags: europe-west2-docker.pkg.dev/swiftleeds-website/swiftleeds-web/web:${{ github.head_ref || github.ref_name }}-latest
           cache-from: type=gha
