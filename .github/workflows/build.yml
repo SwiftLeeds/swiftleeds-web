@@ -39,6 +39,7 @@ jobs:
           cache-to: type=gha,mode=max
 
   deploy:
+    if: github.repository_owner == 'SwiftLeeds'
     runs-on: ubuntu-latest
     needs: build
 
