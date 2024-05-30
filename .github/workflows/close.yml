@@ -2,20 +2,21 @@ name: Destroy SwiftLeeds
 
 on:
   pull_request:
-    types: [ closed ]
+    types: [closed]
 
 jobs:
   destroy:
+    if: github.repository_owner == 'SwiftLeeds'
     runs-on: ubuntu-latest
 
     steps:
       - name: Authenticate with Google Cloud
-        uses: 'google-github-actions/auth@v2'
+        uses: "google-github-actions/auth@v2"
         with:
-          credentials_json: '${{ secrets.GAR_JSON_KEY }}'
+          credentials_json: "${{ secrets.GAR_JSON_KEY }}"
 
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v2'
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v2"
 
       - name: Destroy Google Cloud Run Servce
         run: gcloud run services delete --quiet --region europe-west2 swiftleeds-web-${{ github.head_ref || github.ref_name }}
