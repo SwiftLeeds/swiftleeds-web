@@ -1,11 +1,11 @@
 name: Build SwiftLeeds
 
 on:
-  pull_request_target:
+  pull_request:
   push:
     branches: [main]
 
-concurrency: 
+concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
@@ -48,9 +48,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Authenticate with Google Cloud
-        uses: 'google-github-actions/auth@v2'
+        uses: "google-github-actions/auth@v2"
         with:
-          credentials_json: '${{ secrets.GAR_JSON_KEY }}'
+          credentials_json: "${{ secrets.GAR_JSON_KEY }}"
 
       - name: Create GitHub Deployment
         uses: bobheadxi/deployments@v1
@@ -67,7 +67,7 @@ jobs:
           service: swiftleeds-web-${{ github.head_ref || github.ref_name }}
           region: europe-west2
           image: europe-west2-docker.pkg.dev/swiftleeds-website/swiftleeds-web/web:${{ github.head_ref || github.ref_name }}-latest
-          flags: '--allow-unauthenticated'
+          flags: "--allow-unauthenticated"
           env_vars: |
             BUCKET_NAME_PRESENTATIONS=swiftleeds-presentations
             BUCKET_NAME_SPEAKERS=swiftleeds-speakers
