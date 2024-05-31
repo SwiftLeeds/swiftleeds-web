@@ -22,6 +22,9 @@ final class Event: Model, Content {
     @Field(key: "is_current")
     var isCurrent: Bool
     
+    @Field(key: "tito_event")
+    var titoEvent: String?
+    
     @Children(for: \.$event)
     var presentations: [Presentation]
 
