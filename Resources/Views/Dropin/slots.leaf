@@ -30,6 +30,10 @@
       </div>
     </div>
 
+    #if(session.capacity > 1):
+    <div class="alert alert-secondary" role="alert">This is a group session. Each session may have up to #(session.capacity) participants.</div>
+    #endif
+    
     #if(prompt):
     <div class="alert alert-secondary" role="alert">#(prompt)</div>
     #endif
@@ -45,13 +49,29 @@
               <h5 class="mb-1">#date(slot.date, "HH:mm")</h5>
             </div>
 
-            #if(slot.isOwner):
-            <small>This slot is your session!</small>
-            #elseif(slot.owner):
-            <small class="text-danger">This slot is taken by #(slot.owner).</small>
+            #if(session.capacity > 1):
+            
+                #if(slot.isOwner):
+                <small>You are booked on this session with #(count(slot.owners) - 1) others.</small>
+                #elseif(count(slot.owners) == session.capacity):
+                <small class="text-danger">This session is full.</small>
+                #else:
+                <small>This session is bookable, it currently has #count(slot.owners) participants.</small>
+                #endif
+            
             #else:
-            <small>This slot is available.</small>
+            
+                #if(slot.isOwner):
+                <small>This slot is your session!</small>
+                #elseif(count(slot.owners) == 0):
+                <small>This slot is available.</small>
+                #else:
+                <small class="text-danger">This slot is taken by #for(owner in slot.owners):#(owner)#endfor.</small>
+                #endif
+            
             #endif
+            
+            
           </button>
 
           #if(slot.isOwner):

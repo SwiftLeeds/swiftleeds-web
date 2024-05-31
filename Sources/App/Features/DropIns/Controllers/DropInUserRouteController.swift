@@ -210,6 +210,7 @@ struct DropInSessionViewModel: Codable {
     let ownerImageUrl: String?
     let ownerLink: String?
     let availability: String
+    let capacity: Int
     
     init(model: DropInSession) {
         self.id = model.id?.uuidString ?? ""
@@ -219,8 +220,9 @@ struct DropInSessionViewModel: Codable {
         self.ownerImageUrl = model.ownerImageUrl
         self.ownerLink = model.ownerLink
         self.availability = Self.generateAvailabilityString(
-            slotCount: model.slots.filter { $0.ticket == nil }.count
+            slotCount: model.slots.filter { $0.ticket.count < model.maxTicketsPerSlot }.count
         )
+        self.capacity = model.maxTicketsPerSlot
     }
     
     static func generateAvailabilityString(slotCount: Int) -> String {
