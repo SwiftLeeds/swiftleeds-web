@@ -72,6 +72,8 @@ class Migrations {
 
         // Add Video URL to Presentations table
         app.migrations.add(PresentationMigrationV5())
+        
+        app.migrations.add(AddDropInGroupsMigration()) // Drop-ins v2 (Group Sessions)
 
         do {
             guard let url = Environment.get("DATABASE_URL") else {
