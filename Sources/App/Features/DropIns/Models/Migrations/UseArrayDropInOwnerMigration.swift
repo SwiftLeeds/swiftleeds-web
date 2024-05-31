@@ -13,6 +13,12 @@ final class UseArrayDropInOwnerMigration: AsyncMigration {
     }
 
     func revert(on database: Database) async throws {
-        // This is a breaking change
+        // Note, this is a destructive change and all data will be lost.
+        try await database.schema(Schema.dropInSessionSlots)
+            .deleteField("ticket")
+            .deleteField("ticket_owner")
+            .field("ticket", .string)
+            .field("ticket_owner", .string)
+            .update()
     }
 }
