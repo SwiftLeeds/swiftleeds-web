@@ -16,10 +16,10 @@ final class DropInSessionSlot: Model, Content {
     var date: Date
     
     @Field(key: "ticket")
-    var ticket: String?
+    var ticket: [String]
     
     @Field(key: "ticket_owner")
-    var ticketOwner: String?
+    var ticketOwner: [String]
     
     @Parent(key: "session_id")
     public var session: DropInSession

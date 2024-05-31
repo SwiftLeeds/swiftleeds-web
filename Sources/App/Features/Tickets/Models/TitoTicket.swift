@@ -16,6 +16,10 @@ struct TitoTicket: Codable {
     let avatar_url: URL?
     let responses: [String: String]
     let release: Release?
+    
+    var fullName: String {
+        first_name + " " + last_name
+    }
 }
 
 struct TitoResponse: Decodable {

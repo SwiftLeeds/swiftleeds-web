@@ -72,6 +72,10 @@ class Migrations {
 
         // Add Video URL to Presentations table
         app.migrations.add(PresentationMigrationV5())
+        
+        app.migrations.add(AddDropInGroupsMigration()) // Drop-ins v2 (Group Sessions)
+        app.migrations.add(EventMigrationV3()) // Adds tito ID
+        app.migrations.add(UseArrayDropInOwnerMigration()) // Use arrays for slot owners
 
         do {
             guard let url = Environment.get("DATABASE_URL") else {
