@@ -148,7 +148,7 @@ struct DropInUserRouteController: RouteCollection {
                     return req.redirect(to: "/drop-in/\(sessionID)")
                 }
                 
-                guard let slot = try await DropInSessionSlot.query(on: req.db).filter(\.$id == slotUUID).first() else {
+                guard let slot = try await DropInSessionSlot.query(on: req.db).filter(\.$id == slotUUID).with(\.$session).first() else {
                     // slot not found
                     return req.redirect(to: "/drop-in/\(sessionID)")
                 }
@@ -161,14 +161,15 @@ struct DropInUserRouteController: RouteCollection {
                     return req.redirect(to: "/drop-in/\(sessionID)?prompt=\(message ?? "")")
                 }
                 
-                let existingSlot = try await DropInSessionSlot
+                let existingSlots: [DropInSessionSlot] = try await DropInSessionSlot
                     .query(on: req.db)
                     .filter(\.$ticket == ticket.slug)
-                    .first()
+                    .with(\.$session)
+                    .all()
                 
-                if existingSlot != nil {
+                if existingSlots.contains(where: { $0.session.exclusivityKey == slot.session.exclusivityKey }) {
                     // they already have a slot booked
-                    let message = "You already have a session booked, please cancel it first before booking another."
+                    let message = "You already have a session of this type booked, please cancel it first before booking another."
                         .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
                     
                     return req.redirect(to: "/drop-in/\(sessionID)?prompt=\(message ?? "")")
