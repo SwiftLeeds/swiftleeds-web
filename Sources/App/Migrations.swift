@@ -4,8 +4,6 @@ import Vapor
 
 class Migrations {
     static func migrate(_ app: Application) throws {
-        app.sessions.use(.fluent(.psql))
-        
         // User Migrations
         app.migrations.add(UserMigrationV1())
         

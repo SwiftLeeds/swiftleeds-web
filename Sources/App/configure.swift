@@ -4,6 +4,9 @@ import LeafMarkdown
 import Vapor
 
 public func configure(_ app: Application) throws {
+    // Sessions
+    app.sessions.use(.fluent(.psql))
+    
     // Middleware
     app.middleware.use(AppleAppSiteAssociationMiddleware())
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
