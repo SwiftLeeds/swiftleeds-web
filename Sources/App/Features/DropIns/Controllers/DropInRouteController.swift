@@ -36,7 +36,7 @@ struct DropInRouteController: RouteCollection {
             return DropInSessionSlotsContext.Slot(
                 id: id,
                 date: $0.date,
-                owner: $0.ticketOwner,
+                owners: $0.ticketOwner,
                 isOwner: false
             )
         }.sorted(by: { $0.date < $1.date }) // sort times so they're in order on the day

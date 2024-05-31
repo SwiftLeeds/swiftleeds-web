@@ -41,7 +41,7 @@ final class DropInSession: Model, Content {
     var company: String?
     
     @Field(key: "company_image_url")
-    var companyrImageUrl: String?
+    var companyImageUrl: String?
     
     @Field(key: "company_link")
     var companyLink: String?

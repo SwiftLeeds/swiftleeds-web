@@ -18,6 +18,6 @@ final class AddDropInGroupsMigration: AsyncMigration {
             .deleteField("company")
             .deleteField("company_image_url")
             .deleteField("company_link")
-            .delete()
+            .update()
     }
 }
