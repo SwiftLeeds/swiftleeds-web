@@ -6,7 +6,7 @@ struct DropInUserRouteController: RouteCollection {
         routes.grouped(ValidTicketMiddleware()).group("drop-in") { builder in
             // list available sessions
             builder.get { req async throws -> View in
-                guard let currentEvent = try await Event.query(on: req.db).filter(\.$isCurrent == true).first() else {
+                guard let currentEvent = req.storage.get(CurrentEventKey.self) else {
                     throw Abort(.badRequest, reason: "unable to identify current event")
                 }
                 

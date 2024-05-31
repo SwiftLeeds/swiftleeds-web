@@ -1,4 +1,5 @@
 import Vapor
+import Fluent
 
 struct TicketLoginController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
@@ -11,11 +12,15 @@ struct TicketLoginController: RouteCollection {
         }
         
         routes.post("ticketLogin", "validate") { req async throws -> Response in
+            guard let currentTitoEvent = try await Event.query(on: req.db).filter(\.$isCurrent == true).first()?.titoEvent else {
+                throw Abort(.badRequest, reason: "unable to identify current event")
+            }
+            
             // Get user input
             let input = try req.content.decode(TicketLoginPayload.self)
             
             // Validate ticket
-            let ticketOpt = try await TitoService(event: currentEvent)
+            let ticketOpt = try await TitoService(event: currentTitoEvent)
                 .ticket(payload: input, req: req)
             
             // Handle errors
@@ -27,7 +32,7 @@ struct TicketLoginController: RouteCollection {
             }
             
             // Update session
-            req.session.data["tito-\(currentEvent)"] = ticket.slug
+            req.session.data["tito-\(currentTitoEvent)"] = ticket.slug
             
             // Redirect
             let redirectUrl = req.session.data["ticketRedirectUrl"] ?? "/"

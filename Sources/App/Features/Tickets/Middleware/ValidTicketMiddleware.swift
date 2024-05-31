@@ -1,13 +1,18 @@
 import Vapor
+import Fluent
 
 struct ValidTicketMiddleware: AsyncMiddleware {
-    let event: String
-    
-    init() {
-        event = currentEvent
-    }
-    
     func respond(to request: Request, chainingTo next: AsyncResponder) async throws -> Response {
+        guard let currentEvent = try await Event.query(on: request.db).filter(\.$isCurrent == true).first() else {
+            throw Abort(.badRequest, reason: "unable to identify current event")
+        }
+        
+        guard let titoEvent = currentEvent.titoEvent else {
+            throw Abort(.badRequest, reason: "unable to identify tito project")
+        }
+        
+        request.storage.set(CurrentEventKey.self, to: currentEvent)
+        
         #if DEBUG
         // append ?skipTicket=true to route in debug builds in order to bypass tito
         if request.application.environment.isRelease == false {
@@ -32,11 +37,11 @@ struct ValidTicketMiddleware: AsyncMiddleware {
         let returnUrl = request.url.path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             .map { "?returnUrl=" + $0 } ?? ""
         
-        let sessionKey = "tito-\(event)"
+        let sessionKey = "tito-\(titoEvent)"
         
         if let ticket = request.session.data[sessionKey] {
             // validate ticket stub against tito
-            guard let ticket = try await TitoService(event: event).ticket(stub: ticket, req: request) else {
+            guard let ticket = try await TitoService(event: titoEvent).ticket(stub: ticket, req: request) else {
                 // invalid, clear session and go back to login page
                 request.session.data[sessionKey] = nil
                 return request.redirect(to: "/ticketLogin" + returnUrl)
@@ -54,8 +59,10 @@ struct ValidTicketMiddleware: AsyncMiddleware {
     }
 }
 
-let currentEvent = "swiftleeds-23"
-
 struct TicketStorage: StorageKey {
     typealias Value = TitoTicket
+}
+
+struct CurrentEventKey: StorageKey {
+    typealias Value = Event
 }
