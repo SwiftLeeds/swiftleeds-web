@@ -19,14 +19,12 @@ struct TitoService {
         let ticketOpt = ticketResponse.tickets.first(where: {
             // case insensitive comparisons
             $0.reference.lowercased() == payload.ticket.lowercased() &&
-            $0.email.lowercased() == payload.email.lowercased()
+            $0.email?.lowercased() == payload.email.lowercased() &&
+            // ensure unassigned tickets do not get captured here
+            $0.email != nil
         })
         
-        guard let ticket = ticketOpt else {
-            return nil
-        }
-        
-        return ticket
+        return ticketOpt
     }
     
     func ticket(stub: String, req: Request) async throws -> TitoTicket? {
@@ -78,7 +76,7 @@ struct TitoTicketsResponse: Decodable {
     struct Ticket: Decodable {
         let slug: String
         let reference: String
-        let email: String
+        let email: String?
     }
     
     struct Meta: Decodable {
