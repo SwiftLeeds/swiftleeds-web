@@ -223,7 +223,7 @@
               
               <div class="row flex-nowrap overflow-auto">
               #for(slot in session.slots):
-                <div class="col-xs-5 col-md-5 col-sm-5 col-lg-4 col-xl-3">
+                <div class="col-5 col-md-5 col-sm-5 col-lg-4 col-xl-3">
                 <div class="card #if(slot.isParticipant):bg-dark text-white#endif">
                   <div class="card-body">
                     <h5 class="card-title fs-sm" style="color: inherit;">#(slot.day) at #date(slot.date, "HH:mm")</h5>
