@@ -201,105 +201,32 @@
               <hr />
 #endif
               
-            #if(count(dropInSessions) > 0):
-              <!-- Drop-in -->
-              <h2 id="dropin" class="h5 text-primary pt-1 pt-lg-3 mt-4">Drop-in Sessions</h2>
-              <p>Drop-in sessions enable you to have a one-to-one conversation with one of our fantastic hosts below. Each cover a unique subject, covering your apps, career or anything else you want to discuss.</p>
-              <p>Drop-in sessions are entirely free, with one session included in your ticket cost. Slots are limited and are offered on a first come first served basis, so why not book a slot below?</p>
-              
-              #if(prompt):
-                <div class="alert alert-secondary" role="alert">#(prompt)</div>
-              #endif
-              
-              #for(session in dropInSessions):
-              
-                <div class="d-flex flex-row align-items-center mt-5 mb-3">
-                  <img src="#awsImage(session.ownerImageUrl)" class="d-block rounded" width="80" alt="#(session.ownerName)">
-                  <div class="ps-4">
-                    <h5 class="fw-medium fs-lg mb-1">#(session.title)</h5>
-                    <p class="fs-sm mb-0">#(session.ownerName)</p>
-                  </div>
-                </div>
-              
-              <div class="row flex-nowrap overflow-auto">
-              #for(slot in session.slots):
-                <div class="col-5 col-md-5 col-sm-5 col-lg-4 col-xl-3">
-                <div class="card #if(slot.isParticipant):bg-dark text-white#endif">
-                  <div class="card-body">
-                    <h5 class="card-title fs-sm" style="color: inherit;">#(slot.day) at #date(slot.date, "HH:mm")</h5>
-                    
-                    #if(!hasValidTicket):
-                    <a href="#" class="btn btn-sm btn-secondary disabled">Invalid</a>
-                    #elseif(slot.isParticipant):
-                    <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#slot-#(slot.id)">Cancel</a>
-                    #elseif(slot.isFullyBooked):
-                    <a href="#" class="btn btn-sm btn-secondary disabled">#if(session.maximumAttendance > 1):Fully Booked#else:Taken#endif</a>
-                    #else:
-                    <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#slot-#(slot.id)">Book</a>
-                    #endif
-                    
-                  </div>
-                </div>
-                </div>
-                
-                
-                
-        #if(slot.isParticipant):
-          <!-- Modal -->
-          <div class="modal fade" id="slot-#(slot.id)" tabindex="-1" aria-labelledby="slot-#(slot.id)-title" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="slot-#(slot.id)-title">Cancel Drop-in Session</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  This will cancel your 15 minute session with #(session.owner) at #date(slot.date, "HH:mm") on #date(slot.date, "dd/MM/yyyy").
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Modal (Keep Session)</button>
-                  <a href="/ticket/#(session.id)/cancel/#(slot.id)" class="btn btn-danger">Cancel</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          #else:
-          <!-- Modal -->
-          <div class="modal fade" id="slot-#(slot.id)" tabindex="-1" aria-labelledby="slot-#(slot.id)-title" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="slot-#(slot.id)-title">Book Drop-in Session</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  This will reserve a 15 minute session with #(session.owner) at #date(slot.date, "HH:mm") on #date(slot.date, "dd/MM/yyyy").
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Modal</button>
-                  <a href="/ticket/#(session.id)/book/#(slot.id)" class="btn btn-primary">Book</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          #endif
-                
-                
-              #endfor
-              
-              </div>
-              #endfor
-              
-              <hr class="mt-3" />
+              #if(count(dropInSessions) > 0):
+                  <!-- Drop-in -->
+                  <h2 id="dropin" class="h5 text-primary pt-1 pt-lg-3 mt-4">Drop-in Sessions</h2>
+                  <p>Drop-in sessions enable you to have a one-to-one conversation with one of our fantastic hosts below. Each cover a unique subject, covering your apps, career or anything else you want to discuss.</p>
+                  <p>Drop-in sessions are entirely free, with one session included in your ticket cost. Slots are limited and are offered on a first come first served basis, so why not book a slot below?</p>
+                  
+                  #if(prompt):
+                    <div class="alert alert-secondary" role="alert">#(prompt)</div>
+                  #endif
+                  
+                  #for(session in dropInSessions):
+                    #extend("Hub/_carousel")
+                  #endfor
+                  
+                  <hr class="mt-3" />
               #endif
               
               #if(count(groupSessions) > 0):
-                            
-              <!-- Focus Groups -->
-              <h2 id="focus" class="h5 text-primary pt-1 pt-lg-3 mt-4">Focus Groups</h2>
-              
-              <hr />
-              
+                  <h2 id="focus" class="h5 text-primary pt-1 pt-lg-3 mt-4">Focus Groups</h2>
+                  <!-- TODO: add explanation of group sessions -->
+                  
+                  #for(session in groupSessions):
+                    #extend("Hub/_carousel")
+                  #endfor
+                  
+                  <hr class="mt-3" />
               #endif
               
               <!-- VISA Invitation -->
