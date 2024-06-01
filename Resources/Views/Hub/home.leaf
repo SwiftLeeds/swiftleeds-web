@@ -1,0 +1,330 @@
+#extend("base"):
+    #export("title", "SwiftLeeds")
+        
+    #export("content"):
+
+    <header class="header navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-light shadow-sm fixed-top">
+        <div class="container px-3">
+          <a href="/" class="navbar-brand">
+            <img src="/img/logo_horizontal_dark.svg" width="120" alt="SwiftLeeds">
+          </a>
+        </div>
+      </header>
+
+
+      <!-- Page content -->
+      <section class="container pt-5">
+        <div class="row">
+
+  
+          <!-- Sidebar (User info + Account menu) -->
+          <aside class="col-lg-3 col-md-4 border-end pb-5 mt-n5">
+            <div class="position-sticky top-0">
+              <div class="text-center pt-5">
+                <div class="d-table position-relative mx-auto mt-2 mt-lg-4 pt-5 mb-3">
+                  <img src="#(ticket.imageUrl)" class="d-block rounded-circle" width="120" alt="#(ticket.name)">
+                </div>
+                <h2 class="h5 mb-1">#(ticket.name)</h2>
+                
+                #if(false):
+                #if(ticket.purchaseTalkshowUrl):
+                <a href="#(ticket.purchaseTalkshowUrl)" target="_blank" class="badge bg-danger shadow-danger">Missing Talkshow</a>
+                #else:
+                <span class="badge bg-success shadow-success">Valid Talkshow Ticket</span>
+                #endif
+                #endif
+                
+                <p class="mt-3 fs-sm mb-3 pb-3">#(ticket.email)</p>
+                
+                <button type="button" class="btn btn-secondary w-100 d-md-none mt-n2 mb-3" data-bs-toggle="collapse" data-bs-target="#ticket-menu">
+                  <i class="bx bxs-user-detail fs-xl me-2"></i>
+                  Ticket Hub Menu
+                  <i class="bx bx-chevron-down fs-lg ms-1"></i>
+                </button>
+                
+                <div id="ticket-menu" class="list-group list-group-flush collapse d-md-block">
+                #if(false):
+                  <a href="#info" data-scroll data-scroll-offset="70" class="list-group-item list-group-item-action d-flex align-items-center active">
+                    <i class="bx bx-cog fs-xl opacity-60 me-2"></i>
+                    Personal Information
+                  </a>
+                  <a href="#merch" data-scroll data-scroll-offset="70" class="list-group-item list-group-item-action d-flex align-items-center">
+                    <i class="bx bxs-t-shirt fs-xl opacity-60 me-2"></i>
+                    Merch Preferences
+                  </a>
+                #endif
+                
+                #if(count(dropInSessions) > 0):
+                  <a href="#dropin" data-scroll data-scroll-offset="70" class="list-group-item list-group-item-action d-flex align-items-center">
+                    <i class="bx bx-chat fs-xl opacity-60 me-2"></i>
+                    Drop-in Sessions
+                  </a>
+                #endif
+                  
+                #if(count(groupSessions) > 0):
+                  <a href="#focus" data-scroll data-scroll-offset="70" class="list-group-item list-group-item-action d-flex align-items-center">
+                    <i class="bx bx-group fs-xl opacity-60 me-2"></i>
+                    Focus Groups
+                  </a>
+                #endif
+                  
+                  <a href="#visa" data-scroll data-scroll-offset="70" class="list-group-item list-group-item-action d-flex align-items-center">
+                    <i class="bx bxs-traffic-barrier fs-xl opacity-60 me-2"></i>
+                    VISA Invitation
+                  </a>
+                  <a href="#refund" data-scroll data-scroll-offset="70" class="list-group-item list-group-item-action d-flex align-items-center">
+                    <i class="bx bx-wallet fs-xl opacity-60 me-2"></i>
+                    Ticket Refunds
+                  </a>
+                  <a href="/ticket/logout" class="list-group-item list-group-item-action d-flex align-items-center">
+                    <i class="bx bx-log-out fs-xl opacity-60 me-2"></i>
+                    Sign Out
+                  </a>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+
+          <!-- Account details -->
+          <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4 pt-md-5 mt-n3 mt-md-0">
+            <div class="ps-md-3 ps-lg-0 mt-md-2 py-md-4">
+              <h1 class="h2 pt-xl-1 pb-3">Ticket Details</h1>
+
+#if(false):
+              <!-- Basic info -->
+              <h2 id="info" class="h5 text-primary mb-4">Basic info</h2>
+              <form class="needs-validation border-bottom pb-3 pb-lg-4" novalidate>
+                <div class="row pb-2">
+                  <div class="col-sm-6 mb-4">
+                    <label for="fn" class="form-label fs-base">First name</label>
+                    <input type="text" id="fn" class="form-control form-control-lg" value="James" required readonly>
+                    <div class="invalid-feedback">Please enter your first name!</div>
+                  </div>
+                  <div class="col-sm-6 mb-4">
+                    <label for="sn" class="form-label fs-base">Second name</label>
+                    <input type="text" id="sn" class="form-control form-control-lg" value="Sherlock" required readonly>
+                    <div class="invalid-feedback">Please enter your second name!</div>
+                  </div>
+                  <div class="col-sm-6 mb-4">
+                    <label for="pronoun" class="form-label fs-base">Pronouns</label>
+                    <select id="pronoun" class="form-select form-select-lg" required disabled>
+                      <option value="" disabled>Choose country</option>
+                      <option value="he" selected>he/him</option>
+                      <option value="she">she/her</option>
+                      <option value="they">they/them</option>
+                      <option value="xe">xe/xem</option>
+                      <option value="other">Other</option>
+                    </select>
+                    <div class="invalid-feedback">Please choose your pronouns!</div>
+                  </div>
+                  <div class="col-sm-6 mb-4">
+                    <label for="job" class="form-label fs-base">Job title</label>
+                    <input type="text" id="job" class="form-control form-control-lg" value="Senior iOS Developer" required readonly>
+                    <div class="invalid-feedback">Please provide a job title!</div>
+                  </div>
+                </div>
+                #if(false):
+                <div class="d-flex mb-3">
+                  <button type="reset" class="btn btn-secondary me-3">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+                #endif
+              </form>
+#endif
+              
+#if(false):
+              <!-- Socials -->
+              <h2 id="social" class="h5 text-primary pt-1 pt-lg-3 my-4">Social Links</h2>
+              <form class="border-bottom pb-3 pb-lg-4" novalidate>
+                <div class="row pb-2">
+                  <div class="col-sm-6 mb-4">
+                    <label for="fn" class="form-label fs-base">LinkedIn</label>
+                      <div class="d-flex align-items-center border rounded-3">
+                        <input type="text" id="fn" class="form-control border-0 bg-transparent shadow-none" placeholder="Enter your LinkedIn profile URL" readonly>
+                        <div class="p-2">
+                            <i class="bx bxl-linkedin-square fs-xl opacity-60 me-2 mt-1"></i>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-sm-6 mb-4">
+                    <label for="fn" class="form-label fs-base">Mastodon</label>
+                      <div class="d-flex align-items-center border rounded-3">
+                        <input type="text" id="fn" class="form-control border-0 bg-transparent shadow-none" placeholder="Enter your Mastodon URL" readonly>
+                        <div class="p-2">
+                            <i class="bx bx-note fs-xl opacity-60 me-2 mt-1"></i>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-sm-6 mb-4">
+                    <label for="fn" class="form-label fs-base">Twitter</label>
+                      <div class="d-flex align-items-center border rounded-3">
+                        <input type="text" id="fn" class="form-control border-0 bg-transparent shadow-none" placeholder="Enter your Twitter profile URL" readonly>
+                        <div class="p-2">
+                            <i class="bx bxl-twitter fs-xl opacity-60 me-2 mt-1"></i>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-sm-6 mb-4">
+                    <label for="fn" class="form-label fs-base">YouTube</label>
+                      <div class="d-flex align-items-center border rounded-3">
+                        <input type="text" id="fn" class="form-control border-0 bg-transparent shadow-none" placeholder="Enter your YouTube channel URL" readonly>
+                        <div class="p-2">
+                            <i class="bx bxl-youtube fs-xl opacity-60 me-2 mt-1"></i>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                #if(false):
+                <div class="d-flex mb-3">
+                  <button type="reset" class="btn btn-secondary me-3">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+                #endif
+              </form>
+#endif
+
+#if(false):
+              <!-- Merch -->
+              <h2 id="merch" class="h5 text-primary pt-1 pt-lg-3 mt-4">Merch Preferences</h2>
+              
+                <div class="form-check form-switch">
+                  <input type="checkbox" class="form-check-input" id="customSwitch2" checked>
+                  <label class="form-check-label" for="customSwitch2">Do you want SwiftLeeds Swag?</label>
+                </div>
+                
+                <div class="range-slider" data-start-min="450" data-min="0" data-max="10" data-step="1" data-tooltip-prefix="$">
+                  <div class="range-slider-ui"></div>
+                  <input class="form-control range-slider-value-min" type="hidden">
+                </div>
+              
+              <hr />
+#endif
+              
+            #if(count(dropInSessions) > 0):
+              <!-- Drop-in -->
+              <h2 id="dropin" class="h5 text-primary pt-1 pt-lg-3 mt-4">Drop-in Sessions</h2>
+              <p>Drop-in sessions enable you to have a one-to-one conversation with one of our fantastic hosts below. Each cover a unique subject, covering your apps, career or anything else you want to discuss.</p>
+              <p>Drop-in sessions are entirely free, with one session included in your ticket cost. Slots are limited and are offered on a first come first served basis, so why not book a slot below?</p>
+              
+              #if(prompt):
+                <div class="alert alert-secondary" role="alert">#(prompt)</div>
+              #endif
+              
+              #for(session in dropInSessions):
+              
+                <div class="d-flex flex-row align-items-center mt-5 mb-3">
+                  <img src="#awsImage(session.ownerImageUrl)" class="d-block rounded" width="80" alt="#(session.ownerName)">
+                  <div class="ps-4">
+                    <h5 class="fw-medium fs-lg mb-1">#(session.title)</h5>
+                    <p class="fs-sm mb-0">#(session.ownerName)</p>
+                  </div>
+                </div>
+              
+              <div class="row flex-nowrap overflow-auto">
+              #for(slot in session.slots):
+                <div class="col-xs-5 col-md-5 col-sm-5 col-lg-4 col-xl-3">
+                <div class="card #if(slot.isParticipant):bg-dark text-white#endif">
+                  <div class="card-body">
+                    <h5 class="card-title fs-sm" style="color: inherit;">#(slot.day) at #date(slot.date, "HH:mm")</h5>
+                    
+                    #if(!hasValidTicket):
+                    <a href="#" class="btn btn-sm btn-secondary disabled">Invalid</a>
+                    #elseif(slot.isParticipant):
+                    <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#slot-#(slot.id)">Cancel</a>
+                    #elseif(slot.isFullyBooked):
+                    <a href="#" class="btn btn-sm btn-secondary disabled">#if(session.maximumAttendance > 1):Fully Booked#else:Taken#endif</a>
+                    #else:
+                    <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#slot-#(slot.id)">Book</a>
+                    #endif
+                    
+                  </div>
+                </div>
+                </div>
+                
+                
+                
+        #if(slot.isParticipant):
+          <!-- Modal -->
+          <div class="modal fade" id="slot-#(slot.id)" tabindex="-1" aria-labelledby="slot-#(slot.id)-title" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="slot-#(slot.id)-title">Cancel Drop-in Session</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  This will cancel your 15 minute session with #(session.owner) at #date(slot.date, "HH:mm") on #date(slot.date, "dd/MM/yyyy").
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Modal (Keep Session)</button>
+                  <a href="/ticket/#(session.id)/cancel/#(slot.id)" class="btn btn-danger">Cancel</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          #else:
+          <!-- Modal -->
+          <div class="modal fade" id="slot-#(slot.id)" tabindex="-1" aria-labelledby="slot-#(slot.id)-title" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="slot-#(slot.id)-title">Book Drop-in Session</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  This will reserve a 15 minute session with #(session.owner) at #date(slot.date, "HH:mm") on #date(slot.date, "dd/MM/yyyy").
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Modal</button>
+                  <a href="/ticket/#(session.id)/book/#(slot.id)" class="btn btn-primary">Book</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          #endif
+                
+                
+              #endfor
+              
+              </div>
+              #endfor
+              
+              <hr class="mt-3" />
+              #endif
+              
+              #if(count(groupSessions) > 0):
+                            
+              <!-- Focus Groups -->
+              <h2 id="focus" class="h5 text-primary pt-1 pt-lg-3 mt-4">Focus Groups</h2>
+              
+              <hr />
+              
+              #endif
+              
+              <!-- VISA Invitation -->
+              <h2 id="visa" class="h5 text-primary pt-1 pt-lg-3 mt-4">VISA Invitation</h2>
+              <p>We want to give everybody the opportunity to learn and network at SwiftLeeds, but understand VISA applications for the United Kingdom can sometimes be challenging. We will always do everything we can to assist in your application, including providing an official invitation letter.</p>
+              <p>To request this, please send an email to us at <a href="mailto:info@swiftleeds.co.uk?subject=VISA Invitation">info@swiftleeds.co.uk</a> with the subject 'VISA Invitation'.</p>
+              <hr />
+              
+              <!-- Refund Ticket -->
+              <h2 id="refund" class="h5 text-primary pt-1 pt-lg-3 mt-4">Ticket refunds</h2>
+              <p>SwiftLeeds will always refund 100% of ticket purchases (minus our 3% processing fee) if requested more than 14&nbsp;days before the conference begins. This year, that deadline is #(refund.deadline).</p>
+              
+              #if(refund.active):
+              <a href="#(refund.emailUrl)" target="_blank" class="btn btn-danger">Email us now</a>
+              #else:
+              <div class="alert alert-danger" role="alert">
+              We are no longer accepting refunds for this year. If you'd like to transfer your ticket to another person, please email us at <a href="mailto:info@swiftleeds.co.uk">info@swiftleeds.co.uk</a>.
+              </div>
+              #endif
+              
+              
+            </div>
+          </div>
+        </div>
+      </section>
+
+    #endexport
+#endextend

@@ -16,6 +16,8 @@ struct TitoTicket: Codable {
     let avatar_url: URL?
     let responses: [String: String]
     let release: Release?
+    let email: String
+    let reference: String
     
     var fullName: String {
         first_name + " " + last_name

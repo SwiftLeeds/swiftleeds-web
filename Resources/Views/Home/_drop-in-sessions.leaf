@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="d-flex flex-column flex-sm-row">
-          <a href="/drop-in" class="btn btn-primary mb-3 mb-sm-0 me-sm-3">Book Session</a>
+          <a href="/ticket#dropin" class="btn btn-primary mb-3 mb-sm-0 me-sm-3">Book Session</a>
         </div>
         #else:
         <div class="alert alert-primary text-body" role="alert">
