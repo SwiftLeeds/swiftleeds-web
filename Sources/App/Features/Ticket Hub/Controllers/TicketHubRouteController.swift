@@ -211,6 +211,7 @@ struct TicketHubRouteController: RouteCollection {
             companyImageUrl: model.companyImageUrl,
             companyLink: model.companyLink,
             maximumAttendance: model.maxTicketsPerSlot,
+            remainingSlots: slotsWithDay.map({ model.maxTicketsPerSlot - $0.participantCount }).reduce(0, +),
             slots: slotsWithDay
         )
     }
@@ -253,6 +254,7 @@ struct TicketHubContext: Content {
         let companyLink: String?
         
         let maximumAttendance: Int
+        let remainingSlots: Int
         
         let slots: [SessionSlot]
     }

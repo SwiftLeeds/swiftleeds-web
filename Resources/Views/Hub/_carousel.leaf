@@ -34,8 +34,6 @@
                 </div>
                 </div>
                 
-                
-                
         #if(slot.isParticipant):
           <!-- Modal -->
           <div class="modal fade" id="slot-#(slot.id)" tabindex="-1" aria-labelledby="slot-#(slot.id)-title" aria-hidden="true">
@@ -49,7 +47,7 @@
                   This will cancel your 15 minute session with #(session.owner) at #date(slot.date, "HH:mm") on #date(slot.date, "dd/MM/yyyy").
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Modal (Keep Session)</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close (Keep Session)</button>
                   <a href="/ticket/#(session.id)/cancel/#(slot.id)" class="btn btn-danger">Cancel</a>
                 </div>
               </div>
@@ -68,7 +66,7 @@
                   This will reserve a 15 minute session with #(session.owner) at #date(slot.date, "HH:mm") on #date(slot.date, "dd/MM/yyyy").
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Modal</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                   <a href="/ticket/#(session.id)/book/#(slot.id)" class="btn btn-primary">Book</a>
                 </div>
               </div>
@@ -76,7 +74,8 @@
           </div>
           #endif
                 
-                
               #endfor
               
               </div>
+              
+                <div class="fs-sm pt-1">#(session.remainingSlots) spot#if(session.remainingSlots == 1):#else:s#endif unreserved out of #(session.maximumAttendance * count(session.slots)) available, scroll to see them all.</div>
