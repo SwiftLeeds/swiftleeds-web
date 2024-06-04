@@ -25,7 +25,7 @@
                     #elseif(slot.isParticipant):
                     <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#slot-#(slot.id)">Cancel</a>
                     #elseif(slot.isFullyBooked):
-                    <a href="#" class="btn btn-sm btn-secondary disabled">#if(session.maximumAttendance > 1):Fully Booked#else:Taken#endif</a>
+                    <a href="#" class="btn btn-sm btn-secondary disabled">#if(session.maximumAttendance > 1):Fully Booked#else:Booked#endif</a>
                     #else:
                     <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#slot-#(slot.id)">Book</a>
                     #endif
@@ -40,7 +40,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="slot-#(slot.id)-title">Cancel Drop-in Session</h1>
+                  <h1 class="modal-title fs-5" id="slot-#(slot.id)-title">Cancel Drop-In Session</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -59,7 +59,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="slot-#(slot.id)-title">Book Drop-in Session</h1>
+                  <h1 class="modal-title fs-5" id="slot-#(slot.id)-title">Book Drop-In Session</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -78,4 +78,4 @@
               
               </div>
               
-                <div class="fs-sm pt-1">#(session.remainingSlots) spot#if(session.remainingSlots == 1):#else:s#endif unreserved out of #(session.maximumAttendance * count(session.slots)) available, scroll to see them all.</div>
+                <div class="fs-sm pt-1">#(session.remainingSlots) spot#if(session.remainingSlots == 1):#else:s#endif available out of a total #(session.maximumAttendance * count(session.slots)), scroll to see them all.</div>
