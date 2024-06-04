@@ -7,7 +7,7 @@ struct TitoService {
     func ticket(payload: TicketLoginPayload, req: Request) async throws -> TitoTicketsResponse.Ticket? {
         // 1000 page size should guarantee all tickets are returned in one request (and is the maximum)
         // completed state search makes invalid, incomplete, or unpaid tickets are not returned
-        let url = "\(baseUrl)/\(event)/tickets?search[states][]=complete&page[size]=1000"
+        let url = "\(baseUrl)/\(event)/tickets?search[states][]=complete&page[size]=1000&expand=release"
         
         let response = try await req.client.get(URI(string: url), headers: getHeaders())
         let ticketResponse = try response.content.decode(TitoTicketsResponse.self)
@@ -77,6 +77,11 @@ struct TitoTicketsResponse: Decodable {
         let slug: String
         let reference: String
         let email: String?
+        let release: Release
+    }
+    
+    struct Release: Decodable {
+        let title: String
     }
     
     struct Meta: Decodable {

@@ -26,8 +26,8 @@ func routes(_ app: Application) throws {
 
     try app.routes.register(collection: AuthController()) // TODO: Split this out into web/api/admin
     try app.routes.register(collection: PushController())
-    try app.routes.register(collection: DropInUserRouteController())
     try app.routes.register(collection: TicketLoginController())
+    try app.routes.register(collection: TicketHubRouteController())
     
     // MARK: - API Routes
     

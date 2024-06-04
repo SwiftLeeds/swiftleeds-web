@@ -13,7 +13,12 @@
 
     <script src="/js/theme-switcher.js"></script>
     <link rel="stylesheet" media="screen" href="/css/theme.css">
+    
+    #if(eventYear):
     <link rel="stylesheet" media="screen" href="/css/year/#(eventYear).css">
+    #endif
+    
+    #import("styles")
     
     <title>#import("title") - The Unique iOS Swift Conference in the UK</title>
 
@@ -68,6 +73,7 @@
     <script src="/vendor/lightgallery/plugins/fullscreen/lg-fullscreen.min.js"></script>
     <script src="/vendor/lightgallery/plugins/zoom/lg-zoom.min.js"></script>
     <script src="/vendor/lightgallery/plugins/video/lg-video.min.js"></script>
+    #import("scriptImports")
 
     <!-- Main Theme Script -->
     <script src="/js/theme.min.js"></script>

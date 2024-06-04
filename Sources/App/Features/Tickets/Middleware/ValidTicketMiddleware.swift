@@ -26,7 +26,9 @@ struct ValidTicketMiddleware: AsyncMiddleware {
                     company_name: nil,
                     avatar_url: nil,
                     responses: [:],
-                    release: .init(metadata: .init(canBookDropInSession: true))
+                    release: .init(metadata: .init(canBookDropInSession: true)),
+                    email: "james@gmail.com",
+                    reference: "ABCD-1"
                 ))
                 
                 return try await next.respond(to: request)

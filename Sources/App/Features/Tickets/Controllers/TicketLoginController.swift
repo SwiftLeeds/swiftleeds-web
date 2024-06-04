@@ -31,6 +31,13 @@ struct TicketLoginController: RouteCollection {
                 return req.redirect(to: "/ticketLogin?prompt=\(message ?? "")")
             }
             
+            if ticket.release.title.lowercased().contains("talkshow") {
+                let message = "You cannot login with a talkshow ticket. Please use your main event ticket and try again."
+                    .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                
+                return req.redirect(to: "/ticketLogin?prompt=\(message ?? "")")
+            }
+            
             // Update session
             req.session.data["tito-\(currentTitoEvent)"] = ticket.slug
             
