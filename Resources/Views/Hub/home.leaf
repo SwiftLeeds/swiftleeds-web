@@ -204,8 +204,8 @@
               #if(count(dropInSessions) > 0):
                   <!-- Drop-In -->
                   <h2 id="dropin" class="h5 text-primary pt-1 pt-lg-3 mt-4">Drop-In Sessions</h2>
-                  <p>Drop-In Sessions enable you to have a one-to-one conversation with one of our fantastic hosts below. Each cover a unique subject, covering your apps, career or anything else you want to discuss.</p>
-                  <p>Drop-In Sessions are entirely free, with one session included in your ticket cost. Slots are limited and are offered on a first come first served basis, so why not book a slot below?</p>
+                  <p>Drop-In sessions enable you to have a one-to-one conversation with one of our fantastic hosts below. Each session covers a unique subject, such as your apps, career, or anything else you want to discuss.</p>
+                  <p>Drop-In sessions are free, and one session is included in your ticket cost. However, slots are limited and offered on a first-come, first-served basis, so why not book a slot below?</p>
                   
                   #if(prompt):
                     <div class="alert alert-secondary" role="alert">#(prompt)</div>
@@ -237,7 +237,7 @@
               
               <!-- Refund Ticket -->
               <h2 id="refund" class="h5 text-primary pt-1 pt-lg-3 mt-4">Ticket Refunds</h2>
-              <p>SwiftLeeds will always refund 100% of ticket purchases (minus our 3% processing fee) if requested more than 14&nbsp;days before the conference begins. This year, that deadline is #(refund.deadline).</p>
+              <p>SwiftLeeds will always refund 100% of ticket purchases (minus our 3% processing fee) if requested more than 30&nbsp;days before the conference begins. This year, that deadline is #(refund.deadline).</p>
               
               #if(refund.active):
               <a href="#(refund.emailUrl)" target="_blank" class="btn btn-danger">Email us now</a>
