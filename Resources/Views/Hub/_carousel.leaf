@@ -27,7 +27,7 @@
                     #elseif(slot.isFullyBooked):
                     <a href="#" class="btn btn-sm btn-secondary disabled">#if(session.maximumAttendance > 1):Fully Booked#else:Taken#endif</a>
                     #else:
-                    <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#slot-#(slot.id)">Book </a>
+                    <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#slot-#(slot.id)">Book</a>
                     #endif
                     
                   </div>
@@ -44,7 +44,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  This will cancel your 15 minute session with #(session.owner) at #date(slot.date, "HH:mm") on #date(slot.date, "dd/MM/yyyy").
+                  This will cancel your 15 minute session with #(session.ownerName) at #date(slot.date, "HH:mm") on #date(slot.date, "dd/MM/yyyy").
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close (Keep Session)</button>
@@ -63,7 +63,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  This will reserve a 15 minute session with #(session.owner) at #date(slot.date, "HH:mm") on #date(slot.date, "dd/MM/yyyy").
+                  This will reserve a 15 minute session with #(session.ownerName) at #date(slot.date, "HH:mm") on #date(slot.date, "dd/MM/yyyy").
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
