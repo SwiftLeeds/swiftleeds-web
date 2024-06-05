@@ -84,6 +84,7 @@ jobs:
             TITO_TOKEN=TITO_KEY:latest
             FLICKR_KEY=FLICKR_KEY:latest
             FLICKR_SECRET=FLICKR_SECRET:latest
+            REFUND_PERIOD=30
 
       - name: Update GitHub Deployment
         uses: bobheadxi/deployments@v1

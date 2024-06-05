@@ -9,8 +9,9 @@ struct TicketHubRouteController: RouteCollection {
                     throw Abort(.badRequest, reason: "unable to identify current event")
                 }
                 
-                // 30 days refund window
-                let refundDeadline = Date(timeIntervalSince1970: currentEvent.date.timeIntervalSince1970 - (60 * 60 * 24 * 30))
+                // Refund Period
+                let refundDays: Int = Environment.get("REFUND_PERIOD").flatMap { Int($0) } ?? 30
+                let refundDeadline = Date(timeIntervalSince1970: currentEvent.date.timeIntervalSince1970 - Double((60 * 60 * 24 * refundDays)))
                 
                 let formatter = DateFormatter()
                 formatter.locale = .init(identifier: "en_US_POSIX")
@@ -46,6 +47,7 @@ struct TicketHubRouteController: RouteCollection {
                     groupSessions: groupSessions,
                     refund: .init(
                         active: Date() < refundDeadline,
+                        days: refundDays,
                         deadline: formatter.string(from: refundDeadline),
                         emailUrl: "mailto:info@swiftleeds.co.uk?subject=Refund Request&body=Ticket \(ticket.reference)"
                     ),
@@ -60,7 +62,6 @@ struct TicketHubRouteController: RouteCollection {
                     throw Abort(.unauthorized, reason: "Ticket not present in session storage")
                 }
                 
-                let sessionID = try req.parameters.require("session")
                 let slotID = try req.parameters.require("slot")
                 
                 guard let slotUUID = UUID(uuidString: slotID) else {
@@ -103,7 +104,6 @@ struct TicketHubRouteController: RouteCollection {
                     throw Abort(.unauthorized, reason: "Ticket not present in session storage")
                 }
                 
-                let sessionID = try req.parameters.require("session")
                 let slotID = try req.parameters.require("slot")
                 
                 guard ticket.release?.metadata?.canBookDropInSession == true else {
@@ -226,6 +226,7 @@ struct TicketHubContext: Content {
     
     struct Refund: Codable {
         let active: Bool
+        let days: Int
         let deadline: String
         let emailUrl: String
     }
