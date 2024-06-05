@@ -73,18 +73,17 @@ jobs:
             BUCKET_NAME_SPEAKERS=swiftleeds-speakers
             S3_BUCKET_NAME=swiftleeds-speakers
             ENABLE_AASA=true
-          secrets: |
-            CHECKIN_SECRET=APP_CHECKIN_SECRET:latest
-            CHECKIN_TAG=TITO_CHECKIN_TAG:latest
-            DATABASE_URL=SUPABASE_DATABASE_URL:latest
-            P8_CERTIFICATE=APNS_CERTIFICATE:latest
-            S3_KEY=AWS_KEY:latest
-            S3_SECRET=AWS_SECRET:latest
-            SESSIONIZE_KEY=SESSIONIZE_KEY:latest
-            TITO_TOKEN=TITO_KEY:latest
-            FLICKR_KEY=FLICKR_KEY:latest
-            FLICKR_SECRET=FLICKR_SECRET:latest
-            REFUND_PERIOD=30
+            CHECKIN_SECRET=${{ secrets.CHECKIN_SECRET }}
+            CHECKIN_TAG=${{ secrets.CHECKIN_TAG }}
+            DATABASE_URL=${{ secrets.DATABASE_URL }}
+            P8_CERTIFICATE=${{ secrets.P8_CERTIFICATE }}
+            S3_KEY=${{ secrets.S3_KEY }}
+            S3_SECRET=${{ secrets.S3_SECRET }}
+            SESSIONIZE_KEY=${{ secrets.SESSIONIZE_KEY }}
+            TITO_TOKEN=${{ secrets.TITO_TOKEN }}
+            FLICKR_KEY=${{ secrets.FLICKR_KEY }}
+            FLICKR_SECRET=${{ secrets.FLICKR_SECRET }}
+            REFUND_PERIOD=${{ secrets.REFUND_PERIOD }}
 
       - name: Update GitHub Deployment
         uses: bobheadxi/deployments@v1
