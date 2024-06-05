@@ -176,6 +176,7 @@ struct TicketHubRouteController: RouteCollection {
                         id: slot.id?.uuidString ?? slot.date.description,
                         day: "Day \(offset + 1)",
                         date: slot.date,
+                        duration: slot.duration,
                         isParticipant: slot.ticket.contains(slug),
                         isFullyBooked: slot.ticket.count == model.maxTicketsPerSlot,
                         participantCount: slot.ticket.count
@@ -234,6 +235,7 @@ struct TicketHubContext: Content {
         let id: String
         let day: String
         let date: Date
+        let duration: Int
         let isParticipant: Bool
         let isFullyBooked: Bool
         let participantCount: Int
