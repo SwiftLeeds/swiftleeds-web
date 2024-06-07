@@ -237,7 +237,7 @@
               
               <!-- Refund Ticket -->
               <h2 id="refund" class="h5 text-primary pt-1 pt-lg-3 mt-4">Ticket Refunds</h2>
-              <p>SwiftLeeds will always refund 100% of ticket purchases (minus our 3% processing fee) if requested more than 30&nbsp;days before the conference begins. This year, that deadline is #(refund.deadline).</p>
+              <p>SwiftLeeds will always refund 100% of ticket purchases (minus our 3% processing fee) if requested more than #(refund.days)&nbsp;days before the conference begins. This year, that deadline is #(refund.deadline).</p>
               
               #if(refund.active):
               <a href="#(refund.emailUrl)" target="_blank" class="btn btn-danger">Email us now</a>
