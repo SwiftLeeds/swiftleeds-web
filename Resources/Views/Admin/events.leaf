@@ -1,10 +1,10 @@
 <div class="d-flex align-items-center justify-content-between pt-xl-1 mb-3 pb-3">
     <h1 class="h2 mb-0">Events</h1>
     
-    <a href="/admin/events" class="btn btn-outline-secondary px-3 px-sm-4">
+    <button data-swiftleeds-admin="events" class="btn btn-outline-secondary px-3 px-sm-4">
         <i class="bx bx-plus fs-xl me-sm-1"></i>
         <span class="d-none d-sm-inline">Add Event</span>
-    </a>
+    </button>
 </div>
 
 <ul class="list-unstyled mb-0">
@@ -18,10 +18,10 @@
           <span class="d-inline-block fs-sm text-muted">#date(event.date, "d MMM yyyy")</span>
         </div>
       </div>
-      <a href="/admin/events/#(event.id)" class="btn btn-outline-secondary px-3 px-sm-4">
-        <i class="bx bx-edit fs-xl ms-sm-n1 me-sm-1"></i>
+      <button data-swiftleeds-admin="events/#(event.id)" class="btn btn-outline-secondary px-3 px-sm-4">
+        <i class="bx bx-pencil fs-xl ms-sm-n1 me-sm-1"></i>
         <span class="d-none d-sm-inline">Edit Event</span>
-      </a>
+      </button>
     </li>
     #endfor
 </ul>

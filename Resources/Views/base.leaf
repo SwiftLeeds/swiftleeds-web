@@ -26,7 +26,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
     
+    #if(!page):
     <script src='https://js.tito.io/v2/with/inline' async></script>
+    #endif
     <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
   </head>
 

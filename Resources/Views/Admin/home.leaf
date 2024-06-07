@@ -52,9 +52,20 @@
           </div>
         </div>
       </section>
+      
+        <div class="modal fade" id="modal-admin" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content"></div>
+          </div>
+        </div>
+
+      
   #endexport
 
   #export("scripts"):
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="/js/admin.js"></script>
+    
     <script type="text/javascript">
       var nav = document.getElementById("nav");
       var links = nav.getElementsByClassName("nav-link");

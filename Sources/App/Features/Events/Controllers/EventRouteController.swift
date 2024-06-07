@@ -9,9 +9,10 @@ struct EventRouteController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         routes.get(use: onShowCreate)
         routes.get(":id", use: onShowEdit)
-        routes.get("delete", ":id", use: onDelete)
-        routes.post(use: onCreate)
-        routes.post(":id", use: onEdit)
+        
+        routes.post("create", use: onCreate)
+        routes.post(":id", "delete", use: onDelete)
+        routes.post(":id", "update", use: onEdit)
     }
     
     @Sendable private func onShowCreate(request: Request) async throws -> View {
@@ -34,7 +35,7 @@ struct EventRouteController: RouteCollection {
 
         try await event.delete(on: request.db)
 
-        return request.redirect(to: "/admin?page=events")
+        return Response(status: .ok, body: .init(string: "OK"))
     }
 
     @Sendable private func onCreate(request: Request) async throws -> Response {
@@ -43,7 +44,7 @@ struct EventRouteController: RouteCollection {
 
     @Sendable private func onEdit(request: Request) async throws -> Response {
         guard let event = try await Event.find(request.parameters.get("id"), on: request.db) else {
-            return request.redirect(to: "/admin?page=events")
+            throw Abort(.badRequest, reason: "Failed to find event")
         }
 
         return try await update(request: request, event: event)
@@ -54,7 +55,9 @@ struct EventRouteController: RouteCollection {
         let isCurrent = input.isCurrent ?? false
         var eventID: Event.IDValue
 
-        guard let date = Self.formDateFormatter().date(from: input.date) else { return request.redirect(to: "/admin?page=events")}
+        guard let date = Self.formDateFormatter().date(from: input.date) else {
+            throw Abort(.badRequest, reason: "Invalid Date Format")
+        }
 
         if let event = event {
             event.name = input.name
@@ -88,7 +91,7 @@ struct EventRouteController: RouteCollection {
                 .update()
         }
 
-        return request.redirect(to: "/admin?page=events")
+        return Response(status: .ok, body: .init(string: "OK"))
     }
 
     // MARK: - EventContext
