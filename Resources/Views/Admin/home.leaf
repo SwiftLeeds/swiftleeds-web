@@ -2,21 +2,22 @@
   #export("title", "SwiftLeeds")
 
   #export("content"):
-    #extend("Shared/_header")
-
-      <section class="bg-dark py-4">
-        <div class="container pb-2 py-lg-5">
-          <h1 class="text-center my-4 text-white">Admin Area</h1>
+    <header class="header navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-light shadow-sm fixed-top">
+        <div class="container px-3">
+          <a href="/" class="navbar-brand">
+            <img src="/img/logo_horizontal_dark.svg" width="120" alt="SwiftLeeds">
+          </a>
         </div>
-      </section>
-      
-      <section class="container mb-5 pt-4 pb-2 py-mg-4">
+      </header>
 
-    <div class="row">
-      <div class="col-3">
-        #extend("Admin/Shared/_sidebar")
-      </div>
-      <div class="col-9">
+      <section class="container pt-5">
+        <div class="row">
+
+          #extend("Admin/Shared/_sidebar")
+
+          <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4 pt-md-5 mt-n3 mt-md-0">
+            <div class="ps-md-3 ps-lg-0 mt-md-2 py-md-4">
+
         #if(page == "activities" || page == "dropins" || page == "presentations" || page == "slots" || page == "sponsors" ):
           <label for="selectedEvent" class="form-label">Selected event</label>
           <select id="selectedEvent" name="selectedEvent" class="form-control" onchange="selectedEventUpdated()">
@@ -46,11 +47,11 @@
         #elseif(page == "sponsors"):
           #extend("Admin/sponsors")
         #endif
-      </div>
-    </div>
-
+        
+            </div>
+          </div>
+        </div>
       </section>
-      
   #endexport
 
   #export("scripts"):

@@ -1,17 +1,27 @@
-<h2>Events</h2>
-<br/>
-<ul class="list-group">
-  #for(event in events):
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      #(event.name) - #(event.location) #if(event.isCurrent):✅#endif
-      <span class="badge badge-primary badge-pill">
-        <a href="/admin/events/delete/#(event.id)">🗑</a>
-        &nbsp
-        <a href="/admin/events/#(event.id)">✏️</a>
-      </span>
+<div class="d-flex align-items-center justify-content-between pt-xl-1 mb-3 pb-3">
+    <h1 class="h2 mb-0">Events</h1>
+    
+    <a href="/admin/events" class="btn btn-outline-secondary px-3 px-sm-4">
+        <i class="bx bx-plus fs-xl me-sm-1"></i>
+        <span class="d-none d-sm-inline">Add Event</span>
+    </a>
+</div>
+
+<ul class="list-unstyled mb-0">
+    #for(event in events):
+    <li class="d-flex align-items-center justify-content-between mb-4">
+      <div class="d-flex align-items-start me-3">
+        <div>
+          <div class="fw-medium text-nav mb-0">#(event.name) #if(event.isCurrent):<span class="badge bg-success shadow-success ms-2">Current</span>#endif</div>
+          
+          <span class="d-inline-block fs-sm text-muted border-end pe-2 me-2">#(event.location)</span>
+          <span class="d-inline-block fs-sm text-muted">#date(event.date, "d MMM yyyy")</span>
+        </div>
+      </div>
+      <a href="/admin/events/#(event.id)" class="btn btn-outline-secondary px-3 px-sm-4">
+        <i class="bx bx-edit fs-xl ms-sm-n1 me-sm-1"></i>
+        <span class="d-none d-sm-inline">Edit Event</span>
+      </a>
     </li>
-  #endfor
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    <a href="/admin/events">Add new event</a>
-  </li>
+    #endfor
 </ul>

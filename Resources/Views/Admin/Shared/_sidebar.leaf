@@ -1,53 +1,55 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
-    <ul id="nav" class="nav nav-pills flex-column mb-auto">
-      <li>
-        <a href="/admin?page=activities" class="nav-link link-dark">
-          Activities
-        </a>
-      </li>
-      <li>
-        <a href="/admin?page=dropins" class="nav-link link-dark">
-          Drop-ins
-        </a>
-      </li>
-      <li>
-        <a href="/admin?page=events" class="nav-link link-dark">
-          Events
-        </a>
-      </li>
-      <li>
-        <a href="/admin?page=jobs" class="nav-link link-dark">
-          Jobs
-        </a>
-      </li>
-      <li>
-        <a href="/admin?page=presentations" class="nav-link link-dark">
-          Presentations / Sessions
-        </a>
-      </li>
-      <li>
-        <a href="/admin?page=slots" class="nav-link link-dark">
-          Slots
-        </a>
-      </li>
-      <li>
-        <a href="/admin?page=speakers" class="nav-link link-dark">
-          Speakers
-        </a>
-      </li>
-      <li>
-        <a href="/admin?page=sponsors" class="nav-link link-dark">
-          Sponsors
-        </a>
-      </li>
-    </ul>
-    <hr>
-    <div class="dropdown">
-      <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-        <strong>Welcome, #(user.name)</strong>
-      </a>
-      <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-        <li><a class="dropdown-item" href="/logout">Sign out</a></li>
-      </ul>
+  <aside class="col-lg-3 col-md-4 border-end pb-5 mt-n5">
+    <div class="position-sticky top-0">
+      <div class="text-center pt-5">
+        <div class="d-table position-relative mx-auto mt-2 mt-lg-4 pt-5 mb-3">
+          <img src="https://gravatar.com/avatar/#hash(user.email)?d=retro" class="d-block rounded-circle" width="120" alt="#(user.name)">
+        </div>
+        <h2 class="h5 mb-3 pb-3">#(user.name)</h2>
+        
+        <button type="button" class="btn btn-secondary w-100 d-md-none mt-n2 mb-3" data-bs-toggle="collapse" data-bs-target="#admin-menu">
+          <i class="bx bxs-user-detail fs-xl me-2"></i>
+          Admin Menu
+          <i class="bx bx-chevron-down fs-lg ms-1"></i>
+        </button>
+        
+        <div id="admin-menu" class="list-group list-group-flush collapse d-md-block">
+          <a href="/admin?page=activities" class="list-group-item list-group-item-action d-flex align-items-center #if(page == "activities"):active#endif">
+            <i class="bx bx-popsicle fs-xl opacity-60 me-2"></i>
+            Activities
+          </a>
+          <a href="/admin?page=dropins" class="list-group-item list-group-item-action d-flex align-items-center #if(page == "dropins"):active#endif">
+            <i class="bx bx-group fs-xl opacity-60 me-2"></i>
+            Drop-In Sessions
+          </a>
+          <a href="/admin?page=events" class="list-group-item list-group-item-action d-flex align-items-center #if(page == "events"):active#endif">
+            <i class="bx bx-party fs-xl opacity-60 me-2"></i>
+            Events
+          </a>
+          <a href="/admin?page=jobs" class="list-group-item list-group-item-action d-flex align-items-center #if(page == "jobs"):active#endif">
+            <i class="bx bx-hard-hat fs-xl opacity-60 me-2"></i>
+            Jobs
+          </a>
+          <a href="/admin?page=presentations" class="list-group-item list-group-item-action d-flex align-items-center #if(page == "presentations"):active#endif">
+            <i class="bx bx-slideshow fs-xl opacity-60 me-2"></i>
+            Presentations
+          </a>
+          <a href="/admin?page=slots" class="list-group-item list-group-item-action d-flex align-items-center #if(page == "slots"):active#endif">
+            <i class="bx bx-calendar fs-xl opacity-60 me-2"></i>
+            Slots
+          </a>
+          <a href="/admin?page=speakers" class="list-group-item list-group-item-action d-flex align-items-center #if(page == "speakers"):active#endif">
+            <i class="bx bx-microphone fs-xl opacity-60 me-2"></i>
+            Speakers
+          </a>
+          <a href="/admin?page=sponsors" class="list-group-item list-group-item-action d-flex align-items-center #if(page == "sponsors"):active#endif">
+            <i class="bx bx-money fs-xl opacity-60 me-2"></i>
+            Sponsors
+          </a>
+          <a href="/logout" class="list-group-item list-group-item-action d-flex align-items-center">
+            <i class="bx bx-log-out fs-xl opacity-60 me-2"></i>
+            Sign Out
+          </a>
+        </div>
+      </div>
     </div>
-</div>
+  </aside>

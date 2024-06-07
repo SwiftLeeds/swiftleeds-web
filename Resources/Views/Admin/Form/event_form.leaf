@@ -54,7 +54,11 @@
         </div>
         <br/>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-success">#if(event):Update#else:Create#endif</button>
+        
+        #if(event):
+        <a class="btn btn-danger" "href="/admin/events/delete/#(event.id)">Delete</a>
+        #endif
       </form>
     </div>
 

@@ -23,6 +23,7 @@ public func configure(_ app: Application) throws {
     app.leaf.tags["markdown"] = Markdown()
     app.leaf.tags["awsImage"] = AwsImageTag()
     app.leaf.tags["safeCount"] = SafeCountTag()
+    app.leaf.tags["hash"] = HashTag()
     app.views.use(.leaf)
 
     // Migrations
