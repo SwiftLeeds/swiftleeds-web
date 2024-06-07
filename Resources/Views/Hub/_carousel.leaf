@@ -12,7 +12,8 @@
                 <div class="col-5 col-md-5 col-sm-5 col-lg-4 col-xl-3">
                 <div class="card #if(slot.isParticipant):bg-dark text-white#endif">
                   <div class="card-body">
-                    <h5 class="card-title fs-sm" style="color: inherit;">#(slot.day) at #date(slot.date, "HH:mm")</h5>
+                    <h5 class="card-title fs-sm mb-1" style="color: inherit;">#(slot.day) at #date(slot.date, "HH:mm")</h5>
+                    <p class="fs-sm mb-3">#(slot.duration) minutes</p>
                     
                     #if(session.maximumAttendance > 1):
                     <p><span class="badge bg-info">#(session.maximumAttendance - slot.participantCount) spot left</span></p>
@@ -44,11 +45,38 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  This will cancel your 15 minute session with #(session.ownerName) at #date(slot.date, "HH:mm") on #date(slot.date, "dd/MM/yyyy").
+                    <div class="d-flex flex-row align-items-center mb-3">
+                      <img src="#awsImage(session.ownerImageUrl)" class="d-block rounded" width="80" alt="#(session.ownerName)">
+                      <div class="ps-4">
+                        <h5 class="fw-medium fs-lg mb-1">#(session.title)</h5>
+                        <p class="fs-sm mb-0">#(session.ownerName)</p>
+                      </div>
+                    </div>
+                    
+                    <ul class="list-group">
+                      <li class="list-group-item d-flex align-items-center">
+                        <i class="bx bx-stopwatch fs-lg opacity-70 me-2"></i>
+                        Duration
+                        <span class="ms-auto">#(slot.duration) minutes</span>
+                      </li>
+                      <li class="list-group-item d-flex align-items-center">
+                        <i class="bx bx-calendar fs-lg opacity-70 me-2"></i>
+                        Date
+                        <span class="ms-auto">#date(slot.date, "d MMM yyyy") (#(slot.day))</span></li>
+                      <li class="list-group-item d-flex align-items-center">
+                        <i class="bx bx-time fs-lg opacity-70 mt-n1 me-2"></i>
+                        Time
+                        <span class="ms-auto">#date(slot.date, "HH:mm")</span>
+                      </li>
+                      <li class="list-group-item d-flex align-items-center">
+                        <i class="bx bx-cool fs-lg opacity-70 mt-n1 me-2"></i>
+                        Participant
+                        <span class="ms-auto">#(ticket.name)</span>
+                      </li>
+                    </ul>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close (Keep Session)</button>
-                  <a href="/ticket/#(session.id)/cancel/#(slot.id)" class="btn btn-danger">Cancel</a>
+                  <a href="/ticket/#(session.id)/cancel/#(slot.id)" class="btn btn-danger">Cancel Session</a>
                 </div>
               </div>
             </div>
@@ -63,11 +91,38 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  This will reserve a 15 minute session with #(session.ownerName) at #date(slot.date, "HH:mm") on #date(slot.date, "dd/MM/yyyy").
+                    <div class="d-flex flex-row align-items-center mb-3">
+                      <img src="#awsImage(session.ownerImageUrl)" class="d-block rounded" width="80" alt="#(session.ownerName)">
+                      <div class="ps-4">
+                        <h5 class="fw-medium fs-lg mb-1">#(session.title)</h5>
+                        <p class="fs-sm mb-0">#(session.ownerName)</p>
+                      </div>
+                    </div>
+                    
+                    <ul class="list-group">
+                      <li class="list-group-item d-flex align-items-center">
+                        <i class="bx bx-stopwatch fs-lg opacity-70 me-2"></i>
+                        Duration
+                        <span class="ms-auto">#(slot.duration) minutes</span>
+                      </li>
+                      <li class="list-group-item d-flex align-items-center">
+                        <i class="bx bx-calendar fs-lg opacity-70 me-2"></i>
+                        Date
+                        <span class="ms-auto">#date(slot.date, "d MMM yyyy") (#(slot.day))</span></li>
+                      <li class="list-group-item d-flex align-items-center">
+                        <i class="bx bx-time fs-lg opacity-70 mt-n1 me-2"></i>
+                        Time
+                        <span class="ms-auto">#date(slot.date, "HH:mm")</span>
+                      </li>
+                      <li class="list-group-item d-flex align-items-center">
+                        <i class="bx bx-cool fs-lg opacity-70 mt-n1 me-2"></i>
+                        Participant
+                        <span class="ms-auto">#(ticket.name)</span>
+                      </li>
+                    </ul>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <a href="/ticket/#(session.id)/book/#(slot.id)" class="btn btn-primary">Book</a>
+                  <a href="/ticket/#(session.id)/book/#(slot.id)" class="btn btn-primary">Book Session</a>
                 </div>
               </div>
             </div>

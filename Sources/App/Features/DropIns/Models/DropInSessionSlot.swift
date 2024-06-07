@@ -21,6 +21,9 @@ final class DropInSessionSlot: Model, Content {
     @Field(key: "ticket_owner")
     var ticketOwner: [String]
     
+    @Field(key: "duration")
+    var duration: Int // in minutes
+    
     @Parent(key: "session_id")
     public var session: DropInSession
     
