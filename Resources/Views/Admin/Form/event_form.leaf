@@ -5,24 +5,15 @@
 </div>
 <div class="modal-body">
         <div class="mb-3">
-          <label for="title" class="form-label">Name</label>
-          <input id="name" class="form-control" name="name" value="#(event.name)" required>
-          <div class="invalid-feedback">
-            Please enter a name
-          </div>
+            <label for="title" class="form-label">Name</label>
+            <input class="form-control" id="name" name="name" value="#(event.name)" required>
+            <div class="invalid-feedback">Please enter a name.</div>
         </div>
-
+        
         <div class="mb-3">
-          <label for="date" class="form-label">Date</label>
-          <div class="input-group">
-            <input name="date" type="date" id="date"" class="form-control" value="#if(event):#date(event.date, "yyyy-MM-dd")#endif" required>
-            <span class="input-group-addon">
-              <span class="glyphicon glyphicon-time"></span>
-            </span>
-            <div class="invalid-feedback">
-              Please enter an event date
-            </div>
-          </div>
+            <label for="date" class="form-label">Date</label>
+            <input type="date" class="form-control" id="date" name="date" value="#if(event):#date(event.date, "yyyy-MM-dd")#endif" required>
+            <div class="invalid-feedback">Please enter a valid date.</div>
         </div>
         
         <div class="mb-3">
@@ -32,8 +23,8 @@
         </div>
 
         <div class="form-check form-switch">
-            <input type="checkbox" class="form-check-input" id="customSwitch2" #if(event.isCurrent):checked disabled#endif>
-            <label class="form-check-label" for="customSwitch2">Is current event?</label>
+            <input type="checkbox" class="form-check-input" id="isCurrent" name="isCurrent" #if(event.isCurrent):checked disabled#endif>
+            <label class="form-check-label" for="isCurrent">Is current event?</label>
         </div>
       
 </div>
