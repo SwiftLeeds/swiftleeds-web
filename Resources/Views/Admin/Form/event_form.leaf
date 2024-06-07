@@ -1,32 +1,31 @@
-<form #if(event):data-id="#(event.id)"#endif class="needs-validation d-flex flex-column position-relative overflow-hidden" novalidate>
+<form class="needs-validation d-flex flex-column position-relative overflow-hidden" novalidate>
 <div class="modal-header">
     <h5 class="modal-title">#if(event):Edit Event#else:Create Event#endif</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body">
-        <div class="mb-3">
-            <label for="title" class="form-label">Name</label>
-            <input class="form-control" id="name" name="name" value="#(event.name)" required>
-            <div class="invalid-feedback">Please enter a name.</div>
-        </div>
-        
-        <div class="mb-3">
-            <label for="date" class="form-label">Date</label>
-            <input type="date" class="form-control" id="date" name="date" value="#if(event):#date(event.date, "yyyy-MM-dd")#endif" required>
-            <div class="invalid-feedback">Please enter a valid date.</div>
-        </div>
-        
-        <div class="mb-3">
-            <label for="location" class="form-label">Location</label>
-            <input class="form-control" type="text" id="location" name="location" value="#(event.location)" placeholder="The Playhouse, Leeds" required>
-            <div class="invalid-feedback">Please provide a location.</div>
-        </div>
+    <div class="mb-3">
+        <label for="title" class="form-label">Name</label>
+        <input class="form-control" id="name" name="name" value="#(event.name)" placeholder="SwiftLeeds 2020" required>
+        <div class="invalid-feedback">Please enter a name.</div>
+    </div>
 
-        <div class="form-check form-switch">
-            <input type="checkbox" class="form-check-input" id="isCurrent" name="isCurrent" #if(event.isCurrent):checked disabled#endif>
-            <label class="form-check-label" for="isCurrent">Is current event?</label>
-        </div>
-      
+    <div class="mb-3">
+        <label for="date" class="form-label">Date</label>
+        <input type="date" class="form-control" id="date" name="date" value="#if(event):#date(event.date, "yyyy-MM-dd")#endif" required>
+        <div class="invalid-feedback">Please enter a valid date.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input class="form-control" type="text" id="location" name="location" value="#(event.location)" placeholder="The Playhouse, Leeds" required>
+        <div class="invalid-feedback">Please provide a location.</div>
+    </div>
+
+    <div class="form-check form-switch">
+        <input type="checkbox" class="form-check-input" id="isCurrent" name="isCurrent" #if(event.isCurrent):checked disabled#endif>
+        <label class="form-check-label" for="isCurrent">Is current event?</label>
+    </div>
 </div>
 <div class="modal-footer">
     #if(event):

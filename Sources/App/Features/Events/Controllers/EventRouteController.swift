@@ -7,34 +7,25 @@ import Vapor
 
 struct EventRouteController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
-        routes.get(use: onShowCreate)
-        routes.get(":id", use: onShowEdit)
+        // Modal
+        routes.get(use: onRead)
+        routes.get(":id", use: onRead)
         
+        // Form
         routes.post("create", use: onCreate)
         routes.post(":id", "delete", use: onDelete)
-        routes.post(":id", "update", use: onEdit)
+        routes.post(":id", "update", use: onUpdate)
     }
     
-    @Sendable private func onShowCreate(request: Request) async throws -> View {
-        try await showForm(request: request, event: nil)
-    }
-
-    @Sendable private func onShowEdit(request: Request) async throws -> View {
-        guard let event = try await Event.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
-
-        return try await showForm(request: request, event: event)
-    }
-
-    private func showForm(request: Request, event: Event?) async throws -> View {
+    @Sendable private func onRead(request: Request) async throws -> View {
+        let event = try await request.parameters.get("id").map { Event.find($0, on: request.db) }?.get()
         let context = EventContext(event: event)
         return try await request.view.render("Admin/Form/event_form", context)
     }
 
     @Sendable private func onDelete(request: Request) async throws -> Response {
         guard let event = try await Event.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
-
         try await event.delete(on: request.db)
-
         return Response(status: .ok, body: .init(string: "OK"))
     }
 
@@ -42,7 +33,7 @@ struct EventRouteController: RouteCollection {
         try await update(request: request, event: nil)
     }
 
-    @Sendable private func onEdit(request: Request) async throws -> Response {
+    @Sendable private func onUpdate(request: Request) async throws -> Response {
         guard let event = try await Event.find(request.parameters.get("id"), on: request.db) else {
             throw Abort(.badRequest, reason: "Failed to find event")
         }
