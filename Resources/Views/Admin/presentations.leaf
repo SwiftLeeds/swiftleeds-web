@@ -7,17 +7,26 @@
     </button>
 </div>
 
-<ul class="list-group">
+<ul class="list-unstyled mb-0" data-event-filter="true">
+    <div class="alert alert-secondary hidden" role="alert">There are currently no presentations for this year.</div>
     #for(presentation in presentations):
-        <li class="list-group-item d-flex justify-content-between align-items-center event-visible" data-event="#(presentation.event.id)">
-            #if(presentation.secondSpeaker):
-            "#(presentation.title)" by #(presentation.speaker.name), #(presentation.secondSpeaker.name)
+    <li class="d-flex align-items-center justify-content-between mb-2 border px-3 py-2 rounded" data-event="#(presentation.event.id)">
+      <div class="d-flex align-items-start me-3">
+        <div>
+          <div class="fw-medium text-nav mb-1">#(presentation.title)</div>
+          <span class="d-inline-block fs-sm text-muted pe-2 me-2">
+            #if(presentation.secondSpeaker && presentation.secondSpeaker.name):
+            #(presentation.speaker.name) and #(presentation.secondSpeaker.name)
             #else:
-            "#(presentation.title)" by #(presentation.speaker.name)
+            #(presentation.speaker.name)
             #endif
-            <span class="badge badge-primary badge-pill">
-                <a data-swiftleeds-admin="presentations/#(presentation.id)">✏️</a>
-            </span>
-        </li>
+          </span>
+        </div>
+      </div>
+      <button data-swiftleeds-admin="presentations/#(presentation.id)" class="btn btn-outline-secondary px-3 px-sm-4">
+        <i class="bx bx-x fs-xl ms-sm-n1 me-sm-1"></i>
+        <span class="d-none d-sm-inline">Edit</span>
+      </button>
+    </li>
     #endfor
 </ul>

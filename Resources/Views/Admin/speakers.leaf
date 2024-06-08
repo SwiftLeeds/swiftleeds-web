@@ -1,19 +1,36 @@
 <div class="d-flex align-items-center justify-content-between pt-xl-1 mb-3 pb-3">
     <h1 class="h2 mb-0">Speakers</h1>
     
-    <button data-swiftleeds-admin="speakers" class="btn btn-outline-secondary px-3 px-sm-4">
-        <i class="bx bx-plus fs-xl me-sm-1"></i>
-        <span class="d-none d-sm-inline">Add Speaker</span>
-    </button>
+    <div>
+        <button data-swiftleeds-admin="speakers" class="btn btn-outline-info px-3 px-sm-4 me-2 disabled">
+            <i class="bx bx-sync fs-xl me-sm-1"></i>
+            <span class="d-none d-sm-inline">Sync with Sessionize</span>
+        </button>
+        
+        <button data-swiftleeds-admin="speakers" class="btn btn-outline-secondary px-3 px-sm-4">
+            <i class="bx bx-plus fs-xl me-sm-1"></i>
+            <span class="d-none d-sm-inline">Add Speaker</span>
+        </button>
+    </div>
 </div>
 
-<ul class="list-group">
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-4">
   #for(speaker in speakers):
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      #(speaker.name) - #(speaker.organisation)
-      <span class="badge badge-primary badge-pill">
-        <a data-swiftleeds-admin="speakers/#(speaker.id)">✏️</a>
-      </span>
-    </li>
+  <div class="col">
+    <div class="card card-body bg-light text-center mx-2">
+        <img src="#awsImage(speaker.profileImage)" class="d-block rounded-circle mx-auto mb-3 schedule-speaker" alt="#(speaker.name)" style="width: 100px; height: 100px;">
+        <h5 class="fw-medium fs-lg mb-1">#(speaker.name)</h5>
+        <p class="fs-sm mb-3">#if(speaker.organisation != ""):#(speaker.organisation)#else:<em>No Organisation</em>#endif</p>
+        <div class="d-flex justify-content-center">
+            <a href="https://twitter.com/#(speaker.twitter)" target="_blank" class="btn btn-icon btn-outline-secondary btn-twitter btn-sm me-2" aria-label="Twitter">
+                <i class="bx bxl-twitter"></i>
+            </a>
+            <button data-swiftleeds-admin="speakers/#(speaker.id)" class="btn btn-outline-secondary btn-sm" aria-label="Edit">
+                <i class="bx bx-edit fs-xl me-sm-1"></i>
+                <span class="d-none d-sm-inline">Edit</span>
+            </button>
+        </div>
+    </div>
+  </div>
   #endfor
-</ul>
+</div>

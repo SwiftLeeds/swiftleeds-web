@@ -7,26 +7,32 @@
     </button>
 </div>
 
-<ul class="list-group">
-  #for(slot in slots):
-    <li class="list-group-item d-flex justify-content-between align-items-center event-visible" data-event="#(slot.event.id)">
-      <div>
-        #if(slot.date):
-          <tt>#date(slot.date, "dd/MM [HH:mm")-#sessionEnd(slot.date, slot.duration)]</tt>
-        #else:
-          <tt>#(slot.startDate)</tt>
-        #endif
-
-        #if(slot.presentation):
-          - #(slot.presentation.title)
-        #elseif(slot.activity):
-          - #(slot.activity.title)
-        #endif
+<ul class="list-unstyled mb-0" data-event-filter="true">
+    <div class="alert alert-secondary hidden" role="alert">There are currently no slots for this year.</div>
+    #for(slot in slots):
+    <li class="d-flex align-items-center justify-content-between mb-2 border px-3 py-2 rounded" data-event="#(slot.event.id)">
+      <div class="d-flex align-items-start me-3">
+        <div>
+          <div class="fw-medium text-nav mb-1">
+            #if(slot.presentation):
+              #(slot.presentation.title)
+            #elseif(slot.activity):
+              #(slot.activity.title)
+            #endif
+          </div>
+          <span class="d-inline-block fs-sm text-muted pe-2 me-2">
+            #if(slot.date):
+              <tt>#date(slot.date, "dd/MM [HH:mm")-#sessionEnd(slot.date, slot.duration)]</tt>
+            #else:
+              <tt>#(slot.startDate)</tt>
+            #endif
+          </span>
+        </div>
       </div>
-
-      <span class="badge badge-primary badge-pill">
-        <a data-swiftleeds-admin="slots/#(slot.id)">✏️</a>
-      </span>
+      <button data-swiftleeds-admin="slots/#(slot.id)" class="btn btn-outline-secondary px-3 px-sm-4">
+        <i class="bx bx-x fs-xl ms-sm-n1 me-sm-1"></i>
+        <span class="d-none d-sm-inline">Edit</span>
+      </button>
     </li>
-  #endfor
+    #endfor
 </ul>

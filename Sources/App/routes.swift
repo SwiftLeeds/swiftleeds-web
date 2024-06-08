@@ -59,7 +59,9 @@ func routes(_ app: Application) throws {
             .with(\.$secondSpeaker)
             .all()
         let events = try await Event.query(on: request.db).sort(\.$date).all()
-        let jobs = try await Job.query(on: request.db).sort(\.$title).all()
+        let jobs = try await Job.query(on: request.db).sort(\.$title)
+            .with(\.$sponsor)
+            .all()
         let slots = try await Slot
             .query(on: request.db)
             .sort(\.$date)
