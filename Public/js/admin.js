@@ -29,7 +29,6 @@ function selectedEventUpdated(change) {
         const list = $(element);
         const itemCount = list.find('li[data-event]').length;
         const hiddenItemCount = list.find('li[data-event].hidden').length;
-        console.log(itemCount, hiddenItemCount);
         
         if (hiddenItemCount == itemCount) {
             list.find('.alert').removeClass('hidden');
@@ -60,8 +59,7 @@ $("[data-swiftleeds-admin]").on('click', (e) => {
             
             modal.find('.needs-validation').each((offset, element) => {
                 const form = $(element);
-                console.log('Found Form', form);
-                $(element).on('click', '[data-swiftleeds-form]', (event) => {
+                form.on('click', '[data-swiftleeds-form]', (event) => {
                     const crudEvent = $(event.currentTarget).data('swiftleeds-form');
                     console.log('Received Form Event: ' + crudEvent);
                     
@@ -73,12 +71,16 @@ $("[data-swiftleeds-admin]").on('click', (e) => {
                         // POST admin/:key/:ID/update
                         // POST admin/:key/:ID/delete
                         const crudEndpoint = 'admin/' + trigger.data('swiftleeds-admin') + '/' + crudEvent;
+                        const formData = new FormData(element);
+                        const useFormData = form.attr('enctype') == 'multipart/form-data'
                         console.log('Requesting ' + crudEndpoint);
                         
                         $.ajax({
                             type: "POST",
                             url: crudEndpoint,
-                            data: form.serialize(),
+                            data: useFormData ? formData : form.serialize(),
+                            contentType: useFormData ? false : 'application/x-www-form-urlencoded',
+                            processData: !useFormData,
                             success: (data) => {
                                 if (data == 'OK') {
                                     location.reload();

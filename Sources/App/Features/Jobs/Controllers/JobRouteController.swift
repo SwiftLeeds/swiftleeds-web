@@ -20,7 +20,7 @@ struct JobRouteController: RouteCollection {
     
     @Sendable private func onRead(request: Request) async throws -> View {
         let job = try await request.parameters.get("id").map { Job.find($0, on: request.db) }?.get()
-        let sponsors = try await Sponsor.query(on: request.db).sort(\.$name).all()
+        let sponsors = try await Sponsor.query(on: request.db).sort(\.$name).with(\.$event).all()
         let context = JobContext(job: job, sponsors: sponsors)
 
         return try await request.view.render("Admin/Form/job_form", context)

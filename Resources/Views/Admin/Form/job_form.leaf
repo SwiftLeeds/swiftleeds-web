@@ -4,51 +4,41 @@
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body">
-        <label for="sponsor" class="form-label">Sponsor</label>
-        <select name="sponsorID" class="form-control" required>
-          <option selected disabled value="">-- select a a sponsor --</option>
-          #for(sponsor in sponsors):
-            <option #if(sponsor.id == job.sponsor.id): selected #endif value=#(sponsor.id)>
-              #(sponsor.name)
-            </option>
-          #endfor
-        </select>
-        <div class="invalid-feedback">
-          Please select a sponsor
+        <div class="mb-3">
+            <label for="sponsor" class="form-label">Sponsor</label>
+            <select name="sponsorID" class="form-control" required>
+              <option selected disabled value="">Select a Sponsor</option>
+              #for(sponsor in sponsors):
+                <option #if(sponsor.id == job.sponsor.id): selected #endif value=#(sponsor.id)>
+                  #(sponsor.name) (#(sponsor.event.name))
+                </option>
+              #endfor
+            </select>
+            <div class="invalid-feedback">Please select a sponsor</div>
         </div>
-        <br>
 
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
           <input name="title" value="#(job.title)" id="title" class="form-control" required>
-          <div class="invalid-feedback">
-            Please enter a title
-          </div>
+          <div class="invalid-feedback">Please enter a title</div>
         </div>
 
         <div class="mb-3">
           <label for="location" class="form-label">Location</label>
           <input name="location" value="#(job.location)" id="location" class="form-control" required>
-          <div class="invalid-feedback">
-            Please enter a location
-          </div>
+          <div class="invalid-feedback">Please enter a location</div>
         </div>
 
         <div class="mb-3">
           <label for="details" class="form-label">Details</label>
           <textarea class="form-control" name="details" id="details" rows="10" required>#(job.details)</textarea>
-          <div class="invalid-feedback">
-            Please enter some details
-          </div>
-          <p>* Supports Markdown</p>
+          <div class="invalid-feedback">Please enter some details</div>
         </div>
 
         <div class="mb-3">
           <label for="url" class="form-label">URL</label>
-          <input value="#(job.url)" name="url" id="url" vclass="form-control" required>
-          <div class="invalid-feedback">
-            Please enter a URL
-          </div>
+          <input value="#(job.url)" name="url" id="url" class="form-control" required>
+          <div class="invalid-feedback">Please enter a URL</div>
         </div>
 </div>
 <div class="modal-footer">
