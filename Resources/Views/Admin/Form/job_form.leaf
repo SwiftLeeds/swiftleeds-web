@@ -1,22 +1,9 @@
-#extend("base"):
-  #export("title", "SwiftLeeds")
-
-  #export("content"):
-    #extend("Shared/_header")
-    
-          <section class="bg-dark py-4">
-        <div class="container pb-2 py-lg-5">
-          <h1 class="text-center my-4 text-white">#if(job):
-            Edit Job
-          #else:
-            Create Job
-          #endif</h1>
-        </div>
-      </section>
-      
-      <section class="container mb-5 pt-4 pb-2 py-mg-4">
-    <div class="row">
-      <form method="POST" action="/admin/jobs#if(job):/#(job.id)#endif" class="needs-validation" novalidate>
+<form class="needs-validation d-flex flex-column position-relative overflow-hidden" novalidate enctype="multipart/form-data">
+<div class="modal-header">
+    <h5 class="modal-title">#if(job):Edit Job#else:Create Job#endif</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
         <label for="sponsor" class="form-label">Sponsor</label>
         <select name="sponsorID" class="form-control" required>
           <option selected disabled value="">-- select a a sponsor --</option>
@@ -63,11 +50,13 @@
             Please enter a URL
           </div>
         </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
-    
-    </section>
-  #endexport
-#endextend
+</div>
+<div class="modal-footer">
+    #if(job):
+    <button type="button" class="btn btn-danger btn-sm" data-swiftleeds-form="delete">Delete job</button>
+    <button type="button" class="btn btn-success btn-sm" data-swiftleeds-form="update">Save changes</button>
+    #else:
+    <button type="button" class="btn btn-success btn-sm" data-swiftleeds-form="create">Create job</button>
+    #endif
+</div>
+</form>

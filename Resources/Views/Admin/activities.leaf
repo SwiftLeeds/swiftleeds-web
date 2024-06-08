@@ -5,13 +5,11 @@
         <li class="list-group-item d-flex justify-content-between align-items-center event-visible" data-event="#(activity.event.id)">
             #(activity.title) / #(activity.subtitle)
             <span class="badge badge-primary badge-pill">
-                <a href="/admin/activities/delete/#(activity.id)">🗑</a>
-                &nbsp
-                <a href="/admin/activities/#(activity.id)">✏️</a>
+                <a data-swiftleeds-admin="activities/#(activity.id)">✏️</a>
             </span>
         </li>
     #endfor
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <a href="/admin/activities">Add new activity</a>
+        <a data-swiftleeds-admin="activities">Add new activity</a>
     </li>
 </ul>

@@ -9,13 +9,11 @@
             "#(presentation.title)" by #(presentation.speaker.name)
             #endif
             <span class="badge badge-primary badge-pill">
-                <a href="/admin/presentations/delete/#(presentation.id)">🗑</a>
-                &nbsp
-                <a href="/admin/presentations/#(presentation.id)">✏️</a>
+                <a data-swiftleeds-admin="presentations/#(presentation.id)">✏️</a>
             </span>
         </li>
     #endfor
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <a href="/admin/presentations">Add new presentation</a>
+        <a data-swiftleeds-admin="presentations">Add new presentation</a>
     </li>
 </ul>

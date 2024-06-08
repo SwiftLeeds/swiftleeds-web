@@ -5,13 +5,11 @@
     <li class="list-group-item d-flex justify-content-between align-items-center">
       #(speaker.name) - #(speaker.organisation)
       <span class="badge badge-primary badge-pill">
-        <a href="/admin/speakers/delete/#(speaker.id)">🗑</a>
-        &nbsp
-        <a href="/admin/speakers/#(speaker.id)">✏️</a>
+        <a data-swiftleeds-admin="speakers/#(speaker.id)">✏️</a>
       </span>
     </li>
   #endfor
   <li class="list-group-item d-flex justify-content-between align-items-center">
-    <a href="/admin/speakers">Add new speaker</a>
+    <a data-swiftleeds-admin="speakers">Add new speaker</a>
   </li>
 </ul>
