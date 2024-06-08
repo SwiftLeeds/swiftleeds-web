@@ -3,26 +3,20 @@ import Vapor
 
 struct ActivityRouteController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
-        routes.get(use: onShowCreate)
-        routes.get(":id", use: onShowEdit)
-        routes.get("delete", ":id", use: onDelete)
-        routes.post(use: onCreate)
-        routes.post(":id", use: onEdit)
+        // Modal
+        routes.get(use: onRead)
+        routes.get(":id", use: onRead)
+        
+        // Form
+        routes.post("create", use: onCreate)
+        routes.post(":id", "delete", use: onDelete)
+        routes.post(":id", "update", use: onUpdate)
     }
 
-    @Sendable private func onShowCreate(request: Request) async throws -> View {
-        try await showForm(request: request, activity: nil)
-    }
-
-    @Sendable private func onShowEdit(request: Request) async throws -> View {
-        guard let activity = try await Activity.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
-
-        try await activity.$event.load(on: request.db)
-
-        return try await showForm(request: request, activity: activity)
-    }
-
-    private func showForm(request: Request, activity: Activity?) async throws -> View {
+    @Sendable private func onRead(request: Request) async throws -> View {
+        let activity = try await request.parameters.get("id").map { Activity.find($0, on: request.db) }?.get()
+        try await activity?.$event.load(on: request.db)
+        
         let context = try await buildContext(from: request.db, activity: activity)
         return try await request.view.render("Admin/Form/activity_form", context)
     }
@@ -34,19 +28,17 @@ struct ActivityRouteController: RouteCollection {
 
     @Sendable private func onDelete(request: Request) async throws -> Response {
         guard let activity = try await Activity.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
-
         try await activity.delete(on: request.db)
-
-        return request.redirect(to: "/admin?page=activities")
+        return Response(status: .ok, body: .init(string: "OK"))
     }
 
     @Sendable private func onCreate(request: Request) async throws -> Response {
         try await update(request: request, activity: nil)
     }
 
-    @Sendable private func onEdit(request: Request) async throws -> Response {
+    @Sendable private func onUpdate(request: Request) async throws -> Response {
         guard let activity = try await Activity.find(request.parameters.get("id"), on: request.db) else {
-            return request.redirect(to: "/admin?page=activities")
+            throw Abort(.badRequest, reason: "Could not find activity")
         }
 
         return try await update(request: request, activity: activity)
@@ -57,7 +49,7 @@ struct ActivityRouteController: RouteCollection {
         let image = try request.content.decode(ImageUpload.self)
 
         guard let event = try await Event.find(.init(uuidString: input.eventID), on: request.db) else {
-            return request.redirect(to: "/admin?page=activities")
+            throw Abort(.badRequest, reason: "Could not find event")
         }
 
         if let activity = activity {
@@ -66,15 +58,11 @@ struct ActivityRouteController: RouteCollection {
             if !image.activityImage.filename.isEmpty {
                 let tempFileName = "\(UUID.generateRandom().uuidString)-\(image.activityImage.filename)"
 
-                do {
-                    try await ImageService.uploadFile(
-                        data: Data(image.activityImage.data.readableBytesView),
-                        filename: tempFileName
-                    )
-                    fileName = tempFileName
-                } catch {
-                    return request.redirect(to: "/admin?page=activities")
-                }
+                try await ImageService.uploadFile(
+                    data: Data(image.activityImage.data.readableBytesView),
+                    filename: tempFileName
+                )
+                fileName = tempFileName
             }
 
             activity.title = input.title
@@ -92,14 +80,10 @@ struct ActivityRouteController: RouteCollection {
             if !image.activityImage.filename.isEmpty {
                 fileName = "\(UUID.generateRandom().uuidString)-\(image.activityImage.filename)"
 
-                do {
-                    try await ImageService.uploadFile(
-                        data: Data(image.activityImage.data.readableBytesView),
-                        filename: fileName!
-                    )
-                } catch {
-                    return request.redirect(to: "/admin?page=activities")
-                }
+                try await ImageService.uploadFile(
+                    data: Data(image.activityImage.data.readableBytesView),
+                    filename: fileName!
+                )
             }
 
             let activity = Activity(
@@ -116,7 +100,7 @@ struct ActivityRouteController: RouteCollection {
             try await activity.create(on: request.db)
         }
 
-        return request.redirect(to: "/admin?page=activities")
+        return Response(status: .ok, body: .init(string: "OK"))
     }
 
     // MARK: - ActivityContext

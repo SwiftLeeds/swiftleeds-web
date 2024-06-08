@@ -3,27 +3,21 @@ import Vapor
 
 struct SlotRouteController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
-        routes.get(use: onShowCreate)
-        routes.get(":id", use: onShowEdit)
-        routes.get("delete", ":id", use: onDelete)
-        routes.post(use: onCreate)
-        routes.post(":id", use: onEdit)
+        // Modal
+        routes.get(use: onRead)
+        routes.get(":id", use: onRead)
+        
+        // Form
+        routes.post("create", use: onCreate)
+        routes.post(":id", "delete", use: onDelete)
+        routes.post(":id", "update", use: onUpdate)
     }
-
-    @Sendable private func onShowCreate(request: Request) async throws -> View {
-        try await showForm(request: request, slot: nil)
-    }
-
-    @Sendable private func onShowEdit(request: Request) async throws -> View {
-        guard let slot = try await Slot.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
-
-        try await slot.$presentation.load(on: request.db)
-        try await slot.$activity.load(on: request.db)
-
-        return try await showForm(request: request, slot: slot)
-    }
-
-    private func showForm(request: Request, slot: Slot?) async throws -> View {
+    
+    @Sendable private func onRead(request: Request) async throws -> View {
+        let slot = try await request.parameters.get("id").map { Slot.find($0, on: request.db) }?.get()
+        try await slot?.$presentation.load(on: request.db)
+        try await slot?.$activity.load(on: request.db)
+        
         let context = try await buildContext(from: request.db, slot: slot)
         return try await request.view.render("Admin/Form/slot_form", context)
     }
@@ -42,26 +36,18 @@ struct SlotRouteController: RouteCollection {
     }
 
     @Sendable private func onDelete(request: Request) async throws -> Response {
-        guard let requestID = request.parameters.get("id") else {
-            throw Abort(.notFound)
-        }
-
-        guard let slot = try? await Slot.find(.init(uuidString: requestID), on: request.db) else {
-            throw Abort(.notFound)
-        }
-
+        guard let slot = try await Slot.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
         try await slot.delete(on: request.db)
-
-        return request.redirect(to: "/admin?page=slots")
+        return Response(status: .ok, body: .init(string: "OK"))
     }
 
     @Sendable private func onCreate(request: Request) async throws -> Response {
         try await update(request: request, slot: nil)
     }
 
-    @Sendable private func onEdit(request: Request) async throws -> Response {
+    @Sendable private func onUpdate(request: Request) async throws -> Response {
         guard let slot = try await Slot.find(request.parameters.get("id"), on: request.db) else {
-            return request.redirect(to: "/admin?page=slots")
+            throw Abort(.badRequest, reason: "Could not find slot")
         }
 
         // Load children relationships
@@ -77,7 +63,7 @@ struct SlotRouteController: RouteCollection {
         var presentation: Presentation?
 
         guard let event = try await Event.find(.init(uuidString: input.eventID), on: request.db) else {
-            return request.redirect(to: "/admin?page=slots")
+            throw Abort(.badRequest, reason: "Could not find event")
         }
 
         // We can have either, but not both. If both are provided, prioritise the activity.
@@ -144,7 +130,7 @@ struct SlotRouteController: RouteCollection {
             }
         }
 
-        return request.redirect(to: "/admin?page=slots")
+        return Response(status: .ok, body: .init(string: "OK"))
     }
 
     // MARK: - SlotTypes

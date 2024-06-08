@@ -3,23 +3,18 @@ import Vapor
 
 struct PresentationRouteController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
-        routes.get(use: onShowCreate)
-        routes.get(":id", use: onShowEdit)
-        routes.get("delete", ":id", use: onDelete)
-        routes.post(use: onCreate)
-        routes.post(":id", use: onEdit)
-    }
+        // Modal
+        routes.get(use: onRead)
+        routes.get(":id", use: onRead)
         
-    @Sendable private func onShowCreate(request: Request) async throws -> View {
-        try await showForm(request: request, presentation: nil)
+        // Form
+        routes.post("create", use: onCreate)
+        routes.post(":id", "delete", use: onDelete)
+        routes.post(":id", "update", use: onUpdate)
     }
     
-    @Sendable private func onShowEdit(request: Request) async throws -> View {
-        guard let presentation = try await Presentation.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
-        return try await showForm(request: request, presentation: presentation)
-    }
-
-    private func showForm(request: Request, presentation: Presentation?) async throws -> View {
+    @Sendable private func onRead(request: Request) async throws -> View {
+        let presentation = try await request.parameters.get("id").map { Presentation.find($0, on: request.db) }?.get()
         let speakers = try await Speaker.query(on: request.db).sort(\.$name).all()
         let events = try await Event.query(on: request.db).sort(\.$date).all()
         let context = PresentationContext(presentation: presentation, speakers: speakers, events: events, hasSecondSpeaker: presentation?.$secondSpeaker.id != nil)
@@ -28,22 +23,18 @@ struct PresentationRouteController: RouteCollection {
     }
 
     @Sendable private func onDelete(request: Request) async throws -> Response {
-        guard let presentation = try await Presentation.find(request.parameters.get("id"), on: request.db) else {
-            throw Abort(.notFound)
-        }
-
+        guard let presentation = try await Presentation.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
         try await presentation.delete(on: request.db)
-
-        return request.redirect(to: "/admin?page=presentations")
+        return Response(status: .ok, body: .init(string: "OK"))
     }
 
     @Sendable private func onCreate(request: Request) async throws -> Response {
         try await update(request: request, presentation: nil)
     }
 
-    @Sendable private func onEdit(request: Request) async throws -> Response {
+    @Sendable private func onUpdate(request: Request) async throws -> Response {
         guard let presentation = try await Presentation.find(request.parameters.get("id"), on: request.db) else {
-            return request.redirect(to: "/admin?page=presentations")
+            throw Abort(.badRequest, reason: "Could not find presentation")
         }
 
         return try await update(request: request, presentation: presentation)
@@ -56,7 +47,7 @@ struct PresentationRouteController: RouteCollection {
             let speaker = try await Speaker.find(UUID(uuidString: input.speakerID), on: request.db),
             let event = try await Event.find(.init(uuidString: input.eventID), on: request.db)
         else {
-            return request.redirect(to: "/admin?page=presentations")
+            throw Abort(.badRequest, reason: "Could not find speaker or event")
         }
 
         if let presentation = presentation {
@@ -71,7 +62,7 @@ struct PresentationRouteController: RouteCollection {
 
             if let secondSpeakerID = input.secondSpeakerID {
                 guard let secondSpeaker = try await Speaker.find(UUID(uuidString: secondSpeakerID), on: request.db) else {
-                    return request.redirect(to: "/admin?page=presentations")
+                    throw Abort(.badRequest, reason: "Could not find second speaker")
                 }
                 presentation.$secondSpeaker.id = try secondSpeaker.requireID()
             } else {
@@ -95,7 +86,7 @@ struct PresentationRouteController: RouteCollection {
 
             if let secondSpeakerID = input.secondSpeakerID {
                 guard let secondSpeaker = try await Speaker.find(UUID(uuidString: secondSpeakerID), on: request.db) else {
-                    return request.redirect(to: "/admin?page=presentations")
+                    throw Abort(.badRequest, reason: "Could not find second speaker")
                 }
                 presentation.$secondSpeaker.id = try secondSpeaker.requireID()
             } else {
@@ -106,7 +97,7 @@ struct PresentationRouteController: RouteCollection {
             try await presentation.create(on: request.db)
         }
 
-        return request.redirect(to: "/admin?page=presentations")
+        return Response(status: .ok, body: .init(string: "OK"))
     }
 
     // MARK: - PresentationContext
