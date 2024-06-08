@@ -1,0 +1,28 @@
+<div class="mb-3 templateParent">
+    <input type="hidden" value="#(slot.id)" name="ids[]">
+    <div class="input-group">
+    
+        <input
+            class="form-control"
+            type="datetime-local"
+            name="time[]"
+            min="#dateFix(session.event.date)"
+            max="#dateFix(session.event.date + 172800)"
+            value="#if(slot):#dateFix(slot.date)#else:#dateFix(session.event.date + 36000)#endif"
+            required
+        >
+        <input
+            class="form-control"
+            type="number"
+            name="duration[]"
+            value="#if(slot):#(slot.duration)#else:15#endif"
+            min="15"
+            max="180"
+            required
+        >
+        
+        <button type="button" class="btn btn-icon btn-lg #if(slot):btn-outline-danger#else:btn-outline-success#endif removeTemplate">
+            <i class="bx bx-x fs-xl"></i>
+        </button>
+    </div>
+</div>

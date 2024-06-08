@@ -84,6 +84,7 @@ func routes(_ app: Application) throws {
         
         let dropInSessions = try await DropInSession.query(on: request.db)
             .with(\.$event)
+            .with(\.$slots)
             .all()
 
         return try await request.view.render(

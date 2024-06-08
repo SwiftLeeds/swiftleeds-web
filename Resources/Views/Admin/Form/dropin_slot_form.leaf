@@ -1,0 +1,37 @@
+<div id="template" class="hidden">
+    #extend("Admin/Form/dropin_slot_form_row")
+</div>
+
+<form class="needs-validation d-flex flex-column position-relative overflow-hidden" novalidate>
+<div class="modal-header">
+    <h5 class="modal-title">Edit Session Slots</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <div id="container">
+        #for(slot in slots):
+            #extend("Admin/Form/dropin_slot_form_row")
+        #endfor
+    </div>
+    
+    <button type="button" class="btn btn-outline-secondary px-3 px-sm-4 addTemplate">
+        <i class="bx bx-plus fs-xl ms-sm-n1 me-sm-1"></i>
+        <span class="d-none d-sm-inline">Add Slot</span>
+    </button>
+    
+    <script>
+        if($("#container").html().trim() == "") {
+            $("#container").html($("#template").html());
+        }
+        $(".addTemplate").on('click', () => {
+            $("#container").append($("#template").html());
+        });
+        $("#container").on('click', '.removeTemplate', (e) => {
+            $(e.currentTarget).closest('.templateParent').remove();
+        });
+    </script>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" data-swiftleeds-form="update">Update slots</button>
+</div>
+</form>

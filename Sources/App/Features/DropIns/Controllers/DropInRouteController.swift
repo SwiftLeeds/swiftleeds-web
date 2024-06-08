@@ -20,6 +20,8 @@ struct DropInRouteController: RouteCollection {
         routes.post(":id", "update", use: onUpdate)
         
         // Slots
+        routes.get("slots", ":id", use: onRead)
+        routes.post("slots", ":id", "update", use: onSlotUpdate)
     }
     
     @Sendable private func onRead(request: Request) async throws -> View {
@@ -27,13 +29,19 @@ struct DropInRouteController: RouteCollection {
             DropInSession.query(on: request.db)
                 .filter(\.$id == id)
                 .with(\.$slots)
+                .with(\.$event)
                 .first()
         }?.get()
         
         let events = try await Event.query(on: request.db).sort(\.$date).all()
-        let context = SessionContext(session: session, events: events)
+        let context = SessionContext(
+            session: session,
+            events: events,
+            slots: session?.slots.sorted(by: { $0.date < $1.date }) ?? []
+        )
+        let layout = request.url.path.contains("slots") ? "dropin_slot_form" : "dropin_form"
 
-        return try await request.view.render("Admin/Form/dropin_form", context)
+        return try await request.view.render("Admin/Form/" + layout, context)
     }
     
     @Sendable private func onDelete(request: Request) async throws -> Response {
@@ -66,6 +74,68 @@ struct DropInRouteController: RouteCollection {
         }
         
         return try await update(request: request, session: session)
+    }
+    
+    @Sendable private func onSlotUpdate(request: Request) async throws -> Response {
+        guard let id = request.parameters.get("id"), let uuid = UUID(uuidString: id) else {
+            throw Abort(.badRequest, reason: "Failed to create UUID from provided value")
+        }
+        
+        guard let session = try await DropInSession.query(on: request.db).filter(\.$id == uuid).with(\.$slots).first() else {
+            throw Abort(.badRequest, reason: "Failed to find session")
+        }
+        
+        let input = try request.content.decode(SlotFormInput.self)
+        let slotValues: [(id: String, date: Date, duration: Int)] = try zip(zip(input.ids, input.time), input.duration)
+            .map { tuple in
+                guard let date = Self.formDateTimeFormatter().date(from: tuple.0.1) else {
+                    throw Abort(.badRequest, reason: "Invalid Date Format Provided")
+                }
+                
+                guard let duration = Int(tuple.1), duration > 0 else {
+                    throw Abort(.badRequest, reason: "Invalid Duration Integer Provided")
+                }
+                
+                return (tuple.0.0, date, duration)
+            }
+        
+        if Set(slotValues.map { $0.date }).count != slotValues.count {
+            throw Abort(.badRequest, reason: "Duplicate Slots at Same Time")
+        }
+        
+        await withThrowingTaskGroup(of: Void.self) { group in
+            for slotTuple in slotValues {
+                group.addTask {
+                    // If a slot ID is provided, then query that. Otherwise, create a new slot.
+                    guard let slot = slotTuple.id == "" ?
+                        DropInSessionSlot() :
+                                try await DropInSessionSlot.find(UUID(uuidString: slotTuple.id), on: request.db).get() else {
+                        throw Abort(.badRequest, reason: "Failed to find existing slot")
+                    }
+                    
+                    slot.$session.id = try session.requireID()
+                    slot.date = slotTuple.date
+                    slot.duration = slotTuple.duration
+                    
+                    if slotTuple.id == "" {
+                        slot.id = .generateRandom()
+                        try await slot.create(on: request.db)
+                    } else {
+                        try await slot.update(on: request.db)
+                    }
+                }
+            }
+            
+            for slot in session.slots {
+                if slotValues.contains(where: { $0.id == slot.id?.uuidString }) == false {
+                    group.addTask {
+                        try await slot.delete(on: request.db)
+                    }
+                }
+            }
+        }
+
+        return Response(status: .ok, body: .init(string: "OK"))
     }
     
     private func update(request: Request, session: DropInSession?) async throws -> Response {
@@ -147,6 +217,7 @@ struct DropInRouteController: RouteCollection {
     private struct SessionContext: Content {
         let session: DropInSession?
         let events: [Event]
+        let slots: [DropInSessionSlot]
     }
 
     // MARK: - ImageInput
@@ -168,6 +239,12 @@ struct DropInRouteController: RouteCollection {
         let isPublic: String?
         let isBookable: String?
         let eventID: String
+    }
+    
+    private struct SlotFormInput: Content {
+        let ids: [String]
+        let time: [String]
+        let duration: [String]
     }
 
     @Sendable private func onPrint(request: Request) async throws -> View {
