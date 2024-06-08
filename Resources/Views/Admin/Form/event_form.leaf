@@ -21,6 +21,11 @@
         <input class="form-control" type="text" id="location" name="location" value="#(event.location)" placeholder="The Playhouse, Leeds" required>
         <div class="invalid-feedback">Please provide a location.</div>
     </div>
+    
+    <div class="form-check form-switch">
+        <input type="checkbox" class="form-check-input" id="showSchedule" name="showSchedule" #if(event.showSchedule):checked#endif>
+        <label class="form-check-label" for="showSchedule">Show schedule?</label>
+    </div>
 
     <div class="form-check form-switch">
         <input type="checkbox" class="form-check-input" id="isCurrent" name="isCurrent" #if(event.isCurrent):checked disabled#endif>

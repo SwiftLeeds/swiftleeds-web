@@ -87,7 +87,7 @@ struct HomeRouteController: RouteCollection {
         let phase = try getPhase(req: req, event: event)
         
         return HomeContext(
-            speakers: phase.showSpeakers ? speakers : [],
+            speakers: speakers,
             platinumSponsors: platinumSponsors,
             silverSponsors: silverSponsors,
             goldSponsors: goldSponsors,
@@ -144,26 +144,15 @@ struct HomeRouteController: RouteCollection {
     }
     
     private func getPhase(req: Request, event: Event) throws -> Phase {
-        let isPreviousEvent = event.date <= Date() && event.date.timeIntervalSince1970 > 1420074000 // TODO: date should be nullable
+        let isPreviousEvent = event.date <= Date() &&
+            // This is a little trick where we can set the data to anything older than 2015 to hide date and tickets
+            event.date.timeIntervalSince1970 > 1420074000
         
-        #if DEBUG
-        let phaseQueryItem: String? = try? req.query.get(at: "phase")
-        let phaseItems = phaseQueryItem?.components(separatedBy: ",") ?? []
-        
+        // TODO: If event is current, and in the future, then we should check Tito to ensure we're not sold out.
         return Phase(
-            showSpeakers: isPreviousEvent || phaseItems.contains("speakers"),
-            showSchedule: isPreviousEvent || phaseItems.contains("schedule"),
+            showSchedule: isPreviousEvent || event.showSchedule,
             showTickets: !isPreviousEvent
         )
-        #else
-        // If the event is in the past then we can safely show schedule/speakers
-        // TODO: if event is in the future, then rely on a database toggle
-        return Phase(
-            showSpeakers: isPreviousEvent,
-            showSchedule: isPreviousEvent,
-            showTickets: !isPreviousEvent // TODO: if event is current, and in the future, then check tito
-        )
-        #endif
     }
     
     private func getEvent(for req: Request) async throws -> Event? {
@@ -221,7 +210,6 @@ struct HomeRouteController: RouteCollection {
 }
 
 struct Phase {
-    let showSpeakers: Bool
     let showSchedule: Bool
     let showTickets: Bool
 }

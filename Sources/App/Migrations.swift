@@ -75,6 +75,7 @@ class Migrations {
         app.migrations.add(EventMigrationV3()) // Adds tito ID
         app.migrations.add(UseArrayDropInOwnerMigration()) // Use arrays for slot owners
         app.migrations.add(AddDurationToDropInMigration()) // Add duration to slot
+        app.migrations.add(EventMigrationV4()) // Add sessionize_key and show_schedule
 
         do {
             guard let url = Environment.get("DATABASE_URL") else {
