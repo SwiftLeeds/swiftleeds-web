@@ -8,6 +8,6 @@
 <h3>#(group.title)</h3>
 
 #for(slot in group.slots):
-#date(slot.date, "HH:mm") - #(slot.owner)<br />
+#date(slot.date, "HH:mm") - #for(owner in slot.owners):#if(!isFirst):, #endif#(owner)#endfor<br />
 #endfor
 #endfor

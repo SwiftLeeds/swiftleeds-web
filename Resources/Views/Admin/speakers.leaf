@@ -26,7 +26,7 @@
                 <i class="bx bxl-twitter"></i>
             </a>
             <button data-swiftleeds-admin="speakers/#(speaker.id)" class="btn btn-outline-secondary btn-sm" aria-label="Edit">
-                <i class="bx bx-edit fs-xl me-sm-1"></i>
+                <i class="bx bx-pencil fs-xl me-sm-1"></i>
                 <span class="d-none d-sm-inline">Edit</span>
             </button>
         </div>

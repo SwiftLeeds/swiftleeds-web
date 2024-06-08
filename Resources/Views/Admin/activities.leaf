@@ -18,7 +18,7 @@
         </div>
       </div>
       <button data-swiftleeds-admin="activities/#(activity.id)" class="btn btn-outline-secondary px-3 px-sm-4">
-        <i class="bx bx-x fs-xl ms-sm-n1 me-sm-1"></i>
+        <i class="bx bx-pencil fs-xl ms-sm-n1 me-sm-1"></i>
         <span class="d-none d-sm-inline">Edit</span>
       </button>
     </li>

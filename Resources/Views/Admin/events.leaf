@@ -20,7 +20,7 @@
       </div>
       <button data-swiftleeds-admin="events/#(event.id)" class="btn btn-outline-secondary px-3 px-sm-4">
         <i class="bx bx-pencil fs-xl ms-sm-n1 me-sm-1"></i>
-        <span class="d-none d-sm-inline">Edit Event</span>
+        <span class="d-none d-sm-inline">Edit</span>
       </button>
     </li>
     #endfor
