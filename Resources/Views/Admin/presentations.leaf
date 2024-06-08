@@ -1,10 +1,17 @@
 <div class="d-flex align-items-center justify-content-between pt-xl-1 mb-3 pb-3">
     <h1 class="h2 mb-0">Presentations</h1>
     
-    <button data-swiftleeds-admin="presentations" class="btn btn-outline-secondary px-3 px-sm-4">
-        <i class="bx bx-plus fs-xl me-sm-1"></i>
-        <span class="d-none d-sm-inline">Add Presentation</span>
-    </button>
+    <div>
+        <button data-swiftleeds-admin="presentations" class="btn btn-outline-info px-3 px-sm-4 me-2 disabled">
+            <i class="bx bx-sync fs-xl me-sm-1"></i>
+            <span class="d-none d-sm-inline">Sync with Sessionize</span>
+        </button>
+        
+        <button data-swiftleeds-admin="presentations" class="btn btn-outline-secondary px-3 px-sm-4">
+            <i class="bx bx-plus fs-xl me-sm-1"></i>
+            <span class="d-none d-sm-inline">Add Presentation</span>
+        </button>
+    </div>
 </div>
 
 <ul class="list-unstyled mb-0" data-event-filter="true">
