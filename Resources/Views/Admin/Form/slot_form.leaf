@@ -4,64 +4,64 @@
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body">
-        <label for="event" class="form-label">Event</label>
-        <select name="eventID" id="event" class="form-control" required>
-          <option selected disabled value="">-- select an event --</option>
-          #for(event in events):
-            <option #if(event.id == slot.event.id): selected #endif id="eventID" name="eventID" value=#(event.id)>
-              #(event.name)
-            </option>
-          #endfor
-        </select>
-        <div class="invalid-feedback">
-          Please select an event
-        </div>
-        <br/>
-
-        <label for="type" class="form-label">Type</label>
-        <select id="type" name="type" class="form-control">
-          #for(type in types):
-            <option #if(initialType == type):selected#endif id="type" name="type" value=#(type)>
-              #(type)
-            </option>
-          #endfor
-        </select>
-
-        <br class="presentation">
-        <label for="presentationID" class="form-label presentation">Presentation</label>
-        <select name="presentationID" id="presentationID" class="form-control presentation">
-          <option selected value>-- select a presentation --</option>
-          #for(presentation in presentations):
-            <option #if(presentation.id == slot.presentation.id): selected #endif name="presentation" value=#(presentation.id) class="event-visible" data-event="#(presentation.event.id)">
-              #(presentation.title)
-            </option>
-          #endfor
-        </select>
-
-        <br class="activity">
-        <label for="activityID" class="form-label activity">Activity</label>
-        <select name="activityID" id="activityID" class="form-control activity">
-          <option selected value>-- select an activity --</option>
-          #for(activity in activities):
-            <option #if(activity.id == slot.activity.id): selected #endif name="activity" value=#(activity.id) class="event-visible" data-event="#(activity.event.id)">
-              #(activity.title) - #(activity.subtitle)
-            </option>
-          #endfor
-        </select>
-        <br>
-
-        <label for="date" class="form-label">Start Time</label>
-        <div class="input-group">
-          <input name="date" type="datetime-local" class="form-control" #if(slot.date): value="#date(slot.date)" #elseif(slot.startDate): value="2022-10-09T#(slot.startDate)" #endif required>
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-time"></span>
-          </span>
-        </div>
-        <div class="invalid-feedback">
-          Please enter a start date and time
+        <div class="mb-3">
+            <label for="event" class="form-label">Event</label>
+            <select name="eventID" id="event" class="form-control" required>
+              <option selected disabled value="">-- select an event --</option>
+              #for(event in events):
+                <option #if(event.id == slot.event.id): selected #endif id="eventID" name="eventID" value=#(event.id)>
+                  #(event.name)
+                </option>
+              #endfor
+            </select>
+            <div class="invalid-feedback">
+              Please select an event
+            </div>
         </div>
 
-        <br>
+        <div class="mb-3">
+            <label for="type" class="form-label">Type</label>
+            <select id="type" name="type" class="form-control">
+              #for(type in types):
+                <option #if(initialType == type):selected#endif id="type" name="type" value=#(type)>
+                  #(type)
+                </option>
+              #endfor
+            </select>
+        </div>
+
+        <div class="presentation mb-3">
+            <label for="presentationID" class="form-label presentation">Presentation</label>
+            <select name="presentationID" id="presentationID" class="form-control presentation">
+              <option selected value>Select a Presentation</option>
+              #for(presentation in presentations):
+                <option #if(presentation.id == slot.presentation.id): selected #endif name="presentation" value=#(presentation.id) class="event-visible" data-event="#(presentation.event.id)">
+                  #(presentation.title)
+                </option>
+              #endfor
+            </select>
+        </div>
+
+        <div class="activity mb-3">
+            <label for="activityID" class="form-label activity">Activity</label>
+            <select name="activityID" id="activityID" class="form-control activity">
+              <option selected value>Select an Activity</option>
+              #for(activity in activities):
+                <option #if(activity.id == slot.activity.id): selected #endif name="activity" value=#(activity.id) class="event-visible" data-event="#(activity.event.id)">
+                  #(activity.title) - #(activity.subtitle)
+                </option>
+              #endfor
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="date" class="form-label">Start Time</label>
+            <div class="input-group">
+              <input name="date" type="datetime-local" class="form-control" #if(slot.date):value="#dateFix(slot.date)"#endif required>
+            </div>
+            <div class="invalid-feedback">Please enter a start date and time</div>
+        </div>
+
         <div class="mb-3">
           <label for="duration" class="form-label">Duration (minutes)</label>
           <input name="duration" type="number" class="form-control" value="#(slot.duration)" required>
@@ -102,7 +102,6 @@
           var elements = document.getElementsByClassName('event-visible')
 
           for (const element of elements) {
-            console.log(element.dataset.event + ' - ' + selectedEvent)
             if (element.dataset.event == selectedEvent) {
               element.disabled = false
             } else {

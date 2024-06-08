@@ -36,7 +36,7 @@
 
         <div class="mb-3">
           <label for="profileImage" class="form-label">Image</label>
-          <input id="profileImage" class="form-control" type="file" name="profileImage" required>
+          <input id="profileImage" class="form-control" type="file" name="profileImage">
           <div class="invalid-feedback">
             Please upload an image
           </div>

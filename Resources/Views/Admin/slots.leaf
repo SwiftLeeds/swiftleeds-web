@@ -22,7 +22,7 @@
           </div>
           <span class="d-inline-block fs-sm text-muted pe-2 me-2">
             #if(slot.date):
-              <tt>#date(slot.date, "dd/MM [HH:mm")-#sessionEnd(slot.date, slot.duration)]</tt>
+              <tt>#dateFix(slot.date, "dd/MM [HH:mm")-#sessionEnd(slot.date, slot.duration)]</tt>
             #else:
               <tt>#(slot.startDate)</tt>
             #endif

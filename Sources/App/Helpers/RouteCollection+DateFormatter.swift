@@ -5,14 +5,15 @@ extension RouteCollection {
     public static func formDateTimeFormatter() -> DateFormatter {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = .init(identifier: "en_US_POSIX")
-        dateFormatter.dateFormat = "yyy-MM-dd'T'HH:mm"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
+        dateFormatter.timeZone = .init(identifier: "UTC")
         return dateFormatter
     }
 
     public static func formDateFormatter() -> DateFormatter {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = .init(identifier: "en_US_POSIX")
-        dateFormatter.dateFormat = "yyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter
     }
 
@@ -20,6 +21,7 @@ extension RouteCollection {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = .init(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "HH:mm"
+        dateFormatter.timeZone = .init(identifier: "UTC")
         return dateFormatter
     }
 }
