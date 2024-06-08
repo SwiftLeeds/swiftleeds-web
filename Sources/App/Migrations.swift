@@ -75,6 +75,7 @@ class Migrations {
         app.migrations.add(EventMigrationV3()) // Adds tito ID
         app.migrations.add(UseArrayDropInOwnerMigration()) // Use arrays for slot owners
         app.migrations.add(AddDurationToDropInMigration()) // Add duration to slot
+        app.migrations.add(AddDropInTBAMigration()) // Hide drop-in by default
         app.migrations.add(EventMigrationV4()) // Add sessionize_key and show_schedule
 
         do {

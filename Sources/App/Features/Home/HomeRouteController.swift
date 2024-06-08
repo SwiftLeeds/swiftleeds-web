@@ -126,7 +126,7 @@ struct HomeRouteController: RouteCollection {
         try await DropInSession.query(on: req.db)
             .with(\.$event)
             .all()
-            .filter { $0.event.name == event.name }
+            .filter { $0.event.name == event.name && $0.isPublic }
     }
     
     private func getSlots(req: Request, event: Event) async throws -> [Slot] {
