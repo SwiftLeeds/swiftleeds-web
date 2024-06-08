@@ -57,6 +57,11 @@ $("[data-swiftleeds-admin]").on('click', (e) => {
         success: (data) => {
             modal.find('.modal-content').html(data);
             
+            $("[data-swiftleeds-selectcurrentevent]").each((offset, element) => {
+                const value = localStorage['selectedEvent'];
+                $(element).find('option[value=' + value + ']').attr('selected', true);
+            });
+            
             modal.find('.needs-validation').each((offset, element) => {
                 const form = $(element);
                 form.on('click', '[data-swiftleeds-form]', (event) => {
@@ -71,14 +76,18 @@ $("[data-swiftleeds-admin]").on('click', (e) => {
                         // POST admin/:key/:ID/update
                         // POST admin/:key/:ID/delete
                         const crudEndpoint = 'admin/' + trigger.data('swiftleeds-admin') + '/' + crudEvent;
+                        var disabled = form.find(':input:disabled').removeAttr('disabled');
                         const formData = new FormData(element);
                         const useFormData = form.attr('enctype') == 'multipart/form-data'
+                        const data = useFormData ? formData : form.serialize();
+                        disabled.attr('disabled','disabled');
+                        
                         console.log('Requesting ' + crudEndpoint);
                         
                         $.ajax({
                             type: "POST",
                             url: crudEndpoint,
-                            data: useFormData ? formData : form.serialize(),
+                            data: data,
                             contentType: useFormData ? false : 'application/x-www-form-urlencoded',
                             processData: !useFormData,
                             success: (data) => {
