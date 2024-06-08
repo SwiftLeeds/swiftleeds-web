@@ -4,7 +4,15 @@
         <div class="d-table position-relative mx-auto mt-2 mt-lg-4 pt-5 mb-3">
           <img src="https://gravatar.com/avatar/#hash(user.email)?d=retro" class="d-block rounded-circle" width="120" alt="#(user.name)">
         </div>
-        <h2 class="h5 mb-3 pb-3">#(user.name)</h2>
+        <h2 class="h5 mb-2 pb-3">#(user.name)</h2>
+        
+        <div class="mb-3">
+            <select class="form-select" id="event-select" #if(page == "events" || page == "speakers"):disabled#endif>
+                #for(event in events):
+                <option value="#(event.id)" #if(event.id == selectedEvent.id):selected#endif>#(event.name)</option>
+                #endfor
+            </select>
+        </div>
         
         <button type="button" class="btn btn-secondary w-100 d-md-none mt-n2 mb-3" data-bs-toggle="collapse" data-bs-target="#admin-menu">
           <i class="bx bxs-user-detail fs-xl me-2"></i>

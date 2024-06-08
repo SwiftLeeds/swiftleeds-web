@@ -17,37 +17,23 @@
 
           <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4 pt-md-5 mt-n3 mt-md-0">
             <div class="ps-md-3 ps-lg-0 mt-md-2 py-md-4">
-
-        #if(page == "activities" || page == "dropins" || page == "presentations" || page == "slots" || page == "sponsors" ):
-          <label for="selectedEvent" class="form-label">Selected event</label>
-          <select id="selectedEvent" name="selectedEvent" class="form-control" onchange="selectedEventUpdated()">
-            #for(event in events):
-              <option #if(event.id == selectedEvent.id): selected #endif value=#(event.id)>
-                #(event.name)
-              </option>
-            #endfor
-          </select>
-          <br/>
-        #endif
-
-        #if(page == "activities"):
-          #extend("Admin/activities")
-        #elseif(page == "dropins"):
-          #extend("Admin/dropins")
-        #elseif(page == "events"):
-          #extend("Admin/events")
-        #elseif(page == "jobs"):
-          #extend("Admin/jobs")
-        #elseif(page == "presentations"):
-          #extend("Admin/presentations")
-        #elseif(page == "slots"):
-          #extend("Admin/slots")
-        #elseif(page == "speakers"):
-          #extend("Admin/speakers")
-        #elseif(page == "sponsors"):
-          #extend("Admin/sponsors")
-        #endif
-        
+                #if(page == "activities"):
+                  #extend("Admin/activities")
+                #elseif(page == "dropins"):
+                  #extend("Admin/dropins")
+                #elseif(page == "events"):
+                  #extend("Admin/events")
+                #elseif(page == "jobs"):
+                  #extend("Admin/jobs")
+                #elseif(page == "presentations"):
+                  #extend("Admin/presentations")
+                #elseif(page == "slots"):
+                  #extend("Admin/slots")
+                #elseif(page == "speakers"):
+                  #extend("Admin/speakers")
+                #elseif(page == "sponsors"):
+                  #extend("Admin/sponsors")
+                #endif
             </div>
           </div>
         </div>
@@ -65,36 +51,5 @@
   #export("scripts"):
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="/js/admin.js"></script>
-    
-    <script type="text/javascript">
-      var nav = document.getElementById("nav");
-      var links = nav.getElementsByClassName("nav-link");
-      Object.values(links).filter(link => link.href.includes("#(page)"))[0].className += " active";
-
-      if (document.getElementById('selectedEvent')) {
-        var selectedEvent = localStorage['selectedEvent']
-        if (selectedEvent) {
-          var eventSelection = document.getElementById('selectedEvent')
-          eventSelection.value = selectedEvent
-        }
-
-        selectedEventUpdated()
-      }
-
-      function selectedEventUpdated() {
-        var selectedEvent = document.getElementById('selectedEvent').value
-        var elements = document.getElementsByClassName('event-visible')
-
-        localStorage['selectedEvent'] = selectedEvent
-
-        for (const element of elements) {
-          if (element.dataset.event == selectedEvent) {
-            element.classList.remove('hidden')
-          } else {
-            element.classList.add('hidden')
-          }
-        }
-      }
-    </script>
   #endexport
 #endextend

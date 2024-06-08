@@ -1,37 +1,24 @@
-#extend("base"):
-  #export("title", "SwiftLeeds")
+<form class="needs-validation d-flex flex-column position-relative overflow-hidden" novalidate enctype="multipart/form-data">
+<div class="modal-header">
+    <h5 class="modal-title">#if(sponsor):Edit Sponsor#else:Create Sponsor#endif</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
 
-  #export("content"):
-    #extend("Shared/_header")
-
-      <section class="bg-dark py-4">
-        <div class="container pb-2 py-lg-5">
-          <h1 class="text-center my-4 text-white">#if(sponsor):
-            Edit Sponsor
-          #else:
-            Create Sponsor
-          #endif</h1>
+        <div class="mb-3">
+            <label for="event" class="form-label">Event</label>
+            <select name="eventID" class="form-control" required>
+              <option selected disabled value="">Select an Event</option>
+              #for(event in events):
+                <option #if(event.id == sponsor.event.id): selected #endif id="eventID" name="eventID" value=#(event.id)>
+                  #(event.name)
+                </option>
+              #endfor
+            </select>
+            <div class="invalid-feedback">
+              Please select an event
+            </div>
         </div>
-      </section>
-      
-      <section class="container mb-5 pt-4 pb-2 py-mg-4">
-      
-    <div class="row">
-      <form method="POST" action="/admin/sponsors#if(sponsor):/#(sponsor.id)#endif" enctype="multipart/form-data" class="needs-validation" novalidate>
-
-        <label for="event" class="form-label">Event</label>
-        <select name="eventID" class="form-control" required>
-          <option selected disabled value="">-- select an event --</option>
-          #for(event in events):
-            <option #if(event.id == sponsor.event.id): selected #endif id="eventID" name="eventID" value=#(event.id)>
-              #(event.name)
-            </option>
-          #endfor
-        </select>
-        <div class="invalid-feedback">
-          Please select an event
-        </div>
-        <br>
 
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
@@ -49,13 +36,14 @@
         <div class="mb-3">
           <label for="sponsorImage" class="form-label">Image</label>
           <input class="form-control" type="file" id="sponsorImage" name="sponsorImage">
-
-          #if(sponsor.image):
-            </br>
-            <p class="form-label">Existing image</p>
-            <img src="#awsImage(sponsor.image)" class="img-thumbnail sponsor-thumbnail-img">
-          #endif
         </div>
+        
+        #if(sponsor.image):
+          <div class="mb-3">
+                <p class="form-label">Existing image</p>
+                <img src="#awsImage(sponsor.image)" class="img-thumbnail sponsor-thumbnail-img p-3 bg-secondary img-rounded">
+          </div>
+        #endif
 
         <div class="mb-3">
           <label for="url" class="form-label">URL</label>
@@ -68,7 +56,7 @@
         <div class="mb-3">
           <label for="sponsorLevel" class="form-label">Level</label>
           <select name="sponsorLevel" class="form-control" required>
-            <option selected disabled value="">-- select a sponsor level --</option>
+            <option selected disabled value="">Select a Sponsor Level</option>
             #for(sponsorLevel in sponsorLevels):
               <option #if(sponsorLevel == sponsor.sponsorLevel): selected #endif id="sponsorLevel" name="sponsorLevel" value=#(sponsorLevel)>
                 #capitalized(sponsorLevel)
@@ -79,11 +67,13 @@
             Please select a sponsor level
           </div>
         </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
-
-    </section>
-  #endexport
-#endextend
+</div>
+<div class="modal-footer">
+    #if(sponsor):
+    <button type="button" class="btn btn-danger btn-sm" data-swiftleeds-form="delete">Delete sponsor</button>
+    <button type="button" class="btn btn-success btn-sm" data-swiftleeds-form="update">Save changes</button>
+    #else:
+    <button type="button" class="btn btn-success btn-sm" data-swiftleeds-form="create">Create sponsor</button>
+    #endif
+</div>
+</form>

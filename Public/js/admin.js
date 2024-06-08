@@ -1,10 +1,45 @@
 // Handle Event Selection
+const localSelectedEvent = localStorage['selectedEvent'];
 
-// Handle AJAX Modals
-// - Form Validation
-// - API Error Handling
-// - Confirmation Prompts
+if (localSelectedEvent) {
+    $("#event-select").val(localSelectedEvent).change();
+}
 
+selectedEventUpdated(false); // on load
+$("#event-select").on('change', (event) => {
+    selectedEventUpdated(true); // on change
+});
+
+function selectedEventUpdated(change) {
+    const selectedEvent = $("#event-select").find(":selected").attr("value");
+    
+    if (change) {
+        localStorage['selectedEvent'] = selectedEvent;
+    }
+    
+    $("[data-event-filter] li[data-event]").each((offset, element) => {
+        if (element.dataset.event.includes(selectedEvent)) {
+            element.classList.remove('hidden');
+        } else {
+            element.classList.add('hidden');
+        }
+    });
+    
+    $("[data-event-filter]").each((offset, element) => {
+        const list = $(element);
+        const itemCount = list.find('li[data-event]').length;
+        const hiddenItemCount = list.find('li[data-event].hidden').length;
+        console.log(itemCount, hiddenItemCount);
+        
+        if (hiddenItemCount == itemCount) {
+            list.find('.alert').removeClass('hidden');
+        } else {
+            list.find('.alert').addClass('hidden');
+        }
+    });
+}
+
+// Handle Dynamic Modals with Form Validation
 $("[data-swiftleeds-admin]").on('click', (e) => {
     e.preventDefault();
     
