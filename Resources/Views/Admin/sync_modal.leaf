@@ -1,0 +1,71 @@
+<form class="needs-validation d-flex flex-column position-relative overflow-hidden" novalidate #if(count(changes) > 0):data-modal-size="modal-xl"#endif>
+<div class="modal-header">
+    <h5 class="modal-title">Sync with Sessionize</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+        <div class="mb-3">
+            <label for="event" class="form-label">Event</label>
+            <input value="#(event.id)" class="form-control" name="eventID" id="eventID" type="hidden" required>
+            <input value="#(event.name)" class="form-control" name="event" id="event" readonly>
+        </div>
+        
+        <ul class="list-unstyled mb-0">
+            #if(count(changes) == 0):
+            <div class="alert alert-secondary" role="alert">
+              There are no changes to be synced.
+            </div>
+            #endif
+            #for(change in changes):
+            <li class="d-flex align-items-center justify-content-between mb-4">
+                <div class="d-flex align-items-start me-3">
+                    <div class="bg-secondary rounded-1 p-2">
+                        <i class="bx #if(change.modelType == "speaker"):bx-microphone#else:bx-slideshow#endif fs-xl #if(change.operationType == "create"):text-success#else:text-danger#endif d-block"></i>
+                    </div>
+                    <div class="ps-3">
+                        #for(pair in change.pairs):
+                        <div class="fs-sm mb-1">
+                            <span class="fw-medium">#(pair.key)</span>: #(pair.newValue)
+                            
+                            #if(pair.oldValue):
+                            <em class="text-muted">was #(pair.oldValue)</em>
+                            #endif
+                        </div>
+                        #endfor
+                    </div>
+                </div>
+                
+                <input type="hidden" name="ids[]" value="#(change.id)" required>
+                <input type="hidden" name="statuses[]" value="enabled" required class="status">
+                        
+                <button type="button" data-swiftleeds-toggle="status" class="btn btn-icon btn-outline-success px-3 px-sm-4">
+                    <i class="bx bx-check fs-xl"></i>
+                </button>
+            </li>
+            #endfor
+        </ul>
+        
+        <script>
+        $("[data-swiftleeds-toggle='status']").on('click', (event) => {
+            const statusInput = $(event.currentTarget).parent().find('input.status');
+            
+            if($(event.currentTarget).hasClass('btn-outline-success')) {
+                statusInput.attr('value', 'disabled');
+            
+                $(event.currentTarget)
+                    .removeClass('btn-outline-success').addClass('btn-outline-danger')
+                    .find('i').removeClass('bx-check').addClass('bx-x');
+            } else {
+                statusInput.attr('value', 'enabled');
+            
+                $(event.currentTarget)
+                    .removeClass('btn-outline-danger').addClass('btn-outline-success')
+                    .find('i').removeClass('bx-x').addClass('bx-check');
+            }
+        });
+        </script>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" data-swiftleeds-form="accept" #if(count(changes) == 0):disabled#endif>Accept changes</button>
+</div>
+</form>

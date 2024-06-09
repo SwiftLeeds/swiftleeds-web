@@ -2,7 +2,7 @@
     <h1 class="h2 mb-0">Presentations</h1>
     
     <div>
-        <button data-swiftleeds-admin="presentations" class="btn btn-outline-info px-3 px-sm-4 me-2 disabled">
+        <button data-swiftleeds-admin="sessionize/modal/[FILTER_EVENT]" class="btn btn-outline-info px-3 px-sm-4 me-2">
             <i class="bx bx-sync fs-xl me-sm-1"></i>
             <span class="d-none d-sm-inline">Sync with Sessionize</span>
         </button>

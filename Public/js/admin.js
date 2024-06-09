@@ -48,7 +48,8 @@ $("[data-swiftleeds-admin]").on('click', (e) => {
     modal.modal('show');
     modal.find('.modal-content').html("<div class=\"modal-header\"><h5 class=\"modal-title\">Loading...</h5><button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button></div>");
     
-    const endpoint = 'admin/' + trigger.data('swiftleeds-admin');
+    const endpoint = 'admin/' + trigger.data('swiftleeds-admin')
+        .replace('[FILTER_EVENT]', localStorage['selectedEvent']);
     console.log('Requesting ' + endpoint);
     
     $.ajax({
@@ -56,6 +57,11 @@ $("[data-swiftleeds-admin]").on('click', (e) => {
         url: endpoint,
         success: (data) => {
             modal.find('.modal-content').html(data);
+            
+            const dataSize = modal.find('.modal-content [data-modal-size]');
+            if(dataSize.length == 1) {
+                modal.find('.modal-dialog').addClass(dataSize.data('modal-size'));
+            }
             
             $("[data-swiftleeds-selectcurrentevent]").each((offset, element) => {
                 const value = localStorage['selectedEvent'];
@@ -65,6 +71,11 @@ $("[data-swiftleeds-admin]").on('click', (e) => {
             modal.find('.needs-validation').each((offset, element) => {
                 const form = $(element);
                 form.on('click', '[data-swiftleeds-form]', (event) => {
+                    if ($(event.currentTarget).hasClass('btn-loading')) {
+                        console.log('Ignoring. Button is working.')
+                        return;
+                    }
+                    
                     const crudEvent = $(event.currentTarget).data('swiftleeds-form');
                     console.log('Received Form Event: ' + crudEvent);
                     
@@ -75,7 +86,7 @@ $("[data-swiftleeds-admin]").on('click', (e) => {
                         // POST admin/:key/create
                         // POST admin/:key/:ID/update
                         // POST admin/:key/:ID/delete
-                        const crudEndpoint = 'admin/' + trigger.data('swiftleeds-admin') + '/' + crudEvent;
+                        const crudEndpoint = 'admin/' + trigger.data('swiftleeds-admin').replace('[FILTER_EVENT]', localStorage['selectedEvent']) + '/' + crudEvent;
                         var disabled = form.find(':input:disabled').removeAttr('disabled');
                         const formData = new FormData(element);
                         const useFormData = form.attr('enctype') == 'multipart/form-data'
@@ -83,6 +94,11 @@ $("[data-swiftleeds-admin]").on('click', (e) => {
                         disabled.attr('disabled','disabled');
                         
                         console.log('Requesting ' + crudEndpoint);
+                        
+                        const button = $(event.currentTarget)
+                        const buttonContents = button.html();
+                        button.addClass('btn-loading');
+                        button.html("<span class=\"spinner-border spinner-border-sm me-2\" role=\"status\" aria-hidden=\"true\"></span>Loading...");
                         
                         $.ajax({
                             type: "POST",
@@ -98,6 +114,9 @@ $("[data-swiftleeds-admin]").on('click', (e) => {
                                 }
                             },
                             error: (req) => {
+                                button.removeClass('btn-loading');
+                                button.html(buttonContents);
+                                
                                 console.log(req);
                                 if (req.responseJSON && req.responseJSON.error) {
                                     modal.find('.modal-body').prepend('<div class="alert alert-danger" role="alert"><strong>Failed</strong>: ' + req.responseJSON.reason + '</div>')

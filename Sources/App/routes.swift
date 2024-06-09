@@ -48,6 +48,7 @@ func routes(_ app: Application) throws {
     try adminRoutes.grouped("activities").register(collection: ActivityRouteController())
     try adminRoutes.grouped("jobs").register(collection: JobRouteController())
     try adminRoutes.grouped("dropins").register(collection: DropInRouteController())
+    try adminRoutes.grouped("sessionize").register(collection: SessionizeSyncRouteController())
 
     adminRoutes.get { request -> View in
         let user = try request.auth.require(User.self)
