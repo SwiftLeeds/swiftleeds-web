@@ -28,6 +28,7 @@ struct TicketHubRouteController: RouteCollection {
                     .with(\.$slots)
                     .sort(.id)
                     .all()
+                    .filter { $0.isPublic }
                 
                 let dropInSessions = sessions.filter { $0.maxTicketsPerSlot == 1 }.map { convertDropInSessionToViewModel($0, slug: ticket.slug) }
                 let groupSessions = sessions.filter { $0.maxTicketsPerSlot > 1 }.map { convertDropInSessionToViewModel($0, slug: ticket.slug) }

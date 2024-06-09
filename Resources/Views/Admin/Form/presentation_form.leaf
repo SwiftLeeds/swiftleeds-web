@@ -4,66 +4,65 @@
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body">
-        <label for="event" class="form-label">Event</label>
-        <select name="eventID" class="form-control" required>
-          <option selected disabled value="">-- select an event --</option>
-          #for(event in events):
-            <option #if(event.id == presentation.event.id): selected #endif id="eventID" name="eventID" value=#(event.id)>
-              #(event.name)
-            </option>
-          #endfor
-        </select>
-        <div class="invalid-feedback">
-          Please select an event
+        <div class="mb-3">
+            <label for="event" class="form-label">#if(presentation):Change#endif Event</label>
+            <select name="eventID" class="form-control" required #if(!presentation):disabled#endif data-swiftleeds-selectCurrentEvent="true">
+              #for(event in events):
+                <option #if(event.id == presentation.event.id): selected #endif id="eventID" name="eventID" value=#(event.id)>
+                  #(event.name)
+                </option>
+              #endfor
+            </select>
+            <div class="invalid-feedback">Please select an event</div>
         </div>
-        <br>
 
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
           <input value="#(presentation.title)" class="form-control" name="title" id="title" required>
-          <div class="invalid-feedback">
-            Please enter a title
-          </div>
+          <div class="invalid-feedback">Please enter a title</div>
         </div>
 
         <div class="mb-3">
           <label for="synopsis" class="form-label">Synopsis</label>
           <textarea class="form-control" name="synopsis" id="synopsis" rows="10" required>#(presentation.synopsis)</textarea>
-          <div class="invalid-feedback">
-            Please enter a synopsis
-          </div>
-          <p>* Supports Markdown</p>
+          <div class="invalid-feedback">Please enter a synopsis</div>
         </div>
 
-        <label for="speakerID" class="form-label">Speaker</label>
-        <select name="speakerID" id="speakerID" class="form-control" required>
-          <option selected disabled value="">-- select a speaker --</option>
-          #for(speaker in speakers):
-            <option #if(speaker.id == presentation.speaker.id): selected #endif value=#(speaker.id)>
-              #(speaker.name)
-            </option>
-          #endfor
-        </select>
-        <div class="invalid-feedback">
-          Please select a speaker
+        <div class="mb-3">
+            <label for="speakerID" class="form-label">Speaker</label>
+            <select name="speakerID" id="speakerID" class="form-control" required>
+              <option selected disabled value="">-- select a speaker --</option>
+              #for(speaker in speakers):
+                <option #if(speaker.id == presentation.speaker.id): selected #endif value=#(speaker.id)>
+                  #(speaker.name)
+                </option>
+              #endfor
+            </select>
+            <div class="invalid-feedback">Please select a speaker</div>
         </div>
-        <br/>
-
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="enableSecondSpeaker" data-toggle="toggle" checked="checked">
-          <label class="form-check-label" for="enableSecondSpeaker">Additional Speaker</label>
+        
+        <div class="form-check form-switch mb-3">
+          <input type="checkbox" class="form-check-input" id="enableSecondSpeaker" checked="checked">
+          <label class="form-check-label" for="enableSecondSpeaker">Has second speaker?</label>
         </div>
-
-        <select id="secondSpeakerSelect" name="secondSpeakerID" class="form-control secondSpeaker">
-          <option selected disabled value="">-- select additional speaker --</option>
-          #for(speaker in speakers):
-            <option #if(speaker.id == presentation.secondSpeaker.id): selected #endif value=#(speaker.id)>
-              #(speaker.name)
-            </option>
-          #endfor
-        </select>
-        <br>
-
+        
+        <div class="mb-3" id="secondSpeakerSelect">
+            <select name="secondSpeakerID" class="form-control secondSpeaker">
+            <option selected disabled value="">Select Second Speaker</option>
+              #for(speaker in speakers):
+                <option #if(speaker.id == presentation.secondSpeaker.id): selected #endif value=#(speaker.id)>
+                  #(speaker.name)
+                </option>
+              #endfor
+            </select>
+        </div>
+        
+        #if(presentation):
+        <div class="form-check form-switch mb-3">
+            <input type="checkbox" class="form-check-input" id="isAnnounced" name="isAnnounced" #if(!presentation.isTBA):checked#endif>
+            <label class="form-check-label" for="isAnnounced">Has been announced?</label>
+        </div>
+        
         <div class="mb-3">
           <label for="slidoURL" class="form-label">Slido URL</label>
           <input name="slidoURL" id="slidoURL" class="form-control" value="#(presentation.slidoURL)">
@@ -73,6 +72,7 @@
           <label for="videoURL" class="form-label">Video URL</label>
           <input name="videoURL" id="videoURL" class="form-control" value="#(presentation.videoURL)">
         </div>
+        #endif
         
     <script>
       function updateForSecondSpeaker(enabled) {

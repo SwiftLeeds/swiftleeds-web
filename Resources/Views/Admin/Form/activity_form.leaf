@@ -5,9 +5,8 @@
 </div>
 <div class="modal-body">
         <div class="mb-3">
-            <label for="event" class="form-label">Event</label>
-            <select name="eventID" class="form-control" required>
-              <option selected disabled value="">Select an event</option>
+            <label for="event" class="form-label">#if(activity):Change#endif Event</label>
+            <select name="eventID" class="form-control" required #if(!activity):disabled#endif data-swiftleeds-selectCurrentEvent="true">
               #for(event in events):
                 <option #if(event.id == activity.event.id): selected #endif id="eventID" name="eventID" value=#(event.id)>
                   #(event.name)

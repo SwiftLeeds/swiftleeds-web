@@ -43,7 +43,7 @@ struct EventRouteController: RouteCollection {
 
     private func update(request: Request, event: Event?) async throws -> Response {
         let input = try request.content.decode(FormInput.self)
-        let isCurrent = input.isCurrent ?? false
+        let isCurrent = input.isCurrent ?? event?.isCurrent ?? false
         var eventID: Event.IDValue
 
         guard let date = Self.formDateFormatter().date(from: input.date) else {
@@ -55,6 +55,7 @@ struct EventRouteController: RouteCollection {
             event.date = date
             event.location = input.location
             event.isCurrent = isCurrent
+            event.showSchedule = input.showSchedule ?? false
 
             eventID = try event.requireID()
 
@@ -96,5 +97,6 @@ struct EventRouteController: RouteCollection {
         let date: String
         let location: String
         let isCurrent: Bool?
+        let showSchedule: Bool?
     }
 }

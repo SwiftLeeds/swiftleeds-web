@@ -25,6 +25,12 @@ final class Event: Model, Content {
     @Field(key: "tito_event")
     var titoEvent: String?
     
+    @Field(key: "sessionize_key")
+    var sessionizeKey: String?
+    
+    @Field(key: "show_schedule")
+    var showSchedule: Bool
+    
     @Children(for: \.$event)
     var presentations: [Presentation]
 

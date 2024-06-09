@@ -46,6 +46,9 @@ final class DropInSession: Model, Content {
     @Field(key: "company_link")
     var companyLink: String?
     
+    @Field(key: "is_public")
+    var isPublic: Bool
+    
     @Parent(key: "event_id")
     public var event: Event
     

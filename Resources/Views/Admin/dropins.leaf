@@ -1,7 +1,7 @@
 <div class="d-flex align-items-center justify-content-between pt-xl-1 mb-3 pb-3">
     <h1 class="h2 mb-0">Drop-In Sessions</h1>
     
-    <button data-swiftleeds-admin="dropins" class="btn btn-outline-secondary px-3 px-sm-4" disabled>
+    <button data-swiftleeds-admin="dropins" class="btn btn-outline-secondary px-3 px-sm-4">
         <i class="bx bx-plus fs-xl me-sm-1"></i>
         <span class="d-none d-sm-inline">Add Session</span>
     </button>
@@ -14,13 +14,22 @@
       <div class="d-flex align-items-start me-3">
         <div>
           <div class="fw-medium text-nav mb-1">#(dropInSession.title)</div>
-          <span class="d-inline-block fs-sm text-muted pe-2 me-2">#(dropInSession.owner)</span>
+          <span class="d-inline-block fs-sm text-muted border-end pe-2 me-2">#(dropInSession.owner)</span>
+          <span class="d-inline-block fs-sm text-muted">#count(dropInSession.slots) slots</span>
         </div>
       </div>
-      <a href="/admin/dropins/print/#(dropInSession.id)" class="btn btn-outline-secondary px-3 px-sm-4">
-        <i class="bx bx-printer fs-xl ms-sm-n1 me-sm-1"></i>
-        <span class="d-none d-sm-inline">Print</span>
-      </a>
+      <div>
+          <button data-swiftleeds-admin="dropins/slots/#(dropInSession.id)" class="btn btn-icon btn-outline-secondary me-2">
+            <i class="bx bx-calendar fs-xl"></i>
+          </button>
+          <button data-swiftleeds-admin="dropins/#(dropInSession.id)" class="btn btn-outline-secondary px-3 px-sm-4 me-2">
+            <i class="bx bx-pencil fs-xl ms-sm-n1 me-sm-1"></i>
+            <span class="d-none d-sm-inline">Edit</span>
+          </button>
+          <a href="/admin/dropins/print/#(dropInSession.id)" target="_blank" class="btn btn-icon btn-outline-secondary">
+            <i class="bx bx-printer fs-xl"></i>
+          </a>
+      </div>
     </li>
     #endfor
 </ul>

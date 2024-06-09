@@ -1,0 +1,95 @@
+<form class="needs-validation d-flex flex-column position-relative overflow-hidden" novalidate enctype="multipart/form-data">
+<div class="modal-header">
+    <h5 class="modal-title">#if(session):Edit Session#else:Create Session#endif</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <div class="mb-3">
+        <label for="event" class="form-label">#if(session):Change#endif Event</label>
+        <select name="eventID" class="form-control" required #if(!session):disabled#endif data-swiftleeds-selectCurrentEvent="true">
+          #for(event in events):
+            <option #if(event.id == session.event.id): selected #endif id="eventID" name="eventID" value=#(event.id)>
+              #(event.name)
+            </option>
+          #endfor
+        </select>
+    </div>
+        
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input class="form-control" id="title" name="title" value="#(session.title)" required>
+        <div class="invalid-feedback">Please enter a title.</div>
+    </div>
+    
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" name="description" id="description" rows="10" required>#(session.description)</textarea>
+        <div class="invalid-feedback">Please enter a description.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="ownerName" class="form-label">Owner</label>
+        <input class="form-control" type="text" id="ownerName" name="ownerName" value="#(session.owner)" placeholder="Adam Rush" required>
+        <div class="invalid-feedback">Please provide an owner name.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="ownerLink" class="form-label">Owner Link</label>
+        <input class="form-control" type="text" id="ownerLink" name="ownerLink" value="#(session.ownerLink)" placeholder="https://twitter.com/swift_leeds" required>
+        <div class="invalid-feedback">Please provide a Twitter URL.</div>
+    </div>
+    
+    <div class="mb-3">
+        <label for="ownerImage" class="form-label">Owner Image</label>
+        <input class="form-control" type="file" id="ownerImage" name="ownerImage">
+
+        #if(session.ownerImageUrl):
+        <p class="form-label mt-2">Existing image</p>
+        <img src="#awsImage(session.ownerImageUrl)" class="img-thumbnail" height="100px" style="height: 100px;">
+        #endif
+    </div>
+    
+    <div class="form-check form-switch">
+        <input type="checkbox" class="form-check-input" id="isPublic" name="isPublic" #if(session.isPublic):checked#endif>
+        <label class="form-check-label" for="isPublic">Is Public?</label>
+    </div>
+    
+    <div class="form-check form-switch">
+        <input type="checkbox" class="form-check-input" id="isBookable" name="isBookable" #if(session.maxTicketsPerSlot > 0):checked#endif>
+        <label class="form-check-label" for="isBookable">Is Bookable?</label>
+    </div>
+    
+    <div class="form-check form-switch">
+        <input type="checkbox" class="form-check-input" id="isGroup" name="isGroup" #if(session.maxTicketsPerSlot > 1):checked#endif>
+        <label class="form-check-label" for="isGroup">Is Group?</label>
+    </div>
+    
+    <div class="mb-3" id="groupSizeInput">
+        <label for="groupSize" class="form-label">Group Size</label>
+        <input class="form-control" type="number" id="groupSize" name="groupSize" #if(session.maxTicketsPerSlot):value="#(session.maxTicketsPerSlot)"#else:value="1"#endif min="0" max="100">
+    </div>
+    
+    <script>
+    function updateGroupSize(enabled) {
+        if (enabled) {
+            $("#groupSizeInput").show();
+        } else {
+            $("#groupSizeInput").hide();
+        }
+    }
+    
+    updateGroupSize(#if(session.maxTicketsPerSlot > 1):true#else:false#endif);
+    $("#isGroup").on('change', (event) => {
+        updateGroupSize($(event.currentTarget).prop("checked") == true);
+    });
+    </script>
+</div>
+<div class="modal-footer">
+    #if(session):
+    <button type="button" class="btn btn-danger btn-sm" data-swiftleeds-form="delete">Delete session</button>
+    <button type="button" class="btn btn-success btn-sm" data-swiftleeds-form="update">Save changes</button>
+    #else:
+    <button type="button" class="btn btn-success btn-sm" data-swiftleeds-form="create">Create session</button>
+    #endif
+</div>
+</form>
