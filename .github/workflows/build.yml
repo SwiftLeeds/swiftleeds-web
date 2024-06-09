@@ -68,6 +68,7 @@ jobs:
           region: europe-west2
           image: europe-west2-docker.pkg.dev/swiftleeds-website/swiftleeds-web/web:${{ github.head_ref || github.ref_name }}-latest
           flags: "--allow-unauthenticated"
+          revision_traffic: 'LATEST=100'
           env_vars: |
             BUCKET_NAME_PRESENTATIONS=swiftleeds-presentations
             BUCKET_NAME_SPEAKERS=swiftleeds-speakers

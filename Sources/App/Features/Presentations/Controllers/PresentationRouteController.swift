@@ -53,7 +53,7 @@ struct PresentationRouteController: RouteCollection {
         if let presentation = presentation {
             presentation.title = input.title
             presentation.synopsis = input.synopsis
-            presentation.isTBA = !(input.isAnnounced ?? false)
+            presentation.isTBA = !(input.isAnnounced == "on")
             presentation.slidoURL = input.slidoURL
             presentation.videoURL = input.videoURL
 
@@ -117,6 +117,6 @@ struct PresentationRouteController: RouteCollection {
         let synopsis: String
         let slidoURL: String?
         let videoURL: String?
-        let isAnnounced: Bool?
+        let isAnnounced: String?
     }
 }
