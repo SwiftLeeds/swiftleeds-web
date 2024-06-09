@@ -63,6 +63,24 @@ $("[data-swiftleeds-admin]").on('click', (e) => {
                 modal.find('.modal-dialog').addClass(dataSize.data('modal-size'));
             }
             
+            modal.find('[data-swiftleeds-form="delete"]').each((offset, element) => {
+                const popover = new bootstrap.Popover(element, {
+                    title: 'Are you sure?',
+                    content: 'This will permanently delete this item.',
+                    trigger: 'click',
+                    html: true,
+                    placement: 'top',
+                    container: modal,
+                    customClass: 'delete-confirmation'
+                });
+                
+                element.addEventListener('show.bs.popover', () => {
+                    setTimeout(() => {
+                        popover.hide();
+                    }, 2000);
+                })
+            });
+            
             $("[data-swiftleeds-selectcurrentevent]").each((offset, element) => {
                 const value = localStorage['selectedEvent'];
                 $(element).find('option[value=' + value + ']').attr('selected', true);
@@ -78,6 +96,14 @@ $("[data-swiftleeds-admin]").on('click', (e) => {
                     
                     const crudEvent = $(event.currentTarget).data('swiftleeds-form');
                     console.log('Received Form Event: ' + crudEvent);
+                        
+                    if(crudEvent == 'delete') {
+                        if ($('.popover.delete-confirmation').length == 0) {
+                            // If the popover is not visible, then do not continue.
+                            // This requires that you press the button twice to delete.
+                            return;
+                        }
+                    }
                     
                     const isValid = element.checkValidity();
                     element.classList.add('was-validated');
