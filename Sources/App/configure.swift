@@ -5,6 +5,8 @@ import Vapor
 
 public func configure(_ app: Application) throws {
     // Sessions
+    // https://firebase.google.com/docs/hosting/manage-cache#using_cookies
+    app.sessions.configuration.cookieName = "__session"
     app.sessions.use(.fluent(.psql))
     
     // Middleware
