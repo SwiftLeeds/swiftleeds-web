@@ -8,25 +8,19 @@ struct JobRouteController: RouteCollection {
     }
 
     func boot(routes: RoutesBuilder) throws {
-        routes.get(use: onShowCreate)
-        routes.get(":id", use: onShowEdit)
-        routes.get("delete", ":id", use: onDelete)
-
-        routes.post(use: onCreate)
-        routes.post(":id", use: onEdit)
+        // Modal
+        routes.get(use: onRead)
+        routes.get(":id", use: onRead)
+        
+        // Form
+        routes.post("create", use: onCreate)
+        routes.post(":id", "delete", use: onDelete)
+        routes.post(":id", "update", use: onUpdate)
     }
-
-    @Sendable private func onShowCreate(request: Request) async throws -> View {
-        try await showForm(request: request, job: nil)
-    }
-
-    @Sendable private func onShowEdit(request: Request) async throws -> View {
-        guard let job = try await Job.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
-        return try await showForm(request: request, job: job)
-    }
-
-    private func showForm(request: Request, job: Job?) async throws -> View {
-        let sponsors = try await Sponsor.query(on: request.db).sort(\.$name).all()
+    
+    @Sendable private func onRead(request: Request) async throws -> View {
+        let job = try await request.parameters.get("id").map { Job.find($0, on: request.db) }?.get()
+        let sponsors = try await Sponsor.query(on: request.db).sort(\.$name).with(\.$event).all()
         let context = JobContext(job: job, sponsors: sponsors)
 
         return try await request.view.render("Admin/Form/job_form", context)
@@ -34,18 +28,17 @@ struct JobRouteController: RouteCollection {
 
     @Sendable private func onDelete(request: Request) async throws -> Response {
         guard let job = try await Job.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
-
         try await job.delete(on: request.db)
-        return request.redirect(to: "/admin?page=jobs")
+        return Response(status: .ok, body: .init(string: "OK"))
     }
 
     @Sendable private func onCreate(request: Request) async throws -> Response {
         return try await update(request: request, job: nil)
     }
 
-    @Sendable private func onEdit(request: Request) async throws -> Response {
+    @Sendable private func onUpdate(request: Request) async throws -> Response {
         guard let job = try await Job.find(request.parameters.get("id"), on: request.db) else {
-            return request.redirect(to: "/admin?page=jobs")
+            throw Abort(.badRequest, reason: "Could not find job")
         }
 
         return try await update(request: request, job: job)
@@ -55,7 +48,7 @@ struct JobRouteController: RouteCollection {
         let input = try request.content.decode(FormInput.self)
 
         guard let sponsor = try await Sponsor.find(.init(uuidString: input.sponsorID), on: request.db) else {
-            return request.redirect(to: "/admin?page=jobs")
+            throw Abort(.badRequest, reason: "Could not find sponsor")
         }
 
         if let job = job {
@@ -77,7 +70,7 @@ struct JobRouteController: RouteCollection {
             try await job.create(on: request.db)
         }
 
-        return request.redirect(to: "/admin?page=jobs")
+        return Response(status: .ok, body: .init(string: "OK"))
     }
 
     // MARK: - FormInput

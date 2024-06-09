@@ -5,6 +5,7 @@ struct TicketHubRouteController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         routes.grouped(ValidTicketMiddleware()).group("ticket") { builder in
             builder.get { req -> View in
+                // guard let currentEvent = try await Event.query(on: req.db).filter(\.$name == "SwiftLeeds 2023").first() else {
                 guard let currentEvent = req.storage.get(CurrentEventKey.self) else {
                     throw Abort(.badRequest, reason: "unable to identify current event")
                 }

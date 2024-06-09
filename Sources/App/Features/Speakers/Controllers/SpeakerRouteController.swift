@@ -5,43 +5,33 @@ import Vapor
 
 struct SpeakerRouteController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
-        routes.get(use: onShowCreate)
-        routes.get(":id", use: onShowEdit)
-        routes.get("delete", ":id", use: onDelete)
-        routes.post(use: onCreate)
-        routes.post(":id", use: onEdit)
+        // Modal
+        routes.get(use: onRead)
+        routes.get(":id", use: onRead)
+        
+        // Form
+        routes.post("create", use: onCreate)
+        routes.post(":id", "delete", use: onDelete)
+        routes.post(":id", "update", use: onUpdate)
     }
 
-    @Sendable private func onShowCreate(request: Request) async throws -> View {
-        try await showForm(request: request, speaker: nil)
-    }
-
-    @Sendable private func onShowEdit(request: Request) async throws -> View {
-        guard let speaker = try await Speaker.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
-        return try await showForm(request: request, speaker: speaker)
-    }
-
-    private func showForm(request: Request, speaker: Speaker?) async throws -> View {
+    @Sendable private func onRead(request: Request) async throws -> View {
+        let speaker = try await request.parameters.get("id").map { Speaker.find($0, on: request.db) }?.get()
         let context = SpeakerContext(speaker: speaker)
         return try await request.view.render("Admin/Form/speaker_form", context)
     }
 
     @Sendable private func onDelete(request: Request) async throws -> Response {
-        guard
-            let requestID = request.parameters.get("id"),
-            let speaker = try? await Speaker.find(.init(uuidString: requestID), on: request.db)
-        else { throw Abort(.notFound) }
-
+        guard let speaker = try await Speaker.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
         try await speaker.delete(on: request.db)
-
-        return request.redirect(to: "/admin?page=speakers")
+        return Response(status: .ok, body: .init(string: "OK"))
     }
     
     @Sendable private func onCreate(request: Request) async throws -> Response {
         return try await update(request: request, speaker: nil)
     }
 
-    @Sendable private func onEdit(request: Request) async throws -> Response {
+    @Sendable private func onUpdate(request: Request) async throws -> Response {
         guard let speaker = try await Speaker.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
         return try await update(request: request, speaker: speaker)
     }
@@ -54,15 +44,10 @@ struct SpeakerRouteController: RouteCollection {
         if image.profileImage.filename != "" {
             imageFilename = "\(UUID.generateRandom().uuidString)-\(image.profileImage.filename)"
 
-            do {
-                try await ImageService.uploadFile(
-                    data: Data(image.profileImage.data.readableBytesView),
-                    filename: imageFilename
-                )
-            } catch {
-                request.logger.error("Speaker could not be created. \(error)")
-                return request.redirect(to: "/admin?page=speakers")
-            }
+            try await ImageService.uploadFile(
+                data: Data(image.profileImage.data.readableBytesView),
+                filename: imageFilename
+            )
         }
 
         if let speaker = speaker {
@@ -85,7 +70,7 @@ struct SpeakerRouteController: RouteCollection {
             try await speaker.create(on: request.db)
         }
 
-        return request.redirect(to: "/admin?page=speakers")
+        return Response(status: .ok, body: .init(string: "OK"))
     }
 
     // MARK: - ImageUpload

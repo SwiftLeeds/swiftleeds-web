@@ -1,73 +1,38 @@
-#extend("base"):
-  #export("title", "SwiftLeeds")
-
-  #export("content"):
-    #extend("Shared/_header")
-
-      <section class="bg-dark py-4">
-        <div class="container pb-2 py-lg-5">
-          <h1 class="text-center my-4 text-white">#if(event):
-            Edit Event
-          #else:
-            Create Event
-          #endif</h1>
-        </div>
-      </section>
-      
-      <section class="container mb-5 pt-4 pb-2 py-mg-4">
-      
-    <div class="row">
-      <form method="POST" action="/admin/events#if(event):/#(event.id)#endif" class="needs-validation" novalidate>
-        <div class="mb-3">
-          <label for="title" class="form-label">Name</label>
-          <input id="name" class="form-control" name="name" value="#(event.name)" required>
-          <div class="invalid-feedback">
-            Please enter a name
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label for="date" class="form-label">Date</label>
-          <div class="input-group">
-            <input name="date" type="date" id="date"" class="form-control" value="#if(event):#date(event.date, "yyyy-MM-dd")#endif" required>
-            <span class="input-group-addon">
-              <span class="glyphicon glyphicon-time"></span>
-            </span>
-            <div class="invalid-feedback">
-              Please enter an event date
-            </div>
-          </div>
-        <div>
-
-        <div class="mb-3">
-          <label for="location" class="form-label">Location</label>
-          <input id="location" class="form-control" name="location" value="#(event.location)" required>
-          <div class="invalid-feedback">
-            Please enter a location
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label for="isCurrent" class="form-label">Current Event</label>
-          <input id="isCurrentCheckbox" type="checkbox" #if(event.isCurrent):checked disabled=true#endif onchange="updatedCurrent()">
-          <input id="isCurrent" type="hidden" name="isCurrent" value="#if(event.isCurrent):true#else:false#endif"
-        </div>
-        <br/>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+<form class="needs-validation d-flex flex-column position-relative overflow-hidden" novalidate>
+<div class="modal-header">
+    <h5 class="modal-title">#if(event):Edit #if(event.isCurrent):Current #endif Event#else:Create Event#endif</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <div class="mb-3">
+        <label for="title" class="form-label">Name</label>
+        <input class="form-control" id="name" name="name" value="#(event.name)" placeholder="SwiftLeeds 2020" required>
+        <div class="invalid-feedback">Please enter a name.</div>
     </div>
 
-    </section>
-  #endexport
+    <div class="mb-3">
+        <label for="date" class="form-label">Date</label>
+        <input type="date" class="form-control" id="date" name="date" value="#if(event):#date(event.date, "yyyy-MM-dd")#endif" required>
+        <div class="invalid-feedback">Please enter a valid date.</div>
+    </div>
 
-  #export("scripts"):
-    <script>
-      function updatedCurrent() {
-        var isCurrent = document.getElementById('isCurrentCheckbox').checked
-        var element = document.getElementById('isCurrent')
-        element.value = isCurrent ? true : false
-      }
-    </script>
-  #endexport
-#endextend
+    <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input class="form-control" type="text" id="location" name="location" value="#(event.location)" placeholder="The Playhouse, Leeds" required>
+        <div class="invalid-feedback">Please provide a location.</div>
+    </div>
+
+    <div class="form-check form-switch">
+        <input type="checkbox" class="form-check-input" id="isCurrent" name="isCurrent" #if(event.isCurrent):checked disabled#endif>
+        <label class="form-check-label" for="isCurrent">Is current event?</label>
+    </div>
+</div>
+<div class="modal-footer">
+    #if(event):
+    <button type="button" class="btn btn-danger btn-sm" data-swiftleeds-form="delete" #if(event.isCurrent):disabled#endif>Delete event</button>
+    <button type="button" class="btn btn-success btn-sm" data-swiftleeds-form="update">Save changes</button>
+    #else:
+    <button type="button" class="btn btn-success btn-sm" data-swiftleeds-form="create">Create event</button>
+    #endif
+</div>
+</form>

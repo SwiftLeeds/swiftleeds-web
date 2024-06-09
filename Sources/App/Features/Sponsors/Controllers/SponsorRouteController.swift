@@ -3,43 +3,37 @@ import Vapor
 
 struct SponsorRouteController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
-        routes.get(use: onShowCreate)
-        routes.get(":id", use: onShowEdit)
-        routes.get("delete", ":id", use: onDelete)
-        routes.post(use: onCreate)
-        routes.post(":id", use: onEdit)
+        // Modal
+        routes.get(use: onRead)
+        routes.get(":id", use: onRead)
+        
+        // Form
+        routes.post("create", use: onCreate)
+        routes.post(":id", "delete", use: onDelete)
+        routes.post(":id", "update", use: onUpdate)
     }
-
-    @Sendable private func onShowCreate(request: Request) async throws -> View {
-        try await showForm(request: request, sponsor: nil)
-    }
-
-    @Sendable private func onShowEdit(request: Request) async throws -> View {
-        guard let sponsor = try await Sponsor.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
-        return try await showForm(request: request, sponsor: sponsor)
-    }
-
-    private func showForm(request: Request, sponsor: Sponsor?) async throws -> View {
+    
+    @Sendable private func onRead(request: Request) async throws -> View {
+        let sponsor = try await request.parameters.get("id").map { Sponsor.find($0, on: request.db) }?.get()
         let events = try await Event.query(on: request.db).sort(\.$date).all()
         let context = SponsorContext(sponsor: sponsor, sponsorLevels: sponsorLevels, events: events)
 
         return try await request.view.render("Admin/Form/sponsor_form", context)
     }
-
+    
     @Sendable private func onDelete(request: Request) async throws -> Response {
         guard let sponsor = try await Sponsor.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
-
         try await sponsor.delete(on: request.db)
-        return request.redirect(to: "/admin?page=sponsors")
+        return Response(status: .ok, body: .init(string: "OK"))
     }
     
     @Sendable private func onCreate(request: Request) async throws -> Response {
         return try await update(request: request, sponsor: nil)
     }
     
-    @Sendable private func onEdit(request: Request) async throws -> Response {
+    @Sendable private func onUpdate(request: Request) async throws -> Response {
         guard let sponsor = try await Sponsor.find(request.parameters.get("id"), on: request.db) else {
-            return request.redirect(to: "/admin?page=sponsors")
+            throw Abort(.badRequest, reason: "Failed to find sponsor")
         }
         
         return try await update(request: request, sponsor: sponsor)
@@ -52,7 +46,7 @@ struct SponsorRouteController: RouteCollection {
         guard let event = try await Event.find(
             .init(uuidString: input.eventID), on: request.db
         ) else {
-            return request.redirect(to: "/admin?page=sponsors")
+            throw Abort(.badRequest, reason: "Failed to find event")
         }
 
         var imageFilename = sponsor?.image ?? ""
@@ -60,18 +54,14 @@ struct SponsorRouteController: RouteCollection {
         if let sponsorImage = image.sponsorImage, sponsorImage.filename != "" {
             imageFilename = "\(UUID.generateRandom().uuidString)-\(sponsorImage.filename)"
 
-            do {
-                try await ImageService.uploadFile(
-                    data: Data(sponsorImage.data.readableBytesView),
-                    filename: imageFilename
-                )
-            } catch {
-                return request.redirect(to: "/admin?page=sponsors")
-            }
+            try await ImageService.uploadFile(
+                data: Data(sponsorImage.data.readableBytesView),
+                filename: imageFilename
+            )
         }
 
         guard let sponsorLevel = Sponsor.SponsorLevel(rawValue: input.sponsorLevel) else {
-            return request.redirect(to: "/admin?page=sponsors")
+            throw Abort(.badRequest, reason: "Failed to map sponsor level")
         }
 
         if let sponsor = sponsor {
@@ -97,7 +87,7 @@ struct SponsorRouteController: RouteCollection {
             try await sponsor.create(on: request.db)
         }
 
-        return request.redirect(to: "/admin?page=sponsors")
+        return Response(status: .ok, body: .init(string: "OK"))
     }
 
     // MARK: - SponsorContext

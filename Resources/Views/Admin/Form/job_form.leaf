@@ -1,73 +1,52 @@
-#extend("base"):
-  #export("title", "SwiftLeeds")
-
-  #export("content"):
-    #extend("Shared/_header")
-    
-          <section class="bg-dark py-4">
-        <div class="container pb-2 py-lg-5">
-          <h1 class="text-center my-4 text-white">#if(job):
-            Edit Job
-          #else:
-            Create Job
-          #endif</h1>
+<form class="needs-validation d-flex flex-column position-relative overflow-hidden" novalidate enctype="multipart/form-data">
+<div class="modal-header">
+    <h5 class="modal-title">#if(job):Edit Job#else:Create Job#endif</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+        <div class="mb-3">
+            <label for="sponsor" class="form-label">Sponsor</label>
+            <select name="sponsorID" class="form-control" required>
+              <option selected disabled value="">Select a Sponsor</option>
+              #for(sponsor in sponsors):
+                <option #if(sponsor.id == job.sponsor.id): selected #endif value=#(sponsor.id)>
+                  #(sponsor.name) (#(sponsor.event.name))
+                </option>
+              #endfor
+            </select>
+            <div class="invalid-feedback">Please select a sponsor</div>
         </div>
-      </section>
-      
-      <section class="container mb-5 pt-4 pb-2 py-mg-4">
-    <div class="row">
-      <form method="POST" action="/admin/jobs#if(job):/#(job.id)#endif" class="needs-validation" novalidate>
-        <label for="sponsor" class="form-label">Sponsor</label>
-        <select name="sponsorID" class="form-control" required>
-          <option selected disabled value="">-- select a a sponsor --</option>
-          #for(sponsor in sponsors):
-            <option #if(sponsor.id == job.sponsor.id): selected #endif value=#(sponsor.id)>
-              #(sponsor.name)
-            </option>
-          #endfor
-        </select>
-        <div class="invalid-feedback">
-          Please select a sponsor
-        </div>
-        <br>
 
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
           <input name="title" value="#(job.title)" id="title" class="form-control" required>
-          <div class="invalid-feedback">
-            Please enter a title
-          </div>
+          <div class="invalid-feedback">Please enter a title</div>
         </div>
 
         <div class="mb-3">
           <label for="location" class="form-label">Location</label>
           <input name="location" value="#(job.location)" id="location" class="form-control" required>
-          <div class="invalid-feedback">
-            Please enter a location
-          </div>
+          <div class="invalid-feedback">Please enter a location</div>
         </div>
 
         <div class="mb-3">
           <label for="details" class="form-label">Details</label>
           <textarea class="form-control" name="details" id="details" rows="10" required>#(job.details)</textarea>
-          <div class="invalid-feedback">
-            Please enter some details
-          </div>
-          <p>* Supports Markdown</p>
+          <div class="invalid-feedback">Please enter some details</div>
         </div>
 
         <div class="mb-3">
           <label for="url" class="form-label">URL</label>
-          <input value="#(job.url)" name="url" id="url" vclass="form-control" required>
-          <div class="invalid-feedback">
-            Please enter a URL
-          </div>
+          <input value="#(job.url)" name="url" id="url" class="form-control" required>
+          <div class="invalid-feedback">Please enter a URL</div>
         </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
-    
-    </section>
-  #endexport
-#endextend
+</div>
+<div class="modal-footer">
+    #if(job):
+    <button type="button" class="btn btn-danger btn-sm" data-swiftleeds-form="delete">Delete job</button>
+    <button type="button" class="btn btn-success btn-sm" data-swiftleeds-form="update">Save changes</button>
+    #else:
+    <button type="button" class="btn btn-success btn-sm" data-swiftleeds-form="create">Create job</button>
+    #endif
+</div>
+</form>

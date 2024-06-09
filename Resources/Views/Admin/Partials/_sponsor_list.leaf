@@ -1,0 +1,15 @@
+<li class="d-flex align-items-center justify-content-between mb-4" data-event="#(sponsor.event.id)">
+    <div class="d-flex align-items-start me-3">
+        <div class="bg-secondary rounded-1 p-3">
+            <i class="bx bx-medal fs-xl text-primary d-block"></i>
+        </div>
+        <div class="ps-3">
+            <div class="fw-medium text-nav">#(sponsor.name)</div>
+            <span class="d-inline-block fs-sm text-muted">#(sponsor.subtitle)</span>
+        </div>
+    </div>
+    <button data-swiftleeds-admin="sponsors/#(sponsor.id)" class="btn btn-outline-secondary px-3 px-sm-4">
+        <i class="bx bx-pencil fs-xl ms-sm-n1 me-sm-1"></i>
+        <span class="d-none d-sm-inline">Edit</span>
+    </button>
+</li>

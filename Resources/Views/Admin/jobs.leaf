@@ -1,35 +1,26 @@
-<h2>Jobs</h2>
+<div class="d-flex align-items-center justify-content-between pt-xl-1 mb-3 pb-3">
+    <h1 class="h2 mb-0">Jobs</h1>
+    
+    <button data-swiftleeds-admin="jobs" class="btn btn-outline-secondary px-3 px-sm-4">
+        <i class="bx bx-plus fs-xl me-sm-1"></i>
+        <span class="d-none d-sm-inline">Add Job</span>
+    </button>
+</div>
 
-<ul class="list-group">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    <a href="/admin/jobs">Add new job</a>
-  </li>
-</ul>
-
-</br>
-
-<ul class="list-group">
-  #if(jobs):
+<ul class="list-unstyled mb-0" data-event-filter="true">
+    <div class="alert alert-secondary hidden" role="alert">There are currently no jobs for this year.</div>
     #for(job in jobs):
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        #(job.title)
-
-        #for(sponsor in sponsors):
-          #if(sponsor.id == job.sponsor.id):
-            [#(sponsor.name)]
-          #endif
-        #endfor
-
-        <span class="badge badge-primary badge-pill">
-          <a href="/admin/jobs/delete/#(job.id)">🗑</a>
-          &nbsp
-          <a href="/admin/jobs/#(job.id)">✏️</a>
-        </span>
-      </li>
-    #endfor
-  #else:
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      No jobs
+    <li class="d-flex align-items-center justify-content-between mb-2 border px-3 py-2 rounded" data-event="#(job.sponsor.event.id)">
+      <div class="d-flex align-items-start me-3">
+        <div>
+          <div class="fw-medium text-nav mb-1">#(job.title)</div>
+          <span class="d-inline-block fs-sm text-muted pe-2 me-2">#(job.sponsor.name)</span>
+        </div>
+      </div>
+      <button data-swiftleeds-admin="jobs/#(job.id)" class="btn btn-outline-secondary px-3 px-sm-4">
+        <i class="bx bx-pencil fs-xl ms-sm-n1 me-sm-1"></i>
+        <span class="d-none d-sm-inline">Edit</span>
+      </button>
     </li>
-  #endif
+    #endfor
 </ul>

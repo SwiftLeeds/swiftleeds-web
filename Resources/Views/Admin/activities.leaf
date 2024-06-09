@@ -1,17 +1,26 @@
-<h2>Activities</h2>
-<br/>
-<ul class="list-group">
+<div class="d-flex align-items-center justify-content-between pt-xl-1 mb-3 pb-3">
+    <h1 class="h2 mb-0">Activities</h1>
+    
+    <button data-swiftleeds-admin="activities" class="btn btn-outline-secondary px-3 px-sm-4">
+        <i class="bx bx-plus fs-xl me-sm-1"></i>
+        <span class="d-none d-sm-inline">Add Activity</span>
+    </button>
+</div>
+
+<ul class="list-unstyled mb-0" data-event-filter="true">
+    <div class="alert alert-secondary hidden" role="alert">There are currently no activities for this year.</div>
     #for(activity in activities):
-        <li class="list-group-item d-flex justify-content-between align-items-center event-visible" data-event="#(activity.event.id)">
-            #(activity.title) / #(activity.subtitle)
-            <span class="badge badge-primary badge-pill">
-                <a href="/admin/activities/delete/#(activity.id)">🗑</a>
-                &nbsp
-                <a href="/admin/activities/#(activity.id)">✏️</a>
-            </span>
-        </li>
-    #endfor
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-        <a href="/admin/activities">Add new activity</a>
+    <li class="d-flex align-items-center justify-content-between mb-2 border px-3 py-2 rounded" data-event="#(activity.event.id)">
+      <div class="d-flex align-items-start me-3">
+        <div>
+          <div class="fw-medium text-nav mb-1">#(activity.title)</div>
+          <span class="d-inline-block fs-sm text-muted pe-2 me-2">#(activity.subtitle)</span>
+        </div>
+      </div>
+      <button data-swiftleeds-admin="activities/#(activity.id)" class="btn btn-outline-secondary px-3 px-sm-4">
+        <i class="bx bx-pencil fs-xl ms-sm-n1 me-sm-1"></i>
+        <span class="d-none d-sm-inline">Edit</span>
+      </button>
     </li>
+    #endfor
 </ul>

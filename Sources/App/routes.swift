@@ -59,7 +59,9 @@ func routes(_ app: Application) throws {
             .with(\.$secondSpeaker)
             .all()
         let events = try await Event.query(on: request.db).sort(\.$date).all()
-        let jobs = try await Job.query(on: request.db).sort(\.$title).all()
+        let jobs = try await Job.query(on: request.db).sort(\.$title)
+            .with(\.$sponsor)
+            .all()
         let slots = try await Slot
             .query(on: request.db)
             .sort(\.$date)
@@ -69,14 +71,7 @@ func routes(_ app: Application) throws {
             .all()
         let activities = try await Activity.query(on: request.db).sort(\.$title).all()
 
-        guard let selectedEvent = try await Event
-            .query(on: request.db)
-            .all()
-            .first(where: { $0.shouldBeReturned(by: request) })
-        else {
-            // better error or selection here
-            throw ScheduleAPIController.ScheduleAPIError.notFound
-        }
+        let selectedEvent = events.first(where: { $0.shouldBeReturned(by: request) }) ?? events.first(where: { $0.isCurrent }) ?? events[0]
         
         // There might be a better way to handle this, but Leaf templates don't
         // support dictionaries holding arrays,

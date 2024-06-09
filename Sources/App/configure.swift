@@ -23,7 +23,13 @@ public func configure(_ app: Application) throws {
     app.leaf.tags["markdown"] = Markdown()
     app.leaf.tags["awsImage"] = AwsImageTag()
     app.leaf.tags["safeCount"] = SafeCountTag()
+    app.leaf.tags["hash"] = HashTag()
+    app.leaf.tags["dateFix"] = DateFixTag()
     app.views.use(.leaf)
+    
+    #if DEBUG
+    app.leaf.cache.isEnabled = false
+    #endif
 
     // Migrations
     try Migrations.migrate(app)

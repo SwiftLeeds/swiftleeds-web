@@ -28,4 +28,4 @@ jobs:
           env: ${{ github.head_ref || github.ref_name }}
 
       - name: Untag Container Image
-        run: gcloud container images untag --region europe-west2 swiftleeds-website/swiftleeds-web/web:${{ github.head_ref || github.ref_name }}-latest
+        run: gcloud container images untag swiftleeds-website/swiftleeds-web/web:${{ github.head_ref || github.ref_name }}-latest

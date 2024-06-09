@@ -1,64 +1,32 @@
-<h2>Sponsors</h2>
-<br/>
-<ul class="list-group">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    <a href="/admin/sponsors">Add new sponsor</a>
-  </li>
+<div class="d-flex align-items-center justify-content-between pt-xl-1 mb-3 pb-3">
+    <h1 class="h2 mb-0">Sponsors</h1>
+    
+    <button data-swiftleeds-admin="sponsors" class="btn btn-outline-secondary px-3 px-sm-4">
+        <i class="bx bx-plus fs-xl me-sm-1"></i>
+        <span class="d-none d-sm-inline">Add Sponsor</span>
+    </button>
+</div>
+
+<h2 class="h5 text-primary pt-1 pt-lg-3 mt-4">Platinum Sponsors</h2>
+<ul class="list-unstyled mb-0" data-event-filter="true">
+    <div class="alert alert-secondary hidden" role="alert">There are no sponsors at this level.</div>
+    #for(sponsor in platinumSponsors):
+        #extend("Admin/Partials/_sponsor_list")
+    #endfor
 </ul>
 
-</br>
-
-<ul class="list-group">
-  <li class="list-group-item list-group-item-secondary disabled d-flex justify-content-between align-items-center">
-    Platinum Sponsors
-  </li>
-
-  #for(sponsor in platinumSponsors):
-  <li class="list-group-item d-flex justify-content-between align-items-center event-visible" data-event="#(sponsor.event.id)">
-      #(sponsor.name) - #capitalized(sponsor.sponsorLevel)
-      <span class="badge badge-primary badge-pill">
-          <a href="/admin/sponsors/delete/#(sponsor.id)">🗑</a>
-          &nbsp
-          <a href="/admin/sponsors/#(sponsor.id)">✏️</a>
-      </span>
-  </li>
-  #endfor
+<h2 class="h5 text-primary pt-1 pt-lg-3 mt-4">Gold Sponsors</h2>
+<ul class="list-unstyled mb-0" data-event-filter="true">
+    <div class="alert alert-secondary hidden" role="alert">There are no sponsors at this level.</div>
+    #for(sponsor in goldSponsors):
+        #extend("Admin/Partials/_sponsor_list")
+    #endfor
 </ul>
 
-</br>
-
-<ul class="list-group">
-  <li class="list-group-item list-group-item-secondary disabled d-flex justify-content-between align-items-center">
-    Gold Sponsors
-  </li>
-
-  #for(sponsor in goldSponsors):
-  <li class="list-group-item d-flex justify-content-between align-items-center event-visible" data-event="#(sponsor.event.id)">
-      #(sponsor.name) - #capitalized(sponsor.sponsorLevel)
-      <span class="badge badge-primary badge-pill">
-          <a href="/admin/sponsors/delete/#(sponsor.id)">🗑</a>
-          &nbsp
-          <a href="/admin/sponsors/#(sponsor.id)">✏️</a>
-      </span>
-  </li>
-  #endfor
-</ul>
-
-</br>
-
-<ul class="list-group">
-  <li class="list-group-item list-group-item-secondary disabled d-flex justify-content-between align-items-center">
-    Silver Sponsors
-  </li>
-
-  #for(sponsor in silverSponsors):
-  <li class="list-group-item d-flex justify-content-between align-items-center event-visible" data-event="#(sponsor.event.id)">
-      #(sponsor.name) - #capitalized(sponsor.sponsorLevel)
-      <span class="badge badge-primary badge-pill">
-          <a href="/admin/sponsors/delete/#(sponsor.id)">🗑</a>
-          &nbsp
-          <a href="/admin/sponsors/#(sponsor.id)">✏️</a>
-      </span>
-  </li>
-  #endfor
+<h2 class="h5 text-primary pt-1 pt-lg-3 mt-4">Silver Sponsors</h2>
+<ul class="list-unstyled mb-0" data-event-filter="true">
+    <div class="alert alert-secondary hidden" role="alert">There are no sponsors at this level.</div>
+    #for(sponsor in silverSponsors):
+        #extend("Admin/Partials/_sponsor_list")
+    #endfor
 </ul>
