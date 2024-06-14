@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
 .text-gradient-primary {
   background: linear-gradient(to right, #ED2207, #8B5CF6, #D946EF);
   -webkit-background-clip: text;
@@ -148,7 +147,7 @@
   --sl-dark-border-subtle: #eff2fc;
   --sl-white-rgb: 255, 255, 255;
   --sl-black-rgb: 0, 0, 0;
-  --sl-font-sans-serif: Poppins, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  --sl-font-sans-serif: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", -apple-system, BlinkMacSystemFont, Helvetica, Arial, "Lucida Grande", sans-serif;
   --sl-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --sl-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
   --sl-body-font-family: var(--sl-font-sans-serif);
