@@ -1,7 +1,7 @@
 #if(count(platinumSponsors) > 0 || count(goldSponsors) > 0 || count(silverSponsors) > 0):
 <h2 class="mt-5 themed-header" id="sponsors">Our Sponsors</h2>
 
-<div class="btn-group pb-2 px-0">
+<div class="row row-cols-2 row-cols-lg-3 g-3 pb-2">
 #for(sponsor in platinumSponsors):
     <a href="#(sponsor.url)" target="_blank" class="card card-body card-hover px-2 mx-2">
         <img src="#awsImage(sponsor.image)" class="d-block mx-auto my-2" style="max-height: 50px; width: auto;" alt="#(sponsor.name)">
@@ -9,7 +9,7 @@
 #endfor
 </div>
 
-<div class="btn-group pb-2 px-0">
+<div class="row row-cols-2 row-cols-lg-3 g-3 pb-2">
 #for(sponsor in goldSponsors):
     <a href="#(sponsor.url)" target="_blank" class="card card-body card-hover px-2 mx-2">
         <img src="#awsImage(sponsor.image)" class="d-block mx-auto my-2" style="max-height: 40px; width: auto;" alt="#(sponsor.name)">
@@ -17,7 +17,7 @@
 #endfor
 </div>
 
-<div class="btn-group px-0">
+<div class="row row-cols-2 row-cols-lg-3 g-3">
 #for(sponsor in silverSponsors):
     <a href="#(sponsor.url)" target="_blank" class="card card-body card-hover px-2 mx-2">
         <img src="#awsImage(sponsor.image)" class="d-block mx-auto my-2" style="max-height: 30px; width: auto;" alt="#(sponsor.name)">

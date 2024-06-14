@@ -2,7 +2,7 @@ import Fluent
 import Foundation
 import Vapor
 
-final class Event: Model, Content {
+final class Event: Model, Content, @unchecked Sendable {
     static let schema = Schema.event
 
     typealias IDValue = UUID

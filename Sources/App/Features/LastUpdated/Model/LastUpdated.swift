@@ -2,7 +2,7 @@ import Fluent
 import Foundation
 import Vapor
 
-final class LastUpdated: Model {
+final class LastUpdated: Model, @unchecked Sendable {
     typealias IDValue = UUID
 
     static var schema: String {

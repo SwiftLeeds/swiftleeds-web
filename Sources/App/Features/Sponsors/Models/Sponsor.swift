@@ -2,7 +2,7 @@ import Fluent
 import Foundation
 import Vapor
 
-final class Sponsor: Model, Content {
+final class Sponsor: Model, Content, @unchecked Sendable {
     static let schema = Schema.sponsor
 
     typealias IDValue = UUID

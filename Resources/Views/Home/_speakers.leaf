@@ -2,7 +2,7 @@
 <section id="speakers" class="container pt-5 my-2 my-md-4 my-lg-5">
   <div class="d-md-flex align-items-center justify-content-between text-center text-md-start pt-md-1 pt-lg-3">
     <h2 class="h1 mb-4 mb-md-0 me-md-3 themed-header">
-      #count(speakers) Incredible Speakers
+      #count(speakers) Incredible Speaker#if(count(speakers) != 1):s#endif
     </h2>
   </div>
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 mt-2 mt-lg-4">

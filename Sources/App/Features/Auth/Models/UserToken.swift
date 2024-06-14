@@ -2,7 +2,7 @@ import Fluent
 import Foundation
 import Vapor
 
-final class UserToken: Model, Content, ModelTokenAuthenticatable, Codable {
+final class UserToken: Model, Content, ModelTokenAuthenticatable, Codable, @unchecked Sendable {
     static let schema = Schema.userToken
     
     typealias User = App.User

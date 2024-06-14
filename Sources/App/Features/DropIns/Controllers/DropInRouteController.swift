@@ -265,11 +265,7 @@ struct DropInRouteController: RouteCollection {
             throw Abort(.notFound)
         }
         
-        let slotModels: [DropInSessionSlotsContext.Slot] = session.slots.compactMap {
-            guard let id = $0.id?.uuidString else {
-                return nil
-            }
-            
+        let slotModels: [DropInSessionSlotsContext.Slot] = session.slots.map {
             return DropInSessionSlotsContext.Slot(
                 date: $0.date,
                 owners: $0.ticketOwner

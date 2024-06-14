@@ -2,7 +2,7 @@ import Fluent
 import Foundation
 import Vapor
 
-final class Presentation: Model, Content {
+final class Presentation: Model, Content, @unchecked Sendable {
     static let schema = Schema.presentation
 
     typealias IDValue = UUID

@@ -27,7 +27,7 @@ struct SessionizeSyncRouteController: RouteCollection {
         guard let key = event.sessionizeKey else { throw Abort(.badRequest, reason: "No Sessionize Key for Event") }
         let sessionizeResponse = try await request.client.get("https://sessionize.com/api/v2/\(key)/view/All")
         let sessionize = try sessionizeResponse.content.decode(SessionizeResponse.self)
-        let changes = try await identifyChanges(sessionize: sessionize, request: request, commit: commitIds, event: event)
+        _ = try await identifyChanges(sessionize: sessionize, request: request, commit: commitIds, event: event)
         
         return Response(status: .ok, body: .init(string: "OK"))
     }
@@ -48,7 +48,7 @@ struct SessionizeSyncRouteController: RouteCollection {
             
             let twitter = sessionizeSpeaker.links.first(where: { $0.linkType == "Twitter" })?.url.replacingOccurrences(of: "https://twitter.com/", with: "")
             
-            if var speaker = speakerQuery {
+            if let speaker = speakerQuery {
                 var pairs = [SyncContext.Pair]()
                 
                 if speaker.name != sessionizeSpeaker.fullName {
@@ -166,7 +166,7 @@ struct SessionizeSyncRouteController: RouteCollection {
                     var modelSpeakers: [Speaker] = []
                     
                     for speaker in speakers {
-                        guard var speaker = try await Speaker.query(on: request.db).filter(\.$name, .equal, speaker).first() else {
+                        guard let speaker = try await Speaker.query(on: request.db).filter(\.$name, .equal, speaker).first() else {
                             throw Abort(.badRequest, reason: "Failed to find speaker")
                         }
                         
