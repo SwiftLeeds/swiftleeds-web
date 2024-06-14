@@ -2,7 +2,7 @@ import Fluent
 import Foundation
 import Vapor
 
-final class Location: Codable, Model, Content {
+final class Location: Codable, Model, Content, @unchecked Sendable {
     static let schema = Schema.location
 
     typealias IDValue = UUID

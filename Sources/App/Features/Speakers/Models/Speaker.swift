@@ -3,7 +3,7 @@ import FluentPostgresDriver
 import Foundation
 import Vapor
 
-final class Speaker: Codable, Model, Content {
+final class Speaker: Codable, Model, Content, @unchecked Sendable {
     static let schema = Schema.speaker
 
     typealias IDValue = UUID

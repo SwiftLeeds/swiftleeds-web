@@ -2,7 +2,7 @@ import Fluent
 import Foundation
 import Vapor
 
-final class DropInSessionSlot: Model, Content {
+final class DropInSessionSlot: Model, Content, @unchecked Sendable {
     typealias IDValue = UUID
     
     static var schema: String {

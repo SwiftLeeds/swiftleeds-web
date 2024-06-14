@@ -2,7 +2,7 @@ import Fluent
 import Foundation
 import Vapor
 
-final class Job: Model, Content {
+final class Job: Model, Content, @unchecked Sendable {
     typealias IDValue = UUID
 
     static let schema: String = "jobs"

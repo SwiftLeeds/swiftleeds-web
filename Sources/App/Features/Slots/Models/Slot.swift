@@ -2,7 +2,7 @@ import Fluent
 import Foundation
 import Vapor
 
-final class Slot: Codable, Model, Content {
+final class Slot: Codable, Model, Content, @unchecked Sendable {
     static let schema = Schema.slot
 
     typealias IDValue = UUID

@@ -54,7 +54,7 @@ struct SponsorAPIController: RouteCollection {
         request.application.storage[SponsorsHashes.self] = SponsorsHashes.Hash(lastModified: lastModified, contentLength: contentLength, eTag: eTag)
     }
 
-    private static var readableDateFormatter: DateFormatter = {
+    private static let readableDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.timeZone = TimeZone(secondsFromGMT: 0)

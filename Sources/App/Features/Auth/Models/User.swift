@@ -2,7 +2,7 @@ import Fluent
 import Foundation
 import Vapor
 
-final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAuthenticatable, ModelCredentialsAuthenticatable, Codable {
+final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAuthenticatable, ModelCredentialsAuthenticatable, Codable, @unchecked Sendable {
     static let schema = Schema.user
     
     enum Role: String, Codable {

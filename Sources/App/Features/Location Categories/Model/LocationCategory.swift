@@ -2,7 +2,7 @@ import Fluent
 import Foundation
 import Vapor
 
-final class LocationCategory: Codable, Model, Content {
+final class LocationCategory: Codable, Model, Content, @unchecked Sendable {
     static let schema = Schema.locationCategory
 
     typealias IDValue = UUID
