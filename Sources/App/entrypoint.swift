@@ -14,7 +14,7 @@ enum Entrypoint {
         // This attempts to install NIO as the Swift Concurrency global executor.
         // You should not call any async functions before this point.
         let executorTakeoverSuccess = NIOSingletons.unsafeTryInstallSingletonPosixEventLoopGroupAsConcurrencyGlobalExecutor()
-        app.logger.debug("Running with \(executorTakeoverSuccess ? "SwiftNIO" : "standard") Swift Concurrency default executor")
+        app.logger.info("Running with \(executorTakeoverSuccess ? "SwiftNIO" : "standard") Swift Concurrency default executor")
         
         do {
             try await configure(app)
