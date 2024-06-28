@@ -3,7 +3,7 @@ import FluentPostgresDriver
 import Vapor
 
 class Migrations {
-    static func migrate(_ app: Application) throws {
+    static func migrate(_ app: Application) async throws {
         // User Migrations
         app.migrations.add(UserMigrationV1())
         
@@ -101,7 +101,7 @@ class Migrations {
         
         do {
             if app.environment != .testing {
-                try app.autoMigrate().wait()
+                try await app.autoMigrate()
             }
         } catch {
             app.logger.error("Failed to migrate DB with error \(error)")
