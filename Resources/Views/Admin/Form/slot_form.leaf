@@ -85,7 +85,7 @@
 
       $(document).ready(function(){
         updateForType("#(initialType)")
-        selectedEventUpdated()
+        selectedEventUpdated(localStorage['selectedEvent'])
 
         $("#type").on("change", function(e){
           var type = $(this).val();
@@ -93,18 +93,17 @@
         });
 
         $("#event").on("change", function(e){
-          selectedEventUpdated()
+          selectedEventUpdated(document.getElementById('event').value)
         });
 
-        function selectedEventUpdated() {
-          var selectedEvent = document.getElementById('event').value
+        function selectedEventUpdated(selectedEvent) {
           var elements = document.getElementsByClassName('event-visible')
 
           for (const element of elements) {
-            if (element.dataset.event == selectedEvent) {
-              element.disabled = false
+            if (element.dataset.event == selectedEvent || element.dataset.event == '') {
+              element.hidden = false
             } else {
-              element.disabled = true
+              element.hidden = true
             }
           }
         }

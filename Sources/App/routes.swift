@@ -70,7 +70,11 @@ func routes(_ app: Application) throws {
             .with(\.$presentation)
             .with(\.$activity)
             .all()
-        let activities = try await Activity.query(on: request.db).sort(\.$title).all()
+        let activities = try await Activity
+            .query(on: request.db)
+            .sort(\.$event.$id, .descending) // This moves 'Reusable' events to the top of the filtered view
+            .sort(\.$title)
+            .all()
 
         let selectedEvent = events.first(where: { $0.shouldBeReturned(by: request) }) ?? events.first(where: { $0.isCurrent }) ?? events[0]
         

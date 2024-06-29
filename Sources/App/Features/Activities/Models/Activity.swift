@@ -25,11 +25,11 @@ final class Activity: Codable, Model, Content, @unchecked Sendable {
     @Field(key: "image")
     var image: String?
 
-    @Parent(key: "event_id")
-    var event: Event
+    @OptionalParent(key: "event_id")
+    var event: Event?
 
     @OptionalParent(key: "slot_id")
-    public var slot: Slot?
+    var slot: Slot?
 
     init() {}
 

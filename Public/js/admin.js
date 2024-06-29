@@ -18,7 +18,7 @@ function selectedEventUpdated(change) {
     }
     
     $("[data-event-filter] li[data-event]").each((offset, element) => {
-        if (element.dataset.event.includes(selectedEvent)) {
+        if (element.dataset.event.includes(selectedEvent) || element.dataset.event == '') {
             element.classList.remove('hidden');
         } else {
             element.classList.add('hidden');
