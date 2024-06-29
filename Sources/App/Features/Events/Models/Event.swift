@@ -31,12 +31,6 @@ final class Event: Model, Content, @unchecked Sendable {
     @Field(key: "show_schedule")
     var showSchedule: Bool
     
-    @Children(for: \.$event)
-    var presentations: [Presentation]
-
-    @Children(for: \.$event)
-    var slots: [Slot]
-    
     init() {}
 
     init(id: IDValue?, name: String, date: Date, location: String, isCurrent: Bool) {

@@ -78,6 +78,7 @@ class Migrations {
         app.migrations.add(AddDropInTBAMigration()) // Hide drop-in by default
         app.migrations.add(EventMigrationV4()) // Add sessionize_key and show_schedule
         app.migrations.add(EventDayMigrationV1()) // Add event_days
+        app.migrations.add(SlotMigrationV3()) // Add day_id on Slot
 
         do {
             guard let url = Environment.get("DATABASE_URL") else {

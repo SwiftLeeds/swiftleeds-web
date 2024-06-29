@@ -137,10 +137,12 @@ struct HomeRouteController: RouteCollection {
                     .with(\.$speaker)
                     .with(\.$secondSpeaker)
             }
-            .with(\.$event)
+            .with(\.$day) {
+                $0.with(\.$event)
+            }
             .sort(\.$startDate)
             .all()
-            .filter { $0.event.name == event.name }
+            .filter { $0.day?.event.name == event.name }
     }
     
     private func getPhase(req: Request, event: Event) throws -> Phase {

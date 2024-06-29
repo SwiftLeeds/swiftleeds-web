@@ -74,12 +74,18 @@ struct SlotRouteController: RouteCollection {
         }
 
         let inputDate = Self.formDateTimeFormatter().date(from: input.date) ?? Date()
+        let eventDays = try await EventDay.query(on: request.db).with(\.$event).all()
+        
+        guard let eventDay = eventDays.first(where: { $0.$event.id == event.id && $0.date.withoutTime == inputDate.withoutTime }) else {
+            throw Abort(.badRequest, reason: "Could not find event day")
+        }
 
         if let slot = slot {
             slot.startDate = Self.timeFormatter().string(from: inputDate)
             slot.date = inputDate
             slot.duration = input.duration
             slot.$event.id = try event.requireID()
+            slot.$day.id = try eventDay.requireID()
             try await slot.update(on: request.db)
 
             var hasSessionChanged = (slot.activity?.id == nil && slot.presentation?.id == nil)
@@ -118,6 +124,7 @@ struct SlotRouteController: RouteCollection {
             )
 
             newSlot.$event.id = try event.requireID()
+            newSlot.$day.id = try eventDay.requireID()
 
             try await newSlot.create(on: request.db)
 

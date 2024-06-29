@@ -27,7 +27,7 @@
 <ul class="list-unstyled mb-0" data-event-filter="true">
     <div class="alert alert-secondary hidden" role="alert">There are currently no slots for this year.</div>
     #for(slot in slots):
-    <li class="d-flex align-items-center justify-content-between mb-2 border px-3 py-2 rounded" data-event="#(slot.event.id)">
+    <li class="d-flex align-items-center justify-content-between mb-2 border px-3 py-2 rounded" data-event="#(slot.day.event.id)" data-day="#(slot.day.id)">
       <div class="d-flex align-items-start me-3">
         <div>
           <div class="fw-medium text-nav mb-1">
@@ -38,11 +38,7 @@
             #endif
           </div>
           <span class="d-inline-block fs-sm text-muted pe-2 me-2">
-            #if(slot.date):
-              <tt>#dateFix(slot.date, "dd/MM [HH:mm")-#sessionEnd(slot.date, slot.duration)]</tt>
-            #else:
-              <tt>#(slot.startDate)</tt>
-            #endif
+            #(slot.day.name) - #(slot.startDate) - #sessionEnd(slot.date, slot.duration)
           </span>
         </div>
       </div>
@@ -77,8 +73,26 @@ function refreshSlots() {
     // Update Edit Button
     $("#edit-day").data("swiftleeds-admin", "days/" + selectedDay)
     
-    // Refilter page based on day selector...
-    console.log(selectedEvent, selectedDay);
+    // Refilter page based on day selector
+    $("[data-event-filter] li[data-day]").each((offset, element) => {
+        if (element.dataset.day.includes(selectedDay)) {
+            element.classList.remove('hidden');
+        } else {
+            element.classList.add('hidden');
+        }
+    });
+    
+    $("[data-event-filter]").each((offset, element) => {
+        const list = $(element);
+        const itemCount = list.find('li[data-event]').length;
+        const hiddenItemCount = list.find('li[data-event].hidden').length;
+        
+        if (hiddenItemCount == itemCount) {
+            list.find('.alert').removeClass('hidden');
+        } else {
+            list.find('.alert').addClass('hidden');
+        }
+    });
 }
 
 // Introduce some delay for jQuery to be added to scope

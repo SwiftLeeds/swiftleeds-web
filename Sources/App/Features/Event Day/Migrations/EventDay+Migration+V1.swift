@@ -17,7 +17,7 @@ final class EventDayMigrationV1: AsyncMigration {
         
         for event in events {
             print("[Migrator] Processing event: \(event.name)")
-            let eventSlots = slots.filter { $0.event.id == event.id }
+            let eventSlots = slots.filter { $0.event?.id == event.id }
             let uniqueDays = Set(eventSlots.compactMap { $0.date?.withoutTime }).sorted()
             print("[Migrator] Found \(eventSlots.count) slots over \(uniqueDays.count) days")
             

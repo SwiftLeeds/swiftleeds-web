@@ -68,6 +68,7 @@ func routes(_ app: Application) throws {
             .query(on: request.db)
             .sort(\.$date)
             .sort(\.$startDate)
+            .with(\.$day)
             .with(\.$presentation)
             .with(\.$activity)
             .all()
