@@ -3,6 +3,7 @@ enum Schema {
     static let dropInSessions =  "dropin_sessions"
     static let dropInSessionSlots = "dropin_session_slots"
     static let event = "events"
+    static let eventDay = "event_days"
     static let job = "jobs"
     static let lastUpdated = "last_updated"
     static let location = "locations"

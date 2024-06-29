@@ -75,6 +75,7 @@ func routes(_ app: Application) throws {
             .sort(\.$event.$id, .descending) // This moves 'Reusable' events to the top of the filtered view
             .sort(\.$title)
             .all()
+        let days = try await EventDay.query(on: request.db).all()
 
         let selectedEvent = events.first(where: { $0.shouldBeReturned(by: request) }) ?? events.first(where: { $0.isCurrent }) ?? events[0]
         
@@ -108,6 +109,7 @@ func routes(_ app: Application) throws {
                 dropInSessions: dropInSessions,
                 selectedEvent: selectedEvent,
                 page: (query ?? PageQuery(page: "speakers")).page,
+                days: days,
                 user: user
             )
         )
@@ -132,6 +134,7 @@ struct AdminContext: Content {
     var dropInSessions: [DropInSession] = []
     var selectedEvent: Event
     var page: String
+    var days: [EventDay] = []
     var user: User
 }
 
