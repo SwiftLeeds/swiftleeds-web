@@ -1,0 +1,57 @@
+<form class="needs-validation d-flex flex-column position-relative overflow-hidden" novalidate>
+<div class="modal-header">
+    <h5 class="modal-title">#if(day):Edit Day#else:Create Day#endif</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <div class="mb-3">
+        <label for="event" class="form-label">#if(day):Change#endif Event</label>
+        <select name="eventID" id="event" class="form-control" required disabled data-swiftleeds-selectCurrentEvent="true">
+          #for(event in events):
+            <option #if(event.id == slot.event.id): selected #endif id="eventID" name="eventID" value=#(event.id)>
+              #(event.name)
+            </option>
+          #endfor
+        </select>
+        <div class="invalid-feedback">
+          Please select an event
+        </div>
+    </div>
+        
+    <div class="mb-3">
+        <label for="title" class="form-label">Name</label>
+        <input class="form-control" id="name" name="name" value="#(day.name)" placeholder="Day 1" required>
+        <div class="invalid-feedback">Please enter a name.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="date" class="form-label">Date</label>
+        <input type="date" class="form-control" id="date" name="date" value="#if(day):#date(day.date, "yyyy-MM-dd")#endif" required>
+        <div class="invalid-feedback">Please enter a valid date.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="date" class="form-label">Start Time</label>
+        <div class="input-group">
+          <input name="startTime" type="time" class="form-control" value="#(day.startTime)" required>
+        </div>
+        <div class="invalid-feedback">Please enter a start time</div>
+    </div>
+    
+    <div class="mb-3">
+        <label for="date" class="form-label">End Time</label>
+        <div class="input-group">
+          <input name="endTime" type="time" class="form-control" value="#(day.endTime)" required>
+        </div>
+        <div class="invalid-feedback">Please enter an end time</div>
+    </div>
+</div>
+<div class="modal-footer">
+    #if(day):
+    <button type="button" class="btn btn-danger btn-sm" data-swiftleeds-form="delete">Delete day</button>
+    <button type="button" class="btn btn-success btn-sm" data-swiftleeds-form="update">Save changes</button>
+    #else:
+    <button type="button" class="btn btn-success btn-sm" data-swiftleeds-form="create">Create day</button>
+    #endif
+</div>
+</form>

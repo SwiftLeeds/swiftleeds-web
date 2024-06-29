@@ -65,6 +65,9 @@ function refreshDayPicker() {
     
     // Reset Option
     $("#day-select").val($("#day-select option:first").val());
+    
+    // Disable if empty
+    $("#day-select").prop("disabled", $("#day-select option:not([hidden])").length == 0);
 }
 
 function refreshSlots() {
