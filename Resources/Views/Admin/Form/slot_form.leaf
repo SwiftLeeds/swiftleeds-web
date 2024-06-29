@@ -8,7 +8,7 @@
             <label for="event" class="form-label">#if(slot):Change#endif Event</label>
             <select name="eventID" id="event" class="form-control" required #if(!slot):disabled#endif data-swiftleeds-selectCurrentEvent="true">
               #for(event in events):
-                <option #if(event.id == slot.event.id): selected #endif id="eventID" name="eventID" value=#(event.id)>
+                <option #if(event.id == slot.day.event.id): selected #endif id="eventID" name="eventID" value=#(event.id)>
                   #(event.name)
                 </option>
               #endfor

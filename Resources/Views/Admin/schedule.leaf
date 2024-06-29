@@ -38,7 +38,7 @@
             #endif
           </div>
           <span class="d-inline-block fs-sm text-muted pe-2 me-2">
-            #(slot.day.name) - #(slot.startDate) - #sessionEnd(slot.date, slot.duration)
+            #(slot.startDate) - #sessionEnd(slot.date, slot.duration)
           </span>
         </div>
       </div>
