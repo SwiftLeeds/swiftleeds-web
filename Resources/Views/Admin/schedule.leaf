@@ -38,13 +38,7 @@
             #endif
           </div>
           <span class="d-inline-block fs-sm text-muted pe-2 me-2">
-            #if(slot.presentation.duration > 0):
-            #(slot.startDate) - #sessionEnd(slot.date, slot.presentation.duration)
-            #elseif(slot.activity.duration > 0):
-            #(slot.startDate) - #sessionEnd(slot.date, slot.activity.duration)
-            #elseif(slot.duration > 0):
-            #(slot.startDate) - #sessionEnd(slot.date, slot.duration)
-            #endif
+          #(slot.startDate) - #sessionEnd(slot.date, first(slot.presentation.duration, slot.activity.duration, slot.duration))
           </span>
         </div>
       </div>

@@ -75,16 +75,26 @@ struct HomeRouteController: RouteCollection {
             throw Abort(.notFound, reason: "Unable to find event")
         }
         
+        try await event.$days.load(on: req.db)
+        
         let speakers = try await getSpeakers(req: req, event: event)
         let dropInSessions = try await getDropInSessions(req: req, event: event)
         let slots = try await getSlots(req: req, event: event)
-        let sponsorQuery = try await getSponsors(req: req, event: event)
         
+        let sponsorQuery = try await getSponsors(req: req, event: event)
         let platinumSponsors = sponsorQuery.filter { $0.sponsorLevel == .platinum }
         let silverSponsors = sponsorQuery.filter { $0.sponsorLevel == .silver }
         let goldSponsors = sponsorQuery.filter { $0.sponsorLevel == .gold }
         
         let phase = try getPhase(req: req, event: event)
+        
+        let schedule = event.days.map { day in
+            ScheduleDay(
+                name: day.name,
+                date: day.date,
+                slots: slots.filter { $0.day?.id == day.id }
+            )
+        }.filter { !$0.slots.isEmpty }
         
         return HomeContext(
             speakers: speakers,
@@ -92,7 +102,7 @@ struct HomeRouteController: RouteCollection {
             silverSponsors: silverSponsors,
             goldSponsors: goldSponsors,
             dropInSessions: dropInSessions,
-            schedule: phase.showSchedule ? slots.schedule : [],
+            schedule: phase.showSchedule ? schedule : [],
             phase: PhaseContext(phase: phase, event: event),
             event: event,
             eventDate: buildConferenceDateString(for: event),

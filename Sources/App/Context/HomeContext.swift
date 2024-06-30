@@ -15,11 +15,17 @@ struct HomeContext: Content {
     var silverSponsors: [Sponsor] = []
     var goldSponsors: [Sponsor] = []
     var dropInSessions: [DropInSession] = []
-    var schedule: [[Slot]] = []
+    var schedule: [ScheduleDay] = []
     var phase: PhaseContext? = nil
     var event: Event? = nil
     var eventDate: String? = nil
     var eventYear: String? = nil
+}
+
+struct ScheduleDay: Codable {
+    let name: String
+    let date: Date
+    let slots: [Slot]
 }
 
 struct CfpContext: Content {

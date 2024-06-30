@@ -27,6 +27,7 @@ public func configure(_ app: Application) async throws {
     app.leaf.tags["safeCount"] = SafeCountTag()
     app.leaf.tags["hash"] = HashTag()
     app.leaf.tags["dateFix"] = DateFixTag()
+    app.leaf.tags["first"] = FirstTag()
     app.views.use(.leaf)
     
     #if DEBUG
