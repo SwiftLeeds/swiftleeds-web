@@ -13,6 +13,8 @@ final class Slot: Codable, Model, Content, @unchecked Sendable {
     @Field(key: "start_date")
     var startDate: String
     
+    // DO NOT USE (June 2024)
+    // TODO: This will be removed in a future PR as part of a cleanup
     @Field(key: "date")
     var date: Date?
 
@@ -20,7 +22,7 @@ final class Slot: Codable, Model, Content, @unchecked Sendable {
     var duration: Double?
 
     // DO NOT USE (June 2024)
-    // This will be removed in a future PR as part of a cleanup - it needs to be done this way for safe migrations.
+    // TODO: This will be removed in a future PR as part of a cleanup - it needs to be done this way for safe migrations.
     @OptionalParent(key: "event_id")
     var event: Event?
     
@@ -39,7 +41,7 @@ final class Slot: Codable, Model, Content, @unchecked Sendable {
         id: IDValue?,
         startDate: String,
         date: Date,
-        duration: Double
+        duration: Double?
     ) {
         self.id = id
         self.startDate = startDate

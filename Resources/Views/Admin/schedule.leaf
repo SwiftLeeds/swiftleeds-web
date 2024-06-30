@@ -54,6 +54,11 @@
       </button>
     </li>
     #endfor
+    
+    <button data-swiftleeds-admin="slots" class="btn btn-outline-secondary px-3 px-sm-4">
+        <i class="bx bx-plus fs-xl me-sm-1"></i>
+        <span class="d-none d-sm-inline">Add Slot</span>
+    </button>
 </ul>
 
 <script>
@@ -66,10 +71,13 @@ function refreshDayPicker() {
     });
     
     // Reset Option
-    $("#day-select").val($("#day-select option:first").val());
+    $("#day-select").val($("#day-select option:not([hidden]):first").val());
     
     // Disable if empty
     $("#day-select").prop("disabled", $("#day-select option:not([hidden])").length == 0);
+    
+    // Update Slots
+    refreshSlots();
 }
 
 function refreshSlots() {
@@ -104,7 +112,6 @@ function refreshSlots() {
 // Introduce some delay for jQuery to be added to scope
 document.addEventListener("DOMContentLoaded", function() {
     refreshDayPicker();
-    refreshSlots();
 
     $("#event-select").on('change', (event) => {
         refreshDayPicker();
