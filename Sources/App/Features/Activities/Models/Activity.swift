@@ -24,6 +24,9 @@ final class Activity: Codable, Model, Content, @unchecked Sendable {
 
     @Field(key: "image")
     var image: String?
+    
+    @Field(key: "duration")
+    var duration: Double
 
     @OptionalParent(key: "event_id")
     var event: Event?

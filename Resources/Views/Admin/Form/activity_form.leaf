@@ -39,6 +39,14 @@
           <label for="description" class="form-label">Description</label>
           <textarea class="form-control" name="description" id="description" rows="10">#(activity.description)</textarea>
         </div>
+        
+        <div class="mb-3">
+          <label for="duration" class="form-label">Duration (minutes)</label>
+          <input name="duration" type="number" class="form-control" value="#(activity.duration)" required>
+          <div class="invalid-feedback">
+            Please enter a duration
+          </div>
+        </div>
 
         <div class="mb-3">
           <label for="formFile" class="form-label">Activity picture</label>

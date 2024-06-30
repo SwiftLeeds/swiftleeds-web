@@ -56,6 +56,7 @@ struct PresentationRouteController: RouteCollection {
             presentation.isTBA = !(input.isAnnounced == "on")
             presentation.slidoURL = input.slidoURL
             presentation.videoURL = input.videoURL
+            presentation.duration = input.duration
 
             presentation.$speaker.id = try speaker.requireID()
             presentation.$event.id = try event.requireID()
@@ -81,6 +82,7 @@ struct PresentationRouteController: RouteCollection {
                 videoURL: input.videoURL
             )
 
+            presentation.duration = input.duration
             presentation.$speaker.id = try speaker.requireID()
             presentation.$event.id = try event.requireID()
 
@@ -115,6 +117,7 @@ struct PresentationRouteController: RouteCollection {
         let eventID: String
         let title: String
         let synopsis: String
+        let duration: Double
         let slidoURL: String?
         let videoURL: String?
         let isAnnounced: String?

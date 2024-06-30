@@ -17,7 +17,7 @@ final class Slot: Codable, Model, Content, @unchecked Sendable {
     var date: Date?
 
     @Field(key: "duration")
-    var duration: Double
+    var duration: Double?
 
     // DO NOT USE (June 2024)
     // This will be removed in a future PR as part of a cleanup - it needs to be done this way for safe migrations.
@@ -27,10 +27,10 @@ final class Slot: Codable, Model, Content, @unchecked Sendable {
     @OptionalParent(key: "day_id")
     var day: EventDay?
 
-    @OptionalChild(for: \.$slot)
+    @OptionalParent(key: "presentation_id")
     var presentation: Presentation?
 
-    @OptionalChild(for: \.$slot)
+    @OptionalParent(key: "activity_id")
     var activity: Activity?
 
     init() {}

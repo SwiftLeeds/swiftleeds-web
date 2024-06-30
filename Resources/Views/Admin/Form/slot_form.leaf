@@ -35,7 +35,7 @@
               <option selected value>Select a Presentation</option>
               #for(presentation in presentations):
                 <option #if(presentation.id == slot.presentation.id): selected #endif name="presentation" value=#(presentation.id) class="event-visible" data-event="#(presentation.event.id)">
-                  #(presentation.title)
+                  #(presentation.title) - #(presentation.duration) mins
                 </option>
               #endfor
             </select>
@@ -47,7 +47,7 @@
               <option selected value>Select an Activity</option>
               #for(activity in activities):
                 <option #if(activity.id == slot.activity.id): selected #endif name="activity" value=#(activity.id) class="event-visible" data-event="#(activity.event.id)">
-                  #(activity.title) - #(activity.subtitle)
+                  #(activity.title) - #(activity.duration) mins
                 </option>
               #endfor
             </select>
@@ -62,11 +62,8 @@
         </div>
 
         <div class="mb-3">
-          <label for="duration" class="form-label">Duration (minutes)</label>
-          <input name="duration" type="number" class="form-control" value="#(slot.duration)" required>
-          <div class="invalid-feedback">
-            Please enter a duration
-          </div>
+          <label for="duration" class="form-label">Override Duration</label>
+          <input name="duration" type="number" class="form-control" #if(slot.duration > 0):value="#(slot.duration)"#endif>
         </div>
         
         

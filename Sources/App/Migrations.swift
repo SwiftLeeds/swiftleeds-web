@@ -79,6 +79,7 @@ class Migrations {
         app.migrations.add(EventMigrationV4()) // Add sessionize_key and show_schedule
         app.migrations.add(EventDayMigrationV1()) // Add event_days
         app.migrations.add(SlotMigrationV3()) // Add day_id on Slot
+        app.migrations.add(SlotMigrationV4()) // Add presentation and activity ids to Slot instead of self
 
         do {
             guard let url = Environment.get("DATABASE_URL") else {

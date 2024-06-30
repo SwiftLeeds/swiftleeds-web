@@ -80,6 +80,7 @@ struct ActivityRouteController: RouteCollection {
             activity.description = input.description
             activity.metadataURL = input.metadataURL
             activity.image = fileName
+            activity.duration = input.duration
 
             activity.$event.id = try event?.requireID()
 
@@ -105,6 +106,7 @@ struct ActivityRouteController: RouteCollection {
                 image: fileName
             )
 
+            activity.duration = input.duration
             activity.$event.id = try event?.requireID()
 
             try await activity.create(on: request.db)
@@ -123,6 +125,7 @@ struct ActivityRouteController: RouteCollection {
     private struct FormInput: Content {
         let eventID: String
         let title: String
+        let duration: Double
         let subtitle: String?
         let description: String?
         let metadataURL: String?

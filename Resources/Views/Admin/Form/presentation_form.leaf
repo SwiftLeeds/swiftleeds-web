@@ -27,6 +27,14 @@
           <textarea class="form-control" name="synopsis" id="synopsis" rows="10" required>#(presentation.synopsis)</textarea>
           <div class="invalid-feedback">Please enter a synopsis</div>
         </div>
+        
+        <div class="mb-3">
+          <label for="duration" class="form-label">Duration (minutes)</label>
+          <input name="duration" type="number" class="form-control" value="#(presentation.duration)" required>
+          <div class="invalid-feedback">
+            Please enter a duration
+          </div>
+        </div>
 
         <div class="mb-3">
             <label for="speakerID" class="form-label">Speaker</label>

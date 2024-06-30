@@ -16,6 +16,9 @@ final class Presentation: Model, Content, @unchecked Sendable {
     @Field(key: "synopsis")
     var synopsis: String
     
+    @Field(key: "duration")
+    var duration: Double
+    
     @Parent(key: "speaker_id")
     var speaker: Speaker
 
