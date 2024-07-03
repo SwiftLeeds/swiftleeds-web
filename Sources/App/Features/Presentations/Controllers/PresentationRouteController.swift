@@ -77,7 +77,7 @@ struct PresentationRouteController: RouteCollection {
                 id: .generateRandom(),
                 title: input.title,
                 synopsis: input.synopsis,
-                isTBA: false,
+                isTBA: true,
                 slidoURL: input.slidoURL,
                 videoURL: input.videoURL
             )
