@@ -3,7 +3,7 @@ import FluentPostgresDriver
 import Vapor
 
 class Migrations {
-    static func migrate(_ app: Application) throws {
+    static func migrate(_ app: Application) async throws {
         // User Migrations
         app.migrations.add(UserMigrationV1())
         
@@ -77,6 +77,9 @@ class Migrations {
         app.migrations.add(AddDurationToDropInMigration()) // Add duration to slot
         app.migrations.add(AddDropInTBAMigration()) // Hide drop-in by default
         app.migrations.add(EventMigrationV4()) // Add sessionize_key and show_schedule
+        app.migrations.add(EventDayMigrationV1()) // Add event_days
+        app.migrations.add(SlotMigrationV3()) // Add day_id on Slot
+        app.migrations.add(SlotMigrationV4()) // Add presentation and activity ids to Slot instead of self
 
         do {
             guard let url = Environment.get("DATABASE_URL") else {
@@ -101,7 +104,7 @@ class Migrations {
         
         do {
             if app.environment != .testing {
-                try app.autoMigrate().wait()
+                try await app.autoMigrate()
             }
         } catch {
             app.logger.error("Failed to migrate DB with error \(error)")

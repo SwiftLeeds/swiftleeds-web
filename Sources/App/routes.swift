@@ -49,6 +49,7 @@ func routes(_ app: Application) throws {
     try adminRoutes.grouped("jobs").register(collection: JobRouteController())
     try adminRoutes.grouped("dropins").register(collection: DropInRouteController())
     try adminRoutes.grouped("sessionize").register(collection: SessionizeSyncRouteController())
+    try adminRoutes.grouped("days").register(collection: EventDayRouteController())
 
     adminRoutes.get { request -> View in
         let user = try request.auth.require(User.self)
@@ -67,10 +68,16 @@ func routes(_ app: Application) throws {
             .query(on: request.db)
             .sort(\.$date)
             .sort(\.$startDate)
+            .with(\.$day)
             .with(\.$presentation)
             .with(\.$activity)
             .all()
-        let activities = try await Activity.query(on: request.db).sort(\.$title).all()
+        let activities = try await Activity
+            .query(on: request.db)
+            .sort(\.$event.$id, .descending) // This moves 'Reusable' events to the top of the filtered view
+            .sort(\.$title)
+            .all()
+        let days = try await EventDay.query(on: request.db).all()
 
         let selectedEvent = events.first(where: { $0.shouldBeReturned(by: request) }) ?? events.first(where: { $0.isCurrent }) ?? events[0]
         
@@ -104,6 +111,7 @@ func routes(_ app: Application) throws {
                 dropInSessions: dropInSessions,
                 selectedEvent: selectedEvent,
                 page: (query ?? PageQuery(page: "speakers")).page,
+                days: days,
                 user: user
             )
         )
@@ -128,6 +136,7 @@ struct AdminContext: Content {
     var dropInSessions: [DropInSession] = []
     var selectedEvent: Event
     var page: String
+    var days: [EventDay] = []
     var user: User
 }
 

@@ -11,7 +11,7 @@ struct ValidTicketMiddleware: AsyncMiddleware {
             throw Abort(.badRequest, reason: "unable to identify tito project")
         }
         
-        request.storage.set(CurrentEventKey.self, to: currentEvent)
+        await request.storage.setWithAsyncShutdown(CurrentEventKey.self, to: currentEvent)
         
         #if DEBUG
         // append ?skipTicket=true to route in debug builds in order to bypass tito
@@ -19,7 +19,7 @@ struct ValidTicketMiddleware: AsyncMiddleware {
             let value: String? = try? request.query.get(at: "skipTicket")
             
             if value == "true" {
-                request.storage.set(TicketStorage.self, to: .init(
+                await request.storage.setWithAsyncShutdown(TicketStorage.self, to: .init(
                     first_name: "James",
                     last_name: "Sherlock",
                     slug: "ti_test_p05Ch95xJS5AStInfa8whFA",
@@ -50,7 +50,7 @@ struct ValidTicketMiddleware: AsyncMiddleware {
             }
             
             // store ticket for use in routes
-            request.storage.set(TicketStorage.self, to: ticket)
+            await request.storage.setWithAsyncShutdown(TicketStorage.self, to: ticket)
             
             // continue with request
             return try await next.respond(to: request)

@@ -32,10 +32,7 @@ final class Event: Model, Content, @unchecked Sendable {
     var showSchedule: Bool
     
     @Children(for: \.$event)
-    var presentations: [Presentation]
-
-    @Children(for: \.$event)
-    var slots: [Slot]
+    var days: [EventDay]
     
     init() {}
 

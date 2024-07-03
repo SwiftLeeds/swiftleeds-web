@@ -1,20 +1,20 @@
-<form class="needs-validation d-flex flex-column position-relative overflow-hidden" novalidate enctype="multipart/form-data">
+<form class="needs-validation d-flex flex-column position-relative overflow-hidden" novalidate>
 <div class="modal-header">
     <h5 class="modal-title">#if(slot):Edit Slot#else:Create Slot#endif</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body">
         <div class="mb-3">
-            <label for="event" class="form-label">#if(slot):Change#endif Event</label>
-            <select name="eventID" id="event" class="form-control" required #if(!slot):disabled#endif data-swiftleeds-selectCurrentEvent="true">
-              #for(event in events):
-                <option #if(event.id == slot.event.id): selected #endif id="eventID" name="eventID" value=#(event.id)>
-                  #(event.name)
+            <label for="event" class="form-label">#if(slot):Change#endif Day</label>
+            <select name="dayID" id="day" class="form-control" required data-swiftleeds-selectCurrentDay="true">
+              #for(day in days):
+                <option #if(day.id == slot.day.id): selected #endif id="dayID" name="dayID" value=#(day.id) class="event-visible" data-event="#(day.event.id)">
+                  #(day.event.name) - #(day.name)
                 </option>
               #endfor
             </select>
             <div class="invalid-feedback">
-              Please select an event
+              Please select an event day
             </div>
         </div>
 
@@ -34,8 +34,8 @@
             <select name="presentationID" id="presentationID" class="form-control presentation">
               <option selected value>Select a Presentation</option>
               #for(presentation in presentations):
-                <option #if(presentation.id == slot.presentation.id): selected #endif name="presentation" value=#(presentation.id) class="event-visible" data-event="#(presentation.event.id)">
-                  #(presentation.title)
+                <option #if(presentation.id == slot.presentation.id): selected #endif name="presentation" value=#(presentation.id) class="event-visible" data-event="#(presentation.event.id)" data-duration="#(presentation.duration)">
+                  #(presentation.title) - #(presentation.duration) mins
                 </option>
               #endfor
             </select>
@@ -46,65 +46,71 @@
             <select name="activityID" id="activityID" class="form-control activity">
               <option selected value>Select an Activity</option>
               #for(activity in activities):
-                <option #if(activity.id == slot.activity.id): selected #endif name="activity" value=#(activity.id) class="event-visible" data-event="#(activity.event.id)">
-                  #(activity.title) - #(activity.subtitle)
+                <option #if(activity.id == slot.activity.id): selected #endif name="activity" value=#(activity.id) class="event-visible" data-event="#(activity.event.id)" data-duration="#(activity.duration)">
+                  #(activity.title) - #(activity.duration) mins
                 </option>
               #endfor
             </select>
         </div>
 
         <div class="mb-3">
-            <label for="date" class="form-label">Start Time</label>
+            <label for="startTime" class="form-label">Start Time</label>
             <div class="input-group">
-              <input name="date" type="datetime-local" class="form-control" #if(slot.date):value="#dateFix(slot.date)"#endif required>
+              <input name="startTime" type="time" class="form-control" value="#(slot.startDate)" required>
             </div>
-            <div class="invalid-feedback">Please enter a start date and time</div>
+            <div class="invalid-feedback">Please enter a start time</div>
         </div>
 
         <div class="mb-3">
-          <label for="duration" class="form-label">Duration (minutes)</label>
-          <input name="duration" type="number" class="form-control" value="#(slot.duration)" required>
-          <div class="invalid-feedback">
-            Please enter a duration
-          </div>
+          <label for="duration" class="form-label">Override Duration <span id="duration-value" class="fw-light"></span></label>
+          <input name="duration" type="number" class="form-control" #if(slot.duration > 0):value="#(slot.duration)"#endif>
         </div>
         
         
     <script>
+      function updateDuration(target) {
+        const value = target.find("option:selected").data("duration");
+        if (value) {
+            $("#duration-value").html("- Currently " + parseInt(value, 10) + " mins");
+        } else {
+            $("#duration-value").html("");
+        }
+      }
       function updateForType(type) {
         if (type == "activity") {
           $(".presentation").hide()
           $("#presentationID").prop("selectedIndex", 0)
           $(".activity").show()
+          updateDuration($("#activityID"));
         } else if (type == "presentation") {
           $(".presentation").show()
           $(".activity").hide()
           $("#activityID").prop("selectedIndex", 0)
+          updateDuration($("#presentationID"));
         }
       }
+      
+      $("select").on("change", (event) => {
+        updateDuration($(event.currentTarget));
+      });
 
       $(document).ready(function(){
         updateForType("#(initialType)")
-        selectedEventUpdated()
+        selectedEventUpdated(localStorage['selectedEvent'])
 
         $("#type").on("change", function(e){
           var type = $(this).val();
           updateForType(type)
         });
 
-        $("#event").on("change", function(e){
-          selectedEventUpdated()
-        });
-
-        function selectedEventUpdated() {
-          var selectedEvent = document.getElementById('event').value
+        function selectedEventUpdated(selectedEvent) {
           var elements = document.getElementsByClassName('event-visible')
 
           for (const element of elements) {
-            if (element.dataset.event == selectedEvent) {
-              element.disabled = false
+            if (element.dataset.event == selectedEvent || element.dataset.event == '') {
+              element.hidden = false
             } else {
-              element.disabled = true
+              element.hidden = true
             }
           }
         }

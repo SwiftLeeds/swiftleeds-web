@@ -23,7 +23,7 @@ struct SlotRouteController: RouteCollection {
     }
 
     private func buildContext(from db: Database, slot: Slot?) async throws -> PresentationContext {
-        let events = try await Event.query(on: db).sort(\.$date).all()
+        let eventDays = try await EventDay.query(on: db).with(\.$event).sort(\.$date).all()
         let presentations = try await Presentation.query(on: db).sort(\.$title).all()
         let activities = try await Activity.query(on: db).sort(\.$title).all()
         var initialType = SlotTypes.presentation.rawValue
@@ -32,7 +32,7 @@ struct SlotRouteController: RouteCollection {
             initialType = SlotTypes.activity.rawValue
         }
 
-        return PresentationContext(slot: slot, events: events, presentations: presentations, activities: activities, initialType: initialType)
+        return PresentationContext(slot: slot, days: eventDays, presentations: presentations, activities: activities, initialType: initialType)
     }
 
     @Sendable private func onDelete(request: Request) async throws -> Response {
@@ -62,9 +62,12 @@ struct SlotRouteController: RouteCollection {
         var activity: Activity?
         var presentation: Presentation?
 
-        guard let event = try await Event.find(.init(uuidString: input.eventID), on: request.db) else {
-            throw Abort(.badRequest, reason: "Could not find event")
+        guard let eventDay = try await EventDay.find(.init(uuidString: input.dayID), on: request.db) else {
+            throw Abort(.badRequest, reason: "Could not find event day")
         }
+        
+        try await eventDay.$event.load(on: request.db)
+        let event = eventDay.event
 
         // We can have either, but not both. If both are provided, prioritise the activity.
         if let activityID = input.activityID, activityID.isEmpty == false {
@@ -73,13 +76,21 @@ struct SlotRouteController: RouteCollection {
             presentation = try await Presentation.find(.init(uuidString: presentationID), on: request.db)
         }
 
-        let inputDate = Self.formDateTimeFormatter().date(from: input.date) ?? Date()
-
+        let minutes: Int = input.startTime.components(separatedBy: ":").enumerated().reduce(into: 0) { builder, value in
+            guard let number = Int(value.element) else { return }
+            if value.offset == 0 { builder += number * 60 }
+            else { builder += number }
+        }
+        
+        let inputDate = eventDay.date.addingTimeInterval(TimeInterval(minutes * 60))
+        let duration = input.duration.flatMap(Double.init)
+        
         if let slot = slot {
-            slot.startDate = Self.timeFormatter().string(from: inputDate)
+            slot.startDate = input.startTime
             slot.date = inputDate
-            slot.duration = input.duration
+            slot.duration = duration
             slot.$event.id = try event.requireID()
+            slot.$day.id = try eventDay.requireID()
             try await slot.update(on: request.db)
 
             var hasSessionChanged = (slot.activity?.id == nil && slot.presentation?.id == nil)
@@ -112,12 +123,13 @@ struct SlotRouteController: RouteCollection {
         } else {
             let newSlot = Slot(
                 id: .generateRandom(),
-                startDate: Self.timeFormatter().string(from: inputDate),
+                startDate: input.startTime,
                 date: inputDate,
-                duration: input.duration
+                duration: duration
             )
 
             newSlot.$event.id = try event.requireID()
+            newSlot.$day.id = try eventDay.requireID()
 
             try await newSlot.create(on: request.db)
 
@@ -142,7 +154,7 @@ struct SlotRouteController: RouteCollection {
     // MARK: - PresentationContext
     private struct PresentationContext: Content {
         let slot: Slot?
-        let events: [Event]
+        let days: [EventDay]
         let presentations: [Presentation]
         let activities: [Activity]
         let initialType: String
@@ -153,9 +165,9 @@ struct SlotRouteController: RouteCollection {
     private struct FormInput: Content {
         let presentationID: String?
         let activityID: String?
-        let eventID: String
-        let date: String
-        let duration: Double
+        let dayID: String
+        let startTime: String
+        let duration: String?
         let type: String
     }
 

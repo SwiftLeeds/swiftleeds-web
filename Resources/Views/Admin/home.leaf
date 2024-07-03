@@ -27,8 +27,8 @@
                   #extend("Admin/jobs")
                 #elseif(page == "presentations"):
                   #extend("Admin/presentations")
-                #elseif(page == "slots"):
-                  #extend("Admin/slots")
+                #elseif(page == "schedule"):
+                  #extend("Admin/schedule")
                 #elseif(page == "speakers"):
                   #extend("Admin/speakers")
                 #elseif(page == "sponsors"):

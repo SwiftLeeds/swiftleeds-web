@@ -1,4 +1,4 @@
-// swift-tools-version:5.9
+// swift-tools-version:5.10
 import PackageDescription
 
 let package = Package(
@@ -14,6 +14,7 @@ let package = Package(
         .package(url: "https://github.com/swift-aws/aws-sdk-swift.git", from: "4.7.0"),
         .package(url: "https://github.com/vapor-community/leaf-markdown.git", from: "3.0.0"),
         .package(url: "https://github.com/vapor/apns.git", from: "1.0.0"),
+        .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
         
         // This package is used by AWSSDKSwiftCore on Linux only. We add it here (but don't utilise it) in order to
         // add it to the Package.resolved file. This ensures that when Docker or Heroku resolves this project, it will not
@@ -31,6 +32,8 @@ let package = Package(
                 .product(name: "S3", package: "aws-sdk-swift"),
                 .product(name: "LeafMarkdown", package: "leaf-markdown"),
                 .product(name: "APNS", package: "apns"),
+                .product(name: "NIOCore", package: "swift-nio"),
+                .product(name: "NIOPosix", package: "swift-nio"),
             ],
             swiftSettings: swiftSettings
         ),

@@ -12,20 +12,22 @@ struct ScheduleAPIControllerV2: RouteCollection {
             .all()
 
         guard let event = events.first(where: { $0.shouldBeReturned(by: request) }) else {
-            throw ScheduleAPIController.ScheduleAPIError.notFound
+            throw ScheduleAPIControllerV2.ScheduleAPIError.notFound
         }
 
         let slots = try await Slot.query(on: request.db)
-            .with(\.$event)
+            .with(\.$day) {
+                $0.with(\.$event)
+            }
             .with(\.$activity)
             .with(\.$presentation) { presentation in
                 presentation.with(\.$speaker).with(\.$secondSpeaker)
             }
             .all()
-            .filter { $0.event.id == event.id }
+            .filter { $0.day?.event.id == event.id }
 
         guard let schedule = ScheduleTransformerV2.transform(event: event, events: events, slots: slots) else {
-            throw ScheduleAPIController.ScheduleAPIError.transformFailure
+            throw ScheduleAPIControllerV2.ScheduleAPIError.transformFailure
         }
 
         let response = GenericResponse(
@@ -33,5 +35,12 @@ struct ScheduleAPIControllerV2: RouteCollection {
         )
 
         return try await response.encodeResponse(for: request)
+    }
+}
+
+extension ScheduleAPIControllerV2 {
+    enum ScheduleAPIError: Error {
+        case notFound
+        case transformFailure
     }
 }

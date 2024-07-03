@@ -48,9 +48,19 @@ struct ActivityRouteController: RouteCollection {
         let input = try request.content.decode(FormInput.self)
         let image = try request.content.decode(ImageUpload.self)
 
-        guard let event = try await Event.find(.init(uuidString: input.eventID), on: request.db) else {
-            throw Abort(.badRequest, reason: "Could not find event")
-        }
+        let event: Event? = try await {
+            // If explicitly defined as no event, then return nil.
+            if input.eventID == "none" {
+                return nil
+            }
+            
+            // Otherwise, if an event was defined then throw an error if you can't find it.
+            guard let event = try await Event.find(.init(uuidString: input.eventID), on: request.db) else {
+                throw Abort(.badRequest, reason: "Could not find event")
+            }
+        
+            return event
+        }()
 
         if let activity = activity {
             var fileName = activity.image
@@ -70,8 +80,9 @@ struct ActivityRouteController: RouteCollection {
             activity.description = input.description
             activity.metadataURL = input.metadataURL
             activity.image = fileName
+            activity.duration = input.duration
 
-            activity.$event.id = try event.requireID()
+            activity.$event.id = try event?.requireID()
 
             try await activity.update(on: request.db)
         } else {
@@ -95,7 +106,8 @@ struct ActivityRouteController: RouteCollection {
                 image: fileName
             )
 
-            activity.$event.id = try event.requireID()
+            activity.duration = input.duration
+            activity.$event.id = try event?.requireID()
 
             try await activity.create(on: request.db)
         }
@@ -113,6 +125,7 @@ struct ActivityRouteController: RouteCollection {
     private struct FormInput: Content {
         let eventID: String
         let title: String
+        let duration: Double
         let subtitle: String?
         let description: String?
         let metadataURL: String?

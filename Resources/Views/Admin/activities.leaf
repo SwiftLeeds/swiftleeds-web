@@ -13,7 +13,7 @@
     <li class="d-flex align-items-center justify-content-between mb-2 border px-3 py-2 rounded" data-event="#(activity.event.id)">
       <div class="d-flex align-items-start me-3">
         <div>
-          <div class="fw-medium text-nav mb-1">#(activity.title)</div>
+          <div class="fw-medium text-nav mb-1">#(activity.title) #if(!activity.event.id):<span class="badge bg-success">Reusable</span>#endif</div>
           <span class="d-inline-block fs-sm text-muted pe-2 me-2">#(activity.subtitle)</span>
         </div>
       </div>

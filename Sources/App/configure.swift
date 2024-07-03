@@ -3,7 +3,7 @@ import Leaf
 import LeafMarkdown
 import Vapor
 
-public func configure(_ app: Application) throws {
+public func configure(_ app: Application) async throws {
     // Sessions
     // https://firebase.google.com/docs/hosting/manage-cache#using_cookies
     app.sessions.configuration.cookieName = "__session"
@@ -27,6 +27,7 @@ public func configure(_ app: Application) throws {
     app.leaf.tags["safeCount"] = SafeCountTag()
     app.leaf.tags["hash"] = HashTag()
     app.leaf.tags["dateFix"] = DateFixTag()
+    app.leaf.tags["first"] = FirstTag()
     app.views.use(.leaf)
     
     #if DEBUG
@@ -34,7 +35,7 @@ public func configure(_ app: Application) throws {
     #endif
 
     // Migrations
-    try Migrations.migrate(app)
+    try await Migrations.migrate(app)
 
     // Model middleware
     app.databases.middleware.use(SponsorMiddleware(), on: .psql)

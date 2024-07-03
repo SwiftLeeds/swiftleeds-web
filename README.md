@@ -33,7 +33,7 @@ For now, we'll focus on your local environment which is slightly different to ho
 
 SwiftLeeds relies on a few tools before we can get started! 
 
-* [Xcode](https://developer.apple.com/xcode/) (Xcode 14 using Swift 5.7)
+* [Xcode](https://developer.apple.com/xcode/) (Xcode 15.4 using Swift 5.10)
 * [Postgres](https://postgresapp.com) - our chosen database, used to persist data.
 * Optional: [Vapor](https://docs.vapor.codes/4.0/install/macos/)
 

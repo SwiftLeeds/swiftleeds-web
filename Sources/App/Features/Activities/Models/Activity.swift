@@ -24,12 +24,17 @@ final class Activity: Codable, Model, Content, @unchecked Sendable {
 
     @Field(key: "image")
     var image: String?
+    
+    @Field(key: "duration")
+    var duration: Double
 
-    @Parent(key: "event_id")
-    var event: Event
+    @OptionalParent(key: "event_id")
+    var event: Event?
 
+    // DO NOT USE (June 2024)
+    // TODO: This will be removed in a future PR as part of a cleanup
     @OptionalParent(key: "slot_id")
-    public var slot: Slot?
+    var slot: Slot?
 
     init() {}
 
