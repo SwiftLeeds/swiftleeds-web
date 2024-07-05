@@ -46,7 +46,6 @@ struct SessionizeSyncRouteController: RouteCollection {
                 })
                 .first()
             
-            print(sessionizeSpeaker.links)
             let twitter = sessionizeSpeaker.links.first(where: { $0.linkType == "Twitter" })?.url
                 .replacingOccurrences(of: "https://twitter.com/", with: "")
                 .replacingOccurrences(of: "https://x.com/", with: "")
@@ -54,6 +53,7 @@ struct SessionizeSyncRouteController: RouteCollection {
             
             let linkedin = sessionizeSpeaker.links.first(where: { $0.linkType == "LinkedIn" })?.url
                 .replacingOccurrences(of: "https://www.linkedin.com/", with: "")
+                .replacingOccurrences(of: "https://linkedin.com/", with: "")
                 .replacingOccurrences(of: "in/", with: "")
                 .replacingOccurrences(of: "/", with: "")
             
