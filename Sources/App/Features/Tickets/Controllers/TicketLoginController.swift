@@ -4,7 +4,10 @@ import Fluent
 struct TicketLoginController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         routes.get("ticketLogin") { req async throws -> View in
-            req.session.data["ticketRedirectUrl"] = req.query["returnUrl"]
+            if let query: String = req.query["returnUrl"] {
+                req.session.data["ticketRedirectUrl"] = query
+            }
+            
             return try await req.leaf.render(
                 "Ticket/ticketLogin",
                 TicketLoginContext(prompt: req.query["prompt"])
