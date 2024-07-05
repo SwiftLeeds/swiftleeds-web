@@ -78,6 +78,7 @@ func routes(_ app: Application) throws {
             .sort(\.$title)
             .all()
         let days = try await EventDay.query(on: request.db).all()
+            .sorted(by: { $0.date < $1.date })
 
         let selectedEvent = events.first(where: { $0.shouldBeReturned(by: request) }) ?? events.first(where: { $0.isCurrent }) ?? events[0]
         
