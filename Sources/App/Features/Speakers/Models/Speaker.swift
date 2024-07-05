@@ -26,6 +26,18 @@ final class Speaker: Codable, Model, Content, @unchecked Sendable {
     @Field(key: "twitter")
     var twitter: String?
     
+    @Field(key: "linkedin")
+    var linkedin: String?
+    
+    @Field(key: "website")
+    var website: String?
+    
+    @Field(key: "github")
+    var github: String?
+    
+    @Field(key: "mastodon")
+    var mastodon: String?
+    
     @Children(for: \.$speaker)
     var presentations: [Presentation]
     

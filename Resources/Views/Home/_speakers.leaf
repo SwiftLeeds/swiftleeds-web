@@ -18,21 +18,33 @@
           <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center rounded-3">
             <span class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"></span>
             <div class="position-relative d-flex zindex-2">
-              #if(speaker.facebook):
-              <a href="#" class="btn btn-icon btn-secondary btn-facebook btn-sm bg-white me-2">
-                <i class="bx bxl-facebook"></i>
+              #if(speaker.twitter):
+              <a href="https://twitter.com/#(speaker.twitter)" class="btn btn-icon btn-secondary btn-twitter btn-sm bg-white me-2" target="_blank">
+                <i class="bx bxl-twitter"></i>
               </a>
               #endif
               
               #if(speaker.linkedin):
-              <a href="#" class="btn btn-icon btn-secondary btn-linkedin btn-sm bg-white me-2">
+              <a href="https://linkedin.com/in/#(speaker.linkedin)" class="btn btn-icon btn-secondary btn-linkedin btn-sm bg-white me-2" target="_blank">
                 <i class="bx bxl-linkedin"></i>
               </a>
               #endif
               
-              #if(speaker.twitter):
-              <a href="https://twitter.com/#(speaker.twitter)" class="btn btn-icon btn-secondary btn-twitter btn-sm bg-white">
-                <i class="bx bxl-twitter"></i>
+              #if(speaker.website):
+              <a href="#(speaker.website)" class="btn btn-icon btn-secondary btn-sm bg-white me-2" target="_blank">
+                <i class="bx bx-link"></i>
+              </a>
+              #endif
+              
+              #if(speaker.github):
+              <a href="https://github.com/#(speaker.github)" class="btn btn-icon btn-secondary btn-github btn-sm bg-white me-2" target="_blank">
+                <i class="bx bxl-github"></i>
+              </a>
+              #endif
+              
+              #if(speaker.mastodon):
+              <a href="#(speaker.mastodon)" class="btn btn-icon btn-secondary btn-sm bg-white me-2" target="_blank">
+                <i class="bx bxl-mastodon"></i>
               </a>
               #endif
             </div>
