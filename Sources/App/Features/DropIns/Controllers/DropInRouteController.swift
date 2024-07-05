@@ -185,14 +185,20 @@ struct DropInRouteController: RouteCollection {
         
         // Owner
         mutableSession.owner = input.ownerName
-        mutableSession.ownerImageUrl = try await uploadAndReturnImage(image.ownerImage)
         mutableSession.ownerLink = input.ownerLink
+        
+        if let imageUrl = try await uploadAndReturnImage(image.ownerImage) {
+            mutableSession.ownerImageUrl = imageUrl
+        }
         
         // Company
         if let companyName = input.companyName, let companyLink = input.companyLink {
             mutableSession.company = companyName
-            mutableSession.companyImageUrl = try await uploadAndReturnImage(image.companyImage)
             mutableSession.companyLink = companyLink
+            
+            if let imageUrl = try await uploadAndReturnImage(image.companyImage) {
+                mutableSession.companyImageUrl = imageUrl
+            }
         }
         
         // Update/Create
