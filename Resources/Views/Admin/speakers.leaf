@@ -15,9 +15,37 @@
         <h5 class="fw-medium fs-lg mb-1">#(speaker.name)</h5>
         <p class="fs-sm mb-3">#if(speaker.organisation != ""):#(speaker.organisation)#else:<em>No Organisation</em>#endif</p>
         <div class="d-flex justify-content-center">
+        
+            #if(speaker.twitter):
             <a href="https://twitter.com/#(speaker.twitter)" target="_blank" class="btn btn-icon btn-outline-secondary btn-twitter btn-sm me-2" aria-label="Twitter">
                 <i class="bx bxl-twitter"></i>
             </a>
+            #endif
+            
+            #if(speaker.linkedin):
+            <a href="https://linkedin.com/in/#(speaker.linkedin)" target="_blank" class="btn btn-icon btn-outline-secondary btn-linkedin btn-sm me-2" aria-label="LinkedIn">
+                <i class="bx bxl-linkedin"></i>
+            </a>
+            #endif
+            
+            #if(speaker.website):
+            <a href="#(speaker.website)" target="_blank" class="btn btn-icon btn-outline-secondary btn-sm me-2" aria-label="Website">
+                <i class="bx bx-link"></i>
+            </a>
+            #endif
+            
+            #if(speaker.github):
+            <a href="https://github.com/#(speaker.github)" target="_blank" class="btn btn-icon btn-outline-secondary btn-github btn-sm me-2" aria-label="GitHub">
+                <i class="bx bxl-github"></i>
+            </a>
+            #endif
+            
+            #if(speaker.mastodon):
+            <a href="#(speaker.mastodon)" target="_blank" class="btn btn-icon btn-outline-secondary btn-sm me-2" aria-label="Mastodon">
+                <i class="bx bxl-mastodon"></i>
+            </a>
+            #endif
+            
             <button data-swiftleeds-admin="speakers/#(speaker.id)" class="btn btn-outline-secondary btn-sm" aria-label="Edit">
                 <i class="bx bx-pencil fs-xl me-sm-1"></i>
                 <span class="d-none d-sm-inline">Edit</span>

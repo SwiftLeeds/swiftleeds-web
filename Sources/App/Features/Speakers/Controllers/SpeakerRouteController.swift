@@ -49,25 +49,27 @@ struct SpeakerRouteController: RouteCollection {
                 filename: imageFilename
             )
         }
-
-        if let speaker = speaker {
-            speaker.name = input.name
-            speaker.biography = input.biography
-            speaker.profileImage = imageFilename
-            speaker.organisation = input.organisation
-            speaker.twitter = input.twitter
-            try await speaker.update(on: request.db)
+        
+        let mutableSpeaker = speaker ?? Speaker()
+        mutableSpeaker.name = input.name
+        mutableSpeaker.biography = input.biography
+        mutableSpeaker.profileImage = imageFilename
+        mutableSpeaker.organisation = input.organisation
+        mutableSpeaker.twitter = input.twitter?.trimToNil?
+            .replacingOccurrences(of: "https://twitter.com/", with: "")
+            .replacingOccurrences(of: "https://x.com/", with: "")
+        mutableSpeaker.linkedin = input.linkedin?.trimToNil?
+            .replacingOccurrences(of: "https://linkedin.com/in/", with: "")
+        mutableSpeaker.website = input.website?.trimToNil
+        mutableSpeaker.github = input.github?.trimToNil?
+            .replacingOccurrences(of: "https://github.com/", with: "")
+        mutableSpeaker.mastodon = input.mastodon?.trimToNil
+        
+        if speaker != nil {
+            try await mutableSpeaker.update(on: request.db)
         } else {
-            let speaker = Speaker(
-                id: .generateRandom(),
-                name: input.name,
-                biography: input.biography,
-                profileImage: imageFilename,
-                organisation: input.organisation,
-                twitter: input.twitter
-            )
-
-            try await speaker.create(on: request.db)
+            mutableSpeaker.id = .generateRandom()
+            try await mutableSpeaker.create(on: request.db)
         }
 
         return Response(status: .ok, body: .init(string: "OK"))
@@ -90,5 +92,21 @@ struct SpeakerRouteController: RouteCollection {
         let profileImage: String
         let organisation: String
         let twitter: String?
+        let linkedin: String?
+        let website: String?
+        let github: String?
+        let mastodon: String?
+    }
+}
+
+extension String {
+    var trimToNil: String? {
+        let trim = trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if trim.isEmpty {
+            return nil
+        }
+        
+        return trim
     }
 }

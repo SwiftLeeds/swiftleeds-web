@@ -64,6 +64,12 @@
                   <i class="bx bxl-flickr"></i> <span class="d-block d-sm-block d-md-block d-lg-none" style="margin-left: 6px;">Flickr</span>
               </a>
             </li>
+            
+            <li class="nav-item">
+              <a href="https://open.spotify.com/show/3pHsjVt54MDDHdzZce7ezl" target="_blank" class="nav-link">
+                  <i class="bx bxl-spotify"></i> <span class="d-block d-sm-block d-md-block d-lg-none" style="margin-left: 6px;">Spotify</span>
+              </a>
+            </li>
           </ul>
         </div>
         #if(false):

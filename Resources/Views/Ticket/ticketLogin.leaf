@@ -27,7 +27,8 @@
 
                     <div class="mb-3">
                       <label for="ticket" class="form-label">Ticket Reference</label>
-                      <input type="text" class="form-control" id="ticket" name="ticket">
+                      <input type="text" class="form-control" id="ticket" name="ticket" placeholder="ABCD-1">
+                      <div id="refHelp" class="form-text">This will be in your confirmation email.</div>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>

@@ -88,13 +88,22 @@ struct HomeRouteController: RouteCollection {
         
         let phase = try getPhase(req: req, event: event)
         
-        let schedule = event.days.map { day in
-            ScheduleDay(
-                name: day.name,
-                date: day.date,
-                slots: slots.filter { $0.day?.id == day.id }
-            )
-        }.filter { !$0.slots.isEmpty }
+        let schedule = event.days
+            .map { day in
+                ScheduleDay(
+                    name: day.name,
+                    date: day.date,
+                    slots: slots.filter { $0.day?.id == day.id }
+                )
+            }
+            .filter {
+                // Hide Empty Days
+                !$0.slots.isEmpty
+            }
+            .sorted(by: {
+                // Sort by Date (Chronological)
+                $0.date < $1.date
+            })
         
         return HomeContext(
             speakers: speakers,

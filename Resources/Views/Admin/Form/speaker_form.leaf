@@ -28,10 +28,40 @@
           </div>
         </div>
 
+        <label for="twitter" class="form-label">Social Links</label>
+        <div class="input-group mb-1">
+          <span class="input-group-text">
+            <i class="bx bxl-twitter fs-base"></i>
+          </span>
+          <input type="text" name="twitter" id="twitter" class="form-control" placeholder="Twitter" value="#(speaker.twitter)" aria-label="Twitter">
+        </div>
+        
+        <div class="input-group mb-1">
+          <span class="input-group-text">
+            <i class="bx bxl-linkedin fs-base"></i>
+          </span>
+          <input type="text" name="linkedin" id="linkedin" class="form-control" placeholder="LinkedIn" value="#(speaker.linkedin)" aria-label="LinkedIn">
+        </div>
+        
+        <div class="input-group mb-1">
+          <span class="input-group-text">
+            <i class="bx bx-link fs-base"></i>
+          </span>
+          <input type="text" name="website" id="website" class="form-control" placeholder="Website" value="#(speaker.website)" aria-label="Website">
+        </div>
+        
+        <div class="input-group mb-1">
+          <span class="input-group-text">
+            <i class="bx bxl-github fs-base"></i>
+          </span>
+          <input type="text" name="github" id="github" class="form-control" placeholder="GitHub" value="#(speaker.github)" aria-label="GitHub">
+        </div>
+        
         <div class="input-group mb-3">
-          <br/>
-          <span class="input-group-text">@</span>
-          <input type="text" name="twitter" id="twitter" class="form-control" placeholder="Twitter" value="#(speaker.twitter)" aria-label="Twitter username" aria-describedby="basic-addon1">
+          <span class="input-group-text">
+            <i class="bx bxl-mastodon fs-base"></i>
+          </span>
+          <input type="text" name="mastodon" id="mastodon" class="form-control" placeholder="Mastodon" value="#(speaker.mastodon)" aria-label="Mastodon">
         </div>
 
         <div class="mb-3">

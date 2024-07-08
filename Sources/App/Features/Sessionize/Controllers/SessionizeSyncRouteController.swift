@@ -46,7 +46,26 @@ struct SessionizeSyncRouteController: RouteCollection {
                 })
                 .first()
             
-            let twitter = sessionizeSpeaker.links.first(where: { $0.linkType == "Twitter" })?.url.replacingOccurrences(of: "https://twitter.com/", with: "")
+            let twitter = sessionizeSpeaker.links.first(where: { $0.linkType == "Twitter" })?.url
+                .replacingOccurrences(of: "https://twitter.com/", with: "")
+                .replacingOccurrences(of: "https://x.com/", with: "")
+                .replacingOccurrences(of: "/", with: "")
+            
+            let linkedin = sessionizeSpeaker.links.first(where: { $0.linkType == "LinkedIn" })?.url
+                .replacingOccurrences(of: "https://www.linkedin.com/", with: "")
+                .replacingOccurrences(of: "https://linkedin.com/", with: "")
+                .replacingOccurrences(of: "in/", with: "")
+                .replacingOccurrences(of: "/", with: "")
+            
+            var website = sessionizeSpeaker.links.first(where: { $0.linkType == "Blog" })?.url ??
+                sessionizeSpeaker.links.first(where: { $0.linkType == "Company_Website" })?.url
+            
+            var github: String? = nil
+            
+            if let websiteL = website, websiteL.contains("github.com") {
+                github = websiteL.replacingOccurrences(of: "https://github.com/", with: "")
+                website = nil
+            }
             
             if let speaker = speakerQuery {
                 var pairs = [SyncContext.Pair]()
@@ -71,6 +90,21 @@ struct SessionizeSyncRouteController: RouteCollection {
                     speaker.twitter = twitter
                 }
                 
+                if speaker.linkedin != linkedin {
+                    pairs.append(.init(key: "LinkedIn", oldValue: speaker.linkedin ?? "-- Not Defined --", newValue: linkedin ?? "-- Not Defined --"))
+                    speaker.linkedin = linkedin
+                }
+                
+                if speaker.website != website {
+                    pairs.append(.init(key: "Website", oldValue: speaker.website ?? "-- Not Defined --", newValue: website ?? "-- Not Defined --"))
+                    speaker.website = website
+                }
+                
+                if speaker.github != github {
+                    pairs.append(.init(key: "GitHub", oldValue: speaker.github ?? "-- Not Defined --", newValue: github ?? "-- Not Defined --"))
+                    speaker.github = github
+                }
+                
                 if pairs.isEmpty == false {
                     changes.append(.init(id: sessionizeSpeaker.id, modelType: .speaker, operationType: .update, pairs: pairs))
                 }
@@ -88,6 +122,10 @@ struct SessionizeSyncRouteController: RouteCollection {
                     twitter: twitter
                 )
                 
+                newSpeaker.linkedin = linkedin
+                newSpeaker.website = website
+                newSpeaker.github = github
+                
                 changes.append(.init(
                     id: sessionizeSpeaker.id,
                     modelType: .speaker,
@@ -96,7 +134,10 @@ struct SessionizeSyncRouteController: RouteCollection {
                         .init(key: "Name", oldValue: nil, newValue: sessionizeSpeaker.fullName),
                         .init(key: "Biography", oldValue: nil, newValue: sessionizeSpeaker.bio),
                         .init(key: "Organisation", oldValue: nil, newValue: sessionizeSpeaker.tagLine),
-                        .init(key: "Twitter", oldValue: nil, newValue: newSpeaker.twitter ?? "-- Not Defined --")
+                        .init(key: "Twitter", oldValue: nil, newValue: newSpeaker.twitter ?? "-- Not Defined --"),
+                        .init(key: "LinkedIn", oldValue: nil, newValue: newSpeaker.linkedin ?? "-- Not Defined --"),
+                        .init(key: "Website", oldValue: nil, newValue: newSpeaker.website ?? "-- Not Defined --"),
+                        .init(key: "GitHub", oldValue: nil, newValue: newSpeaker.github ?? "-- Not Defined --"),
                     ]
                 ))
                 
