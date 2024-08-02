@@ -48,6 +48,12 @@
             </li>
             
             <li class="nav-item">
+              <a href="https://iosdev.space/@swiftleeds" rel="me"" target="_blank" class="nav-link">
+                <i class="bx bxl-mastodon"></i> <span class="d-block d-sm-block d-md-block d-lg-none" style="margin-left: 6px;">Mastodon</span>
+              </a>
+            </li>
+            
+            <li class="nav-item">
               <a href="https://www.youtube.com/channel/UCCq1K0eWKZFBCpqaC3n8V1g" target="_blank" class="nav-link">
                   <i class="bx bxl-youtube"></i> <span class="d-block d-sm-block d-md-block d-lg-none" style="margin-left: 6px;">YouTube</span>
               </a>
