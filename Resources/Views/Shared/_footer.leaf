@@ -30,6 +30,9 @@
               <a href="https://twitter.com/swift_leeds" class="btn btn-icon btn-sm btn-secondary btn-twitter rounded-circle me-3">
                 <i class="bx bxl-twitter"></i>
               </a>
+              <a href="https://iosdev.space/@swiftleeds" class="btn btn-icon btn-sm btn-secondary btn-mastodon rounded-circle me-3">
+                <i class="bx bxl-mastodon"></i>
+              </a>
               <a href="https://join.slack.com/t/swiftleedsworkspace/shared_invite/zt-wkmr6pif-ZDCdDeHM60jcBUy0BxHdCQ" class="btn btn-icon btn-sm btn-secondary btn-slack rounded-circle me-3">
                 <i class="bx bxl-slack"></i>
               </a>
