@@ -49,7 +49,7 @@
           <div class="col-md-6 ordr-md-1">
             <h2 class="h3 mb-sm-4">#if(eventYear == 2024):<span class="badge bg-primary fs-sm align-middle me-2">NEW</span>#endif SwiftLeeds Evening Talkshow</h2>
             
-            <p>SwiftLeeds is super excited to host a new, and interactive evening talk show with <a href="#" target="_blank">Dave&nbsp;Verwer</a>, <a href="#" target="_blank">Gwynne&nbsp;Raskind</a>, <a href="#" target="_blank">Donny&nbsp;Wals</a> and <a href="#" target="_blank">Marc&nbsp;Aupont</a>. This special event will be held at the <a href="#venue" data-scroll data-scroll-offset="70">Leeds&nbsp;Playhouse</a> on October 7th, the evening before the main conference, at 6pm until 8:30pm.</p>
+            <p>SwiftLeeds is super excited to host a new, and interactive evening talk show with <a href="#" target="_blank">Dave&nbsp;Verwer</a>, <a href="#" target="_blank">Mikaela&nbsp;Caron</a>, <a href="#" target="_blank">Donny&nbsp;Wals</a> and <a href="#" target="_blank">Marc&nbsp;Aupont</a>. This special event will be held at the <a href="#venue" data-scroll data-scroll-offset="70">Leeds&nbsp;Playhouse</a> on October 7th, the evening before the main conference, at 6pm until 8:30pm.</p>
             
             <p>We'll be discussing some hot topics within the Swift community, such as;</p>
             
@@ -70,10 +70,10 @@
                   </div>
                 </div>
                 <div class="col d-flex align-items-center border-bottom p-3">
-                  <img src="#awsImage("1130717+(2).png")" width="48" alt="Gwynne Raskind" class="rounded">
+                  <img src="#awsImage("mikaela-caron-headshot.jpg")" width="48" alt="Mikaela Caron" class="rounded">
                   <div class="ps-2 ms-1">
-                    <h3 class="h6 mb-0">Gwynne Raskind</h3>
-                    <p class="fs-xs mb-0">Half of <a href="https://vapor.codes/?utm_source=swiftleeds" target="_blank">Vapor</a> core-team, and key contributor of <a href="https://www.swift.org/sswg/?utm_source=swiftleeds" target="_blank">server-side Swift working group</a>.</p>
+                    <h3 class="h6 mb-0">Mikaela Caron</h3>
+                    <p class="fs-xs mb-0">Independent iOS Engineer who actively shares her expertise on social media, focusing on iOS development, building apps in public, and freelancing.</p>
                   </div>
                 </div>
                 <div class="col d-flex align-items-center border-bottom p-3">
