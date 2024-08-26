@@ -32,6 +32,8 @@ struct TicketHubRouteController: RouteCollection {
                 
                 let dropInSessions = sessions.filter { $0.maxTicketsPerSlot == 1 }.map { convertDropInSessionToViewModel($0, slug: ticket.slug) }
                 let groupSessions = sessions.filter { $0.maxTicketsPerSlot > 1 }.map { convertDropInSessionToViewModel($0, slug: ticket.slug) }
+                let userSessions = sessions.filter { $0.maxTicketsPerSlot > 0 && $0.slots.contains(where: { $0.ticket.contains(ticket.slug) }) }
+                    .map { convertDropInSessionToViewModel($0, slug: ticket.slug) }
                 
                 let titoPrefill = #"{"email": "\#(ticket.email)", "name": "\#(ticket.fullName)"}"#
                     .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -47,6 +49,7 @@ struct TicketHubRouteController: RouteCollection {
                         // TODO: return nil here if the user has a talk show ticket
                         purchaseTalkshowUrl: "https://ti.to/swiftleeds/swiftleeds-24/with/live-talkshow?prefill=\(titoPrefill)"
                     ),
+                    userSessions: userSessions,
                     dropInSessions: dropInSessions,
                     groupSessions: groupSessions,
                     refund: .init(
@@ -268,6 +271,7 @@ struct TicketHubContext: Content {
     }
     
     let ticket: Ticket
+    let userSessions: [Session]
     let dropInSessions: [Session]
     let groupSessions: [Session]
     let refund: Refund

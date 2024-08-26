@@ -212,7 +212,28 @@
                   #if(prompt):
                     <div class="alert alert-secondary" role="alert">#(prompt)</div>
                   #endif
-                  
+
+              #if(count(userSessions) > 0):
+                <h2 id="dropin" class="h5 text-primary pt-1 pt-lg-3 mt-4">Your Session#if(count(userSessions) > 1):s#endif</h2>
+                <div class="row flex-nowrap overflow-auto">
+                    #for(session in userSessions):
+                    #for(slot in session.slots):
+                    #if(slot.isParticipant):
+                    <div class="col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5">
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title fs-sm mb-1" style="color: inherit;">#(slot.day) (#date(slot.date, "dd MMM")) at #date(slot.date, "HH:mm")</h5>
+                            <p class="fs-lead pb-0 mb-0">#(session.title)</p>
+                            <p class="fs-sm mb-0">#(slot.duration) minutes with #(session.ownerName)</p>
+                          </div>
+                        </div>
+                    </div>
+                    #endif
+                    #endfor
+                    #endfor
+                </div>
+              #endif
+              
                   #for(session in dropInSessions):
                     #extend("Hub/_carousel")
                   #endfor
