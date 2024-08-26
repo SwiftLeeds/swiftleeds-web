@@ -225,6 +225,26 @@
                             <h5 class="card-title fs-sm mb-1" style="color: inherit;">#(slot.day) (#date(slot.date, "dd MMM")) at #date(slot.date, "HH:mm")</h5>
                             <p class="fs-lead pb-0 mb-0">#(session.title)</p>
                             <p class="fs-sm mb-0">#(slot.duration) minutes with #(session.ownerName)</p>
+                            
+                            <button class="btn btn-sm btn-outline-secondary mt-3" id="#(slot.id)">
+                                <i class="bx bx-calendar-check fs-xl me-2 ms-n1"></i>
+                                Add to calendar
+                            </button>
+                            <script type="application/javascript">
+                                const config = {
+                                    name: "SwiftLeeds Drop-in Session",
+                                    description: "#(session.title)",
+                                    startDate: "#dateFix(slot.date, "yyyy-MM-dd")",
+                                    startTime: "#dateFix(slot.date, "HH:mm")",
+                                    endTime: "#sessionEnd(slot.date, slot.duration)",
+                                    options: ["Google", "iCal", "Apple", "Outlook.com", "Yahoo", "MicrosoftTeams", "Microsoft365"],
+                                    timeZone: "UTC"
+                                };
+
+                                document.querySelectorAll("##(slot.id)").forEach(button => {
+                                    button.addEventListener('click', () => atcb_action(config, button));
+                                });
+                            </script>
                           </div>
                         </div>
                     </div>
