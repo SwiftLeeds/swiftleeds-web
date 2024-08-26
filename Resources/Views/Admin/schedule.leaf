@@ -66,9 +66,9 @@ function refreshDayPicker() {
     });
     
     // Reset Option
-    if(selectedDay, selectedDay.length > 0) {
+    if(selectedDay && selectedDay.length > 0) {
         const dayElement = $("#day-select option[value='" + selectedDay + "']");
-        if (dayElement.length > 0, dayElement[0].dataset.event.includes(selectedEvent)) {
+        if (dayElement && dayElement.length > 0 && dayElement[0].dataset.event.includes(selectedEvent)) {
             $("#day-select").val(selectedDay);
         } else {
             $("#day-select").val($("#day-select option:not([hidden]):first").val());
