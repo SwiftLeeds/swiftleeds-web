@@ -86,6 +86,11 @@ $("[data-swiftleeds-admin]").on('click', (e) => {
                 $(element).find('option[value=' + value + ']').attr('selected', true);
             });
             
+            $("[data-swiftleeds-selectCurrentDay]").each((offset, element) => {
+                const value = $("#day-select").val();
+                $(element).find('option[value=' + value + ']').attr('selected', true);
+            });
+            
             modal.find('.needs-validation').each((offset, element) => {
                 const form = $(element);
                 form.on('click', '[data-swiftleeds-form]', (event) => {

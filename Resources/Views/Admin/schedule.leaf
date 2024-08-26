@@ -58,6 +58,7 @@
 <script>
 function refreshDayPicker() {
     const selectedEvent = localStorage['selectedEvent'];
+    const selectedDay = localStorage['selectedDay'];
     
     // Change Day Dropdown
     $("#day-select option[data-event]").each((offset, element) => {
@@ -65,7 +66,16 @@ function refreshDayPicker() {
     });
     
     // Reset Option
-    $("#day-select").val($("#day-select option:not([hidden]):first").val());
+    if(selectedDay, selectedDay.length > 0) {
+        const dayElement = $("#day-select option[value='" + selectedDay + "']");
+        if (dayElement.length > 0, dayElement[0].dataset.event.includes(selectedEvent)) {
+            $("#day-select").val(selectedDay);
+        } else {
+            $("#day-select").val($("#day-select option:not([hidden]):first").val());
+        }
+    } else {
+        $("#day-select").val($("#day-select option:not([hidden]):first").val());
+    }
     
     // Disable if empty
     $("#day-select").prop("disabled", $("#day-select option:not([hidden])").length == 0);
@@ -113,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     $("#day-select").on('change', (event) => {
         refreshSlots();
+        localStorage['selectedDay'] = $(event.currentTarget).val();
     });
 });
 </script>
