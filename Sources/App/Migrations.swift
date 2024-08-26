@@ -81,6 +81,7 @@ class Migrations {
         app.migrations.add(SlotMigrationV3()) // Add day_id on Slot
         app.migrations.add(SlotMigrationV4()) // Add presentation and activity ids to Slot instead of self
         app.migrations.add(SpeakerMigrationV2()) // Add more social link options
+        app.migrations.add(SlotMigrationV5()) // Remove unneeded slot_id params
 
         do {
             guard let url = Environment.get("DATABASE_URL") else {

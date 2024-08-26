@@ -85,63 +85,32 @@ struct SlotRouteController: RouteCollection {
         let inputDate = eventDay.date.addingTimeInterval(TimeInterval(minutes * 60))
         let duration = input.duration.flatMap(Double.init)
         
-        if let slot = slot {
-            slot.startDate = input.startTime
-            slot.date = inputDate
-            slot.duration = duration
-            slot.$event.id = try event.requireID()
-            slot.$day.id = try eventDay.requireID()
-            try await slot.update(on: request.db)
-
-            var hasSessionChanged = (slot.activity?.id == nil && slot.presentation?.id == nil)
-
-            // Remove old session reference if changed
-            if let existingActivity = slot.activity, input.activityID != existingActivity.id?.uuidString {
-                let emptySlotID: Slot.IDValue? = nil
-                existingActivity.$slot.id = emptySlotID
-                try await existingActivity.update(on: request.db)
-                hasSessionChanged = true
-            }
-
-            if let existingPresentation = slot.presentation, input.presentationID != existingPresentation.id?.uuidString {
-                let emptySlotID: Slot.IDValue? = nil
-                existingPresentation.$slot.id = emptySlotID
-                try await existingPresentation.update(on: request.db)
-                hasSessionChanged = true
-            }
-
-            // Add new session reference if required
-            if hasSessionChanged {
-                if let activity = activity {
-                    activity.$slot.id = try slot.requireID()
-                    try await activity.update(on: request.db)
-                } else if let presentation = presentation {
-                    presentation.$slot.id = try slot.requireID()
-                    try await presentation.update(on: request.db)
-                }
-            }
+        let mutableSlot = slot ?? Slot()
+        mutableSlot.startDate = input.startTime
+        mutableSlot.date = inputDate
+        mutableSlot.duration = duration
+        mutableSlot.$event.id = try event.requireID()
+        mutableSlot.$day.id = try eventDay.requireID()
+        
+        if let activity {
+            mutableSlot.$activity.id = try activity.requireID()
         } else {
-            let newSlot = Slot(
-                id: .generateRandom(),
-                startDate: input.startTime,
-                date: inputDate,
-                duration: duration
-            )
-
-            newSlot.$event.id = try event.requireID()
-            newSlot.$day.id = try eventDay.requireID()
-
-            try await newSlot.create(on: request.db)
-
-            if let activity = activity {
-                activity.$slot.id = try newSlot.requireID()
-                try await activity.update(on: request.db)
-            } else if let presentation = presentation {
-                presentation.$slot.id = try newSlot.requireID()
-                try await presentation.update(on: request.db)
-            }
+            mutableSlot.$activity.id = nil
         }
-
+        
+        if let presentation {
+            mutableSlot.$presentation.id = try presentation.requireID()
+        } else {
+            mutableSlot.$presentation.id = nil
+        }
+        
+        if slot == nil {
+            mutableSlot.id = .generateRandom()
+            try await mutableSlot.create(on: request.db)
+        } else {
+            try await mutableSlot.update(on: request.db)
+        }
+        
         return Response(status: .ok, body: .init(string: "OK"))
     }
 

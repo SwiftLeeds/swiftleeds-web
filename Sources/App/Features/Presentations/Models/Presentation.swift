@@ -27,11 +27,6 @@ final class Presentation: Model, Content, @unchecked Sendable {
     
     @Parent(key: "event_id")
     public var event: Event
-
-    // DO NOT USE (June 2024)
-    // TODO: This will be removed in a future PR as part of a cleanup
-    @OptionalParent(key: "slot_id")
-    public var slot: Slot?
     
     @Field(key: "is_tba")
     var isTBA: Bool

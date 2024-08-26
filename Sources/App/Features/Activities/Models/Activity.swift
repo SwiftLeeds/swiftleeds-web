@@ -31,11 +31,6 @@ final class Activity: Codable, Model, Content, @unchecked Sendable {
     @OptionalParent(key: "event_id")
     var event: Event?
 
-    // DO NOT USE (June 2024)
-    // TODO: This will be removed in a future PR as part of a cleanup
-    @OptionalParent(key: "slot_id")
-    var slot: Slot?
-
     init() {}
 
     init(
