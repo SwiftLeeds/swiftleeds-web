@@ -22,7 +22,7 @@
             <div class="position-sticky top-0">
               <div class="text-center pt-5">
                 <div class="d-table position-relative mx-auto mt-2 mt-lg-4 pt-5 mb-3">
-                  <img src="#(ticket.imageUrl)" class="d-block rounded-circle" width="120" alt="#(ticket.name)">
+                  <img src="#first(ticket.qrUrl, ticket.imageUrl)" class="d-block rounded" width="120" alt="#(ticket.name)">
                 </div>
                 <h2 class="h5 mb-1">#(ticket.name)</h2>
                 
@@ -34,8 +34,10 @@
                 #endif
                 #endif
                 
-                <p class="mt-3 fs-sm mb-3 pb-3">#(ticket.email)</p>
+                <p class="mt-3 fs-sm mb-0 pb-3">#(ticket.email)</p>
                 
+                <a href="#(ticket.passbookUrl)" class="btn btn-primary mb-5" target="_self">Add to Apple Wallet</a>
+                                
                 <button type="button" class="btn btn-secondary w-100 d-md-none mt-n2 mb-3" data-bs-toggle="collapse" data-bs-target="#ticket-menu">
                   <i class="bx bxs-user-detail fs-xl me-2"></i>
                   Ticket Hub Menu

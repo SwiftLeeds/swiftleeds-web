@@ -28,7 +28,8 @@ struct ValidTicketMiddleware: AsyncMiddleware {
                     responses: [:],
                     release: .init(metadata: .init(canBookDropInSession: true)),
                     email: "james@gmail.com",
-                    reference: "ABCD-1"
+                    reference: "ABCD-1", 
+                    qr_url: "https://qr.tito.io/tickets/ti_p1NWgFenXguSSrqE2XRDHnw"
                 ))
                 
                 return try await next.respond(to: request)

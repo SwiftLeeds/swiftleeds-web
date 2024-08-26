@@ -39,6 +39,8 @@ struct TicketHubRouteController: RouteCollection {
                 return try await req.view.render("Hub/home", TicketHubContext(
                     ticket: .init(
                         imageUrl: ticket.avatar_url?.absoluteString,
+                        qrUrl: ticket.qr_url,
+                        passbookUrl: "https://passbook.tito.io/tickets/\(ticket.slug)",
                         name: ticket.fullName,
                         email: ticket.email,
                         
@@ -222,6 +224,8 @@ struct TicketHubRouteController: RouteCollection {
 struct TicketHubContext: Content {
     struct Ticket: Codable {
         let imageUrl: String?
+        let qrUrl: String?
+        let passbookUrl: String
         let name: String
         let email: String
         let purchaseTalkshowUrl: String?
