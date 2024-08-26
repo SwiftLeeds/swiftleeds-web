@@ -35,7 +35,7 @@
               <option selected value>Select a Presentation</option>
               #for(presentation in presentations):
                 <option #if(presentation.id == slot.presentation.id): selected #endif name="presentation" value=#(presentation.id) class="event-visible" data-event="#(presentation.event.id)" data-duration="#(presentation.duration)">
-                  #(presentation.title) - #(presentation.duration) mins
+                  #(presentation.title) - #(presentation.speaker.name)
                 </option>
               #endfor
             </select>

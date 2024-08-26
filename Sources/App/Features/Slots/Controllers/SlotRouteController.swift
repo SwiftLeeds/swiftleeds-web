@@ -24,7 +24,7 @@ struct SlotRouteController: RouteCollection {
 
     private func buildContext(from db: Database, slot: Slot?) async throws -> PresentationContext {
         let eventDays = try await EventDay.query(on: db).with(\.$event).sort(\.$date).all()
-        let presentations = try await Presentation.query(on: db).sort(\.$title).all()
+        let presentations = try await Presentation.query(on: db).with(\.$speaker).sort(\.$title).all()
         let activities = try await Activity.query(on: db).sort(\.$title).all()
         var initialType = SlotTypes.presentation.rawValue
 
