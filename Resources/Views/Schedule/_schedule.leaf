@@ -10,7 +10,7 @@
         <!-- Nav tabs -->
         <div class="nav flex-nowrap flex-lg-column nav-tabs" role="tablist" aria-orientation="vertical">
           #for(day in schedule):
-          <a href="#day-#(index + 1)" class="nav-link d-block w-100 rounded-3 p-4 p-xl-5 #if(index == 0):me-2 me-sm-3 me-lg-0 mb-lg-3 active#endif" id="day-#(index + 1)-tab" data-bs-toggle="tab" role="tab" aria-controls="day-#(index + 1)" aria-selected="#if(index == 0):true#else:false#endif">
+          <a href="#day-#(index + 1)" class="nav-link d-block w-100 rounded-3 p-4 p-xl-5 #if(!last):me-2 me-sm-3 me-lg-0 mb-lg-3#endif #if(index == 0):active#endif" id="day-#(index + 1)-tab" data-bs-toggle="tab" role="tab" aria-controls="day-#(index + 1)" aria-selected="#if(index == 0):true#else:false#endif">
             <div class="fs-xl">#(day.name)</div>
             <div class="fs-3 fw-bold">#date(day.date, "MMM d, YYYY")</div>
           </a>
@@ -28,7 +28,7 @@
             <div class="#if(isLast):#else:border-bottom#endif #if(isFirst):pb-4#endif #if(isLast):pt-4#endif #if(!isFirst && !isLast):py-4#endif">
               <div class="row pb-1 pb-xl-3">
                 <div class="col-sm-4 mb-3 mb-sm-0">
-                  <div class="h5 mb-1">#(slot.startDate) – #sessionEnd(slot.date, first(slot.presentation.duration, slot.activity.duration, slot.duration))</div>
+                  <div class="h5 mb-1">#(slot.startDate) – #sessionEnd(slot.date, first(slot.duration, slot.presentation.duration, slot.activity.duration))</div>
                   
                   #if(slot.presentation.id):
                   #if(first(slot.presentation.duration, slot.duration) <= 15.0):
