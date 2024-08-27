@@ -219,7 +219,7 @@
                     #for(session in userSessions):
                     #for(slot in session.slots):
                     #if(slot.isParticipant):
-                    <div class="col-5 col-md-5 col-sm-5 col-lg-5 col-xl-5">
+                    <div class="col-12 col-md-12 col-sm-12 col-lg-6 col-xl-6">
                         <div class="card">
                           <div class="card-body">
                             <h5 class="card-title fs-sm mb-1" style="color: inherit;">#(slot.day) (#date(slot.date, "dd MMM")) at #date(slot.date, "HH:mm")</h5>

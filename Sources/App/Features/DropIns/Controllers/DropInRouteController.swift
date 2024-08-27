@@ -265,6 +265,9 @@ struct DropInRouteController: RouteCollection {
         let sessionOpt = try await DropInSession.query(on: request.db)
             .filter(\.$id == sessionKeyUUID)
             .with(\.$slots)
+            .with(\.$event) {
+                $0.with(\.$days)
+            }
             .first()
         
         guard let session = sessionOpt else {
@@ -285,7 +288,8 @@ struct DropInRouteController: RouteCollection {
             // enumerate them to turn into conference day number
             .enumerated()
             .map { (offset, result) in
-                DropInSessionSlotsContext.SlotGroup(title: "Day \(offset + 1)", slots: result.value)
+                let eventDay = session.event.days.first(where: { $0.date.withoutTime == result.value[0].date.withoutTime })
+                return DropInSessionSlotsContext.SlotGroup(title: eventDay?.name ?? "Day \(offset + 1)", slots: result.value)
             }
         
         let context = DropInSessionSlotsContext(session: .init(model: session), slots: slotModelsGrouped)

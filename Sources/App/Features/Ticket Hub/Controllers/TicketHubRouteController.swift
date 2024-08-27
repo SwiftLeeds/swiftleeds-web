@@ -23,8 +23,10 @@ struct TicketHubRouteController: RouteCollection {
                 }
                 
                 let sessions = try await DropInSession.query(on: req.db)
-                    .with(\.$event)
                     .filter(\.$event.$id == currentEvent.requireID())
+                    .with(\.$event) {
+                        $0.with(\.$days)
+                    }
                     .with(\.$slots)
                     .sort(.id)
                     .all()
@@ -179,9 +181,11 @@ struct TicketHubRouteController: RouteCollection {
             .enumerated()
             .map { (offset, result) -> [TicketHubContext.SessionSlot] in
                 result.value.map { slot in
-                    TicketHubContext.SessionSlot(
+                    let eventDay = model.event.days.first(where: { $0.date.withoutTime == slot.date.withoutTime })
+                    
+                    return TicketHubContext.SessionSlot(
                         id: slot.id?.uuidString ?? slot.date.description,
-                        day: "Day \(offset + 1)",
+                        day: eventDay?.name ?? "Day \(offset + 1)",
                         date: slot.date,
                         duration: slot.duration,
                         isParticipant: slot.ticket.contains(slug),
