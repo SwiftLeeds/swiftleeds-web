@@ -1,0 +1,13 @@
+{
+    "hosting": {
+        "target": "swiftleeds_main",
+        "appAssociation": "NONE",
+        "rewrites": [{
+            "glob": "**",
+            "run": {
+                "serviceId": "swiftleeds-web-main",
+                "region": "europe-west2"
+            }
+        }]
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "swiftleeds-website"
+  },
+  "targets": {
+    "swiftleeds-website": {
+      "hosting": {
+        "swiftleeds_main": [
+          "swiftleeds"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
