@@ -5,6 +5,5 @@ Packages
 DerivedData/
 Tests/LinuxMain.swift
 .vscode
-.swiftpm/xcode/xcuserdata/
-.swiftpm/
+.swiftpm/xcode/
 .env.*
