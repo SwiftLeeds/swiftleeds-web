@@ -1,4 +1,4 @@
-import LeafKit
+@preconcurrency import LeafKit
 import SwiftMarkdown
 
 struct MarkdownTag: UnsafeUnescapedLeafTag {

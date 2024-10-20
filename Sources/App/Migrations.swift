@@ -82,6 +82,7 @@ class Migrations {
         app.migrations.add(SlotMigrationV4()) // Add presentation and activity ids to Slot instead of self
         app.migrations.add(SpeakerMigrationV2()) // Add more social link options
         app.migrations.add(SlotMigrationV5()) // Remove unneeded slot_id params
+        app.migrations.add(PresentationMigrationV6()) // Add video visibility
 
         do {
             guard let url = Environment.get("DATABASE_URL") else {
