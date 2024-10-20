@@ -1,5 +1,5 @@
 {
-  "originHash" : "08523ac4412f1417482aa2e366b9423358ce5a97532b2ae98a14c2cea6a7bde3",
+  "originHash" : "886db623d4cb2afb0f2deb192dcbab9bf39688b6acdb0d43e1e5d7d5c1abbc76",
   "pins" : [
     {
       "identity" : "apns",
@@ -44,15 +44,6 @@
       "state" : {
         "revision" : "b402b8a434ca39f24d189289ab93fbee96664502",
         "version" : "4.9.0"
-      }
-    },
-    {
-      "identity" : "cmark-gfm",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/brokenhandsio/cmark-gfm.git",
-      "state" : {
-        "revision" : "e97450a77a40f12b4f88f95891621c3b5d8669de",
-        "version" : "2.1.0"
       }
     },
     {
@@ -128,21 +119,12 @@
       }
     },
     {
-      "identity" : "leaf-markdown",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor-community/leaf-markdown.git",
-      "state" : {
-        "revision" : "ecec9a93102139609aa5a84c51990fc305fbc1d6",
-        "version" : "3.0.1"
-      }
-    },
-    {
       "identity" : "markdown",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor-community/markdown.git",
+      "location" : "https://github.com/handya/markdown.git",
       "state" : {
-        "revision" : "f0cdf125947c06685ebaef633fd00ae5247a1cfc",
-        "version" : "0.7.1"
+        "branch" : "fix/xcode-16",
+        "revision" : "27b17a8ba10e7431a2bf82afa4a5b1f78ce6dfad"
       }
     },
     {
@@ -242,6 +224,15 @@
       "state" : {
         "revision" : "cd142fd2f64be2100422d658e7411e39489da985",
         "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "swift-cmark",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-cmark.git",
+      "state" : {
+        "revision" : "3ccff77b2dc5b96b77db3da0d68d28068593fa53",
+        "version" : "0.5.0"
       }
     },
     {
