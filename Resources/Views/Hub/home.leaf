@@ -91,6 +91,21 @@
           <!-- Account details -->
           <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4 pt-md-5 mt-n3 mt-md-0">
             <div class="ps-md-3 ps-lg-0 mt-md-2 py-md-4">
+            
+              #if(count(videos) > 0):
+              <h1 class="h2 pt-xl-1 pb-0">Your Talks</h1>
+              <p>We hope you had a fantastic time with us in Leeds, here are the videos from #(event.name).</p>
+              
+              #for(video in videos):
+                <div class="d-flex align-items-center mb-2 #if(isLast):mb-5#endif">
+                    <a href="#(video.videoUrl)" class="btn btn-video btn-icon" data-bs-toggle="video" aria-label="Play video">
+                        <i class="bx bx-play"></i>
+                    </a>
+                    <span class="fs-sm text-muted ps-3">#(video.title) by <img src="#awsImage(video.speakerImageUrl)" class="rounded-circle inline-speaker" alt="#(video.speakerName)"> <strong>#(video.speakerName)</strong></span>
+                </div>
+              #endfor
+              #endif
+              
               <h1 class="h2 pt-xl-1 pb-3">Ticket Details</h1>
 
 #if(false):
