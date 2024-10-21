@@ -1,6 +1,5 @@
 import APNS
 import Leaf
-import LeafMarkdown
 import Vapor
 
 public func configure(_ app: Application) async throws {
@@ -22,7 +21,7 @@ public func configure(_ app: Application) async throws {
     app.leaf.tags["copyright"] = CopyrightTag()
     app.leaf.tags["dateFormat"] = NowTag()
     app.leaf.tags["sessionEnd"] = SessionEndTag()
-    app.leaf.tags["markdown"] = Markdown()
+    app.leaf.tags["markdown"] = MarkdownTag()
     app.leaf.tags["awsImage"] = AwsImageTag()
     app.leaf.tags["safeCount"] = SafeCountTag()
     app.leaf.tags["hash"] = HashTag()

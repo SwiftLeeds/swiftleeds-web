@@ -17356,6 +17356,12 @@ img-comparison-slider:focus {
     object-fit: cover;
 }
 
+.inline-speaker {
+    height: 20px;
+    width: 20px;
+    object-fit: cover;
+}
+
 .nav-item i.bx {
     font-size: 24px;
 }

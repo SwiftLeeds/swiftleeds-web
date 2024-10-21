@@ -27,6 +27,8 @@
                     <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#slot-#(slot.id)">Cancel</a>
                     #elseif(slot.isFullyBooked):
                     <a href="#" class="btn btn-sm btn-secondary disabled">#if(session.maximumAttendance > 1):Fully Booked#else:Booked#endif</a>
+                    #elseif(slot.isInPast):
+                    <a href="#" class="btn btn-sm btn-secondary disabled">Missed</a>
                     #else:
                     <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#slot-#(slot.id)">Book</a>
                     #endif

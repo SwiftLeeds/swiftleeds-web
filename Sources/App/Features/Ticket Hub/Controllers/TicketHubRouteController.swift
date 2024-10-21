@@ -40,6 +40,23 @@ struct TicketHubRouteController: RouteCollection {
                 let titoPrefill = #"{"email": "\#(ticket.email)", "name": "\#(ticket.fullName)"}"#
                     .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
                 
+                let presentations = try await Presentation.query(on: req.db)
+                    .filter(\.$event.$id == currentEvent.requireID())
+                    .with(\.$speaker)
+                    .with(\.$secondSpeaker)
+                    .all()
+                
+                let videos: [TicketHubContext.VideoPresentation] = presentations.compactMap {
+                    guard let url = $0.videoURL, url != "", $0.videoVisibility != .unlisted else { return nil }
+                    
+                    return TicketHubContext.VideoPresentation(
+                        title: $0.title,
+                        speakerName: $0.speaker.name,
+                        speakerImageUrl: $0.speaker.profileImage,
+                        videoUrl: url
+                    )
+                }
+                
                 return try await req.view.render("Hub/home", TicketHubContext(
                     ticket: .init(
                         imageUrl: ticket.avatar_url?.absoluteString,
@@ -51,6 +68,7 @@ struct TicketHubRouteController: RouteCollection {
                         // TODO: return nil here if the user has a talk show ticket
                         purchaseTalkshowUrl: "https://ti.to/swiftleeds/swiftleeds-24/with/live-talkshow?prefill=\(titoPrefill)"
                     ),
+                    videos: videos,
                     userSessions: userSessions,
                     dropInSessions: dropInSessions,
                     groupSessions: groupSessions,
@@ -61,7 +79,8 @@ struct TicketHubRouteController: RouteCollection {
                         emailUrl: "mailto:info@swiftleeds.co.uk?subject=Refund Request&body=Ticket \(ticket.reference)"
                     ),
                     hasValidTicket: ticket.release?.metadata?.canBookDropInSession == true,
-                    prompt: req.query["prompt"]
+                    prompt: req.query["prompt"],
+                    event: currentEvent
                 ))
             }
             
@@ -190,6 +209,7 @@ struct TicketHubRouteController: RouteCollection {
                         duration: slot.duration,
                         isParticipant: slot.ticket.contains(slug),
                         isFullyBooked: slot.ticket.count == model.maxTicketsPerSlot,
+                        isInPast: slot.date < Date(),
                         participantCount: slot.ticket.count
                     )
                 }
@@ -252,6 +272,7 @@ struct TicketHubContext: Content {
         let duration: Int
         let isParticipant: Bool
         let isFullyBooked: Bool
+        let isInPast: Bool
         let participantCount: Int
     }
     
@@ -274,13 +295,22 @@ struct TicketHubContext: Content {
         let slots: [SessionSlot]
     }
     
+    struct VideoPresentation: Codable {
+        let title: String
+        let speakerName: String
+        let speakerImageUrl: String
+        let videoUrl: String
+    }
+    
     let ticket: Ticket
+    let videos: [VideoPresentation]
     let userSessions: [Session]
     let dropInSessions: [Session]
     let groupSessions: [Session]
     let refund: Refund
     let hasValidTicket: Bool
     let prompt: String?
+    let event: Event
 }
 
 extension Date {

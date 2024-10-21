@@ -58,7 +58,11 @@ function updateCountdown() {
     document.getElementById("countdown-min").innerHTML = minutes;
     document.getElementById("countdown-sec").innerHTML = seconds;
     
-    if (distance < 0) {
+    if (distance < -259200) { // 3 days, temporary solution
+        clearInterval(x); // Don't continue triggering if in the past
+        document.getElementById("countdown-container").innerHTML = "<div class=\"lead\">Conference Ended</div>";
+    }
+    else if (distance < 0) {
         clearInterval(x); // Don't continue triggering if in the past
         document.getElementById("countdown-container").innerHTML = "<div class=\"lead\">Conference Started</div>";
     }

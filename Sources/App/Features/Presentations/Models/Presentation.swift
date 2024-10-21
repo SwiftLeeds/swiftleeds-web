@@ -37,6 +37,9 @@ final class Presentation: Model, Content, @unchecked Sendable {
     @Field(key: "video_url")
     var videoURL: String?
     
+    @Field(key: "video_visibility")
+    var videoVisibility: VideoVisibility?
+    
     init() {}
     
     init(id: IDValue?, title: String, synopsis: String, isTBA: Bool, slidoURL: String?, videoURL: String?) {
@@ -46,5 +49,9 @@ final class Presentation: Model, Content, @unchecked Sendable {
         self.isTBA = isTBA
         self.slidoURL = slidoURL
         self.videoURL = videoURL
+    }
+    
+    enum VideoVisibility: String, Codable {
+        case unlisted, shared, attendee
     }
 }
