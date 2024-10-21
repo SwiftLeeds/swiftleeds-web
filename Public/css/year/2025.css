@@ -1,0 +1,38 @@
+/* Icon next to headers */
+
+.themed-header::before {
+    content: url('/img/year/2025/rocket.svg');
+    transform: scale(.8);
+    margin-left: -65px;
+    margin-top: -10px;
+    position: absolute;
+}
+
+.themed-header {
+    margin-left: 0px;
+}
+
+.themed-header#sponsors {
+    padding-left: 60px;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 992px) {
+    .text-lg-start.text-center .themed-header {
+        margin-left: 60px;
+    }
+}
+@media (min-width: 768px) {
+    .text-md-start.text-center .themed-header {
+        margin-left: 50px;
+    }
+}
+
+/* Icon above final call to action */
+
+#hook-precta::before {
+    content: url('/img/year/2025/launch.svg');
+    background: #f3f6ff;
+    display: block;
+    text-align: center;
+}
