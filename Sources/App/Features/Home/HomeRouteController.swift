@@ -165,14 +165,14 @@ struct HomeRouteController: RouteCollection {
     }
     
     private func getPhase(req: Request, event: Event) throws -> Phase {
-        // This is a little trick where we can set the data to anything older than 2015 to hide date and tickets
-        let isntHiddenEvent = event.date.timeIntervalSince1970 > 1420074000
-        let isPreviousEvent = event.date <= Date() && isntHiddenEvent
+        // This is a little trick where we can set the date to anything older than 2015 to hide date and tickets
+        let isHiddenEvent = event.date.timeIntervalSince1970 < 1420074000
+        let isPreviousEvent = event.date <= Date()
         
         // TODO: If event is current, and in the future, then we should check Tito to ensure we're not sold out.
         return Phase(
-            showSchedule: isPreviousEvent || event.showSchedule,
-            showTickets: !isPreviousEvent && isntHiddenEvent
+            showSchedule: (isPreviousEvent && !isHiddenEvent) || event.showSchedule,
+            showTickets: !isPreviousEvent && !isHiddenEvent
         )
     }
     
