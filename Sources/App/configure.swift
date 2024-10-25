@@ -27,6 +27,8 @@ public func configure(_ app: Application) async throws {
     app.leaf.tags["hash"] = HashTag()
     app.leaf.tags["dateFix"] = DateFixTag()
     app.leaf.tags["first"] = FirstTag()
+    app.leaf.tags["cast"] = CastTag()
+    app.leaf.tags["staticLoop"] = StaticLoopTag()
     app.views.use(.leaf)
     
     #if DEBUG

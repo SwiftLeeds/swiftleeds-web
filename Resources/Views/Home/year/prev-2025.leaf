@@ -1,0 +1,22 @@
+#extend("Home/_previous-conferences.leaf"):
+#export("year"):
+#(cast(eventYear, "int") - 1)
+#endexport
+
+#export("keyline"):
+In 2024 SwiftLeeds introduced it's popular evening talkshow, and carried the torch through 16 incredible talks. Watch this short video to check out how it all unfolded.
+#endexport
+
+#export("speakerCount"):
+27
+#endexport
+
+#export("images"):
+#staticLoop("https://live.staticflickr.com/65535/54076511648_098789d854_z.jpg https://live.staticflickr.com/65535/54075376717_32152fb017_z.jpg https://live.staticflickr.com/65535/54075371472_d90f1632df_z.jpg https://live.staticflickr.com/65535/54076511303_a07cfc8116_z.jpg https://live.staticflickr.com/65535/54076708485_22c5cdf5c5_z.jpg https://live.staticflickr.com/65535/54075375917_135ea72871_z.jpg https://live.staticflickr.com/65535/54075375337_bcedeef4b0_z.jpg https://live.staticflickr.com/65535/54076578304_9ec0c9957c_z.jpg https://live.staticflickr.com/65535/54076577899_ff6da72868_z.jpg"):
+  <!-- Item -->
+  <div class="swiper-slide">
+    <img src="[[VALUE]]" alt="Gallery image" class="rounded-3" loading="lazy">
+  </div>
+#endstaticLoop
+#endexport
+#endextend
