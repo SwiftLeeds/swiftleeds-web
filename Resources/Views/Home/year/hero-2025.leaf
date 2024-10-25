@@ -1,0 +1,36 @@
+<!-- Hero -->
+<!-- style="background-image: url(img/drop_bg.png);" -->
+<section class="bg-dark bg-size-cover bg-repeat-0 bg-position-center position-relative overflow-hidden py-5 mb-4" data-bs-theme="dark" style="background-image: url(/img/year/2025/hero.png);">
+    <div class="container position-relative pt-3 pt-lg-5">
+        
+        <div class="parallax mx-auto me-lg-0">
+            <div class="parallax-layer zindex-1" data-depth="0.1">
+                <img src="/img/year/2025/frame-earth.png" alt="Layer">
+            </div>
+            <div class="parallax-layer zindex-1" data-depth="0.3">
+                <img src="/img/year/2025/frame-mars.svg" alt="Layer">
+            </div>
+            <div class="parallax-layer zindex-1" data-depth="0.12">
+                <img src="/img/year/2025/frame-moon.png" alt="Layer">
+            </div>
+            <div class="parallax-layer zindex-1" data-depth="0.4">
+                <img src="/img/year/2025/frame-saturn.png" alt="Layer">
+            </div>
+            <div class="parallax-layer zindex-1" data-depth="0.5">
+                <img src="/img/year/2025/frame-uranus.png" alt="Layer">
+            </div>
+        
+        
+        <div class="col-xs-3 col-sm-offset-4 hero-container">
+            <div class="hero-top">
+                <span>-01:28:55</span>
+                <span>13th Oct 2025</span>
+            </div>
+            <br />
+            <div class="hero-bottom">
+                <span>A UNIQUE SWIFT CONFERENCE IN THE HEART OF LEEDS</span>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>

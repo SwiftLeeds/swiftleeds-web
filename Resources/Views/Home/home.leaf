@@ -6,6 +6,8 @@
         
         #if(eventYear == 2024):
             #extend("Home/year/hero-2024")
+        #elseif(eventYear == 2025):
+            #extend("Home/year/hero-2025")
         #else:
             #extend("Home/_hero")
         #endif
