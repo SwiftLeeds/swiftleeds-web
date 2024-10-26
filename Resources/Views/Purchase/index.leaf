@@ -1,0 +1,16 @@
+#extend("base"):
+    #export("title", "Thank you")
+    
+    #export("content"):
+        #extend("Shared/_header")
+        
+      <section class="bg-dark py-4">
+        <div class="container pb-2 py-lg-5">
+          <h1 class="text-center my-4 text-white">Thanks for buying a ticket to #(event.name)!</h1>
+        </div>
+      </section>
+      
+        #extend("Purchase/_hub")
+        #extend("Purchase/_social")
+    #endexport
+#endextend
