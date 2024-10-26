@@ -1,0 +1,140 @@
+/* Icon next to headers */
+
+.themed-header::before {
+    content: url('/img/year/2025/rocket.svg');
+    transform: scale(.8);
+    margin-left: -65px;
+    margin-top: -10px;
+    position: absolute;
+}
+
+.themed-header {
+    margin-left: 0px;
+}
+
+.themed-header#sponsors {
+    padding-left: 60px;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 992px) {
+    .text-lg-start.text-center .themed-header {
+        margin-left: 60px;
+    }
+}
+@media (min-width: 768px) {
+    .text-md-start.text-center .themed-header {
+        margin-left: 50px;
+    }
+}
+
+/* Icon above final call to action */
+
+#hook-precta::before {
+    content: url('/img/year/2025/launch.svg');
+    background: #f3f6ff;
+    display: block;
+    text-align: center;
+}
+
+/* Hero */
+
+.hero-container {
+    z-index: 2;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    right: 0;
+}
+
+.hero-container .hero-middle {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+.hero-container .hero-top {
+    background: #000000;
+    border-radius: 20px;
+    border: 5px solid #191919;
+    padding: 0.5rem;
+    
+    margin-bottom: 1vw;
+    text-align: center;
+    display: inline-block;
+    clear: both;
+    margin-top: 1rem;
+}
+
+.hero-container .hero-top span:nth-child(1) {
+    font: 3rem serif;
+    color: #B72815;
+    font-weight: 700;
+    display: block;
+}
+
+.hero-container .hero-top span:nth-child(2) {
+    font-size: 1rem;
+    color: white;
+}
+
+.hero-container .hero-bottom {
+    background: #000000;
+    border-radius: 10px;
+    border: 8px solid #191919;
+    padding: 0.5rem;
+    color: white;
+    font-size: 0.5rem;
+    font-weight: 600;
+    max-width: 470px;
+    text-align: center;
+    display: inline-block;
+}
+
+@media (min-width: 600px) {
+    .hero-container .hero-top span:nth-child(1) {
+        font: 7rem serif;
+        font-weight: 700;
+    }
+    
+    .hero-container .hero-top span:nth-child(2) {
+        font-size: 2.5rem;
+    }
+    
+    .hero-container .hero-top {
+        padding: 1rem;
+        border: 10px solid #191919;
+        border-radius: 10px;
+        margin-top: 3rem;
+    }
+    
+    .hero-container .hero-bottom {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+}
+
+@media (min-width: 920px) {
+    .hero-container .hero-top span:nth-child(1) {
+        font: 9rem serif;
+        font-weight: 700;
+    }
+    
+    .hero-container .hero-top span:nth-child(2) {
+        font-size: 3rem;
+    }
+    
+    .hero-container .hero-top {
+        padding: 2rem;
+        border: 20px solid #191919;
+        border-radius: 20px;
+        margin-top: 1.5rem;
+    }
+    
+    .hero-container .hero-bottom {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+}

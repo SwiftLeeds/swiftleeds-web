@@ -4,8 +4,8 @@
 
       <!-- Text -->
       <div class="col-md-6 col-xl-5 text-center text-md-start mb-5 mb-md-0">
-        <h2 class="h1 pb-2 pb-lg-3 themed-header">Throwback to 2023</h2>
-        <p class="pb-2 mb-4 mb-lg-5">In 2023 SwiftLeeds increased to two days, introduced drop-in sessions and live streamed the entire event. Watch this short video to check out how it all unfolded.</p>
+        <h2 class="h1 pb-2 pb-lg-3 themed-header">Throwback to #import("year")</h2>
+        <p class="pb-2 mb-4 mb-lg-5">#import("keyline")</p>
         <hr>
         <div class="d-flex justify-content-center justify-content-md-between pt-4 pt-lg-5">
           <div class="mx-3 mx-md-0">
@@ -14,7 +14,7 @@
             <p>🇬🇧 🇩🇪 🇫🇷 🇮🇳 🇺🇸 🇮🇹 🇸🇳 🇰🇷 🇨🇳 🇿🇦 🇵🇰</p>
           </div>
           <div class="mx-3 mx-md-0">
-            <div class="display-3 text-dark mb-1">22</div>
+            <div class="display-3 text-dark mb-1">#import("speakerCount")</div>
             <span>Expert speakers and hosts</span>
           </div>
         </div>
@@ -24,7 +24,7 @@
       <div class="col-md-6 offset-xl-1">
         <div class="position-relative overflow-hidden rounded-3">
             <span class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-35"></span>
-            <img src="/img/IMG_0169.jpg" alt="SwiftLeeds Attendees from 2023">
+            <img src="/img/year/#import("year")/group.jpg" alt="SwiftLeeds Attendees from #import("year")">
             <div class="position-absolute top-0 start-0 w-100 h-100 zindex-5 d-flex align-items-center justify-content-center">
               <a href="https://www.youtube.com/watch?v=cI-g6H2EeWU" class="btn btn-video btn-icon bg-white btn-xl stretched-link" data-bs-toggle="video">
                 <i class="bx bx-play"></i>
@@ -68,46 +68,7 @@
         }
       }'>
         <div class="swiper-wrapper">
-
-          <!-- Item -->
-          <div class="swiper-slide">
-            <img src="/img/gallery/swift-leeds-2023-jma-photography-9.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
-          </div>
-
-          <!-- Item -->
-          <div class="swiper-slide">
-            <img src="/img/gallery/swift-leeds-2023-jma-photography-16.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
-          </div>
-
-          <!-- Item -->
-          <div class="swiper-slide">
-            <img src="/img/gallery/swift-leeds-2023-jma-photography-52.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
-          </div>
-          
-          <!-- Item -->
-          <div class="swiper-slide">
-            <img src="/img/gallery/swift-leeds-2023-jma-photography-53.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
-          </div>
-          
-          <!-- Item -->
-          <div class="swiper-slide">
-            <img src="/img/gallery/swift-leeds-2023-jma-photography-59.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
-          </div>
-
-          <!-- Item -->
-          <div class="swiper-slide">
-            <img src="/img/gallery/swift-leeds-2023-jma-photography-65.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
-          </div>
-
-          <!-- Item -->
-          <div class="swiper-slide">
-            <img src="/img/gallery/swift-leeds-2023-jma-photography-69.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
-          </div>
-          
-          <!-- Item -->
-          <div class="swiper-slide">
-            <img src="/img/gallery/swift-leeds-2023-jma-photography-75.jpg" alt="Gallery image" class="rounded-3" loading="lazy">
-          </div>
+            #import("images")
         </div>
       </div>
     </div>

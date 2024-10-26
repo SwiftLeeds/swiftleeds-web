@@ -165,14 +165,14 @@ struct HomeRouteController: RouteCollection {
     }
     
     private func getPhase(req: Request, event: Event) throws -> Phase {
-        let isPreviousEvent = event.date <= Date() &&
-            // This is a little trick where we can set the data to anything older than 2015 to hide date and tickets
-            event.date.timeIntervalSince1970 > 1420074000
+        // This is a little trick where we can set the date to anything older than 2015 to hide date and tickets
+        let isHiddenEvent = event.date.timeIntervalSince1970 < 1420074000
+        let isPreviousEvent = event.date <= Date()
         
         // TODO: If event is current, and in the future, then we should check Tito to ensure we're not sold out.
         return Phase(
-            showSchedule: isPreviousEvent || event.showSchedule,
-            showTickets: !isPreviousEvent
+            showSchedule: (isPreviousEvent && !isHiddenEvent) || event.showSchedule,
+            showTickets: !isPreviousEvent && !isHiddenEvent
         )
     }
     
@@ -240,11 +240,11 @@ struct PhaseContext: Codable {
     let currentTicketPrice: String
     let showAddToCalendar: Bool
     let showSchedule: Bool
-    let titoStub: String
+    let titoStub: String?
     
     init(phase: Phase, event: Event) {
         ticketsEnabled = phase.showTickets
-        titoStub = "swiftleeds-24" // TODO: load this from event in database
+        titoStub = event.titoEvent
         currentTicketPrice = "£180" // TODO: need to load from tito
         showAddToCalendar = event.isCurrent && event.date.timeIntervalSince1970 > 1420074000 // TODO: make date optional in db and do nil check here
         showSchedule = phase.showSchedule

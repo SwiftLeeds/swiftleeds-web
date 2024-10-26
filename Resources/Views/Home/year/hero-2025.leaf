@@ -1,0 +1,80 @@
+<!-- Hero -->
+<!-- style="background-image: url(img/drop_bg.png);" -->
+<section class="bg-dark bg-size-cover bg-repeat-0 bg-position-center position-relative overflow-hidden py-5 mb-4" data-bs-theme="dark" style="background-image: url(/img/year/2025/hero.png);">
+    <div class="container position-relative pt-3 pt-lg-5">
+        
+        <div class="parallax mx-auto me-lg-0">
+            <div class="parallax-layer zindex-1" data-depth="0.1">
+                <img src="/img/year/2025/frame-earth.png" alt="Layer">
+            </div>
+            <div class="parallax-layer zindex-1" data-depth="0.3">
+                <img src="/img/year/2025/frame-mars.svg" alt="Layer">
+            </div>
+            <div class="parallax-layer zindex-1" data-depth="0.12">
+                <img src="/img/year/2025/frame-moon.png" alt="Layer">
+            </div>
+            <div class="parallax-layer zindex-1" data-depth="0.4">
+                <img src="/img/year/2025/frame-saturn.png" alt="Layer">
+            </div>
+            <div class="parallax-layer zindex-1" data-depth="0.5">
+                <img src="/img/year/2025/frame-uranus.png" alt="Layer">
+            </div>
+        
+        
+        <div class="col-xs-3 col-sm-offset-4 hero-container">
+        <div class="hero-middle">
+            <div class="hero-top">
+                <span id="countdown">-01:28:55</span>
+                <span>#if(eventDate):#(eventDate) #(eventYear)#else:Coming late #(eventYear)#endif</span>
+            </div>
+            <br />
+            <div class="hero-bottom">
+                <span>A UNIQUE SWIFT CONFERENCE IN THE HEART OF LEEDS</span>
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// The date is hard coded to 8:30 since event.date does not include start time
+var countDownDate = new Date("#date(event.date, "MMM d, yyyy") 8:30:00").getTime();
+
+function zeroPad(num, places) {
+  var zero = places - num.toString().length + 1;
+  return Array(+(zero > 0 && zero)).join("0") + num;
+}
+
+function updateCountdown() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    if (days > 0) {
+        document.getElementById("countdown").innerHTML = "-" + zeroPad(days) + ":" + zeroPad(hours, 2) + ":" + zeroPad(minutes, 2) + ":" + zeroPad(seconds, 2);
+    } else {
+        document.getElementById("countdown").innerHTML = "-" + zeroPad(hours, 2) + ":" + zeroPad(minutes, 2) + ":" + zeroPad(seconds, 2);
+    }
+    
+    if (new Date(countDownDate).getYear() <= 2015) {
+        clearInterval(x); // Don't continue triggering if in the past
+        document.getElementById("countdown").innerHTML = "Coming Soon";
+    }
+    else if (distance <= -259200) { // 3 days, temporary solution
+        clearInterval(x); // Don't continue triggering if in the past
+        document.getElementById("countdown").innerHTML = "Ended";
+    }
+    else if (distance < 0) {
+        clearInterval(x); // Don't continue triggering if in the past
+        document.getElementById("countdown").innerHTML = "Started";
+    }
+}
+
+var x = setInterval(updateCountdown, 1000); // Every Second
+updateCountdown(); // Initial Load
+</script>

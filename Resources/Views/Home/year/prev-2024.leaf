@@ -1,0 +1,22 @@
+#extend("Home/_previous-conferences.leaf"):
+#export("year"):
+#(cast(eventYear, "int") - 1)
+#endexport
+
+#export("keyline"):
+In 2023 SwiftLeeds increased to two days, introduced drop-in sessions and live streamed the entire event. Watch this short video to check out how it all unfolded.
+#endexport
+
+#export("speakerCount"):
+22
+#endexport
+
+#export("images"):
+#staticLoop("/img/gallery/swift-leeds-2023-jma-photography-9.jpg /img/gallery/swift-leeds-2023-jma-photography-16.jpg /img/gallery/swift-leeds-2023-jma-photography-52.jpg /img/gallery/swift-leeds-2023-jma-photography-53.jpg /img/gallery/swift-leeds-2023-jma-photography-59.jpg /img/gallery/swift-leeds-2023-jma-photography-65.jpg /img/gallery/swift-leeds-2023-jma-photography-69.jpg /img/gallery/swift-leeds-2023-jma-photography-75.jpg"):
+  <!-- Item -->
+  <div class="swiper-slide">
+    <img src="[[VALUE]]" alt="Gallery image" class="rounded-3" loading="lazy">
+  </div>
+#endstaticLoop
+#endexport
+#endextend

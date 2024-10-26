@@ -6,6 +6,8 @@
         
         #if(eventYear == 2024):
             #extend("Home/year/hero-2024")
+        #elseif(eventYear == 2025):
+            #extend("Home/year/hero-2025")
         #else:
             #extend("Home/_hero")
         #endif
@@ -22,8 +24,10 @@
             #extend("Home/_cfp")
         #endif
         
-        #if(event.isCurrent):
-            #extend("Home/_previous-conferences")
+        #if(eventYear == 2024):
+            #extend("Home/year/prev-2024")
+        #elseif(eventYear == 2025):
+            #extend("Home/year/prev-2025")
         #endif
         
         #if(event.location == "The Playhouse, Leeds"):
