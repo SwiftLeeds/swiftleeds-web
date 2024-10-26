@@ -23,6 +23,22 @@ func routes(_ app: Application) throws {
     app.get("conduct") { req -> View in
         return try await req.view.render("Secondary/conduct", HomeContext())
     }
+    
+    app.get("robots.txt") { req -> String in
+        let disallowedPaths = [
+            "/purchase", // Not intended for direct access, only redirect from tito
+            "/admin", // Not intended for normal users
+            "/api/", // Not intended for SEO
+            "/login" // Not intended for normal users (only used for admin)
+        ]
+        .map { "Disallow: " + $0 }
+        .joined(separator: "\n")
+        
+        return """
+        User-agent: *
+        \(disallowedPaths)
+        """
+    }
 
     try app.routes.register(collection: AuthController()) // TODO: Split this out into web/api/admin
     try app.routes.register(collection: PushController())
