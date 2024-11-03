@@ -1,7 +1,7 @@
 import Fluent
 import Vapor
 
-struct ScheduleAPIControllerV2: RouteCollection {
+struct ScheduleAPIController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         routes.get(use: onGet)
     }
@@ -12,7 +12,7 @@ struct ScheduleAPIControllerV2: RouteCollection {
             .all()
 
         guard let event = events.first(where: { $0.shouldBeReturned(by: request) }) else {
-            throw ScheduleAPIControllerV2.ScheduleAPIError.notFound
+            throw ScheduleAPIController.ScheduleAPIError.notFound
         }
 
         let slots = try await Slot.query(on: request.db)
@@ -26,8 +26,8 @@ struct ScheduleAPIControllerV2: RouteCollection {
             .all()
             .filter { $0.day?.event.id == event.id }
 
-        guard let schedule = ScheduleTransformerV2.transform(event: event, events: events, slots: event.showSchedule ? slots : []) else {
-            throw ScheduleAPIControllerV2.ScheduleAPIError.transformFailure
+        guard let schedule = ScheduleTransformer.transform(event: event, events: events, slots: event.showSchedule ? slots : []) else {
+            throw ScheduleAPIController.ScheduleAPIError.transformFailure
         }
 
         let response = GenericResponse(
@@ -38,7 +38,7 @@ struct ScheduleAPIControllerV2: RouteCollection {
     }
 }
 
-extension ScheduleAPIControllerV2 {
+extension ScheduleAPIController {
     enum ScheduleAPIError: Error {
         case notFound
         case transformFailure

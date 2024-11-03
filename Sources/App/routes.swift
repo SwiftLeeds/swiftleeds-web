@@ -50,7 +50,7 @@ func routes(_ app: Application) throws {
     
     let apiRoutes = app.grouped("api", "v1")
     try apiRoutes.grouped("sponsors").register(collection: SponsorAPIController())
-    try apiRoutes.grouped("schedule").register(collection: ScheduleAPIControllerV2())
+    try apiRoutes.grouped("schedule").register(collection: ScheduleAPIController())
     try apiRoutes.grouped("local").register(collection: LocalAPIController())
     try apiRoutes.grouped("tickets").register(collection: TicketsAPIController())
     try apiRoutes.grouped("checkin").register(collection: CheckInAPIController())

@@ -1,16 +1,16 @@
 import Foundation
 
-enum SlotTransformerV2: Transformer {
-    static func transform(_ entity: Slot?) -> SlotResponseV2? {
+enum SlotTransformer: Transformer {
+    static func transform(_ entity: Slot?) -> SlotResponse? {
         guard let entity = entity, let id = entity.id else {
             return nil
         }
 
-        let presentation: PresentationResponseV2?
+        let presentation: PresentationResponse?
         let activity: ActivityResponse?
 
         if let presentationEntity = entity.$presentation.value {
-            presentation = PresentationTransformerV2.transform(presentationEntity)
+            presentation = PresentationTransformer.transform(presentationEntity)
         } else {
             presentation = nil
         }
