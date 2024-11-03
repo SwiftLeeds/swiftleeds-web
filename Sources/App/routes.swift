@@ -54,6 +54,9 @@ func routes(_ app: Application) throws {
     try apiRoutes.grouped("local").register(collection: LocalAPIController())
     try apiRoutes.grouped("tickets").register(collection: TicketsAPIController())
     try apiRoutes.grouped("checkin").register(collection: CheckInAPIController())
+    
+    let apiV2Routes = app.grouped("api", "v2")
+    try apiV2Routes.grouped("schedule").register(collection: ScheduleAPIControllerV2())
 
     // MARK: - Admin Routes
     let adminRoutes = app.grouped("admin").grouped(AdminMiddleware())
