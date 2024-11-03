@@ -24,7 +24,7 @@ struct HomeRouteController: RouteCollection {
         
         // We shuffle the team members array on each load request in order to remove any bias in the array.
         // All volunteers are shown equally.
-        let context = try await TeamContext(
+        let context = TeamContext(
             teamMembers: teamMembers.shuffled(),
             event: EventContext(event: event)
         )
@@ -73,6 +73,13 @@ struct HomeRouteController: RouteCollection {
         
         try await event.$days.load(on: req.db)
         
+        let eventContext = EventContext(event: event)
+        
+        // Add some protection against unannounced years
+        if eventContext.isHidden && req.user?.role != .admin {
+            throw Abort(.notFound, reason: "Unable to find event")
+        }
+        
         let speakers = try await getSpeakers(req: req, event: event)
         let dropInSessions = try await getDropInSessions(req: req, event: event)
         let slots = try await getSlots(req: req, event: event)
@@ -101,7 +108,7 @@ struct HomeRouteController: RouteCollection {
                 $0.date < $1.date
             })
         
-        return try await HomeContext(
+        return HomeContext(
             speakers: speakers,
             platinumSponsors: platinumSponsors,
             silverSponsors: silverSponsors,
@@ -109,7 +116,7 @@ struct HomeRouteController: RouteCollection {
             dropInSessions: dropInSessions,
             schedule: phase.showSchedule ? schedule : [],
             phase: PhaseContext(phase: phase, event: event),
-            event: EventContext(event: event)
+            event: eventContext
         )
     }
     

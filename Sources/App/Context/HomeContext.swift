@@ -35,7 +35,7 @@ struct EventContext: Codable {
     let isPast: Bool
     let isHidden: Bool
     
-    init(event: Event) async throws {
+    init(event: Event) {
         self.name = event.name
         self.event = event.name.components(separatedBy: " ").first ?? "SwiftLeeds"
         self.year = event.name.components(separatedBy: " ").last ?? ""
@@ -51,8 +51,8 @@ struct EventContext: Codable {
         self.location = event.location
         
         self.isCurrent = event.isCurrent
-        self.isFuture = event.date > Date()
-        self.isPast = event.date <= Date()
+        self.isFuture = event.date > Date() || !isKnownDate
+        self.isPast = event.date <= Date() && isKnownDate
         self.isHidden = isKnownDate != true
     }
     
