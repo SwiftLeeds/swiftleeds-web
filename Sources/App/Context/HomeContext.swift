@@ -51,7 +51,7 @@ struct EventContext: Codable {
         self.location = event.location
         
         self.isCurrent = event.isCurrent
-        self.isFuture = event.date > Date() || !isKnownDate
+        self.isFuture = event.date > Date() && !isKnownDate
         self.isPast = event.date <= Date() && isKnownDate
         self.isHidden = isKnownDate != true
     }
