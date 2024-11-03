@@ -45,6 +45,7 @@ func routes(_ app: Application) throws {
     try app.routes.register(collection: TicketLoginController())
     try app.routes.register(collection: TicketHubRouteController())
     try app.routes.register(collection: PurchaseRouteController())
+    try app.routes.register(collection: EngageRouteController())
     
     // MARK: - API Routes
     
