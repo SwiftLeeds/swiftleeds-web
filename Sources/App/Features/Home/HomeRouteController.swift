@@ -22,6 +22,8 @@ struct HomeRouteController: RouteCollection {
             throw Abort(.notFound, reason: "Unable to find event")
         }
         
+        try await event.$days.load(on: req.db)
+        
         // We shuffle the team members array on each load request in order to remove any bias in the array.
         // All volunteers are shown equally.
         let context = TeamContext(

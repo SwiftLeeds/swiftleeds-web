@@ -247,7 +247,7 @@
                             </button>
                             <script type="application/javascript">
                                 const config = {
-                                    name: "SwiftLeeds Drop-in Session",
+                                    name: "#(event.event) Drop-in Session",
                                     description: "#(session.title)",
                                     startDate: "#dateFix(slot.date, "yyyy-MM-dd")",
                                     startTime: "#dateFix(slot.date, "HH:mm")",

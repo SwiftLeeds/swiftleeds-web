@@ -8,7 +8,7 @@ let teamMembers: [TeamContext.TeamMember] = [
     ),
     .init(
         name: "James Sherlock",
-        role: "Visual and Technical Production",
+        role: "Production Team Lead",
         twitter: "https://twitter.com/JamesSherlouk",
         linkedin: "https://www.linkedin.com/in/jamessherlockdeveloper/",
         imageURL: "/img/team/sherlock.jpg"
@@ -29,7 +29,7 @@ let teamMembers: [TeamContext.TeamMember] = [
     ),
     .init(
         name: "Noam Efergan",
-        role: "Social Media",
+        role: "Camera Operator and Social Media",
         twitter: "https://twitter.com/No_Wham",
         linkedin: "https://www.linkedin.com/in/noamefergan/",
         imageURL: "/img/team/noam.jpg"
