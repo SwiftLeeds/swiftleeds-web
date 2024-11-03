@@ -3,7 +3,7 @@
     <div class="container py-2 py-md-4 py-lg-5">
       <div class="row py-xl-3">
         <div class="col-xl-4 col-lg-5 offset-xl-1 order-lg-2 mb-4">
-          <h2 class="h1 text-light text-center text-sm-start pb-4 mb-0 mb-lg-3">Join us for SwiftLeeds #(eventYear)!</h2>
+          <h2 class="h1 text-light text-center text-sm-start pb-4 mb-0 mb-lg-3">Join us for #(event.name)!</h2>
           <div class="d-flex align-items-center pb-4">
             <div class="bg-white rounded-circle text-primary flex-shrink-0 p-3" style="width: 60px; height: 60px;">
               <i class="bx bxs-graduation" style="font-size: 26px; padding-left: 3px;"></i>
@@ -35,7 +35,7 @@
               <div class="px-md-4 position-relative zindex-5">
                 <div class="d-sm-flex align-items-start justify-content-between">
                   <div class="text-center text-sm-start me-sm-4">
-                    <div class="lead text-primary fw-semibold text-uppercase mb-2">#(eventDate)</div>
+                    <div class="lead text-primary fw-semibold text-uppercase mb-2">#(event.dateFormatted)</div>
                     <h3 class="h1">#(event.name)</h3>
                   </div>
                   <div class="d-table bg-white rounded-3 p-4 flex-shrink-0 mx-auto mx-sm-0">

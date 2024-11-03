@@ -1,6 +1,6 @@
 #extend("Home/_previous-conferences.leaf"):
 #export("year"):
-#(cast(eventYear, "int") - 1)
+#(cast(event.year, "int") - 1)
 #endexport
 
 #export("keyline"):

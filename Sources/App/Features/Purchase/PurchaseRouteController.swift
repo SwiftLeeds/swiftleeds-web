@@ -8,6 +8,6 @@ struct PurchaseRouteController: RouteCollection {
     
     @Sendable func get(req: Request) async throws -> View {
         let event = try await Event.getCurrent(on: req.db)
-        return try await req.view.render("Purchase/index", HomeContext(event: event))
+        return try await req.view.render("Purchase/index", HomeContext(event: EventContext(event: event)))
     }
 }

@@ -4,9 +4,9 @@
     #export("content"):
         #extend("Shared/_header")
         
-        #if(eventYear == 2024):
+        #if(event.year == 2024):
             #extend("Home/year/hero-2024")
-        #elseif(eventYear == 2025):
+        #elseif(event.year == 2025):
             #extend("Home/year/hero-2025")
         #else:
             #extend("Home/_hero")
@@ -14,7 +14,7 @@
         
         #extend("Home/_info")
         
-        #if(eventYear >= 2023):
+        #if(event.year >= 2023):
             #extend("Home/_drop-in-sessions")
         #endif
         
@@ -24,9 +24,9 @@
             #extend("Home/_cfp")
         #endif
         
-        #if(eventYear == 2024):
+        #if(event.year == 2024):
             #extend("Home/year/prev-2024")
-        #elseif(eventYear == 2025):
+        #elseif(event.year == 2025):
             #extend("Home/year/prev-2025")
         #endif
         

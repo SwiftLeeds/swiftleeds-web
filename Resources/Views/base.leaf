@@ -14,8 +14,8 @@
     <script src="/js/theme-switcher.js"></script>
     <link rel="stylesheet" media="screen" href="/css/theme.css">
     
-    #if(eventYear):
-    <link rel="stylesheet" media="screen" href="/css/year/#(eventYear).css">
+    #if(event):
+    <link rel="stylesheet" media="screen" href="/css/year/#(event.year).css">
     #endif
     
     #import("styles")
@@ -98,10 +98,10 @@
       })()
     </script>
     
-    #if(event):
+    #if(event.date):
     <script type="application/javascript">
         const config = {
-            name: "SwiftLeeds #(eventYear)",
+            name: "#(event.name)",
             description: "Join us for this year's SwiftLeeds!",
             startDate: "#date(event.date, "yyyy-MM-dd")",
             startTime: "08:30",

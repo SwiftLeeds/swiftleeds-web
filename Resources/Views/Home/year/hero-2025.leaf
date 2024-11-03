@@ -24,8 +24,8 @@
         <div class="col-xs-3 col-sm-offset-4 hero-container">
         <div class="hero-middle">
             <div class="hero-top">
-                <span id="countdown">-01:28:55</span>
-                <span>#if(eventDate):#(eventDate) #(eventYear)#else:Coming late #(eventYear)#endif</span>
+                #if(event.date):<span id="countdown">-01:28:55</span>#endif
+                <span>#if(event.date):#(event.dateFormatted) #(event.year)#else:Coming late #(event.year)#endif</span>
             </div>
             <br />
             <div class="hero-bottom">
@@ -37,6 +37,7 @@
     </div>
 </section>
 
+#if(event.date):
 <script>
 // The date is hard coded to 8:30 since event.date does not include start time
 var countDownDate = new Date("#date(event.date, "MMM d, yyyy") 8:30:00").getTime();
@@ -61,11 +62,7 @@ function updateCountdown() {
         document.getElementById("countdown").innerHTML = "-" + zeroPad(hours, 2) + ":" + zeroPad(minutes, 2) + ":" + zeroPad(seconds, 2);
     }
     
-    if (new Date(countDownDate).getYear() <= 2015) {
-        clearInterval(x); // Don't continue triggering if in the past
-        document.getElementById("countdown").innerHTML = "Coming Soon";
-    }
-    else if (distance <= -259200) { // 3 days, temporary solution
+    if (distance <= -259200) { // 3 days, temporary solution
         clearInterval(x); // Don't continue triggering if in the past
         document.getElementById("countdown").innerHTML = "Ended";
     }
@@ -78,3 +75,4 @@ function updateCountdown() {
 var x = setInterval(updateCountdown, 1000); // Every Second
 updateCountdown(); // Initial Load
 </script>
+#endif
