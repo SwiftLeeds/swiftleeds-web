@@ -26,7 +26,7 @@ struct ScheduleAPIControllerV2: RouteCollection {
             .all()
             .filter { $0.day?.event.id == event.id }
 
-        guard let schedule = ScheduleTransformerV2.transform(event: event, events: events, slots: slots) else {
+        guard let schedule = ScheduleTransformerV2.transform(event: event, events: events, slots: event.showSchedule ? slots : []) else {
             throw ScheduleAPIControllerV2.ScheduleAPIError.transformFailure
         }
 

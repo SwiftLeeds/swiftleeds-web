@@ -5,7 +5,9 @@ enum ScheduleTransformerV2 {
     static func transform(event: Event, events: [Event], slots: [Slot]) -> ScheduleResponseV2? {
         guard let eventResponse = EventTransformer.transform(event) else { return nil }
 
-        let eventsResponse = events.compactMap { EventTransformer.transform($0)}
+        let eventsResponse = events
+            .filter { $0.date.timeIntervalSince1970 > 1420074000 } // 2015 date is used to hide unannounced events
+            .compactMap { EventTransformer.transform($0) }
 
         return ScheduleResponseV2(
             event: eventResponse,
