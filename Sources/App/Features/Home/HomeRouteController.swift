@@ -22,13 +22,13 @@ struct HomeRouteController: RouteCollection {
             throw Abort(.notFound, reason: "Unable to find event")
         }
         
+        try await event.$days.load(on: req.db)
+        
         // We shuffle the team members array on each load request in order to remove any bias in the array.
         // All volunteers are shown equally.
         let context = TeamContext(
             teamMembers: teamMembers.shuffled(),
-            event: event,
-            eventDate: buildConferenceDateString(for: event),
-            eventYear: event.name.components(separatedBy: " ").last
+            event: EventContext(event: event)
         )
         
         return try await req.view.render("Team/index", context)
@@ -62,9 +62,7 @@ struct HomeRouteController: RouteCollection {
             stage: stage,
             faqs: callForPaperFAQs,
             phase: context.phase,
-            event: context.event,
-            eventDate: context.eventDate,
-            eventYear: context.eventYear
+            event: context.event
         )
         
         return try await req.view.render("CFP/index", cfpContext)
@@ -76,6 +74,13 @@ struct HomeRouteController: RouteCollection {
         }
         
         try await event.$days.load(on: req.db)
+        
+        let eventContext = EventContext(event: event)
+        
+        // Add some protection against unannounced years
+        if eventContext.isHidden && req.user?.role != .admin {
+            throw Abort(.notFound, reason: "Unable to find event")
+        }
         
         let speakers = try await getSpeakers(req: req, event: event)
         let dropInSessions = try await getDropInSessions(req: req, event: event)
@@ -113,9 +118,7 @@ struct HomeRouteController: RouteCollection {
             dropInSessions: dropInSessions,
             schedule: phase.showSchedule ? schedule : [],
             phase: PhaseContext(phase: phase, event: event),
-            event: event,
-            eventDate: buildConferenceDateString(for: event),
-            eventYear: event.name.components(separatedBy: " ").last
+            event: eventContext
         )
     }
     
@@ -184,49 +187,6 @@ struct HomeRouteController: RouteCollection {
         }
         
         return try await Event.getCurrent(on: req.db)
-    }
-    
-    private func getNumberOfDays(for event: Event) -> Int {
-        // TODO: move this logic into the database allowing a start and end date to be provided.
-        
-        guard let yearString = event.name.components(separatedBy: " ").last, let year = Int(yearString) else {
-            return 1
-        }
-        
-        // two days since 2023
-        return year >= 2023 ? 2 : 1
-    }
-    
-    func buildConferenceDateString(for event: Event) -> String? {
-        let date = event.date
-        
-        // This is a slightly unintuitive capability which means if you set the date earlier than 2015 it will hide the date
-        // This is for when we have yet to lock in the date.
-        // TODO: make event.date optional in database
-        guard date.timeIntervalSince1970 > 1420074000 else {
-            return nil
-        }
-        
-        let days = getNumberOfDays(for: event)
-        
-        let formatter = DateFormatter()
-        formatter.locale = .init(identifier: "en_US_POSIX")
-        
-        if days == 1 {
-            formatter.dateFormat = "d MMM"
-            return formatter.string(from: date).uppercased()
-        } else {
-            // Month
-            formatter.dateFormat = "MMM"
-            let month = formatter.string(from: date)
-            
-            // Day
-            formatter.dateFormat = "d"
-            let lowerDay = Int(formatter.string(from: date)) ?? 0
-            let upperDay = lowerDay + (days - 1)
-            
-            return "\(lowerDay)-\(upperDay) \(month)".uppercased()
-        }
     }
 }
 

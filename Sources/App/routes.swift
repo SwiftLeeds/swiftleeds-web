@@ -23,20 +23,40 @@ func routes(_ app: Application) throws {
     app.get("conduct") { req -> View in
         return try await req.view.render("Secondary/conduct", HomeContext())
     }
+    
+    app.get("robots.txt") { req -> String in
+        let disallowedPaths = [
+            "/purchase", // Not intended for direct access, only redirect from tito
+            "/admin", // Not intended for normal users
+            "/api/", // Not intended for SEO
+            "/login" // Not intended for normal users (only used for admin)
+        ]
+        .map { "Disallow: " + $0 }
+        .joined(separator: "\n")
+        
+        return """
+        User-agent: *
+        \(disallowedPaths)
+        """
+    }
 
     try app.routes.register(collection: AuthController()) // TODO: Split this out into web/api/admin
     try app.routes.register(collection: PushController())
     try app.routes.register(collection: TicketLoginController())
     try app.routes.register(collection: TicketHubRouteController())
+    try app.routes.register(collection: PurchaseRouteController())
     
     // MARK: - API Routes
     
     let apiRoutes = app.grouped("api", "v1")
     try apiRoutes.grouped("sponsors").register(collection: SponsorAPIController())
-    try apiRoutes.grouped("schedule").register(collection: ScheduleAPIControllerV2())
+    try apiRoutes.grouped("schedule").register(collection: ScheduleAPIController())
     try apiRoutes.grouped("local").register(collection: LocalAPIController())
     try apiRoutes.grouped("tickets").register(collection: TicketsAPIController())
     try apiRoutes.grouped("checkin").register(collection: CheckInAPIController())
+    
+    let apiV2Routes = app.grouped("api", "v2")
+    try apiV2Routes.grouped("schedule").register(collection: ScheduleAPIControllerV2())
 
     // MARK: - Admin Routes
     let adminRoutes = app.grouped("admin").grouped(AdminMiddleware())

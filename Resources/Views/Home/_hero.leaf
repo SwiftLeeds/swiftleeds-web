@@ -6,8 +6,8 @@
 
         <!-- Text -->
         <div class="col-xl-5 col-md-6 pt-lg-5 text-center text-md-start mb-4 mb-md-0">
-          <h2 class="h3 text-primary">#if(eventDate):#(eventDate) #endif#(eventYear)</h2>
-          <h1 class="display-4 pb-2 pb-sm-3">A <span class="text-primary">Unique</span>#if(eventYear >= 2023): 2 Day#endif Swift Conference in the Heart of Leeds</h1>
+          <h2 class="h3 text-primary">#if(event.date):#(event.dateFormatted) #endif#(event.year)</h2>
+          <h1 class="display-4 pb-2 pb-sm-3">A <span class="text-primary">Unique</span>#if(event.year >= 2023): 2 Day#endif Swift Conference in the Heart of Leeds</h1>
           
           <div class="d-flex justify-content-center justify-content-lg-start text-start mb-5">
             <i class="bx bx-map fs-4 text-primary me-2"></i>

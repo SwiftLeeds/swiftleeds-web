@@ -21,10 +21,14 @@ enum SlotTransformer: Transformer {
             activity = nil
         }
 
+        if activity == nil && presentation == nil {
+            return nil
+        }
+
         return .init(
             id: id,
             startTime: entity.startDate,
-            date: entity.date ?? Date(),
+            date: entity.date,
             duration: entity.presentation?.duration ?? entity.activity?.duration ?? entity.duration ?? 0,
             presentation: presentation,
             activity: activity

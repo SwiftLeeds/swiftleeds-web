@@ -1,0 +1,83 @@
+<section class="container text-center py-5 mb-2 mb-md-4 mb-lg-5">
+        <h2 class="h1 mb-4">We Have Social Networks</h2>
+        <p class="fs-lg text-muted pb-2 mb-5">Follow us and keep up to date with the latest announcements!</p>
+        <div class="swiper" data-swiper-options='{
+          "slidesPerView": 2,
+          "pagination": {
+            "el": ".swiper-pagination",
+            "clickable": true
+          },
+          "breakpoints": {
+            "500": {
+              "slidesPerView": 2
+            },
+            "650": {
+              "slidesPerView": 3
+            },
+            "900": {
+              "slidesPerView": 4
+            },
+            "1100": {
+              "slidesPerView": 4
+            }
+          }
+        }'>
+          <div class="swiper-wrapper">
+
+            <!-- Item -->
+            <div class="swiper-slide">
+              <div class="position-relative text-center border-end mx-n1">
+                <a href="https://twitter.com/swift_leeds" class="btn btn-icon btn-secondary btn-twitter btn-lg stretched-link" aria-label="Twitter">
+                  <i class="bx bxl-twitter"></i>
+                </a>
+                <div class="pt-4">
+                  <h6 class="mb-1">Twitter</h6>
+                  <p class="fs-sm text-muted mb-0">@Swift_Leeds</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item -->
+            <div class="swiper-slide">
+              <div class="position-relative text-center border-end mx-n1">
+                <a href="https://iosdev.space/@swiftleeds" class="btn btn-icon btn-secondary btn-mastodon btn-lg stretched-link" aria-label="Mastodon">
+                  <i class="bx bxl-mastodon"></i>
+                </a>
+                <div class="pt-4">
+                  <h6 class="mb-1">Mastodon</h6>
+                  <p class="fs-sm text-muted mb-0">@swiftleeds</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item -->
+            <div class="swiper-slide">
+              <div class="position-relative text-center border-end mx-n1">
+                <a href="https://join.slack.com/t/swiftleedsworkspace/shared_invite/zt-wkmr6pif-ZDCdDeHM60jcBUy0BxHdCQ" class="btn btn-icon btn-secondary btn-slack btn-lg stretched-link" aria-label="Slack">
+                  <i class="bx bxl-slack"></i>
+                </a>
+                <div class="pt-4">
+                  <h6 class="mb-1">Slack</h6>
+                  <p class="fs-sm text-muted mb-0">SwiftLeeds</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item -->
+            <div class="swiper-slide">
+              <div class="position-relative text-center border-end mx-n1">
+                <a href="https://www.youtube.com/channel/UCCq1K0eWKZFBCpqaC3n8V1g" class="btn btn-icon btn-secondary btn-youtube btn-lg stretched-link" aria-label="YouTube">
+                  <i class="bx bxl-youtube"></i>
+                </a>
+                <div class="pt-4">
+                  <h6 class="mb-1">YouTube</h6>
+                  <p class="fs-sm text-muted mb-0">SwiftLeeds</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pagination (bullets) -->
+          <div class="swiper-pagination position-relative bottom-0 pt-3 mt-4"></div>
+        </div>
+      </section>

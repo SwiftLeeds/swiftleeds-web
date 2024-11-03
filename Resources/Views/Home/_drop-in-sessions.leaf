@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="col-md-6">
-        <h2 class="h3 mb-sm-4">#if(eventYear == 2023):<span class="badge bg-primary fs-sm align-middle me-2">NEW</span>#endif Drop-In Sessions</h2>
+        <h2 class="h3 mb-sm-4">#if(event.year == 2023):<span class="badge bg-primary fs-sm align-middle me-2">NEW</span>#endif Drop-In Sessions</h2>
         <p class="d-md-none d-xl-block pb-2 pb-md-3 mb-3">
           Included for free with every ticket, drop-in sessions give you an
           exclusive 1 on 1 feedback session with one of our industry experts.
@@ -39,7 +39,7 @@
     </div>
   
   
-  #if(eventYear == 2025):
+  #if(event.year == 2025):
         <div class="row mt-5">
           <div class="col-md-6 order-md-2 pb-2 pb-md-0 mb-4 mb-md-0">
             <div class="pe-lg-5">
@@ -52,7 +52,7 @@
             <p>The SwiftLeeds Evening Talkshow will be returning for it's second year in 2025. This interactive event will be held at the <a href="#venue" data-scroll data-scroll-offset="70">Leeds&nbsp;Playhouse</a> on the evening before the conference, and will have a fresh and exciting lineup of hosts with a new range of topics based on WWDC and whatever you want to hear about!</p>
           </div>
         </div>
-    #elseif(eventYear >= 2024):
+    #elseif(event.year >= 2024):
       <div class="row mt-5">
           <div class="col-md-6 order-md-2 pb-2 pb-md-0 mb-4 mb-md-0">
             <div class="pe-lg-5">
@@ -60,7 +60,7 @@
             </div>
           </div>
           <div class="col-md-6 ordr-md-1">
-            <h2 class="h3 mb-sm-4">#if(eventYear == 2024):<span class="badge bg-primary fs-sm align-middle me-2">NEW</span>#endif SwiftLeeds Evening Talkshow</h2>
+            <h2 class="h3 mb-sm-4">#if(event.year == 2024):<span class="badge bg-primary fs-sm align-middle me-2">NEW</span>#endif SwiftLeeds Evening Talkshow</h2>
             
             <p>SwiftLeeds is super excited to host a new, and interactive evening talk show with <a href="#" target="_blank">Charlie&nbsp;Chapman</a>, <a href="#" target="_blank">Mikaela&nbsp;Caron</a>, <a href="#" target="_blank">Donny&nbsp;Wals</a> and <a href="#" target="_blank">Marc&nbsp;Aupont</a>. This special event will be held at the <a href="#venue" data-scroll data-scroll-offset="70">Leeds&nbsp;Playhouse</a> on October 7th, the evening before the main conference, at 6pm until 8:30pm.</p>
             

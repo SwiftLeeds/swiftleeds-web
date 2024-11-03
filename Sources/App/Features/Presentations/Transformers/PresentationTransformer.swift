@@ -7,6 +7,7 @@ enum PresentationTransformer: Transformer {
         }
 
         let speaker: SpeakerResponse?
+        let secondSpeaker: SpeakerResponse?
 
         if let speakerEntity = entity.$speaker.value {
             speaker = SpeakerTransformer.transform(speakerEntity)
@@ -14,12 +15,19 @@ enum PresentationTransformer: Transformer {
             speaker = nil
         }
 
+        if let secondSpeakerEntity = entity.$secondSpeaker.value {
+            secondSpeaker = SpeakerTransformer.transform(secondSpeakerEntity)
+        } else {
+            secondSpeaker = nil
+        }
+
         return PresentationResponse(
             id: id,
             title: entity.title,
             synopsis: entity.synopsis,
-            speaker: speaker,
-            slidoURL: entity.slidoURL
+            speakers: [speaker, secondSpeaker].compactMap { $0 },
+            slidoURL: entity.slidoURL,
+            videoURL: entity.videoVisibility == .shared ? entity.videoURL : nil
         )
     }
 }

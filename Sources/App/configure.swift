@@ -8,6 +8,9 @@ public func configure(_ app: Application) async throws {
     app.sessions.configuration.cookieName = "__session"
     app.sessions.use(.fluent(.psql))
     
+    // Content Encoding
+    ContentConfiguration.global.use(encoder: JSONEncoder.custom(dates: .iso8601, format: .sortedKeys), for: .json)
+    
     // Middleware
     app.middleware.use(AppleAppSiteAssociationMiddleware())
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))

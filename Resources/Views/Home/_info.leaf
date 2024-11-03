@@ -19,10 +19,10 @@
             <div class="px-md-4 position-relative zindex-5">
               <div class="d-sm-flex align-items-start justify-content-between">
                 <div class="text-center text-sm-start me-sm-4">
-                  #if(eventDate):
-                  <div class="lead fw-semibold text-light text-uppercase mb-2">#(eventDate) #(eventYear)</div>
+                  #if(event.date):
+                  <div class="lead fw-semibold text-light text-uppercase mb-2">#(event.dateFormatted) #(event.year)</div>
                   #endif
-                  <h3 class="h1 text-light">SwiftLeeds</h3>
+                  <h3 class="h1 text-light">#(event.event)</h3>
                   <p class="text-light">
                       <i class="bx bx-map text-light me-2"></i>
                       #(event.location)
@@ -43,7 +43,7 @@
                   <span class="fs-lg text-light me-2">from only</span>
                   <span class="h4 text-light mb-0">#(phase.currentTicketPrice)</span>
                 </div>
-                #elseif(event.isCurrent):
+                #elseif(!event.isPast):
                 <button class="btn btn-light btn-lg mb-3 mb-sm-0 me-sm-3 text-primary" disabled>Coming Soon</button>
                 #else:
                 <button class="btn btn-light btn-lg mb-3 mb-sm-0 me-sm-3 text-primary" disabled>Sales Closed</button>

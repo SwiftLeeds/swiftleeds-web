@@ -80,7 +80,7 @@ struct TicketHubRouteController: RouteCollection {
                     ),
                     hasValidTicket: ticket.release?.metadata?.canBookDropInSession == true,
                     prompt: req.query["prompt"],
-                    event: currentEvent
+                    event: EventContext(event: currentEvent)
                 ))
             }
             
@@ -310,7 +310,7 @@ struct TicketHubContext: Content {
     let refund: Refund
     let hasValidTicket: Bool
     let prompt: String?
-    let event: Event
+    let event: EventContext
 }
 
 extension Date {

@@ -1,0 +1,46 @@
+<section class="container pt-2 pt-sm-3 pt-md-4 pt-lg-5">
+        <div class="row py-5 my-md-2 my-lg-3">
+          <div class="col-lg-5 col-xl-4 mb-5 mb-lg-0">
+            <div class="text-center text-lg-start pe-lg-5 pe-xl-0">
+              <h2 class="h1 pb-3 pb-lg-5">Get the most out of SwiftLeeds with our <span class="text-primary">ticket hub</span>!</h2>
+              <a href="/ticket" class="btn btn-lg btn-primary w-100 w-sm-auto">
+                Login with your ticket
+                <i class="bx bx-right-arrow-alt lead ms-2 me-n1"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-7 col-xl-6 offset-xl-2">
+            <div class="row row-cols-1 row-cols-sm-2 gy-5">
+              <div class="col pt-md-2">
+                <div class="text-center text-sm-start pe-sm-3 pe-xl-4">
+                  <i class="bx bx-group text-primary" style="font-size: 60px"></i>
+                  <h3 class="h4 mb-2">Drop-In Session</h3>
+                  <p class="fs-lg mb-2">Book your exclusive session with one of our select hosts, free with your ticket.</p>
+                  <p class="fs-sm">Sessions are given on a first-come first-served basis.</p>
+                </div>
+              </div>
+              <div class="col pt-md-2">
+                <div class="text-center text-sm-start pe-sm-3 pe-xl-4">
+                  <i class="bx bxs-t-shirt text-primary" style="font-size: 60px"></i>
+                  <h3 class="h4 mb-2">Swagalicious</h3>
+                  <p class="fs-lg mb-0">Select your merch preferences to ensure you don't miss out on one of our fabulous shirts.</p>
+                </div>
+              </div>
+              <div class="col pt-md-2">
+                <div class="text-center text-sm-start pe-sm-3 pe-xl-4">
+                  <i class="bx bxs-user-account text-primary" style="font-size: 60px"></i>
+                  <h3 class="h4 mb-2">Your Profile</h3>
+                  <p class="fs-lg mb-0">Share any social links to make it easier to follow up with other attendees, before or after the event.</p>
+                </div>
+              </div>
+              <div class="col pt-md-2">
+                <div class="text-center text-sm-start pe-sm-3 pe-xl-4">
+                  <i class="bx bx-smile text-primary" style="font-size: 60px"></i>
+                  <h3 class="h4 mb-2">Fit for You</h3>
+                  <p class="fs-lg mb-0">Submit any accessibility and dietary requirements, ensuring your stay with us is perfect.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>

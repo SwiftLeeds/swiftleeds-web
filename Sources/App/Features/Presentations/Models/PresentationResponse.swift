@@ -5,6 +5,7 @@ struct PresentationResponse: Content {
     let id: UUID
     let title: String
     let synopsis: String
-    let speaker: SpeakerResponse?
+    var speakers: [SpeakerResponse] = []
     let slidoURL: String?
+    let videoURL: String?
 }

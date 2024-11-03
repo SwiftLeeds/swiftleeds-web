@@ -7,6 +7,8 @@ struct ValidTicketMiddleware: AsyncMiddleware {
             throw Abort(.badRequest, reason: "unable to identify current event")
         }
         
+        try await currentEvent.$days.load(on: request.db)
+        
         guard let titoEvent = currentEvent.titoEvent else {
             throw Abort(.badRequest, reason: "unable to identify tito project")
         }

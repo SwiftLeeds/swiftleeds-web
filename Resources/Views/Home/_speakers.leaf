@@ -76,7 +76,7 @@
         #if(event.isCurrent):
         <a href="/schedule" class="btn btn-primary w-100">View Schedule</a>
         #else:
-        <a href="/year/#(eventYear)/schedule" class="btn btn-primary w-100">View Schedule</a>
+        <a href="/year/#(event.year)/schedule" class="btn btn-primary w-100">View Schedule</a>
         #endif
       </div>
     </div>
