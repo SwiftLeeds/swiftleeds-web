@@ -57,9 +57,9 @@ function updateCountdown() {
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     if (days > 0) {
-        document.getElementById("countdown").innerHTML = "-" + zeroPad(days) + ":" + zeroPad(hours, 2) + ":" + zeroPad(minutes, 2) + ":" + zeroPad(seconds, 2);
+        document.getElementById("countdown").innerHTML = "T-" + zeroPad(days) + ":" + zeroPad(hours, 2) + ":" + zeroPad(minutes, 2) + ":" + zeroPad(seconds, 2);
     } else {
-        document.getElementById("countdown").innerHTML = "-" + zeroPad(hours, 2) + ":" + zeroPad(minutes, 2) + ":" + zeroPad(seconds, 2);
+        document.getElementById("countdown").innerHTML = "T-" + zeroPad(hours, 2) + ":" + zeroPad(minutes, 2) + ":" + zeroPad(seconds, 2);
     }
     
     if (distance <= -259200) { // 3 days, temporary solution
