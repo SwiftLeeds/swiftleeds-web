@@ -47,9 +47,48 @@
             </div>
           </div>
           <div class="col-md-6 ordr-md-1">
-            <h2 class="h3 mb-sm-4">SwiftLeeds Evening Talkshow</h2>
+            <h2 class="h3 mb-sm-4">#if(event.year == 2024):<span class="badge bg-primary fs-sm align-middle me-2">NEW</span>#endif SwiftLeeds Evening Talkshow</h2>
             
-            <p>The SwiftLeeds Evening Talkshow will be returning for it's second year in 2025. This interactive event will be held at the <a href="#venue" data-scroll data-scroll-offset="70">Leeds&nbsp;Playhouse</a> on the evening before the conference, and will have a fresh and exciting lineup of hosts with a new range of topics based on WWDC and whatever you want to hear about!</p>
+            <p>SwiftLeeds is super excited to host for another year an interactive evening talk show hosted by <a href="https://x.com/hiddevdploeg" target="_blank">Hidde&nbsp;van der Ploeg</a>, <a href="https://x.com/monika_mateska" target="_blank">Monika&nbsp;Mateska</a>, <a href="https://x.com/FosiaDesign" target="_blank">Sofia&nbsp;Larsson</a> and <a href="https://x.com/jasperhauser" target="_blank">Jasper Hauser</a>. This special event will be held at the <a href="#venue" data-scroll data-scroll-offset="70">Leeds&nbsp;Playhouse</a> on October 6th, the evening before the main conference, at 6pm until 8:30pm.</p>
+            
+            <p>We'll be discussing some hot topics within the Swift community, plus all the great announcements during WWDC25.</p>
+            
+            <div class="border rounded-3 mb-3 mb-lg-4">
+              <div class="row row-cols-1 g-0">
+                <div class="col d-flex align-items-center border-bottom p-3">
+                  <img src="#awsImage("hidde.png")" width="48" alt="Hidde van der Ploeg" class="rounded">
+                  <div class="ps-2 ms-1">
+                    <h3 class="h6 mb-1"><span class="badge bg-primary fs-sm align-middle me-2">HOST</span>Hidde van der Ploeg</h3>
+                    <p class="fs-xs mb-0">Hidde is a designer who taught himself how to code and make apps. As an indie developer he is the creator of popular apps like <a href="https://helm-app.com/" target="_blank">Helm for App Store Connect</a>, NowPlaying and Gola. He’s also a regular at the Apple Developers' Conferences around the world and recently joined RevenueCat as Senior UI Engineer.</p>
+                  </div>
+                </div>
+                <div class="col d-flex align-items-center border-bottom p-3">
+                  <img src="#awsImage("monika.jpg")" width="48" alt="Monika Mateska" class="rounded">
+                  <div class="ps-2 ms-1">
+                    <h3 class="h6 mb-0">Monika Mateska</h3>
+                    <p class="fs-xs mb-0">Monika is an iOS engineer passionate about exploring Augmented Reality and visionOS development, based in Copenhagen, Denmark. She is the co-founder of <a href="https://cocoaheads.mk/" target="_blank">CocoaHeadsMK</a> - a community of iOS Developers in Macedonia, where she originally comes from. She currently works at Vivino, building the greatest experience for wine lovers.</p>
+                  </div>
+                </div>
+                <div class="col d-flex align-items-center border-bottom p-3">
+                  <img src="#awsImage("sofia.jpg")" width="48" alt="Sofia Larsson" class="rounded">
+                  <div class="ps-2 ms-1">
+                    <h3 class="h6 mb-0">Sofia Larsson</h3>
+                    <p class="fs-xs mb-0">With a bachelor’s degree in Textile Science and Engineering, Sofia unexpectedly pivoted into app development, teaching herself to code. As a kid, I was obsessed with finding the perfect “flow” by constantly rearranging furniture. Now, working with UI and UX daily, I turn my love for layout into intuitive, user-friendly designs across all Apple platforms.</p>
+                  </div>
+                </div>
+                <div class="col d-flex align-items-center p-3">
+                  <img src="#awsImage("jasper.png")" width="48" alt="Jasper Hauser" class="rounded">
+                  <div class="ps-2 ms-1">
+                    <h3 class="h6 mb-0">Jasper Hauser</h3>
+                    <p class="fs-xs mb-0">A designer, founder, and creative force behind many well-known digital products across his 20-year career. A key figure in the Delicious Generation era with projects like Disco, AppZapper, and Camino. With three Apple Design Awards and a company acquired by Facebook, Jasper brings deep experience at the intersection of design and technology.</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column flex-sm-row mb-2">
+              <a href="https://ti.to/swiftleeds/swiftleeds-25/with/standard-talkshow-combo,live-evening-talkshow" target="_blank" class="btn btn-primary mb-3 mb-sm-0 me-sm-3">Buy now</a>
+            </div>
+            <span class="fs-sm">Tickets will be sold on a first-come first-serve basis, so we encourage you to secure your spot now.</span>
           </div>
         </div>
     #elseif(event.year >= 2024):
