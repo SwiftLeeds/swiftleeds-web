@@ -47,7 +47,7 @@
             </div>
           </div>
           <div class="col-md-6 ordr-md-1">
-            <h2 class="h3 mb-sm-4">#if(event.year == 2024):<span class="badge bg-primary fs-sm align-middle me-2">NEW</span>#endif SwiftLeeds Evening Talkshow</h2>
+            <h2 class="h3 mb-sm-4"><span class="badge bg-primary fs-sm align-middle me-2">NEW</span>SwiftLeeds Evening Talkshow</h2>
             
             <p>SwiftLeeds is super excited to host for another year an interactive evening talk show hosted by <a href="https://x.com/hiddevdploeg" target="_blank">Hidde&nbsp;van&nbsp;der&nbsp;Ploeg</a>, <a href="https://x.com/monika_mateska" target="_blank">Monika&nbsp;Mateska</a>, <a href="https://x.com/FosiaDesign" target="_blank">Sofia&nbsp;Larsson</a> and <a href="https://x.com/jasperhauser" target="_blank">Jasper Hauser</a>. This special event will be held at the <a href="#venue" data-scroll data-scroll-offset="70">Leeds&nbsp;Playhouse</a> on October 6th, the evening before the main conference, at 6pm until 8:30pm.</p>
             
