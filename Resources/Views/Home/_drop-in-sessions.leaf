@@ -43,7 +43,7 @@
         <div class="row mt-5">
           <div class="col-md-6 order-md-2 pb-2 pb-md-0 mb-4 mb-md-0">
             <div class="pe-lg-5">
-              <img src="/img/theatre.jpg" class="rounded-3" alt="SwiftLeeds Theatre">
+              <img src="/img/talkshow.jpg" class="rounded-3" alt="SwiftLeeds Talkshow">
             </div>
           </div>
           <div class="col-md-6 ordr-md-1">
@@ -58,7 +58,7 @@
                 <div class="col d-flex align-items-center border-bottom p-3">
                   <img src="#awsImage("hidde.png")" width="48" alt="Hidde van der Ploeg" class="rounded">
                   <div class="ps-2 ms-1">
-                    <h3 class="h6 mb-1"><span class="badge bg-primary fs-sm align-middle me-2">HOST</span>Hidde van der Ploeg</h3>
+                    <h3 class="h6 mb-1"><span class="badge bg-primary fs-sm align-middle me-2" style="font-size: 0.65rem !important;">HOST</span>Hidde van der Ploeg</h3>
                     <p class="fs-xs mb-0">Hidde is a designer who taught himself how to code and make apps. As an indie developer he is the creator of popular apps like <a href="https://helm-app.com/" target="_blank">Helm for App Store Connect</a>, NowPlaying and Gola. He’s also a regular at the Apple Developers' Conferences around the world and recently joined RevenueCat as Senior UI Engineer.</p>
                   </div>
                 </div>
