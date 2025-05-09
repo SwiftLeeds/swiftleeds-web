@@ -49,7 +49,7 @@
           <div class="col-md-6 ordr-md-1">
             <h2 class="h3 mb-sm-4">SwiftLeeds Evening Talkshow</h2>
             
-            <p>SwiftLeeds is super excited to host for another year an interactive evening talk show hosted by <a href="https://x.com/hiddevdploeg" target="_blank">Hidde&nbsp;van&nbsp;der&nbsp;Ploeg</a>, <a href="https://x.com/monika_mateska" target="_blank">Monika&nbsp;Mateska</a>, <a href="https://x.com/FosiaDesign" target="_blank">Sofia&nbsp;Larsson</a> and <a href="https://x.com/jasperhauser" target="_blank">Jasper Hauser</a>. This special event will be held at the <a href="#venue" data-scroll data-scroll-offset="70">Leeds&nbsp;Playhouse</a> on October 6th, the evening before the main conference, at 6pm until 8:30pm.</p>
+            <p>SwiftLeeds is super excited to host for another year an interactive evening talk show hosted by <a href="https://x.com/hiddevdploeg" target="_blank">Hidde&nbsp;van&nbsp;der&nbsp;Ploeg</a>, <a href="https://x.com/monika_mateska" target="_blank">Monika&nbsp;Mateska</a>, <a href="https://x.com/FosiaDesign" target="_blank">Sofia&nbsp;Larsson</a>, <a href="https://x.com/jasperhauser" target="_blank">Jasper Hauser</a> and <a href="https://x.com/klemensstrasser" target="_blank">Klemens Strasser</a>. This special event will be held at the <a href="#venue" data-scroll data-scroll-offset="70">Leeds&nbsp;Playhouse</a> on October 6th, the evening before the main conference, at 6pm until 8:30pm.</p>
             
             <p>We'll be discussing some hot topics within the Swift community, plus all the great announcements during WWDC25.</p>
             
@@ -80,7 +80,14 @@
                   <img src="#awsImage("jasper.png")" width="48" alt="Jasper Hauser" class="rounded">
                   <div class="ps-2 ms-1">
                     <h3 class="h6 mb-0">Jasper Hauser</h3>
-                    <p class="fs-xs mb-0">A designer, founder, and creative force behind many well-known digital products across his 20-year career. A key figure in the Delicious Generation era with projects like Disco, AppZapper, and Camino. With three Apple Design Awards and a company acquired by Facebook, Jasper brings deep experience at the intersection of design and technology. He’s currently focused on Darkroom, the most recent Apple Design Award winner, photo editor used by many. Based in Amsterdam, he’s passionate about design craft, photography, and road cycling.</a></p>
+                    <p class="fs-xs mb-0">A designer, founder, and creative force behind many well-known digital products across his 20-year career. A key figure in the Delicious Generation era with projects like Disco, AppZapper, and Camino. With three Apple Design Awards and a company acquired by Facebook, Jasper brings deep experience at the intersection of design and technology. He’s currently focused on Darkroom, the most recent Apple Design Award winner, photo editor used by many. Based in Amsterdam, he’s passionate about design craft, photography, and road cycling.</p>
+                  </div>
+                </div>
+                <div class="col d-flex align-items-center p-3">
+                  <img src="#awsImage("klemens.jpg")" width="48" alt="Klemens Strasser" class="rounded">
+                  <div class="ps-2 ms-1">
+                    <h3 class="h6 mb-0">Klemens Strasser</h3>
+                    <p class="fs-xs mb-0">Klemens is an indie developer based in Graz, Austria, who is passionate about making games and apps more accessible. Over the past decade, he has contributed to prominent apps such as Fantastical, Cardhop, and the Nuki SmartLock platform. He recently transitioned to full-time indie development to work on The Art of Fauna, a puzzle game celebrating the beauty of nature. His commitment to inclusive design earned him an Apple Design Award in 2015 as a student, as well as two Apple Design Award nominations in 2022 and 2023.</p>
                   </div>
                 </div>
               </div>
