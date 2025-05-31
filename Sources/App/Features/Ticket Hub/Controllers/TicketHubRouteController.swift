@@ -79,6 +79,7 @@ struct TicketHubRouteController: RouteCollection {
                         emailUrl: "mailto:info@swiftleeds.co.uk?subject=Refund Request&body=Ticket \(ticket.reference)"
                     ),
                     hasValidTicket: ticket.release?.metadata?.canBookDropInSession == true,
+                    canViewDropInSessionParticipants: ticket.release?.metadata?.canViewDropInSessionParticipants == true,
                     prompt: req.query["prompt"],
                     event: EventContext(event: currentEvent)
                 ))
@@ -210,7 +211,8 @@ struct TicketHubRouteController: RouteCollection {
                         isParticipant: slot.ticket.contains(slug),
                         isFullyBooked: slot.ticket.count == model.maxTicketsPerSlot,
                         isInPast: slot.date < Date(),
-                        participantCount: slot.ticket.count
+                        participantCount: slot.ticket.count,
+                        participants: slot.ticketOwner
                     )
                 }
             }
@@ -243,7 +245,8 @@ struct TicketHubRouteController: RouteCollection {
             companyLink: model.companyLink,
             maximumAttendance: model.maxTicketsPerSlot,
             remainingSlots: slotsWithDay.map({ model.maxTicketsPerSlot - $0.participantCount }).reduce(0, +),
-            slots: slotsWithDay
+            slots: slotsWithDay,
+            slotsOrdered: slotsWithDay.sorted(by: { $0.date < $1.date })
         )
     }
 }
@@ -274,6 +277,7 @@ struct TicketHubContext: Content {
         let isFullyBooked: Bool
         let isInPast: Bool
         let participantCount: Int
+        let participants: [String]
     }
     
     struct Session: Codable {
@@ -293,6 +297,7 @@ struct TicketHubContext: Content {
         let remainingSlots: Int
         
         let slots: [SessionSlot]
+        let slotsOrdered: [SessionSlot]
     }
     
     struct VideoPresentation: Codable {
@@ -309,6 +314,7 @@ struct TicketHubContext: Content {
     let groupSessions: [Session]
     let refund: Refund
     let hasValidTicket: Bool
+    let canViewDropInSessionParticipants: Bool
     let prompt: String?
     let event: EventContext
 }

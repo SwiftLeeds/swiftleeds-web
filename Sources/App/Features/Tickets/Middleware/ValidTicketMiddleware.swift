@@ -15,30 +15,6 @@ struct ValidTicketMiddleware: AsyncMiddleware {
         
         await request.storage.setWithAsyncShutdown(CurrentEventKey.self, to: currentEvent)
         
-        #if DEBUG
-        // append ?skipTicket=true to route in debug builds in order to bypass tito
-        if request.application.environment.isRelease == false {
-            let value: String? = try? request.query.get(at: "skipTicket")
-            
-            if value == "true" {
-                await request.storage.setWithAsyncShutdown(TicketStorage.self, to: .init(
-                    first_name: "James",
-                    last_name: "Sherlock",
-                    slug: "ti_test_p05Ch95xJS5AStInfa8whFA",
-                    company_name: nil,
-                    avatar_url: nil,
-                    responses: [:],
-                    release: .init(metadata: .init(canBookDropInSession: true)),
-                    email: "james@gmail.com",
-                    reference: "ABCD-1", 
-                    qr_url: "https://qr.tito.io/tickets/ti_p1NWgFenXguSSrqE2XRDHnw"
-                ))
-                
-                return try await next.respond(to: request)
-            }
-        }
-        #endif
-        
         let returnUrl = request.url.path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             .map { "?returnUrl=" + $0 } ?? ""
         

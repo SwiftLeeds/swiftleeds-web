@@ -1,6 +1,39 @@
+#if(canViewDropInSessionParticipants):
+<div class="modal fade" id="session-#(session.id)" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">#(session.title)</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul>
+        #for(slot in session.slotsOrdered):
+            <li>#(slot.day) at #date(slot.date, "HH:mm")
+                <ul>
+                    #for(name in slot.participants):
+                    <li>#(name)</li>
+                    #endfor
+                </ul>
+            </li>
+        
+        #endfor
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+#endif
 
                 <div class="d-flex flex-row align-items-center mt-5 mb-3">
-                  <img src="#awsImage(session.ownerImageUrl)" class="d-block rounded" width="80" alt="#(session.ownerName)">
+                  #if(canViewDropInSessionParticipants):
+                    <a data-bs-toggle="modal" data-bs-target="\#session-#(session.id)" href="#">
+                        <img src="#awsImage(session.ownerImageUrl)" class="d-block rounded" width="80" alt="#(session.ownerName)">
+                    </a>
+                  #else:
+                    <img src="#awsImage(session.ownerImageUrl)" class="d-block rounded" width="80" alt="#(session.ownerName)">
+                  #endif
+                  
                   <div class="ps-4">
                     <h5 class="fw-medium fs-lg mb-1">#(session.title)</h5>
                     <p class="fs-sm mb-0">#(session.ownerName)</p>
