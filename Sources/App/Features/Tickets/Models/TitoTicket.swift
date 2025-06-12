@@ -3,6 +3,7 @@ import Foundation
 struct TitoTicket: Codable {
     struct Metadata: Codable {
         let canBookDropInSession: Bool?
+        let canViewDropInSessionParticipants: Bool?
     }
     
     struct Release: Codable {
