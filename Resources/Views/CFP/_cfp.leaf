@@ -71,6 +71,21 @@
             </div>
           </div>
         </div>
+        <div class="row gy-4 py-xl-3">
+          <div class="col-12">
+            <div class="align-self-center ps-lg-0 ps-md-4">
+              <h2 class="h1 mb-lg-4 mb-3">What makes a good submission?</h2>
+              <p class="fs-lg">The SwiftLeeds team review all talks anonymously, and so rely heavily on the title and description of your submission to understand whether it's a good fit for the community. With only 1&nbsp;in&nbsp;10 submissions being accepted, here's how you can stand out:</p>
+              <ul>
+                <li class="fs-lg"><span class="text-success fw-bold">Do</span> tell us what attendees will take away from the talk. What are they going to learn?</li>
+                <li class="fs-lg"><span class="text-success fw-bold">Do</span> consider how much content you have. We like to strike a balance of shorter 15-minute talks, and longer 35-minute talks with Q&A. If you can flex to different times, let us know!</li>
+                <li class="fs-lg"><span class="text-warning fw-bold">Careful</span> when using AI tools to write submissions. They can come across as low effort, and spammy, which leads them to be deranked.</li>
+                <li class="fs-lg"><span class="text-danger fw-bold">Don't</span> try to deanonymise the review process. Don't link to YouTube channels, blogs, or previous talks within the talk contents itself. You can put personal links on your profile, we don't see this until after the review!</li>
+              </ul>
+              <p class="fs-lg">If you have any questions, please do <a href="mailto:info@swiftleeds.co.uk">email us</a> or speak to the team on <a href="https://join.slack.com/t/swiftleedsworkspace/shared_invite/zt-wkmr6pif-ZDCdDeHM60jcBUy0BxHdCQ" target="_blank">Slack</a>!</p>
+            </div>
+          </div>
+        </div>
       </section>
 
 #if(stage.now < stage.openDate):
