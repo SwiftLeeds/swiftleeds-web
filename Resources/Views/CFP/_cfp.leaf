@@ -71,6 +71,22 @@
             </div>
           </div>
         </div>
+        <div class="row gy-4 py-xl-3">
+          <div class="col-12">
+            <div class="align-self-center ps-lg-0 ps-md-4">
+              <h2 class="h1 mb-lg-4 mb-3">What makes a good submission?</h2>
+              <p class="fs-lg">The SwiftLeeds team review all talks anonymously and relies heavily on the title and description of your submission to understand whether it's a good fit for the community. With only 1&nbsp;in&nbsp;10 submissions being accepted, here's how you can stand out:</p>
+              <ul>
+                <li class="fs-lg">Please let us know what attendees will take away from the talk. What are they going to learn? Perhaps, consider using the 5s W framework (What, Why, Who, Where and When).</li>
+                <li class="fs-lg">Although we don't specify how much content you can give us during the submission, we think 2-3 paragraphs is the ideal. A single-sentence submission is not enough content for us to fully understand much about the talk, but similarly, too much content can be hard to digest during the review, so keep it somewhere in the middle.</li>
+                <li class="fs-lg">Consider how much content you have. We aim to strike a balance between shorter 15-minute talks and longer 35-minute talks, accompanied by Q&A sessions. If you can flex to different times, let us know!</li>
+                <li class="fs-lg">Be careful when using AI tools to write submissions. They can come across as low effort and spammy, which leads them to be de-ranked and think quality over quantity.</li>
+                <li class="fs-lg">Don't try to deanonymise the review process. Don't link to YouTube channels, blogs, or previous talks within the talk content itself. You can put personal links on your profile, we don't see this until after the review!</li>
+              </ul>
+              <p class="fs-lg">If you have any questions, please do <a href="mailto:info@swiftleeds.co.uk">email us</a> or speak to the team on <a href="https://join.slack.com/t/swiftleedsworkspace/shared_invite/zt-wkmr6pif-ZDCdDeHM60jcBUy0BxHdCQ" target="_blank">Slack</a>!</p>
+            </div>
+          </div>
+        </div>
       </section>
 
 #if(stage.now < stage.openDate):
