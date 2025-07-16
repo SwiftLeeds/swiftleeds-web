@@ -86,12 +86,15 @@ func routes(_ app: Application) throws {
             .all()
         let slots = try await Slot
             .query(on: request.db)
-            .sort(\.$date)
             .sort(\.$startDate)
             .with(\.$day)
             .with(\.$presentation)
             .with(\.$activity)
             .all()
+            .sorted {
+                guard let d1 = $0.day?.date, let d2 = $1.day?.date else { return false }
+                return d1 < d2
+            }
         let activities = try await Activity
             .query(on: request.db)
             .sort(\.$event.$id, .descending) // This moves 'Reusable' events to the top of the filtered view

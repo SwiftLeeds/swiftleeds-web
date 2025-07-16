@@ -87,9 +87,7 @@ struct SlotRouteController: RouteCollection {
         
         let mutableSlot = slot ?? Slot()
         mutableSlot.startDate = input.startTime
-        mutableSlot.date = inputDate
         mutableSlot.duration = duration
-        mutableSlot.$event.id = try event.requireID()
         mutableSlot.$day.id = try eventDay.requireID()
         
         if let activity {
