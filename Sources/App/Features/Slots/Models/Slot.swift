@@ -12,19 +12,9 @@ final class Slot: Codable, Model, Content, @unchecked Sendable {
 
     @Field(key: "start_date")
     var startDate: String
-    
-    // DO NOT USE (June 2024)
-    // TODO: This will be removed in a future PR as part of a cleanup
-//    @Field(key: "date")
-//    var date: Date?
 
     @Field(key: "duration")
     var duration: Double?
-
-    // DO NOT USE (June 2024)
-    // TODO: This will be removed in a future PR as part of a cleanup - it needs to be done this way for safe migrations.
-//    @OptionalParent(key: "event_id")
-//    var event: Event?
     
     @OptionalParent(key: "day_id")
     var day: EventDay?
