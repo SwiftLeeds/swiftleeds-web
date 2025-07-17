@@ -28,8 +28,8 @@
             <div class="#if(isLast):#else:border-bottom#endif #if(isFirst):pb-4#endif #if(isLast):pt-4#endif #if(!isFirst && !isLast):py-4#endif">
               <div class="row pb-1 pb-xl-3">
                 <div class="col-sm-4 mb-3 mb-sm-0">
-                  <div class="h5 mb-1">#(slot.startDate) – #sessionEnd(slot.date, first(slot.duration, slot.presentation.duration, slot.activity.duration))</div>
-                  
+                  <div class="h5 mb-1">#(slot.startDate) – #sessionEnd(slot.startDate, first(slot.duration, slot.presentation.duration, slot.activity.duration))</div>
+
                   #if(slot.presentation.id):
                   #if(first(slot.presentation.duration, slot.duration) <= 15.0):
                   <span class="badge bg-danger shadow-danger fs-sm">Lightning</span>

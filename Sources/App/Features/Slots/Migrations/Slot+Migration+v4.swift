@@ -3,13 +3,38 @@ import Fluent
 
 struct SlotMigrationV4: AsyncMigration {
     func prepare(on database: Database) async throws {
-        fatalError("Read comment from Aug 2024 below")
+
+        final class MigrationSlot: Model {
+            static let schema = Schema.slot
+
+            @ID(key: .id) var id: UUID?
+            @OptionalField(key: "duration") var duration: Double?
+            @OptionalParent(key: "presentation_id") var presentation: Presentation?
+            @OptionalParent(key: "activity_id") var activity: Activity?
+        }
+
+        final class MigrationPresentation: Model {
+            static let schema = Schema.presentation
+
+            @ID(key: .id) var id: UUID?
+            @OptionalField(key: "duration") var duration: Double?
+            @OptionalField(key: "slot_id") var slotID: UUID?
+        }
+
+        final class MigrationActivity: Model {
+            static let schema = Schema.activity
+
+            @ID(key: .id) var id: UUID?
+            @OptionalField(key: "duration") var duration: Double?
+            @OptionalField(key: "slot_id") var slotID: UUID?
+        }
+
+        // fatalError("Read comment from Aug 2024 below")
         // Aug 2024: This migrator has been partially commented out as the field it relies on has been removed (as it was no longer needed).
         // In order to migrate past this point, you need to go to an earlier commit, migrate, and then come to a more recent commit before finishing
         // the migration.
         // Or, alternatively, just take a backup of production and apply that locally so you're up to date without playing git games.
-        
-        /*
+
         try await database.schema(Schema.slot)
             .field("presentation_id", .uuid, .references(Schema.presentation, "id"))
             .field("activity_id", .uuid, .references(Schema.activity, "id"))
@@ -25,36 +50,35 @@ struct SlotMigrationV4: AsyncMigration {
         
         // Data Migrator
         
-        let slots = try await Slot.query(on: database).all()
-        let presentations = try await Presentation.query(on: database).with(\.$slot).all()
-        let activities = try await Activity.query(on: database).with(\.$slot).all()
-        
+        let slots = try await MigrationSlot.query(on: database).all()
+        let presentations = try await MigrationPresentation.query(on: database).all()
+        let activities = try await MigrationActivity.query(on: database).all()
+
         for presentation in presentations {
-            if let slot = slots.first(where: { $0.id == presentation.slot?.id }) {
+            if let slot = slots.first(where: { $0.id == presentation.slotID }) {
                 let slotDuration = slot.duration
                 slot.$presentation.id = try presentation.requireID()
-                slot.duration = 0 // easy to set to nil in future cleanup
+                slot.duration = 0
                 try await slot.update(on: database)
-                
-                presentation.$slot.id = nil
+
+                presentation.slotID = nil
                 presentation.duration = slotDuration ?? 0
                 try await presentation.update(on: database)
             }
         }
-        
+
         for activity in activities {
-            if let slot = slots.first(where: { $0.id == activity.slot?.id }) {
+            if let slot = slots.first(where: { $0.id == activity.slotID }) {
                 let slotDuration = slot.duration
                 slot.$activity.id = try activity.requireID()
-                slot.duration = 0 // easy to set to nil in future cleanup
+                slot.duration = 0
                 try await slot.update(on: database)
-                
-                activity.$slot.id = nil
+
+                activity.slotID = nil
                 activity.duration = slotDuration ?? 0
                 try await activity.update(on: database)
             }
         }
-        */
     }
     
     func revert(on database: Database) async throws {

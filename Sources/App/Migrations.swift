@@ -83,6 +83,7 @@ class Migrations {
         app.migrations.add(SpeakerMigrationV2()) // Add more social link options
         app.migrations.add(SlotMigrationV5()) // Remove unneeded slot_id params
         app.migrations.add(PresentationMigrationV6()) // Add video visibility
+        app.migrations.add(SlotMigrationV6()) // Remove legacy date and event_id fields
 
         do {
             guard let url = Environment.get("DATABASE_URL") else {

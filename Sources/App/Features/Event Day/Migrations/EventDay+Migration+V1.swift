@@ -1,3 +1,4 @@
+import Foundation
 import Fluent
 
 final class EventDayMigrationV1: AsyncMigration {
@@ -10,14 +11,26 @@ final class EventDayMigrationV1: AsyncMigration {
             .field("end_time", .string, .required)
             .field("name", .string, .required)
             .create()
-        
+
+        // We use this local-only model (instead of the 'real' Slot) to solve a migration step problem,
+        // whilst also allowing us to drop event and date from Slot
+        final class MigrationSlot: Model {
+            static let schema = Schema.slot
+
+            @ID(key: .id) var id: UUID?
+            @Field(key: "date") var date: Date?
+            @Parent(key: "event_id") var event: Event
+
+            init() {}
+        }
+
         // Custom migratory code to automatically seed the `event_days` table with previous years information
         let events = try await Event.query(on: database).all()
-        let slots = try await Slot.query(on: database).with(\.$event).all()
-        
+        let slots = try await MigrationSlot.query(on: database).with(\.$event).all()
+
         for event in events {
             print("[Migrator] Processing event: \(event.name)")
-            let eventSlots = slots.filter { $0.event?.id == event.id }
+            let eventSlots = slots.filter { $0.event.id == event.id }
             let uniqueDays = Set(eventSlots.compactMap { $0.date?.withoutTime }).sorted()
             print("[Migrator] Found \(eventSlots.count) slots over \(uniqueDays.count) days")
             

@@ -1,22 +1,25 @@
-import Foundation
 import Leaf
+import Foundation
 
 struct SessionEndTag: LeafTag {
-    let formatter = DateFormatter()
+    let formatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "HH:mm"
+        f.timeZone = .init(identifier: "UTC")
+        f.locale = .init(identifier: "en_US_POSIX")
+        return f
+    }()
 
     func render(_ ctx: LeafContext) throws -> LeafData {
         guard
-            let startDate = ctx.parameters[0].double,
-            let duration = ctx.parameters[1].double
-        else { return .string("") }
+            let startString = ctx.parameters[0].string, // e.g., "09:30"
+            let duration = ctx.parameters[1].double,    // duration in minutes
+            let startDate = formatter.date(from: startString)
+        else {
+            return .string("")
+        }
 
-        formatter.dateFormat = "HH:mm"
-        formatter.timeZone = .init(identifier: "UTC")
-        formatter.locale = .init(identifier: "en_US_POSIX")
-
-        let referenceDate = Date(timeIntervalSince1970: startDate)
-        let endDate = referenceDate.addingTimeInterval(.init(Int(duration) * 60))
-
+        let endDate = startDate.addingTimeInterval(duration * 60)
         return .string(formatter.string(from: endDate))
     }
 }
