@@ -13,7 +13,7 @@ struct TeamAPIController: RouteCollection {
                 twitter: "https://twitter.com/Adam9Rush",
                 linkedin: "https://www.linkedin.com/in/swiftlyrush/",
                 slack: "https://swiftleedsworkspace.slack.com/archives/D05RK6AAV29",
-                imageURL: getImageURL(path: "img/team/rush.jpg", req: req)
+                imageURL: "/img/team/rush.jpg"
             ),
             TeamMember(
                 name: "James Sherlock",
@@ -21,7 +21,7 @@ struct TeamAPIController: RouteCollection {
                 twitter: "https://twitter.com/JamesSherlouk",
                 linkedin: "https://www.linkedin.com/in/jamessherlockdeveloper/",
                 slack: "https://swiftleedsworkspace.slack.com/archives/D05RK6AAV29",
-                imageURL: getImageURL(path: "img/team/sherlock.jpg", req: req)
+                imageURL: "/img/team/sherlock.jpg"
             ),
             TeamMember(
                 name: "Matthew Gallagher",
@@ -29,7 +29,7 @@ struct TeamAPIController: RouteCollection {
                 twitter: "https://twitter.com/pdamonkey",
                 linkedin: "https://www.linkedin.com/in/pdamonkey/",
                 slack: "https://swiftleedsworkspace.slack.com/archives/D030PN528UA",
-                imageURL: getImageURL(path: "img/team/matt.jpg", req: req)
+                imageURL: "/img/team/matt.jpg"
             ),
             TeamMember(
                 name: "Adam Oxley",
@@ -37,7 +37,7 @@ struct TeamAPIController: RouteCollection {
                 twitter: "https://twitter.com/admoxly",
                 linkedin: "https://www.linkedin.com/in/adam-oxley-41183a82/",
                 slack: "https://swiftleedsworkspace.slack.com/team/U02DRL7KUCS",
-                imageURL: getImageURL(path: "img/team/oxley.jpg", req: req)
+                imageURL: "/img/team/oxley.jpg"
             ),
             TeamMember(
                 name: "Noam Efergan",
@@ -45,7 +45,7 @@ struct TeamAPIController: RouteCollection {
                 twitter: "https://twitter.com/No_Wham",
                 linkedin: "https://www.linkedin.com/in/noamefergan/",
                 slack: "https://swiftleedsworkspace.slack.com/archives/D05RK6AAV29",
-                imageURL: getImageURL(path: "img/team/noam.jpg", req: req)
+                imageURL: "/img/team/noam.jpg"
             ),
             TeamMember(
                 name: "Kannan Prasad",
@@ -53,7 +53,7 @@ struct TeamAPIController: RouteCollection {
                 twitter: nil,
                 linkedin: "https://www.linkedin.com/in/kannanprasad/",
                 slack: "https://swiftleedsworkspace.slack.com/archives/D0477TRS28G",
-                imageURL: getImageURL(path: "img/team/kannan.jpg", req: req)
+                imageURL: "/img/team/kannan.jpg"
             ),
             TeamMember(
                 name: "Muralidharan Kathiresan",
@@ -61,7 +61,7 @@ struct TeamAPIController: RouteCollection {
                 twitter: "https://twitter.com/Muralidharan_K",
                 linkedin: "https://www.linkedin.com/in/muralidharankathiresan/",
                 slack: "https://swiftleedsworkspace.slack.com/archives/D05RK6AAV29",
-                imageURL: getImageURL(path: "img/team/mural.jpg", req: req)
+                imageURL: "/img/team/mural.jpg"
             ),
             TeamMember(
                 name: "Preeti Thombare",
@@ -69,7 +69,7 @@ struct TeamAPIController: RouteCollection {
                 twitter: nil,
                 linkedin: nil,
                 slack: "https://swiftleedsworkspace.slack.com/archives/D05RK6AAV29",
-                imageURL: getImageURL(path: "img/team/preeti.jpg", req: req)
+                imageURL: "/img/team/preeti.jpg"
             ),
             TeamMember(
                 name: "Paul Willis",
@@ -77,7 +77,7 @@ struct TeamAPIController: RouteCollection {
                 twitter: nil,
                 linkedin: "https://www.linkedin.com/in/paulrobertwillis/",
                 slack: "https://swiftleedsworkspace.slack.com/archives/D05RK6AAV29",
-                imageURL: getImageURL(path: "img/team/paul.jpg", req: req)
+                imageURL: "/img/team/paul.jpg"
             ),
             TeamMember(
                 name: "Joe Williams",
@@ -85,20 +85,11 @@ struct TeamAPIController: RouteCollection {
                 twitter: "https://twitter.com/joedub_dev",
                 linkedin: "https://www.linkedin.com/in/joe-williams-1676b871/",
                 slack: "https://swiftleedsworkspace.slack.com/archives/C05N7JZE2NP",
-                imageURL: getImageURL(path: "img/team/joe.jpg", req: req)
+                imageURL: "/img/team/joe.jpg"
             ),
         ]
         
         // Shuffle the team members to avoid bias, just like the web page does
         return TeamResponse(teamMembers: teamMembers.shuffled())
-    }
-    
-    private func getImageURL(path: String, req: Request) -> String {
-        // In development, use local URLs. In production, use S3
-        if req.application.environment == .development {
-            return "/\(path)"
-        } else {
-            return ImageTransformer.transform(imageURL: path)
-        }
     }
 }
