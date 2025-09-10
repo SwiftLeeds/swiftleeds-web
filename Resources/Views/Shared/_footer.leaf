@@ -27,6 +27,15 @@
               </li>
             </ul>
             <div class="d-flex pt-2 pt-sm-3 pt-md-4">
+              #if(social):
+                #for(link in social.socialLinks):
+                  #if(link.id != "spotify"):
+                  <a href="#(link.url)" class="btn btn-icon btn-sm btn-secondary btn-#(link.id) rounded-circle me-3" #if(link.id == "mastodon"):rel="me"#endif>
+                    <i class="#(link.icon)"></i>
+                  </a>
+                  #endif
+                #endfor
+              #else:
               <a href="https://twitter.com/swift_leeds" class="btn btn-icon btn-sm btn-secondary btn-twitter rounded-circle me-3">
                 <i class="bx bxl-twitter"></i>
               </a>
@@ -42,6 +51,7 @@
               <a href="https://www.flickr.com/photos/196979204@N02/albums/72177720303878744" class="btn btn-icon btn-sm btn-secondary btn-flickr rounded-circle me-3">
                 <i class="bx bxl-flickr"></i>
               </a>
+              #endif
             </div>
           </div>
 

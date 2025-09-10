@@ -93,6 +93,15 @@ struct HomeRouteController: RouteCollection {
         
         let phase = try getPhase(req: req, event: event)
         
+        // Fetch About and Social data from APIs to maintain consistency between web and mobile
+        let aboutAPIController = AboutAPIController()
+        let aboutResponse = try await aboutAPIController.onGet(request: req)
+        let aboutData = try aboutResponse.content.decode(GenericResponse<AboutResponse>.self).data
+        
+        let socialAPIController = SocialAPIController()
+        let socialResponse = try await socialAPIController.onGet(request: req)
+        let socialData = try socialResponse.content.decode(GenericResponse<SocialResponse>.self).data
+        
         let schedule = event.days
             .map { day in
                 ScheduleDay(
@@ -118,7 +127,9 @@ struct HomeRouteController: RouteCollection {
             dropInSessions: dropInSessions,
             schedule: phase.showSchedule ? schedule : [],
             phase: PhaseContext(phase: phase, event: event),
-            event: eventContext
+            event: eventContext,
+            about: aboutData,
+            social: socialData
         )
     }
     

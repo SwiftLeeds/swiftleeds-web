@@ -41,6 +41,15 @@
             
             <li class="nav-item d-none d-sm-none d-md-none d-lg-block mx-auto"></li>
             
+            #if(social):
+                #for(link in social.socialLinks):
+                <li class="nav-item">
+                  <a href="#(link.url)" target="_blank" class="nav-link" #if(link.id == "mastodon"):rel="me"#endif>
+                    <i class="#(link.icon)"></i> <span class="d-block d-sm-block d-md-block d-lg-none" style="margin-left: 6px;">#(link.name)</span>
+                  </a>
+                </li>
+                #endfor
+            #else:
             <li class="nav-item">
               <a href="https://twitter.com/swift_leeds" target="_blank" class="nav-link">
                 <i class="bx bxl-twitter"></i> <span class="d-block d-sm-block d-md-block d-lg-none" style="margin-left: 6px;">Twitter</span>
@@ -76,6 +85,7 @@
                   <i class="bx bxl-spotify"></i> <span class="d-block d-sm-block d-md-block d-lg-none" style="margin-left: 6px;">Spotify</span>
               </a>
             </li>
+            #endif
           </ul>
         </div>
         #if(false):

@@ -3,11 +3,23 @@
     <div class="row pt-xl-2 pb-md-3">
       <div class="col-lg-5 mb-4 mb-lg-0">
         <div class="text-center text-lg-start">
-            <h2 class="h1 mb-4 themed-header">About</h2>
+            <h2 class="h1 mb-4 themed-header">#if(about):#(about.title)#else:About#endif</h2>
         </div>
+        #if(about):
+            #for(paragraph in about.description):
+                #if(paragraph == about.description[0]):
+                <p>Founded by <a href="#(about.founderTwitter)" target="_blank">#(about.founderName)</a> in #(about.foundedYear), SwiftLeeds has set out to bring a modern, inclusive conference to the north of the UK.</p>
+                #elseif(paragraph == about.description[2]):
+                <p class="pb-2 pb-lg-4 pb-xl-5 mb-3">#(paragraph)</p>
+                #else:
+                <p>#(paragraph)</p>
+                #endif
+            #endfor
+        #else:
         <p>Founded by <a href="https://twitter.com/Adam9Rush" target="_blank">Adam Rush</a> in 2019, SwiftLeeds has set out to bring a modern, inclusive conference to the north of the UK.</p>
         <p>Ran by just a handful of community volunteers, SwiftLeeds is entirely non-profit with every penny going into delivering the best experience possible.</p>
         <p class="pb-2 pb-lg-4 pb-xl-5 mb-3">In-person conferences are the best way to meet like-minded people who enjoy building apps with Swift. You can also learn from the best people in the industry and chat about all things Swift.</p>
+        #endif
       </div>
       <div class="col-xl-6 col-lg-7 offset-xl-1 position-relative">
 

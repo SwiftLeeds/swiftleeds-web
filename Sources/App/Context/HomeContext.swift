@@ -18,6 +18,8 @@ struct HomeContext: Content {
     var schedule: [ScheduleDay] = []
     var phase: PhaseContext? = nil
     var event: EventContext? = nil
+    var about: AboutResponse? = nil
+    var social: SocialResponse? = nil
 }
 
 struct EventContext: Codable {
