@@ -84,6 +84,9 @@ class Migrations {
         app.migrations.add(SlotMigrationV5()) // Remove unneeded slot_id params
         app.migrations.add(PresentationMigrationV6()) // Add video visibility
         app.migrations.add(SlotMigrationV6()) // Remove legacy date and event_id fields
+        
+        // User Reviews
+        app.migrations.add(UserReviewMigrationV1()) // Add user_reviews table
 
         do {
             guard let url = Environment.get("DATABASE_URL") else {

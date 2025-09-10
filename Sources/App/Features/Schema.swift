@@ -16,4 +16,5 @@ enum Schema {
     static let tokens = "tokens"
     static let user = "users"
     static let userToken = "user_tokens"
+    static let userReview = "user_reviews"
 }
