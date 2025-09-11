@@ -93,6 +93,10 @@ struct HomeRouteController: RouteCollection {
         
         let phase = try getPhase(req: req, event: event)
         
+        // Fetch About and Social data from API endpoints to maintain single source of truth
+        let aboutData: AboutResponse? = try await fetchAboutData(req: req)
+        let socialData: SocialResponse? = try await fetchSocialData(req: req)
+        
         let schedule = event.days
             .map { day in
                 ScheduleDay(
@@ -118,7 +122,9 @@ struct HomeRouteController: RouteCollection {
             dropInSessions: dropInSessions,
             schedule: phase.showSchedule ? schedule : [],
             phase: PhaseContext(phase: phase, event: event),
-            event: eventContext
+            event: eventContext,
+            about: aboutData,
+            social: socialData
         )
     }
     
@@ -187,6 +193,38 @@ struct HomeRouteController: RouteCollection {
         }
         
         return try await Event.getCurrent(on: req.db)
+    }
+    
+    private func fetchAboutData(req: Request) async throws -> AboutResponse? {
+        do {
+            // Make internal request to the About API endpoint
+            let aboutRequest = Request(application: req.application, method: .GET, url: URI(string: "/api/v2/about"), on: req.eventLoop)
+            let aboutController = AboutAPIController()
+            let aboutResponse = try await aboutController.onGet(request: aboutRequest)
+            
+            guard let data = aboutResponse.body.data else { return nil }
+            let genericResponse = try JSONDecoder().decode(GenericResponse<AboutResponse>.self, from: data)
+            return genericResponse.data
+        } catch {
+            req.logger.warning("Failed to fetch about data from API: \(error)")
+            return nil
+        }
+    }
+    
+    private func fetchSocialData(req: Request) async throws -> SocialResponse? {
+        do {
+            // Make internal request to the Social API endpoint
+            let socialRequest = Request(application: req.application, method: .GET, url: URI(string: "/api/v2/social"), on: req.eventLoop)
+            let socialController = SocialAPIController()
+            let socialResponse = try await socialController.onGet(request: socialRequest)
+            
+            guard let data = socialResponse.body.data else { return nil }
+            let genericResponse = try JSONDecoder().decode(GenericResponse<SocialResponse>.self, from: data)
+            return genericResponse.data
+        } catch {
+            req.logger.warning("Failed to fetch social data from API: \(error)")
+            return nil
+        }
     }
 }
 
