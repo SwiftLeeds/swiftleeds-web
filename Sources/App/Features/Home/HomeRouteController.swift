@@ -93,27 +93,9 @@ struct HomeRouteController: RouteCollection {
         
         let phase = try getPhase(req: req, event: event)
         
-        // Fetch About and Social data from services to maintain consistency between web and mobile
-        let aboutData: AboutResponse? = AboutResponse(
-            title: "About",
-            description: [
-                "Founded by Adam Rush in 2019, SwiftLeeds has set out to bring a modern, inclusive conference to the north of the UK.",
-                "Ran by just a handful of community volunteers, SwiftLeeds is entirely non-profit with every penny going into delivering the best experience possible.",
-                "In-person conferences are the best way to meet like-minded people who enjoy building apps with Swift. You can also learn from the best people in the industry and chat about all things Swift."
-            ],
-            foundedYear: "2019",
-            founderName: "Adam Rush",
-            founderTwitter: "https://twitter.com/Adam9Rush"
-        )
-        
-        let socialData: SocialResponse? = SocialResponse(socialLinks: [
-            SocialLink(id: "twitter", name: "Twitter", url: "https://twitter.com/swift_leeds", icon: "bx bxl-twitter", displayName: "@Swift_Leeds", order: 1),
-            SocialLink(id: "mastodon", name: "Mastodon", url: "https://iosdev.space/@swiftleeds", icon: "bx bxl-mastodon", displayName: "@swiftleeds", order: 2),
-            SocialLink(id: "youtube", name: "YouTube", url: "https://www.youtube.com/channel/UCCq1K0eWKZFBCpqaC3n8V1g", icon: "bx bxl-youtube", displayName: nil, order: 3),
-            SocialLink(id: "slack", name: "Join Slack", url: "https://join.slack.com/t/swiftleedsworkspace/shared_invite/zt-wkmr6pif-ZDCdDeHM60jcBUy0BxHdCQ", icon: "bx bxl-slack", displayName: nil, order: 4),
-            SocialLink(id: "flickr", name: "Flickr", url: "https://www.flickr.com/photos/196979204@N02/albums/72177720303878744", icon: "bx bxl-flickr", displayName: nil, order: 5),
-            SocialLink(id: "spotify", name: "Spotify", url: "https://open.spotify.com/show/3pHsjVt54MDDHdzZce7ezl", icon: "bx bxl-spotify", displayName: nil, order: 6)
-        ])
+        // Fetch About and Social data from API endpoints to maintain single source of truth
+        let aboutData: AboutResponse? = try await fetchAboutData(req: req)
+        let socialData: SocialResponse? = try await fetchSocialData(req: req)
         
         let schedule = event.days
             .map { day in
@@ -211,6 +193,38 @@ struct HomeRouteController: RouteCollection {
         }
         
         return try await Event.getCurrent(on: req.db)
+    }
+    
+    private func fetchAboutData(req: Request) async throws -> AboutResponse? {
+        do {
+            // Make internal request to the About API endpoint
+            let aboutRequest = Request(application: req.application, method: .GET, url: URI(string: "/api/v2/about"), on: req.eventLoop)
+            let aboutController = AboutAPIController()
+            let aboutResponse = try await aboutController.onGet(request: aboutRequest)
+            
+            guard let data = aboutResponse.body.data else { return nil }
+            let genericResponse = try JSONDecoder().decode(GenericResponse<AboutResponse>.self, from: data)
+            return genericResponse.data
+        } catch {
+            req.logger.warning("Failed to fetch about data from API: \(error)")
+            return nil
+        }
+    }
+    
+    private func fetchSocialData(req: Request) async throws -> SocialResponse? {
+        do {
+            // Make internal request to the Social API endpoint
+            let socialRequest = Request(application: req.application, method: .GET, url: URI(string: "/api/v2/social"), on: req.eventLoop)
+            let socialController = SocialAPIController()
+            let socialResponse = try await socialController.onGet(request: socialRequest)
+            
+            guard let data = socialResponse.body.data else { return nil }
+            let genericResponse = try JSONDecoder().decode(GenericResponse<SocialResponse>.self, from: data)
+            return genericResponse.data
+        } catch {
+            req.logger.warning("Failed to fetch social data from API: \(error)")
+            return nil
+        }
     }
 }
 
