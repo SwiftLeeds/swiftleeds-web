@@ -116,6 +116,7 @@ struct TeamContext: Content {
         let role: String?
         let twitter: String?
         let linkedin: String?
+        let slack: String?
         let imageURL: String?
     }
     

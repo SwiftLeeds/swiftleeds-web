@@ -49,8 +49,13 @@
                     </a>
                     #endif
                     #if(teamMember.twitter):
-                    <a href="#(teamMember.twitter)" class="btn btn-icon btn-secondary btn-twitter btn-sm bg-white" aria-label="Twitter">
+                    <a href="#(teamMember.twitter)" class="btn btn-icon btn-secondary btn-twitter btn-sm bg-white me-2" aria-label="Twitter">
                       <i class="bx bxl-twitter"></i>
+                    </a>
+                    #endif
+                    #if(teamMember.slack):
+                    <a href="#(teamMember.slack)" class="btn btn-icon btn-secondary btn-slack btn-sm bg-white" aria-label="Slack">
+                      <i class="bx bxl-slack"></i>
                     </a>
                     #endif
                   </div>

@@ -24,10 +24,24 @@ struct HomeRouteController: RouteCollection {
         
         try await event.$days.load(on: req.db)
         
-        // We shuffle the team members array on each load request in order to remove any bias in the array.
-        // All volunteers are shown equally.
+        // Fetch team data from API to maintain consistency between web and mobile
+        let teamAPIController = TeamAPIController()
+        let teamResponse = try await teamAPIController.getTeam(req: req)
+        
+        // Convert API response to context format for the web template
+        let teamMembers = teamResponse.teamMembers.map { member in
+            TeamContext.TeamMember(
+                name: member.name,
+                role: member.role,
+                twitter: member.twitter,
+                linkedin: member.linkedin,
+                slack: member.slack,
+                imageURL: member.imageURL
+            )
+        }
+        
         let context = TeamContext(
-            teamMembers: teamMembers.shuffled(),
+            teamMembers: teamMembers,
             event: EventContext(event: event)
         )
         
