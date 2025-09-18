@@ -55,18 +55,18 @@
                     Merch Preferences
                   </a>
                 #endif
-                
-                #if(count(dropInSessions) > 0 && !event.isPast):
+
+                #if((regularDropInSessions || groupDropInSessions) && !event.isPast):
                   <a href="#dropin" data-scroll data-scroll-offset="70" class="list-group-item list-group-item-action d-flex align-items-center">
                     <i class="bx bx-chat fs-xl opacity-60 me-2"></i>
                     Drop-In Sessions
                   </a>
                 #endif
                   
-                #if(count(groupSessions) > 0):
+                #if(count(groupDropInSessions) > 0):
                   <a href="#focus" data-scroll data-scroll-offset="70" class="list-group-item list-group-item-action d-flex align-items-center">
                     <i class="bx bx-group fs-xl opacity-60 me-2"></i>
-                    Focus Groups
+                    Group Drop-In Sessions
                   </a>
                 #endif
                   
@@ -217,12 +217,12 @@
               
               <hr />
 #endif
-              
-              #if(count(dropInSessions) > 0 && !event.isPast):
+
+              #if((regularDropInSessions || groupDropInSessions) && !event.isPast):
                   <!-- Drop-In -->
                   <h2 id="dropin" class="h5 text-primary pt-1 pt-lg-3 mt-4">Drop-In Sessions</h2>
-                  <p>Drop-In sessions enable you to have a one-to-one conversation with one of our fantastic hosts below. Each session covers a unique subject, such as your apps, career, or anything else you want to discuss.</p>
-                  <p>Drop-In sessions are free, and one session is included in your ticket cost. However, slots are limited and offered on a first-come, first-served basis, so why not book a slot below?</p>
+                  <p>Drop-In sessions give you exclusive access to industry experts through both individual and group sessions. Each session covers unique subjects like your apps, career advice, or technical deep-dives.</p>
+                  <p>All drop-in sessions are included free with your ticket. You can book both a regular 1-on-1 session <strong>and</strong> a group session. Slots are limited and offered on a first-come, first-served basis, so secure your spots below!</p>
                   
                   #if(prompt):
                     <div class="alert alert-secondary" role="alert">#(prompt)</div>
@@ -268,19 +268,20 @@
                     #endfor
                 </div>
               #endif
-              
-                  #for(session in dropInSessions):
+
+                  #for(session in regularDropInSessions):
                     #extend("Hub/_carousel")
                   #endfor
-                  
+
                   <hr class="mt-3" />
               #endif
               
-              #if(count(groupSessions) > 0):
-                  <h2 id="focus" class="h5 text-primary pt-1 pt-lg-3 mt-4">Focus Groups</h2>
-                  <!-- TODO: add explanation of group sessions -->
+              #if(count(groupDropInSessions) > 0):
+                  <h2 id="focus" class="h5 text-primary pt-1 pt-lg-3 mt-4">Group Drop-In</h2>
+                  <p>Join small group sessions for hands-on learning and in-depth exploration of specific topics. These interactive sessions allow you to learn alongside other attendees with direct guidance from industry experts.</p>
+                  <p>Group Drop-In sessions are perfect for collaborative learning and networking. You can book a group drop-in session in addition to your individual drop-in session.</p>
                   
-                  #for(session in groupSessions):
+                  #for(session in groupDropInSessions):
                     #extend("Hub/_carousel")
                   #endfor
                   

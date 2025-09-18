@@ -124,12 +124,16 @@ struct HomeRouteController: RouteCollection {
                 $0.date < $1.date
             })
         
+        let regularDropInSessions = dropInSessions.filter { $0.maxTicketsPerSlot == 1 }
+        let groupDropInSessions = dropInSessions.filter { $0.maxTicketsPerSlot > 1 }
+
         return HomeContext(
             speakers: speakers,
             platinumSponsors: platinumSponsors,
             silverSponsors: silverSponsors,
             goldSponsors: goldSponsors,
-            dropInSessions: dropInSessions,
+            regularDropInSessions: regularDropInSessions,
+            groupDropInSessions: groupDropInSessions,
             schedule: phase.showSchedule ? schedule : [],
             phase: PhaseContext(phase: phase, event: event),
             event: eventContext

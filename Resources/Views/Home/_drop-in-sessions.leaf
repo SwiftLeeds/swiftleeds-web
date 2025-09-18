@@ -9,14 +9,15 @@
       <div class="col-md-6">
         <h2 class="h3 mb-sm-4">#if(event.year == 2023):<span class="badge bg-primary fs-sm align-middle me-2">NEW</span>#endif Drop-In Sessions</h2>
         <p class="d-md-none d-xl-block pb-2 pb-md-3 mb-3">
-          Included for free with every ticket, drop-in sessions give you an
-          exclusive 1 on 1 feedback session with one of our industry experts.
-          Choose from one of this year's hosts covering a wide range of topics.
+          Included for free with every ticket, drop-in sessions give you exclusive
+          1-on-1 feedback sessions with our industry experts. You can book both
+          individual <strong>and</strong> group sessions to maximize your learning experience.
         </p>
-        #if(count(dropInSessions) > 0):
-        <div class="border rounded-3 mb-4 mb-lg-5">
+        #if(count(regularDropInSessions) > 0 || count(groupDropInSessions) > 0):
+        #if(count(regularDropInSessions) > 0):
+        <div class="border rounded-3 mb-4">
           <div class="row row-cols-1 row-cols-sm-2 g-0">
-            #for(session in dropInSessions):
+            #for(session in regularDropInSessions):
             <div class="col d-flex align-items-center #if(index == 0 || index == 1):border-bottom#endif #if(index == 0 || index == 2):border-end-sm#endif p-3">
               <img src="#awsImage(session.ownerImageUrl)" width="48" alt="#(session.owner) avatar image" class="rounded-circle">
               <div class="ps-2 ms-1">
@@ -27,6 +28,29 @@
             #endfor
           </div>
         </div>
+        #endif
+
+        #if(count(groupDropInSessions) > 0):
+        <h3 class="h5 mb-3 mt-4">#if(event.year == 2025):<span class="badge bg-primary fs-sm align-middle me-2">NEW</span>#endif Group Drop-In Sessions</h3>
+        <p class="d-md-none d-xl-block pb-2 pb-md-3 mb-3">
+          Join small group sessions for hands-on learning and in-depth exploration of specific topics.
+          Learn alongside other attendees with direct guidance from industry experts.
+        </p>
+        <div class="border rounded-3 mb-4 mb-lg-5">
+          <div class="row #if(count(groupDropInSessions) > 1):row-cols-1 row-cols-sm-2#endif g-0">
+            #for(session in groupDropInSessions):
+            <div class="col d-flex align-items-center #if(count(groupDropInSessions) > 1):#if(index == 0 || index == 1):border-bottom#endif #if(index == 0 || index == 2):border-end-sm#endif#endif p-3">
+              <img src="#awsImage(session.ownerImageUrl)" width="48" alt="#(session.owner) avatar image" class="rounded-circle">
+              <div class="ps-2 ms-1">
+                <h3 class="h6 mb-0">#(session.title)</h3>
+                <p class="fs-xs mb-0"><a href="#(session.ownerLink)" target="_blank">#(session.owner)</a></p>
+              </div>
+            </div>
+            #endfor
+          </div>
+        </div>
+        #endif
+
         <div class="d-flex flex-column flex-sm-row">
           <a href="/ticket#dropin" class="btn btn-primary mb-3 mb-sm-0 me-sm-3">Book Session</a>
         </div>
