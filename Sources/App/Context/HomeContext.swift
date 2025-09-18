@@ -15,6 +15,8 @@ struct HomeContext: Content {
     var silverSponsors: [Sponsor] = []
     var goldSponsors: [Sponsor] = []
     var dropInSessions: [DropInSession] = []
+    var regularDropInSessions: [DropInSession] = []
+    var groupDropInSessions: [DropInSession] = []
     var schedule: [ScheduleDay] = []
     var phase: PhaseContext? = nil
     var event: EventContext? = nil
