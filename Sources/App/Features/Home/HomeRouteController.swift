@@ -132,7 +132,6 @@ struct HomeRouteController: RouteCollection {
             platinumSponsors: platinumSponsors,
             silverSponsors: silverSponsors,
             goldSponsors: goldSponsors,
-            dropInSessions: dropInSessions,
             regularDropInSessions: regularDropInSessions,
             groupDropInSessions: groupDropInSessions,
             schedule: phase.showSchedule ? schedule : [],

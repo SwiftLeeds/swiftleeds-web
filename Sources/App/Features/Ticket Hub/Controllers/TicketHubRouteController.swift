@@ -32,8 +32,10 @@ struct TicketHubRouteController: RouteCollection {
                     .all()
                     .filter { $0.isPublic }
                 
-                let dropInSessions = sessions.filter { $0.maxTicketsPerSlot == 1 }.map { convertDropInSessionToViewModel($0, slug: ticket.slug) }
-                let groupSessions = sessions.filter { $0.maxTicketsPerSlot > 1 }.map { convertDropInSessionToViewModel($0, slug: ticket.slug) }
+
+                let regularDropInSessions = sessions.filter { $0.maxTicketsPerSlot == 1 }.map { convertDropInSessionToViewModel($0, slug: ticket.slug) }
+                let groupDropInSessions = sessions.filter { $0.maxTicketsPerSlot > 1 }.map { convertDropInSessionToViewModel($0, slug: ticket.slug) }
+
                 let userSessions = sessions.filter { $0.maxTicketsPerSlot > 0 && $0.slots.contains(where: { $0.ticket.contains(ticket.slug) }) }
                     .map { convertDropInSessionToViewModel($0, slug: ticket.slug) }
                 
@@ -70,8 +72,8 @@ struct TicketHubRouteController: RouteCollection {
                     ),
                     videos: videos,
                     userSessions: userSessions,
-                    dropInSessions: dropInSessions,
-                    groupSessions: groupSessions,
+                    regularDropInSessions: regularDropInSessions,
+                    groupDropInSessions: groupDropInSessions,
                     refund: .init(
                         active: Date() < refundDeadline,
                         days: refundDays,
@@ -310,8 +312,8 @@ struct TicketHubContext: Content {
     let ticket: Ticket
     let videos: [VideoPresentation]
     let userSessions: [Session]
-    let dropInSessions: [Session]
-    let groupSessions: [Session]
+    let regularDropInSessions: [Session]
+    let groupDropInSessions: [Session]
     let refund: Refund
     let hasValidTicket: Bool
     let canViewDropInSessionParticipants: Bool
