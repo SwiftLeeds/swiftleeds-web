@@ -90,7 +90,7 @@ In order for Xcode to know where the Leaf files are stored, you must set your wo
 
 That should be everything! If you've followed these steps, you should now be able to run the 'swift-leeds' scheme in Xcode. This will output a message reading "Server starting on http://127.0.0.1:8080".
 
-If the application fails to load then we recommend following these steps again to make sure you haven't missed something. Otherwise, feel free to raise a GitHub Issue or contact us on the Slack (links above) and we'll help you to get started.
+If the application fails to load, then we recommend following these steps again to make sure you haven't missed something. Otherwise, feel free to raise a GitHub Issue or contact us on the Slack (links above) and we'll help you to get started.
 
 ### (Optional) Seed Database
 
