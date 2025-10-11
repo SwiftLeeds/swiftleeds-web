@@ -75,7 +75,7 @@ jobs:
             ENABLE_AASA=true
             CHECKIN_SECRET=${{ secrets.CHECKIN_SECRET }}
             CHECKIN_TAG=${{ secrets.CHECKIN_TAG }}
-            DATABASE_URL=${{ secrets.DATABASE_URL }}
+            DATABASE_URL=${{ (github.head_ref != '' ? github.head_ref : github.ref_name) == 'main' ? secrets.DATABASE_URL : secrets.STAGING_DATABASE_URL }}
             P8_CERTIFICATE=${{ secrets.P8_CERTIFICATE }}
             S3_KEY=${{ secrets.S3_KEY }}
             S3_SECRET=${{ secrets.S3_SECRET }}
