@@ -40,7 +40,8 @@ jobs:
           apt-get -q update \
             && apt-get -q dist-upgrade -y \
             && apt-get install -y libjemalloc-dev \
-            && apt-get install -y libssl-dev
+            && apt-get install -y libssl-dev \
+            && rm -rf /var/lib/apt/lists/*
 
           swift build -c release --force-resolved-versions --static-swift-stdlib -Xlinker -ljemalloc
 
@@ -71,6 +72,7 @@ jobs:
           push: true
           provenance: false
           tags: europe-west1-docker.pkg.dev/swiftleeds-website/swiftleeds-web/web:${{ github.head_ref || github.ref_name }}-latest
+          no-cache: true
 
   deploy:
     if: github.repository_owner == 'SwiftLeeds'
