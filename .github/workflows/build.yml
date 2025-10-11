@@ -4,6 +4,7 @@ on:
   pull_request:
   push:
     branches: [main]
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -13,10 +14,46 @@ jobs:
   build:
     if: github.repository_owner == 'SwiftLeeds'
     runs-on: ubuntu-latest
+    container: swift:6.0-jammy
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+
+      # actions/cache will detect zstd and will become much faster.
+      - name: Install zstd
+        run: |
+          apt-get update -y
+          apt-get install -y zstd
+
+      - name: Restore .build
+        if: ${{ github.run_attempt == 1 }} # Because maybe the cache is causing issues
+        id: "restore-cache"
+        uses: actions/cache/restore@v4
+        with:
+          path: .build
+          key: "build-${{ runner.os }}-${{ github.event.pull_request.base.sha || github.event.after }}"
+          restore-keys: "build-${{ runner.os }}-"
+
+      - name: Prebuild Application
+        run: |
+          apt-get -q update \
+            && apt-get -q dist-upgrade -y \
+            && apt-get install -y libjemalloc-dev \
+            && apt-get install -y libssl-dev \
+            && rm -rf /var/lib/apt/lists/*
+
+          swift build -c release --force-resolved-versions --static-swift-stdlib -Xlinker -ljemalloc
+
+      - name: Cache .build
+        if: steps.restore-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .build
+          key: "build-${{ runner.os }}-${{ github.event.pull_request.base.sha || github.event.after }}"
+
+      - name: Install Docker
+        run: ./.github/install-docker.bash
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -35,8 +72,6 @@ jobs:
           push: true
           provenance: false
           tags: europe-west1-docker.pkg.dev/swiftleeds-website/swiftleeds-web/web:${{ github.head_ref || github.ref_name }}-latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
   deploy:
     if: github.repository_owner == 'SwiftLeeds'
