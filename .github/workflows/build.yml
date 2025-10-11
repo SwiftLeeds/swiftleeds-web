@@ -39,7 +39,8 @@ jobs:
         run: |
           apt-get -q update \
             && apt-get -q dist-upgrade -y \
-            && apt-get install -y libjemalloc-dev
+            && apt-get install -y libjemalloc-dev \
+            && apt-get install -y libssl-dev
 
           swift build -c release --force-resolved-versions --static-swift-stdlib -Xlinker -ljemalloc
 
