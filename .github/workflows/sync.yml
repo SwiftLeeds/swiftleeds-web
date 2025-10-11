@@ -13,14 +13,26 @@ jobs:
       - name: Install PostgreSQL client
         run: sudo apt-get update && sudo apt-get install -y postgresql-client
 
-      - name: Dump production database
+      - name: Dump production database (public schema only)
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
-          pg_dump "$DATABASE_URL" --no-owner --no-privileges --format=custom --file=prod_dump.dump
+          pg_dump "$DATABASE_URL" \
+            --schema=public \
+            --no-owner \
+            --no-privileges \
+            --format=custom \
+            --file=prod_dump.dump
 
-      - name: Restore to staging database
+      - name: Restore to staging database (public schema only)
         env:
           STAGING_DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
         run: |
-          pg_restore --clean --if-exists --no-owner --no-privileges --dbname="$STAGING_DATABASE_URL" prod_dump.dump
+          pg_restore \
+            --clean \
+            --if-exists \
+            --no-owner \
+            --no-privileges \
+            --schema=public \
+            --dbname="$STAGING_DATABASE_URL" \
+            prod_dump.dump
