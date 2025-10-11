@@ -72,7 +72,6 @@ jobs:
           push: true
           provenance: false
           tags: europe-west1-docker.pkg.dev/swiftleeds-website/swiftleeds-web/web:${{ github.head_ref || github.ref_name }}-latest
-          no-cache: true
 
   deploy:
     if: github.repository_owner == 'SwiftLeeds'
