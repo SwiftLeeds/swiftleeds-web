@@ -52,7 +52,7 @@ jobs:
           key: "build-${{ runner.os }}-${{ github.event.pull_request.base.sha || github.event.after }}"
 
       - name: Install Docker
-        run: curl -fsSL https://get.docker.com | bash
+        run: ./.github/install-docker.bash
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
