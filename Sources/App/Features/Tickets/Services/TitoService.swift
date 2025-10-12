@@ -16,15 +16,13 @@ struct TitoService {
             req.logger.warning("There is an extra page of ticket results, login will not see new tickets...")
         }
         
-        let ticketOpt = ticketResponse.tickets.first(where: {
+        return ticketResponse.tickets.first(where: {
             // case insensitive comparisons
             $0.reference.lowercased() == payload.ticket.lowercased() &&
                 $0.email?.lowercased() == payload.email.lowercased() &&
                 // ensure unassigned tickets do not get captured here
                 $0.email != nil
         })
-        
-        return ticketOpt
     }
     
     func ticket(stub: String, req: Request) async throws -> TitoTicket? {

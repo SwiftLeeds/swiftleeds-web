@@ -11,8 +11,16 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  lint:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: SwiftFormat
+        run: swiftformat --lint . --reporter github-actions-log
+
   build:
     if: github.repository_owner == 'SwiftLeeds'
+    needs: lint
     runs-on: ubuntu-latest
     container: swift:6.0-jammy
 

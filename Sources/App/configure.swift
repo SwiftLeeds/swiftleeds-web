@@ -57,6 +57,7 @@ public func configure(_ app: Application) async throws {
         app.get { req in
             req.view.render("Kotlin/home")
         }
+
     case .swiftleeds:
         try routes(app)
     }

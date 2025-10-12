@@ -8,11 +8,21 @@
 --disable redundantReturn
 
 --enable isEmpty
---enable sortedSwitchCases
+--enable sortSwitchCases
 --enable wrapEnumCases
 --enable wrapSwitchCases
 --enable wrapConditionalBodies
 --enable blankLinesBetweenImports
+--enable blankLineAfterSwitchCase
+--enable blankLinesBetweenImports
 --enable blockComments
+--enable emptyExtensions
+--enable preferSwiftTesting
+--enable singlePropertyPerLine
+--enable redundantMemberwiseInit
+--enable redundantAsync
+--enable redundantEquatable
+--enable redundantProperty
+--enable redundantThrows
 
 --header ""
