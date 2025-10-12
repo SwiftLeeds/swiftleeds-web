@@ -45,7 +45,9 @@ struct EventRouteController: RouteCollection {
         let input = try request.content.decode(FormInput.self)
         let isCurrent = input.isCurrent ?? event?.isCurrent ?? false
         var eventID: Event.IDValue
-
+        
+        try request.requireUser(hasPermission: .eventUpdate)
+        
         guard let date = Self.formDateFormatter().date(from: input.date) else {
             throw Abort(.badRequest, reason: "Invalid Date Format")
         }
@@ -56,6 +58,7 @@ struct EventRouteController: RouteCollection {
             event.location = input.location
             event.isCurrent = isCurrent
             event.showSchedule = input.showSchedule ?? false
+            event.checkinKey = input.checkinKey ?? event.checkinKey
 
             eventID = try event.requireID()
 
@@ -98,5 +101,6 @@ struct EventRouteController: RouteCollection {
         let location: String
         let isCurrent: Bool?
         let showSchedule: Bool?
+        let checkinKey: String?
     }
 }
