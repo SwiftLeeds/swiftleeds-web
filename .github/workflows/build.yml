@@ -1,4 +1,4 @@
-name: Build SwiftLeeds
+name: Build All Services
 
 on:
   pull_request:
@@ -78,6 +78,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
 
+    strategy:
+      max-parallel: 1 # Shouldn't cause issues, but let's deploy one conference at a time
+      matrix:
+        conference: [swiftleeds, kotlinleeds]
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -92,14 +97,14 @@ jobs:
         id: deployment
         with:
           step: start
-          env: ${{ github.head_ref || github.ref_name }}
+          env: ${{ matrix.conference }}-${{ github.head_ref || github.ref_name }}
           ref: ${{ github.head_ref || github.ref_name }}
 
       - name: Deploy to Cloud Run
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-          service: swiftleeds-web-${{ github.head_ref || github.ref_name }}-be
+          service: ${{ matrix.conference }}-web-${{ github.head_ref || github.ref_name }}-be
           region: europe-west1
           image: europe-west1-docker.pkg.dev/swiftleeds-website/swiftleeds-web/web:${{ github.head_ref || github.ref_name }}-latest
           flags: "--allow-unauthenticated"
@@ -119,6 +124,7 @@ jobs:
             FLICKR_KEY=${{ secrets.FLICKR_KEY }}
             FLICKR_SECRET=${{ secrets.FLICKR_SECRET }}
             REFUND_PERIOD=${{ secrets.REFUND_PERIOD }}
+            CONFERENCE=${{ matrix.conference }}
 
       - name: Update GitHub Deployment
         uses: bobheadxi/deployments@v1

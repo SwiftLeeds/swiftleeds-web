@@ -1,4 +1,4 @@
-name: Destroy SwiftLeeds
+name: Shutdown Services
 
 on:
   pull_request:
@@ -9,6 +9,10 @@ jobs:
     if: github.repository_owner == 'SwiftLeeds'
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        conference: [swiftleeds, kotlinleeds]
+    
     steps:
       - name: Authenticate with Google Cloud
         uses: "google-github-actions/auth@v2"
@@ -19,11 +23,10 @@ jobs:
         uses: "google-github-actions/setup-gcloud@v2"
 
       - name: Destroy Google Cloud Run Servce
-        run: gcloud run services delete --quiet --region europe-west2 swiftleeds-web-${{ github.head_ref || github.ref_name }}-be
+        run: gcloud run services delete --quiet --region europe-west1 ${{ matrix.conference }}-web-${{ github.head_ref || github.ref_name }}-be
 
       - name: Destroy GitHub Deployment
         uses: bobheadxi/deployments@v1
         with:
           step: deactivate-env
-          env: ${{ github.head_ref || github.ref_name }}
-
+          env: ${{ matrix.conference }}-${{ github.head_ref || github.ref_name }}
