@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="android, kotlin, conference, leeds, kotlinleeds, swiftleeds">
+    <title>KotlinLeeds - The Unique Android Kotlin Conferece in the UK</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/kotlin.css">
+    <script src='https://js.tito.io/v2' async></script>
+    <link rel="icon" href="favicon.ico" type="img/Kotlin_Icon">
+    <link rel="shortcut icon" href="favicon.ico" type="img/Kotlin_Icon">
+  </head>
+  <body>
+    <div class="half left-half"></div>
+    <div class="half right-half"></div>
+    <div class="container-fluid background-container">
+        <div class="row">
+            <div class="col-md-4 text-center text-white center-column-flex">
+                <h1 class="white-text-media-query fw-bold">Hello, KotlinLeeds!</h1>
+                <p class="white-text-media-query">We've got something coming soon...</p>
+            </div>
+            <div class="col-md-4 center-row-flex">
+                <img src="/img/Kotlin_Icon.svg" alt="Icon" class="img-fluid mx-auto d-block" style="width: 25%">
+            </div>
+            <div class="col-md-4 text-center" >
+                <tito-register-interest id="tito-widget" event="swiftleeds/kotlinleeds" email-placeholder="sundar@gmail.com" name-placeholder="Sundar Pichai">
+                    <a data-v-2b7a4f44="" href="https://ti.to" target="_blank">Click here to register interest</a>
+                </tito-register-interest>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script defer data-domain="kotlinleeds.co.uk" src="https://plausible.io/js/script.js"></script>
+    <script>
+          window.tito =
+            window.tito ||
+            function() {
+                (tito.q = tito.q || []).push(arguments);
+            };
+    </script>
+  </body>
+</html>

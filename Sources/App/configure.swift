@@ -51,7 +51,15 @@ public func configure(_ app: Application) async throws {
 
     // Routes
     app.routes.defaultMaxBodySize = "10mb"
-    try routes(app)
+    
+    switch app.conference {
+    case .kotlinleeds:
+        app.get { req in
+            req.view.render("Kotlin/home")
+        }
+    case .swiftleeds:
+        try routes(app)
+    }
 
     // APNS
     if
@@ -63,5 +71,15 @@ public func configure(_ app: Application) async throws {
         try await app.apns.configure(.jwt(privateKey: .loadFrom(string: p8Key), keyIdentifier: "K4D2BJ235Y", teamIdentifier: "K33K6V7FBA"))
     } else {
         app.logger.warning("Skipping APNS Setup")
+    }
+}
+
+extension Application {
+    enum Conference: String {
+        case kotlinleeds, swiftleeds
+    }
+    
+    var conference: Conference {
+        Environment.get("CONFERENCE").flatMap { Conference(rawValue: $0) } ?? .swiftleeds
     }
 }

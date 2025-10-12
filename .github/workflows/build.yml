@@ -79,6 +79,7 @@ jobs:
     needs: build
 
     strategy:
+      max-parallel: 1 # Shouldn't cause issues, but let's deploy one conference at a time
       matrix:
         conference: [swiftleeds, kotlinleeds]
 

@@ -1,0 +1,106 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden; /* Prevent content from overflowing */
+}
+
+.half {
+  position: absolute;
+  top: 0;
+  width: 50vw;
+  height: 100vh;
+}
+
+.center-column-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.center-row-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.right-half {
+  right: 0;
+  background: white;
+}
+
+.left-half {
+  left: 0;
+  background: radial-gradient(89.53% 145.96% at 0.34% 100.79%, rgb(239, 72, 87) 0px, rgb(222, 73, 112) 17.58%, rgb(180, 77, 176) 50.31%, rgb(127, 82, 255) 97.03%);
+}
+
+.background-container {
+  z-index: 999;
+}
+
+/* Style for the form container */
+.tito-register-interest-form {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+/* Style for the name field */
+.tito-register-interest-form--name {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tito-name-label {
+  align-items: center;
+}
+
+/* Style for the email field */
+.tito-register-interest-form--email {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tito-email-label {
+  align-items: center;
+}
+
+/* Style for the input fields with rounded corners and adjusted drop shadow */
+.tito-register-interest-name-field,
+.tito-register-interest-email-field {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1); /* Adjusted drop shadow */
+}
+
+/* Style for the submit button with the new green color */
+.tito-register-interest-form button {
+  background-color: rgb(25, 195, 125); /* New green color */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Hover effect for the submit button */
+.tito-register-interest-form button:hover {
+  background-color: #1a8041; /* Darker green on hover */
+}
+
+@media (max-width: 770px) {
+  /* Style changes for screens with a width of 762x685 or smaller */
+  .white-text-media-query {
+    color: #27282c;
+  }
+}
