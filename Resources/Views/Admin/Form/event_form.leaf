@@ -22,6 +22,13 @@
         <div class="invalid-feedback">Please provide a location.</div>
     </div>
     
+    #if(event):
+    <div class="mb-3">
+        <label for="location" class="form-label">Tito Check-In Key</label>
+        <input class="form-control" type="text" id="checkinKey" name="checkinKey" value="#(event.checkinKey)" placeholder="chk_...">
+    </div>
+    #endif
+    
     <div class="form-check form-switch">
         <input type="checkbox" class="form-check-input" id="showSchedule" name="showSchedule" #if(event.showSchedule):checked#endif>
         <label class="form-check-label" for="showSchedule">Show schedule?</label>

@@ -84,6 +84,9 @@ class Migrations {
         app.migrations.add(SlotMigrationV5()) // Remove unneeded slot_id params
         app.migrations.add(PresentationMigrationV6()) // Add video visibility
         app.migrations.add(SlotMigrationV6()) // Remove legacy date and event_id fields
+        app.migrations.add(EventMigrationV5()) // Add `checkin_key` to event
+        app.migrations.add(UserMigrationV2()) // Add `permissions` to user
+        app.migrations.add(EventMigrationV6()) // Add `conference` to event ("swiftleeds" - default, or "kotlinleeds")
 
         do {
             guard let url = Environment.get("DATABASE_URL") else {
