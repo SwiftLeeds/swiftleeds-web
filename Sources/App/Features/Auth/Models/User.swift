@@ -15,8 +15,8 @@ final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAu
         return id ?? .init()
     }
     
-    static let usernameKey = \User.$email
-    static let passwordHashKey = \User.$passwordHash
+    static var usernameKey: KeyPath<User, Field<String>> { \User.$email }
+    static var passwordHashKey: KeyPath<User, Field<String>> { \User.$passwordHash }
     
     // Unique identifier for this user.
     @ID()
@@ -64,19 +64,19 @@ final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAu
     
     public static func credentialsAuthenticator(
         database _: DatabaseID? = nil
-    ) -> Authenticator {
+    ) -> any Authenticator {
         return CustomCredentialsAuthenticator()
     }
     
     public static func sessionAuthenticator(
         _: DatabaseID? = nil
-    ) -> Authenticator {
+    ) -> any Authenticator {
         return SessionAuthenticator()
     }
     
     public static func authenticator(
         database _: DatabaseID? = nil
-    ) -> Authenticator {
+    ) -> any Authenticator {
         return BearerAuthenticatable()
     }
 

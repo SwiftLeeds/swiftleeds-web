@@ -7,8 +7,8 @@ final class UserToken: Model, Content, ModelTokenAuthenticatable, Codable, @unch
     
     typealias User = App.User
     
-    static let valueKey = \UserToken.$value
-    static let userKey = \UserToken.$user
+    static var valueKey: KeyPath<UserToken, Field<String>> { \UserToken.$value }
+    static var userKey: KeyPath<UserToken, Parent<User>> { \UserToken.$user }
 
     var isValid: Bool {
         return timestamp > Date()

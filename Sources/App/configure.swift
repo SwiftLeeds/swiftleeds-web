@@ -38,11 +38,14 @@ public func configure(_ app: Application) async throws {
     app.leaf.cache.isEnabled = false
     #endif
 
-    // Migrations
+    // Setup database and define migrations
     try await Migrations.migrate(app)
 
-    // Model middleware
-    app.databases.middleware.use(SponsorMiddleware(), on: .psql)
+    // Check that the database has been setup
+    if app.databases.ids().isEmpty == false {
+        // Model middleware
+        app.databases.middleware.use(SponsorMiddleware(), on: .psql)
+    }
 
     // Routes
     app.routes.defaultMaxBodySize = "10mb"

@@ -67,7 +67,7 @@ struct SlotRouteController: RouteCollection {
         }
         
         try await eventDay.$event.load(on: request.db)
-        let event = eventDay.event
+//        let event = eventDay.event
 
         // We can have either, but not both. If both are provided, prioritise the activity.
         if let activityID = input.activityID, activityID.isEmpty == false {
@@ -76,13 +76,13 @@ struct SlotRouteController: RouteCollection {
             presentation = try await Presentation.find(.init(uuidString: presentationID), on: request.db)
         }
 
-        let minutes: Int = input.startTime.components(separatedBy: ":").enumerated().reduce(into: 0) { builder, value in
-            guard let number = Int(value.element) else { return }
-            if value.offset == 0 { builder += number * 60 }
-            else { builder += number }
-        }
+//        let minutes: Int = input.startTime.components(separatedBy: ":").enumerated().reduce(into: 0) { builder, value in
+//            guard let number = Int(value.element) else { return }
+//            if value.offset == 0 { builder += number * 60 }
+//            else { builder += number }
+//        }
         
-        let inputDate = eventDay.date.addingTimeInterval(TimeInterval(minutes * 60))
+//        let inputDate = eventDay.date.addingTimeInterval(TimeInterval(minutes * 60))
         let duration = input.duration.flatMap(Double.init)
         
         let mutableSlot = slot ?? Slot()
