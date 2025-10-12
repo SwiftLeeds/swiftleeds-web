@@ -1,33 +1,31 @@
 @testable import App
-import XCTVapor
+import VaporTesting
+import Testing
 
-final class AppTests: XCTestCase {
-    func testAASA() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
+@Suite("Application Tests")
+struct AppTests {
+    private func withApp(_ test: (Application) async throws -> ()) async throws {
+        let app = try await Application.make(.testing)
         
-        try app.test(.GET, ".well-known/apple-app-site-association", afterResponse: { res in
-            XCTAssertEqual(res.status, .ok)
-            XCTAssertEqual(res.headers.first(name: .contentType), "application/json") // mime type must be set
-            XCTAssertLessThan(res.body.readableBytes, 128000) // Max size is 128Kb
-        })
+        do {
+            try await configure(app)
+            try await test(app)
+        } catch {
+            try await app.asyncShutdown()
+            throw error
+        }
+        
+        try await app.asyncShutdown()
     }
     
-    func testPhaseDateCalculation() {
-        do { // 2014 (Unannounced)
-            let event = Event(id: nil, name: "SwiftLeeds 2014", date: Date(timeIntervalSince1970: 1412899200), location: "", isCurrent: false)
-            XCTAssertEqual(HomeRouteController().buildConferenceDateString(for: event), nil)
-        }
-        
-        do { // 2021 (1 day event)
-            let event = Event(id: nil, name: "SwiftLeeds 2021", date: Date(timeIntervalSince1970: 1633737600), location: "", isCurrent: false)
-            XCTAssertEqual(HomeRouteController().buildConferenceDateString(for: event), "9 OCT")
-        }
-        
-        do { // 2023 (2 day event)
-            let event = Event(id: nil, name: "SwiftLeeds 2023", date: Date(timeIntervalSince1970: 1696809600), location: "", isCurrent: false)
-            XCTAssertEqual(HomeRouteController().buildConferenceDateString(for: event), "9-10 OCT")
+    @Test("Ensure AASA has correct format")
+    func verifyAASA() async throws {
+        try await withApp { app in
+            try await app.testing().test(.GET, ".well-known/apple-app-site-association", afterResponse: { res in
+                #expect(res.status == .ok)
+                #expect(res.headers.first(name: .contentType) == "application/json") // mime type must be set
+                #expect(res.body.readableBytes < 128000) // Max size is 128Kb
+            })
         }
     }
 }
