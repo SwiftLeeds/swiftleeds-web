@@ -31,6 +31,12 @@ final class Event: Model, Content, @unchecked Sendable {
     @Field(key: "show_schedule")
     var showSchedule: Bool
     
+    @Field(key: "checkin_key")
+    var checkinKey: String?
+    
+    @Field(key: "conference")
+    var conference: String
+    
     @Children(for: \.$event)
     var days: [EventDay]
     

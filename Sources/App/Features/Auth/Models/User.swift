@@ -32,6 +32,9 @@ final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAu
     @Field(key: "password_hash")
     var passwordHash: String
     
+    @Field(key: "permissions")
+    var permissions: [String]
+    
     @Field(key: "user_role")
     var role: User.Role
     
