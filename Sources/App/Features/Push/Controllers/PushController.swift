@@ -3,7 +3,7 @@ import Fluent
 import Vapor
 
 struct PushController: RouteCollection {
-    func boot(routes: RoutesBuilder) throws {
+    func boot(routes: any RoutesBuilder) throws {
         let push = routes.grouped("push")
         push.post(use: create)
         push.post("testNotification", use: testNotification)

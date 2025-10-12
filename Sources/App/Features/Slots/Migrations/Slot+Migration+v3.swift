@@ -2,13 +2,13 @@ import Foundation
 import Fluent
 
 struct SlotMigrationV3: AsyncMigration {
-    func prepare(on database: Database) async throws {
+    func prepare(on database: any Database) async throws {
         try await database.schema(Schema.slot)
             .field("day_id", .uuid, .references(Schema.eventDay, "id"))
             .update()
 
         // Define a local-only model to access the old structure
-        final class MigrationSlot: Model {
+        final class MigrationSlot: Model, @unchecked Sendable {
             static let schema = Schema.slot
 
             @ID(key: .id) var id: UUID?
@@ -31,7 +31,7 @@ struct SlotMigrationV3: AsyncMigration {
         }
     }
 
-    func revert(on database: Database) async throws {
+    func revert(on database: any Database) async throws {
         try await database.schema(Schema.slot)
             .deleteField("day_id")
             .update()

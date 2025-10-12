@@ -6,7 +6,7 @@ import LeafKit
 import Vapor
 
 struct EventRouteController: RouteCollection {
-    func boot(routes: RoutesBuilder) throws {
+    func boot(routes: any RoutesBuilder) throws {
         // Modal
         routes.get(use: onRead)
         routes.get(":id", use: onRead)

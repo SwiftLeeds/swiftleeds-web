@@ -1,7 +1,7 @@
 import Fluent
 
 final class ActivityMigrationV1: AsyncMigration {
-    func prepare(on database: Database) async throws {
+    func prepare(on database: any Database) async throws {
         try await database.schema(Schema.activity)
             .id()
             .field("title", .string, .required)
@@ -13,7 +13,7 @@ final class ActivityMigrationV1: AsyncMigration {
             .create()
     }
 
-    func revert(on database: Database) async throws {
+    func revert(on database: any Database) async throws {
         try await database.schema(Schema.activity).delete()
     }
 }

@@ -2,7 +2,7 @@ import Foundation
 import Fluent
 
 struct SlotMigrationV5: AsyncMigration {
-    func prepare(on database: Database) async throws {
+    func prepare(on database: any Database) async throws {
         try await database.schema(Schema.activity)
             .deleteField("slot_id")
             .update()
@@ -12,7 +12,7 @@ struct SlotMigrationV5: AsyncMigration {
             .update()
     }
     
-    func revert(on database: Database) async throws {
+    func revert(on database: any Database) async throws {
         try await database.schema(Schema.presentation)
             .field("slot_id", .uuid, .references(Schema.slot, "id", onDelete: .setNull, onUpdate: .cascade))
             .unique(on: "slot_id")

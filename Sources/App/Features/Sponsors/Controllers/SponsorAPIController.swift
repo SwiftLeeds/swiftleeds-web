@@ -2,7 +2,7 @@ import Fluent
 import Vapor
 
 struct SponsorAPIController: RouteCollection {
-    func boot(routes: RoutesBuilder) throws {
+    func boot(routes: any RoutesBuilder) throws {
         routes.get(use: onGet)
     }
 

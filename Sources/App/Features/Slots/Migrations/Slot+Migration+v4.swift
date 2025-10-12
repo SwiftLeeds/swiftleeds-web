@@ -2,9 +2,9 @@ import Foundation
 import Fluent
 
 struct SlotMigrationV4: AsyncMigration {
-    func prepare(on database: Database) async throws {
+    func prepare(on database: any Database) async throws {
 
-        final class MigrationSlot: Model {
+        final class MigrationSlot: Model, @unchecked Sendable {
             static let schema = Schema.slot
 
             @ID(key: .id) var id: UUID?
@@ -13,7 +13,7 @@ struct SlotMigrationV4: AsyncMigration {
             @OptionalParent(key: "activity_id") var activity: Activity?
         }
 
-        final class MigrationPresentation: Model {
+        final class MigrationPresentation: Model, @unchecked Sendable {
             static let schema = Schema.presentation
 
             @ID(key: .id) var id: UUID?
@@ -21,7 +21,7 @@ struct SlotMigrationV4: AsyncMigration {
             @OptionalField(key: "slot_id") var slotID: UUID?
         }
 
-        final class MigrationActivity: Model {
+        final class MigrationActivity: Model, @unchecked Sendable {
             static let schema = Schema.activity
 
             @ID(key: .id) var id: UUID?
@@ -81,7 +81,7 @@ struct SlotMigrationV4: AsyncMigration {
         }
     }
     
-    func revert(on database: Database) async throws {
+    func revert(on database: any Database) async throws {
         try await database.schema(Schema.slot)
             .deleteField("presentation_id")
             .deleteField("activity_id")

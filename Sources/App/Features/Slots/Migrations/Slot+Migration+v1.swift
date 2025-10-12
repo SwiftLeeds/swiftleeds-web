@@ -1,7 +1,7 @@
 import Fluent
 
 final class SlotMigrationV1: AsyncMigration {
-    func prepare(on database: Database) async throws {
+    func prepare(on database: any Database) async throws {
         try await database.schema(Schema.slot)
             .id()
             .field("start_date", .string, .required)
@@ -32,7 +32,7 @@ final class SlotMigrationV1: AsyncMigration {
             .update()
     }
 
-    func revert(on database: Database) async throws {
+    func revert(on database: any Database) async throws {
         // remove foreign keys & restore deleted fields
         try await database
             .schema(Schema.presentation)
