@@ -26,7 +26,7 @@ final class Presentation: Model, Content, @unchecked Sendable {
     var secondSpeaker: Speaker?
     
     @Parent(key: "event_id")
-    public var event: Event
+    var event: Event
     
     @Field(key: "is_tba")
     var isTBA: Bool
@@ -52,6 +52,8 @@ final class Presentation: Model, Content, @unchecked Sendable {
     }
     
     enum VideoVisibility: String, Codable {
-        case unlisted, shared, attendee
+        case unlisted
+        case shared
+        case attendee
     }
 }

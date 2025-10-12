@@ -2,7 +2,7 @@ import Foundation
 
 enum PresentationTransformer: Transformer {
     static func transform(_ entity: Presentation?) -> PresentationResponse? {
-        guard let entity = entity, let id = entity.id else {
+        guard let entity, let id = entity.id else {
             return nil
         }
 
@@ -25,7 +25,7 @@ enum PresentationTransformer: Transformer {
             id: id,
             title: entity.title,
             synopsis: entity.synopsis,
-            speakers: [speaker, secondSpeaker].compactMap { $0 },
+            speakers: [speaker, secondSpeaker].compactMap(\.self),
             slidoURL: entity.slidoURL,
             videoURL: entity.videoVisibility == .shared ? entity.videoURL : nil
         )

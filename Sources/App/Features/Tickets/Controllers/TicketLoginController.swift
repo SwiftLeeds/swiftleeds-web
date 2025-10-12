@@ -1,5 +1,5 @@
-import Vapor
 import Fluent
+import Vapor
 
 struct TicketLoginController: RouteCollection {
     func boot(routes: any RoutesBuilder) throws {

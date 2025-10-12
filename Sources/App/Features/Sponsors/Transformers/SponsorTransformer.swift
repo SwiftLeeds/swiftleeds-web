@@ -3,7 +3,9 @@ import Vapor
 
 enum SponsorTransformer: Transformer {
     static func transform(_ sponsor: Sponsor?) -> SponsorResponse? {
-        guard let sponsor = sponsor else { return nil }
+        guard let sponsor else {
+            return nil
+        }
         
         guard let bucketName = Environment.get("S3_BUCKET_NAME") else {
             fatalError("Missing 'S3_BUCKET_NAME' environment variable")

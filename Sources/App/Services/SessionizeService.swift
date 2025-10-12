@@ -18,7 +18,7 @@ final class SessionizeService {
         
         let api: URI = "https://sessionize.com/api/universal/event?slug=\(slug)"
         let headers: HTTPHeaders = [
-            "X-API-KEY": sessionizeKey
+            "X-API-KEY": sessionizeKey,
         ]
         
         let formatter = DateFormatter()
@@ -26,10 +26,10 @@ final class SessionizeService {
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .custom({ decoder in
+        decoder.dateDecodingStrategy = .custom { decoder in
             let value = try decoder.singleValueContainer().decode(String.self)
             return formatter.date(from: value) ?? .init()
-        })
+        }
         
         let data = try await req.client.get(api, headers: headers)
         return try data.content.decode(SessionizeEvent.self, using: decoder)

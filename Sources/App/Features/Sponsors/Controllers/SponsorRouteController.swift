@@ -22,7 +22,9 @@ struct SponsorRouteController: RouteCollection {
     }
     
     @Sendable private func onDelete(request: Request) async throws -> Response {
-        guard let sponsor = try await Sponsor.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
+        guard let sponsor = try await Sponsor.find(request.parameters.get("id"), on: request.db) else {
+            throw Abort(.notFound)
+        }
         try await sponsor.delete(on: request.db)
         return Response(status: .ok, body: .init(string: "OK"))
     }
@@ -64,7 +66,7 @@ struct SponsorRouteController: RouteCollection {
             throw Abort(.badRequest, reason: "Failed to map sponsor level")
         }
 
-        if let sponsor = sponsor {
+        if let sponsor {
             sponsor.name = input.name
             sponsor.subtitle = input.subtitle
             sponsor.image = imageFilename
@@ -91,6 +93,7 @@ struct SponsorRouteController: RouteCollection {
     }
 
     // MARK: - SponsorContext
+
     private struct SponsorContext: Content {
         let sponsor: Sponsor?
         let sponsorLevels: [Sponsor.SponsorLevel]
@@ -98,11 +101,13 @@ struct SponsorRouteController: RouteCollection {
     }
 
     // MARK: - ImageInput
+
     private struct ImageInput: Content {
         let sponsorImage: File?
     }
 
     // MARK: - FormInput
+
     private struct FormInput: Content {
         let name: String
         let subtitle: String
@@ -112,5 +117,6 @@ struct SponsorRouteController: RouteCollection {
     }
 
     // MARK: - sponsorLevels
+
     private let sponsorLevels: [Sponsor.SponsorLevel] = [.silver, .gold, .platinum]
 }

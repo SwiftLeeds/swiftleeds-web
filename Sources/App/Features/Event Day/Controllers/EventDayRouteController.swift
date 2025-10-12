@@ -1,5 +1,4 @@
 import Fluent
-import Fluent
 import Foundation
 import Leaf
 import LeafKit
@@ -28,7 +27,9 @@ struct EventDayRouteController: RouteCollection {
     }
 
     @Sendable private func onDelete(request: Request) async throws -> Response {
-        guard let event = try await EventDay.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
+        guard let event = try await EventDay.find(request.parameters.get("id"), on: request.db) else {
+            throw Abort(.notFound)
+        }
         try await event.delete(on: request.db)
         return Response(status: .ok, body: .init(string: "OK"))
     }
@@ -74,12 +75,14 @@ struct EventDayRouteController: RouteCollection {
     }
 
     // MARK: - EventContext
+
     private struct EventDayContext: Content {
         let day: EventDay?
         let events: [Event]
     }
 
     // MARK: - FormInput
+
     private struct FormInput: Content {
         let name: String
         let date: String

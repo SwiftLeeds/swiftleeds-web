@@ -5,7 +5,7 @@ struct TeamAPIController: RouteCollection {
         routes.get(use: getTeam)
     }
     
-    @Sendable func getTeam(req: Request) async throws -> TeamResponse {
+    @Sendable func getTeam(req _: Request) async throws -> TeamResponse {
         let teamMembers = [
             TeamMember(
                 name: "Adam Rush",

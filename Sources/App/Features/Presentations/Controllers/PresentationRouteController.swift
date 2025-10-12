@@ -23,7 +23,9 @@ struct PresentationRouteController: RouteCollection {
     }
 
     @Sendable private func onDelete(request: Request) async throws -> Response {
-        guard let presentation = try await Presentation.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
+        guard let presentation = try await Presentation.find(request.parameters.get("id"), on: request.db) else {
+            throw Abort(.notFound)
+        }
         try await presentation.delete(on: request.db)
         return Response(status: .ok, body: .init(string: "OK"))
     }
@@ -50,7 +52,7 @@ struct PresentationRouteController: RouteCollection {
             throw Abort(.badRequest, reason: "Could not find speaker or event")
         }
 
-        if let presentation = presentation {
+        if let presentation {
             presentation.title = input.title
             presentation.synopsis = input.synopsis
             presentation.isTBA = !(input.isAnnounced == "on")
@@ -103,6 +105,7 @@ struct PresentationRouteController: RouteCollection {
     }
 
     // MARK: - PresentationContext
+
     private struct PresentationContext: Content {
         let presentation: Presentation?
         let speakers: [Speaker]
@@ -111,6 +114,7 @@ struct PresentationRouteController: RouteCollection {
     }
 
     // MARK: - FormInput
+
     private struct FormInput: Content {
         let speakerID: String
         let secondSpeakerID: String?

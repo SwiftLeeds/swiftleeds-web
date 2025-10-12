@@ -1,5 +1,5 @@
-import Foundation
 import Fluent
+import Foundation
 
 struct SlotMigrationV6: AsyncMigration {
     func prepare(on db: any Database) async throws {
@@ -14,6 +14,5 @@ struct SlotMigrationV6: AsyncMigration {
             .field("date", .datetime)
             .field("event_id", .uuid, .references(Schema.event, "id"))
             .update()
-
     }
 }

@@ -19,9 +19,9 @@ struct TitoService {
         let ticketOpt = ticketResponse.tickets.first(where: {
             // case insensitive comparisons
             $0.reference.lowercased() == payload.ticket.lowercased() &&
-            $0.email?.lowercased() == payload.email.lowercased() &&
-            // ensure unassigned tickets do not get captured here
-            $0.email != nil
+                $0.email?.lowercased() == payload.email.lowercased() &&
+                // ensure unassigned tickets do not get captured here
+                $0.email != nil
         })
         
         return ticketOpt
@@ -66,10 +66,9 @@ struct TitoService {
         
         return [
             "Authorization": "Token token=\(auth)",
-            "Accept": "application/json"
+            "Accept": "application/json",
         ]
     }
-    
 }
 
 struct TitoTicketsResponse: Decodable {

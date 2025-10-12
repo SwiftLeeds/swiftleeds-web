@@ -1,5 +1,4 @@
 import Fluent
-import Fluent
 import Foundation
 import Leaf
 import LeafKit
@@ -24,7 +23,9 @@ struct EventRouteController: RouteCollection {
     }
 
     @Sendable private func onDelete(request: Request) async throws -> Response {
-        guard let event = try await Event.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
+        guard let event = try await Event.find(request.parameters.get("id"), on: request.db) else {
+            throw Abort(.notFound)
+        }
         try await event.delete(on: request.db)
         return Response(status: .ok, body: .init(string: "OK"))
     }
@@ -52,7 +53,7 @@ struct EventRouteController: RouteCollection {
             throw Abort(.badRequest, reason: "Invalid Date Format")
         }
 
-        if let event = event {
+        if let event {
             event.name = input.name
             event.date = date
             event.location = input.location
@@ -90,11 +91,13 @@ struct EventRouteController: RouteCollection {
     }
 
     // MARK: - EventContext
+
     private struct EventContext: Content {
         let event: Event?
     }
 
     // MARK: - FormInput
+
     private struct FormInput: Content {
         let name: String
         let date: String

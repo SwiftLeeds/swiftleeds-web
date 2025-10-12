@@ -2,7 +2,9 @@ import Foundation
 
 enum EventTransformer: Transformer {
     static func transform(_ entity: Event?) -> EventResponse? {
-        guard let entity = entity, let id = entity.id else { return nil }
+        guard let entity, let id = entity.id else {
+            return nil
+        }
 
         return .init(
             id: id,

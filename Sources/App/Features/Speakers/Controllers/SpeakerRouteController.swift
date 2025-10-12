@@ -22,7 +22,9 @@ struct SpeakerRouteController: RouteCollection {
     }
 
     @Sendable private func onDelete(request: Request) async throws -> Response {
-        guard let speaker = try await Speaker.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
+        guard let speaker = try await Speaker.find(request.parameters.get("id"), on: request.db) else {
+            throw Abort(.notFound)
+        }
         try await speaker.delete(on: request.db)
         return Response(status: .ok, body: .init(string: "OK"))
     }
@@ -32,7 +34,9 @@ struct SpeakerRouteController: RouteCollection {
     }
 
     @Sendable private func onUpdate(request: Request) async throws -> Response {
-        guard let speaker = try await Speaker.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
+        guard let speaker = try await Speaker.find(request.parameters.get("id"), on: request.db) else {
+            throw Abort(.notFound)
+        }
         return try await update(request: request, speaker: speaker)
     }
 
@@ -76,16 +80,19 @@ struct SpeakerRouteController: RouteCollection {
     }
 
     // MARK: - ImageUpload
+
     struct ImageUpload: Content {
         var profileImage: File
     }
 
     // MARK: - SpeakerContext
+
     private struct SpeakerContext: Content {
         let speaker: Speaker?
     }
 
     // MARK: - FormInput
+
     private struct FormInput: Content {
         let name: String
         let biography: String

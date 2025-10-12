@@ -1,5 +1,5 @@
-import Foundation
 import Fluent
+import Foundation
 
 struct JobMiddleware: AsyncModelMiddleware {
     func create(model: Job, on db: any Database, next: any AnyAsyncModelResponder) async throws {
@@ -21,7 +21,9 @@ struct JobMiddleware: AsyncModelMiddleware {
         guard let lastUpdated = try await LastUpdated
             .query(on: db)
             .first()
-        else { throw ModelMiddlewareError.couldNotUpdateTimestamp }
+        else {
+            throw ModelMiddlewareError.couldNotUpdateTimestamp
+        }
 
         let updatedDate = Date()
         print("Job \(title) was updated - \(updatedDate)")

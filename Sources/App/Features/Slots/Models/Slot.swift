@@ -38,7 +38,7 @@ final class Slot: Codable, Model, Content, @unchecked Sendable {
     }
 }
 
-extension Array where Element == Slot {
+extension [Slot] {
     var schedule: [[Slot]] {
         let dates = Set(compactMap { $0.day?.date.withoutTime }).sorted()
         var slots: [[Slot]] = []
@@ -46,7 +46,9 @@ extension Array where Element == Slot {
         for date in dates {
             slots.append(
                 filter {
-                    guard let slotDate = $0.day?.date else { return false }
+                    guard let slotDate = $0.day?.date else {
+                        return false
+                    }
                     return Calendar.current.isDate(slotDate, inSameDayAs: date)
                 }
             )

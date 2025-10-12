@@ -1,5 +1,5 @@
-import Foundation
 import Fluent
+import Foundation
 
 struct SponsorMiddleware: AsyncModelMiddleware {
     func create(model: Sponsor, on db: any Database, next: any AnyAsyncModelResponder) async throws {
@@ -21,7 +21,9 @@ struct SponsorMiddleware: AsyncModelMiddleware {
         guard let lastUpdated = try await LastUpdated
             .query(on: db)
             .first()
-        else { throw SponsorMiddlewareError.couldNotUpdateTimestamp }
+        else {
+            throw SponsorMiddlewareError.couldNotUpdateTimestamp
+        }
 
         let updatedDate = Date()
         db.logger.info("Sponsor \(name) was updated - \(updatedDate)")

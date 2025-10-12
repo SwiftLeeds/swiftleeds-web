@@ -36,7 +36,9 @@ struct SlotRouteController: RouteCollection {
     }
 
     @Sendable private func onDelete(request: Request) async throws -> Response {
-        guard let slot = try await Slot.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
+        guard let slot = try await Slot.find(request.parameters.get("id"), on: request.db) else {
+            throw Abort(.notFound)
+        }
         try await slot.delete(on: request.db)
         return Response(status: .ok, body: .init(string: "OK"))
     }
@@ -113,12 +115,14 @@ struct SlotRouteController: RouteCollection {
     }
 
     // MARK: - SlotTypes
+
     enum SlotTypes: String, CaseIterable {
         case presentation
         case activity
     }
 
     // MARK: - PresentationContext
+
     private struct PresentationContext: Content {
         let slot: Slot?
         let days: [EventDay]
@@ -129,6 +133,7 @@ struct SlotRouteController: RouteCollection {
     }
 
     // MARK: - FormInput
+
     private struct FormInput: Content {
         let presentationID: String?
         let activityID: String?
@@ -139,6 +144,7 @@ struct SlotRouteController: RouteCollection {
     }
 
     // MARK: - FormError
+
     enum FormError: Error {
         case didNotProvideActivityOrPresentation
     }

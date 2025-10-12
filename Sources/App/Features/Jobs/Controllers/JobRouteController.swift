@@ -27,7 +27,9 @@ struct JobRouteController: RouteCollection {
     }
 
     @Sendable private func onDelete(request: Request) async throws -> Response {
-        guard let job = try await Job.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
+        guard let job = try await Job.find(request.parameters.get("id"), on: request.db) else {
+            throw Abort(.notFound)
+        }
         try await job.delete(on: request.db)
         return Response(status: .ok, body: .init(string: "OK"))
     }
@@ -51,7 +53,7 @@ struct JobRouteController: RouteCollection {
             throw Abort(.badRequest, reason: "Could not find sponsor")
         }
 
-        if let job = job {
+        if let job {
             job.title = input.title
             job.location = input.location
             job.details = input.details
@@ -60,11 +62,10 @@ struct JobRouteController: RouteCollection {
             try await job.update(on: request.db)
         } else {
             let job = Job(id: .generateRandom(),
-                title: input.title,
-                location: input.location,
-                details: input.details,
-                url: input.url
-            )
+                          title: input.title,
+                          location: input.location,
+                          details: input.details,
+                          url: input.url)
 
             job.$sponsor.id = try sponsor.requireID()
             try await job.create(on: request.db)
@@ -74,6 +75,7 @@ struct JobRouteController: RouteCollection {
     }
 
     // MARK: - FormInput
+
     private struct FormInput: Content {
         let title: String
         let location: String

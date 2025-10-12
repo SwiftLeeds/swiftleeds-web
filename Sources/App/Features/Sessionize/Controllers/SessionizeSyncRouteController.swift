@@ -7,9 +7,13 @@ struct SessionizeSyncRouteController: RouteCollection {
     }
     
     @Sendable private func modal(request: Request) async throws -> View {
-        guard let event = try await Event.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
+        guard let event = try await Event.find(request.parameters.get("id"), on: request.db) else {
+            throw Abort(.notFound)
+        }
         
-        guard let key = event.sessionizeKey else { throw Abort(.badRequest, reason: "No Sessionize Key for Event") }
+        guard let key = event.sessionizeKey else {
+            throw Abort(.badRequest, reason: "No Sessionize Key for Event")
+        }
         let sessionizeResponse = try await request.client.get("https://sessionize.com/api/v2/\(key)/view/All")
         let sessionize = try sessionizeResponse.content.decode(SessionizeResponse.self)
         let changes = try await identifyChanges(sessionize: sessionize, request: request, commit: [], event: event)
@@ -19,12 +23,16 @@ struct SessionizeSyncRouteController: RouteCollection {
     }
     
     @Sendable private func commit(request: Request) async throws -> Response {
-        guard let event = try await Event.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
+        guard let event = try await Event.find(request.parameters.get("id"), on: request.db) else {
+            throw Abort(.notFound)
+        }
         
         let input = try request.content.decode(FormInput.self)
-        let commitIds = zip(input.ids, input.statuses).filter { $0.1 == "enabled" }.map { $0.0 }
+        let commitIds = zip(input.ids, input.statuses).filter { $0.1 == "enabled" }.map(\.0)
         
-        guard let key = event.sessionizeKey else { throw Abort(.badRequest, reason: "No Sessionize Key for Event") }
+        guard let key = event.sessionizeKey else {
+            throw Abort(.badRequest, reason: "No Sessionize Key for Event")
+        }
         let sessionizeResponse = try await request.client.get("https://sessionize.com/api/v2/\(key)/view/All")
         let sessionize = try sessionizeResponse.content.decode(SessionizeResponse.self)
         _ = try await identifyChanges(sessionize: sessionize, request: request, commit: commitIds, event: event)
@@ -40,10 +48,10 @@ struct SessionizeSyncRouteController: RouteCollection {
             
             let speakerQuery = try await Speaker
                 .query(on: request.db)
-                .group(.or, { $0
+                .group(.or) { $0
                     .filter(\.$name, .equal, sessionizeSpeaker.fullName)
                     .filter(\.$id, .equal, UUID(uuidString: sessionizeSpeaker.id)!)
-                })
+                }
                 .first()
             
             let twitter = sessionizeSpeaker.links.first(where: { $0.linkType == "Twitter" })?.url
@@ -188,7 +196,7 @@ struct SessionizeSyncRouteController: RouteCollection {
                 
                 let speakers = sessionize.speakers
                     .filter { sessionizeSession.speakers.contains($0.id) }
-                    .map { $0.fullName }
+                    .map(\.fullName)
                 
                 changes.append(.init(
                     id: sessionizeSession.id,
@@ -197,7 +205,7 @@ struct SessionizeSyncRouteController: RouteCollection {
                     pairs: [
                         .init(key: "Title", oldValue: nil, newValue: sessionizeSession.title),
                         .init(key: "Description", oldValue: nil, newValue: sessionizeSession.description),
-                        .init(key: "Speakers", oldValue: nil, newValue: speakers.joined(separator: " and "))
+                        .init(key: "Speakers", oldValue: nil, newValue: speakers.joined(separator: " and ")),
                     ]
                 ))
                 
@@ -237,11 +245,13 @@ struct SessionizeSyncRouteController: RouteCollection {
     
     struct SyncContext: Content {
         enum ModelType: String, Codable {
-            case speaker, presentation
+            case speaker
+            case presentation
         }
         
         enum OperationType: String, Codable {
-            case create, update
+            case create
+            case update
         }
         
         struct Pair: Codable {

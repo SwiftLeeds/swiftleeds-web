@@ -1,6 +1,6 @@
-import VaporAPNS
 import Leaf
 import Vapor
+import VaporAPNS
 
 public func configure(_ app: Application) async throws {
     // Sessions
@@ -76,7 +76,8 @@ public func configure(_ app: Application) async throws {
 
 extension Application {
     enum Conference: String {
-        case kotlinleeds, swiftleeds
+        case kotlinleeds
+        case swiftleeds
     }
     
     var conference: Conference {

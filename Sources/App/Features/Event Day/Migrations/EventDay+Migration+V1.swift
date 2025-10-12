@@ -1,5 +1,5 @@
-import Foundation
 import Fluent
+import Foundation
 
 final class EventDayMigrationV1: AsyncMigration {
     func prepare(on database: any Database) async throws {
