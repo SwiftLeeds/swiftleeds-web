@@ -1,7 +1,7 @@
 import Fluent
 
 struct PushMigration: AsyncMigration {
-    func prepare(on database: Database) async throws {
+    func prepare(on database: any Database) async throws {
         try await database.schema(Schema.tokens)
             .id()
             .field("token", .string, .required)
@@ -10,7 +10,7 @@ struct PushMigration: AsyncMigration {
             .create()
     }
 
-    func revert(on database: Database) async throws {
+    func revert(on database: any Database) async throws {
         try await database.schema(Schema.tokens).delete()
     }
 }

@@ -2,7 +2,7 @@ import Fluent
 import Vapor
 
 struct SlotRouteController: RouteCollection {
-    func boot(routes: RoutesBuilder) throws {
+    func boot(routes: any RoutesBuilder) throws {
         // Modal
         routes.get(use: onRead)
         routes.get(":id", use: onRead)
@@ -22,7 +22,7 @@ struct SlotRouteController: RouteCollection {
         return try await request.view.render("Admin/Form/slot_form", context)
     }
 
-    private func buildContext(from db: Database, slot: Slot?) async throws -> PresentationContext {
+    private func buildContext(from db: any Database, slot: Slot?) async throws -> PresentationContext {
         let eventDays = try await EventDay.query(on: db).with(\.$event).sort(\.$date).all()
         let presentations = try await Presentation.query(on: db).with(\.$speaker).sort(\.$title).all()
         let activities = try await Activity.query(on: db).sort(\.$title).all()
@@ -67,7 +67,7 @@ struct SlotRouteController: RouteCollection {
         }
         
         try await eventDay.$event.load(on: request.db)
-        let event = eventDay.event
+//        let event = eventDay.event
 
         // We can have either, but not both. If both are provided, prioritise the activity.
         if let activityID = input.activityID, activityID.isEmpty == false {
@@ -76,13 +76,13 @@ struct SlotRouteController: RouteCollection {
             presentation = try await Presentation.find(.init(uuidString: presentationID), on: request.db)
         }
 
-        let minutes: Int = input.startTime.components(separatedBy: ":").enumerated().reduce(into: 0) { builder, value in
-            guard let number = Int(value.element) else { return }
-            if value.offset == 0 { builder += number * 60 }
-            else { builder += number }
-        }
+//        let minutes: Int = input.startTime.components(separatedBy: ":").enumerated().reduce(into: 0) { builder, value in
+//            guard let number = Int(value.element) else { return }
+//            if value.offset == 0 { builder += number * 60 }
+//            else { builder += number }
+//        }
         
-        let inputDate = eventDay.date.addingTimeInterval(TimeInterval(minutes * 60))
+//        let inputDate = eventDay.date.addingTimeInterval(TimeInterval(minutes * 60))
         let duration = input.duration.flatMap(Double.init)
         
         let mutableSlot = slot ?? Slot()

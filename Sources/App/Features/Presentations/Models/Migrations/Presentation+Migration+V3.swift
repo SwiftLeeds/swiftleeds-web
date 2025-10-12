@@ -1,13 +1,13 @@
 import Fluent
 
 final class PresentationMigrationV3: AsyncMigration {
-    func prepare(on database: Database) async throws {
+    func prepare(on database: any Database) async throws {
         try await database.schema(Schema.presentation)
             .field("slido_url", .string)
             .update()
     }
 
-    func revert(on database: Database) async throws {
+    func revert(on database: any Database) async throws {
         try await database.schema(Schema.presentation)
             .deleteField("slido_url")
             .update()

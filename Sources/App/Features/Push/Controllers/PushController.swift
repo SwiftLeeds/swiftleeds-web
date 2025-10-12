@@ -1,9 +1,10 @@
-import APNS
+import APNSCore
+import VaporAPNS
 import Fluent
 import Vapor
 
 struct PushController: RouteCollection {
-    func boot(routes: RoutesBuilder) throws {
+    func boot(routes: any RoutesBuilder) throws {
         let push = routes.grouped("push")
         push.post(use: create)
         push.post("testNotification", use: testNotification)
@@ -42,8 +43,14 @@ struct PushController: RouteCollection {
             return .notFound
         }
 
-        let alert = APNSwiftAlert(title: "SwiftLeeds Rocks!", body: "Push is working 🚀")
-        _ = req.apns.send(alert, to: token.token)
+        let notification = APNSAlertNotification(
+            alert: APNSAlertNotificationContent(title: .raw("SwiftLeeds Rocks!"), body: .raw("Push is working 🚀")),
+            expiration: .none,
+            priority: .immediately,
+            topic: "uk.co.swiftleeds.SwiftLeeds"
+        )
+        
+        try await req.apnsClient.sendAlertNotification(notification, deviceToken: token.token)
 
         return .noContent
     }
@@ -62,12 +69,29 @@ struct PushController: RouteCollection {
         }
 
         let tokens = try await Token.query(on: req.db).all()
-        let alert = APNSwiftAlert(title: "SwiftLeeds", body: notificationRequest.message)
 
-        tokens.forEach { token in
-            _ = req.apns.send(alert, to: token.token)
+        let notification = APNSAlertNotification(
+            alert: APNSAlertNotificationContent(title: .raw("SwiftLeeds"), body: .raw(notificationRequest.message)),
+            expiration: .none,
+            priority: .immediately,
+            topic: "uk.co.swiftleeds.SwiftLeeds"
+        )
+        
+        for token in tokens {
+            try await req.apnsClient.sendAlertNotification(notification, deviceToken: token.token)
         }
 
         return .noContent
+    }
+}
+
+extension Request {
+    var apnsClient: APNSGenericClient {
+        get async {
+            switch application.environment {
+            case .production: return await apns.client(.production)
+            default: return await apns.client(.development)
+            }
+        }
     }
 }

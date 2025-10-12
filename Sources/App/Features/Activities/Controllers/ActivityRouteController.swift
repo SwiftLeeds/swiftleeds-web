@@ -2,7 +2,7 @@ import Fluent
 import Vapor
 
 struct ActivityRouteController: RouteCollection {
-    func boot(routes: RoutesBuilder) throws {
+    func boot(routes: any RoutesBuilder) throws {
         // Modal
         routes.get(use: onRead)
         routes.get(":id", use: onRead)
@@ -21,7 +21,7 @@ struct ActivityRouteController: RouteCollection {
         return try await request.view.render("Admin/Form/activity_form", context)
     }
 
-    private func buildContext(from db: Database, activity: Activity?) async throws -> ActivityContext {
+    private func buildContext(from db: any Database, activity: Activity?) async throws -> ActivityContext {
         let events = try await Event.query(on: db).sort(\.$date).all()
         return ActivityContext(activity: activity, events: events)
     }

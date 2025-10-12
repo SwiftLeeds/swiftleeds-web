@@ -1,7 +1,7 @@
 import Fluent
 
 final class AddDropInGroupsMigration: AsyncMigration {
-    func prepare(on database: Database) async throws {
+    func prepare(on database: any Database) async throws {
         try await database.schema(Schema.dropInSessions)
             .field("max_tickets", .int, .sql(.default(1)), .required)
             .field("exclusivity_key", .string, .sql(.default("A")), .required)
@@ -11,7 +11,7 @@ final class AddDropInGroupsMigration: AsyncMigration {
             .update()
     }
 
-    func revert(on database: Database) async throws {
+    func revert(on database: any Database) async throws {
         try await database.schema(Schema.dropInSessions)
             .deleteField("max_tickets")
             .deleteField("exclusivity_key")

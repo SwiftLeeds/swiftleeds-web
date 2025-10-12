@@ -1,7 +1,7 @@
 import Vapor
 
 struct TalkRouteController: RouteCollection {
-    func boot(routes: RoutesBuilder) throws {
+    func boot(routes: any RoutesBuilder) throws {
         let route = routes.grouped(User.sessionAuthenticator())
         route.get("talk", ":talk", use: talk)
     }

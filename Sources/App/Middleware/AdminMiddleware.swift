@@ -1,7 +1,7 @@
 import Vapor
 
 struct AdminMiddleware: AsyncMiddleware {
-    func respond(to request: Request, chainingTo next: AsyncResponder) async throws -> Response {
+    func respond(to request: Request, chainingTo next: any AsyncResponder) async throws -> Response {
         guard let user = request.user else {
             if !request.application.environment.isRelease {
                 request.logger.warning("attempted to access admin page, but no user is logged in")

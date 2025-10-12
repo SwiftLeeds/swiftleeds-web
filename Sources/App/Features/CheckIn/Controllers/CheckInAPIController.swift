@@ -1,7 +1,7 @@
 import Vapor
 
 struct CheckInAPIController: RouteCollection {
-    func boot(routes: RoutesBuilder) throws {
+    func boot(routes: any RoutesBuilder) throws {
         routes.get(":secret", use: onGet)
     }
     

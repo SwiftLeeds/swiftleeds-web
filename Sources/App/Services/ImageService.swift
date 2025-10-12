@@ -1,4 +1,4 @@
-import S3
+@preconcurrency import S3
 import Vapor
 
 final class ImageService {

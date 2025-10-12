@@ -7,7 +7,7 @@ import Vapor
 // The enhancements here ensure the application understands how many days there are,
 // what slots are on what day, and what the name of the day is (such as 'Talkshow').
 struct ScheduleAPIControllerV2: RouteCollection {
-    func boot(routes: RoutesBuilder) throws {
+    func boot(routes: any RoutesBuilder) throws {
         routes.get(use: onGet)
     }
 

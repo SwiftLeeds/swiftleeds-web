@@ -1,7 +1,7 @@
 import Vapor
 
 struct TeamAPIController: RouteCollection {
-    func boot(routes: RoutesBuilder) throws {
+    func boot(routes: any RoutesBuilder) throws {
         routes.get(use: getTeam)
     }
     

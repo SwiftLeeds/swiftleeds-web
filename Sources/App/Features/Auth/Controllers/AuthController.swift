@@ -3,7 +3,7 @@ import Foundation
 import Vapor
 
 struct AuthController: RouteCollection {
-    func boot(routes: RoutesBuilder) throws {
+    func boot(routes: any RoutesBuilder) throws {
         routes.get("logout", use: logout)
         let grouped = routes.grouped("api", "v1", "auth")
         grouped.post("create", use: create)

@@ -1,7 +1,7 @@
 import Fluent
 
 final class SpeakerMigrationV1: AsyncMigration {
-    func prepare(on database: Database) async throws {
+    func prepare(on database: any Database) async throws {
         try await database.schema(Speaker.schema)
             .id()
             .field("name", .string, .required)
@@ -12,7 +12,7 @@ final class SpeakerMigrationV1: AsyncMigration {
             .create()
     }
 
-    func revert(on database: Database) async throws {
+    func revert(on database: any Database) async throws {
         try await database.schema(Schema.speaker).delete()
     }
 }

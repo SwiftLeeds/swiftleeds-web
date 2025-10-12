@@ -1,7 +1,7 @@
 import Fluent
 
 final class SponsorMigrationV1: AsyncMigration {
-    func prepare(on database: Database) async throws {
+    func prepare(on database: any Database) async throws {
         _ = try await database.enum("sponsor_level")
             .case("silver")
             .case("gold")
@@ -20,7 +20,7 @@ final class SponsorMigrationV1: AsyncMigration {
             .create()
     }
 
-    func revert(on database: Database) async throws {
+    func revert(on database: any Database) async throws {
         try await database.enum("sponsor_level").delete()
         try await database.schema(Schema.sponsor).delete()
     }

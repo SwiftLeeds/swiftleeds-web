@@ -2,7 +2,7 @@ import Foundation
 import Fluent
 
 final class EventDayMigrationV1: AsyncMigration {
-    func prepare(on database: Database) async throws {
+    func prepare(on database: any Database) async throws {
         try await database.schema(Schema.eventDay)
             .id()
             .field("event_id", .uuid, .required, .references(Schema.event, "id"))
@@ -14,7 +14,7 @@ final class EventDayMigrationV1: AsyncMigration {
 
         // We use this local-only model (instead of the 'real' Slot) to solve a migration step problem,
         // whilst also allowing us to drop event and date from Slot
-        final class MigrationSlot: Model {
+        final class MigrationSlot: Model, @unchecked Sendable {
             static let schema = Schema.slot
 
             @ID(key: .id) var id: UUID?
@@ -47,7 +47,7 @@ final class EventDayMigrationV1: AsyncMigration {
         }
     }
 
-    func revert(on database: Database) async throws {
+    func revert(on database: any Database) async throws {
         try await database.schema(Schema.eventDay).delete()
     }
 }

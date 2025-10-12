@@ -4,7 +4,7 @@ import S3
 import Vapor
 
 struct SpeakerRouteController: RouteCollection {
-    func boot(routes: RoutesBuilder) throws {
+    func boot(routes: any RoutesBuilder) throws {
         // Modal
         routes.get(use: onRead)
         routes.get(":id", use: onRead)

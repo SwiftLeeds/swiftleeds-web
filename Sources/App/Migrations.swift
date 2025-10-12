@@ -109,6 +109,8 @@ class Migrations {
         do {
             if app.environment != .testing {
                 try await app.autoMigrate()
+            } else {
+                app.logger.warning("Skipping database migration")
             }
         } catch {
             app.logger.error("Failed to migrate DB with error \(error)")

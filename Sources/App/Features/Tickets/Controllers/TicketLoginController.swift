@@ -2,7 +2,7 @@ import Vapor
 import Fluent
 
 struct TicketLoginController: RouteCollection {
-    func boot(routes: RoutesBuilder) throws {
+    func boot(routes: any RoutesBuilder) throws {
         routes.get("ticketLogin") { req async throws -> View in
             if let query: String = req.query["returnUrl"] {
                 req.session.data["ticketRedirectUrl"] = query

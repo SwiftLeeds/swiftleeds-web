@@ -1,7 +1,7 @@
 import Fluent
 
 final class AddDropInSessionSlotsMigration: AsyncMigration {
-    func prepare(on database: Database) async throws {
+    func prepare(on database: any Database) async throws {
         try await database.schema(Schema.dropInSessionSlots)
             .id()
             .field("session_id", .uuid, .references(Schema.dropInSessions, "id"))
@@ -11,7 +11,7 @@ final class AddDropInSessionSlotsMigration: AsyncMigration {
             .create()
     }
 
-    func revert(on database: Database) async throws {
+    func revert(on database: any Database) async throws {
         try await database.schema(Schema.dropInSessionSlots).delete()
     }
 }

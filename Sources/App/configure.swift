@@ -1,4 +1,4 @@
-import APNS
+import VaporAPNS
 import Leaf
 import Vapor
 
@@ -38,11 +38,16 @@ public func configure(_ app: Application) async throws {
     app.leaf.cache.isEnabled = false
     #endif
 
-    // Migrations
+    // Setup database and define migrations
     try await Migrations.migrate(app)
 
-    // Model middleware
-    app.databases.middleware.use(SponsorMiddleware(), on: .psql)
+    // Check that the database has been setup
+    if app.databases.ids().isEmpty == false {
+        // Model middleware
+        app.databases.middleware.use(SponsorMiddleware(), on: .psql)
+    } else {
+        app.logger.warning("Skipping database middleware")
+    }
 
     // Routes
     app.routes.defaultMaxBodySize = "10mb"
@@ -55,8 +60,8 @@ public func configure(_ app: Application) async throws {
         let data = Data(base64Encoded: encodedKey),
         let p8Key = String(data: data, encoding: .utf8)
     {
-        let apnsEnvironment: APNSwiftConfiguration.Environment = app.environment == .production ? .production : .sandbox
-        let auth: APNSwiftConfiguration.AuthenticationMethod = try .jwt(key: .private(pem: p8Key), keyIdentifier: "K4D2BJ235Y", teamIdentifier: "K33K6V7FBA")
-        app.apns.configuration = .init(authenticationMethod: auth, topic: "uk.co.swiftleeds.SwiftLeeds", environment: apnsEnvironment)
+        try await app.apns.configure(.jwt(privateKey: .loadFrom(string: p8Key), keyIdentifier: "K4D2BJ235Y", teamIdentifier: "K33K6V7FBA"))
+    } else {
+        app.logger.warning("Skipping APNS Setup")
     }
 }

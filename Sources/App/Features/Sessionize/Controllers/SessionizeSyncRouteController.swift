@@ -1,7 +1,7 @@
 import Vapor
 
 struct SessionizeSyncRouteController: RouteCollection {
-    func boot(routes: RoutesBuilder) throws {
+    func boot(routes: any RoutesBuilder) throws {
         routes.get("modal", ":id", use: modal)
         routes.post("modal", ":id", "accept", use: commit)
     }

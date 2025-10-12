@@ -1,7 +1,7 @@
 import Fluent
 
 final class PresentationMigrationV6: AsyncMigration {
-    func prepare(on database: Database) async throws {
+    func prepare(on database: any Database) async throws {
         _ = try await database.enum("video_visibility")
             .case("unlisted")
             .case("shared")
@@ -15,7 +15,7 @@ final class PresentationMigrationV6: AsyncMigration {
             .update()
     }
 
-    func revert(on database: Database) async throws {
+    func revert(on database: any Database) async throws {
         try await database.enum("video_visibility").delete()
         
         try await database.schema(Schema.presentation)

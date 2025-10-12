@@ -2,7 +2,7 @@ import Fluent
 import Vapor
 
 struct TicketHubRouteController: RouteCollection {
-    func boot(routes: RoutesBuilder) throws {
+    func boot(routes: any RoutesBuilder) throws {
         routes.grouped(ValidTicketMiddleware()).group("ticket") { builder in
             builder.get { req -> View in
                 // guard let currentEvent = try await Event.query(on: req.db).filter(\.$name == "SwiftLeeds 2023").first() else {

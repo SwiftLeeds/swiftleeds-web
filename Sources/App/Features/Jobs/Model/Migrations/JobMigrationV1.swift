@@ -1,7 +1,7 @@
 import Fluent
 
 final class JobMigrationV1: AsyncMigration {
-    func prepare(on database: Database) async throws {
+    func prepare(on database: any Database) async throws {
         try await database.schema(Schema.job)
             .id()
             .field("title", .string, .required)
@@ -12,7 +12,7 @@ final class JobMigrationV1: AsyncMigration {
             .create()
     }
 
-    func revert(on database: Database) async throws {
+    func revert(on database: any Database) async throws {
         try await database.schema(Schema.job).delete()
     }
 }
