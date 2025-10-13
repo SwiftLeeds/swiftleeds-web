@@ -3,7 +3,7 @@ import Vapor
 
 enum LocationCategoryTransformer: Transformer {
     static func transform(_ entity: LocationCategory?) -> LocationCategoryResponse? {
-        guard let entity = entity, let id = entity.id else {
+        guard let entity, let id = entity.id else {
             return nil
         }
 

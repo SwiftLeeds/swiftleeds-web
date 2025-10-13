@@ -1,10 +1,3 @@
-//
-//  Permissions.swift
-//  swift-leeds
-//
-//  Created by James Sherlock on 12/10/2025.
-//
-
 import Vapor
 
 enum Permission: String, CaseIterable {

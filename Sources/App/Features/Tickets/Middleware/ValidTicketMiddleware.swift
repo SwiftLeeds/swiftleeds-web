@@ -1,5 +1,5 @@
-import Vapor
 import Fluent
+import Vapor
 
 struct ValidTicketMiddleware: AsyncMiddleware {
     func respond(to request: Request, chainingTo next: any AsyncResponder) async throws -> Response {

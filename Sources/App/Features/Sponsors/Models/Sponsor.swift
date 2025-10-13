@@ -26,7 +26,7 @@ final class Sponsor: Model, Content, @unchecked Sendable {
     var sponsorLevel: SponsorLevel
     
     @Parent(key: "event_id")
-    public var event: Event
+    var event: Event
 
     @Children(for: \.$sponsor)
     var jobs: [Job]
@@ -43,6 +43,7 @@ final class Sponsor: Model, Content, @unchecked Sendable {
     }
 
     // MARK: - SponsorLevel
+
     enum SponsorLevel: String, Codable {
         case silver
         case gold

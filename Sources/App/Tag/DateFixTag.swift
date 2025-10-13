@@ -8,13 +8,14 @@ struct DateFixTag: LeafTag {
         formatter.locale = .init(identifier: "en_US_POSIX")
         formatter.timeZone = .init(identifier: "UTC")
         switch ctx.parameters.count {
-            
         case 1: formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+
         case 2:
             guard let string = ctx.parameters[1].string else {
                 throw "Unable to convert date format to string"
             }
             formatter.dateFormat = string
+
         default:
             throw "invalid parameters provided for date"
         }

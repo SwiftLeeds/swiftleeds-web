@@ -20,9 +20,11 @@ struct CopyrightTag: UnsafeUnescapedLeafTag {
         switch ctx.parameters.count {
         case 1:
             return .string("\(copyrightText) \(year)")
+
         case 2:
             let company = ctx.parameters[1].string ?? ""
             return .string("\(copyrightText) \(year) \(company)")
+
         default:
             return .string(copyrightText)
         }

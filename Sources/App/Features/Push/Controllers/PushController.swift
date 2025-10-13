@@ -1,7 +1,7 @@
 import APNSCore
-import VaporAPNS
 import Fluent
 import Vapor
+import VaporAPNS
 
 struct PushController: RouteCollection {
     func boot(routes: any RoutesBuilder) throws {

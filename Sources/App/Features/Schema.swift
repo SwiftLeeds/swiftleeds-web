@@ -1,6 +1,6 @@
 enum Schema {
     static let activity = "activity"
-    static let dropInSessions =  "dropin_sessions"
+    static let dropInSessions = "dropin_sessions"
     static let dropInSessionSlots = "dropin_session_slots"
     static let event = "events"
     static let eventDay = "event_days"

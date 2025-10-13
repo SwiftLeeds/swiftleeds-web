@@ -3,7 +3,9 @@ import Foundation
 // A unique transformer as it doesn't actually represent an entity
 enum ScheduleTransformer {
     static func transform(event: Event, events: [Event], slots: [Slot]) -> ScheduleResponse? {
-        guard let eventResponse = EventTransformer.transform(event) else { return nil }
+        guard let eventResponse = EventTransformer.transform(event) else {
+            return nil
+        }
 
         let eventsResponse = events
             .filter { $0.date.timeIntervalSince1970 > 1420074000 } // 2015 date is used to hide unannounced events

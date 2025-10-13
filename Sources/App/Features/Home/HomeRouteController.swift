@@ -92,7 +92,7 @@ struct HomeRouteController: RouteCollection {
         let eventContext = EventContext(event: event)
         
         // Add some protection against unannounced years
-        if eventContext.isHidden && req.user?.role != .admin {
+        if eventContext.isHidden, req.user?.role != .admin {
             throw Abort(.notFound, reason: "Unable to find event")
         }
         
@@ -185,7 +185,7 @@ struct HomeRouteController: RouteCollection {
             .filter { $0.day?.event.name == event.name }
     }
     
-    private func getPhase(req: Request, event: Event) throws -> Phase {
+    private func getPhase(req _: Request, event: Event) throws -> Phase {
         // This is a little trick where we can set the date to anything older than 2015 to hide date and tickets
         let isHiddenEvent = event.date.timeIntervalSince1970 < 1420074000
         let isPreviousEvent = event.date <= Date()

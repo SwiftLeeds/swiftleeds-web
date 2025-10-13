@@ -2,17 +2,17 @@
 import SwiftMarkdown
 
 struct MarkdownTag: UnsafeUnescapedLeafTag {
-    public enum Error: Swift.Error {
+    enum Error: Swift.Error {
         case invalidArgument(LeafData?)
     }
     
     private let options: MarkdownOptions?
     
-    public init(options: MarkdownOptions? = nil) {
+    init(options: MarkdownOptions? = nil) {
         self.options = options
     }
     
-    public func render(_ ctx: LeafContext) throws -> LeafData {
+    func render(_ ctx: LeafContext) throws -> LeafData {
         var markdown = ""
         
         if let markdownArgument = ctx.parameters.first, !markdownArgument.isNil {
@@ -22,11 +22,10 @@ struct MarkdownTag: UnsafeUnescapedLeafTag {
             markdown = markdownArgumentValue
         }
 
-        let markdownHTML: String
-        if let options = options {
-            markdownHTML = try markdownToHTML(markdown, options: options)
+        let markdownHTML: String = if let options {
+            try markdownToHTML(markdown, options: options)
         } else {
-            markdownHTML = try markdownToHTML(markdown)
+            try markdownToHTML(markdown)
         }
 
         return .string(markdownHTML)

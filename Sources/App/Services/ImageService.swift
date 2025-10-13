@@ -1,7 +1,7 @@
 @preconcurrency import S3
 import Vapor
 
-final class ImageService {
+enum ImageService {
     @discardableResult
     static func uploadFile(data: Data, filename: String) async throws -> S3.PutObjectOutput {
         guard

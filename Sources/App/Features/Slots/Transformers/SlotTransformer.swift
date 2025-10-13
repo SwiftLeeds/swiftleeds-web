@@ -2,7 +2,7 @@ import Foundation
 
 enum SlotTransformer: Transformer {
     static func transform(_ entity: Slot?) -> SlotResponse? {
-        guard let entity = entity, let id = entity.id else {
+        guard let entity, let id = entity.id else {
             return nil
         }
 
@@ -21,7 +21,7 @@ enum SlotTransformer: Transformer {
             activity = nil
         }
 
-        if activity == nil && presentation == nil {
+        if activity == nil, presentation == nil {
             return nil
         }
 

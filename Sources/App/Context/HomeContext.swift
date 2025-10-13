@@ -17,8 +17,8 @@ struct HomeContext: Content {
     var regularDropInSessions: [DropInSession] = []
     var groupDropInSessions: [DropInSession] = []
     var schedule: [ScheduleDay] = []
-    var phase: PhaseContext? = nil
-    var event: EventContext? = nil
+    var phase: PhaseContext?
+    var event: EventContext?
 }
 
 struct EventContext: Codable {
@@ -37,33 +37,32 @@ struct EventContext: Codable {
     let isHidden: Bool
     
     init(event: Event) {
-        self.name = event.name
+        name = event.name
         self.event = event.name.components(separatedBy: " ").first ?? "SwiftLeeds"
-        self.year = event.name.components(separatedBy: " ").last ?? ""
+        year = event.name.components(separatedBy: " ").last ?? ""
         
         // This is a total hack, but means if we set the date of an event to something earlier than 2015 then the event is hidden.
         // This prevents people accessing that year, useful for development and preparing.
         // TODO: just make event.date optional in database
         let isKnownDate = event.date.timeIntervalSince1970 > 1420074000
         
-        self.date = isKnownDate ? event.date : nil
-        self.dateFormatted = isKnownDate ? Self.buildConferenceDateString(for: event) : nil
+        date = isKnownDate ? event.date : nil
+        dateFormatted = isKnownDate ? Self.buildConferenceDateString(for: event) : nil
         
-        self.location = event.location
+        location = event.location
         
-        self.isCurrent = event.isCurrent
-        self.isFuture = event.date > Date() && !isKnownDate
-        self.isPast = event.date <= Date() && isKnownDate
-        self.isHidden = isKnownDate != true
+        isCurrent = event.isCurrent
+        isFuture = event.date > Date() && !isKnownDate
+        isPast = event.date <= Date() && isKnownDate
+        isHidden = isKnownDate != true
     }
     
     private static func buildConferenceDateString(for event: Event) -> String? {
         let date = event.date
         
         let days = event.days
-            .filter { $0.name.contains("Talkshow") == false }
-            .count
-        
+            .count(where: { $0.name.contains("Talkshow") == false })
+            
         let formatter = DateFormatter()
         formatter.locale = .init(identifier: "en_US_POSIX")
         
@@ -107,8 +106,8 @@ struct CfpContext: Content {
     
     let stage: Stage
     var faqs: [Question] = []
-    var phase: PhaseContext? = nil
-    var event: EventContext? = nil
+    var phase: PhaseContext?
+    var event: EventContext?
 }
 
 struct TeamContext: Content {
@@ -122,5 +121,5 @@ struct TeamContext: Content {
     }
     
     var teamMembers: [TeamMember] = []
-    var event: EventContext? = nil
+    var event: EventContext?
 }

@@ -32,7 +32,7 @@ struct TalkRouteController: RouteCollection {
             videoReference: "J4s3mraKcag",
             imageLink: "https://live.staticflickr.com/65535/53300388151_07124551b2_c_d.jpg",
             resources: [
-                "https://github.com/jessielinden/ICYMI-EnumsAreTheSh-t"
+                "https://github.com/jessielinden/ICYMI-EnumsAreTheSh-t",
             ]
         )
         

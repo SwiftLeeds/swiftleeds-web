@@ -1,9 +1,8 @@
-import Foundation
 import Fluent
+import Foundation
 
 struct SlotMigrationV4: AsyncMigration {
     func prepare(on database: any Database) async throws {
-
         final class MigrationSlot: Model, @unchecked Sendable {
             static let schema = Schema.slot
 

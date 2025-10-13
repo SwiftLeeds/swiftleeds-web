@@ -2,6 +2,7 @@ import Vapor
 
 func routes(_ app: Application) throws {
     // MARK: - Web Routes
+
     try app.routes.register(collection: HomeRouteController())
     
     #if DEBUG
@@ -24,12 +25,12 @@ func routes(_ app: Application) throws {
         return try await req.view.render("Secondary/conduct", HomeContext())
     }
     
-    app.get("robots.txt") { req -> String in
+    app.get("robots.txt") { _ -> String in
         let disallowedPaths = [
             "/purchase", // Not intended for direct access, only redirect from tito
             "/admin", // Not intended for normal users
             "/api/", // Not intended for SEO
-            "/login" // Not intended for normal users (only used for admin)
+            "/login", // Not intended for normal users (only used for admin)
         ]
         .map { "Disallow: " + $0 }
         .joined(separator: "\n")
@@ -60,6 +61,7 @@ func routes(_ app: Application) throws {
     try apiV2Routes.grouped("team").register(collection: TeamAPIController())
 
     // MARK: - Admin Routes
+
     let adminRoutes = app.grouped("admin").grouped(AdminMiddleware())
     try adminRoutes.grouped("sponsors").register(collection: SponsorRouteController())
     try adminRoutes.grouped("speakers").register(collection: SpeakerRouteController())
@@ -93,7 +95,9 @@ func routes(_ app: Application) throws {
             .with(\.$activity)
             .all()
             .sorted {
-                guard let d1 = $0.day?.date, let d2 = $1.day?.date else { return false }
+                guard let d1 = $0.day?.date, let d2 = $1.day?.date else {
+                    return false
+                }
                 return d1 < d2
             }
         let activities = try await Activity

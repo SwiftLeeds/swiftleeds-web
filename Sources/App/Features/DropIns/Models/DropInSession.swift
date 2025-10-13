@@ -50,7 +50,7 @@ final class DropInSession: Model, Content, @unchecked Sendable {
     var isPublic: Bool
     
     @Parent(key: "event_id")
-    public var event: Event
+    var event: Event
     
     @Children(for: \.$session)
     var slots: [DropInSessionSlot]

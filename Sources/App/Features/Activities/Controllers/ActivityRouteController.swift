@@ -27,7 +27,9 @@ struct ActivityRouteController: RouteCollection {
     }
 
     @Sendable private func onDelete(request: Request) async throws -> Response {
-        guard let activity = try await Activity.find(request.parameters.get("id"), on: request.db) else { throw Abort(.notFound) }
+        guard let activity = try await Activity.find(request.parameters.get("id"), on: request.db) else {
+            throw Abort(.notFound)
+        }
         try await activity.delete(on: request.db)
         return Response(status: .ok, body: .init(string: "OK"))
     }
@@ -62,7 +64,7 @@ struct ActivityRouteController: RouteCollection {
             return event
         }()
 
-        if let activity = activity {
+        if let activity {
             var fileName = activity.image
 
             if !image.activityImage.filename.isEmpty {
@@ -116,12 +118,14 @@ struct ActivityRouteController: RouteCollection {
     }
 
     // MARK: - ActivityContext
+
     private struct ActivityContext: Content {
         let activity: Activity?
         let events: [Event]
     }
 
     // MARK: - FormInput
+
     private struct FormInput: Content {
         let eventID: String
         let title: String
@@ -132,6 +136,7 @@ struct ActivityRouteController: RouteCollection {
     }
 
     // MARK: - ImageUpload
+
     struct ImageUpload: Content {
         var activityImage: File
     }

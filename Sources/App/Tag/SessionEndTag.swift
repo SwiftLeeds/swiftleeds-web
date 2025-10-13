@@ -1,5 +1,5 @@
-import Leaf
 import Foundation
+import Leaf
 
 struct SessionEndTag: LeafTag {
     let formatter: DateFormatter = {
@@ -13,7 +13,7 @@ struct SessionEndTag: LeafTag {
     func render(_ ctx: LeafContext) throws -> LeafData {
         guard
             let startString = ctx.parameters[0].string, // e.g., "09:30"
-            let duration = ctx.parameters[1].double,    // duration in minutes
+            let duration = ctx.parameters[1].double, // duration in minutes
             let startDate = formatter.date(from: startString)
         else {
             return .string("")

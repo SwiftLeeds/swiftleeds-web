@@ -41,7 +41,8 @@ struct SponsorAPIController: RouteCollection {
     private func generateETag(on request: Request, lastModified: Date) async throws -> String {
         if
             let hash = request.application.storage[SponsorsHashes.self],
-            hash.lastModified == lastModified {
+            hash.lastModified == lastModified
+        {
             return hash.eTag
         }
 
@@ -63,6 +64,7 @@ struct SponsorAPIController: RouteCollection {
     }()
 
     // MARK: - SponsorsHashes
+
     struct SponsorsHashes: StorageKey {
         typealias Value = Hash
 

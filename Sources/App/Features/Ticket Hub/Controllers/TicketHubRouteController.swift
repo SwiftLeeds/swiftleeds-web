@@ -12,7 +12,7 @@ struct TicketHubRouteController: RouteCollection {
                 
                 // Refund Period
                 let refundDays: Int = Environment.get("REFUND_PERIOD").flatMap { Int($0) } ?? 30
-                let refundDeadline = Date(timeIntervalSince1970: currentEvent.date.timeIntervalSince1970 - Double((60 * 60 * 24 * refundDays)))
+                let refundDeadline = Date(timeIntervalSince1970: currentEvent.date.timeIntervalSince1970 - Double(60 * 60 * 24 * refundDays))
                 
                 let formatter = DateFormatter()
                 formatter.locale = .init(identifier: "en_US_POSIX")
@@ -30,9 +30,8 @@ struct TicketHubRouteController: RouteCollection {
                     .with(\.$slots)
                     .sort(.id)
                     .all()
-                    .filter { $0.isPublic }
+                    .filter(\.isPublic)
                 
-
                 let regularDropInSessions = sessions.filter { $0.maxTicketsPerSlot == 1 }.map { convertDropInSessionToViewModel($0, slug: ticket.slug) }
                 let groupDropInSessions = sessions.filter { $0.maxTicketsPerSlot > 1 }.map { convertDropInSessionToViewModel($0, slug: ticket.slug) }
 
@@ -49,7 +48,9 @@ struct TicketHubRouteController: RouteCollection {
                     .all()
                 
                 let videos: [TicketHubContext.VideoPresentation] = presentations.compactMap {
-                    guard let url = $0.videoURL, url != "", $0.videoVisibility != .unlisted else { return nil }
+                    guard let url = $0.videoURL, url != "", $0.videoVisibility != .unlisted else {
+                        return nil
+                    }
                     
                     return TicketHubContext.VideoPresentation(
                         title: $0.title,
@@ -176,7 +177,8 @@ struct TicketHubRouteController: RouteCollection {
                     .all()
                 
                 if existingSlots.filter({ $0.ticket.contains(ticket.slug) })
-                                .contains(where: { $0.session.exclusivityKey == slot.session.exclusivityKey }) {
+                    .contains(where: { $0.session.exclusivityKey == slot.session.exclusivityKey })
+                {
                     // they already have a slot booked with same exclusivity key
                     let message = "You already have a session of this type booked, please cancel it first before booking another."
                         .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
@@ -201,7 +203,7 @@ struct TicketHubRouteController: RouteCollection {
         let slotsWithDay: [TicketHubContext.SessionSlot] = model.slots.grouped(by: { $0.date.dayNumberOfWeek() ?? -1 })
             .sorted(by: { $0.key < $1.key })
             .enumerated()
-            .map { (offset, result) -> [TicketHubContext.SessionSlot] in
+            .map { offset, result -> [TicketHubContext.SessionSlot] in
                 result.value.map { slot in
                     let eventDay = model.event.days.first(where: { $0.date.withoutTime == slot.date.withoutTime })
                     
@@ -218,15 +220,15 @@ struct TicketHubRouteController: RouteCollection {
                     )
                 }
             }
-            .flatMap { $0 }
+            .flatMap(\.self)
             .sorted(by: {
                 if $0.isParticipant {
                     // Always push slots the user is a participant of to the front (no matter what)
                     return true
-                } else if !$0.isFullyBooked && $1.isFullyBooked {
+                } else if !$0.isFullyBooked, $1.isFullyBooked {
                     // Push fully booked sessions to the front
                     return true
-                } else if $0.isFullyBooked && !$1.isFullyBooked {
+                } else if $0.isFullyBooked, !$1.isFullyBooked {
                     // Push fully booked sessions to the front
                     return false
                 } else {
@@ -246,7 +248,7 @@ struct TicketHubRouteController: RouteCollection {
             companyImageUrl: model.companyImageUrl,
             companyLink: model.companyLink,
             maximumAttendance: model.maxTicketsPerSlot,
-            remainingSlots: slotsWithDay.map({ model.maxTicketsPerSlot - $0.participantCount }).reduce(0, +),
+            remainingSlots: slotsWithDay.map { model.maxTicketsPerSlot - $0.participantCount }.reduce(0, +),
             slots: slotsWithDay,
             slotsOrdered: slotsWithDay.sorted(by: { $0.date < $1.date })
         )

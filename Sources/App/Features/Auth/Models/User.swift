@@ -65,19 +65,19 @@ final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAu
         )
     }
     
-    public static func credentialsAuthenticator(
+    static func credentialsAuthenticator(
         database _: DatabaseID? = nil
     ) -> any Authenticator {
         return CustomCredentialsAuthenticator()
     }
     
-    public static func sessionAuthenticator(
+    static func sessionAuthenticator(
         _: DatabaseID? = nil
     ) -> any Authenticator {
         return SessionAuthenticator()
     }
     
-    public static func authenticator(
+    static func authenticator(
         database _: DatabaseID? = nil
     ) -> any Authenticator {
         return BearerAuthenticatable()

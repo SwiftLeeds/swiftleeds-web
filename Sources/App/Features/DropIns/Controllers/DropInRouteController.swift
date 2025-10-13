@@ -50,10 +50,12 @@ struct DropInRouteController: RouteCollection {
                 .filter(\.$id == id)
                 .with(\.$slots)
                 .first()
-        })?.get() else { throw Abort(.notFound) }
+        })?.get() else {
+            throw Abort(.notFound)
+        }
         
         await withThrowingTaskGroup(of: Void.self) { group in
-            session.slots.forEach { slot in
+            for slot in session.slots {
                 group.addTask {
                     try await slot.delete(on: request.db)
                 }
@@ -99,7 +101,7 @@ struct DropInRouteController: RouteCollection {
                 return (tuple.0.0, date, duration)
             }
         
-        if Set(slotValues.map { $0.date }).count != slotValues.count {
+        if Set(slotValues.map(\.date)).count != slotValues.count {
             throw Abort(.badRequest, reason: "Duplicate Slots at Same Time")
         }
         
@@ -109,7 +111,8 @@ struct DropInRouteController: RouteCollection {
                     // If a slot ID is provided, then query that. Otherwise, create a new slot.
                     guard let slot = slotTuple.id == "" ?
                         DropInSessionSlot() :
-                                try await DropInSessionSlot.find(UUID(uuidString: slotTuple.id), on: request.db).get() else {
+                        try await DropInSessionSlot.find(UUID(uuidString: slotTuple.id), on: request.db).get()
+                    else {
                         throw Abort(.badRequest, reason: "Failed to find existing slot")
                     }
                     
@@ -212,7 +215,9 @@ struct DropInRouteController: RouteCollection {
     }
     
     func uploadAndReturnImage(_ image: File?) async throws -> String? {
-        guard let image = image, image.filename != "" else { return nil }
+        guard let image, image.filename != "" else {
+            return nil
+        }
         
         let fileName = "\(UUID.generateRandom().uuidString)-\(image.filename)"
         try await ImageService.uploadFile(data: Data(image.data.readableBytesView), filename: fileName)
@@ -220,6 +225,7 @@ struct DropInRouteController: RouteCollection {
     }
     
     // MARK: - SessionContext
+
     private struct SessionContext: Content {
         let session: DropInSession?
         let events: [Event]
@@ -227,12 +233,14 @@ struct DropInRouteController: RouteCollection {
     }
 
     // MARK: - ImageInput
+
     private struct ImageInput: Content {
         let ownerImage: File?
         let companyImage: File?
     }
 
     // MARK: - FormInput
+
     private struct FormInput: Content {
         let title: String
         let description: String
@@ -287,7 +295,7 @@ struct DropInRouteController: RouteCollection {
             .sorted(by: { $0.key < $1.key })
             // enumerate them to turn into conference day number
             .enumerated()
-            .map { (offset, result) in
+            .map { offset, result in
                 let eventDay = session.event.days.first(where: { $0.date.withoutTime == result.value[0].date.withoutTime })
                 return DropInSessionSlotsContext.SlotGroup(title: eventDay?.name ?? "Day \(offset + 1)", slots: result.value)
             }
@@ -304,10 +312,10 @@ struct DropInSessionViewModel: Codable {
     let owner: String
     
     init(model: DropInSession) {
-        self.id = model.id?.uuidString ?? ""
-        self.title = model.title
-        self.description = model.description
-        self.owner = model.owner
+        id = model.id?.uuidString ?? ""
+        title = model.title
+        description = model.description
+        owner = model.owner
     }
 }
 

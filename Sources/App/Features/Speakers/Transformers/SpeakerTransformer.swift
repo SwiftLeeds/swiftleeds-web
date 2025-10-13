@@ -2,16 +2,14 @@ import Foundation
 
 enum SpeakerTransformer: Transformer {
     static func transform(_ entity: Speaker?) -> SpeakerResponse? {
-        guard let entity = entity else {
+        guard let entity else {
             return nil
         }
 
-        let presentations: [PresentationResponse]
-
-        if let presentationEntities = entity.$presentations.value {
-            presentations = presentationEntities.compactMap(PresentationTransformer.transform(_:))
+        let presentations: [PresentationResponse] = if let presentationEntities = entity.$presentations.value {
+            presentationEntities.compactMap(PresentationTransformer.transform(_:))
         } else {
-            presentations = []
+            []
         }
 
         return .init(

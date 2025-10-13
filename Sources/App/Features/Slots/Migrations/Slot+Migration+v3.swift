@@ -1,5 +1,5 @@
-import Foundation
 import Fluent
+import Foundation
 
 struct SlotMigrationV3: AsyncMigration {
     func prepare(on database: any Database) async throws {

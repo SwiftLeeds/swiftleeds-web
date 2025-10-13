@@ -25,7 +25,7 @@ final class DropInSessionSlot: Model, Content, @unchecked Sendable {
     var duration: Int // in minutes
     
     @Parent(key: "session_id")
-    public var session: DropInSession
+    var session: DropInSession
     
     init() {}
 }
