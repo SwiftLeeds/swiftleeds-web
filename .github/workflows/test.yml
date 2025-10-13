@@ -1,0 +1,56 @@
+name: Test Application
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    if: github.repository_owner == 'SwiftLeeds'
+    runs-on: ubuntu-latest
+    container: swift:6.0-jammy
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # actions/cache will detect zstd and will become much faster.
+      - name: Install zstd
+        run: |
+          apt-get update -y
+          apt-get install -y zstd
+
+      - name: Restore .build
+        if: ${{ github.run_attempt == 1 }} # Because maybe the cache is causing issues
+        id: "restore-cache"
+        uses: actions/cache/restore@v4
+        with:
+          path: .build
+          key: "test-${{ runner.os }}-${{ github.event.pull_request.base.sha || github.event.after }}"
+          restore-keys: "test-${{ runner.os }}-"
+
+      - name: Prebuild Application
+        run: |
+          apt-get -q update \
+            && apt-get -q dist-upgrade -y \
+            && apt-get install -y libjemalloc-dev \
+            && apt-get install -y libssl-dev \
+            && rm -rf /var/lib/apt/lists/*
+
+          swift build --build-tests --enable-code-coverage --force-resolved-versions
+
+      - name: Cache .build
+        if: steps.restore-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .build
+          key: "test-${{ runner.os }}-${{ github.event.pull_request.base.sha || github.event.after }}"
+
+      - name: Run unit tests
+        run: swift test --skip-build --enable-code-coverage --parallel
