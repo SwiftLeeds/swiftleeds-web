@@ -7,3 +7,4 @@ Tests/LinuxMain.swift
 .vscode
 .swiftpm/xcode/
 .env.*
+!.env.testing
