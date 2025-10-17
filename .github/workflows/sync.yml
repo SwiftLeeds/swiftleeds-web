@@ -23,7 +23,7 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
-          pg_dump "$DATABASE_URL" \
+          /usr/lib/postgresql/17/bin/pg_dump "$DATABASE_URL" \
             --schema=public \
             --no-owner \
             --no-privileges \
@@ -34,7 +34,7 @@ jobs:
         env:
           STAGING_DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
         run: |
-          pg_restore \
+          /usr/lib/postgresql/17/bin/pg_restore \
             --clean \
             --if-exists \
             --no-owner \
