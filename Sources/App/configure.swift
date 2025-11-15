@@ -51,16 +51,7 @@ public func configure(_ app: Application) async throws {
 
     // Routes
     app.routes.defaultMaxBodySize = "10mb"
-    
-    switch app.conference {
-    case .kotlinleeds:
-        app.get { req in
-            req.view.render("Kotlin/home")
-        }
-
-    case .swiftleeds:
-        try routes(app)
-    }
+    try routes(app)
 
     // APNS
     if
