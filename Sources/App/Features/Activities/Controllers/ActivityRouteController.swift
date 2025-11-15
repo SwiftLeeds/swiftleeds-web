@@ -17,12 +17,15 @@ struct ActivityRouteController: RouteCollection {
         let activity = try await request.parameters.get("id").map { Activity.find($0, on: request.db) }?.get()
         try await activity?.$event.load(on: request.db)
         
-        let context = try await buildContext(from: request.db, activity: activity)
+        let context = try await buildContext(req: request, activity: activity)
         return try await request.view.render("Admin/Form/activity_form", context)
     }
 
-    private func buildContext(from db: any Database, activity: Activity?) async throws -> ActivityContext {
-        let events = try await Event.query(on: db).sort(\.$date).all()
+    private func buildContext(req: Request, activity: Activity?) async throws -> ActivityContext {
+        let events = try await Event.query(on: req.db)
+            .filter(\.$conference == req.application.conference.rawValue)
+            .sort(\.$date)
+            .all()
         return ActivityContext(activity: activity, events: events)
     }
 

@@ -1,3 +1,4 @@
+import JWT
 import Leaf
 import Vapor
 import VaporAPNS
@@ -51,15 +52,12 @@ public func configure(_ app: Application) async throws {
 
     // Routes
     app.routes.defaultMaxBodySize = "10mb"
+    try routes(app)
     
-    switch app.conference {
-    case .kotlinleeds:
-        app.get { req in
-            req.view.render("Kotlin/home")
-        }
-
-    case .swiftleeds:
-        try routes(app)
+    // JWT
+    if let secret = Environment.get("JWT_SECRET") {
+        await app.jwt.keys.add(hmac: HMACKey(from: secret), digestAlgorithm: .sha256)
+        app.logger.info("Setup JWT successfully")
     }
 
     // APNS

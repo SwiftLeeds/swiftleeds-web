@@ -1,29 +1,36 @@
+import Fluent
 import Vapor
 
 func routes(_ app: Application) throws {
     // MARK: - Web Routes
 
-    try app.routes.register(collection: HomeRouteController())
-    
-    #if DEBUG
-    try app.routes.register(collection: TalkRouteController())
-    #endif
-    
-    app.routes.get("login") { request in
-        request.view.render("Authentication/login")
-    }
-    
-    app.routes.get("register") { request -> View in
-        if let message = request.query[String.self, at: "message"] {
-            return try await request.view.render("Authentication/register", RegisterContext(message: message))
-        } else {
-            return try await request.view.render("Authentication/register")
+    switch app.conference {
+    case .swiftleeds:
+        try app.routes.register(collection: HomeRouteController())
+        
+        #if DEBUG
+        try app.routes.register(collection: TalkRouteController())
+        #endif
+        
+    case .kotlinleeds:
+        app.get { req in
+            req.view.render("Kotlin/home")
         }
     }
     
-    app.get("conduct") { req -> View in
-        return try await req.view.render("Secondary/conduct", HomeContext())
-    }
+    // MARK: - API Routes
+    
+    let apiRoutes = app.grouped("api", "v1")
+    try apiRoutes.grouped("sponsors").register(collection: SponsorAPIController())
+    try apiRoutes.grouped("schedule").register(collection: ScheduleAPIController())
+    try apiRoutes.grouped("local").register(collection: LocalAPIController())
+    try apiRoutes.grouped("tickets").register(collection: TicketsAPIController())
+    try apiRoutes.grouped("checkin").register(collection: CheckInAPIController())
+    try apiRoutes.grouped("login").register(collection: AppLoginRouteController())
+    
+    let apiV2Routes = app.grouped("api", "v2")
+    try apiV2Routes.grouped("schedule").register(collection: ScheduleAPIControllerV2())
+    try apiV2Routes.grouped("team").register(collection: TeamAPIController())
     
     app.get("robots.txt") { _ -> String in
         let disallowedPaths = [
@@ -40,6 +47,26 @@ func routes(_ app: Application) throws {
         \(disallowedPaths)
         """
     }
+    
+    if app.conference == .kotlinleeds {
+        return // limit routes on KotlinLeeds domain for now
+    }
+    
+    app.routes.get("login") { request in
+        request.view.render("Authentication/login")
+    }
+    
+    app.routes.get("register") { request -> View in
+        if let message = request.query[String.self, at: "message"] {
+            return try await request.view.render("Authentication/register", RegisterContext(message: message))
+        } else {
+            return try await request.view.render("Authentication/register")
+        }
+    }
+    
+    app.get("conduct") { req -> View in
+        return try await req.view.render("Secondary/conduct", HomeContext())
+    }
 
     try app.routes.register(collection: AuthController()) // TODO: Split this out into web/api/admin
     try app.routes.register(collection: PushController())
@@ -47,19 +74,6 @@ func routes(_ app: Application) throws {
     try app.routes.register(collection: TicketHubRouteController())
     try app.routes.register(collection: PurchaseRouteController())
     
-    // MARK: - API Routes
-    
-    let apiRoutes = app.grouped("api", "v1")
-    try apiRoutes.grouped("sponsors").register(collection: SponsorAPIController())
-    try apiRoutes.grouped("schedule").register(collection: ScheduleAPIController())
-    try apiRoutes.grouped("local").register(collection: LocalAPIController())
-    try apiRoutes.grouped("tickets").register(collection: TicketsAPIController())
-    try apiRoutes.grouped("checkin").register(collection: CheckInAPIController())
-    
-    let apiV2Routes = app.grouped("api", "v2")
-    try apiV2Routes.grouped("schedule").register(collection: ScheduleAPIControllerV2())
-    try apiV2Routes.grouped("team").register(collection: TeamAPIController())
-
     // MARK: - Admin Routes
 
     let adminRoutes = app.grouped("admin").grouped(AdminMiddleware())
@@ -83,7 +97,10 @@ func routes(_ app: Application) throws {
             .with(\.$speaker)
             .with(\.$secondSpeaker)
             .all()
-        let events = try await Event.query(on: request.db).sort(\.$date).all()
+        let events = try await Event.query(on: request.db)
+            .filter(\.$conference == request.application.conference.rawValue)
+            .sort(\.$date)
+            .all()
         let jobs = try await Job.query(on: request.db).sort(\.$title)
             .with(\.$sponsor)
             .all()

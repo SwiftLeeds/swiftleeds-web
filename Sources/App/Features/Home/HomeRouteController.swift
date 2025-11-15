@@ -200,11 +200,11 @@ struct HomeRouteController: RouteCollection {
     private func getEvent(for req: Request) async throws -> Event? {
         if let yearParameterItem = req.parameters.get("year") {
             return try await Event.query(on: req.db)
-                .filter("name", .equal, "SwiftLeeds \(yearParameterItem)")
+                .filter("name", .custom("ilike"), "\(req.application.conference.rawValue) \(yearParameterItem)")
                 .first()
         }
         
-        return try await Event.getCurrent(on: req.db)
+        return try await Event.getCurrent(req: req)
     }
 }
 

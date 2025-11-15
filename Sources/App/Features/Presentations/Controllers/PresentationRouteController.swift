@@ -16,7 +16,11 @@ struct PresentationRouteController: RouteCollection {
     @Sendable private func onRead(request: Request) async throws -> View {
         let presentation = try await request.parameters.get("id").map { Presentation.find($0, on: request.db) }?.get()
         let speakers = try await Speaker.query(on: request.db).sort(\.$name).all()
-        let events = try await Event.query(on: request.db).sort(\.$date).all()
+        let events = try await Event
+            .query(on: request.db)
+            .filter(\.$conference == request.application.conference.rawValue)
+            .sort(\.$date)
+            .all()
         let context = PresentationContext(presentation: presentation, speakers: speakers, events: events, hasSecondSpeaker: presentation?.$secondSpeaker.id != nil)
 
         return try await request.view.render("Admin/Form/presentation_form", context)

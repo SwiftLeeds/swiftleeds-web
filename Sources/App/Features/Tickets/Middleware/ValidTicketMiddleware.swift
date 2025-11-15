@@ -3,10 +3,7 @@ import Vapor
 
 struct ValidTicketMiddleware: AsyncMiddleware {
     func respond(to request: Request, chainingTo next: any AsyncResponder) async throws -> Response {
-        guard let currentEvent = try await Event.query(on: request.db).filter(\.$isCurrent == true).first() else {
-            throw Abort(.badRequest, reason: "unable to identify current event")
-        }
-        
+        let currentEvent = try await Event.getCurrent(req: request)
         try await currentEvent.$days.load(on: request.db)
         
         guard let titoEvent = currentEvent.titoEvent else {

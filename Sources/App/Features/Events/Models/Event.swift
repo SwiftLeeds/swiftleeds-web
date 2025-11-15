@@ -52,8 +52,12 @@ final class Event: Model, Content, @unchecked Sendable {
 }
 
 extension Event {
-    static func getCurrent(on db: any Database) async throws -> Event {
-        guard let event = try await Event.query(on: db).filter(\.$isCurrent == true).first() else {
+    static func getCurrent(req: Request) async throws -> Event {
+        guard let event = try await Event.query(on: req.db)
+            .filter(\.$isCurrent == true)
+            .filter(\.$conference == req.application.conference.rawValue)
+            .first()
+        else {
             throw Abort(.notFound, reason: "could not locate current event")
         }
         
@@ -61,6 +65,11 @@ extension Event {
     }
     
     func shouldBeReturned(by request: Request) -> Bool {
+        // prevent being able to specify an ID of a conference on a different deployment
+        guard request.application.conference.rawValue == conference else {
+            return false
+        }
+        
         // if the request has a query parameter of 'event' (the event ID)
         // then only return 'true' if the ID provided matches this event
         if let targetEvent: String = try? request.query.get(String.self, at: "event") {

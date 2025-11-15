@@ -15,7 +15,7 @@ struct TicketLoginController: RouteCollection {
         }
         
         routes.post("ticketLogin", "validate") { req async throws -> Response in
-            guard let currentTitoEvent = try await Event.query(on: req.db).filter(\.$isCurrent == true).first()?.titoEvent else {
+            guard let currentTitoEvent = try await Event.getCurrent(req: req).titoEvent else {
                 throw Abort(.badRequest, reason: "unable to identify current event")
             }
             
