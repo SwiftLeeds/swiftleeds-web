@@ -16,7 +16,7 @@ struct CheckInAPIController: RouteCollection {
         }
         
         // If it is, then return Event.checkinKey or `CHECKIN_TAG`
-        let event = try await Event.getCurrent(on: request.db)
+        let event = try await Event.getCurrent(req: request)
         return CheckIn(tag: event.checkinKey ?? Environment.get("CHECKIN_TAG") ?? "")
     }
     

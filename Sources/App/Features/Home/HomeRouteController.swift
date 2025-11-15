@@ -204,7 +204,7 @@ struct HomeRouteController: RouteCollection {
                 .first()
         }
         
-        return try await Event.getCurrent(on: req.db)
+        return try await Event.getCurrent(req: req)
     }
 }
 
