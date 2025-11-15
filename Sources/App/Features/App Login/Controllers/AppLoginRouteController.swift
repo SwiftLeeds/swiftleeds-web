@@ -13,7 +13,7 @@ struct AppLoginRouteController: RouteCollection {
         routes.post("ticket", use: login)
     }
     
-    @Sendable private func login(request: Request) async throws -> AppTicketResponse {
+    @Sendable private func login(request: Request) async throws -> String {
         let payload = try request.content.decode(AppLoginRequest.self, as: .json)
         
         var eventQuery = Event.query(on: request.db)
@@ -45,6 +45,13 @@ struct AppLoginRouteController: RouteCollection {
             throw Abort(.internalServerError, reason: "requested unassigned ticket")
         }
         
-        return AppTicketResponse(slug: ticket.slug, reference: ticket.reference, email: email, ticketType: ticket.release.title)
+        return try await request.jwt.sign(AppTicketJWTPayload(
+            sub: .init(value: email),
+            iat: .init(value: .now),
+            slug: ticket.slug,
+            reference: ticket.reference,
+            event: event.requireID().uuidString,
+            ticketType: ticket.release.title
+        ))
     }
 }

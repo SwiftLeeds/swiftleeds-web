@@ -1,6 +1,7 @@
 import Leaf
 import Vapor
 import VaporAPNS
+import JWT
 
 public func configure(_ app: Application) async throws {
     // Sessions
@@ -52,6 +53,12 @@ public func configure(_ app: Application) async throws {
     // Routes
     app.routes.defaultMaxBodySize = "10mb"
     try routes(app)
+    
+    // JWT
+    if let secret = Environment.get("JWT_SECRET") {
+        await app.jwt.keys.add(hmac: HMACKey(from: secret), digestAlgorithm: .sha256)
+        app.logger.info("Setup JWT successfully")
+    }
 
     // APNS
     if

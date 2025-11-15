@@ -5,11 +5,17 @@
 //  Created by James Sherlock on 15/11/2025.
 //
 
-import Vapor
+import JWT
 
-struct AppTicketResponse: Content {
+struct AppTicketJWTPayload: JWTPayload {
+    let sub: SubjectClaim
+    let iat: IssuedAtClaim
     let slug: String
     let reference: String
-    let email: String
+    let event: String
     let ticketType: String
+    
+    func verify(using algorithm: some JWTKit.JWTAlgorithm) async throws {
+        
+    }
 }
