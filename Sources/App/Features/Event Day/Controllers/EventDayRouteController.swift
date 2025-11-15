@@ -20,7 +20,10 @@ struct EventDayRouteController: RouteCollection {
         let day = try await request.parameters.get("id").map { EventDay.find($0, on: request.db) }?.get()
         try await day?.$event.load(on: request.db)
         
-        let events = try await Event.query(on: request.db).all()
+        let events = try await Event
+            .query(on: request.db)
+            .filter(\.$conference == request.application.conference.rawValue)
+            .all()
         
         let context = EventDayContext(day: day, events: events)
         return try await request.view.render("Admin/Form/event_day_form", context)

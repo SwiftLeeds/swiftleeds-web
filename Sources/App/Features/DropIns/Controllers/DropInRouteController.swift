@@ -33,7 +33,10 @@ struct DropInRouteController: RouteCollection {
                 .first()
         }?.get()
         
-        let events = try await Event.query(on: request.db).sort(\.$date).all()
+        let events = try await Event.query(on: request.db)
+            .filter(\.$conference == request.application.conference.rawValue)
+            .sort(\.$date)
+            .all()
         let context = SessionContext(
             session: session,
             events: events,

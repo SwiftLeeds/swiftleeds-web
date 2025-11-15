@@ -1,4 +1,5 @@
 import Vapor
+import Fluent
 
 func routes(_ app: Application) throws {
     // MARK: - Web Routes
@@ -96,7 +97,10 @@ func routes(_ app: Application) throws {
             .with(\.$speaker)
             .with(\.$secondSpeaker)
             .all()
-        let events = try await Event.query(on: request.db).sort(\.$date).all()
+        let events = try await Event.query(on: request.db)
+            .filter(\.$conference == request.application.conference.rawValue)
+            .sort(\.$date)
+            .all()
         let jobs = try await Job.query(on: request.db).sort(\.$title)
             .with(\.$sponsor)
             .all()

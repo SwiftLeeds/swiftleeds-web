@@ -15,7 +15,10 @@ struct SponsorRouteController: RouteCollection {
     
     @Sendable private func onRead(request: Request) async throws -> View {
         let sponsor = try await request.parameters.get("id").map { Sponsor.find($0, on: request.db) }?.get()
-        let events = try await Event.query(on: request.db).sort(\.$date).all()
+        let events = try await Event.query(on: request.db)
+            .filter(\.$conference == request.application.conference.rawValue)
+            .sort(\.$date)
+            .all()
         let context = SponsorContext(sponsor: sponsor, sponsorLevels: sponsorLevels, events: events)
 
         return try await request.view.render("Admin/Form/sponsor_form", context)
