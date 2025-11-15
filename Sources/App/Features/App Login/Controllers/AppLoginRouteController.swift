@@ -1,12 +1,5 @@
-//
-//  AppLoginRouteController.swift
-//  swift-leeds
-//
-//  Created by James Sherlock on 15/11/2025.
-//
-
-import Vapor
 import Fluent
+import Vapor
 
 struct AppLoginRouteController: RouteCollection {
     func boot(routes: any RoutesBuilder) throws {

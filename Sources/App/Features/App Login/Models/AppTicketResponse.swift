@@ -1,10 +1,3 @@
-//
-//  AppTicketResponse.swift
-//  swift-leeds
-//
-//  Created by James Sherlock on 15/11/2025.
-//
-
 import JWT
 
 struct AppTicketJWTPayload: JWTPayload {
@@ -15,7 +8,5 @@ struct AppTicketJWTPayload: JWTPayload {
     let event: String
     let ticketType: String
     
-    func verify(using algorithm: some JWTKit.JWTAlgorithm) async throws {
-        
-    }
+    func verify(using _: some JWTKit.JWTAlgorithm) async throws {}
 }

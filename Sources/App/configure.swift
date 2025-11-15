@@ -1,7 +1,7 @@
+import JWT
 import Leaf
 import Vapor
 import VaporAPNS
-import JWT
 
 public func configure(_ app: Application) async throws {
     // Sessions
