@@ -65,6 +65,11 @@ extension Event {
     }
     
     func shouldBeReturned(by request: Request) -> Bool {
+        // prevent being able to specify an ID of a conference on a different deployment
+        guard request.application.conference.rawValue == conference else {
+            return false
+        }
+        
         // if the request has a query parameter of 'event' (the event ID)
         // then only return 'true' if the ID provided matches this event
         if let targetEvent: String = try? request.query.get(String.self, at: "event") {
