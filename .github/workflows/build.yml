@@ -133,6 +133,7 @@ jobs:
             FLICKR_SECRET=${{ secrets.FLICKR_SECRET }}
             REFUND_PERIOD=${{ secrets.REFUND_PERIOD }}
             CONFERENCE=${{ matrix.conference }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
 
       - name: Update GitHub Deployment
         uses: bobheadxi/deployments@v1
