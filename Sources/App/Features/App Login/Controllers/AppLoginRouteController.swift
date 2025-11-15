@@ -4,6 +4,10 @@ import Vapor
 struct AppLoginRouteController: RouteCollection {
     func boot(routes: any RoutesBuilder) throws {
         routes.post("ticket", use: login)
+        
+        routes.group(AppBearerMiddleware()) { builder in
+            builder.get("ticket", use: ticket)
+        }
     }
     
     @Sendable private func login(request: Request) async throws -> String {
@@ -43,8 +47,21 @@ struct AppLoginRouteController: RouteCollection {
             iat: .init(value: .now),
             slug: ticket.slug,
             reference: ticket.reference,
-            event: event.requireID().uuidString,
+            event: event.requireID(),
             ticketType: ticket.release.title
         ))
     }
+    
+    @Sendable private func ticket(request: Request) async throws -> TitoTicketResponse {
+        guard let ticket = request.storage.get(TicketStorage.self) else {
+            throw Abort(.unauthorized, reason: "Ticket not present in session storage")
+        }
+        
+        return TitoTicketResponse(ticket: ticket)
+    }
+}
+
+struct TitoTicketResponse: Content {
+    static let defaultContentType: HTTPMediaType = .json
+    let ticket: TitoTicket
 }

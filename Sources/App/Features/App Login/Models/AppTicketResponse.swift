@@ -1,3 +1,4 @@
+import Foundation
 import JWT
 
 struct AppTicketJWTPayload: JWTPayload {
@@ -5,7 +6,7 @@ struct AppTicketJWTPayload: JWTPayload {
     let iat: IssuedAtClaim
     let slug: String
     let reference: String
-    let event: String
+    let event: UUID
     let ticketType: String
     
     func verify(using _: some JWTKit.JWTAlgorithm) async throws {}
