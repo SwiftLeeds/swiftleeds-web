@@ -2,7 +2,7 @@
         <div class="row py-5 my-md-2 my-lg-3">
           <div class="col-lg-5 col-xl-4 mb-5 mb-lg-0">
             <div class="text-center text-lg-start pe-lg-5 pe-xl-0">
-              <h2 class="h1 pb-3 pb-lg-5">Get the most out of SwiftLeeds with our <span class="text-primary">ticket hub</span>!</h2>
+              <h2 class="h1 pb-3 pb-lg-5">Get the most out of #(event.event) with our <span class="text-primary">ticket hub</span>!</h2>
               <a href="/ticket" class="btn btn-lg btn-primary w-100 w-sm-auto">
                 Login with your ticket
                 <i class="bx bx-right-arrow-alt lead ms-2 me-n1"></i>

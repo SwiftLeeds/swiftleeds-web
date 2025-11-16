@@ -10,7 +10,7 @@ struct TicketLoginController: RouteCollection {
             
             return try await req.leaf.render(
                 "Ticket/ticketLogin",
-                TicketLoginContext(prompt: req.query["prompt"])
+                TicketLoginContext(prompt: req.query["prompt"], conference: req.application.conference.rawValue)
             )
         }
         
@@ -60,4 +60,5 @@ struct TicketLoginPayload: Decodable {
 
 struct TicketLoginContext: Codable {
     let prompt: String?
+    let conference: String
 }

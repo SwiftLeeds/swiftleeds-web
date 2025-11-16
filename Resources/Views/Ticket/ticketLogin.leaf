@@ -1,5 +1,5 @@
 #extend("base"):
-  #export("title", "SwiftLeeds")
+  #export("title", conference)
 
   #export("content"):
     #extend("Shared/_header")

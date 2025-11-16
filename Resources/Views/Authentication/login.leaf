@@ -1,12 +1,12 @@
 #extend("base"):
-  #export("title", "SwiftLeeds")
+  #export("title", "Admin")
 
   #export("content"):
     #extend("Shared/_header")
 
       <section class="bg-dark py-4">
         <div class="container pb-2 py-lg-5">
-          <h1 class="text-center my-4 text-white">Login with your SwiftLeeds account</h1>
+          <h1 class="text-center my-4 text-white">Login with your admin account</h1>
         </div>
       </section>
         

@@ -60,7 +60,8 @@ struct EventRouteController: RouteCollection {
             event.isCurrent = isCurrent
             event.showSchedule = input.showSchedule ?? false
             event.checkinKey = input.checkinKey ?? event.checkinKey
-
+            event.conference = request.application.conference.rawValue
+            
             eventID = try event.requireID()
 
             try await event.update(on: request.db)
@@ -72,7 +73,8 @@ struct EventRouteController: RouteCollection {
                 location: input.location,
                 isCurrent: isCurrent
             )
-
+            
+            event.conference = request.application.conference.rawValue
             eventID = try event.requireID()
 
             try await event.create(on: request.db)
@@ -84,6 +86,7 @@ struct EventRouteController: RouteCollection {
                 .query(on: request.db)
                 .set(\.$isCurrent, to: false)
                 .filter(\.$id != eventID)
+                .filter(\.$conference != request.application.conference.rawValue)
                 .update()
         }
 
