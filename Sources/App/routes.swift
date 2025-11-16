@@ -4,19 +4,11 @@ import Vapor
 func routes(_ app: Application) throws {
     // MARK: - Web Routes
 
-    switch app.conference {
-    case .swiftleeds:
-        try app.routes.register(collection: HomeRouteController())
+    try app.routes.register(collection: HomeRouteController())
         
-        #if DEBUG
-        try app.routes.register(collection: TalkRouteController())
-        #endif
-        
-    case .kotlinleeds:
-        app.get { req in
-            req.view.render("Kotlin/home")
-        }
-    }
+    #if DEBUG
+    try app.routes.register(collection: TalkRouteController())
+    #endif
     
     // MARK: - API Routes
     
@@ -48,10 +40,6 @@ func routes(_ app: Application) throws {
         """
     }
     
-    if app.conference == .kotlinleeds {
-        return // limit routes on KotlinLeeds domain for now
-    }
-    
     app.routes.get("login") { request in
         request.view.render("Authentication/login")
     }
@@ -65,7 +53,10 @@ func routes(_ app: Application) throws {
     }
     
     app.get("conduct") { req -> View in
-        return try await req.view.render("Secondary/conduct", HomeContext())
+        let event = try await Event.getCurrent(req: req)
+        try await event.$days.load(on: req.db)
+        
+        return try await req.view.render("Secondary/conduct", HomeContext(event: EventContext(event: event)))
     }
 
     try app.routes.register(collection: AuthController()) // TODO: Split this out into web/api/admin

@@ -4,7 +4,7 @@
         <div class="container position-relative zindex-2 pt-5" data-bs-theme="dark">
 
           <div class="mt-4 mb-lg-5 mb-4 py-3">
-            <h1 class="display-4 mb-0">We are SwiftLeeds Volunteers</h1>
+            <h1 class="display-4 mb-0">We are #(event.event) Volunteers</h1>
           </div>
 
           <!-- Gallery -->
@@ -25,7 +25,7 @@
       <section class="container mb-5 pt-md-1 pt-lg-4 pt-xl-5">
         <div class="mt-4 py-2 pb-sm-3 pb-md-4 pb-lg-5 mx-auto text-center">
           <h2 class="h1 mb-4">For the community, by the community.</h2>
-          <p class="mb-2">Each one of our volunteers come from a background of Swift development, and have come together to put on the best possible conference.</p>
+          <p class="mb-2">Each one of our volunteers come from a background of mobile development, and have come together to put on the best possible conference.</p>
           <p>They're here to answer your questions, keep you safe, and make sure you have a fantastic time.</p>
         </div>
       </section>
@@ -84,7 +84,7 @@
                   Want to get involved?<br>
                   Get in touch!
                 </h2>
-                <p>From the mobile app, website, tooling and more, we rely on our volunteers to help build out the systems which make SwiftLeeds possible.</p>
+                <p>From the mobile app, website, tooling and more, we rely on our volunteers to help build out the systems which make #(event.event) possible.</p>
               </div>
             </div>
             <div class="col-lg-7 offset-xl-1">
