@@ -1,4 +1,5 @@
 import Vapor
+
 private let isKotlinLeeds = Environment.get("CONFERENCE") == "kotlinleeds"
 
 let callForPaperFAQs: [CfpContext.Question] = [
@@ -6,8 +7,8 @@ let callForPaperFAQs: [CfpContext.Question] = [
         question: "What topics can I talk about?",
         answer: [
             isKotlinLeeds ?
-            "It's a long list, but any talks surrounding the Kotlin language, Android, or the wider ecosystem (such as tooling, or Kotlin Multiplatform) are all fair game. We also allow talks on design, architecture, working in software, indie development, testing, and more." :
-            "It's a long list, but any talks surrounding the Swift language, the ecosystem (such as tooling, Swift Package Manager, Server-side Swift, or other non-Apple platforms), or any Apple operating system are all fair game. We also allow talks on design, architecture, working in software, indie development, testing, and more.",
+                "It's a long list, but any talks surrounding the Kotlin language, Android, or the wider ecosystem (such as tooling, or Kotlin Multiplatform) are all fair game. We also allow talks on design, architecture, working in software, indie development, testing, and more." :
+                "It's a long list, but any talks surrounding the Swift language, the ecosystem (such as tooling, Swift Package Manager, Server-side Swift, or other non-Apple platforms), or any Apple operating system are all fair game. We also allow talks on design, architecture, working in software, indie development, testing, and more.",
             "If in doubt, we would urge you to submit a proposal or discuss it with our team <a href=\"https://join.slack.com/t/swiftleedsworkspace/shared_invite/zt-wkmr6pif-ZDCdDeHM60jcBUy0BxHdCQ\" target=\"_blank\">on Slack</a>.",
         ]
     ),

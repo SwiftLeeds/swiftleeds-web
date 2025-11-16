@@ -18,7 +18,7 @@ struct HomeRouteController: RouteCollection {
 //        if req.application.conference == .kotlinleeds {
 //            return try await req.view.render("Kotlin/home")
 //        } else {
-            return try await req.view.render("Home/home", context)
+        return try await req.view.render("Home/home", context)
 //        }
     }
     
