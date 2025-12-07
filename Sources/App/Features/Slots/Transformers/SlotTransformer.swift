@@ -29,9 +29,16 @@ enum SlotTransformer: Transformer {
             id: id,
             startTime: entity.startDate,
             date: entity.day?.date,
-            duration: entity.presentation?.duration ?? entity.activity?.duration ?? entity.duration ?? 0,
+            duration: entity.presentation?.duration.nilIfZero ?? entity.activity?.duration.nilIfZero ?? entity.duration ?? 0,
             presentation: presentation,
             activity: activity
         )
+    }
+}
+
+fileprivate extension Double {
+    var nilIfZero: Double? {
+        if self == 0 { return nil }
+        return self
     }
 }
