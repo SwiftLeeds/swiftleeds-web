@@ -1,14 +1,7 @@
-//
-//  ErrorMiddleware.swift
-//  swift-leeds
-//
-//  Created by James Sherlock on 07/12/2025.
-//
-
 import Vapor
 
 public final class ErrorFileMiddleware: AsyncMiddleware {
-    internal struct ErrorResponse: Codable {
+    struct ErrorResponse: Codable {
         let error: Bool
         let reason: String
         let code: String
@@ -18,7 +11,9 @@ public final class ErrorFileMiddleware: AsyncMiddleware {
         do {
             return try await next.respond(to: req)
         } catch {
-            let status: HTTPResponseStatus, reason: String, source: ErrorSource
+            let status: HTTPResponseStatus
+            let reason: String
+            let source: ErrorSource
             var headers: HTTPHeaders
 
             // Inspect the error type and extract what data we can.
@@ -40,9 +35,9 @@ public final class ErrorFileMiddleware: AsyncMiddleware {
             
             // Report the error
             req.logger.report(error: error,
-                              metadata: ["method" : "\(req.method.rawValue)",
-                                         "url" : "\(req.url.string)",
-                                         "userAgent" : .array(req.headers["User-Agent"].map { "\($0)" })],
+                              metadata: ["method": "\(req.method.rawValue)",
+                                         "url": "\(req.url.string)",
+                                         "userAgent": .array(req.headers["User-Agent"].map { "\($0)" })],
                               file: source.file,
                               function: source.function,
                               line: source.line)

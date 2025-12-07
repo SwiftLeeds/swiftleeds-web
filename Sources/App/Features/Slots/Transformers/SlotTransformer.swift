@@ -36,9 +36,11 @@ enum SlotTransformer: Transformer {
     }
 }
 
-fileprivate extension Double {
+private extension Double {
     var nilIfZero: Double? {
-        if self == 0 { return nil }
+        if self == 0 {
+            return nil
+        }
         return self
     }
 }

@@ -1,8 +1,8 @@
 import Logging
 import NIOCore
 import NIOPosix
-import Vapor
 import StackdriverLogging
+import Vapor
 
 @main
 enum Entrypoint {
