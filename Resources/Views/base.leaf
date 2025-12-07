@@ -41,11 +41,14 @@
       #import("content")
     </main>
     
-    <!-- Footer -->
-    #extend("Shared/_footer")
+    #if(!error):
+        <!-- Footer -->
+        #extend("Shared/_footer")
+    #endif
 
     <script defer data-domain="#if(event.event == "KotlinLeeds"):kotlinleeds.co.uk#else:swiftleeds.co.uk#endif" src="https://plausible.io/js/plausible.js"></script>
     
+    #if(!error):
     <!-- Back to top button -->
     <a href="#top" class="btn-scroll-top" data-scroll>
       <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
@@ -69,6 +72,7 @@
         </div>
       </div>
     </div>
+    #endif
 
     <!-- Vendor Scripts -->
     <script src="/vendor/parallax-js/dist/parallax.min.js"></script>
