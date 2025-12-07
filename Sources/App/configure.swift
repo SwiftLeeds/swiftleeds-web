@@ -13,6 +13,9 @@ public func configure(_ app: Application) async throws {
     ContentConfiguration.global.use(encoder: JSONEncoder.custom(dates: .iso8601, format: .sortedKeys), for: .json)
     
     // Middleware
+    app.middleware = .init()
+    app.middleware.use(RouteLoggingMiddleware(logLevel: .info))
+    app.middleware.use(ErrorFileMiddleware())
     app.middleware.use(AppleAppSiteAssociationMiddleware())
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
     app.middleware.use(app.sessions.middleware)

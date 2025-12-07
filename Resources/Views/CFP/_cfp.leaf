@@ -4,10 +4,10 @@
         <div class="container pb-2 py-lg-5">
             <div class="row">
               <div class="col-lg-6">
-                <h1 class="display-2 mb-0 text-white my-4">Speak at <span class="text-primary">SwiftLeeds #(eventYear)</span></h1>
+                <h1 class="display-2 mb-0 text-white my-4">Speak at <span class="text-primary">#(event.event) #(eventYear)</span></h1>
               </div>
               <div class="col-lg-6 col-xl-5 offset-xl-1 pt-3 pt-sm-4 pt-lg-3">
-                <p class="fs-xl pb-4 mb-1 mb-md-2 mb-xl-3">Each year, SwiftLeeds operates a Call for Papers (CfP), which allows you to submit your talk to present on the big stage.</p>
+                <p class="fs-xl pb-4 mb-1 mb-md-2 mb-xl-3">Each year, #(event.event) operates a Call for Papers (CfP), which allows you to submit your talk to present on the big stage.</p>
                 <p class="fs-xl pb-4 mb-1 mb-md-2 mb-xl-3">No matter your experience, colour, race, or gender, we invite everyone to apply.</p>
               </div>
             </div>
@@ -66,7 +66,7 @@
             <div class="align-self-center ps-lg-0 ps-md-4">
               <h2 class="h1 mb-lg-4 mb-3">We want to hear from you!</h2>
               <p class="fs-lg">Many potential speakers, especially those from under-represented groups or those who have never spoken at a conference, may rule themselves out unnecessarily.</p>
-              <p class="fs-lg">We want to hear from everybody in the Swift community and urge you to submit a proposal. Our team at SwiftLeeds review all talks anonymously.</p>
+              <p class="fs-lg">We want to hear from everybody in the #if(event.event == "KotlinLeeds"):Kotlin#else:Swift#endif community and urge you to submit a proposal. Our team at #(event.event) review all talks anonymously.</p>
               <p class="fs-lg">All our speakers join us for the entire year. This means we offer full speaker training and any support you require throughout the process, from reviewing slides to helping with speaker nerves.</p>
             </div>
           </div>
@@ -75,7 +75,7 @@
           <div class="col-12">
             <div class="align-self-center ps-lg-0 ps-md-4">
               <h2 class="h1 mb-lg-4 mb-3">What makes a good submission?</h2>
-              <p class="fs-lg">The SwiftLeeds team review all talks anonymously and relies heavily on the title and description of your submission to understand whether it's a good fit for the community. With only 1&nbsp;in&nbsp;10 submissions being accepted, here's how you can stand out:</p>
+              <p class="fs-lg">The #(event.event) team review all talks anonymously and relies heavily on the title and description of your submission to understand whether it's a good fit for the community. With only 1&nbsp;in&nbsp;10 submissions being accepted, here's how you can stand out:</p>
               <ul>
                 <li class="fs-lg">Please let us know what attendees will take away from the talk. What are they going to learn? Perhaps, consider using the 5s W framework (What, Why, Who, Where and When).</li>
                 <li class="fs-lg">Although we don't specify how much content you can give us during the submission, we think 2-3 paragraphs is the ideal. A single-sentence submission is not enough content for us to fully understand much about the talk, but similarly, too much content can be hard to digest during the review, so keep it somewhere in the middle.</li>

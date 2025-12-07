@@ -5,9 +5,17 @@
         <div class="text-center text-lg-start">
             <h2 class="h1 mb-4 themed-header">About</h2>
         </div>
+        
+        #if(event.event == "KotlinLeeds"):
+        <p>Founded by <a href="https://twitter.com/Adam9Rush" target="_blank">Adam Rush</a> in 2025, KotlinLeeds brings the UK's first dedicated Kotlin conference to the north of England.</p>
+        <p>Run by a passionate team of community volunteers, KotlinLeeds is a non-profit initiative where every penny goes directly into creating an exceptional conference experience. As the Android counterpart to our established <a href="https://swiftleeds.co.uk/" target="_blank">SwiftLeeds</a> conference, we're building on five years of experience delivering world-class mobile development events.</p>
+        <p>In-person conferences are where the Kotlin community truly comes alive. Connect with Android developers, Kotlin Multiplatform pioneers, and backend engineers who share your passion for modern app development.</p>
+        <p class="pb-2 pb-lg-4 pb-xl-5 mb-3">Whether you're building your first Android app or architecting enterprise solutions, KotlinLeeds is where the UK's Kotlin community comes together to learn, share, and grow.</p>
+        #else:
         <p>Founded by <a href="https://twitter.com/Adam9Rush" target="_blank">Adam Rush</a> in 2019, SwiftLeeds has set out to bring a modern, inclusive conference to the north of the UK.</p>
         <p>Ran by just a handful of community volunteers, SwiftLeeds is entirely non-profit with every penny going into delivering the best experience possible.</p>
         <p class="pb-2 pb-lg-4 pb-xl-5 mb-3">In-person conferences are the best way to meet like-minded people who enjoy building apps with Swift. You can also learn from the best people in the industry and chat about all things Swift.</p>
+        #endif
       </div>
       <div class="col-xl-6 col-lg-7 offset-xl-1 position-relative">
 

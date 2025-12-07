@@ -1,5 +1,5 @@
 #extend("base"):
-    #export("title", "SwiftLeeds")
+    #export("title", event.event)
 
     #export("content"):
         #extend("Shared/_header")
@@ -13,7 +13,7 @@
         <section class="container mb-5 pt-4 pb-2 py-mg-4">
         <div class="row justify-content-center">
           <div class="col-lg-9">
-            <p>SwiftLeeds is a conference built by the community for the community and we take pride in our conference being a safe place for everyone. We take this very seriously and we expect everyone attending our conference to abide by these rules.</p>
+            <p>#(event.event) is a conference built by the community for the community and we take pride in our conference being a safe place for everyone. We take this very seriously and we expect everyone attending our conference to abide by these rules.</p>
 
             <p>All attendees, speakers, sponsors and volunteers at our conference are required to agree to the following code of conduct. Organisers will enforce this code throughout the event. We expect cooperation from all participants to help ensure a safe environment for everybody.</p>
 
@@ -31,7 +31,7 @@
 
             <p>We expect participants to follow these rules at conference and workshop venues and conference-related social events.</p>
 
-            <p>If you have any questions please contact us on: <a href="mailto:info@swiftleeds.co.uk">info@swiftleeds.co.uk</a></p>
+            <p>If you have any questions please contact us on: #if(event.event == "KotlinLeeds"):<a href="mailto:info@kotlinleeds.com">info@kotlinleeds.com</a>#else:<a href="mailto:info@swiftleeds.co.uk">info@swiftleeds.co.uk</a>#endif</p>
           </div>
       </div>
       </section>

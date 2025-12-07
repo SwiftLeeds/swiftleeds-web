@@ -20,9 +20,9 @@
             <h3 class="h5 pb-1 pb-sm-2 pb-lg-3">Contact us</h3>
             <ul class="nav flex-column mb-3">
               <li>
-                <a href="mailto:info@swiftleeds.co.uk" class="nav-link fs-lg fw-normal px-0 py-1">
+                <a href="mailto:#if(event.event == "KotlinLeeds"):info@kotlinleeds.com#else:info@swiftleeds.co.uk#endif" class="nav-link fs-lg fw-normal px-0 py-1">
                   <i class="bx bx-envelope fs-4 me-2"></i>
-                  info@swiftleeds.co.uk
+                  #if(event.event == "KotlinLeeds"):info@kotlinleeds.com#else:info@swiftleeds.co.uk#endif
                 </a>
               </li>
             </ul>
@@ -51,6 +51,12 @@
                 <li class="nav-item"><a href="/" class="nav-link d-inline-block px-0 pt-1 pb-2">Home</a></li>
                 <li class="nav-item"><a href="/conduct" class="nav-link d-inline-block px-0 pt-1 pb-2">Code of Conduct</a></li>
                 
+                #if(event.event == "KotlinLeeds"):
+                <li class="nav-item"><a href="https://swiftleeds.co.uk/" target="_blank" class="nav-link d-inline-block px-0 pt-1 pb-2">SwiftLeeds</a></li>
+                #elseif(event.event == "SwiftLeeds"):
+                <li class="nav-item"><a href="https://kotlinleeds.co.uk/" target="_blank" class="nav-link d-inline-block px-0 pt-1 pb-2">KotlinLeeds</a></li>
+                #endif
+                
                 #if(false):
                 <li class="nav-item"><a href="/accessibility" class="nav-link d-inline-block px-0 pt-1 pb-2">Accessibility & Inclusivity</a></li>
                 #endif
@@ -62,7 +68,7 @@
       </div>
     </div>
     <p class="nav d-block fs-sm pt-5 mb-0 text-light opacity-60">
-      #copyright(2021, "SwiftLeeds")
+      #copyright(2021, event.event)
     </p>
   </div>
 </footer>

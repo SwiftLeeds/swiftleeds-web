@@ -3,8 +3,12 @@
   <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="author" content="SwiftLeeds"/>
+    <meta name="author" content="#(event.event)"/>
+    
+    #if(event.event == "SwiftLeeds"):
     <meta name="apple-itunes-app" content="app-id=1595490143, app-clip-bundle-id=uk.co.swiftleeds.SwiftLeeds.Clip, app-clip-display=card"/>
+    #endif
+    
     <meta property="og:image" content="/img/logo.png" />
 
     <link rel="stylesheet" media="screen" href="/vendor/boxicons/css/boxicons.min.css"/>
@@ -37,11 +41,14 @@
       #import("content")
     </main>
     
-    <!-- Footer -->
-    #extend("Shared/_footer")
+    #if(!error):
+        <!-- Footer -->
+        #extend("Shared/_footer")
+    #endif
 
-    <script defer data-domain="swiftleeds.co.uk" src="https://plausible.io/js/plausible.js"></script>
+    <script defer data-domain="#if(event.event == "KotlinLeeds"):kotlinleeds.co.uk#else:swiftleeds.co.uk#endif" src="https://plausible.io/js/plausible.js"></script>
     
+    #if(!error):
     <!-- Back to top button -->
     <a href="#top" class="btn-scroll-top" data-scroll>
       <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
@@ -65,6 +72,7 @@
         </div>
       </div>
     </div>
+    #endif
 
     <!-- Vendor Scripts -->
     <script src="/vendor/parallax-js/dist/parallax.min.js"></script>
@@ -102,7 +110,7 @@
     <script type="application/javascript">
         const config = {
             name: "#(event.name)",
-            description: "Join us for this year's SwiftLeeds!",
+            description: "Join us for this year's #(event.event)!",
             startDate: "#date(event.date, "yyyy-MM-dd")",
             startTime: "08:30",
             location: "#(event.location)",
