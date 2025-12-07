@@ -1,5 +1,5 @@
 {
-  "originHash" : "c813346744436891189c6b2ddcdecc17f8a5e93d38b5bb2d0a39c9c3dbc3dd6a",
+  "originHash" : "f34b43daf638947218dcf50309c6b0f3bdd54b3f76e7050ef8b16d1a53ee1b5b",
   "pins" : [
     {
       "identity" : "apns",
@@ -197,6 +197,15 @@
       "state" : {
         "revision" : "1a9ab0523fb742d9629558cede64290165c4285b",
         "version" : "3.33.2"
+      }
+    },
+    {
+      "identity" : "stackdriverlogging",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/brainfinance/StackdriverLogging.git",
+      "state" : {
+        "revision" : "2b86b3f8de55e1b2f996cf40bb093b8236bb97b3",
+        "version" : "4.2.0"
       }
     },
     {

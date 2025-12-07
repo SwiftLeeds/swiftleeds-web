@@ -16,6 +16,7 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
         .package(url: "https://github.com/handya/markdown.git", branch: "fix/xcode-16"),
         .package(url: "https://github.com/vapor/jwt.git", from: "5.0.0"),
+        .package(url: "https://github.com/brainfinance/StackdriverLogging.git", from: "4.2.0"),
         
         // This package is used by AWSSDKSwiftCore on Linux only. We add it here (but don't utilise it) in order to
         // add it to the Package.resolved file. This ensures that when Docker resolves this project, it will not ignore
@@ -37,6 +38,7 @@ let package = Package(
                 .product(name: "NIOCore", package: "swift-nio"),
                 .product(name: "NIOPosix", package: "swift-nio"),
                 .product(name: "JWT", package: "jwt"),
+                .product(name: "StackdriverLogging", package: "StackdriverLogging"),
             ],
             swiftSettings: swiftSettings
         ),

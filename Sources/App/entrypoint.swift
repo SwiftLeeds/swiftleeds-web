@@ -2,12 +2,24 @@ import Logging
 import NIOCore
 import NIOPosix
 import Vapor
+import StackdriverLogging
 
 @main
 enum Entrypoint {
     static func main() async throws {
         var env = try Environment.detect()
-        try LoggingSystem.bootstrap(from: &env)
+        try LoggingSystem.bootstrap(from: &env) { level in
+            let console = Terminal()
+            return { (label: String) in
+                #if DEBUG
+                return ConsoleLogger(label: label, console: console, level: level)
+                #else
+                var logger = StackdriverLogHandler(destination: .stdout, enableErrorTagging: true)
+                logger.logLevel = level
+                return logger
+                #endif
+            }
+        }
         
         let app = try await Application.make(env)
 
