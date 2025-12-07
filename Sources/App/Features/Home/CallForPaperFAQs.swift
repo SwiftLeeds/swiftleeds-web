@@ -5,10 +5,12 @@ private let isKotlinLeeds = Environment.get("CONFERENCE") == "kotlinleeds"
 let callForPaperFAQs: [CfpContext.Question] = [
     .init(
         question: "What topics can I talk about?",
-        answer: [
-            isKotlinLeeds ?
-                "It's a long list, but any talks surrounding the Kotlin language, Android, or the wider ecosystem (such as tooling, or Kotlin Multiplatform) are all fair game. We also allow talks on design, architecture, working in software, indie development, testing, and more." :
-                "It's a long list, but any talks surrounding the Swift language, the ecosystem (such as tooling, Swift Package Manager, Server-side Swift, or other non-Apple platforms), or any Apple operating system are all fair game. We also allow talks on design, architecture, working in software, indie development, testing, and more.",
+        answer: isKotlinLeeds ? [
+            "It's a long list, but any talks surrounding the Kotlin language, the ecosystem (such as tooling, Gradle, Kotlin Multiplatform, server-side Kotlin, or Compose), or Android development are all fair game. We also welcome talks on app architecture, design systems, working in software, indie development, testing, CI/CD, and more.",
+            "Topics could include Android development, Kotlin Multiplatform Mobile (KMM), Compose UI, backend development with Ktor or Spring, or even emerging areas like Kotlin/Native and Kotlin/JS.",
+            "If in doubt, we would urge you to submit a proposal or discuss it with our team <a href=\"https://join.slack.com/t/swiftleedsworkspace/shared_invite/zt-wkmr6pif-ZDCdDeHM60jcBUy0BxHdCQ\" target=\"_blank\">on Slack</a>.",
+        ] : [
+            "It's a long list, but any talks surrounding the Swift language, the ecosystem (such as tooling, Swift Package Manager, Server-side Swift, or other non-Apple platforms), or any Apple operating system are all fair game. We also allow talks on design, architecture, working in software, indie development, testing, and more.",
             "If in doubt, we would urge you to submit a proposal or discuss it with our team <a href=\"https://join.slack.com/t/swiftleedsworkspace/shared_invite/zt-wkmr6pif-ZDCdDeHM60jcBUy0BxHdCQ\" target=\"_blank\">on Slack</a>.",
         ]
     ),

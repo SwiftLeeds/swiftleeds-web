@@ -51,6 +51,12 @@
                 <li class="nav-item"><a href="/" class="nav-link d-inline-block px-0 pt-1 pb-2">Home</a></li>
                 <li class="nav-item"><a href="/conduct" class="nav-link d-inline-block px-0 pt-1 pb-2">Code of Conduct</a></li>
                 
+                #if(event.event == "KotlinLeeds"):
+                <li class="nav-item"><a href="https://swiftleeds.co.uk/" target="_blank" class="nav-link d-inline-block px-0 pt-1 pb-2">SwiftLeeds</a></li>
+                #elseif(event.event == "SwiftLeeds"):
+                <li class="nav-item"><a href="https://kotlinleeds.co.uk/" target="_blank" class="nav-link d-inline-block px-0 pt-1 pb-2">KotlinLeeds</a></li>
+                #endif
+                
                 #if(false):
                 <li class="nav-item"><a href="/accessibility" class="nav-link d-inline-block px-0 pt-1 pb-2">Accessibility & Inclusivity</a></li>
                 #endif
