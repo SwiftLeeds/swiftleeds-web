@@ -14,7 +14,12 @@ public func configure(_ app: Application) async throws {
     
     // Middleware
     app.middleware = .init()
-    app.middleware.use(RouteLoggingMiddleware(logLevel: .info))
+    
+    if app.environment != .production {
+        // GCR does its own route logging, so let's not double up
+        app.middleware.use(RouteLoggingMiddleware(logLevel: .info))
+    }
+    
     app.middleware.use(ErrorFileMiddleware())
     app.middleware.use(AppleAppSiteAssociationMiddleware())
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))

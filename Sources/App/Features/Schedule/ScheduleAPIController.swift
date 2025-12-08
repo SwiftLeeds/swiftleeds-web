@@ -9,6 +9,7 @@ struct ScheduleAPIController: RouteCollection {
     @Sendable private func onGet(request: Request) async throws -> Response {
         let events = try await Event
             .query(on: request.db)
+            .filter(\.$conference == request.application.conference.rawValue)
             .all()
 
         guard let event = events.first(where: { $0.shouldBeReturned(by: request) }) else {

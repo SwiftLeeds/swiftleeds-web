@@ -12,4 +12,5 @@ struct TeamMember: Content {
     let linkedin: String?
     let slack: String?
     let imageURL: String
+    let core: Bool
 }
