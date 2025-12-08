@@ -16,7 +16,7 @@ public func configure(_ app: Application) async throws {
     app.middleware = .init()
     
     if app.environment != .production {
-        // GCR does it's own route logging, so let's not double up
+        // GCR does its own route logging, so let's not double up
         app.middleware.use(RouteLoggingMiddleware(logLevel: .info))
     }
     

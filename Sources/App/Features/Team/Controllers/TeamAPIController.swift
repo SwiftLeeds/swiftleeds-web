@@ -100,7 +100,7 @@ struct TeamAPIController: RouteCollection {
         ]
         
         // Shuffle the team members to avoid bias, just like the web page does
-        let coreTeam = teamMembers.filter { $0.core }.shuffled()
+        let coreTeam = teamMembers.filter(\.core).shuffled()
         let dayTeam = teamMembers.filter { !$0.core }.shuffled()
         return TeamResponse(teamMembers: coreTeam + dayTeam)
     }

@@ -15,8 +15,8 @@ struct ScheduleAPIControllerV2: RouteCollection {
         let events = try await Event
             .query(on: request.db)
             .with(\.$days)
+            .filter(\.$conference == request.application.conference.rawValue)
             .all()
-            .filter { request.application.conference.rawValue == $0.conference }
 
         guard let event = events.first(where: { $0.shouldBeReturned(by: request) }) else {
             throw ScheduleAPIController.ScheduleAPIError.notFound
