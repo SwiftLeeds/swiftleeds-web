@@ -14,7 +14,7 @@
         
         #extend("Home/_info")
         
-        #if(event.year >= 2023):
+        #if(event.year >= 2023 && event.conference != "kotlinleeds"):
             #extend("Home/_drop-in-sessions")
         #endif
         

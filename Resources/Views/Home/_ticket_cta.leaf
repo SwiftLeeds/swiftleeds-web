@@ -13,9 +13,9 @@
           
           <div class="d-flex align-items-center pb-4">
             <div class="bg-white rounded-circle text-primary flex-shrink-0 p-3" style="width: 60px; height: 60px;">
-              <i class="bx bxs-video-recording" style="font-size: 26px; padding-left: 3px;"></i>
+              <i class="bx bxs-calendar-plus" style="font-size: 26px; padding-left: 3px;"></i>
             </div>
-            <p class="fs-xl text-light ps-3 mb-0">Buy our livestream pass to join us online and never miss a moment.</p>
+            <p class="fs-xl text-light ps-3 mb-0">Why not join us for an extra few days with #if(event.conference == "swiftleeds"):KotlinLeeds#else:SwiftLeeds#endif?</p>
           </div>
           
           <div class="d-flex align-items-center">

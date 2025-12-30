@@ -28,6 +28,6 @@
 
 #if(event.isCurrent):
 <p class="mt-3 mb-0">
-    Want to support the event? Email us at <a href="mailto:info@swiftleeds.co.uk">info@swiftleeds.co.uk</a> for our sponsorship pack.
+    Want to support the event? Email us at #if(event.conference == "kotlinleeds"):<a href="mailto:info@kotlinleeds.com">info@kotlinleeds.com</a>#else:<a href="mailto:info@swiftleeds.co.uk">info@swiftleeds.co.uk</a>#endif for our sponsorship pack.
 </p>
 #endif
