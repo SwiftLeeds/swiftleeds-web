@@ -13,12 +13,8 @@ struct HomeRouteController: RouteCollection {
     }
     
     @Sendable func get(req: Request) async throws -> View {
-        if req.application.conference == .kotlinleeds {
-            return try await req.view.render("Kotlin/home")
-        } else {
-            let context = try await getContext(req: req)
-            return try await req.view.render("Home/home", context)
-        }
+        let context = try await getContext(req: req)
+        return try await req.view.render("Home/home", context)
     }
     
     @Sendable func team(req: Request) async throws -> View {

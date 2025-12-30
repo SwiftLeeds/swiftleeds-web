@@ -20,6 +20,9 @@
     
     #if(event):
     <link rel="stylesheet" media="screen" href="/css/year/#(event.year).css">
+    #if(event.conference == "kotlinleeds"):
+    <link rel="stylesheet" media="screen" href="/css/kotlin.css">
+    #endif
     #endif
     
     #import("styles")
