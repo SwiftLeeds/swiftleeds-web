@@ -30,7 +30,7 @@
             #extend("Home/year/prev-2024")
         #elseif(event.year == 2025):
             #extend("Home/year/prev-2025")
-        #elseif(event.year == 2026):
+        #elseif(event.year == 2026 && event.conference == "swiftleeds"):
             #extend("Home/year/prev-2026")
         #endif
         
