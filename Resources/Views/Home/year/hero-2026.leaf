@@ -2,5 +2,32 @@
 <section class="bg-dark bg-size-cover bg-repeat-0 bg-position-center position-relative overflow-hidden py-5 mb-4" data-bs-theme="dark" style="background-image: url(/img/year/2026/hero.svg);">
     <div class="container position-relative pt-3 pt-lg-5" style="height: 700px;">
         
+        <div class="hero-container">
+            <div class="hero-title">
+                <img src="/img/year/2026/departures.png" width="70" style="padding-right: 1rem;"/>
+                #(event.event)
+            </div>
+            <table>
+              <tr>
+                <td>12th Oct</td>
+                <td class="hero-yellow">Leeds, UK</td>
+                <td>Evening Talkshow</td>
+                <td class="hero-green">Book now</td>
+              </tr>
+              <tr>
+                <td>13th & 14th Oct</td>
+                <td class="hero-yellow">Leeds, UK</td>
+                <td>SwiftLeeds</td>
+                <td class="hero-green">Book now</td>
+              </tr>
+              <tr>
+                <td>15th & 16th Oct</td>
+                <td class="hero-yellow">Leeds, UK</td>
+                <td>KotlinLeeds</td>
+                <td class="hero-green">Book now</td>
+              </tr>
+            </table>
+        </div>
+        
     </div>
 </section>

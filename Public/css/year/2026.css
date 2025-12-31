@@ -57,3 +57,28 @@
 }
 
 /* Hero */
+
+.hero-container {
+    background: black;
+    color: white;
+    padding: 10px;
+}
+
+.hero-title {
+    background: #FFCC01;
+    padding: 2rem;
+    font-size: 3rem;
+    font-weight: 700;
+    color: black;
+}
+
+
+.hero-container table {
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.hero-container td {
+    padding: 1rem 0;
+}
