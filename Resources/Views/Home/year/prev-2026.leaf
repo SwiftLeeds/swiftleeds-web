@@ -1,0 +1,22 @@
+#extend("Home/_previous-conferences.leaf"):
+#export("year"):
+#(cast(event.year, "int") - 1)
+#endexport
+
+#export("keyline"):
+Celebrating our 5th year of joining together in Leeds, SwiftLeeds 2025 was an absolute blast (into outer space). With 17 incredible talks, 4 drop-in sessions (including our brand new group sessions), and a star-studded SwiftLeeds Evening Talkshow, it was one for the history books.
+#endexport
+
+#export("speakerCount"):
+26
+#endexport
+
+#export("images"):
+#staticLoop("https://live.staticflickr.com/65535/54857506384_587432a90f_n.jpg https://live.staticflickr.com/65535/54857275566_1470aa99d3.jpg https://live.staticflickr.com/65535/54857517234_d30eaa4874.jpg https://live.staticflickr.com/65535/54856412227_dc6f3132cd.jpg https://live.staticflickr.com/65535/54857570095_963cfd43e7.jpg https://live.staticflickr.com/65535/54857570095_963cfd43e7.jpg https://live.staticflickr.com/65535/54857512474_646efc3cd2.jpg https://live.staticflickr.com/65535/54857522528_71b981a091.jpg https://live.staticflickr.com/65535/54856405882_dbd11d4b0c.jpg"):
+  <!-- Item -->
+  <div class="swiper-slide">
+    <img src="[[VALUE]]" alt="Gallery image" class="rounded-3" loading="lazy">
+  </div>
+#endstaticLoop
+#endexport
+#endextend

@@ -1,0 +1,6 @@
+<!-- Hero -->
+<section class="bg-dark bg-size-cover bg-repeat-0 bg-position-center position-relative overflow-hidden py-5 mb-4" data-bs-theme="dark" style="background-image: url(/img/year/2026/hero.svg);">
+    <div class="container position-relative pt-3 pt-lg-5" style="height: 700px;">
+        
+    </div>
+</section>
