@@ -42,16 +42,24 @@
             <li class="nav-item d-none d-sm-none d-md-none d-lg-block mx-auto"></li>
             
             <li class="nav-item">
+              #if(event.event == "KotlinLeeds"):
+              <a href="https://twitter.com/KotlinLeeds" target="_blank" class="nav-link">
+                <i class="bx bxl-twitter"></i> <span class="d-block d-sm-block d-md-block d-lg-none" style="margin-left: 6px;">Twitter</span>
+              </a>
+              #else:
               <a href="https://twitter.com/swift_leeds" target="_blank" class="nav-link">
                 <i class="bx bxl-twitter"></i> <span class="d-block d-sm-block d-md-block d-lg-none" style="margin-left: 6px;">Twitter</span>
               </a>
+              #endif
             </li>
-            
+
+            #if(event.event != "KotlinLeeds"):
             <li class="nav-item">
               <a href="https://iosdev.space/@swiftleeds" rel="me" target="_blank" class="nav-link">
                 <i class="bx bxl-mastodon"></i> <span class="d-block d-sm-block d-md-block d-lg-none" style="margin-left: 6px;">Mastodon</span>
               </a>
             </li>
+            #endif
             
             <li class="nav-item">
               <a href="https://www.youtube.com/channel/UCCq1K0eWKZFBCpqaC3n8V1g" target="_blank" class="nav-link">
@@ -65,17 +73,19 @@
               </a>
             </li>
             
+            #if(event.event != "KotlinLeeds"):
             <li class="nav-item">
               <a href="https://www.flickr.com/photos/196979204@N02/albums" target="_blank" class="nav-link">
                   <i class="bx bxl-flickr"></i> <span class="d-block d-sm-block d-md-block d-lg-none" style="margin-left: 6px;">Flickr</span>
               </a>
             </li>
-            
+
             <li class="nav-item">
               <a href="https://open.spotify.com/show/3pHsjVt54MDDHdzZce7ezl" target="_blank" class="nav-link">
                   <i class="bx bxl-spotify"></i> <span class="d-block d-sm-block d-md-block d-lg-none" style="margin-left: 6px;">Spotify</span>
               </a>
             </li>
+            #endif
           </ul>
         </div>
         #if(false):
