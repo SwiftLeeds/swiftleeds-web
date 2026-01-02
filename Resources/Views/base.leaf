@@ -30,8 +30,13 @@
     <title>#import("title") - The Unique iOS Swift Conference in the UK</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    #if(event.conference == "kotlinleeds"):
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/kotlinleeds-favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/kotlinleeds-favicon-16x16.png">
+    #else:
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    #endif
     
     #if(!page):
     <script src='https://js.tito.io/v2/with/inline' async></script>

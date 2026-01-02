@@ -1,7 +1,7 @@
   <header class="header navbar navbar-expand-lg navbar-dark #if(event.year != 2024):position-absolute#endif navbar-sticky">
     <div class="container px-3">
       <a href="/" class="navbar-brand">
-        <img src="/img/logo_horizontal_dark.svg" width="120" alt="SwiftLeeds">
+        #if(event.event == "KotlinLeeds"):<img src="/img/kotlinleeds_logo_horizontal_dark.svg" width="120" alt="KotlinLeeds">#else:<img src="/img/logo_horizontal_dark.svg" width="120" alt="SwiftLeeds">#endif
       </a>
       
       <div id="navbarNav" class="offcanvas offcanvas-end bg-dark">
