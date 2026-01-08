@@ -147,25 +147,6 @@
     position: relative;
 }
 
-.hero-container::before,
-.hero-container::after {
-    content: '';
-    position: absolute;
-    bottom: -48px;
-    width: 18px;
-    height: 48px;
-    background: #000000;
-}
-
-.hero-container::before {
-    left: 25%;
-}
-
-.hero-container::after {
-    right: 25%;
-}
-
-
 .hero-title {
     background: #FFCC01;
     padding: 2.5rem 3rem;
@@ -273,11 +254,6 @@
     .hero-container td {
         padding: 0.875rem 0.5rem;
         white-space: normal;
-    }
-
-    .hero-container::before,
-    .hero-container::after {
-        display: none;
     }
 }
 
