@@ -1,6 +1,13 @@
   <!-- Buy ticket CTA -->
-  <section class="bg-gradient-primary py-5" data-bs-theme="light">
-    <div class="container py-2 py-md-4 py-lg-5">
+  <section class="bg-gradient-primary py-5 position-relative overflow-hidden" data-bs-theme="light">
+    <!-- Kodee mascot for KotlinLeeds -->
+    #if(event.conference == "kotlinleeds"):
+    <div class="d-none d-xl-block position-absolute" style="right: -4%; bottom: -200px; z-index: 1;">
+      <img src="/img/kodee.svg" alt="Kodee - Kotlin Mascot" style="width: 600px; height: auto;">
+    </div>
+    #endif
+
+    <div class="container py-2 py-md-4 py-lg-5 position-relative" style="z-index: 2;">
       <div class="row py-xl-3">
         <div class="col-xl-4 col-lg-5 offset-xl-1 order-lg-2 mb-4">
           <h2 class="h1 text-light text-center text-sm-start pb-4 mb-0 mb-lg-3">Join us for #(event.name)!</h2>

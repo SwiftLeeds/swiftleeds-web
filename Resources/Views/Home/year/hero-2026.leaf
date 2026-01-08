@@ -1,33 +1,77 @@
 <!-- Hero -->
-<section class="bg-dark bg-size-cover bg-repeat-0 bg-position-center position-relative overflow-hidden py-5 mb-4" data-bs-theme="dark" style="background-image: url(/img/year/2026/hero.svg);">
-    <div class="container position-relative pt-3 pt-lg-5" style="height: 700px;">
-        
-        <div class="hero-container">
-            <div class="hero-title">
-                <img src="/img/year/2026/departures.png" width="70" style="padding-right: 1rem;"/>
-                #(event.event)
-            </div>
-            <table>
-              <tr>
-                <td>12th Oct</td>
-                <td class="hero-yellow">Leeds, UK</td>
-                <td>Evening Talkshow</td>
-                <td class="hero-green">Book now</td>
-              </tr>
-              <tr>
-                <td>13th & 14th Oct</td>
-                <td class="hero-yellow">Leeds, UK</td>
-                <td>SwiftLeeds</td>
-                <td class="hero-green">Book now</td>
-              </tr>
-              <tr>
-                <td>15th & 16th Oct</td>
-                <td class="hero-yellow">Leeds, UK</td>
-                <td>KotlinLeeds</td>
-                <td class="hero-green">Book now</td>
-              </tr>
-            </table>
+<section class="hero-section position-relative overflow-hidden mb-4" data-bs-theme="dark">
+    <div class="hero-sky position-absolute w-100" style="top: 0; left: 0; height: 280px; z-index: 1;">
+        <img src="/img/year/2026/sky-gradient.svg" alt="" class="w-100 h-100" style="object-fit: cover;">
+    </div>
+
+    <div class="hero-clouds-wrapper position-absolute" style="top: 20px; left: 0; right: 0; z-index: 2;">
+        <div class="hero-clouds">
+            <img src="/img/year/2026/clouds.svg" alt="" class="hero-cloud-img">
+            <img src="/img/year/2026/clouds.svg" alt="" class="hero-cloud-img">
         </div>
-        
+    </div>
+
+    <div class="hero-city position-absolute w-100 d-none d-lg-block" style="top: 50px; left: 0; z-index: 2;">
+        <img src="/img/year/2026/city.svg" alt="" class="w-100" style="height: 200px; object-fit: contain;">
+    </div>
+
+    <div class="hero-control-tower position-absolute d-none d-lg-block" style="top: 134px; left: 10px; z-index: 5;">
+        <img src="/img/year/2026/tower.svg" alt="" style="width: 260px; height: auto;">
+    </div>
+
+    <div class="hero-plane position-absolute d-none d-md-block" style="top: 60px; right: 10%; z-index: 4;">
+        <img src="/img/year/2026/plane.svg" alt="" style="width: 160px; height: auto;">
+    </div>
+
+    <div class="hero-runway position-absolute w-100" style="top: 200px; left: 0; z-index: 3;">
+        <img src="/img/year/2026/runway.svg" alt="" class="w-100" style="height: auto;">
+    </div>
+
+    <div class="hero-content container position-relative py-4 py-lg-5" style="z-index: 10; min-height: 750px;">
+        <div class="d-flex align-items-center justify-content-center" style="padding-top: 100px;">
+            <div class="hero-container">
+                <div class="hero-title">
+                    <img src="/img/year/2026/departures.png" width="80" style="margin-right: 1.5rem;"/>
+                    #(event.event)
+                </div>
+                <table>
+                    <tbody>
+                    #if(event.conference == "kotlinleeds"):
+                    <tr>
+                        <td>15th Oct</td>
+                        <td class="hero-yellow">Leeds, UK</td>
+                        <td>Day 1</td>
+                        <td><a href="https://ti.to/swiftleeds/#(phase.titoStub)" target="_blank" class="hero-green hero-link">Book now</a></td>
+                    </tr>
+                    <tr>
+                        <td>16th Oct</td>
+                        <td class="hero-yellow">Leeds, UK</td>
+                        <td>Day 2</td>
+                        <td><a href="https://ti.to/swiftleeds/#(phase.titoStub)" target="_blank" class="hero-green hero-link">Book now</a></td>
+                    </tr>
+                    #else:
+                    <tr>
+                        <td>12th Oct</td>
+                        <td class="hero-yellow">Leeds, UK</td>
+                        <td>Evening Talkshow</td>
+                        <td><a href="https://ti.to/swiftleeds/#(phase.titoStub)" target="_blank" class="hero-green hero-link">Book now</a></td>
+                    </tr>
+                    <tr>
+                        <td>13th Oct</td>
+                        <td class="hero-yellow">Leeds, UK</td>
+                        <td>Day 1</td>
+                        <td><a href="https://ti.to/swiftleeds/#(phase.titoStub)" target="_blank" class="hero-green hero-link">Book now</a></td>
+                    </tr>
+                    <tr>
+                        <td>14th Oct</td>
+                        <td class="hero-yellow">Leeds, UK</td>
+                        <td>Day 2</td>
+                        <td><a href="https://ti.to/swiftleeds/#(phase.titoStub)" target="_blank" class="hero-green hero-link">Book now</a></td>
+                    </tr>
+                    #endif
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </section>
