@@ -27,7 +27,7 @@
     
     #import("styles")
     
-    <title>#import("title") - The Unique iOS Swift Conference in the UK</title>
+    <title>#import("title") - #if(event.event == "KotlinLeeds"):The Unique Android & Kotlin Conference in the UK#else:The Unique iOS Swift Conference in the UK#endif</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
     #if(event.conference == "kotlinleeds"):
