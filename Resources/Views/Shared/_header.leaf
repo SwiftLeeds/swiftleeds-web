@@ -19,7 +19,7 @@
             <li class="nav-item">
               <a href="/#speakers" class="nav-link" data-scroll data-scroll-offset="70">Speakers</a>
             </li>
-            #else:
+            #elseif(event.event != "KotlinLeeds"):
             <li class="nav-item">
               <a href="/#highlights" class="nav-link" data-scroll data-scroll-offset="70">Highlights</a>
             </li>
