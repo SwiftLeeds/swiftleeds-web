@@ -194,6 +194,10 @@
     color: #22C55E;
 }
 
+.hero-red {
+    color: #EF4444;
+}
+
 .hero-link {
     text-decoration: none;
     transition: opacity 0.2s ease;

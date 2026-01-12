@@ -41,32 +41,32 @@
                         <td>15th Oct</td>
                         <td class="hero-yellow">Leeds, UK</td>
                         <td>Day 1</td>
-                        <td><a href="https://ti.to/swiftleeds/#(phase.titoStub)" target="_blank" class="hero-green hero-link">Book now</a></td>
+                        <td>#if(phase.ticketsEnabled):<a href="https://ti.to/swiftleeds/#(phase.titoStub)" target="_blank" class="hero-green hero-link">Book now</a>#elseif(!event.isPast):<span class="hero-yellow">Coming soon</span>#else:<span class="hero-red">Sales closed</span>#endif</td>
                     </tr>
                     <tr>
                         <td>16th Oct</td>
                         <td class="hero-yellow">Leeds, UK</td>
                         <td>Day 2</td>
-                        <td><a href="https://ti.to/swiftleeds/#(phase.titoStub)" target="_blank" class="hero-green hero-link">Book now</a></td>
+                        <td>#if(phase.ticketsEnabled):<a href="https://ti.to/swiftleeds/#(phase.titoStub)" target="_blank" class="hero-green hero-link">Book now</a>#elseif(!event.isPast):<span class="hero-yellow">Coming soon</span>#else:<span class="hero-red">Sales closed</span>#endif</td>
                     </tr>
                     #else:
                     <tr>
                         <td>12th Oct</td>
                         <td class="hero-yellow">Leeds, UK</td>
                         <td>Evening Talkshow</td>
-                        <td><a href="https://ti.to/swiftleeds/#(phase.titoStub)" target="_blank" class="hero-green hero-link">Book now</a></td>
+                        <td>#if(phase.ticketsEnabled):<a href="https://ti.to/swiftleeds/#(phase.titoStub)" target="_blank" class="hero-green hero-link">Book now</a>#elseif(!event.isPast):<span class="hero-yellow">Coming soon</span>#else:<span class="hero-red">Sales closed</span>#endif</td>
                     </tr>
                     <tr>
                         <td>13th Oct</td>
                         <td class="hero-yellow">Leeds, UK</td>
                         <td>Day 1</td>
-                        <td><a href="https://ti.to/swiftleeds/#(phase.titoStub)" target="_blank" class="hero-green hero-link">Book now</a></td>
+                        <td>#if(phase.ticketsEnabled):<a href="https://ti.to/swiftleeds/#(phase.titoStub)" target="_blank" class="hero-green hero-link">Book now</a>#elseif(!event.isPast):<span class="hero-yellow">Coming soon</span>#else:<span class="hero-red">Sales closed</span>#endif</td>
                     </tr>
                     <tr>
                         <td>14th Oct</td>
                         <td class="hero-yellow">Leeds, UK</td>
                         <td>Day 2</td>
-                        <td><a href="https://ti.to/swiftleeds/#(phase.titoStub)" target="_blank" class="hero-green hero-link">Book now</a></td>
+                        <td>#if(phase.ticketsEnabled):<a href="https://ti.to/swiftleeds/#(phase.titoStub)" target="_blank" class="hero-green hero-link">Book now</a>#elseif(!event.isPast):<span class="hero-yellow">Coming soon</span>#else:<span class="hero-red">Sales closed</span>#endif</td>
                     </tr>
                     #endif
                     </tbody>
