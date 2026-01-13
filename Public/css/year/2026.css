@@ -115,7 +115,8 @@
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
     .hero-plane,
-    .hero-clouds {
+    .hero-clouds,
+    .hero-green.hero-link {
         animation: none;
     }
 
@@ -192,6 +193,19 @@
 
 .hero-green {
     color: #22C55E;
+}
+
+@keyframes pulse-green {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.hero-green.hero-link {
+    animation: pulse-green 1s ease-in-out infinite;
 }
 
 .hero-red {
