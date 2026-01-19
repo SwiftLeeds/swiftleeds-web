@@ -20,15 +20,23 @@
     
     #if(event):
     <link rel="stylesheet" media="screen" href="/css/year/#(event.year).css">
+    #if(event.conference == "kotlinleeds"):
+    <link rel="stylesheet" media="screen" href="/css/kotlin.css">
+    #endif
     #endif
     
     #import("styles")
     
-    <title>#import("title") - The Unique iOS Swift Conference in the UK</title>
+    <title>#import("title") - #if(event.event == "KotlinLeeds"):The Unique Android & Kotlin Conference in the UK#else:The Unique iOS Swift Conference in the UK#endif</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    #if(event.conference == "kotlinleeds"):
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/kotlinleeds-favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/kotlinleeds-favicon-16x16.png">
+    #else:
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    #endif
     
     #if(!page):
     <script src='https://js.tito.io/v2/with/inline' async></script>
@@ -103,6 +111,21 @@
             form.classList.add('was-validated')
           }, false)
         })
+      })()
+    </script>
+
+    <script>
+      // Close offcanvas menu when nav links are clicked
+      (() => {
+        const offcanvasEl = document.getElementById('navbarNav')
+        if (offcanvasEl) {
+          offcanvasEl.querySelectorAll('.nav-link[href^="/#"]').forEach(link => {
+            link.addEventListener('click', () => {
+              const closeBtn = offcanvasEl.querySelector('[data-bs-dismiss="offcanvas"]')
+              if (closeBtn) closeBtn.click()
+            })
+          })
+        }
       })()
     </script>
     

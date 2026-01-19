@@ -1,4 +1,4 @@
-<section class="pb-5">
+<section class="#if(event.conference == "kotlinleeds"):bg-secondary my-lg-5 py-5#else:pb-5#endif">
   <div class="container pt-2">
     <div class="d-md-flex align-items-center justify-content-between text-center text-md-start">
         <h2 class="h1">

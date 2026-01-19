@@ -6,7 +6,7 @@
     <header class="header navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-light shadow-sm fixed-top">
         <div class="container px-3">
           <a href="/" class="navbar-brand">
-            <img src="/img/logo_horizontal_dark.svg" width="120" alt="SwiftLeeds">
+            #if(event.event == "KotlinLeeds"):<img src="/img/kotlinleeds_logo_horizontal_dark.svg" width="120" alt="KotlinLeeds">#else:<img src="/img/logo_horizontal_dark.svg" width="120" alt="SwiftLeeds">#endif
           </a>
         </div>
       </header>

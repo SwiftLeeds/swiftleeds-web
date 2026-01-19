@@ -25,6 +25,7 @@ struct EventContext: Codable {
     let name: String // SwiftLeeds 2024
     let event: String // SwiftLeeds
     let year: String // 2024
+    let conference: String
     
     let date: Date?
     let dateFormatted: String? // 7-10 OCT
@@ -40,6 +41,7 @@ struct EventContext: Codable {
         name = event.name
         self.event = event.name.components(separatedBy: " ").first ?? "SwiftLeeds"
         year = event.name.components(separatedBy: " ").last ?? ""
+        conference = event.conference
         
         // This is a total hack, but means if we set the date of an event to something earlier than 2015 then the event is hidden.
         // This prevents people accessing that year, useful for development and preparing.

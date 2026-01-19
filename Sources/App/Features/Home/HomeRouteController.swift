@@ -13,12 +13,8 @@ struct HomeRouteController: RouteCollection {
     }
     
     @Sendable func get(req: Request) async throws -> View {
-        if req.application.conference == .kotlinleeds {
-            return try await req.view.render("Kotlin/home")
-        } else {
-            let context = try await getContext(req: req)
-            return try await req.view.render("Home/home", context)
-        }
+        let context = try await getContext(req: req)
+        return try await req.view.render("Home/home", context)
     }
     
     @Sendable func team(req: Request) async throws -> View {
@@ -227,7 +223,7 @@ struct PhaseContext: Codable {
     init(phase: Phase, event: Event) {
         ticketsEnabled = phase.showTickets
         titoStub = event.titoEvent
-        currentTicketPrice = "£180" // TODO: need to load from tito
+        currentTicketPrice = event.conference == "kotlinleeds" ? "£140" : "£180" // TODO: need to load from tito
         showAddToCalendar = event.isCurrent && event.date.timeIntervalSince1970 > 1420074000 // TODO: make date optional in db and do nil check here
         showSchedule = phase.showSchedule
     }
