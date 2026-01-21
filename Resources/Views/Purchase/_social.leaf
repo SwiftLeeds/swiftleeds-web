@@ -27,6 +27,15 @@
             <!-- Item -->
             <div class="swiper-slide">
               <div class="position-relative text-center border-end mx-n1">
+                #if(event.event == "KotlinLeeds"):
+                <a href="https://twitter.com/KotlinLeeds" class="btn btn-icon btn-secondary btn-twitter btn-lg stretched-link" aria-label="Twitter">
+                  <i class="bx bxl-twitter"></i>
+                </a>
+                <div class="pt-4">
+                  <h6 class="mb-1">Twitter</h6>
+                  <p class="fs-sm text-muted mb-0">@KotlinLeeds</p>
+                </div>
+                #else:
                 <a href="https://twitter.com/swift_leeds" class="btn btn-icon btn-secondary btn-twitter btn-lg stretched-link" aria-label="Twitter">
                   <i class="bx bxl-twitter"></i>
                 </a>
@@ -34,9 +43,11 @@
                   <h6 class="mb-1">Twitter</h6>
                   <p class="fs-sm text-muted mb-0">@Swift_Leeds</p>
                 </div>
+                #endif
               </div>
             </div>
 
+            #if(event.event != "KotlinLeeds"):
             <!-- Item -->
             <div class="swiper-slide">
               <div class="position-relative text-center border-end mx-n1">
@@ -49,6 +60,7 @@
                 </div>
               </div>
             </div>
+            #endif
 
             <!-- Item -->
             <div class="swiper-slide">
@@ -58,7 +70,7 @@
                 </a>
                 <div class="pt-4">
                   <h6 class="mb-1">Slack</h6>
-                  <p class="fs-sm text-muted mb-0">SwiftLeeds</p>
+                  <p class="fs-sm text-muted mb-0">#(event.event)</p>
                 </div>
               </div>
             </div>
@@ -71,7 +83,7 @@
                 </a>
                 <div class="pt-4">
                   <h6 class="mb-1">YouTube</h6>
-                  <p class="fs-sm text-muted mb-0">SwiftLeeds</p>
+                  <p class="fs-sm text-muted mb-0">#(event.event)</p>
                 </div>
               </div>
             </div>

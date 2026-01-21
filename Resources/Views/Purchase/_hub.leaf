@@ -14,6 +14,7 @@
               <div class="col pt-md-2">
                 <div class="text-center text-sm-start pe-sm-3 pe-xl-4">
                   <i class="bx bx-group text-primary" style="font-size: 60px"></i>
+                  #if(event.event == "KotlinLeeds"):<span class="badge bg-warning fs-xs mb-2">Coming Soon</span><br>#endif
                   <h3 class="h4 mb-2">Drop-In Session</h3>
                   <p class="fs-lg mb-2">Book your exclusive session with one of our select hosts, free with your ticket.</p>
                   <p class="fs-sm">Sessions are given on a first-come first-served basis.</p>
