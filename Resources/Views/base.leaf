@@ -63,6 +63,7 @@
       <i class="btn-scroll-top-icon bx bx-chevron-up"></i>
     </a>
     
+    #if(phase.titoStub):
     <!-- Tito modal -->
     <div class="modal fade" id="modalTitoOrder" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -80,6 +81,7 @@
         </div>
       </div>
     </div>
+    #endif
     #endif
 
     <!-- Vendor Scripts -->
