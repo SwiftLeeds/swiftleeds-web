@@ -41,10 +41,6 @@ struct WebhookRouteController: RouteCollection {
     @Sendable private func generateRegistrationMessage(for registration: TitoRegistration) -> String {
         var message = "*\(registration.fullName)* "
         
-        if registration.email.isEmpty == false {
-            message += "<\(registration.email)> "
-        }
-        
         if let companyName = registration.company_name {
             message += "from \(companyName) "
         }
