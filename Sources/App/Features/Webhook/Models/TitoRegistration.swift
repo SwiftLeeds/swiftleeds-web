@@ -28,7 +28,10 @@ struct TitoRegistration: Decodable {
         let upgrades: [Upgrade]?
         
         var fullName: String? {
-            guard let first_name, let last_name else { return nil }
+            guard let first_name, let last_name else {
+                return nil
+            }
+            
             return "\(first_name) \(last_name)"
         }
         

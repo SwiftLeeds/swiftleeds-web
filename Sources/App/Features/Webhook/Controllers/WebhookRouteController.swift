@@ -6,23 +6,28 @@ struct WebhookRouteController: RouteCollection {
     }
     
     @Sendable private func onReceive(request: Request) async throws -> String {
-        guard let webhookName = request.headers["x-webhook-name"].first else { return "No webhook name found" }
-        guard let titoWebhook = TitoWebhook(rawValue: webhookName) else { return "Webhook name not recognised" }
+        guard let webhookName = request.headers["x-webhook-name"].first else {
+            return "No webhook name found"
+        }
+        
+        guard let titoWebhook = TitoWebhook(rawValue: webhookName) else {
+            return "Webhook name not recognised"
+        }
         
         switch titoWebhook {
-        case .checkinCreated, .checkinDeleted:
+        case .registrationFinished:
+            try await handleRegistrationUpdate(req: request)
+        default:
             break
-        case .ticketCreated, .ticketCompleted, .ticketReassigned, .ticketUpdated, .ticketUnsnoozed, .ticketUnvoided, .ticketVoided:
-            break
-        case .registrationUpdated, .registrationFinished, .registrationCompleted, .registrationCancelled, .registrationMarkedAsPaid, .registrationMarkedAsUnpaid:
-            try await handleRegistrationUpdate(req: request, webhook: titoWebhook)
         }
         
         return ""
     }
     
-    @Sendable func handleRegistrationUpdate(req: Request, webhook: TitoWebhook) async throws {
-        guard let ticketChannel = Environment.get("TICKET_CHANNEL") else { throw Abort(.notFound) }
+    @Sendable private func handleRegistrationUpdate(req: Request) async throws {
+        guard let ticketChannel = Environment.get("TICKET_CHANNEL") else {
+            throw Abort(.notFound)
+        }
         
         let registration = try req.content.decode(TitoRegistration.self)
         
@@ -32,7 +37,7 @@ struct WebhookRouteController: RouteCollection {
         let slackMessage = SlackMessage(channel: ticketChannel, icon_emoji: ":admission_tickets:", username: registration.event.title, blocks: [
             .init(type: .section, text: .init(type: .markdown, text: message)),
             .init(type: .section, text: .init(type: .markdown, text: details)),
-            .init(type: .divider)
+            .init(type: .divider),
         ])
         
         try await slackMessage.send(req: req)
@@ -58,7 +63,7 @@ struct WebhookRouteController: RouteCollection {
     @Sendable private func generateRegistrationDetails(for registration: TitoRegistration) -> String {
         var details = ""
         
-        registration.tickets.forEach { ticket in
+        for ticket in registration.tickets {
             details += "_• \(ticket.release_title) "
             
             if let fullName = ticket.fullName {
@@ -68,7 +73,7 @@ struct WebhookRouteController: RouteCollection {
             }
             
             if let upgrades = ticket.upgrades {
-                details.append(" + \(upgrades.map { $0.title }.joined(separator: ","))")
+                details.append(" + \(upgrades.map(\.title).joined(separator: ","))")
             }
             
             details += "_\n"
@@ -78,6 +83,7 @@ struct WebhookRouteController: RouteCollection {
     }
     
     // MARK: - TitoWebhook
+        
     enum TitoWebhook: String {
         case checkinCreated = "checkin.created"
         case checkinDeleted = "checkin.deleted"

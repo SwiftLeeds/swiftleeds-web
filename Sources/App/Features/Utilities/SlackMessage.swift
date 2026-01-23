@@ -1,6 +1,5 @@
 import Vapor
 
-// MARK: - SlackMessage
 struct SlackMessage: Content {
     let channel: String
     let icon_emoji: String
@@ -17,7 +16,8 @@ struct SlackMessage: Content {
         }
         
         enum BlockType: String, Content {
-            case section, divider
+            case divider
+            case section
         }
         
         struct SlackText: Content {
@@ -32,9 +32,13 @@ struct SlackMessage: Content {
 }
 
 // MARK: - Send message
+
 extension SlackMessage {
     func send(req: Request) async throws {
-        guard let slackWebhook = Environment.get("SLACK_WEBHOOK") else { throw Abort(.notFound) }
+        guard let slackWebhook = Environment.get("SLACK_WEBHOOK") else {
+            throw Abort(.notFound)
+        }
+        
         _ = try await req.client.post(URI(string: slackWebhook), content: self)
     }
 }
