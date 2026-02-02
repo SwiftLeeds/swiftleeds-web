@@ -89,7 +89,16 @@
         </div>
       </section>
 
-#if(stage.now < stage.openDate):
+#if(!stage.isKnown):
+  <section class="container mt-5">
+    <div class="position-relative bg-info rounded-3 overflow-hidden px-3 py-3">
+      <div class="position-relative zindex-5 text-center my-xl-3 py-1 py-md-4 py-lg-5">
+        <p class="lead text-light opacity-70 mb-3">You're early</p>
+        <h2 class="h1 text-light pb-3 pb-lg-0 mb-lg-5">Dates for this years CFP have not been announced</h2>
+      </div>
+    </div>
+  </section>
+#elseif(stage.now < stage.openDate):
   <section class="container mt-5">
     <div class="position-relative bg-info rounded-3 overflow-hidden px-3 py-3">
       <div class="position-relative zindex-5 text-center my-xl-3 py-1 py-md-4 py-lg-5">

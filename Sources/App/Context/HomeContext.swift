@@ -100,6 +100,7 @@ struct CfpContext: Content {
     
     struct Stage: Codable {
         let now: Date
+        let isKnown: Bool
         let openDate: Date
         let closeDate: Date
         let reviewCompleted: Bool
