@@ -15,14 +15,19 @@ final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAu
         return id ?? .init()
     }
     
-    static var usernameKey: KeyPath<User, Field<String>> { \User.$email }
-    static var passwordHashKey: KeyPath<User, Field<String>> { \User.$passwordHash }
+    static var usernameKey: KeyPath<User, Field<String>> {
+        \User.$email
+    }
+
+    static var passwordHashKey: KeyPath<User, Field<String>> {
+        \User.$passwordHash
+    }
     
-    // Unique identifier for this user.
+    /// Unique identifier for this user.
     @ID()
     var id: UUID?
 
-    // The user's name.
+    /// The user's name.
     @Field(key: "name")
     var name: String
     
@@ -41,10 +46,10 @@ final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAu
     @OptionalChild(for: \.$user)
     var token: UserToken?
     
-    // Creates a new, empty user.
+    /// Creates a new, empty user.
     init() {}
 
-    // Creates a new user with all properties set.
+    /// Creates a new user with all properties set.
     init(id: UUID? = .init(), name: String, email: String, passwordHash: String, role: User.Role) {
         self.id = id
         self.name = name
