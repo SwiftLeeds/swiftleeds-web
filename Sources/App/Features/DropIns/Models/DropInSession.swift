@@ -18,15 +18,15 @@ final class DropInSession: Model, Content, @unchecked Sendable {
     @Field(key: "description")
     var description: String
     
-    // The total number of people who can have a ticket for a single slot
+    /// The total number of people who can have a ticket for a single slot
     @Field(key: "max_tickets")
     var maxTicketsPerSlot: Int
     
-    // The total number of tickets a single attendee can have (one per key)
+    /// The total number of tickets a single attendee can have (one per key)
     @Field(key: "exclusivity_key")
     var exclusivityKey: String
     
-    // Owner presents the individual who is running the drop-in session
+    /// Owner presents the individual who is running the drop-in session
     @Field(key: "owner")
     var owner: String
     
@@ -36,7 +36,7 @@ final class DropInSession: Model, Content, @unchecked Sendable {
     @Field(key: "owner_link")
     var ownerLink: String?
     
-    // Company is for drop-in sessions which relate to a branded product (it may or may not be sponsored)
+    /// Company is for drop-in sessions which relate to a branded product (it may or may not be sponsored)
     @Field(key: "company")
     var company: String?
     

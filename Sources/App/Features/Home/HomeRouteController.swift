@@ -62,12 +62,20 @@ struct HomeRouteController: RouteCollection {
     
     @Sendable func cfp(req: Request) async throws -> View {
         let context = try await getContext(req: req)
+        
+        guard let eventYear = context.event?.year, let yearDate = Date.fromYear(eventYear) else {
+            throw Abort(.notFound)
+        }
+        
         let sessionize = try await SessionizeService().loadEvent(slug: "swiftleeds-ios-conference-in-leeds", req: req)
+        
+        let isSetup: Bool = sessionize.cfpDates.startUtc > yearDate
         
         let stage = CfpContext.Stage(
             now: Date(),
-            openDate: sessionize.cfpDates.startUtc,
-            closeDate: sessionize.cfpDates.endUtc,
+            isKnown: isSetup,
+            openDate: isSetup ? sessionize.cfpDates.startUtc : .distantFuture,
+            closeDate: isSetup ? sessionize.cfpDates.endUtc : .distantFuture,
             reviewCompleted: context.speakers.isEmpty == false,
             cfpUrl: sessionize.cfpLink
         )
@@ -226,5 +234,21 @@ struct PhaseContext: Codable {
         currentTicketPrice = event.conference == "kotlinleeds" ? "£140" : "£180" // TODO: need to load from tito
         showAddToCalendar = event.isCurrent && event.date.timeIntervalSince1970 > 1420074000 // TODO: make date optional in db and do nil check here
         showSchedule = phase.showSchedule
+    }
+}
+
+private extension Date {
+    static func fromYear(_ year: String) -> Date? {
+        guard let yearInt = Int(year) else {
+            return nil
+        }
+        var components = DateComponents()
+        components.year = yearInt
+        components.month = 1
+        components.day = 1
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        return Calendar.current.date(from: components)
     }
 }

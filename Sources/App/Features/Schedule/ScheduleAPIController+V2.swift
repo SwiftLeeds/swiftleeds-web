@@ -1,11 +1,11 @@
 import Fluent
 import Vapor
 
-// With the V1 API, clients were expected to infer days from the fact the slot date was different.
-//
-// With the V2 API (which this file introduces), we add 'Days' as a native concept.
-// The enhancements here ensure the application understands how many days there are,
-// what slots are on what day, and what the name of the day is (such as 'Talkshow').
+/// With the V1 API, clients were expected to infer days from the fact the slot date was different.
+///
+/// With the V2 API (which this file introduces), we add 'Days' as a native concept.
+/// The enhancements here ensure the application understands how many days there are,
+/// what slots are on what day, and what the name of the day is (such as 'Talkshow').
 struct ScheduleAPIControllerV2: RouteCollection {
     func boot(routes: any RoutesBuilder) throws {
         routes.get(use: onGet)
