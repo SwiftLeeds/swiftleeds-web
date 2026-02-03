@@ -237,9 +237,11 @@ struct PhaseContext: Codable {
     }
 }
 
-fileprivate extension Date {
+private extension Date {
     static func fromYear(_ year: String) -> Date? {
-        guard let yearInt = Int(year) else { return nil }
+        guard let yearInt = Int(year) else {
+            return nil
+        }
         var components = DateComponents()
         components.year = yearInt
         components.month = 1
