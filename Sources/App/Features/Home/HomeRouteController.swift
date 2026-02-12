@@ -67,7 +67,7 @@ struct HomeRouteController: RouteCollection {
             throw Abort(.notFound)
         }
         
-        let sessionize = try await SessionizeService().loadEvent(slug: "swiftleeds-ios-conference-in-leeds", req: req)
+        let sessionize = try await SessionizeService().loadEvent(slug: "swiftleeds-kotlinleeds-conference-in-leeds", req: req)
         
         let isSetup: Bool = sessionize.cfpDates.startUtc > yearDate
         
