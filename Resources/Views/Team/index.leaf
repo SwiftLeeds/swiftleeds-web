@@ -1,6 +1,8 @@
 #extend("base"):
     #export("title", "Team")
-    
+    #export("description"):Meet the volunteer team behind #(event.event) who organise the UK's unique #if(event.event == "KotlinLeeds"):Android and Kotlin#else:iOS and Swift#endif conference.#endexport
+    #export("path", "/team")
+
     #export("content"):
         #extend("Shared/_header")
         #extend("Team/_team")

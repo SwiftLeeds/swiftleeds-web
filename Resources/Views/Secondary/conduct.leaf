@@ -1,5 +1,7 @@
 #extend("base"):
-    #export("title", event.event)
+    #export("title", "Code of Conduct")
+    #export("description"):#(event.event) is committed to providing a safe and welcoming conference environment for all attendees, speakers, sponsors, and volunteers.#endexport
+    #export("path", "/conduct")
 
     #export("content"):
         #extend("Shared/_header")

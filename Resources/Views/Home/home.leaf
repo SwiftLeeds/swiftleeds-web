@@ -1,6 +1,8 @@
 #extend("base"):
     #export("title", event.event)
-    
+    #export("description"):#if(event.event == "KotlinLeeds"):KotlinLeeds is a unique Android and Kotlin conference held in the heart of Leeds, UK. Join us for talks, workshops, and networking.#else:SwiftLeeds is a unique iOS and Swift conference held in the heart of Leeds, UK. Join us for talks, workshops, and networking.#endif#endexport
+    #export("path", "/")
+
     #export("content"):
         #extend("Shared/_header")
         
@@ -47,5 +49,64 @@
         #if(phase.ticketsEnabled):
             #extend("Home/_ticket_cta")
         #endif
+    #endexport
+
+    #export("scripts"):
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "#(event.event)",
+      "url": "https://#if(event.event == "KotlinLeeds"):kotlinleeds.co.uk#else:swiftleeds.co.uk#endif",
+      "logo": "https://#if(event.event == "KotlinLeeds"):kotlinleeds.co.uk#else:swiftleeds.co.uk#endif/img/logo.png",
+      "sameAs": [
+        #if(event.event == "KotlinLeeds"):
+        "https://twitter.com/KotlinLeeds"
+        #else:
+        "https://twitter.com/swift_leeds",
+        "https://iosdev.space/@swiftleeds",
+        "https://www.youtube.com/channel/UCCq1K0eWKZFBCpqaC3n8V1g"
+        #endif
+      ]
+    }
+    </script>
+    #if(event.date):
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "#(event.name)",
+      "description": "#if(event.event == "KotlinLeeds"):A unique Android and Kotlin conference held in the heart of Leeds, UK.#else:A unique iOS and Swift conference held in the heart of Leeds, UK.#endif",
+      "startDate": "#date(event.date, "yyyy-MM-dd")",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place",
+        "name": "#(event.location)",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Leeds",
+          "addressCountry": "GB"
+        }
+      },
+      "image": "https://#if(event.event == "KotlinLeeds"):kotlinleeds.co.uk#else:swiftleeds.co.uk#endif/img/logo.png",
+      "organizer": {
+        "@type": "Organization",
+        "name": "#(event.event)",
+        "url": "https://#if(event.event == "KotlinLeeds"):kotlinleeds.co.uk#else:swiftleeds.co.uk#endif"
+      }
+      #if(phase.ticketsEnabled):
+      ,"offers": {
+        "@type": "Offer",
+        "url": "https://#if(event.event == "KotlinLeeds"):kotlinleeds.co.uk#else:swiftleeds.co.uk#endif",
+        "price": "#if(event.event == "KotlinLeeds"):140#else:180#endif",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/InStock"
+      }
+      #endif
+    }
+    </script>
+    #endif
     #endexport
 #endextend

@@ -1,6 +1,8 @@
 #extend("base"):
     #export("title", "Call for Papers")
-    
+    #export("description"):Submit your talk proposal for #(event.name). We welcome speakers of all experience levels to share their knowledge.#endexport
+    #export("path", "/cfp")
+
     #export("content"):
         #extend("Shared/_header")
         
