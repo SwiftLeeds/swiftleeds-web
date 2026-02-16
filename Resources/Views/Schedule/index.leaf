@@ -1,6 +1,8 @@
 #extend("base"):
     #export("title", "Schedule")
-    
+    #export("description"):View the full schedule for #(event.name) including talks, workshops, and activities.#endexport
+    #export("path", "/schedule")
+
     #export("content"):
         #extend("Shared/_header")
         #extend("Home/_hero")

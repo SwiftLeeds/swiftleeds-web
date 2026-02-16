@@ -4,12 +4,28 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="author" content="#(event.event)"/>
-    
+    <meta name="description" content="#import("description")"/>
+
     #if(event.event == "SwiftLeeds"):
     <meta name="apple-itunes-app" content="app-id=1595490143, app-clip-bundle-id=uk.co.swiftleeds.SwiftLeeds.Clip, app-clip-display=card"/>
     #endif
-    
-    <meta property="og:image" content="/img/logo.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="#import("title") - #(event.event)"/>
+    <meta property="og:description" content="#import("description")"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://#(event.domain)#import("path")"/>
+    <meta property="og:image" content="https://#(event.domain)/img/logo.png"/>
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content="#if(event.event == "KotlinLeeds"):@KotlinLeeds#else:@swift_leeds#endif"/>
+    <meta name="twitter:title" content="#import("title") - #(event.event)"/>
+    <meta name="twitter:description" content="#import("description")"/>
+    <meta name="twitter:image" content="https://#(event.domain)/img/logo.png"/>
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://#(event.domain)#import("path")"/>
 
     <link rel="stylesheet" media="screen" href="/vendor/boxicons/css/boxicons.min.css"/>
     <link rel="stylesheet" media="screen" href="/vendor/swiper/swiper-bundle.min.css"/>
@@ -54,7 +70,7 @@
         #extend("Shared/_footer")
     #endif
 
-    <script defer data-domain="#if(event.event == "KotlinLeeds"):kotlinleeds.co.uk#else:swiftleeds.co.uk#endif" src="https://plausible.io/js/plausible.js"></script>
+    <script defer data-domain="#(event.domain)" src="https://plausible.io/js/plausible.js"></script>
     
     #if(!error):
     <!-- Back to top button -->
