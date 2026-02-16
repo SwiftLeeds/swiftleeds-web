@@ -224,14 +224,17 @@ struct Phase {
 struct PhaseContext: Codable {
     let ticketsEnabled: Bool
     let currentTicketPrice: String
+    let currentTicketPriceValue: String
     let showAddToCalendar: Bool
     let showSchedule: Bool
     let titoStub: String?
-    
+
     init(phase: Phase, event: Event) {
         ticketsEnabled = phase.showTickets
         titoStub = event.titoEvent
-        currentTicketPrice = event.conference == "kotlinleeds" ? "£140" : "£180" // TODO: need to load from tito
+        let priceValue = event.conference == "kotlinleeds" ? "140" : "180" // TODO: need to load from tito
+        currentTicketPriceValue = priceValue
+        currentTicketPrice = "£\(priceValue)"
         showAddToCalendar = event.isCurrent && event.date.timeIntervalSince1970 > 1420074000 // TODO: make date optional in db and do nil check here
         showSchedule = phase.showSchedule
     }

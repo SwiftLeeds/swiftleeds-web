@@ -58,8 +58,8 @@
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "#(event.event)",
-      "url": "https://#if(event.event == "KotlinLeeds"):kotlinleeds.co.uk#else:swiftleeds.co.uk#endif",
-      "logo": "https://#if(event.event == "KotlinLeeds"):kotlinleeds.co.uk#else:swiftleeds.co.uk#endif/img/logo.png",
+      "url": "https://#(event.domain)",
+      "logo": "https://#(event.domain)/img/logo.png",
       "sameAs": [
         #if(event.event == "KotlinLeeds"):
         "https://twitter.com/KotlinLeeds"
@@ -90,17 +90,17 @@
           "addressCountry": "GB"
         }
       },
-      "image": "https://#if(event.event == "KotlinLeeds"):kotlinleeds.co.uk#else:swiftleeds.co.uk#endif/img/logo.png",
+      "image": "https://#(event.domain)/img/logo.png",
       "organizer": {
         "@type": "Organization",
         "name": "#(event.event)",
-        "url": "https://#if(event.event == "KotlinLeeds"):kotlinleeds.co.uk#else:swiftleeds.co.uk#endif"
+        "url": "https://#(event.domain)"
       }
       #if(phase.ticketsEnabled):
       ,"offers": {
         "@type": "Offer",
-        "url": "https://#if(event.event == "KotlinLeeds"):kotlinleeds.co.uk#else:swiftleeds.co.uk#endif",
-        "price": "#if(event.event == "KotlinLeeds"):140#else:180#endif",
+        "url": "https://#(event.domain)",
+        "price": "#(phase.currentTicketPriceValue)",
         "priceCurrency": "GBP",
         "availability": "https://schema.org/InStock"
       }
