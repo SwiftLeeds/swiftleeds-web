@@ -1,6 +1,6 @@
 import Foundation
 
-// A unique transformer as it doesn't actually represent an entity
+/// A unique transformer as it doesn't actually represent an entity
 enum ScheduleTransformer {
     static func transform(event: Event, events: [Event], slots: [Slot]) -> ScheduleResponse? {
         guard let eventResponse = EventTransformer.transform(event) else {

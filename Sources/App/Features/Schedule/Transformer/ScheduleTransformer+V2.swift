@@ -1,6 +1,6 @@
 import Foundation
 
-// A unique transformer as it doesn't actually represent an entity
+/// A unique transformer as it doesn't actually represent an entity
 enum ScheduleTransformerV2 {
     static func transform(event: Event, events: [Event], slots: [Slot]) -> ScheduleResponseV2? {
         guard let eventResponse = EventTransformer.transform(event) else {
@@ -28,8 +28,7 @@ enum ScheduleTransformerV2 {
                             }
 
                             return $0.startTime < $1.startTime
-                        }
-                        )
+                        })
                 )
             }
             .filter { !$0.slots.isEmpty }

@@ -25,21 +25,25 @@ struct EventContext: Codable {
     let name: String // SwiftLeeds 2024
     let event: String // SwiftLeeds
     let year: String // 2024
-    
+    let conference: String
+    let domain: String // swiftleeds.co.uk or kotlinleeds.co.uk
+
     let date: Date?
     let dateFormatted: String? // 7-10 OCT
-    
+
     let location: String
-    
+
     let isCurrent: Bool
     let isFuture: Bool
     let isPast: Bool
     let isHidden: Bool
-    
+
     init(event: Event) {
         name = event.name
         self.event = event.name.components(separatedBy: " ").first ?? "SwiftLeeds"
         year = event.name.components(separatedBy: " ").last ?? ""
+        conference = event.conference
+        domain = event.conference == "kotlinleeds" ? "kotlinleeds.co.uk" : "swiftleeds.co.uk"
         
         // This is a total hack, but means if we set the date of an event to something earlier than 2015 then the event is hidden.
         // This prevents people accessing that year, useful for development and preparing.
@@ -98,6 +102,7 @@ struct CfpContext: Content {
     
     struct Stage: Codable {
         let now: Date
+        let isKnown: Bool
         let openDate: Date
         let closeDate: Date
         let reviewCompleted: Bool

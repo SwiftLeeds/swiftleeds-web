@@ -4,12 +4,28 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="author" content="#(event.event)"/>
-    
+    <meta name="description" content="#import("description")"/>
+
     #if(event.event == "SwiftLeeds"):
     <meta name="apple-itunes-app" content="app-id=1595490143, app-clip-bundle-id=uk.co.swiftleeds.SwiftLeeds.Clip, app-clip-display=card"/>
     #endif
-    
-    <meta property="og:image" content="/img/logo.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="#import("title") - #(event.event)"/>
+    <meta property="og:description" content="#import("description")"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://#(event.domain)#import("path")"/>
+    <meta property="og:image" content="https://#(event.domain)/img/logo.png"/>
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content="#if(event.event == "KotlinLeeds"):@KotlinLeeds#else:@swift_leeds#endif"/>
+    <meta name="twitter:title" content="#import("title") - #(event.event)"/>
+    <meta name="twitter:description" content="#import("description")"/>
+    <meta name="twitter:image" content="https://#(event.domain)/img/logo.png"/>
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://#(event.domain)#import("path")"/>
 
     <link rel="stylesheet" media="screen" href="/vendor/boxicons/css/boxicons.min.css"/>
     <link rel="stylesheet" media="screen" href="/vendor/swiper/swiper-bundle.min.css"/>
@@ -20,15 +36,23 @@
     
     #if(event):
     <link rel="stylesheet" media="screen" href="/css/year/#(event.year).css">
+    #if(event.conference == "kotlinleeds"):
+    <link rel="stylesheet" media="screen" href="/css/kotlin.css">
+    #endif
     #endif
     
     #import("styles")
     
-    <title>#import("title") - The Unique iOS Swift Conference in the UK</title>
+    <title>#import("title") - #if(event.event == "KotlinLeeds"):The Unique Android & Kotlin Conference in the UK#else:The Unique iOS Swift Conference in the UK#endif</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    #if(event.conference == "kotlinleeds"):
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/kotlinleeds-favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/kotlinleeds-favicon-16x16.png">
+    #else:
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    #endif
     
     #if(!page):
     <script src='https://js.tito.io/v2/with/inline' async></script>
@@ -46,7 +70,7 @@
         #extend("Shared/_footer")
     #endif
 
-    <script defer data-domain="#if(event.event == "KotlinLeeds"):kotlinleeds.co.uk#else:swiftleeds.co.uk#endif" src="https://plausible.io/js/plausible.js"></script>
+    <script defer data-domain="#(event.domain)" src="https://plausible.io/js/plausible.js"></script>
     
     #if(!error):
     <!-- Back to top button -->
@@ -55,6 +79,7 @@
       <i class="btn-scroll-top-icon bx bx-chevron-up"></i>
     </a>
     
+    #if(phase.titoStub):
     <!-- Tito modal -->
     <div class="modal fade" id="modalTitoOrder" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -72,6 +97,7 @@
         </div>
       </div>
     </div>
+    #endif
     #endif
 
     <!-- Vendor Scripts -->
@@ -103,6 +129,21 @@
             form.classList.add('was-validated')
           }, false)
         })
+      })()
+    </script>
+
+    <script>
+      // Close offcanvas menu when nav links are clicked
+      (() => {
+        const offcanvasEl = document.getElementById('navbarNav')
+        if (offcanvasEl) {
+          offcanvasEl.querySelectorAll('.nav-link[href^="/#"]').forEach(link => {
+            link.addEventListener('click', () => {
+              const closeBtn = offcanvasEl.querySelector('[data-bs-dismiss="offcanvas"]')
+              if (closeBtn) closeBtn.click()
+            })
+          })
+        }
       })()
     </script>
     

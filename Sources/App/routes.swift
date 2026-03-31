@@ -25,6 +25,8 @@ func routes(_ app: Application) throws {
     try apiV2Routes.grouped("schedule").register(collection: ScheduleAPIControllerV2())
     try apiV2Routes.grouped("team").register(collection: TeamAPIController())
     
+    try app.routes.register(collection: WebhookRouteController())
+    
     app.get("robots.txt") { _ -> String in
         let disallowedPaths = [
             "/purchase", // Not intended for direct access, only redirect from tito
