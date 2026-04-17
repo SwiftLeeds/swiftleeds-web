@@ -24,7 +24,7 @@ final class User: Authenticatable, ModelAuthenticatable, Content, ModelSessionAu
     }
     
     /// Unique identifier for this user.
-    @ID()
+    @ID
     var id: UUID?
 
     /// The user's name.

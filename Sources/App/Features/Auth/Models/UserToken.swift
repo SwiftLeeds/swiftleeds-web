@@ -19,7 +19,7 @@ final class UserToken: Model, Content, ModelTokenAuthenticatable, Codable, @unch
         return timestamp > Date()
     }
 
-    @ID()
+    @ID
     var id: UUID?
 
     @Field(key: "value")
