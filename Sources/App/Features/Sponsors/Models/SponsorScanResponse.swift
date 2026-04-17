@@ -9,12 +9,12 @@ struct SponsorScanResponse: Content {
     let responses: [String: String]
 
     init(ticket: TitoTicket) {
-        self.name = ticket.fullName
-        self.firstName = ticket.first_name
-        self.lastName = ticket.last_name
-        self.company = ticket.company_name
-        self.email = ticket.email
-        self.responses = ticket.responses
+        name = ticket.fullName
+        firstName = ticket.first_name
+        lastName = ticket.last_name
+        company = ticket.company_name
+        email = ticket.email
+        responses = ticket.responses
     }
 }
 

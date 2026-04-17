@@ -13,7 +13,8 @@ struct SponsorScanController: RouteCollection {
         let payload = try request.content.decode(SponsorScanRequest.self)
 
         guard let currentEvent = request.storage.get(CurrentEventKey.self),
-              let titoEvent = currentEvent.titoEvent else {
+              let titoEvent = currentEvent.titoEvent
+        else {
             throw Abort(.internalServerError, reason: "Unable to identify event")
         }
 
