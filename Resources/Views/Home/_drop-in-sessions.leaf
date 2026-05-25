@@ -132,7 +132,7 @@
           <div class="col-md-6 ordr-md-1">
             <h2 class="h3 mb-sm-4">SwiftLeeds Evening Talkshow</h2>
 
-            <p>SwiftLeeds is super excited to host another interactive evening talk show hosted by <a href="https://x.com/hiddevdploeg" target="_blank">Hidde&nbsp;van&nbsp;der&nbsp;Ploeg</a>, <a href="https://x.com/seanallen_dev" target="_blank">Sean&nbsp;Allen</a> and <a href="https://www.linkedin.com/in/janinakutyn/" target="_blank">Janina&nbsp;Kutyn</a>. This special event will be held at the <a href="#venue" data-scroll data-scroll-offset="70">Leeds&nbsp;Playhouse</a> the evening before the main conference, at 6pm until 8:30pm.</p>
+            <p>SwiftLeeds is super excited to host another interactive evening talk show hosted by <a href="https://x.com/hiddevdploeg" target="_blank">Hidde&nbsp;van&nbsp;der&nbsp;Ploeg</a>, <a href="https://x.com/seanallen_dev" target="_blank">Sean&nbsp;Allen</a>, <a href="https://www.linkedin.com/in/janinakutyn/" target="_blank">Janina&nbsp;Kutyn</a> and <a href="https://www.linkedin.com/in/katarina-lotri%C4%8D-98a7a414a/" target="_blank">Katarina&nbsp;Lotrič</a>. This special event will be held at the <a href="#venue" data-scroll data-scroll-offset="70">Leeds&nbsp;Playhouse</a> the evening before the main conference, at 6pm until 8:30pm.</p>
 
             <p>We'll be discussing some hot topics within the Swift community, plus all the great announcements during WWDC26.</p>
 
@@ -152,19 +152,18 @@
                     <p class="fs-xs mb-0">Sean is a content creator and indie app developer. His <a href="https://www.youtube.com/@seanallen" target="_blank">YouTube channel</a> of over 170K subscribers teaches Swift, SwiftUI and keeps you up to date on the latest in iOS development. Sean is also building his indie app portfolio.</p>
                   </div>
                 </div>
-                <div class="col d-flex align-items-center p-3">
+                <div class="col d-flex align-items-center border-bottom p-3">
                   <img src="#awsImage("janina.jpg")" width="48" alt="Janina Kutyn" class="rounded">
                   <div class="ps-2 ms-1">
                     <h3 class="h6 mb-0">Janina Kutyn</h3>
                     <p class="fs-xs mb-0">Janina has worked across the tech spectrum: from scrappy startups to global brands like adidas and ING, and she even spent six years at Apple building products like Apple Music and the TV App. Now as an indie developer working on <a href="https://joinlupin.app" target="_blank">Lupin</a>, she's interested in creating apps that are not only beautiful and high-performing, but also make a positive social impact. When she's not writing software, she's writing children's books.</p>
                   </div>
                 </div>
-                <div class="col d-flex align-items-center border-top p-3">
-                  <div class="rounded d-flex align-items-center justify-content-center text-muted" style="width: 48px; height: 48px; border: 2px dashed currentColor; opacity: 0.4;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>
-                  </div>
+                <div class="col d-flex align-items-center p-3">
+                  <img src="#awsImage("katarina.jpg")" width="48" alt="Katarina Lotrič" class="rounded">
                   <div class="ps-2 ms-1">
-                    <p class="fs-sm text-muted mb-0">More panelists coming soon&hellip;</p>
+                    <h3 class="h6 mb-0">Katarina Lotrič</h3>
+                    <p class="fs-xs mb-0">Katarina is the CEO and co-founder of <a href="https://gentlerstories.com/" target="_blank">Gentler Stories</a>, a Slovenian indie studio building health and fitness apps that stem from their own problems. She cares deeply about how an app feels in your hand, and how it treats people using it. Her work across two companies has earned two Apple Design Awards (Lake Coloring, Gentler Streak), two ADA Finalist recognitions, and an App of the Year. She's not a developer — she leads from a human perspective, and that's where the whole "gentler" idea comes from.</p>
                   </div>
                 </div>
               </div>
